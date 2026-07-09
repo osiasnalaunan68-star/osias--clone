@@ -1,0 +1,12 @@
+# Python
+__pycache__/
+*.py[cod]
+*.db
+backups/
+
+# Node
+frontend/node_modules/
+
+# Environment
+.env
+*.log
