@@ -54,3 +54,16 @@ app.include_router(interactive_router.router)
 app.include_router(dev_admin_router.router)
 app.include_router(dev_import_router.router)
 app.include_router(dev_links_router.router)
+
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+import os
+
+if os.path.exists("dist"):
+    app.mount("/assets", StaticFiles(directory="dist/assets"), name="assets")
+
+    @app.get("/{catchall:path}")
+    def serve_react_app(catchall: str):
+        if os.path.exists("dist/index.html"):
+            return FileResponse("dist/index.html")
+        return {"error": "Frontend not found"}
