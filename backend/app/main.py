@@ -7,9 +7,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.api import chapters as chapters_router
 from app.api import search as search_router
 from app.api import interactive as interactive_router
-from app.api import dev_admin as dev_admin_router
-from app.api import dev_import as dev_import_router
-from app.api import dev_links as dev_links_router
 from app.core.config import settings
 from app.db.database import init_db
 
@@ -50,10 +47,10 @@ app.include_router(chapters_router.router)
 app.include_router(search_router.router)
 app.include_router(interactive_router.router)
 
-# Dev Panel routes — gated per-router by require_dev_access (app/core/security.py)
-app.include_router(dev_admin_router.router)
-app.include_router(dev_import_router.router)
-app.include_router(dev_links_router.router)
+# Dev Panel routes intentionally NOT mounted on this deployed clone.
+# The dev_admin / dev_import / dev_links routers still exist in
+# app/api/, but are never registered here, so every /api/dev/*
+# request 404s regardless of any DEV_PANEL_ENABLED / DEV_ADMIN_KEY setting.
 
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
