@@ -3,10 +3,8 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 
-from app.api import chapters as chapters_router
-from app.api import search as search_router
-from app.api import interactive as interactive_router
 from app.core.config import settings
 from app.db.database import init_db
 
@@ -46,27 +44,56 @@ def health():
     return {"status": "ok"}
 
 
+# ----- I-import at i-register ang mga routers (may try/except para sa debugging) -----
+try:
+    from app.api import chapters as chapters_router
+    from app.api import search as search_router
+    from app.api import interactive as interactive_router
+    logger.info("Successfully imported routers")
+except Exception as e:
+    logger.error(f"Failed to import routers: {e}")
+    raise
+
 app.include_router(chapters_router.router)
 app.include_router(search_router.router)
 app.include_router(interactive_router.router)
+logger.info("Routers included")
 
+
+# ----- I-log ang lahat ng routes para malaman kung anong available -----
+@app.on_event("startup")
+async def log_routes():
+    logger.info("=== Registered routes ===")
+    for route in app.routes:
+        logger.info(f"  {route.path} - methods: {getattr(route, 'methods', set())}")
+    logger.info("==========================")
+
+
+# ----- Serve static files (dist) and PWA files -----
+import os
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
-import os
 
 if os.path.exists("dist"):
     DIST_DIR = os.path.abspath("dist")
+    # Mount assets folder
     app.mount("/assets", StaticFiles(directory="dist/assets"), name="assets")
 
     @app.get("/{path:path}")
     async def serve_react(path: str):
-        # NEW: serve real static files (manifest.json, sw.js, icons/*, etc.)
-        # from the build output when they exist, so the PWA manifest and
-        # service worker actually load with the right content instead of
-        # getting index.html back. Everything else falls back to
-        # index.html exactly like before, so client-side routing is
-        # unaffected. The startswith() check blocks path-traversal.
+        # 🛡️ Kung ang path ay nagsisimula sa "api/", huwag magbalik ng HTML
+        if path.startswith("api/"):
+            return JSONResponse(
+                status_code=404,
+                content={"detail": f"API endpoint not found: /{path}"}
+            )
+
+        # Serve real files if they exist (manifest.json, sw.js, icons, etc.)
         candidate = os.path.abspath(os.path.join(DIST_DIR, path))
         if path and candidate.startswith(DIST_DIR) and os.path.isfile(candidate):
             return FileResponse(candidate)
+
+        # Fallback to index.html for SPA routing
         return FileResponse("dist/index.html")
+else:
+    logger.warning("dist folder not found – frontend build may be missing")
