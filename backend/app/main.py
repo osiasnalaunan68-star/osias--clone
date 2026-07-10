@@ -55,8 +55,18 @@ from fastapi.responses import FileResponse
 import os
 
 if os.path.exists("dist"):
+    DIST_DIR = os.path.abspath("dist")
     app.mount("/assets", StaticFiles(directory="dist/assets"), name="assets")
 
     @app.get("/{path:path}")
     async def serve_react(path: str):
+        # NEW: serve real static files (manifest.json, sw.js, icons/*, etc.)
+        # from the build output when they exist, so the PWA manifest and
+        # service worker actually load with the right content instead of
+        # getting index.html back. Everything else falls back to
+        # index.html exactly like before, so client-side routing is
+        # unaffected. The startswith() check blocks path-traversal.
+        candidate = os.path.abspath(os.path.join(DIST_DIR, path))
+        if path and candidate.startswith(DIST_DIR) and os.path.isfile(candidate):
+            return FileResponse(candidate)
         return FileResponse("dist/index.html")
