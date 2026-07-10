@@ -35,34 +35,40 @@ app.add_middleware(
 def health():
     return {"status": "ok"}
 
-# ---------- Import routers with detailed logging ----------
+# Diagnostic endpoint (para malaman kung gumagana ang API)
+@app.get("/api/test")
+async def test_api():
+    return {"message": "API is working"}
+
+# Import routers
 try:
     from app.api import chapters as chapters_router
-    logger.info("✅ chapters router imported successfully")
+    logger.info("✅ chapters router imported")
 except Exception as e:
-    logger.error(f"❌ Failed to import chapters: {e}")
+    logger.error(f"❌ chapters import error: {e}")
     raise
 
 try:
     from app.api import search as search_router
-    logger.info("✅ search router imported successfully")
+    logger.info("✅ search router imported")
 except Exception as e:
-    logger.error(f"❌ Failed to import search: {e}")
+    logger.error(f"❌ search import error: {e}")
     raise
 
 try:
     from app.api import interactive as interactive_router
-    logger.info("✅ interactive router imported successfully")
+    logger.info("✅ interactive router imported")
 except Exception as e:
-    logger.error(f"❌ Failed to import interactive: {e}")
+    logger.error(f"❌ interactive import error: {e}")
     raise
 
-app.include_router(chapters_router.router)
-app.include_router(search_router.router)
-app.include_router(interactive_router.router)
-logger.info("✅ All routers included")
+# Isama ang routers na may prefix na "/api"
+app.include_router(chapters_router.router, prefix="/api")
+app.include_router(search_router.router, prefix="/api")
+app.include_router(interactive_router.router, prefix="/api")
+logger.info("✅ All routers included with /api prefix")
 
-# ---------- Log all routes at startup ----------
+# I-log ang lahat ng routes pagkatapos ng startup
 @app.on_event("startup")
 async def log_routes():
     logger.info("=== REGISTERED ROUTES ===")
@@ -71,26 +77,26 @@ async def log_routes():
         logger.info(f"  {route.path} - {methods}")
     logger.info("==========================")
 
-# ---------- Serve static files (dist) ----------
+# Serve static files
 if os.path.exists("dist"):
     DIST_DIR = os.path.abspath("dist")
     app.mount("/assets", StaticFiles(directory="dist/assets"), name="assets")
     logger.info(f"✅ Static assets mounted from {DIST_DIR}/assets")
 else:
-    logger.warning("⚠️ dist folder not found – frontend build missing")
+    logger.warning("⚠️ dist folder not found")
 
-# ---------- Catch-all for SPA (must be LAST) ----------
+# Catch-all for SPA (dapat nasa huli)
 @app.get("/{path:path}")
 async def serve_react(path: str):
-    # If path starts with api/, return a JSON 404 (not HTML)
+    # Kung ang path ay nagsisimula sa "api/", magbalik ng 404 JSON (hindi HTML)
     if path.startswith("api/"):
         return JSONResponse(
             status_code=404,
             content={"detail": f"API endpoint not found: /{path}"}
         )
-    # Serve real files if they exist (manifest.json, sw.js, icons, etc.)
+    # Serve real files (manifest.json, sw.js, icons, etc.)
     candidate = os.path.abspath(os.path.join(DIST_DIR, path))
     if path and candidate.startswith(DIST_DIR) and os.path.isfile(candidate):
         return FileResponse(candidate)
-    # Fallback to index.html for SPA routes
+    # Fallback to index.html para sa SPA
     return FileResponse("dist/index.html")
