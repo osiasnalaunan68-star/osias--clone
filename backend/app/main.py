@@ -21,12 +21,16 @@ async def lifespan(app: FastAPI):
     yield
 
 
-app = FastAPI(title="Customs Law Platform - RA 10863", lifespan=lifespan)
+app = FastAPI(
+    title="Customs Law Platform - RA 10863",
+    lifespan=lifespan,
+)
 
-if settings.CORS_ORIGINS.strip() == "*":
-    origins = ["*"]
-else:
-    origins = [o.strip() for o in settings.CORS_ORIGINS.split(",") if o.strip()]
+origins = (
+    ["*"]
+    if settings.CORS_ORIGINS.strip() == "*"
+    else [o.strip() for o in settings.CORS_ORIGINS.split(",") if o.strip()]
+)
 
 app.add_middleware(
     CORSMiddleware,
@@ -38,19 +42,13 @@ app.add_middleware(
 
 
 @app.get("/health")
-def health_check():
+def health():
     return {"status": "ok"}
 
 
-# Public routes, always available
 app.include_router(chapters_router.router)
 app.include_router(search_router.router)
 app.include_router(interactive_router.router)
-
-# Dev Panel routes intentionally NOT mounted on this deployed clone.
-# The dev_admin / dev_import / dev_links routers still exist in
-# app/api/, but are never registered here, so every /api/dev/*
-# request 404s regardless of any DEV_PANEL_ENABLED / DEV_ADMIN_KEY setting.
 
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
@@ -59,8 +57,6 @@ import os
 if os.path.exists("dist"):
     app.mount("/assets", StaticFiles(directory="dist/assets"), name="assets")
 
-    @app.get("/{catchall:path}")
-    def serve_react_app(catchall: str):
-        if os.path.exists("dist/index.html"):
-            return FileResponse("dist/index.html")
-        return {"error": "Frontend not found"}
+    @app.get("/{path:path}")
+    async def serve_react(path: str):
+        return FileResponse("dist/index.html")
