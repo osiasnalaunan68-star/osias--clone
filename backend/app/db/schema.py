@@ -34,7 +34,6 @@ CREATE UNIQUE INDEX IF NOT EXISTS idx_unique_title ON legal_nodes(node_number) W
 CREATE UNIQUE INDEX IF NOT EXISTS idx_unique_section ON legal_nodes(node_number) WHERE node_type = 'section';
 CREATE UNIQUE INDEX IF NOT EXISTS idx_unique_chapter ON legal_nodes(parent_id, node_number) WHERE node_type = 'chapter';
 
--- (all other tables unchanged)
 CREATE TABLE IF NOT EXISTS node_keywords (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     node_id INTEGER NOT NULL,
@@ -49,6 +48,8 @@ CREATE TABLE IF NOT EXISTS node_cross_references (
     node_id INTEGER NOT NULL,
     reference_text TEXT NOT NULL,
     referenced_node_id INTEGER,
+    url TEXT,
+    display_text TEXT,
     note TEXT,
     FOREIGN KEY (node_id) REFERENCES legal_nodes(id) ON DELETE CASCADE,
     FOREIGN KEY (referenced_node_id) REFERENCES legal_nodes(id) ON DELETE SET NULL
@@ -123,7 +124,6 @@ CREATE VIRTUAL TABLE IF NOT EXISTS search_index USING fts5(
     keywords
 );
 
--- highlights table
 CREATE TABLE IF NOT EXISTS highlights (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     node_id INTEGER NOT NULL,

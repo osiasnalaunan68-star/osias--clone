@@ -1,8 +1,8 @@
 from typing import List, Optional
 
-from fastapi import APIRouter, HTTPException, Query, status
+from fastapi import APIRouter, Depends, HTTPException, Query, status
 
-from app.core.config import settings as app_settings
+from app.core.security import require_dev_access
 from app.db.database import get_connection
 from app.models.schemas import (
     DatabaseStatus,
@@ -22,20 +22,18 @@ from app.services.pipeline.search_indexer import SearchIndexer
 from app.services.settings_service import SettingsService
 from app.services.status_service import StatusService
 
-router = APIRouter(prefix="/api/dev", tags=["development-admin"])
+router = APIRouter(
+    prefix="/api/dev",
+    tags=["development-admin"],
+    dependencies=[Depends(require_dev_access)],
+)
 export_service = ExportService()
 settings_service = SettingsService()
 status_service = StatusService()
 
 
-def _check_enabled():
-    if not app_settings.DEV_PANEL_ENABLED:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Not found")
-
-
 @router.get("/history", response_model=List[ImportLogOut])
 def get_history(limit: int = 50):
-    _check_enabled()
     conn = get_connection()
     try:
         repo = ImportLogRepository(conn)
@@ -46,19 +44,16 @@ def get_history(limit: int = 50):
 
 @router.get("/status/database", response_model=DatabaseStatus)
 def get_database_status():
-    _check_enabled()
     return status_service.database_status()
 
 
 @router.get("/status/search-index", response_model=SearchIndexStatus)
 def get_search_index_status():
-    _check_enabled()
     return status_service.search_index_status()
 
 
 @router.post("/search-index/rebuild")
 def rebuild_search_index():
-    _check_enabled()
     conn = get_connection()
     try:
         indexer = SearchIndexer(NodeRepository(conn), SearchRepository(conn))
@@ -71,7 +66,6 @@ def rebuild_search_index():
 
 @router.get("/search")
 def dev_search(q: str, limit: int = 20):
-    _check_enabled()
     conn = get_connection()
     try:
         rows = SearchRepository(conn).search(q, limit)
@@ -82,7 +76,6 @@ def dev_search(q: str, limit: int = 20):
 
 @router.post("/backup")
 def create_backup():
-    _check_enabled()
     conn = get_connection()
     try:
         manager = BackupManager(BackupRepository(conn))
@@ -95,7 +88,6 @@ def create_backup():
 
 @router.get("/export-chapter/{chapter_number}")
 def export_chapter(chapter_number: str, title_number: Optional[str] = Query(None)):
-    _check_enabled()
     try:
         return export_service.export_chapter(chapter_number, title_number)
     except ChapterNotFoundError as e:
@@ -104,16 +96,33 @@ def export_chapter(chapter_number: str, title_number: Optional[str] = Query(None
 
 @router.get("/export-title/{title_number}")
 def export_title(title_number: str):
-    _check_enabled()
     try:
         return export_service.export_title(title_number)
     except ChapterNotFoundError as e:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(e))
 
 
+@router.get("/export-all")
+def export_everything():
+    conn = get_connection()
+    try:
+        titles = conn.execute(
+            "SELECT node_number FROM legal_nodes WHERE node_type = 'title' ORDER BY CAST(node_number AS INTEGER) ASC"
+        ).fetchall()
+        all_data = []
+        for t in titles:
+            try:
+                title_data = export_service.export_title(t["node_number"])
+                all_data.extend(title_data)
+            except ChapterNotFoundError:
+                continue
+        return all_data
+    finally:
+        conn.close()
+
+
 @router.delete("/chapter/{chapter_number}")
 def delete_chapter(chapter_number: str, title_number: Optional[str] = Query(None)):
-    _check_enabled()
     conn = get_connection()
     try:
         node_repo = NodeRepository(conn)
@@ -143,11 +152,9 @@ def delete_chapter(chapter_number: str, title_number: Optional[str] = Query(None
 
 @router.get("/settings", response_model=List[SettingOut])
 def get_settings():
-    _check_enabled()
     return settings_service.get_all()
 
 
 @router.put("/settings", response_model=List[SettingOut])
 def update_settings(payload: SettingsUpdate):
-    _check_enabled()
     return settings_service.update(payload.values)

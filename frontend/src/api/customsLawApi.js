@@ -101,3 +101,10 @@ export async function fetchChapters() {
   const res = await fetch(`${API_BASE}/api/chapters/all`);
   return handle(res);
 }
+
+// Search
+export async function searchCMTA(query, filter = "all") {
+  const params = new URLSearchParams({ q: query, filter });
+  const res = await fetch(`${API_BASE}/api/search?${params.toString()}`);
+  return handle(res);
+}

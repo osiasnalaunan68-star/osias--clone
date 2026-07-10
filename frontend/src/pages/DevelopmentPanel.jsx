@@ -157,6 +157,26 @@ function ImportTab() {
     }
   }
 
+  async function handleExportEverything() {
+    setIsBusy(true);
+    try {
+      const res = await fetch(`${API_BASE}/api/dev/export-all`);
+      if (!res.ok) throw new Error("Export failed");
+      const data = await res.json();
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "ra10863_full.json";
+      a.click();
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      setErrorMessage(err.message);
+    } finally {
+      setIsBusy(false);
+    }
+  }
+
   const toggleTitleCollapse = (titleKey) => {
     setCollapsedTitles(prev => ({ ...prev, [titleKey]: !prev[titleKey] }));
   };
@@ -229,7 +249,17 @@ function ImportTab() {
         </p>
       )}
 
-      <h2 style={{ marginTop: "2rem" }}>Chapters</h2>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "2rem" }}>
+        <h2 style={{ margin: 0 }}>Chapters</h2>
+        <button
+          onClick={handleExportEverything}
+          disabled={isBusy}
+          style={{ padding: "0.4rem 1rem", fontSize: "0.9rem", backgroundColor: "#28a745", color: "white", border: "none", borderRadius: "4px", cursor: "pointer" }}
+        >
+          Export Everything (all titles)
+        </button>
+      </div>
+
       {titleGroups.map(group => (
         <div key={group.titleKey} style={{ marginBottom: "1rem", border: "1px solid #ddd", borderRadius: "4px" }}>
           <div
