@@ -1,3 +1,751 @@
+## File: `./all_files.md`
+```markdown
+```
+
+## File: `./docs/index.html`
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0f172a" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <title>RA 10863 – Customs Modernization and Tariff Act</title>
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="apple-touch-icon" href="./icons/icon-192.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>" />
+
+    <script>
+      // Apply saved dark-mode preference immediately, before first paint,
+      // so there's no flash of light UI when dark mode is turned on.
+      (function () {
+        try {
+          if (localStorage.getItem("customsLaw_darkMode") === "true") {
+            document.documentElement.classList.add("dark");
+          }
+        } catch (e) {}
+      })();
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+              serif: ['"Source Serif 4"', 'Georgia', 'Cambria', 'serif'],
+            },
+            colors: {
+              navy: {
+                950: '#0b1220',
+                900: '#0f172a',
+                800: '#152238',
+                700: '#1e3a5f',
+              },
+              gold: {
+                50: '#fdf8ec',
+                100: '#faedc4',
+                400: '#e0b94d',
+                500: '#c9a227',
+                600: '#a9841c',
+              },
+            },
+            boxShadow: {
+              card: '0 1px 2px 0 rgba(15, 23, 42, 0.06), 0 1px 3px 0 rgba(15, 23, 42, 0.08)',
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      html { -webkit-tap-highlight-color: transparent; }
+      body { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; }
+      ::-moz-selection { background: #fde68a; }
+      ::selection { background: #fde68a; }
+      mark { background: #fde68a; padding: 0 2px; border-radius: 3px; color: #1e293b; font-weight: 600; }
+      .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+      .safe-top { padding-top: env(safe-area-inset-top); }
+      @media (min-width: 768px) {
+        ::-webkit-scrollbar { width: 10px; height: 10px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+      }
+      .dark ::-moz-selection { background: #92400e; }
+      .dark ::selection { background: #92400e; }
+      .dark ::-webkit-scrollbar-thumb { background: #475569; }
+      .dark ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+    </style>
+    <script type="module" crossorigin src="./assets/index-Cu1Nm48_.js"></script>
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <link rel="stylesheet" crossorigin href="./assets/index-D-97NAqP.css">
+  </head>
+  <body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+    <div id="root"></div>
+  <!-- iOS Add to Home Screen Banner -->
+  <div id="ios-pwa-banner" style="display:none; position:fixed; bottom:10px; left:10px; right:10px; background:white; color:#1e293b; border-radius:12px; padding:14px; box-shadow:0 4px 20px rgba(0,0,0,0.3); z-index:9999; font-family:sans-serif; align-items:center; gap:10px; border:1px solid #e2e8f0;">
+    <span style="font-size:24px;">📲</span>
+    <div style="flex:1;">
+      <strong style="font-size:15px;">Install this app</strong><br>
+      <span style="font-size:13px; color:#64748b;">Tap <span style="background:#f1f5f9; padding:2px 6px; border-radius:4px;">⬆️ Share</span> then <span style="background:#f1f5f9; padding:2px 6px; border-radius:4px;">Add to Home Screen</span></span>
+    </div>
+    <button onclick="document.getElementById("ios-pwa-banner").style.display="none"" style="background:none; border:none; font-size:20px; color:#94a3b8; cursor:pointer;">✕</button>
+  </div>
+  <script>
+    (function() {
+      var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+      var isStandalone = window.navigator.standalone;
+      if (isIOS && !isStandalone) {
+        document.getElementById("ios-pwa-banner").style.display = "flex";
+      }
+    })();
+  </script>
+  </body>
+</html>
+```
+
+## File: `./docs/manifest.json`
+```json
+{
+  "name": "RA 10863 - Customs Modernization and Tariff Act",
+  "short_name": "CMTA Law",
+  "description": "Study and reference companion for the Customs Modernization and Tariff Act (RA 10863) of the Philippines, with search, highlights, and offline support.",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "orientation": "portrait-primary",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
+```
+
+## File: `./docs/sw.js`
+```javascript
+// Minimal offline-support service worker.
+// Strategy: try the network first (so data stays fresh when online),
+// and fall back to cache when the request fails (offline / weak signal).
+// Every successful GET response gets cached automatically, so chapters,
+// search results, and app files you've already opened once will keep
+// working with no internet connection.
+
+const CACHE_NAME = "cmta-app-cache-v1";
+
+self.addEventListener("install", () => {
+  self.skipWaiting();
+});
+
+self.addEventListener("activate", (event) => {
+  event.waitUntil(
+    caches.keys().then((keys) =>
+      Promise.all(keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key)))
+    )
+  );
+  self.clients.claim();
+});
+
+self.addEventListener("fetch", (event) => {
+  const { request } = event;
+  if (request.method !== "GET") return;
+
+  event.respondWith(
+    fetch(request)
+      .then((response) => {
+        const copy = response.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put(request, copy)).catch(() => {});
+        return response;
+      })
+      .catch(async () => {
+        const cached = await caches.match(request);
+        if (cached) return cached;
+        if (request.mode === "navigate") {
+          const shell = await caches.match("/");
+          if (shell) return shell;
+        }
+        return Response.error();
+      })
+  );
+});
+```
+
+## File: `./frontend/index.html`
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0f172a" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <title>RA 10863 – Customs Modernization and Tariff Act</title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet" />
+
+    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+    <script>eruda.init();</script>
+
+    <script>
+      (function () {
+        try {
+          if (localStorage.getItem("customsLaw_darkMode") === "true") {
+            document.documentElement.classList.add("dark");
+          }
+        } catch (e) {}
+      })();
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+              serif: ['"Source Serif 4"', 'Georgia', 'Cambria', 'serif'],
+            },
+            colors: {
+              navy: { 950: '#0b1220', 900: '#0f172a', 800: '#152238', 700: '#1e3a5f' },
+              gold: { 50: '#fdf8ec', 100: '#faedc4', 400: '#e0b94d', 500: '#c9a227', 600: '#a9841c' },
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      html { -webkit-tap-highlight-color: transparent; }
+      body { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; }
+      mark { background: #fde68a; padding: 0 2px; border-radius: 3px; color: #1e293b; font-weight: 600; }
+      .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+      .safe-top { padding-top: env(safe-area-inset-top); }
+    </style>
+  </head>
+  <body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
+```
+
+## File: `./frontend/package.json`
+```json
+{
+  "name": "customs-law-frontend",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "sql.js": "^1.14.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.0",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.13",
+    "vite": "^5.2.0"
+  }
+}
+```
+
+## File: `./frontend/postcss.config.js`
+```javascript
+export default {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+}
+```
+
+## File: `./frontend/public/manifest.json`
+```json
+{
+  "name": "RA 10863 - Customs Modernization and Tariff Act",
+  "short_name": "CMTA Law",
+  "description": "Study and reference companion for the Customs Modernization and Tariff Act (RA 10863) of the Philippines, with search, highlights, and offline support.",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "orientation": "portrait-primary",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
+```
+
+## File: `./frontend/public/sw.js`
+```javascript
+// Minimal offline-support service worker.
+// Strategy: try the network first (so data stays fresh when online),
+// and fall back to cache when the request fails (offline / weak signal).
+// Every successful GET response gets cached automatically, so chapters,
+// search results, and app files you've already opened once will keep
+// working with no internet connection.
+
+const CACHE_NAME = "cmta-app-cache-v1";
+
+self.addEventListener("install", () => {
+  self.skipWaiting();
+});
+
+self.addEventListener("activate", (event) => {
+  event.waitUntil(
+    caches.keys().then((keys) =>
+      Promise.all(keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key)))
+    )
+  );
+  self.clients.claim();
+});
+
+self.addEventListener("fetch", (event) => {
+  const { request } = event;
+  if (request.method !== "GET") return;
+
+  event.respondWith(
+    fetch(request)
+      .then((response) => {
+        const copy = response.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put(request, copy)).catch(() => {});
+        return response;
+      })
+      .catch(async () => {
+        const cached = await caches.match(request);
+        if (cached) return cached;
+        if (request.mode === "navigate") {
+          const shell = await caches.match("/");
+          if (shell) return shell;
+        }
+        return Response.error();
+      })
+  );
+});
+```
+
+## File: `./frontend/src/db.js`
+```javascript
+import initSqlJs from 'sql.js/dist/sql-wasm.js';
+import sqlWasmUrl from 'sql.js/dist/sql-wasm.wasm?url';
+
+let dbPromise = null;
+
+async function loadDatabase() {
+  const SQL = await initSqlJs({ locateFile: () => sqlWasmUrl });
+  const url = `${import.meta.env.BASE_URL}customs_law.db`;
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`Could not load customs_law.db (HTTP ${response.status})`);
+  const arrayBuffer = await response.arrayBuffer();
+  return new SQL.Database(new Uint8Array(arrayBuffer));
+}
+
+export function initDatabase() {
+  if (!dbPromise) dbPromise = loadDatabase();
+  return dbPromise;
+}
+
+export async function query(sql, params = []) {
+  const database = await initDatabase();
+  const stmt = database.prepare(sql);
+  stmt.bind(params);
+  const results = [];
+  while (stmt.step()) results.push(stmt.getAsObject());
+  stmt.free();
+  return results;
+}
+
+export async function queryOne(sql, params = []) {
+  const rows = await query(sql, params);
+  return rows.length ? rows[0] : null;
+}
+
+function romanToInt(s) {
+  if (!s) return 0;
+  s = String(s).toUpperCase().trim();
+  const values = { I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000 };
+  let total = 0;
+  let prev = 0;
+  for (let i = s.length - 1; i >= 0; i--) {
+    const cur = values[s[i]] || 0;
+    total += cur < prev ? -cur : cur;
+    prev = cur;
+  }
+  return total;
+}
+
+export async function getTitles() {
+  const rows = await query(`
+    SELECT 
+      t.id AS title_id,
+      t.node_number AS title_number,
+      t.title AS title_title,
+      c.id AS chapter_id,
+      c.node_number AS chapter_number,
+      c.title AS chapter_title,
+      (SELECT COUNT(*) FROM legal_nodes s WHERE s.parent_id = c.id AND s.node_type = 'section') AS section_count
+    FROM legal_nodes t
+    LEFT JOIN legal_nodes c ON c.parent_id = t.id AND c.node_type = 'chapter'
+    WHERE t.node_type = 'title'
+    ORDER BY CAST(c.node_number AS INTEGER) ASC
+  `);
+  const map = new Map();
+  for (const row of rows) {
+    if (!map.has(row.title_id)) {
+      map.set(row.title_id, {
+        title_id: row.title_id,
+        title_number: row.title_number,
+        title_title: row.title_title,
+        chapters: []
+      });
+    }
+    if (row.chapter_id) {
+      map.get(row.title_id).chapters.push({
+        id: row.chapter_id,
+        node_number: row.chapter_number,
+        title: row.chapter_title,
+        section_count: row.section_count
+      });
+    }
+  }
+  const rootRows = await query(`
+    SELECT 
+      c.id AS chapter_id,
+      c.node_number AS chapter_number,
+      c.title AS chapter_title,
+      (SELECT COUNT(*) FROM legal_nodes s WHERE s.parent_id = c.id AND s.node_type = 'section') AS section_count
+    FROM legal_nodes c
+    WHERE c.node_type = 'chapter' AND c.parent_id IS NULL
+    ORDER BY CAST(c.node_number AS INTEGER) ASC
+  `);
+  const result = Array.from(map.values()).sort(
+    (a, b) => romanToInt(a.title_number) - romanToInt(b.title_number)
+  );
+  if (rootRows.length) {
+    result.push({
+      title_id: null,
+      title_number: null,
+      title_title: "Chapters (no title)",
+      chapters: rootRows.map(r => ({
+        id: r.chapter_id,
+        node_number: r.chapter_number,
+        title: r.chapter_title,
+        section_count: r.section_count
+      }))
+    });
+  }
+  return result;
+}
+
+export async function getChapter(chapterNumber, titleNumber = null) {
+  let whereClause = "node_type = 'chapter' AND node_number = ?";
+  let params = [chapterNumber];
+  if (titleNumber) {
+    const titleRow = await queryOne("SELECT id FROM legal_nodes WHERE node_type = 'title' AND node_number = ?", [titleNumber]);
+    if (!titleRow) return null;
+    whereClause += " AND parent_id = ?";
+    params.push(titleRow.id);
+  } else {
+    whereClause += " AND parent_id IS NULL";
+  }
+  const chapterRow = await queryOne(`SELECT * FROM legal_nodes WHERE ${whereClause}`, params);
+  if (!chapterRow) return null;
+
+  const sql = `
+    WITH RECURSIVE subtree(id, parent_id, node_type, node_number, title, content, status, version, depth, sort_order) AS (
+      SELECT id, parent_id, node_type, node_number, title, content, status, version, depth, sort_order
+      FROM legal_nodes WHERE id = ?
+      UNION ALL
+      SELECT n.id, n.parent_id, n.node_type, n.node_number, n.title, n.content, n.status, n.version, n.depth, n.sort_order
+      FROM legal_nodes n JOIN subtree s ON n.parent_id = s.id
+    )
+    SELECT * FROM subtree ORDER BY depth, sort_order
+  `;
+  const rows = await query(sql, [chapterRow.id]);
+  const nodeMap = {};
+  const root = { ...chapterRow, children: [] };
+  nodeMap[chapterRow.id] = root;
+  for (const row of rows) {
+    if (row.id === chapterRow.id) continue;
+    const parent = nodeMap[row.parent_id];
+    if (!parent) continue;
+    const node = { ...row, children: [] };
+    parent.children.push(node);
+    nodeMap[row.id] = node;
+  }
+  const ids = Object.keys(nodeMap);
+  if (ids.length) {
+    const keywordRows = await query(`SELECT node_id, keyword FROM node_keywords WHERE node_id IN (${ids.join(',')})`);
+    for (const kw of keywordRows) {
+      const node = nodeMap[kw.node_id];
+      if (node) { if (!node.keywords) node.keywords = []; node.keywords.push(kw.keyword); }
+    }
+    const xrefRows = await query(`SELECT node_id, reference_text, url, display_text FROM node_cross_references WHERE node_id IN (${ids.join(',')})`);
+    for (const xr of xrefRows) {
+      const node = nodeMap[xr.node_id];
+      if (node) { if (!node.cross_references) node.cross_references = []; node.cross_references.push({ text: xr.display_text || xr.reference_text, url: xr.url }); }
+    }
+    const noteRows = await query(`SELECT node_id, note_text FROM node_notes WHERE node_id IN (${ids.join(',')})`);
+    for (const nt of noteRows) {
+      const node = nodeMap[nt.node_id];
+      if (node) { if (!node.notes) node.notes = []; node.notes.push(nt.note_text); }
+    }
+  }
+  function buildNode(node) {
+    return {
+      id: node.id,
+      uuid: node.uuid || '',
+      node_type: node.node_type,
+      node_number: node.node_number,
+      title: node.title,
+      content: node.content,
+      status: node.status,
+      version: node.version,
+      keywords: node.keywords || [],
+      cross_references: node.cross_references || [],
+      notes: node.notes || [],
+      children: (node.children || []).map(child => buildNode(child))
+    };
+  }
+  return buildNode(root);
+}
+
+export async function search(queryText, filter = 'all', limit = 50) {
+  const tokens = queryText.trim().split(/\s+/).filter(t => t.length > 0);
+  if (!tokens.length) return [];
+  const matchExpr = tokens.map(t => `"${t}"`).join(' ');
+  let sql = `
+    SELECT s.node_id, n.node_type, n.node_number, n.title, n.content,
+           snippet(search_index, 4, '[', ']', '...', 20) AS excerpt,
+           t_parent.node_number AS title_number, t_parent.title AS title_title,
+           ch_parent.node_number AS chapter_number, ch_parent.title AS chapter_title,
+           0 AS exact_match
+    FROM search_index s
+    JOIN legal_nodes n ON n.id = s.node_id
+    LEFT JOIN legal_nodes ch_parent ON ch_parent.id = n.parent_id AND ch_parent.node_type = 'chapter'
+    LEFT JOIN legal_nodes t_parent ON t_parent.id = ch_parent.parent_id AND t_parent.node_type = 'title'
+    WHERE search_index MATCH ?
+  `;
+  const params = [matchExpr];
+  if (filter !== 'all') { sql += " AND n.node_type = ?"; params.push(filter); }
+  sql += " ORDER BY bm25(search_index, 12.0, 6.0, 1.0, 4.0) LIMIT ?";
+  params.push(limit);
+  try {
+    return await query(sql, params);
+  } catch (e) {
+    let likeSql = `
+      SELECT n.id AS node_id, n.node_type, n.node_number, n.title, n.content,
+             substr(n.content, 1, 200) AS excerpt,
+             t_parent.node_number AS title_number, t_parent.title AS title_title,
+             ch_parent.node_number AS chapter_number, ch_parent.title AS chapter_title,
+             0 AS exact_match
+      FROM legal_nodes n
+      LEFT JOIN legal_nodes ch_parent ON ch_parent.id = n.parent_id AND ch_parent.node_type = 'chapter'
+      LEFT JOIN legal_nodes t_parent ON t_parent.id = ch_parent.parent_id AND t_parent.node_type = 'title'
+      WHERE ${tokens.map(() => '(n.node_number LIKE ? OR n.title LIKE ? OR n.content LIKE ? OR n.node_type LIKE ?)').join(' AND ')}
+    `;
+    const likeParams = [];
+    for (const token of tokens) {
+      const like = `%${token}%`;
+      likeParams.push(like, like, like, like);
+    }
+    if (filter !== 'all') { likeSql += " AND n.node_type = ?"; likeParams.push(filter); }
+    likeSql += " ORDER BY n.node_type, CAST(n.node_number AS INTEGER) LIMIT ?";
+    likeParams.push(limit);
+    return await query(likeSql, likeParams);
+  }
+}
+
+const HIGHLIGHTS_KEY = 'customsLaw_highlights';
+export function getHighlightsForNode(nodeId) {
+  try { const all = JSON.parse(localStorage.getItem(HIGHLIGHTS_KEY) || '{}'); return all[nodeId] || []; } catch { return []; }
+}
+export function addHighlight(nodeId, start, end, color = '#90EE90') {
+  const all = JSON.parse(localStorage.getItem(HIGHLIGHTS_KEY) || '{}');
+  if (!all[nodeId]) all[nodeId] = [];
+  const newHl = { id: Date.now() + Math.random() * 1000, node_id: nodeId, start_offset: start, end_offset: end, color, created_at: new Date().toISOString() };
+  all[nodeId].push(newHl);
+  localStorage.setItem(HIGHLIGHTS_KEY, JSON.stringify(all));
+  return newHl;
+}
+export function removeHighlight(highlightId) {
+  const all = JSON.parse(localStorage.getItem(HIGHLIGHTS_KEY) || '{}');
+  for (const nodeId in all) {
+    all[nodeId] = all[nodeId].filter(h => h.id !== highlightId);
+    if (all[nodeId].length === 0) delete all[nodeId];
+  }
+  localStorage.setItem(HIGHLIGHTS_KEY, JSON.stringify(all));
+}
+
+// ---------- Notes ----------
+const NOTES_KEY = 'customsLaw_notes';
+
+export function getNotesForNode(nodeId) {
+  try {
+    const all = JSON.parse(localStorage.getItem(NOTES_KEY) || '{}');
+    return all[nodeId] || [];
+  } catch {
+    return [];
+  }
+}
+
+export function addNote(nodeId, content) {
+  const all = JSON.parse(localStorage.getItem(NOTES_KEY) || '{}');
+  if (!all[nodeId]) all[nodeId] = [];
+  const now = new Date().toISOString();
+  const note = {
+    id: Date.now() + Math.random() * 1000,
+    node_id: nodeId,
+    content,
+    created_at: now,
+    updated_at: now,
+  };
+  all[nodeId].push(note);
+  localStorage.setItem(NOTES_KEY, JSON.stringify(all));
+  return note;
+}
+
+export function updateNote(nodeId, noteId, content) {
+  const all = JSON.parse(localStorage.getItem(NOTES_KEY) || '{}');
+  const list = all[nodeId] || [];
+  const note = list.find((n) => n.id === noteId);
+  if (note) {
+    note.content = content;
+    note.updated_at = new Date().toISOString();
+    localStorage.setItem(NOTES_KEY, JSON.stringify(all));
+  }
+  return note || null;
+}
+
+export function deleteNote(nodeId, noteId) {
+  const all = JSON.parse(localStorage.getItem(NOTES_KEY) || '{}');
+  if (!all[nodeId]) return;
+  all[nodeId] = all[nodeId].filter((n) => n.id !== noteId);
+  if (all[nodeId].length === 0) delete all[nodeId];
+  localStorage.setItem(NOTES_KEY, JSON.stringify(all));
+}
+
+// ---------- Resume Reading / Study Progress ----------
+const PROGRESS_KEY = 'customsLaw_lastPosition';
+
+export function saveProgress(progress) {
+  try {
+    const existing = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}');
+    const merged = { ...existing, ...progress, saved_at: new Date().toISOString() };
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(merged));
+  } catch {}
+}
+
+export function getProgress() {
+  try {
+    return JSON.parse(localStorage.getItem(PROGRESS_KEY) || 'null');
+  } catch {
+    return null;
+  }
+}
+
+// ---------- Tutorial ----------
+const TUTORIAL_KEY = 'customsLaw_tutorialSeen';
+
+export function hasTutorialBeenSeen() {
+  try {
+    return localStorage.getItem(TUTORIAL_KEY) === 'true';
+  } catch {
+    return true;
+  }
+}
+
+export function markTutorialSeen() {
+  try {
+    localStorage.setItem(TUTORIAL_KEY, 'true');
+  } catch {}
+}
+```
+
+## File: `./frontend/src/index.css`
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+## File: `./frontend/src/main.jsx`
+```jsx
+import "./index.css";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import ChapterBrowser from "./pages/ChapterBrowser";
+
+class ErrorBoundary extends React.Component {
+  constructor(props) { super(props); this.state = { error: null }; }
+  static getDerivedStateFromError(e) { return { error: e }; }
+  componentDidCatch(e, info) { console.error(e, info); }
+  render() {
+    if (this.state.error) {
+      return (
+        <div style={{ padding: 20, background: "#1e1e1e", color: "#ff6b6b", fontFamily: "monospace", whiteSpace: "pre-wrap", minHeight: "100vh" }}>
+          <h1>⚠️ App Error</h1>
+          <pre>{this.state.error.toString()}</pre>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
+window.addEventListener("unhandledrejection", (e) => {
+  const msg = e.reason?.message || String(e.reason);
+  document.body.innerHTML = `<div style="padding:20px;background:#1e1e1e;color:#ff6b6b;font-family:monospace;white-space:pre-wrap;">⚠️ ${msg}</div>`;
+});
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <ErrorBoundary>
+      <ChapterBrowser />
+    </ErrorBoundary>
+  </React.StrictMode>
+);
+
+// Register Service Worker
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js").catch((err) => {
+      console.warn("Service worker registration failed:", err);
+    });
+  });
+}
+```
+
+## File: `./frontend/src/pages/ChapterBrowser.jsx`
+```jsx
 import { useState, useEffect, useCallback, useRef, useMemo, useContext, createContext } from "react";
 import {
   getTitles, getChapter, search,
@@ -960,11 +1708,9 @@ export default function ChapterBrowser() {
                 <button onClick={() => setView("settings")} aria-label="Settings" className={`min-h-[34px] rounded-full px-2.5 py-1 font-medium transition-colors ${view === "settings" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
                   ⚙️
                 </button>
-                {IS_DEV && (
                 <button onClick={() => setView("dev")} aria-label="Dev Panel" className={`min-h-[34px] rounded-full px-2.5 py-1 font-medium transition-colors ${view === "dev" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
                   🛠
                 </button>
-      )}
               </div>
               <span className="flex-1" />
               {view === "browse" && <ModeToggle mode={mode} setMode={setMode} />}
@@ -993,7 +1739,7 @@ export default function ChapterBrowser() {
                 <p className="text-sm">{error}</p>
               </div>
             )}
-            {view === "search" ? <SearchView onNavigateChapter={loadChapter} /> : view === "dev" && IS_DEV ? <DevPanel /> : view === "settings" ? <SettingsView darkMode={darkMode} setDarkMode={setDarkMode} onReplayTutorial={replayTutorial} /> : (
+            {view === "search" ? <SearchView onNavigateChapter={loadChapter} /> : view === "dev" ? <DevPanel /> : view === "settings" ? <SettingsView darkMode={darkMode} setDarkMode={setDarkMode} onReplayTutorial={replayTutorial} /> : (
               <>
                 {loading && (
                   <div className="mx-auto max-w-3xl space-y-3">
@@ -1060,3 +1806,676 @@ export default function ChapterBrowser() {
     </HighlightUIContext.Provider>
   );
 }
+```
+
+## File: `./frontend/src/pages/DevPanel.jsx`
+```jsx
+import { useState, useEffect, useCallback } from "react";
+import {
+  getAllBatches, getBatchEntries, importChapterJson, renameBatch,
+  updateEntry, deleteEntry, deleteBatch,
+  getExportAllJson, saveRawEntries, clearAllImports, getImportedCount,
+} from "../devImportStore";
+
+function EntryEditForm({ entry, onSave, onCancel }) {
+  const [title, setTitle] = useState(entry.title || "");
+  const [content, setContent] = useState(entry.content || "");
+  const [prompt, setPrompt] = useState(entry.prompt || "");
+  const save = () => onSave({ title, content, prompt });
+  return (
+    <div className="mt-2 space-y-2 rounded-lg border border-amber-200 bg-amber-50/60 p-3 dark:border-amber-800 dark:bg-amber-950/20">
+      <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" style={{ fontSize: "16px" }} className="w-full rounded-lg border border-slate-200 bg-white p-2 text-sm dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
+      <textarea value={content} onChange={(e) => setContent(e.target.value)} placeholder="Content" rows={6} style={{ fontSize: "16px" }} className="w-full rounded-lg border border-slate-200 bg-white p-2 text-sm dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
+      <textarea value={prompt} onChange={(e) => setPrompt(e.target.value)} placeholder="Prompt" rows={3} style={{ fontSize: "16px" }} className="w-full rounded-lg border border-slate-200 bg-white p-2 text-sm dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
+      <div className="flex justify-end gap-2">
+        <button onClick={onCancel} className="rounded-lg px-3 py-1.5 text-sm text-slate-500 dark:text-slate-400">Cancel</button>
+        <button onClick={save} className="rounded-lg bg-amber-600 px-3 py-1.5 text-sm font-semibold text-white">Save</button>
+      </div>
+    </div>
+  );
+}
+
+function EntryRow({ nodeId, entry, onChanged }) {
+  const [editing, setEditing] = useState(false);
+  const label = entry._label || entry.title || nodeId;
+  const handleSave = (fields) => { updateEntry(nodeId, fields); setEditing(false); onChanged(); };
+  const handleDelete = () => { if (confirm(`Delete entry id ${nodeId}?`)) { deleteEntry(nodeId); onChanged(); } };
+  return (
+    <div className="rounded-lg border border-slate-200 bg-white p-2.5 dark:border-slate-700 dark:bg-slate-800">
+      <div className="flex items-center justify-between gap-2">
+        <div className="min-w-0">
+          <p className="truncate text-sm font-semibold text-slate-800 dark:text-slate-100">#{nodeId} — {label}</p>
+          <p className="truncate text-xs text-slate-400 dark:text-slate-500">{(entry.content || "").slice(0, 70)}...</p>
+        </div>
+        <div className="flex flex-shrink-0 gap-2">
+          <button onClick={() => setEditing((v) => !v)} className="rounded-lg border border-slate-200 px-2.5 py-1 text-xs font-medium text-slate-600 dark:border-slate-600 dark:text-slate-300">Edit</button>
+          <button onClick={handleDelete} className="rounded-lg border border-red-200 px-2.5 py-1 text-xs font-medium text-red-600 dark:border-red-800 dark:text-red-400">Delete</button>
+        </div>
+      </div>
+      {editing && <EntryEditForm entry={entry} onSave={handleSave} onCancel={() => setEditing(false)} />}
+    </div>
+  );
+}
+
+function BatchCard({ batch, onChanged }) {
+  const [open, setOpen] = useState(false);
+  const entries = open ? getBatchEntries(batch.id) : [];
+  const handleDeleteBatch = () => {
+    if (confirm(`Delete the whole "${batch.label}" batch (${batch.nodeIds.length} entries)?`)) {
+      deleteBatch(batch.id);
+      onChanged();
+    }
+  };
+  const handleRename = () => {
+    const next = prompt("Rename this chapter label:", batch.label);
+    if (next !== null) { renameBatch(batch.id, next); onChanged(); }
+  };
+  return (
+    <div className="rounded-xl border border-slate-200 bg-white p-3 shadow-card dark:border-slate-700 dark:bg-slate-800">
+      <div className="flex items-center justify-between gap-2">
+        <button onClick={() => setOpen((v) => !v)} className="min-w-0 flex-1 text-left">
+          <p className="truncate font-semibold text-navy-900 dark:text-slate-100">{open ? "▾" : "▸"} {batch.label}</p>
+          <p className="text-xs text-slate-400 dark:text-slate-500">{batch.nodeIds.length} entries · {new Date(batch.importedAt).toLocaleString()}</p>
+        </button>
+        <div className="flex flex-shrink-0 gap-2">
+          <button onClick={handleRename} className="rounded-lg border border-slate-200 px-2.5 py-1 text-xs font-medium text-slate-600 dark:border-slate-600 dark:text-slate-300">✏️</button>
+          <button onClick={handleDeleteBatch} className="rounded-lg border border-red-200 px-2.5 py-1 text-xs font-medium text-red-600 dark:border-red-800 dark:text-red-400">Delete</button>
+        </div>
+      </div>
+      {open && (
+        <div className="mt-3 space-y-2">
+          {entries.map((e) => <EntryRow key={e.id} nodeId={e.id} entry={e} onChanged={onChanged} />)}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ImportForm({ onImported }) {
+  const [json, setJson] = useState("");
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+
+  const handleImport = () => {
+    setError(null); setSuccess(null);
+    try {
+      const { count, label } = importChapterJson(json);
+      setSuccess(`✓ Na-import ang ${count} entries bilang "${label}".`);
+      setJson("");
+      onImported();
+    } catch (e) {
+      setError(e.message);
+    }
+  };
+
+  return (
+    <div className="rounded-xl border border-navy-200 bg-white p-3 shadow-card dark:border-navy-700 dark:bg-slate-800">
+      <p className="mb-1 text-sm font-semibold text-navy-900 dark:text-slate-100">📥 Import AI Context JSON</p>
+      <p className="mb-2 text-xs text-slate-400 dark:text-slate-500">I-paste lang at Import — isang bagsakan. Optional: maglagay ng "_chapter" key sa JSON para may custom label.</p>
+      <textarea value={json} onChange={(e) => setJson(e.target.value)} placeholder='{ "_chapter": "Chapter 1", "393": {...}, "193": {...} }' rows={9} style={{ fontSize: "16px" }} className="w-full rounded-lg border border-slate-200 bg-white p-2 font-mono text-xs dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
+      {error && <p className="mt-2 text-sm text-red-600 dark:text-red-400">{error}</p>}
+      {success && <p className="mt-2 text-sm text-emerald-600 dark:text-emerald-400">{success}</p>}
+      <button onClick={handleImport} disabled={!json.trim()} className="mt-2 w-full rounded-lg bg-navy-900 px-4 py-2.5 text-sm font-semibold text-white disabled:opacity-40 dark:bg-navy-700">Import</button>
+    </div>
+  );
+}
+
+function RawJsonEditor({ onChanged }) {
+  const [open, setOpen] = useState(false);
+  const [text, setText] = useState("");
+  const [error, setError] = useState(null);
+  const [saved, setSaved] = useState(false);
+
+  const openEditor = () => { setText(getExportAllJson()); setOpen(true); setError(null); };
+  const handleSave = () => {
+    try {
+      saveRawEntries(text);
+      setError(null); setSaved(true);
+      onChanged();
+      setTimeout(() => setSaved(false), 2000);
+    } catch (e) { setError(e.message); }
+  };
+
+  return (
+    <div className="rounded-xl border border-slate-200 bg-white p-3 shadow-card dark:border-slate-700 dark:bg-slate-800">
+      <button onClick={() => (open ? setOpen(false) : openEditor())} className="text-sm font-semibold text-slate-800 dark:text-slate-100">
+        🔧 {open ? "Hide" : "Edit"} Raw JSON (advanced, buong imported data)
+      </button>
+      {open && (
+        <div className="mt-2">
+          <textarea value={text} onChange={(e) => setText(e.target.value)} rows={10} style={{ fontSize: "13px" }} className="w-full rounded-lg border border-slate-200 bg-white p-2 font-mono text-xs dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
+          {error && <p className="mt-1 text-xs text-red-500">{error}</p>}
+          {saved && <p className="mt-1 text-xs text-emerald-600 dark:text-emerald-400">✓ Saved.</p>}
+          <button onClick={handleSave} className="mt-2 rounded-lg bg-amber-600 px-3 py-1.5 text-sm font-semibold text-white">Save Raw JSON</button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default function DevPanel() {
+  const [batches, setBatches] = useState([]);
+  const [copied, setCopied] = useState(false);
+
+  const refresh = useCallback(() => setBatches(getAllBatches()), []);
+  useEffect(() => { refresh(); }, [refresh]);
+
+  const handleExportAll = async () => {
+    try { await navigator.clipboard.writeText(getExportAllJson()); } catch {}
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2500);
+  };
+
+  const handleClearAll = () => {
+    if (confirm(`Delete ALL ${getImportedCount()} imported entries? Hindi na ito mababawi.`)) {
+      clearAllImports();
+      refresh();
+    }
+  };
+
+  return (
+    <div className="mx-auto max-w-2xl space-y-4 pb-10">
+      <div>
+        <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-50">🛠 Dev Panel</h1>
+        <p className="text-sm text-slate-500 dark:text-slate-400">Import at pamahalaan ang AI-generated context. Naka-save ito sa device kahit tanggalin mo pa itong tab.</p>
+      </div>
+      <ImportForm onImported={refresh} />
+      <div className="rounded-xl border border-slate-200 bg-white p-3 shadow-card dark:border-slate-700 dark:bg-slate-800">
+        <p className="mb-2 text-sm font-semibold text-slate-800 dark:text-slate-100">📦 Buong Imported JSON ({getImportedCount()} entries)</p>
+        <div className="flex flex-wrap gap-2">
+          <button onClick={handleExportAll} className="flex-1 rounded-lg bg-emerald-600 px-3 py-2 text-sm font-semibold text-white">📋 Export All (copy)</button>
+          <button onClick={handleClearAll} className="flex-1 rounded-lg border border-red-300 px-3 py-2 text-sm font-semibold text-red-600 dark:border-red-800 dark:text-red-400">🗑 Delete All</button>
+        </div>
+        {copied && <p className="mt-2 text-xs font-medium text-emerald-600 dark:text-emerald-400">✓ Na-copy! I-paste sa frontend/src/data/aiContext.json para permanente sa lahat ng users.</p>}
+      </div>
+      <RawJsonEditor onChanged={refresh} />
+      <div className="space-y-2">
+        <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">Imported Chapters</p>
+        {batches.length === 0 && <p className="text-sm italic text-slate-400 dark:text-slate-600">Wala pang na-import.</p>}
+        {batches.map((b) => <BatchCard key={b.id} batch={b} onChanged={refresh} />)}
+      </div>
+    </div>
+  );
+}
+```
+
+## File: `./frontend/src/data/aiContext.json`
+```json
+{
+  "_example_do_not_use": {
+    "title": "How to fill this in",
+    "content": "Delete this entry. Real entries are keyed by the node's numeric id (as text), e.g. \"42\". Run the app with npm run dev, open a chapter, and tap the amber 'Copy ID Template' button to get the ids for that chapter pre-filled.",
+    "prompt": "Not used."
+  }
+}
+```
+
+## File: `./frontend/src/aiContext.js`
+```javascript
+import aiContextData from "./data/aiContext.json";
+import { getImportedEntry } from "./devImportStore";
+
+// Osias 6.7 — bundled AI explanations, shipped fully offline with the app.
+// Lookup order: (1) npm-run-dev preview [dev only], (2) permanently imported
+// via the Dev Panel [localStorage, works even after Dev Panel is deleted],
+// (3) the committed aiContext.json bundled at build time.
+
+const DEV_PREVIEW_KEY = "customsLaw_aiContextDevPreview";
+export const IS_DEV = import.meta.env.DEV;
+
+function readDevPreview() {
+  if (!IS_DEV) return {};
+  try {
+    return JSON.parse(localStorage.getItem(DEV_PREVIEW_KEY) || "{}");
+  } catch {
+    return {};
+  }
+}
+
+export function getAiContext(nodeId) {
+  const key = String(nodeId);
+  if (IS_DEV) {
+    const preview = readDevPreview();
+    if (preview[key]) return preview[key];
+  }
+  const imported = getImportedEntry(key);
+  if (imported) return imported;
+  return aiContextData[key] || null;
+}
+
+export function saveDevPreviewBatch(jsonText) {
+  if (!IS_DEV) throw new Error("Preview is only available in npm run dev");
+  const parsed = JSON.parse(jsonText);
+  const merged = { ...readDevPreview(), ...parsed };
+  localStorage.setItem(DEV_PREVIEW_KEY, JSON.stringify(merged));
+  return merged;
+}
+
+export function clearDevPreview() {
+  if (!IS_DEV) return;
+  localStorage.removeItem(DEV_PREVIEW_KEY);
+}
+
+export function getDevPreviewRaw() {
+  if (!IS_DEV) return "{}";
+  return JSON.stringify(readDevPreview(), null, 2);
+}
+
+export const MASTER_PROMPT = `🧠 MASTER CONTENT GENERATION PROMPT
+You are an expert Customs Broker, CMTA legal educator, instructional designer, and content writer for AHTN Navigator.
+Your task is to generate a pre-written Study Guide for each Definition, Section, Chapter, or Provision of Republic Act No. 10863 (CMTA).
+The Study Guide will be stored permanently in the application's database. It is NOT AI-generated at runtime. Every response must be written as if it were created by an experienced Customs law professor.
+
+SOURCE OF TRUTH
+The official text from the provided JSON file is the only legal source.
+Never modify the official law. Never rewrite the official law. Never omit important legal meaning.
+Never invent legal requirements. Never fabricate court cases or legal interpretations.
+If additional information is unavailable, clearly state that instead of guessing.
+
+TARGET AUDIENCE
+Write for: First-year BSCA students, Customs Broker reviewees, and professionals who want a simple explanation.
+The reader should feel like a professor is explaining the topic in plain language.
+
+LANGUAGE
+Primary language: Tagalog. Keep important legal terms in English when appropriate.
+Use simple, conversational Tagalog. Avoid deep legal jargon unless you immediately explain it.
+
+WRITING STYLE
+The explanation should feel like a mentor talking to a student.
+Do NOT sound like ChatGPT. Do NOT sound robotic. Do NOT simply repeat the law.
+Instead: Explain. Teach. Simplify. Give context. Build understanding.
+
+REQUIRED FORMAT
+Generate the following sections in this exact order.
+
+📖 Kahulugan
+Start with a one-paragraph explanation in very simple Tagalog. The reader should immediately understand what the topic means.
+
+🔍 Breakdown
+Break the provision into its important parts. Explain each keyword separately (e.g. Imported Goods, Free Zone, Directly or Through Transit). Explain why each one matters.
+
+💡 Simpleng Paliwanag
+Pretend you're explaining the topic to your classmate one day before the exam. Avoid legal wording. Make it easy to remember.
+
+📦 Halimbawa
+Create one realistic Customs scenario. Use situations involving imports, exports, airport, seaport, customs officers, customs brokers, warehouses, PEZA, Clark, Subic, Free Zones. The example must directly relate to the law.
+
+⭐ Bakit Mahalaga Ito?
+Explain why the provision exists. Why should Customs students understand it? How is it applied in real life?
+
+⚠️ Dapat Tandaan
+List the most important reminders. Mention common misunderstandings if applicable.
+
+🎯 Board Exam Tip
+Give review advice. Help students remember the concept. Mention common board exam traps if appropriate. Never invent actual board exam questions.
+
+❓ Madalas Malito ang Students
+Write one realistic question students usually ask. Then answer it clearly.
+
+🔗 Related Topics
+List related Sections, Definitions, Chapters, Customs concepts, and Related laws (only if officially relevant).
+
+🤖 Need More Explanation?
+Generate a high-quality prompt that users can send to external AI. The prompt must ask the AI to: explain the topic simply, give practical Customs examples, explain why the law exists, mention related provisions, mention relevant CAOs/CMOs if applicable, provide board exam insights, and clarify common misconceptions. This prompt will be automatically copied to the user's clipboard before opening Meta AI, ChatGPT, or Gemini.
+
+IMPORTANT RULES
+Every explanation must: preserve the legal meaning, never contradict CMTA, never hallucinate, never make assumptions, never create fake cases, never use unnecessary filler words, be educational, be easy to understand, and be consistent across the entire app.
+The user should feel that every Study Guide was written by the same experienced Customs law professor.
+
+For each id below, output valid JSON matching the ID TEMPLATE structure, filling in "title", "content", and "prompt" using the OFFICIAL CMTA SOURCE TEXT provided for that same id as your only source of truth.`;
+
+function nodeLabel(node) {
+  const type = node.node_type;
+  const num = node.node_number || "";
+  if (type === "chapter") return `Chapter ${num}`.trim();
+  if (type === "section") return `Sec. ${num}`.trim();
+  if (type === "title") return `Title ${num}`.trim();
+  return `${type} ${num}`.trim();
+}
+
+export function buildTemplateForChapter(chapterTree) {
+  const out = {};
+  function walk(node) {
+    if (node.content) {
+      out[node.id] = {
+        _label: `${node.node_type} ${node.node_number || ""} — ${(node.title || "").slice(0, 60)}`,
+        title: "",
+        content: "",
+        prompt: "",
+      };
+    }
+    (node.children || []).forEach(walk);
+  }
+  walk(chapterTree);
+  return JSON.stringify(out, null, 2);
+}
+
+export function buildTopicTextForChapter(chapterTree) {
+  const blocks = [];
+  function walk(node) {
+    if (node.content) {
+      const lines = [`topic: [${node.id}]`, nodeLabel(node)];
+      if (node.title) lines.push(node.title);
+      lines.push(node.content);
+      if (node.cross_references && node.cross_references.length) {
+        lines.push("See Also");
+        node.cross_references.forEach((ref) => {
+          lines.push(ref.url ? `${ref.text} (${ref.url})` : ref.text);
+        });
+      }
+      blocks.push(lines.join("\n"));
+    }
+    (node.children || []).forEach(walk);
+  }
+  walk(chapterTree);
+  return blocks.join("\n\n");
+}
+
+export function buildFullCopyPayload(chapterTree) {
+  const idTemplate = buildTemplateForChapter(chapterTree);
+  const topics = buildTopicTextForChapter(chapterTree);
+  return [
+    MASTER_PROMPT,
+    "",
+    "🧩 ID TEMPLATE — fill title/content/prompt for each id below:",
+    idTemplate,
+    "",
+    "📚 OFFICIAL CMTA SOURCE TEXT (per id, your only source of truth):",
+    topics,
+  ].join("\n");
+}
+
+export const AI_APPS = [
+  { id: "meta", label: "Meta AI", icon: "💬", url: "https://m.me/MetaAI" },
+  { id: "chatgpt", label: "ChatGPT", icon: "🟢", url: "https://chatgpt.com/" },
+  { id: "gemini", label: "Gemini", icon: "✨", url: "https://gemini.google.com/app" },
+];
+
+export async function copyPromptAndOpen(prompt, appUrl) {
+  try {
+    await navigator.clipboard.writeText(prompt);
+  } catch {
+    // Clipboard can silently fail on some Android WebViews.
+  }
+  window.open(appUrl, "_blank", "noopener,noreferrer");
+}
+```
+
+## File: `./frontend/src/devImportStore.js`
+```javascript
+// Dev Panel storage: lets Osias paste AI-generated JSON (per chapter) and
+// have it saved permanently in localStorage — independent of IS_DEV, and
+// independent of whether the Dev Panel UI itself still exists in the code.
+// getAiContext() in aiContext.js reads from here so imported entries keep
+// working even after the Dev Panel tab is deleted from the app later.
+//
+// Chapter label: optional. Add a top-level "_chapter" key in the pasted
+// JSON (e.g. { "_chapter": "Chapter 1", "393": {...} }) to name the batch
+// in one paste. Skip it and a timestamp label is auto-assigned instead —
+// rename anytime from the batch list.
+
+const STORE_KEY = "customsLaw_aiContextImports";
+
+function emptyStore() {
+  return { batches: {}, entries: {} };
+}
+
+function loadStore() {
+  try {
+    const raw = localStorage.getItem(STORE_KEY);
+    if (!raw) return emptyStore();
+    const parsed = JSON.parse(raw);
+    return {
+      batches: parsed.batches || {},
+      entries: parsed.entries || {},
+    };
+  } catch {
+    return emptyStore();
+  }
+}
+
+function saveStore(store) {
+  localStorage.setItem(STORE_KEY, JSON.stringify(store));
+}
+
+export function getImportedEntry(nodeId) {
+  const store = loadStore();
+  return store.entries[String(nodeId)] || null;
+}
+
+export function getAllBatches() {
+  const store = loadStore();
+  return Object.values(store.batches).sort((a, b) =>
+    b.importedAt.localeCompare(a.importedAt)
+  );
+}
+
+export function getBatchEntries(batchId) {
+  const store = loadStore();
+  const batch = store.batches[batchId];
+  if (!batch) return [];
+  return batch.nodeIds.map((id) => ({ id, ...(store.entries[id] || {}) }));
+}
+
+export function importChapterJson(jsonText) {
+  const parsed = JSON.parse(jsonText);
+  const rawLabel = parsed._chapter;
+  if (parsed._chapter !== undefined) delete parsed._chapter;
+  const ids = Object.keys(parsed);
+  if (!ids.length) throw new Error("Walang laman ang JSON na na-paste.");
+  const store = loadStore();
+  for (const bId in store.batches) {
+    store.batches[bId].nodeIds = store.batches[bId].nodeIds.filter(
+      (id) => !ids.includes(id)
+    );
+  }
+  for (const bId in store.batches) {
+    if (store.batches[bId].nodeIds.length === 0) delete store.batches[bId];
+  }
+  const batchId = `b_${Date.now()}`;
+  const fallback = `Import – ${new Date().toLocaleString("en-PH", {
+    month: "short", day: "numeric", hour: "numeric", minute: "2-digit",
+  })}`;
+  const label = (rawLabel && String(rawLabel).trim()) || fallback;
+  store.batches[batchId] = {
+    id: batchId,
+    label,
+    importedAt: new Date().toISOString(),
+    nodeIds: ids,
+  };
+  for (const id of ids) store.entries[id] = parsed[id];
+  saveStore(store);
+  return { batchId, count: ids.length, label };
+}
+
+export function renameBatch(batchId, newLabel) {
+  const store = loadStore();
+  if (!store.batches[batchId]) return;
+  const trimmed = newLabel.trim();
+  if (trimmed) store.batches[batchId].label = trimmed;
+  saveStore(store);
+}
+
+export function updateEntry(nodeId, fields) {
+  const store = loadStore();
+  if (!store.entries[nodeId]) return;
+  store.entries[nodeId] = { ...store.entries[nodeId], ...fields };
+  saveStore(store);
+}
+
+export function deleteEntry(nodeId) {
+  const store = loadStore();
+  delete store.entries[nodeId];
+  for (const bId in store.batches) {
+    store.batches[bId].nodeIds = store.batches[bId].nodeIds.filter(
+      (id) => id !== nodeId
+    );
+    if (store.batches[bId].nodeIds.length === 0) delete store.batches[bId];
+  }
+  saveStore(store);
+}
+
+export function deleteBatch(batchId) {
+  const store = loadStore();
+  const batch = store.batches[batchId];
+  if (!batch) return;
+  for (const id of batch.nodeIds) delete store.entries[id];
+  delete store.batches[batchId];
+  saveStore(store);
+}
+
+export function getExportAllJson() {
+  const store = loadStore();
+  return JSON.stringify(store.entries, null, 2);
+}
+
+export function saveRawEntries(jsonText) {
+  const parsed = JSON.parse(jsonText);
+  const store = loadStore();
+  const newIds = Object.keys(parsed);
+  for (const bId in store.batches) {
+    store.batches[bId].nodeIds = store.batches[bId].nodeIds.filter((id) =>
+      newIds.includes(id)
+    );
+    if (store.batches[bId].nodeIds.length === 0) delete store.batches[bId];
+  }
+  store.entries = parsed;
+  saveStore(store);
+}
+
+export function clearAllImports() {
+  saveStore(emptyStore());
+}
+
+export function getImportedCount() {
+  return Object.keys(loadStore().entries).length;
+}
+```
+
+## File: `./frontend/tailwind.config.js`
+```javascript
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  darkMode: 'class',
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+
+## File: `./frontend/vite.config.js`
+```javascript
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
+export default defineConfig({
+  base: './',
+  plugins: [react()],
+  build: {
+    outDir: '../dist',
+    emptyOutDir: true,
+  },
+});
+```
+
+## File: `./sh.sh`
+```bash
+#!/bin/bash
+# Output all code files as Markdown with language hints
+
+OUTPUT="all_files.md"
+> "$OUTPUT"  # Clear or create file
+
+# List of file extensions to include (text-based code)
+extensions=(
+    "*.py" "*.js" "*.jsx" "*.ts" "*.tsx"
+    "*.css" "*.scss" "*.html"
+    "*.json" "*.yaml" "*.yml" "*.toml"
+    "*.md" "*.txt"
+    "*.sh" "*.bash"
+    "*.sql"
+    "*.xml" "*.xsd"
+    "*.conf" "*.config" "*.ini"
+)
+
+# Build find command
+find_cmd="find . -type f \( "
+first=true
+for ext in "${extensions[@]}"; do
+    if [ "$first" = true ]; then
+        find_cmd+="-name \"$ext\""
+        first=false
+    else
+        find_cmd+=" -o -name \"$ext\""
+    fi
+done
+find_cmd+=" \)"
+
+# Exclude directories
+exclude_dirs=(
+    "*/node_modules/*"
+    "*/__pycache__/*"
+    "*/venv/*"
+    "*/env/*"
+    "*/docs/assets/*"
+    "*/docs/icons/*"
+    "*/.git/*"
+    "*/dist/*"
+    "*/build/*"
+)
+for dir in "${exclude_dirs[@]}"; do
+    find_cmd+=" -not -path \"$dir\""
+done
+
+# Exclude specific files
+find_cmd+=" -not -name \"package-lock.json\""
+find_cmd+=" -not -name \"yarn.lock\""
+find_cmd+=" -not -name \"*.db\""
+find_cmd+=" -not -name \"*.wasm\""
+find_cmd+=" -not -name \"*.png\""
+find_cmd+=" -not -name \"*.jpg\""
+find_cmd+=" -not -name \"*.jpeg\""
+find_cmd+=" -not -name \"*.gif\""
+find_cmd+=" -not -name \"*.ico\""
+find_cmd+=" -not -name \"*.svg\""
+
+# Process each file
+eval $find_cmd | while read -r file; do
+    # Determine language for code block based on extension
+    lang="${file##*.}"
+    case "$lang" in
+        py) lang="python" ;;
+        js) lang="javascript" ;;
+        jsx) lang="jsx" ;;
+        ts) lang="typescript" ;;
+        tsx) lang="tsx" ;;
+        css) lang="css" ;;
+        scss) lang="scss" ;;
+        html) lang="html" ;;
+        json) lang="json" ;;
+        yaml|yml) lang="yaml" ;;
+        toml) lang="toml" ;;
+        md) lang="markdown" ;;
+        sh|bash) lang="bash" ;;
+        sql) lang="sql" ;;
+        xml) lang="xml" ;;
+        conf|config|ini) lang="ini" ;;
+        *) lang="" ;;
+    esac
+
+    # Write to markdown
+    echo "## File: \`$file\`" >> "$OUTPUT"
+    echo '```'"$lang" >> "$OUTPUT"
+    cat "$file" >> "$OUTPUT"
+    echo '```' >> "$OUTPUT"
+    echo >> "$OUTPUT"
+done
+
+echo "Done! Output written to $OUTPUT"
+```
+
