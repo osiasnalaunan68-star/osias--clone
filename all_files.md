@@ -2,116 +2,6 @@
 ```markdown
 ```
 
-## File: `./docs/index.html`
-```html
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#0f172a" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <title>RA 10863 – Customs Modernization and Tariff Act</title>
-    <link rel="manifest" href="./manifest.json" />
-    <link rel="apple-touch-icon" href="./icons/icon-192.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet" />
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>" />
-
-    <script>
-      // Apply saved dark-mode preference immediately, before first paint,
-      // so there's no flash of light UI when dark mode is turned on.
-      (function () {
-        try {
-          if (localStorage.getItem("customsLaw_darkMode") === "true") {
-            document.documentElement.classList.add("dark");
-          }
-        } catch (e) {}
-      })();
-    </script>
-
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        darkMode: 'class',
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-              serif: ['"Source Serif 4"', 'Georgia', 'Cambria', 'serif'],
-            },
-            colors: {
-              navy: {
-                950: '#0b1220',
-                900: '#0f172a',
-                800: '#152238',
-                700: '#1e3a5f',
-              },
-              gold: {
-                50: '#fdf8ec',
-                100: '#faedc4',
-                400: '#e0b94d',
-                500: '#c9a227',
-                600: '#a9841c',
-              },
-            },
-            boxShadow: {
-              card: '0 1px 2px 0 rgba(15, 23, 42, 0.06), 0 1px 3px 0 rgba(15, 23, 42, 0.08)',
-            },
-          },
-        },
-      };
-    </script>
-    <style>
-      html { -webkit-tap-highlight-color: transparent; }
-      body { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; }
-      ::-moz-selection { background: #fde68a; }
-      ::selection { background: #fde68a; }
-      mark { background: #fde68a; padding: 0 2px; border-radius: 3px; color: #1e293b; font-weight: 600; }
-      .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
-      .safe-top { padding-top: env(safe-area-inset-top); }
-      @media (min-width: 768px) {
-        ::-webkit-scrollbar { width: 10px; height: 10px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
-        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-      }
-      .dark ::-moz-selection { background: #92400e; }
-      .dark ::selection { background: #92400e; }
-      .dark ::-webkit-scrollbar-thumb { background: #475569; }
-      .dark ::-webkit-scrollbar-thumb:hover { background: #64748b; }
-    </style>
-    <script type="module" crossorigin src="./assets/index-Cu1Nm48_.js"></script>
-    <link rel="apple-touch-icon" href="icons/icon-192.png">
-    <link rel="stylesheet" crossorigin href="./assets/index-D-97NAqP.css">
-  </head>
-  <body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
-    <div id="root"></div>
-  <!-- iOS Add to Home Screen Banner -->
-  <div id="ios-pwa-banner" style="display:none; position:fixed; bottom:10px; left:10px; right:10px; background:white; color:#1e293b; border-radius:12px; padding:14px; box-shadow:0 4px 20px rgba(0,0,0,0.3); z-index:9999; font-family:sans-serif; align-items:center; gap:10px; border:1px solid #e2e8f0;">
-    <span style="font-size:24px;">📲</span>
-    <div style="flex:1;">
-      <strong style="font-size:15px;">Install this app</strong><br>
-      <span style="font-size:13px; color:#64748b;">Tap <span style="background:#f1f5f9; padding:2px 6px; border-radius:4px;">⬆️ Share</span> then <span style="background:#f1f5f9; padding:2px 6px; border-radius:4px;">Add to Home Screen</span></span>
-    </div>
-    <button onclick="document.getElementById("ios-pwa-banner").style.display="none"" style="background:none; border:none; font-size:20px; color:#94a3b8; cursor:pointer;">✕</button>
-  </div>
-  <script>
-    (function() {
-      var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-      var isStandalone = window.navigator.standalone;
-      if (isIOS && !isStandalone) {
-        document.getElementById("ios-pwa-banner").style.display = "flex";
-      }
-    })();
-  </script>
-  </body>
-</html>
-```
-
 ## File: `./docs/manifest.json`
 ```json
 {
@@ -180,6 +70,70 @@ self.addEventListener("fetch", (event) => {
       })
   );
 });
+```
+
+## File: `./docs/index.html`
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0f172a" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <title>RA 10863 – Customs Modernization and Tariff Act</title>
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="apple-touch-icon" href="./icons/icon-192.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet" />
+
+    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+    <script>eruda.init();</script>
+
+    <script>
+      (function () {
+        try {
+          if (localStorage.getItem("customsLaw_darkMode") === "true") {
+            document.documentElement.classList.add("dark");
+          }
+        } catch (e) {}
+      })();
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+              serif: ['"Source Serif 4"', 'Georgia', 'Cambria', 'serif'],
+            },
+            colors: {
+              navy: { 950: '#0b1220', 900: '#0f172a', 800: '#152238', 700: '#1e3a5f' },
+              gold: { 50: '#fdf8ec', 100: '#faedc4', 400: '#e0b94d', 500: '#c9a227', 600: '#a9841c' },
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      html { -webkit-tap-highlight-color: transparent; }
+      body { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; }
+      mark { background: #fde68a; padding: 0 2px; border-radius: 3px; color: #1e293b; font-weight: 600; }
+      .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+      .safe-top { padding-top: env(safe-area-inset-top); }
+    </style>
+    <script type="module" crossorigin src="./assets/index-CYpIQ6IG.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-5fePaXY3.css">
+  </head>
+  <body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+    <div id="root"></div>
+  </body>
+</html>
 ```
 
 ## File: `./frontend/index.html`
@@ -538,50 +492,185 @@ export async function getChapter(chapterNumber, titleNumber = null) {
   return buildNode(root);
 }
 
+// Fetch the FULL subtree of an entire Title — used to build the AI/quiz
+// generation prompt for a whole title in one paste.
+export async function getTitleTree(titleNumber) {
+  const titleRow = await queryOne(
+    "SELECT * FROM legal_nodes WHERE node_type = 'title' AND node_number = ?",
+    [titleNumber]
+  );
+  if (!titleRow) return null;
+
+  const sql = `
+    WITH RECURSIVE subtree(id, parent_id, node_type, node_number, title, content, depth, sort_order) AS (
+      SELECT id, parent_id, node_type, node_number, title, content, depth, sort_order
+      FROM legal_nodes WHERE id = ?
+      UNION ALL
+      SELECT n.id, n.parent_id, n.node_type, n.node_number, n.title, n.content, n.depth, n.sort_order
+      FROM legal_nodes n JOIN subtree s ON n.parent_id = s.id
+    )
+    SELECT * FROM subtree ORDER BY depth, sort_order
+  `;
+  const rows = await query(sql, [titleRow.id]);
+  const nodeMap = {};
+  const root = { ...titleRow, children: [] };
+  nodeMap[titleRow.id] = root;
+  for (const row of rows) {
+    if (row.id === titleRow.id) continue;
+    const parent = nodeMap[row.parent_id];
+    if (!parent) continue;
+    const node = { ...row, children: [] };
+    parent.children.push(node);
+    nodeMap[row.id] = node;
+  }
+  function buildNode(node) {
+    return {
+      id: node.id,
+      node_type: node.node_type,
+      node_number: node.node_number,
+      title: node.title,
+      content: node.content,
+      children: (node.children || []).map(buildNode)
+    };
+  }
+  return buildNode(root);
+}
+
+// ---------- Search ----------
+
+function escapeRegExp(str) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+// Builds a short excerpt centered on the FIRST match in the content (instead
+// of always showing characters 1-200, which usually cut off the actual
+// match), and wraps every matched token with [ ] so SearchResultCard can
+// turn them into <mark> highlights.
+function buildExcerpt(content, tokens, radius = 90) {
+  if (!content) return '';
+  const lower = content.toLowerCase();
+  let matchIndex = -1;
+  let matchLen = 0;
+  for (const token of tokens) {
+    const idx = lower.indexOf(token.toLowerCase());
+    if (idx !== -1 && (matchIndex === -1 || idx < matchIndex)) {
+      matchIndex = idx;
+      matchLen = token.length;
+    }
+  }
+  let start = 0;
+  let end = Math.min(content.length, 200);
+  if (matchIndex !== -1) {
+    start = Math.max(0, matchIndex - radius);
+    end = Math.min(content.length, matchIndex + matchLen + radius);
+  }
+  let excerpt = content.slice(start, end);
+  if (start > 0) excerpt = `…${excerpt}`;
+  if (end < content.length) excerpt = `${excerpt}…`;
+
+  const sortedTokens = [...tokens].sort((a, b) => b.length - a.length);
+  for (const token of sortedTokens) {
+    if (!token) continue;
+    const re = new RegExp(`(${escapeRegExp(token)})`, 'gi');
+    excerpt = excerpt.replace(re, '[$1]');
+  }
+  return excerpt;
+}
+
+// ✅ FIXED search — no FTS (this sql.js build doesn't have it), uses LIKE.
 export async function search(queryText, filter = 'all', limit = 50) {
-  const tokens = queryText.trim().split(/\s+/).filter(t => t.length > 0);
+  const trimmedQuery = queryText.trim();
+  const tokens = trimmedQuery.split(/\s+/).filter(t => t.length > 0);
   if (!tokens.length) return [];
-  const matchExpr = tokens.map(t => `"${t}"`).join(' ');
+
+  const likeConditions = tokens.map(() =>
+    '(n.node_number LIKE ? OR n.title LIKE ? OR n.content LIKE ?)'
+  ).join(' OR ');
+
+  const likeParams = [];
+  for (const token of tokens) {
+    const like = `%${token}%`;
+    likeParams.push(like, like, like);
+  }
+
   let sql = `
-    SELECT s.node_id, n.node_type, n.node_number, n.title, n.content,
-           snippet(search_index, 4, '[', ']', '...', 20) AS excerpt,
-           t_parent.node_number AS title_number, t_parent.title AS title_title,
-           ch_parent.node_number AS chapter_number, ch_parent.title AS chapter_title,
-           0 AS exact_match
-    FROM search_index s
-    JOIN legal_nodes n ON n.id = s.node_id
+    SELECT
+      n.id AS node_id,
+      n.node_type,
+      n.node_number,
+      n.title,
+      n.content,
+      t_parent.node_number AS title_number,
+      t_parent.title AS title_title,
+      ch_parent.node_number AS chapter_number,
+      ch_parent.title AS chapter_title
+    FROM legal_nodes n
     LEFT JOIN legal_nodes ch_parent ON ch_parent.id = n.parent_id AND ch_parent.node_type = 'chapter'
     LEFT JOIN legal_nodes t_parent ON t_parent.id = ch_parent.parent_id AND t_parent.node_type = 'title'
-    WHERE search_index MATCH ?
+    WHERE ${likeConditions}
   `;
-  const params = [matchExpr];
-  if (filter !== 'all') { sql += " AND n.node_type = ?"; params.push(filter); }
-  sql += " ORDER BY bm25(search_index, 12.0, 6.0, 1.0, 4.0) LIMIT ?";
-  params.push(limit);
-  try {
-    return await query(sql, params);
-  } catch (e) {
-    let likeSql = `
-      SELECT n.id AS node_id, n.node_type, n.node_number, n.title, n.content,
-             substr(n.content, 1, 200) AS excerpt,
-             t_parent.node_number AS title_number, t_parent.title AS title_title,
-             ch_parent.node_number AS chapter_number, ch_parent.title AS chapter_title,
-             0 AS exact_match
-      FROM legal_nodes n
-      LEFT JOIN legal_nodes ch_parent ON ch_parent.id = n.parent_id AND ch_parent.node_type = 'chapter'
-      LEFT JOIN legal_nodes t_parent ON t_parent.id = ch_parent.parent_id AND t_parent.node_type = 'title'
-      WHERE ${tokens.map(() => '(n.node_number LIKE ? OR n.title LIKE ? OR n.content LIKE ? OR n.node_type LIKE ?)').join(' AND ')}
-    `;
-    const likeParams = [];
-    for (const token of tokens) {
-      const like = `%${token}%`;
-      likeParams.push(like, like, like, like);
-    }
-    if (filter !== 'all') { likeSql += " AND n.node_type = ?"; likeParams.push(filter); }
-    likeSql += " ORDER BY n.node_type, CAST(n.node_number AS INTEGER) LIMIT ?";
-    likeParams.push(limit);
-    return await query(likeSql, likeParams);
+
+  if (filter !== 'all') {
+    sql += " AND n.node_type = ?";
+    likeParams.push(filter);
   }
+
+  sql += " ORDER BY n.node_type, CAST(n.node_number AS INTEGER)";
+
+  const rows = await query(sql, likeParams);
+  const lowerQuery = trimmedQuery.toLowerCase();
+
+  const withMeta = rows.map((row) => {
+    const haystacks = [row.node_number, row.title, row.content]
+      .filter(Boolean)
+      .map((s) => String(s).toLowerCase());
+    const exact_match = haystacks.some((h) => h.includes(lowerQuery)) ? 1 : 0;
+    return {
+      ...row,
+      excerpt: buildExcerpt(row.content || '', tokens),
+      exact_match,
+    };
+  });
+
+  // Stable sort: exact matches float to the top; everything else keeps the
+  // node_type/node_number order the SQL query already gave it.
+  withMeta.sort((a, b) => b.exact_match - a.exact_match);
+
+  return withMeta.slice(0, limit);
+}
+
+export async function getChapterForNode(nodeId) {
+  const sql = `
+    WITH RECURSIVE ancestors(id, parent_id, node_type, node_number) AS (
+      SELECT id, parent_id, node_type, node_number
+      FROM legal_nodes
+      WHERE id = ?
+      UNION ALL
+      SELECT n.id, n.parent_id, n.node_type, n.node_number
+      FROM legal_nodes n
+      JOIN ancestors a ON n.id = a.parent_id
+    )
+    SELECT node_type, node_number, id
+    FROM ancestors
+    WHERE node_type = 'chapter'
+    LIMIT 1
+  `;
+  const result = await queryOne(sql, [nodeId]);
+  if (!result) return null;
+
+  const titleSql = `
+    SELECT t.node_number AS title_number
+    FROM legal_nodes t
+    WHERE t.id = (
+      SELECT parent_id FROM legal_nodes WHERE id = ? AND node_type = 'chapter'
+    )
+    AND t.node_type = 'title'
+  `;
+  const titleRow = await queryOne(titleSql, [result.id]);
+  return {
+    chapter_number: result.node_number,
+    title_number: titleRow ? titleRow.title_number : null
+  };
 }
 
 const HIGHLIGHTS_KEY = 'customsLaw_highlights';
@@ -748,17 +837,20 @@ if ("serviceWorker" in navigator) {
 ```jsx
 import { useState, useEffect, useCallback, useRef, useMemo, useContext, createContext } from "react";
 import {
-  getTitles, getChapter, search,
+  getTitles, getChapter, getTitleTree, search,
   addHighlight, removeHighlight, getHighlightsForNode,
   getNotesForNode, addNote, updateNote, deleteNote,
   saveProgress, getProgress,
   hasTutorialBeenSeen, markTutorialSeen,
+  getChapterForNode,
 } from "../db";
 import {
-  getAiContext, IS_DEV, saveDevPreviewBatch, clearDevPreview,
-  getDevPreviewRaw, buildTemplateForChapter, buildFullCopyPayload, AI_APPS, copyPromptAndOpen,
+  getAiContext, AI_APPS, copyPromptAndOpen,
 } from "../aiContext";
+import { IS_DEV } from "../env";
+import { copyQuizPromptForTitle } from "../quizContext";
 import DevPanel from "./DevPanel";
+import QuizPage from "./QuizPage";
 
 const MODE_KEY = "customsLaw_mode";
 const FONT_KEY = "customsLaw_fontScale";
@@ -972,13 +1064,8 @@ function NotePanel({ notes, onCreate, onEdit, onDelete, onClose }) {
 }
 
 function AiContextModal({ node, onClose }) {
-  const [entry, setEntry] = useState(() => getAiContext(node.id));
+  const [entry] = useState(() => getAiContext(node.id));
   const [copiedApp, setCopiedApp] = useState(null);
-  const [devOpen, setDevOpen] = useState(false);
-  const [devJson, setDevJson] = useState(() => (IS_DEV ? getDevPreviewRaw() : "{}"));
-  const [devError, setDevError] = useState(null);
-
-  const refresh = () => setEntry(getAiContext(node.id));
 
   const handleAskExternal = async (app) => {
     const prompt = entry?.prompt?.trim() ||
@@ -986,16 +1073,6 @@ function AiContextModal({ node, onClose }) {
     await copyPromptAndOpen(prompt, app.url);
     setCopiedApp(app.id);
     setTimeout(() => setCopiedApp(null), 2500);
-  };
-
-  const handleSaveDevJson = () => {
-    try {
-      saveDevPreviewBatch(devJson);
-      setDevError(null);
-      refresh();
-    } catch (e) {
-      setDevError(e.message);
-    }
   };
 
   return (
@@ -1035,38 +1112,10 @@ function AiContextModal({ node, onClose }) {
             </p>
           )}
         </div>
-
-        {IS_DEV && (
-          <div className="mt-4 rounded-2xl border border-dashed border-amber-300 p-3 dark:border-amber-700">
-            <button onClick={() => setDevOpen((v) => !v)} className="w-full text-left text-xs font-bold uppercase tracking-wide text-amber-700 dark:text-amber-400">
-              🛠 Dev only: {devOpen ? "Hide" : "Add / Preview AI context (JSON)"}
-            </button>
-            {devOpen && (
-              <div className="mt-2">
-                <textarea
-                  value={devJson}
-                  onChange={(e) => setDevJson(e.target.value)}
-                  rows={8}
-                  style={{ fontSize: "13px" }}
-                  className="w-full rounded-lg border border-slate-200 bg-white p-2 font-mono text-xs text-slate-800 dark:border-slate-600 dark:bg-slate-950 dark:text-slate-200"
-                />
-                {devError && <p className="mt-1 text-xs text-red-500">{devError}</p>}
-                <div className="mt-2 flex flex-wrap gap-2">
-                  <button onClick={handleSaveDevJson} className="rounded-lg bg-amber-600 px-3 py-1.5 text-xs font-semibold text-white">Preview this JSON</button>
-                  <button onClick={() => { clearDevPreview(); setDevJson("{}"); refresh(); }} className="rounded-lg border border-slate-200 px-3 py-1.5 text-xs font-semibold text-slate-600 dark:border-slate-600 dark:text-slate-300">Clear preview</button>
-                </div>
-                <p className="mt-2 text-[11px] leading-relaxed text-slate-400 dark:text-slate-500">
-                  This box only exists in npm run dev. It's stripped out of the production build automatically — it will not show on the live site.
-                </p>
-              </div>
-            )}
-          </div>
-        )}
       </div>
     </div>
   );
 }
-
 const STUDY_TYPE_STYLES = {
   chapter: "text-xl sm:text-2xl font-bold text-navy-900 dark:text-slate-50",
   section: "text-lg sm:text-xl font-semibold text-slate-800 dark:text-slate-200",
@@ -1343,7 +1392,24 @@ function SearchView({ onNavigateChapter }) {
 
   const handleKeyDown = (e) => { if (e.key === "Enter") handleSearch(); };
   const clearQuery = () => { setQuery(""); setResults([]); setHasSearched(false); inputRef.current?.focus(); };
-  const handleResultClick = (item) => { onNavigateChapter(item.chapter_number, item.title_number, item.node_number); };
+  
+  const handleResultClick = async (item) => {
+    if (item.chapter_number) {
+      onNavigateChapter(item.chapter_number, item.title_number, item.node_id);
+    } else {
+      try {
+        const chapterInfo = await getChapterForNode(item.node_id);
+        if (chapterInfo) {
+          onNavigateChapter(chapterInfo.chapter_number, chapterInfo.title_number, item.node_id);
+        } else {
+          alert('This item is not under any chapter. Please browse manually.');
+        }
+      } catch (e) {
+        alert('Could not locate the chapter for this item.');
+        console.error(e);
+      }
+    }
+  };
   
   const exactResults = results.filter((r) => r.exact_match);
   const otherResults = results.filter((r) => !r.exact_match);
@@ -1478,11 +1544,11 @@ function SettingsView({ darkMode, setDarkMode, onReplayTutorial }) {
   );
 }
 
-function findNodeAndAncestors(node, targetNumber, ancestors = []) {
-  if (node.node_number === targetNumber) return { found: true, ancestors };
+function findNodeByIdAndAncestors(node, targetId, ancestors = []) {
+  if (node.id === targetId) return { found: true, ancestors, node };
   if (node.children) {
     for (const child of node.children) {
-      const result = findNodeAndAncestors(child, targetNumber, [...ancestors, node.id]);
+      const result = findNodeByIdAndAncestors(child, targetId, [...ancestors, node.id]);
       if (result.found) return result;
     }
   }
@@ -1553,7 +1619,7 @@ export default function ChapterBrowser() {
     setShowTutorial(true);
   }, []);
 
-  const loadChapter = useCallback(async (chapterNumber, titleNumber = null, focusSectionNumber = null) => {
+  const loadChapter = useCallback(async (chapterNumber, titleNumber = null, targetNodeId = null) => {
     setLoading(true); setError(null);
     try {
       const data = await getChapter(chapterNumber, titleNumber);
@@ -1563,18 +1629,14 @@ export default function ChapterBrowser() {
       setSelectedTitleNumber(titleNumber);
       setView("browse");
       setSidebarOpen(window.innerWidth >= 768);
-      if (focusSectionNumber && data) {
-        const { found, ancestors } = findNodeAndAncestors(data, focusSectionNumber);
+      if (targetNodeId && data) {
+        const { found, ancestors, node: foundNode } = findNodeByIdAndAncestors(data, targetNodeId);
         if (found) {
-          setExpandedNodeIds(new Set(ancestors));
-          let targetId = null;
-          const walk = (node) => {
-            if (node.node_number === focusSectionNumber && node.node_type === "section") { targetId = node.id; return true; }
-            if (node.children) { for (const child of node.children) { if (walk(child)) return true; } }
-            return false;
-          };
-          walk(data);
-          setScrollToNodeId(targetId);
+          setExpandedNodeIds(new Set([...ancestors, foundNode.id]));
+          setScrollToNodeId(foundNode.id);
+        } else {
+          setExpandedNodeIds(new Set());
+          setScrollToNodeId(null);
         }
       } else {
         setExpandedNodeIds(new Set());
@@ -1640,13 +1702,38 @@ export default function ChapterBrowser() {
     setStudyCollapseSignal((v) => v + 1);
   };
 
-  const handleCopyTemplate = async () => {
-    if (!chapterTree) return;
-    const payload = buildFullCopyPayload(chapterTree);
-    try { await navigator.clipboard.writeText(payload); } catch {}
-    alert("Copied! Master prompt + ID template + official CMTA source text — paste this straight into ChatGPT, Gemini, or Meta AI.");
-  };
-  
+  // 🔽 BINAGO: i-download bilang .txt file sa halip na clipboard
+  const handleCopyQuizTemplate = useCallback(async (titleNumber) => {
+    try {
+      const tree = await getTitleTree(titleNumber);
+      if (!tree) { alert("Could not load this title."); return; }
+      const payload = copyQuizPromptForTitle(tree);
+      // Gumawa ng .txt file at i-download
+      const blob = new Blob([payload], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `quiz-prompt-Title-${titleNumber}.txt`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+      // Ipakita ang confirmation message
+      alert(`✅ Na-download ang quiz-generation prompt para sa Title ${titleNumber} bilang .txt file.
+
+📝 INSTRUCTIONS FOR AI:
+1. Act like a professor designing a CuBLE exam.
+2. SELECTIVELY choose the most important and testable provisions.
+3. There is NO fixed number of questions — generate as many as educationally appropriate.
+4. Use web search (if available) to verify CuBLE exam patterns and frequently tested topics.
+5. Focus on QUALITY over QUANTITY — board-exam relevant questions only.
+
+⚠️ IMPORTANT: The AI will SKIP minor, procedural, or repetitive provisions.`);
+    } catch (err) {
+      alert("Failed to build quiz template: " + err.message);
+    }
+  }, []);
+
   const highlightUIValue = useMemo(() => ({ activeHighlightNodeId, setActiveHighlightNodeId }), [activeHighlightNodeId]);
 
   return (
@@ -1665,10 +1752,21 @@ export default function ChapterBrowser() {
                 const collapsed = collapsedTitles[key];
                 return (
                   <div key={key} className="mb-2">
-                    <button onClick={() => toggleTitleCollapse(key)} className="flex w-full items-center justify-between gap-2 rounded-lg px-2 py-2 text-left active:bg-slate-50 dark:active:bg-slate-800">
-                      <span className="text-sm font-bold uppercase tracking-wide text-navy-800 dark:text-slate-300">{titleGroup.title_number ? `Title ${titleGroup.title_number}` : titleGroup.title_title}</span>
-                      <span className="flex-shrink-0 text-xs text-slate-400 dark:text-slate-500">{collapsed ? "▸" : "▾"}</span>
-                    </button>
+                    <div className="flex items-center gap-1">
+                      <button onClick={() => toggleTitleCollapse(key)} className="flex min-h-[40px] flex-1 items-center justify-between gap-2 rounded-lg px-2 py-2 text-left active:bg-slate-50 dark:active:bg-slate-800">
+                        <span className="text-sm font-bold uppercase tracking-wide text-navy-800 dark:text-slate-300">{titleGroup.title_number ? `Title ${titleGroup.title_number}` : titleGroup.title_title}</span>
+                        <span className="flex-shrink-0 text-xs text-slate-400 dark:text-slate-500">{collapsed ? "▸" : "▾"}</span>
+                      </button>
+                      {IS_DEV && titleGroup.title_number && (
+                        <button
+                          onClick={() => handleCopyQuizTemplate(titleGroup.title_number)}
+                          title="Download Quiz Template as .txt"
+                          className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-dashed border-purple-400 text-sm text-purple-700 active:bg-purple-100 dark:border-purple-600 dark:text-purple-400"
+                        >
+                          📝
+                        </button>
+                      )}
+                    </div>
                     {!collapsed && (
                       <ul className="ml-1 space-y-0.5 border-l border-slate-100 pl-2 dark:border-slate-800">
                         {titleGroup.chapters.map((ch) => {
@@ -1705,12 +1803,17 @@ export default function ChapterBrowser() {
                 <button onClick={() => setView("search")} aria-label="Search" className={`min-h-[34px] rounded-full px-2.5 py-1 font-medium transition-colors ${view === "search" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
                   <span aria-hidden>🔍</span><span className="hidden sm:inline ml-1">Search</span>
                 </button>
+                <button onClick={() => setView("quiz")} aria-label="Quiz/Exam" className={`min-h-[34px] rounded-full px-2.5 py-1 font-medium transition-colors ${view === "quiz" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
+                  <span aria-hidden>📝</span><span className="hidden sm:inline ml-1">Quiz/Exam</span>
+                </button>
                 <button onClick={() => setView("settings")} aria-label="Settings" className={`min-h-[34px] rounded-full px-2.5 py-1 font-medium transition-colors ${view === "settings" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
                   ⚙️
                 </button>
-                <button onClick={() => setView("dev")} aria-label="Dev Panel" className={`min-h-[34px] rounded-full px-2.5 py-1 font-medium transition-colors ${view === "dev" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
-                  🛠
-                </button>
+                {IS_DEV && (
+                  <button onClick={() => setView("dev")} aria-label="Dev Panel" className={`min-h-[34px] rounded-full px-2.5 py-1 font-medium transition-colors ${view === "dev" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
+                    🛠
+                  </button>
+                )}
               </div>
               <span className="flex-1" />
               {view === "browse" && <ModeToggle mode={mode} setMode={setMode} />}
@@ -1739,7 +1842,7 @@ export default function ChapterBrowser() {
                 <p className="text-sm">{error}</p>
               </div>
             )}
-            {view === "search" ? <SearchView onNavigateChapter={loadChapter} /> : view === "dev" ? <DevPanel /> : view === "settings" ? <SettingsView darkMode={darkMode} setDarkMode={setDarkMode} onReplayTutorial={replayTutorial} /> : (
+            {view === "search" ? <SearchView onNavigateChapter={loadChapter} /> : view === "dev" && IS_DEV ? <DevPanel /> : view === "quiz" ? <QuizPage /> : view === "settings" ? <SettingsView darkMode={darkMode} setDarkMode={setDarkMode} onReplayTutorial={replayTutorial} /> : (
               <>
                 {loading && (
                   <div className="mx-auto max-w-3xl space-y-3">
@@ -1768,11 +1871,6 @@ export default function ChapterBrowser() {
                   <div className="mx-auto max-w-3xl">
                     {chapterTree.content && <p className="mb-4 rounded-xl bg-white p-4 text-base text-slate-600 shadow-card dark:bg-slate-900 dark:text-slate-300">{chapterTree.content}</p>}
                     <div className="mb-3 flex flex-wrap items-center justify-end gap-2">
-                      {IS_DEV && (
-                        <button onClick={handleCopyTemplate} className="flex h-9 items-center gap-1.5 rounded-full border border-dashed border-amber-400 bg-amber-50 px-3 text-sm font-medium text-amber-700 active:bg-amber-100 dark:border-amber-600 dark:bg-amber-950/30 dark:text-amber-400">
-                          <span aria-hidden>🛠</span> Copy ID Template
-                        </button>
-                      )}
                       <button onClick={expandAllStudy} className="flex h-9 items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 text-sm font-medium text-slate-600 active:bg-slate-100 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 dark:active:bg-slate-700">
                         <span aria-hidden>⤢</span> Expand All
                       </button>
@@ -1805,77 +1903,93 @@ export default function ChapterBrowser() {
       </div>
     </HighlightUIContext.Provider>
   );
-}
-```
+}```
 
 ## File: `./frontend/src/pages/DevPanel.jsx`
 ```jsx
+import QuizPanel from "./QuizPanel";
+
+export default function DevPanel() {
+  return (
+    <div className="mx-auto max-w-2xl space-y-4 pb-10">
+      <div>
+        <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-50">🛠 Dev Panel</h1>
+        <p className="text-sm text-slate-500 dark:text-slate-400">
+          Quiz question import &amp; preview only. This panel is stripped out of production
+          builds automatically (it only renders when running{" "}
+          <code className="rounded bg-slate-100 px-1 dark:bg-slate-700">npm run dev</code>),
+          so it never ships to real users on GitHub Pages.
+        </p>
+      </div>
+      <QuizPanel />
+    </div>
+  );
+}
+```
+
+## File: `./frontend/src/pages/QuizPanel.jsx`
+```jsx
 import { useState, useEffect, useCallback } from "react";
 import {
-  getAllBatches, getBatchEntries, importChapterJson, renameBatch,
-  updateEntry, deleteEntry, deleteBatch,
-  getExportAllJson, saveRawEntries, clearAllImports, getImportedCount,
-} from "../devImportStore";
+  getAllQuizBatches, getQuizBatchEntries, importQuizJson,
+  renameQuizBatch, deleteQuizBatch, getQuizExportAllJson,
+  saveRawQuizEntries, clearAllQuizImports, getQuizImportedCount,
+} from "../quizStore";
+import { LEVELS, QuizLevelButton, QuizPlayView } from "../components/QuizShared";
 
-function EntryEditForm({ entry, onSave, onCancel }) {
-  const [title, setTitle] = useState(entry.title || "");
-  const [content, setContent] = useState(entry.content || "");
-  const [prompt, setPrompt] = useState(entry.prompt || "");
-  const save = () => onSave({ title, content, prompt });
-  return (
-    <div className="mt-2 space-y-2 rounded-lg border border-amber-200 bg-amber-50/60 p-3 dark:border-amber-800 dark:bg-amber-950/20">
-      <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" style={{ fontSize: "16px" }} className="w-full rounded-lg border border-slate-200 bg-white p-2 text-sm dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
-      <textarea value={content} onChange={(e) => setContent(e.target.value)} placeholder="Content" rows={6} style={{ fontSize: "16px" }} className="w-full rounded-lg border border-slate-200 bg-white p-2 text-sm dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
-      <textarea value={prompt} onChange={(e) => setPrompt(e.target.value)} placeholder="Prompt" rows={3} style={{ fontSize: "16px" }} className="w-full rounded-lg border border-slate-200 bg-white p-2 text-sm dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
-      <div className="flex justify-end gap-2">
-        <button onClick={onCancel} className="rounded-lg px-3 py-1.5 text-sm text-slate-500 dark:text-slate-400">Cancel</button>
-        <button onClick={save} className="rounded-lg bg-amber-600 px-3 py-1.5 text-sm font-semibold text-white">Save</button>
-      </div>
-    </div>
-  );
-}
-
-function EntryRow({ nodeId, entry, onChanged }) {
-  const [editing, setEditing] = useState(false);
-  const label = entry._label || entry.title || nodeId;
-  const handleSave = (fields) => { updateEntry(nodeId, fields); setEditing(false); onChanged(); };
-  const handleDelete = () => { if (confirm(`Delete entry id ${nodeId}?`)) { deleteEntry(nodeId); onChanged(); } };
-  return (
-    <div className="rounded-lg border border-slate-200 bg-white p-2.5 dark:border-slate-700 dark:bg-slate-800">
-      <div className="flex items-center justify-between gap-2">
-        <div className="min-w-0">
-          <p className="truncate text-sm font-semibold text-slate-800 dark:text-slate-100">#{nodeId} — {label}</p>
-          <p className="truncate text-xs text-slate-400 dark:text-slate-500">{(entry.content || "").slice(0, 70)}...</p>
-        </div>
-        <div className="flex flex-shrink-0 gap-2">
-          <button onClick={() => setEditing((v) => !v)} className="rounded-lg border border-slate-200 px-2.5 py-1 text-xs font-medium text-slate-600 dark:border-slate-600 dark:text-slate-300">Edit</button>
-          <button onClick={handleDelete} className="rounded-lg border border-red-200 px-2.5 py-1 text-xs font-medium text-red-600 dark:border-red-800 dark:text-red-400">Delete</button>
-        </div>
-      </div>
-      {editing && <EntryEditForm entry={entry} onSave={handleSave} onCancel={() => setEditing(false)} />}
-    </div>
-  );
-}
-
-function BatchCard({ batch, onChanged }) {
+function QuizBatchCard({ batch, onChanged }) {
   const [open, setOpen] = useState(false);
-  const entries = open ? getBatchEntries(batch.id) : [];
+  const [selectedLevel, setSelectedLevel] = useState(null);
+  const [progress, setProgress] = useState({});
+
+  useEffect(() => {
+    const storageKey = `quiz_progress_${batch.id}`;
+    try {
+      setProgress(JSON.parse(localStorage.getItem(storageKey) || "{}"));
+    } catch {
+      setProgress({});
+    }
+  }, [batch.id, selectedLevel]);
+
+  const entries = open ? getQuizBatchEntries(batch.id) : [];
+  const nodeIds = entries.map((e) => e.id);
+  const entriesById = Object.fromEntries(entries.map((e) => [e.id, e]));
+
+  const handleLevelSelect = (levelId) => {
+    if (nodeIds.length === 0) { alert("No quiz entries found for this batch."); return; }
+    setSelectedLevel(levelId);
+  };
+  const handleBack = () => setSelectedLevel(null);
+
   const handleDeleteBatch = () => {
     if (confirm(`Delete the whole "${batch.label}" batch (${batch.nodeIds.length} entries)?`)) {
-      deleteBatch(batch.id);
+      deleteQuizBatch(batch.id);
       onChanged();
     }
   };
   const handleRename = () => {
-    const next = prompt("Rename this chapter label:", batch.label);
-    if (next !== null) { renameBatch(batch.id, next); onChanged(); }
+    const next = prompt("Rename this quiz batch:", batch.label);
+    if (next !== null) { renameQuizBatch(batch.id, next); onChanged(); }
   };
+
+  if (selectedLevel) {
+    return (
+      <QuizPlayView
+        title={batch.label}
+        entries={entriesById}
+        level={selectedLevel}
+        onBack={handleBack}
+        progressKey={batch.id}
+      />
+    );
+  }
+
   return (
-    <div className="rounded-xl border border-slate-200 bg-white p-3 shadow-card dark:border-slate-700 dark:bg-slate-800">
-      <div className="flex items-center justify-between gap-2">
+    <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-card dark:border-slate-700 dark:bg-slate-800">
+      <div className="mb-3 flex items-center justify-between gap-2">
         <button onClick={() => setOpen((v) => !v)} className="min-w-0 flex-1 text-left">
           <p className="truncate font-semibold text-navy-900 dark:text-slate-100">{open ? "▾" : "▸"} {batch.label}</p>
-          <p className="text-xs text-slate-400 dark:text-slate-500">{batch.nodeIds.length} entries · {new Date(batch.importedAt).toLocaleString()}</p>
+          <p className="text-xs text-slate-400 dark:text-slate-500">{batch.nodeIds.length} questions · {new Date(batch.importedAt).toLocaleString()}</p>
         </button>
         <div className="flex flex-shrink-0 gap-2">
           <button onClick={handleRename} className="rounded-lg border border-slate-200 px-2.5 py-1 text-xs font-medium text-slate-600 dark:border-slate-600 dark:text-slate-300">✏️</button>
@@ -1883,15 +1997,17 @@ function BatchCard({ batch, onChanged }) {
         </div>
       </div>
       {open && (
-        <div className="mt-3 space-y-2">
-          {entries.map((e) => <EntryRow key={e.id} nodeId={e.id} entry={e} onChanged={onChanged} />)}
+        <div className="space-y-2">
+          {LEVELS.map((level) => (
+            <QuizLevelButton key={level.id} level={level} progress={progress[level.id] || 0} onClick={() => handleLevelSelect(level.id)} />
+          ))}
         </div>
       )}
     </div>
   );
 }
 
-function ImportForm({ onImported }) {
+function ImportQuizForm({ onImported }) {
   const [json, setJson] = useState("");
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
@@ -1899,8 +2015,8 @@ function ImportForm({ onImported }) {
   const handleImport = () => {
     setError(null); setSuccess(null);
     try {
-      const { count, label } = importChapterJson(json);
-      setSuccess(`✓ Na-import ang ${count} entries bilang "${label}".`);
+      const { count, label } = importQuizJson(json);
+      setSuccess(`✓ Imported ${count} questions as "${label}".`);
       setJson("");
       onImported();
     } catch (e) {
@@ -1910,9 +2026,9 @@ function ImportForm({ onImported }) {
 
   return (
     <div className="rounded-xl border border-navy-200 bg-white p-3 shadow-card dark:border-navy-700 dark:bg-slate-800">
-      <p className="mb-1 text-sm font-semibold text-navy-900 dark:text-slate-100">📥 Import AI Context JSON</p>
-      <p className="mb-2 text-xs text-slate-400 dark:text-slate-500">I-paste lang at Import — isang bagsakan. Optional: maglagay ng "_chapter" key sa JSON para may custom label.</p>
-      <textarea value={json} onChange={(e) => setJson(e.target.value)} placeholder='{ "_chapter": "Chapter 1", "393": {...}, "193": {...} }' rows={9} style={{ fontSize: "16px" }} className="w-full rounded-lg border border-slate-200 bg-white p-2 font-mono text-xs dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
+      <p className="mb-1 text-sm font-semibold text-navy-900 dark:text-slate-100">📥 Import Quiz JSON</p>
+      <p className="mb-2 text-xs text-slate-400 dark:text-slate-500">Paste the AI-generated quiz JSON and Import — one title per batch. Optional: add "_title" for a custom label (importing the same "_title" again merges into that batch).</p>
+      <textarea value={json} onChange={(e) => setJson(e.target.value)} placeholder='{ "_title": "Title II", "4821": { "level1": {...}, "level2": {...}, ... } }' rows={9} style={{ fontSize: "16px" }} className="w-full rounded-lg border border-slate-200 bg-white p-2 font-mono text-xs dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
       {error && <p className="mt-2 text-sm text-red-600 dark:text-red-400">{error}</p>}
       {success && <p className="mt-2 text-sm text-emerald-600 dark:text-emerald-400">{success}</p>}
       <button onClick={handleImport} disabled={!json.trim()} className="mt-2 w-full rounded-lg bg-navy-900 px-4 py-2.5 text-sm font-semibold text-white disabled:opacity-40 dark:bg-navy-700">Import</button>
@@ -1920,16 +2036,16 @@ function ImportForm({ onImported }) {
   );
 }
 
-function RawJsonEditor({ onChanged }) {
+function RawQuizEditor({ onChanged }) {
   const [open, setOpen] = useState(false);
   const [text, setText] = useState("");
   const [error, setError] = useState(null);
   const [saved, setSaved] = useState(false);
 
-  const openEditor = () => { setText(getExportAllJson()); setOpen(true); setError(null); };
+  const openEditor = () => { setText(getQuizExportAllJson()); setOpen(true); setError(null); };
   const handleSave = () => {
     try {
-      saveRawEntries(text);
+      saveRawQuizEntries(text);
       setError(null); setSaved(true);
       onChanged();
       setTimeout(() => setSaved(false), 2000);
@@ -1939,7 +2055,7 @@ function RawJsonEditor({ onChanged }) {
   return (
     <div className="rounded-xl border border-slate-200 bg-white p-3 shadow-card dark:border-slate-700 dark:bg-slate-800">
       <button onClick={() => (open ? setOpen(false) : openEditor())} className="text-sm font-semibold text-slate-800 dark:text-slate-100">
-        🔧 {open ? "Hide" : "Edit"} Raw JSON (advanced, buong imported data)
+        🔧 {open ? "Hide" : "Edit"} Raw Quiz JSON (advanced, all imported data)
       </button>
       {open && (
         <div className="mt-2">
@@ -1953,22 +2069,32 @@ function RawJsonEditor({ onChanged }) {
   );
 }
 
-export default function DevPanel() {
+export default function QuizPanel() {
   const [batches, setBatches] = useState([]);
-  const [copied, setCopied] = useState(false);
+  const [downloaded, setDownloaded] = useState(false);
 
-  const refresh = useCallback(() => setBatches(getAllBatches()), []);
+  const refresh = useCallback(() => setBatches(getAllQuizBatches()), []);
   useEffect(() => { refresh(); }, [refresh]);
 
-  const handleExportAll = async () => {
-    try { await navigator.clipboard.writeText(getExportAllJson()); } catch {}
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
+  const handleExportAll = () => {
+    const json = getQuizExportAllJson();
+    const blob = new Blob([json], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const stamp = new Date().toISOString().slice(0, 10);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `quiz-export-${stamp}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    setDownloaded(true);
+    setTimeout(() => setDownloaded(false), 3500);
   };
 
   const handleClearAll = () => {
-    if (confirm(`Delete ALL ${getImportedCount()} imported entries? Hindi na ito mababawi.`)) {
-      clearAllImports();
+    if (confirm(`Delete ALL ${getQuizImportedCount()} imported quiz entries? This cannot be undone.`)) {
+      clearAllQuizImports();
       refresh();
     }
   };
@@ -1976,213 +2102,203 @@ export default function DevPanel() {
   return (
     <div className="mx-auto max-w-2xl space-y-4 pb-10">
       <div>
-        <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-50">🛠 Dev Panel</h1>
-        <p className="text-sm text-slate-500 dark:text-slate-400">Import at pamahalaan ang AI-generated context. Naka-save ito sa device kahit tanggalin mo pa itong tab.</p>
+        <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-50">📝 Quiz Panel</h1>
+        <p className="text-sm text-slate-500 dark:text-slate-400">Import, manage, and test-drive quizzes generated from CMTA provisions.</p>
+        <p className="mt-1 text-xs text-slate-400 dark:text-slate-500">
+          Kapag tapos ka na sa isang batch, gamitin ang <strong>Export All</strong> tapos i-merge yung JSON sa
+          <code className="mx-1 rounded bg-slate-100 px-1 dark:bg-slate-700">frontend/src/data/quizData.json</code>
+          para ma-bundle na siya sa app at gumana offline para sa lahat ng users — kagaya ng ginawa mo na sa AI explanations.
+        </p>
       </div>
-      <ImportForm onImported={refresh} />
+
+      <ImportQuizForm onImported={refresh} />
+
       <div className="rounded-xl border border-slate-200 bg-white p-3 shadow-card dark:border-slate-700 dark:bg-slate-800">
-        <p className="mb-2 text-sm font-semibold text-slate-800 dark:text-slate-100">📦 Buong Imported JSON ({getImportedCount()} entries)</p>
+        <p className="mb-2 text-sm font-semibold text-slate-800 dark:text-slate-100">📦 All Imported Quizzes ({getQuizImportedCount()} questions)</p>
         <div className="flex flex-wrap gap-2">
-          <button onClick={handleExportAll} className="flex-1 rounded-lg bg-emerald-600 px-3 py-2 text-sm font-semibold text-white">📋 Export All (copy)</button>
+          <button onClick={handleExportAll} className="flex-1 rounded-lg bg-emerald-600 px-3 py-2 text-sm font-semibold text-white">⬇️ Export All (download)</button>
           <button onClick={handleClearAll} className="flex-1 rounded-lg border border-red-300 px-3 py-2 text-sm font-semibold text-red-600 dark:border-red-800 dark:text-red-400">🗑 Delete All</button>
         </div>
-        {copied && <p className="mt-2 text-xs font-medium text-emerald-600 dark:text-emerald-400">✓ Na-copy! I-paste sa frontend/src/data/aiContext.json para permanente sa lahat ng users.</p>}
+        {downloaded && <p className="mt-2 text-xs font-medium text-emerald-600 dark:text-emerald-400">✓ Downloaded JSON file.</p>}
       </div>
-      <RawJsonEditor onChanged={refresh} />
+
+      <RawQuizEditor onChanged={refresh} />
+
       <div className="space-y-2">
-        <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">Imported Chapters</p>
-        {batches.length === 0 && <p className="text-sm italic text-slate-400 dark:text-slate-600">Wala pang na-import.</p>}
-        {batches.map((b) => <BatchCard key={b.id} batch={b} onChanged={refresh} />)}
+        <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">Imported Quiz Batches</p>
+        {batches.length === 0 && <p className="text-sm italic text-slate-400 dark:text-slate-600">No quiz batches imported yet.</p>}
+        {batches.map((b) => <QuizBatchCard key={b.id} batch={b} onChanged={refresh} />)}
       </div>
     </div>
   );
 }
 ```
 
-## File: `./frontend/src/data/aiContext.json`
-```json
-{
-  "_example_do_not_use": {
-    "title": "How to fill this in",
-    "content": "Delete this entry. Real entries are keyed by the node's numeric id (as text), e.g. \"42\". Run the app with npm run dev, open a chapter, and tap the amber 'Copy ID Template' button to get the ids for that chapter pre-filled.",
-    "prompt": "Not used."
+## File: `./frontend/src/pages/QuizPage.jsx`
+```jsx
+import { useState, useEffect } from "react";
+import staticQuizData from "../data/quizData.json";
+import { getFlattenedEntries } from "../quizStore";
+import { LEVELS, QuizLevelButton, QuizPlayView } from "../components/QuizShared";
+
+function groupByTitle(flatEntries) {
+  const titleGroups = {};
+  Object.keys(flatEntries).forEach((id) => {
+    const entry = flatEntries[id];
+    const title = entry._title || "Untitled";
+    if (!titleGroups[title]) titleGroups[title] = {};
+    const cleanEntry = { ...entry };
+    delete cleanEntry._title;
+    titleGroups[title][id] = cleanEntry;
+  });
+  return Object.keys(titleGroups).map((title) => ({ title, data: titleGroups[title] }));
+}
+
+// Live in-browser imports (Dev Panel → Quiz tab) take priority so you can
+// preview immediately. Once a batch is finished, export it and merge into
+// src/data/quizData.json so it ships with the app and works fully offline
+// for every user — same pattern as aiContext.json.
+function loadQuizData() {
+  try {
+    const flat = getFlattenedEntries();
+    if (Object.keys(flat).length > 0) return groupByTitle(flat);
+  } catch (e) {
+    console.warn("Failed to load quiz data from local imports:", e);
   }
+  if (staticQuizData && Object.keys(staticQuizData).length > 0) {
+    return groupByTitle(staticQuizData);
+  }
+  return [];
+}
+
+function QuizTitleCard({ title, data, onSelectLevel }) {
+  const [open, setOpen] = useState(false);
+  const [progress, setProgress] = useState({});
+  const [totalQuestions, setTotalQuestions] = useState({});
+
+  useEffect(() => {
+    const ids = Object.keys(data);
+    const counts = {};
+    LEVELS.forEach((level) => {
+      counts[level.id] = ids.filter((id) => data[id] && data[id][level.id]).length;
+    });
+    setTotalQuestions(counts);
+  }, [data]);
+
+  useEffect(() => {
+    const storageKey = `quiz_progress_${title}`;
+    try {
+      setProgress(JSON.parse(localStorage.getItem(storageKey) || "{}"));
+    } catch {
+      setProgress({});
+    }
+  }, [title]);
+
+  const handleLevelSelect = (levelId) => {
+    const ids = Object.keys(data).filter((id) => data[id] && data[id][levelId]);
+    if (ids.length === 0) {
+      alert(`No questions available for ${LEVELS.find((l) => l.id === levelId)?.label}.`);
+      return;
+    }
+    onSelectLevel(title, data, levelId);
+  };
+
+  const total = Object.values(totalQuestions).reduce((a, b) => a + b, 0);
+
+  return (
+    <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-card dark:border-slate-700 dark:bg-slate-800">
+      <div className="mb-3 flex items-center justify-between gap-2">
+        <button onClick={() => setOpen((v) => !v)} className="min-w-0 flex-1 text-left">
+          <p className="truncate font-semibold text-navy-900 dark:text-slate-100">{open ? "▾" : "▸"} {title}</p>
+          <p className="text-xs text-slate-400 dark:text-slate-500">{Object.keys(data).length} provisions · {total} total questions</p>
+        </button>
+      </div>
+      {open && (
+        <div className="space-y-2">
+          {LEVELS.map((level) => {
+            if (!totalQuestions[level.id]) return null;
+            return (
+              <QuizLevelButton key={level.id} level={level} progress={progress[level.id] || 0} onClick={() => handleLevelSelect(level.id)} />
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default function QuizPage() {
+  const [selectedTitle, setSelectedTitle] = useState(null);
+  const [selectedData, setSelectedData] = useState(null);
+  const [selectedLevel, setSelectedLevel] = useState(null);
+  const [titles, setTitles] = useState([]);
+  const [refreshKey, setRefreshKey] = useState(0);
+
+  useEffect(() => { setTitles(loadQuizData()); }, [refreshKey]);
+
+  useEffect(() => {
+    const handleStorageChange = (e) => {
+      if (e.key === "customsLaw_quizImports") setRefreshKey((prev) => prev + 1);
+    };
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
+
+  const handleSelectLevel = (title, data, levelId) => {
+    setSelectedTitle(title); setSelectedData(data); setSelectedLevel(levelId);
+  };
+  const handleBack = () => { setSelectedTitle(null); setSelectedData(null); setSelectedLevel(null); };
+
+  if (selectedTitle && selectedData && selectedLevel) {
+    return (
+      <div className="mx-auto max-w-2xl p-4">
+        <QuizPlayView title={selectedTitle} entries={selectedData} level={selectedLevel} onBack={handleBack} progressKey={selectedTitle} backLabel={`← Back to ${selectedTitle}`} />
+      </div>
+    );
+  }
+
+  return (
+    <div className="mx-auto max-w-2xl p-4">
+      <div className="mb-6 flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-50">📝 Quiz / Exam</h1>
+          <p className="text-sm text-slate-500 dark:text-slate-400">Test your knowledge with 5 levels of difficulty — from Easy to Will Done.</p>
+        </div>
+        <button onClick={() => setRefreshKey((prev) => prev + 1)} className="rounded-lg border border-slate-200 px-3 py-1.5 text-sm text-slate-600 hover:bg-slate-50 dark:border-slate-600 dark:text-slate-300 dark:hover:bg-slate-800" title="Refresh quiz data from imported files">🔄 Refresh</button>
+      </div>
+
+      {titles.length === 0 ? (
+        <div className="flex h-64 flex-col items-center justify-center text-center text-slate-500 dark:text-slate-400">
+          <p className="text-lg font-medium">No quiz data available</p>
+          <p className="text-sm mt-2">Import quiz data from <strong>Dev Panel (🛠) → Quiz tab</strong>.</p>
+          <p className="text-sm mt-1">After importing, click <strong>Refresh</strong> or reload the page.</p>
+        </div>
+      ) : (
+        <div className="space-y-3">
+          {titles.map(({ title, data }) => <QuizTitleCard key={title} title={title} data={data} onSelectLevel={handleSelectLevel} />)}
+        </div>
+      )}
+    </div>
+  );
 }
 ```
+
+## File: `./frontend/src/data/aiContext.json`
+`na send ko na kanina kaya hindi ko isesend ulit`
 
 ## File: `./frontend/src/aiContext.js`
 ```javascript
 import aiContextData from "./data/aiContext.json";
-import { getImportedEntry } from "./devImportStore";
 
 // Osias 6.7 — bundled AI explanations, shipped fully offline with the app.
-// Lookup order: (1) npm-run-dev preview [dev only], (2) permanently imported
-// via the Dev Panel [localStorage, works even after Dev Panel is deleted],
-// (3) the committed aiContext.json bundled at build time.
-
-const DEV_PREVIEW_KEY = "customsLaw_aiContextDevPreview";
-export const IS_DEV = import.meta.env.DEV;
-
-function readDevPreview() {
-  if (!IS_DEV) return {};
-  try {
-    return JSON.parse(localStorage.getItem(DEV_PREVIEW_KEY) || "{}");
-  } catch {
-    return {};
-  }
-}
+// All entries are pre-generated and permanently baked into data/aiContext.json,
+// so this is now just a simple, read-only lookup. (There used to be a
+// companion "Dev Panel" import tool for pasting in fresh AI-generated batches
+// during authoring — that workflow is finished, so it was removed to keep the
+// shipped app lean and to avoid exposing any import/edit control to users.)
 
 export function getAiContext(nodeId) {
-  const key = String(nodeId);
-  if (IS_DEV) {
-    const preview = readDevPreview();
-    if (preview[key]) return preview[key];
-  }
-  const imported = getImportedEntry(key);
-  if (imported) return imported;
-  return aiContextData[key] || null;
-}
-
-export function saveDevPreviewBatch(jsonText) {
-  if (!IS_DEV) throw new Error("Preview is only available in npm run dev");
-  const parsed = JSON.parse(jsonText);
-  const merged = { ...readDevPreview(), ...parsed };
-  localStorage.setItem(DEV_PREVIEW_KEY, JSON.stringify(merged));
-  return merged;
-}
-
-export function clearDevPreview() {
-  if (!IS_DEV) return;
-  localStorage.removeItem(DEV_PREVIEW_KEY);
-}
-
-export function getDevPreviewRaw() {
-  if (!IS_DEV) return "{}";
-  return JSON.stringify(readDevPreview(), null, 2);
-}
-
-export const MASTER_PROMPT = `🧠 MASTER CONTENT GENERATION PROMPT
-You are an expert Customs Broker, CMTA legal educator, instructional designer, and content writer for AHTN Navigator.
-Your task is to generate a pre-written Study Guide for each Definition, Section, Chapter, or Provision of Republic Act No. 10863 (CMTA).
-The Study Guide will be stored permanently in the application's database. It is NOT AI-generated at runtime. Every response must be written as if it were created by an experienced Customs law professor.
-
-SOURCE OF TRUTH
-The official text from the provided JSON file is the only legal source.
-Never modify the official law. Never rewrite the official law. Never omit important legal meaning.
-Never invent legal requirements. Never fabricate court cases or legal interpretations.
-If additional information is unavailable, clearly state that instead of guessing.
-
-TARGET AUDIENCE
-Write for: First-year BSCA students, Customs Broker reviewees, and professionals who want a simple explanation.
-The reader should feel like a professor is explaining the topic in plain language.
-
-LANGUAGE
-Primary language: Tagalog. Keep important legal terms in English when appropriate.
-Use simple, conversational Tagalog. Avoid deep legal jargon unless you immediately explain it.
-
-WRITING STYLE
-The explanation should feel like a mentor talking to a student.
-Do NOT sound like ChatGPT. Do NOT sound robotic. Do NOT simply repeat the law.
-Instead: Explain. Teach. Simplify. Give context. Build understanding.
-
-REQUIRED FORMAT
-Generate the following sections in this exact order.
-
-📖 Kahulugan
-Start with a one-paragraph explanation in very simple Tagalog. The reader should immediately understand what the topic means.
-
-🔍 Breakdown
-Break the provision into its important parts. Explain each keyword separately (e.g. Imported Goods, Free Zone, Directly or Through Transit). Explain why each one matters.
-
-💡 Simpleng Paliwanag
-Pretend you're explaining the topic to your classmate one day before the exam. Avoid legal wording. Make it easy to remember.
-
-📦 Halimbawa
-Create one realistic Customs scenario. Use situations involving imports, exports, airport, seaport, customs officers, customs brokers, warehouses, PEZA, Clark, Subic, Free Zones. The example must directly relate to the law.
-
-⭐ Bakit Mahalaga Ito?
-Explain why the provision exists. Why should Customs students understand it? How is it applied in real life?
-
-⚠️ Dapat Tandaan
-List the most important reminders. Mention common misunderstandings if applicable.
-
-🎯 Board Exam Tip
-Give review advice. Help students remember the concept. Mention common board exam traps if appropriate. Never invent actual board exam questions.
-
-❓ Madalas Malito ang Students
-Write one realistic question students usually ask. Then answer it clearly.
-
-🔗 Related Topics
-List related Sections, Definitions, Chapters, Customs concepts, and Related laws (only if officially relevant).
-
-🤖 Need More Explanation?
-Generate a high-quality prompt that users can send to external AI. The prompt must ask the AI to: explain the topic simply, give practical Customs examples, explain why the law exists, mention related provisions, mention relevant CAOs/CMOs if applicable, provide board exam insights, and clarify common misconceptions. This prompt will be automatically copied to the user's clipboard before opening Meta AI, ChatGPT, or Gemini.
-
-IMPORTANT RULES
-Every explanation must: preserve the legal meaning, never contradict CMTA, never hallucinate, never make assumptions, never create fake cases, never use unnecessary filler words, be educational, be easy to understand, and be consistent across the entire app.
-The user should feel that every Study Guide was written by the same experienced Customs law professor.
-
-For each id below, output valid JSON matching the ID TEMPLATE structure, filling in "title", "content", and "prompt" using the OFFICIAL CMTA SOURCE TEXT provided for that same id as your only source of truth.`;
-
-function nodeLabel(node) {
-  const type = node.node_type;
-  const num = node.node_number || "";
-  if (type === "chapter") return `Chapter ${num}`.trim();
-  if (type === "section") return `Sec. ${num}`.trim();
-  if (type === "title") return `Title ${num}`.trim();
-  return `${type} ${num}`.trim();
-}
-
-export function buildTemplateForChapter(chapterTree) {
-  const out = {};
-  function walk(node) {
-    if (node.content) {
-      out[node.id] = {
-        _label: `${node.node_type} ${node.node_number || ""} — ${(node.title || "").slice(0, 60)}`,
-        title: "",
-        content: "",
-        prompt: "",
-      };
-    }
-    (node.children || []).forEach(walk);
-  }
-  walk(chapterTree);
-  return JSON.stringify(out, null, 2);
-}
-
-export function buildTopicTextForChapter(chapterTree) {
-  const blocks = [];
-  function walk(node) {
-    if (node.content) {
-      const lines = [`topic: [${node.id}]`, nodeLabel(node)];
-      if (node.title) lines.push(node.title);
-      lines.push(node.content);
-      if (node.cross_references && node.cross_references.length) {
-        lines.push("See Also");
-        node.cross_references.forEach((ref) => {
-          lines.push(ref.url ? `${ref.text} (${ref.url})` : ref.text);
-        });
-      }
-      blocks.push(lines.join("\n"));
-    }
-    (node.children || []).forEach(walk);
-  }
-  walk(chapterTree);
-  return blocks.join("\n\n");
-}
-
-export function buildFullCopyPayload(chapterTree) {
-  const idTemplate = buildTemplateForChapter(chapterTree);
-  const topics = buildTopicTextForChapter(chapterTree);
-  return [
-    MASTER_PROMPT,
-    "",
-    "🧩 ID TEMPLATE — fill title/content/prompt for each id below:",
-    idTemplate,
-    "",
-    "📚 OFFICIAL CMTA SOURCE TEXT (per id, your only source of truth):",
-    topics,
-  ].join("\n");
+  return aiContextData[String(nodeId)] || null;
 }
 
 export const AI_APPS = [
@@ -2201,20 +2317,20 @@ export async function copyPromptAndOpen(prompt, appUrl) {
 }
 ```
 
-## File: `./frontend/src/devImportStore.js`
+## File: `./frontend/src/quizStore.js`
 ```javascript
-// Dev Panel storage: lets Osias paste AI-generated JSON (per chapter) and
-// have it saved permanently in localStorage — independent of IS_DEV, and
-// independent of whether the Dev Panel UI itself still exists in the code.
-// getAiContext() in aiContext.js reads from here so imported entries keep
-// working even after the Dev Panel tab is deleted from the app later.
+// Quiz storage: lets you paste AI-generated quiz JSON (per title/level) and have
+// it saved permanently in localStorage. When importing multiple batches with
+// the same _title, entries are MERGED instead of overwritten.
 //
-// Chapter label: optional. Add a top-level "_chapter" key in the pasted
-// JSON (e.g. { "_chapter": "Chapter 1", "393": {...} }) to name the batch
-// in one paste. Skip it and a timestamp label is auto-assigned instead —
-// rename anytime from the batch list.
+// Title label: optional. Add a top-level "_title" key in the pasted JSON
+// (e.g. { "_title": "CMTA Title I - Level 1 Batch", "393": {...} }) to name the batch.
+// Importing Level 2 with the same _title will merge with Level 1.
+// Matching is case-insensitive and ignores leading/trailing spaces, so
+// "Title I" and "title i " will merge into the same batch instead of
+// silently creating a duplicate one.
 
-const STORE_KEY = "customsLaw_aiContextImports";
+const STORE_KEY = "customsLaw_quizImports";
 
 function emptyStore() {
   return { batches: {}, entries: {} };
@@ -2227,7 +2343,7 @@ function loadStore() {
     const parsed = JSON.parse(raw);
     return {
       batches: parsed.batches || {},
-      entries: parsed.entries || {},
+      entries: parsed.entries || {}
     };
   } catch {
     return emptyStore();
@@ -2238,57 +2354,99 @@ function saveStore(store) {
   localStorage.setItem(STORE_KEY, JSON.stringify(store));
 }
 
-export function getImportedEntry(nodeId) {
+function normalizeLabel(label) {
+  return String(label || "").trim().toLowerCase();
+}
+
+export function getImportedQuizEntry(nodeId) {
   const store = loadStore();
   return store.entries[String(nodeId)] || null;
 }
 
-export function getAllBatches() {
+export function getAllQuizBatches() {
   const store = loadStore();
-  return Object.values(store.batches).sort((a, b) =>
-    b.importedAt.localeCompare(a.importedAt)
-  );
+  return Object.values(store.batches).sort((a, b) => b.importedAt.localeCompare(a.importedAt));
 }
 
-export function getBatchEntries(batchId) {
+export function getQuizBatchEntries(batchId) {
   const store = loadStore();
   const batch = store.batches[batchId];
   if (!batch) return [];
   return batch.nodeIds.map((id) => ({ id, ...(store.entries[id] || {}) }));
 }
 
-export function importChapterJson(jsonText) {
-  const parsed = JSON.parse(jsonText);
-  const rawLabel = parsed._chapter;
-  if (parsed._chapter !== undefined) delete parsed._chapter;
-  const ids = Object.keys(parsed);
-  if (!ids.length) throw new Error("Walang laman ang JSON na na-paste.");
+// Flattens batches + entries into { id: { _title, level1, level2, ... } } —
+// the SAME shape used by the shipped frontend/src/data/quizData.json static
+// file. This is the fix for the "everything shows up as Untitled" bug: the
+// title now travels with each question instead of only living on the batch,
+// so the live import preview and the final baked-in file always agree.
+export function getFlattenedEntries() {
   const store = loadStore();
-  for (const bId in store.batches) {
-    store.batches[bId].nodeIds = store.batches[bId].nodeIds.filter(
-      (id) => !ids.includes(id)
-    );
+  const flat = {};
+  for (const batch of Object.values(store.batches)) {
+    for (const id of batch.nodeIds) {
+      if (store.entries[id]) {
+        flat[id] = { _title: batch.label, ...store.entries[id] };
+      }
+    }
   }
-  for (const bId in store.batches) {
-    if (store.batches[bId].nodeIds.length === 0) delete store.batches[bId];
-  }
-  const batchId = `b_${Date.now()}`;
-  const fallback = `Import – ${new Date().toLocaleString("en-PH", {
-    month: "short", day: "numeric", hour: "numeric", minute: "2-digit",
-  })}`;
-  const label = (rawLabel && String(rawLabel).trim()) || fallback;
-  store.batches[batchId] = {
-    id: batchId,
-    label,
-    importedAt: new Date().toISOString(),
-    nodeIds: ids,
-  };
-  for (const id of ids) store.entries[id] = parsed[id];
-  saveStore(store);
-  return { batchId, count: ids.length, label };
+  return flat;
 }
 
-export function renameBatch(batchId, newLabel) {
+export function importQuizJson(jsonText) {
+  const parsed = JSON.parse(jsonText);
+  const rawLabel = parsed._title;
+  if (parsed._title !== undefined) delete parsed._title;
+  const ids = Object.keys(parsed);
+  if (!ids.length) throw new Error("The pasted JSON is empty.");
+
+  const store = loadStore();
+
+  let existingBatchId = null;
+  const label = (rawLabel && String(rawLabel).trim()) || null;
+
+  if (label) {
+    const normalized = normalizeLabel(label);
+    for (const [bId, batch] of Object.entries(store.batches)) {
+      if (normalizeLabel(batch.label) === normalized) {
+        existingBatchId = bId;
+        break;
+      }
+    }
+  }
+
+  for (const id of ids) {
+    const existing = store.entries[id];
+    store.entries[id] = existing ? { ...existing, ...parsed[id] } : parsed[id];
+  }
+
+  if (existingBatchId) {
+    const batch = store.batches[existingBatchId];
+    const existingIds = new Set(batch.nodeIds);
+    for (const id of ids) {
+      if (!existingIds.has(id)) batch.nodeIds.push(id);
+    }
+    batch.importedAt = new Date().toISOString();
+  } else {
+    const batchId = `qb_${Date.now()}`;
+    const fallback = `Import – ${new Date().toLocaleString("en-PH", {
+      month: "short", day: "numeric", hour: "numeric", minute: "2-digit",
+    })}`;
+    store.batches[batchId] = {
+      id: batchId,
+      label: label || fallback,
+      importedAt: new Date().toISOString(),
+      nodeIds: ids
+    };
+  }
+
+  saveStore(store);
+
+  const count = Object.keys(store.entries).length;
+  return { count, label: label || "New batch" };
+}
+
+export function renameQuizBatch(batchId, newLabel) {
   const store = loadStore();
   if (!store.batches[batchId]) return;
   const trimmed = newLabel.trim();
@@ -2296,60 +2454,500 @@ export function renameBatch(batchId, newLabel) {
   saveStore(store);
 }
 
-export function updateEntry(nodeId, fields) {
+export function updateQuizEntry(nodeId, fields) {
   const store = loadStore();
   if (!store.entries[nodeId]) return;
   store.entries[nodeId] = { ...store.entries[nodeId], ...fields };
   saveStore(store);
 }
 
-export function deleteEntry(nodeId) {
+export function deleteQuizEntry(nodeId) {
   const store = loadStore();
   delete store.entries[nodeId];
   for (const bId in store.batches) {
-    store.batches[bId].nodeIds = store.batches[bId].nodeIds.filter(
-      (id) => id !== nodeId
-    );
+    store.batches[bId].nodeIds = store.batches[bId].nodeIds.filter((id) => id !== nodeId);
     if (store.batches[bId].nodeIds.length === 0) delete store.batches[bId];
   }
   saveStore(store);
 }
 
-export function deleteBatch(batchId) {
+export function deleteQuizBatch(batchId) {
   const store = loadStore();
   const batch = store.batches[batchId];
   if (!batch) return;
-  for (const id of batch.nodeIds) delete store.entries[id];
+  for (const id of batch.nodeIds) {
+    let usedElsewhere = false;
+    for (const [bId, b] of Object.entries(store.batches)) {
+      if (bId !== batchId && b.nodeIds.includes(id)) { usedElsewhere = true; break; }
+    }
+    if (!usedElsewhere) delete store.entries[id];
+  }
   delete store.batches[batchId];
   saveStore(store);
 }
 
-export function getExportAllJson() {
-  const store = loadStore();
-  return JSON.stringify(store.entries, null, 2);
+export function getQuizExportAllJson() {
+  return JSON.stringify(getFlattenedEntries(), null, 2);
 }
 
-export function saveRawEntries(jsonText) {
+export function saveRawQuizEntries(jsonText) {
   const parsed = JSON.parse(jsonText);
   const store = loadStore();
-  const newIds = Object.keys(parsed);
-  for (const bId in store.batches) {
-    store.batches[bId].nodeIds = store.batches[bId].nodeIds.filter((id) =>
-      newIds.includes(id)
-    );
-    if (store.batches[bId].nodeIds.length === 0) delete store.batches[bId];
+  for (const id of Object.keys(parsed)) {
+    const existing = store.entries[id];
+    store.entries[id] = existing ? { ...existing, ...parsed[id] } : parsed[id];
   }
-  store.entries = parsed;
   saveStore(store);
 }
 
-export function clearAllImports() {
+export function clearAllQuizImports() {
   saveStore(emptyStore());
 }
 
-export function getImportedCount() {
+export function getQuizImportedCount() {
   return Object.keys(loadStore().entries).length;
 }
+```
+
+## File: `./frontend/src/quizContext.js`
+```javascript
+// Quiz generation — builds the "Copy Quiz Template" clipboard payload for one Title.
+// The prompt instructs the AI to SELECTIVELY generate quiz questions for the most
+// important and testable provisions, like a professor curating an exam.
+//
+// Flow: tap the 📝 button next to a Title in the sidebar -> this builds a
+// prompt containing instructions + the full text of every node in that
+// title, each tagged with its unique ID -> paste into an AI -> paste the
+// AI's JSON answer into Dev Panel -> Import Quiz JSON.
+
+function flattenForQuiz(node, lines = []) {
+  const label = `${(node.node_type || "").toUpperCase()} ${node.node_number || ""}`.trim();
+  const heading = node.title ? `${label} — ${node.title}` : label;
+  if (node.content) {
+    lines.push(`[ID: ${node.id}] ${heading}`);
+    lines.push(node.content.trim());
+    lines.push("");
+  } else if (node.title) {
+    lines.push(`[ID: ${node.id}] ${heading}`);
+    lines.push("");
+  }
+  if (node.children) {
+    for (const child of node.children) flattenForQuiz(child, lines);
+  }
+  return lines;
+}
+
+function collectQuizIds(node, ids = []) {
+  if (node.content) ids.push(node.id);
+  if (node.children) {
+    for (const child of node.children) collectQuizIds(child, ids);
+  }
+  return ids;
+}
+
+export const QUIZ_MASTER_PROMPT = `🧠 QUIZ GENERATION — SELECTIVE & CUBLE-ALIGNED (CMTA RA 10863)
+
+You are an expert Customs law professor and CuBLE exam developer. Your task is to create a high-quality, selective 5-level quiz system for a Philippine law-study app covering RA 10863, the Customs Modernization and Tariff Act (CMTA).
+
+🎯 TARGET AUDIENCE: BSCA students and Customs Broker Licensure Examination (CuBLE) reviewees.
+🔍 SOURCE: The official CMTA text provided below. Do NOT invent facts not stated in the text.
+🌐 WEB SEARCH: You MAY use web search (if available) to verify CuBLE exam patterns, frequently tested topics, and board exam trends — but your answers must ALWAYS be based on the actual CMTA text provided.
+
+---
+📋 SELECTION RULE — YOU ARE THE PROFESSOR
+
+You are given a list of IDs and their full text below.
+
+Your task is to SELECTIVELY generate quiz questions for the MOST IMPORTANT and TESTABLE provisions — just like a professor would when designing a board exam review.
+
+DO NOT generate a question for every single ID.
+DO NOT force questions for repetitive, minor, or purely procedural provisions.
+
+CHOOSE the provisions that are:
+- Frequently tested in CuBLE (e.g., definitions, penalties, procedures, exceptions)
+- Core principles (Declaration of Policy, Definition of Terms, Importation rules)
+- Thresholds, percentages, deadlines (e.g., 15 days, 30 days, 100% ad valorem)
+- Key distinctions (Abatement vs Refund, Entry vs Admission, Outright vs Technical Smuggling)
+- Practical application scenarios (seizure, forfeiture, assessment, protest)
+- Board exam favorite topics (Flexible Clause, AEO, Rules of Origin, Valuation Methods)
+- Unique or landmark provisions
+
+SKIP provisions that are:
+- Purely procedural or administrative (e.g., reporting requirements, record-keeping)
+- Repetitive or redundant across multiple sections
+- Too minor or rarely tested in board exams
+- Already covered by a more important provision
+
+The number of questions you generate should be based on the educational importance and testability of the provisions — there is no fixed minimum or maximum. Focus on quality over quantity. A good exam covers the most critical topics without being exhaustive.
+
+IMPORTANT: Whichever IDs you choose to cover for THIS Title, reuse that SAME set of IDs across every level (1 through 5) if you are asked to generate more than one level later for this Title. This keeps every level's question count consistent.
+
+---
+📋 CRITICAL: THE "_title" FIELD MUST STAY IDENTICAL ACROSS ALL 5 LEVELS
+
+This app merges quiz batches by matching the "_title" string EXACTLY (case-insensitive, whitespace-trimmed only — no other normalization). If Level 1, Level 2, Level 3, Level 4, and Level 5 are generated as separate outputs for the SAME Title, every single output MUST use the exact same "_title" value. Do NOT append "Level 1", "Batch 2", "Easy", "Normal", etc. to it, and do NOT reword it between levels. Otherwise the app creates separate, duplicate-looking groups instead of one merged quiz set with all 5 level buttons working correctly.
+
+Derive the "_title" from the Title heading found at the top of the FULL TEXT section below (e.g. a line like "TITLE I — PRELIMINARY PROVISIONS" becomes "_title": "Title I – Preliminary Provisions"). If the person tells you to use a specific exact "_title" string, use that instead — it takes priority, since it guarantees the string matches whatever was used for the other levels of this same Title.
+
+---
+📋 OUTPUT FORMAT
+
+If asked to generate ONE level at a time (most common), output ONLY that level, nested under each selected ID:
+
+{
+  "_title": "Title I – Preliminary Provisions",
+  "<selectedID>": {
+    "level1": {
+      "question": "...",
+      "choices": { "A": "...", "B": "...", "C": "...", "D": "..." },
+      "correct": "A",
+      "reason": "..."
+    }
+  }
+}
+
+If asked to generate ALL 5 levels at once, nest every level under the same ID instead:
+
+{
+  "_title": "Title I – Preliminary Provisions",
+  "<selectedID>": {
+    "level1": { "question": "...", "choices": {...}, "correct": "A", "reason": "..." },
+    "level2": { "question": "...", "choices": {...}, "correct": "B", "reason": "..." },
+    "level3": { "question": "...", "choices": {...}, "correct": "C", "reason": "..." },
+    "level4": { "question": "...", "choices": {...}, "correct": "D", "reason": "..." },
+    "level5": { "question": "...", "correct": "The exact answer text", "reason": "..." }
+  }
+}
+
+Note: Level 5 never has a "choices" field — it is identification-only.
+
+Output ONLY the JSON object. No markdown code fences, no extra commentary before or after it.
+
+---
+📋 CRITICAL: THE "reason" FIELD MUST BE PLAIN TEXT — NO MARKDOWN
+
+The app displays "reason" inside a plain paragraph tag with no markdown rendering whatsoever. Do NOT use any of the following inside "reason":
+- Bold markers (**text**)
+- Blockquote markers (>)
+- Headers (#)
+- Emoji section icons (book, lightbulb, checkmark, etc.)
+- Forced line breaks
+
+Instead, write "reason" as ONE flat, well-punctuated paragraph, 3-4 sentences max, following this structure:
+
+"Correct answer: [letter]. Section [X]([paragraph letter if any]) of the CMTA states: '[exact verbatim wording from the source text].' [1-2 sentence tip explaining the key distinction, common trap, or why the other choices are wrong.]"
+
+Rules:
+- Quote the EXACT wording from the source text, inside straight single or double quotes — never paraphrase the legal text itself.
+- No icons, no markdown symbols, no forced line breaks — everything flows as normal prose.
+- Level 1 reasons are written in Tagalog, but the quoted legal text itself stays in English inside quotes.
+- Levels 2-5 reasons are written fully in English.
+
+EXAMPLE (Level 2): "reason": "Correct answer: C. Section 101 of the CMTA states the State's policy is to 'efficiently facilitate international trade,' not restrict it, while also aiming to 'prevent and curtail any form of customs fraud and illegal acts.' Choice C reverses this intent, which contradicts the law's actual goal of facilitation with fraud control."
+
+EXAMPLE (Level 1): "reason": "Tamang sagot: C. Ayon sa Section 101, layunin ng estado na 'efficiently facilitate international trade' o padaliin ang international trade, hindi ito paghigpitan. Mali ang choice C dahil sinasabi nitong dapat limitahan ang import."
+
+---
+🎯 LEVEL GUIDE:
+
+🟢 LEVEL 1 — EASY (Tagalog Foundation)
+- Language: Tagalog
+- Purpose: Build foundation before transitioning to English.
+- Question Types: Definition of Terms, True or False (presented as 4 choices), Best Answer, Simple Scenario-Based Questions.
+- Example (True or False): "Ang Bureau of Customs ay nasa ilalim ng Department of Finance." Choices: A. True, B. False, C. Partially True, D. Cannot be Determined
+- Keep it simple. Focus on basic understanding.
+
+🔵 LEVEL 2 — NORMAL (English Foundation)
+- Language: English
+- Purpose: Introduce students to the official legal language used in the CMTA and CuBLE.
+- Question Types: Definition of Terms, Focus on customs terminology, legal definitions, basic concepts, section identification.
+- Keep it straightforward. Test memory and recognition.
+
+🟠 LEVEL 3 — MEDIUM (Legal Analysis)
+- Language: English
+- Purpose: Develop analytical thinking similar to actual board exam questions.
+- Question Types: Best Answer, Focus: Interpretation, Exceptions, Comparing provisions, Applying legal principles.
+- Require deeper understanding, not just rote memorization.
+
+🟣 LEVEL 4 — MEDIUM PRO (Real-World Application)
+- Language: English
+- Purpose: Train students to apply CMTA provisions in realistic customs situations.
+- Question Types: Scenario-Based Questions
+- Scenarios include: Importation, Exportation, Customs valuation, Tariff classification, Seizure and forfeiture, Customs procedures, Realistic business transactions.
+- Make the scenarios practical and relatable to actual customs operations in the Philippines (seaports, airports, PEZA, Clark, Subic, Free Zones).
+
+🔴 LEVEL 5 — WILL DONE (Hard / Mastery Mode)
+- Language: English
+- Purpose: Measure true mastery without relying on answer choices.
+- Question Types: Identification — user manually types the answer.
+- Question Types: Definition of Terms, Best Answer, Scenario-Based Questions, Mixed Board-Style Questions.
+- The correct answer should be a single, clear, unambiguous term or short phrase.
+- The app will handle case-insensitive matching, so the correct answer must be spelled correctly.
+- No choices — this tests recall, not recognition.
+
+---
+📋 BOARD EXAM INSIGHTS (Use web search if available)
+
+If you have web search capability, use it to verify:
+- Which CMTA topics are frequently tested in the CuBLE (Customs Broker Licensure Examination)
+- Common board exam question patterns (e.g., "Which is NOT a valid...," "Except...," "What is the correct...,")
+- Frequently asked definitions, percentages, deadlines, and distinctions
+- Real board exam trends from recent years
+
+Your questions should mimic actual CuBLE question quality and difficulty.
+
+---
+📋 IMPORTANT REMINDERS
+
+- DO NOT generate questions for every ID — be selective.
+- Choose IDs that are testable, important, and board-exam relevant.
+- Use web search (if available) to verify CuBLE exam patterns.
+- Your JSON must only include the IDs you selected.
+- Skip IDs that are repetitive, procedural, or minor.
+- Focus on quality over quantity — there is no fixed number of questions.
+- Keep the exact same "_title" across every level you generate for this Title.
+- The "reason" field must be plain flat prose — no markdown, no icons, no line breaks.
+
+---
+📋 IDs available (you choose which to cover — do not feel obligated to cover all):
+
+IDs to cover: `;
+
+export function copyQuizPromptForTitle(titleTree) {
+  const fullText = flattenForQuiz(titleTree).join("\n");
+  const ids = collectQuizIds(titleTree);
+
+  return `${QUIZ_MASTER_PROMPT} ${ids.join(", ")}
+
+=== FULL TEXT (use this as your source of truth) ===
+${fullText}`;
+}
+
+// Legacy export — kept for backward compatibility
+export function buildQuizPromptForTitle(titleTree) {
+  return copyQuizPromptForTitle(titleTree);
+}
+```
+
+## File: `./frontend/src/components/QuizShared.jsx`
+```jsx
+import { useState, useEffect } from "react";
+
+export const LEVELS = [
+  { id: "level1", label: "🟢 Level 1 — Easy", tagalog: "Madali", color: "green" },
+  { id: "level2", label: "🔵 Level 2 — Normal", tagalog: "Katamtaman", color: "blue" },
+  { id: "level3", label: "🟠 Level 3 — Medium", tagalog: "Gitna", color: "orange" },
+  { id: "level4", label: "🟣 Level 4 — Medium Pro", tagalog: "Gitnang Pro", color: "purple" },
+  { id: "level5", label: "🔴 Level 5 — Will Done", tagalog: "Dalubhasa", color: "red" },
+];
+
+const LEVEL_STROKE = { green: "#22c55e", blue: "#3b82f6", orange: "#f97316", purple: "#a855f7", red: "#ef4444" };
+const LEVEL_BORDER = {
+  green: "border-emerald-400 hover:bg-emerald-50 dark:border-emerald-600 dark:hover:bg-emerald-950/30",
+  blue: "border-blue-400 hover:bg-blue-50 dark:border-blue-600 dark:hover:bg-blue-950/30",
+  orange: "border-orange-400 hover:bg-orange-50 dark:border-orange-600 dark:hover:bg-orange-950/30",
+  purple: "border-purple-400 hover:bg-purple-50 dark:border-purple-600 dark:hover:bg-purple-950/30",
+  red: "border-red-400 hover:bg-red-50 dark:border-red-600 dark:hover:bg-red-950/30",
+};
+
+export function ProgressCircle({ progress, size = 60, strokeWidth = 6, color = "#22c55e" }) {
+  const radius = (size - strokeWidth) / 2;
+  const circumference = 2 * Math.PI * radius;
+  const offset = circumference - (progress / 100) * circumference;
+  return (
+    <div className="relative inline-flex items-center justify-center" style={{ width: size, height: size }}>
+      <svg className="transform -rotate-90" width={size} height={size}>
+        <circle className="text-slate-200 dark:text-slate-700" strokeWidth={strokeWidth} stroke="currentColor" fill="transparent" r={radius} cx={size / 2} cy={size / 2} />
+        <circle stroke={color} strokeWidth={strokeWidth} strokeDasharray={circumference} strokeDashoffset={offset} strokeLinecap="round" fill="transparent" r={radius} cx={size / 2} cy={size / 2} className="transition-all duration-500" style={{ stroke: progress > 0 ? color : "transparent" }} />
+      </svg>
+      <span className="absolute text-sm font-semibold text-slate-700 dark:text-slate-200">{Math.round(progress)}%</span>
+    </div>
+  );
+}
+
+export function QuizLevelButton({ level, progress, onClick }) {
+  const colorClass = LEVEL_BORDER[level.color] || LEVEL_BORDER.green;
+  return (
+    <button onClick={onClick} className={`flex items-center gap-4 rounded-xl border-2 p-4 w-full transition-all ${colorClass}`}>
+      <ProgressCircle progress={progress} color={LEVEL_STROKE[level.color] || LEVEL_STROKE.green} />
+      <div className="flex-1 text-left">
+        <p className="font-semibold text-slate-800 dark:text-slate-100">{level.label}</p>
+        <p className="text-sm text-slate-500 dark:text-slate-400">{level.tagalog} · {progress > 0 ? `${Math.round(progress)}% completed` : "Not started"}</p>
+      </div>
+    </button>
+  );
+}
+
+export function QuizQuestion({ level, questionData, onAnswer, answered, selected }) {
+  const [inputValue, setInputValue] = useState("");
+  const isLevel5 = level === "level5";
+  const choices = questionData?.choices || {};
+  const correct = questionData?.correct || "";
+  const reason = questionData?.reason || "";
+
+  const handleChoiceClick = (choiceKey) => { if (!answered) onAnswer(choiceKey); };
+  const handleInputSubmit = () => { if (!answered && inputValue.trim()) onAnswer(inputValue.trim()); };
+
+  if (isLevel5) {
+    return (
+      <div className="space-y-4">
+        <p className="text-lg font-medium text-slate-800 dark:text-slate-100">{questionData?.question || "No question available"}</p>
+        <p className="text-sm text-slate-500 dark:text-slate-400">Type your answer below:</p>
+        <div className="flex gap-2">
+          <input type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)} onKeyDown={(e) => e.key === "Enter" && handleInputSubmit()} disabled={answered} placeholder="Type your answer here..." className="flex-1 rounded-lg border border-slate-200 bg-white px-4 py-2 text-slate-800 focus:outline-none focus:ring-2 focus:ring-navy-900 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:focus:ring-navy-500 disabled:opacity-50" />
+          <button onClick={handleInputSubmit} disabled={answered || !inputValue.trim()} className="rounded-lg bg-navy-900 px-6 py-2 text-sm font-semibold text-white disabled:opacity-40 dark:bg-navy-700">Submit</button>
+        </div>
+        {answered && (
+          <div className={`mt-4 rounded-lg p-4 ${selected === correct ? "bg-emerald-50 dark:bg-emerald-950/30" : "bg-red-50 dark:bg-red-950/30"}`}>
+            <p className="font-medium text-slate-800 dark:text-slate-100">{selected === correct ? "✅ Correct!" : `❌ Incorrect. The correct answer is: ${correct}`}</p>
+            {reason && <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{reason}</p>}
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  const choiceKeys = ["A", "B", "C", "D"];
+  return (
+    <div className="space-y-4">
+      <p className="text-lg font-medium text-slate-800 dark:text-slate-100">{questionData?.question || "No question available"}</p>
+      <div className="space-y-2">
+        {choiceKeys.map((key) => {
+          const label = choices[key] || "";
+          const isSelected = selected === key;
+          const isCorrect = answered && key === correct;
+          const isWrong = answered && isSelected && key !== correct;
+          const choiceClass = answered
+            ? isCorrect ? "border-emerald-400 bg-emerald-50 dark:border-emerald-600 dark:bg-emerald-950/30"
+              : isWrong ? "border-red-400 bg-red-50 dark:border-red-600 dark:bg-red-950/30"
+              : "border-slate-200 bg-white dark:border-slate-600 dark:bg-slate-800"
+            : isSelected ? "border-navy-900 dark:border-navy-500"
+              : "border-slate-200 bg-white hover:border-slate-400 dark:border-slate-600 dark:bg-slate-800 dark:hover:border-slate-400";
+          return (
+            <button key={key} onClick={() => handleChoiceClick(key)} disabled={answered} className={`block w-full rounded-xl border-2 px-4 py-3 text-left text-sm transition-colors ${choiceClass} ${!answered && "cursor-pointer"} disabled:cursor-default`}>
+              <span className="font-semibold">{key}.</span> {label}
+            </button>
+          );
+        })}
+      </div>
+      {answered && (
+        <div className={`mt-4 rounded-lg p-4 ${selected === correct ? "bg-emerald-50 dark:bg-emerald-950/30" : "bg-red-50 dark:bg-red-950/30"}`}>
+          <p className="font-medium text-slate-800 dark:text-slate-100">{selected === correct ? "✅ Correct!" : `❌ Incorrect. The correct answer is: ${correct}`}</p>
+          {reason && <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{reason}</p>}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// progressKey identifies WHERE to save/read progress (localStorage key
+// `quiz_progress_${progressKey}`). Pass a stable id — a batch id while
+// testing in Dev Panel, or the title string once baked into quizData.json.
+export function QuizPlayView({ title, entries, level, onBack, progressKey, backLabel = "← Back" }) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [answers, setAnswers] = useState({});
+  const [progress, setProgress] = useState(0);
+  const [score, setScore] = useState(0);
+
+  const nodeIds = Object.keys(entries);
+  const totalQuestions = nodeIds.length;
+  const currentId = nodeIds[currentIndex] || null;
+  const currentEntry = currentId ? entries[currentId] : null;
+  const currentQuestion = currentEntry?.[level] || null;
+  const currentAnswer = currentId ? answers[currentId] : null;
+  const isAnswered = currentAnswer !== undefined && currentAnswer !== null;
+
+  useEffect(() => {
+    if (totalQuestions === 0) return;
+    const answeredIds = Object.keys(answers).filter((id) => answers[id] !== undefined && answers[id] !== null);
+    const progressPct = (answeredIds.length / totalQuestions) * 100;
+    setProgress(progressPct);
+    const correctCount = answeredIds.filter((id) => entries[id]?.[level]?.correct === answers[id]).length;
+    setScore(totalQuestions ? (correctCount / totalQuestions) * 100 : 0);
+    if (progressKey) {
+      try {
+        const key = `quiz_progress_${progressKey}`;
+        const saved = JSON.parse(localStorage.getItem(key) || "{}");
+        saved[level] = progressPct;
+        localStorage.setItem(key, JSON.stringify(saved));
+      } catch {}
+    }
+  }, [answers, totalQuestions, entries, level, progressKey]);
+
+  const handleAnswer = (answer) => { if (currentId && !answers[currentId]) setAnswers((prev) => ({ ...prev, [currentId]: answer })); };
+  const goToPrevious = () => { if (currentIndex > 0) setCurrentIndex(currentIndex - 1); };
+  const goToNext = () => { if (currentIndex < totalQuestions - 1) setCurrentIndex(currentIndex + 1); };
+  const goToQuestion = (index) => setCurrentIndex(index);
+
+  if (totalQuestions === 0) {
+    return (
+      <div className="flex h-64 flex-col items-center justify-center text-center text-slate-500 dark:text-slate-400">
+        <p className="text-lg font-medium">No questions available for this level.</p>
+        <p className="text-sm">Try importing quiz data first.</p>
+      </div>
+    );
+  }
+
+  const levelLabel = LEVELS.find((l) => l.id === level)?.label || level;
+
+  return (
+    <div>
+      <div className="mb-4 flex items-center justify-between">
+        <button onClick={onBack} className="flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800">{backLabel}</button>
+        <div className="flex items-center gap-3">
+          <span className="text-sm font-medium text-slate-600 dark:text-slate-300">{levelLabel}</span>
+          <span className="text-xs text-slate-400 dark:text-slate-500">{currentIndex + 1} / {totalQuestions}</span>
+        </div>
+      </div>
+
+      {title && (
+        <div className="mb-3 text-center">
+          <span className="text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">{title}</span>
+        </div>
+      )}
+
+      <div className="mb-2 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+        <span>Progress: {Math.round(progress)}%</span>
+        <span>Score: {Math.round(score)}%</span>
+      </div>
+
+      <div className="mb-3 h-1 w-full rounded-full bg-slate-100 dark:bg-slate-700">
+        <div className="h-1 rounded-full bg-gradient-to-r from-amber-400 to-navy-700 transition-all duration-300 dark:from-amber-500 dark:to-navy-400" style={{ width: `${progress}%` }} />
+      </div>
+
+      <div className="mb-4 flex flex-wrap gap-1">
+        {nodeIds.map((id, idx) => {
+          const isAnsweredDot = answers[id] !== undefined && answers[id] !== null;
+          const isActive = idx === currentIndex;
+          const q = entries[id]?.[level];
+          const isCorrect = answers[id] === q?.correct;
+          const dotColor = isAnsweredDot ? (isCorrect ? "bg-emerald-400 dark:bg-emerald-500" : "bg-red-400 dark:bg-red-500") : "bg-slate-300 dark:bg-slate-600";
+          return <button key={id} onClick={() => goToQuestion(idx)} className={`h-3 w-3 rounded-full transition-all ${isActive ? "scale-125" : ""} ${dotColor}`} title={`Question ${idx + 1}`} />;
+        })}
+      </div>
+
+      <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-card dark:border-slate-700 dark:bg-slate-800">
+        <QuizQuestion level={level} questionData={currentQuestion} onAnswer={handleAnswer} answered={isAnswered} selected={currentAnswer} />
+      </div>
+
+      <div className="mt-4 flex justify-between">
+        <button onClick={goToPrevious} disabled={currentIndex === 0} className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-medium text-slate-600 disabled:opacity-40 dark:border-slate-600 dark:text-slate-300">Previous</button>
+        <button onClick={goToNext} disabled={currentIndex === totalQuestions - 1} className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-medium text-slate-600 disabled:opacity-40 dark:border-slate-600 dark:text-slate-300">Next</button>
+      </div>
+
+      <div className="mt-4 text-center text-xs text-slate-400 dark:text-slate-500">{Math.round(progress)}% complete · {Math.round(score)}% score</div>
+    </div>
+  );
+}
+```
+
+## File: `./frontend/src/env.js`
+```javascript
+// Single source of truth for "is this a local dev build" checks (e.g. to hide
+// the Dev Panel from the production build shipped to GitHub Pages). Vite
+// replaces import.meta.env.DEV with a literal `false` in production builds,
+// so anything gated behind IS_DEV never renders for real users.
+export const IS_DEV = import.meta.env.DEV;
 ```
 
 ## File: `./frontend/tailwind.config.js`
@@ -2362,7 +2960,16 @@ export default {
   ],
   darkMode: 'class',
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        serif: ['"Source Serif 4"', 'Georgia', 'Cambria', 'serif'],
+      },
+      colors: {
+        navy: { 950: '#0b1220', 900: '#0f172a', 800: '#152238', 700: '#1e3a5f' },
+        gold: { 50: '#fdf8ec', 100: '#faedc4', 400: '#e0b94d', 500: '#c9a227', 600: '#a9841c' },
+      },
+    },
   },
   plugins: [],
 }
@@ -2377,10 +2984,340 @@ export default defineConfig({
   base: './',
   plugins: [react()],
   build: {
-    outDir: '../dist',
+    outDir: '../docs',
     emptyOutDir: true,
   },
 });
+```
+
+## File: `./db.sh`
+```bash
+#!/bin/bash
+set -e
+
+# 1) Gawin ang python builder script
+cat > build_db.py << 'PYEOF'
+import json
+import sqlite3
+from pathlib import Path
+
+INPUT_JSON = "ra10863_full.json"
+OUTPUT_DB = "customs_law.db"
+
+
+def main():
+    with open(INPUT_JSON, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    db_path = Path(OUTPUT_DB)
+    if db_path.exists():
+        db_path.unlink()
+
+    conn = sqlite3.connect(OUTPUT_DB)
+    cur = conn.cursor()
+
+    cur.executescript("""
+        CREATE TABLE legal_nodes (
+            id INTEGER PRIMARY KEY,
+            uuid TEXT,
+            parent_id INTEGER,
+            node_type TEXT NOT NULL,
+            node_number TEXT,
+            title TEXT,
+            content TEXT,
+            status TEXT,
+            version INTEGER,
+            depth INTEGER,
+            sort_order INTEGER
+        );
+
+        CREATE TABLE node_keywords (
+            node_id INTEGER,
+            keyword TEXT
+        );
+
+        CREATE TABLE node_cross_references (
+            node_id INTEGER,
+            reference_text TEXT,
+            url TEXT,
+            display_text TEXT
+        );
+
+        CREATE TABLE node_notes (
+            node_id INTEGER,
+            note_text TEXT
+        );
+
+        CREATE INDEX idx_nodes_parent ON legal_nodes(parent_id);
+        CREATE INDEX idx_nodes_type_number ON legal_nodes(node_type, node_number);
+        CREATE INDEX idx_keywords_node ON node_keywords(node_id);
+        CREATE INDEX idx_xref_node ON node_cross_references(node_id);
+        CREATE INDEX idx_notes_node ON node_notes(node_id);
+    """)
+
+    sort_counter = 0
+
+    def next_sort():
+        nonlocal sort_counter
+        sort_counter += 1
+        return sort_counter
+
+    def insert_node(parent_id, node_type, node_number, title, content, status, version, depth):
+        cur.execute(
+            """INSERT INTO legal_nodes
+               (uuid, parent_id, node_type, node_number, title, content, status, version, depth, sort_order)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+            ("", parent_id, node_type, node_number, title, content,
+             status or "published", version or 1, depth, next_sort())
+        )
+        return cur.lastrowid
+
+    def insert_keywords(node_id, keywords):
+        for kw in keywords or []:
+            cur.execute("INSERT INTO node_keywords (node_id, keyword) VALUES (?, ?)", (node_id, kw))
+
+    def insert_cross_refs(node_id, refs):
+        for ref in refs or []:
+            if isinstance(ref, str):
+                cur.execute(
+                    "INSERT INTO node_cross_references (node_id, reference_text, url, display_text) VALUES (?, ?, ?, ?)",
+                    (node_id, ref, None, None)
+                )
+            elif isinstance(ref, dict):
+                cur.execute(
+                    "INSERT INTO node_cross_references (node_id, reference_text, url, display_text) VALUES (?, ?, ?, ?)",
+                    (node_id, ref.get("reference_text"), ref.get("url"), ref.get("display_text"))
+                )
+
+    def insert_notes(node_id, notes):
+        for note in notes or []:
+            if isinstance(note, str):
+                cur.execute("INSERT INTO node_notes (node_id, note_text) VALUES (?, ?)", (node_id, note))
+            elif isinstance(note, dict):
+                cur.execute("INSERT INTO node_notes (node_id, note_text) VALUES (?, ?)",
+                            (node_id, note.get("note_text") or note.get("text")))
+
+    def insert_recursive(parent_id, node_json, depth):
+        node_id = insert_node(
+            parent_id,
+            node_json.get("node_type"),
+            node_json.get("node_number"),
+            node_json.get("title"),
+            node_json.get("content"),
+            node_json.get("status"),
+            node_json.get("version"),
+            depth,
+        )
+        insert_keywords(node_id, node_json.get("keywords"))
+        insert_cross_refs(node_id, node_json.get("cross_references"))
+        insert_notes(node_id, node_json.get("notes"))
+        for child in node_json.get("children") or []:
+            insert_recursive(node_id, child, depth + 1)
+        return node_id
+
+    title_ids = {}
+
+    for entry in data:
+        title_number = entry["title_number"]
+
+        if title_number not in title_ids:
+            title_ids[title_number] = insert_node(
+                None, "title", title_number, entry["title_title"], None, "published", 1, 0
+            )
+
+        chapter_id = insert_node(
+            title_ids[title_number], "chapter", entry["chapter_number"],
+            entry["chapter_title"], None, "published", 1, 1
+        )
+
+        for section in entry.get("sections", []):
+            insert_recursive(chapter_id, section, 2)
+
+    conn.commit()
+    total = cur.execute("SELECT COUNT(*) FROM legal_nodes").fetchone()[0]
+    titles = cur.execute("SELECT COUNT(*) FROM legal_nodes WHERE node_type='title'").fetchone()[0]
+    chapters = cur.execute("SELECT COUNT(*) FROM legal_nodes WHERE node_type='chapter'").fetchone()[0]
+    sections = cur.execute("SELECT COUNT(*) FROM legal_nodes WHERE node_type='section'").fetchone()[0]
+    conn.close()
+    print(f"Done. {total} total nodes ({titles} titles, {chapters} chapters, {sections} sections) -> {OUTPUT_DB}")
+
+
+if __name__ == "__main__":
+    main()
+PYEOF
+
+# 2) I-check kung nandito ang source json (dapat kasabay ng sh.sh sa root)
+if [ ! -f "ra10863_full.json" ]; then
+  echo "ERROR: 'ra10863_full.json' not found sa $(pwd). Ilagay muna dito bago patakbuhin ulit."
+  exit 1
+fi
+
+# 3) Buuin ang database
+python3 build_db.py
+
+# 4) I-deploy sa frontend/public (dito kinukuha ng dev server / fetch())
+mkdir -p frontend/public
+cp -f customs_law.db frontend/public/customs_law.db
+
+# 5) I-deploy din sa docs/ (production build na naka-serve sa GitHub Pages)
+if [ -d "docs" ]; then
+  cp -f customs_law.db docs/customs_law.db
+  echo "-> Na-copy din sa docs/customs_law.db (GitHub Pages)"
+fi
+
+echo "OK: customs_law.db ay nasa frontend/public/ at docs/ na ngayon."
+echo "I-restart ang 'npm run dev' (o i-hard refresh ang browser: Ctrl/Cmd+Shift+R)."
+```
+
+## File: `./build_db.py`
+```python
+import json
+import sqlite3
+from pathlib import Path
+
+INPUT_JSON = "ra10863_full.json"
+OUTPUT_DB = "customs_law.db"
+
+
+def main():
+    with open(INPUT_JSON, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    db_path = Path(OUTPUT_DB)
+    if db_path.exists():
+        db_path.unlink()
+
+    conn = sqlite3.connect(OUTPUT_DB)
+    cur = conn.cursor()
+
+    cur.executescript("""
+        CREATE TABLE legal_nodes (
+            id INTEGER PRIMARY KEY,
+            uuid TEXT,
+            parent_id INTEGER,
+            node_type TEXT NOT NULL,
+            node_number TEXT,
+            title TEXT,
+            content TEXT,
+            status TEXT,
+            version INTEGER,
+            depth INTEGER,
+            sort_order INTEGER
+        );
+
+        CREATE TABLE node_keywords (
+            node_id INTEGER,
+            keyword TEXT
+        );
+
+        CREATE TABLE node_cross_references (
+            node_id INTEGER,
+            reference_text TEXT,
+            url TEXT,
+            display_text TEXT
+        );
+
+        CREATE TABLE node_notes (
+            node_id INTEGER,
+            note_text TEXT
+        );
+
+        CREATE INDEX idx_nodes_parent ON legal_nodes(parent_id);
+        CREATE INDEX idx_nodes_type_number ON legal_nodes(node_type, node_number);
+        CREATE INDEX idx_keywords_node ON node_keywords(node_id);
+        CREATE INDEX idx_xref_node ON node_cross_references(node_id);
+        CREATE INDEX idx_notes_node ON node_notes(node_id);
+    """)
+
+    sort_counter = 0
+
+    def next_sort():
+        nonlocal sort_counter
+        sort_counter += 1
+        return sort_counter
+
+    def insert_node(parent_id, node_type, node_number, title, content, status, version, depth):
+        cur.execute(
+            """INSERT INTO legal_nodes
+               (uuid, parent_id, node_type, node_number, title, content, status, version, depth, sort_order)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+            ("", parent_id, node_type, node_number, title, content,
+             status or "published", version or 1, depth, next_sort())
+        )
+        return cur.lastrowid
+
+    def insert_keywords(node_id, keywords):
+        for kw in keywords or []:
+            cur.execute("INSERT INTO node_keywords (node_id, keyword) VALUES (?, ?)", (node_id, kw))
+
+    def insert_cross_refs(node_id, refs):
+        for ref in refs or []:
+            if isinstance(ref, str):
+                cur.execute(
+                    "INSERT INTO node_cross_references (node_id, reference_text, url, display_text) VALUES (?, ?, ?, ?)",
+                    (node_id, ref, None, None)
+                )
+            elif isinstance(ref, dict):
+                cur.execute(
+                    "INSERT INTO node_cross_references (node_id, reference_text, url, display_text) VALUES (?, ?, ?, ?)",
+                    (node_id, ref.get("reference_text"), ref.get("url"), ref.get("display_text"))
+                )
+
+    def insert_notes(node_id, notes):
+        for note in notes or []:
+            if isinstance(note, str):
+                cur.execute("INSERT INTO node_notes (node_id, note_text) VALUES (?, ?)", (node_id, note))
+            elif isinstance(note, dict):
+                cur.execute("INSERT INTO node_notes (node_id, note_text) VALUES (?, ?)",
+                            (node_id, note.get("note_text") or note.get("text")))
+
+    def insert_recursive(parent_id, node_json, depth):
+        node_id = insert_node(
+            parent_id,
+            node_json.get("node_type"),
+            node_json.get("node_number"),
+            node_json.get("title"),
+            node_json.get("content"),
+            node_json.get("status"),
+            node_json.get("version"),
+            depth,
+        )
+        insert_keywords(node_id, node_json.get("keywords"))
+        insert_cross_refs(node_id, node_json.get("cross_references"))
+        insert_notes(node_id, node_json.get("notes"))
+        for child in node_json.get("children") or []:
+            insert_recursive(node_id, child, depth + 1)
+        return node_id
+
+    title_ids = {}
+
+    for entry in data:
+        title_number = entry["title_number"]
+
+        if title_number not in title_ids:
+            title_ids[title_number] = insert_node(
+                None, "title", title_number, entry["title_title"], None, "published", 1, 0
+            )
+
+        chapter_id = insert_node(
+            title_ids[title_number], "chapter", entry["chapter_number"],
+            entry["chapter_title"], None, "published", 1, 1
+        )
+
+        for section in entry.get("sections", []):
+            insert_recursive(chapter_id, section, 2)
+
+    conn.commit()
+    total = cur.execute("SELECT COUNT(*) FROM legal_nodes").fetchone()[0]
+    titles = cur.execute("SELECT COUNT(*) FROM legal_nodes WHERE node_type='title'").fetchone()[0]
+    chapters = cur.execute("SELECT COUNT(*) FROM legal_nodes WHERE node_type='chapter'").fetchone()[0]
+    sections = cur.execute("SELECT COUNT(*) FROM legal_nodes WHERE node_type='section'").fetchone()[0]
+    conn.close()
+    print(f"Done. {total} total nodes ({titles} titles, {chapters} chapters, {sections} sections) -> {OUTPUT_DB}")
+
+
+if __name__ == "__main__":
+    main()
 ```
 
 ## File: `./sh.sh`
@@ -2479,3 +3416,5 @@ done
 echo "Done! Output written to $OUTPUT"
 ```
 
+## File: `./ra10863_full.json`
+`No need na pati ito sy ippaste ko pa kasi thousands of file`

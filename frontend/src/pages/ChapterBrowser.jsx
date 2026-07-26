@@ -1,16 +1,67 @@
 import { useState, useEffect, useCallback, useRef, useMemo, useContext, createContext } from "react";
 import {
-  getTitles, getChapter, search,
+  getTitles, getChapter, getTitleTree, search,
   addHighlight, removeHighlight, getHighlightsForNode,
   getNotesForNode, addNote, updateNote, deleteNote,
   saveProgress, getProgress,
   hasTutorialBeenSeen, markTutorialSeen,
+  getChapterForNode,
 } from "../db";
 import {
-  getAiContext, IS_DEV, saveDevPreviewBatch, clearDevPreview,
-  getDevPreviewRaw, buildTemplateForChapter, buildFullCopyPayload, AI_APPS, copyPromptAndOpen,
+  getAiContext, AI_APPS, copyPromptAndOpen,
 } from "../aiContext";
+import { IS_DEV } from "../env";
+import { copyQuizPromptForTitle } from "../quizContext";
 import DevPanel from "./DevPanel";
+import QuizPage from "./QuizPage";
+
+// Enrich nodes with hierarchy information for composite key lookup
+function enrichNodesWithHierarchy(nodes) {
+  let currentSection = null;
+  let currentParagraph = null;
+  let currentSubparagraph = null;
+
+  function traverse(node) {
+    const label = node._label || node.title || "";
+
+    if (node.node_type === "section") {
+      currentSection = node.node_number;
+      currentParagraph = null;
+      currentSubparagraph = null;
+    } else if (node.node_type === "paragraph") {
+      const match = label.match(/paragraph \(([^)]+)\)/);
+      if (match) {
+        currentParagraph = match[1];
+      } else {
+        currentParagraph = node.node_number;
+      }
+      currentSubparagraph = null;
+    } else if (node.node_type === "subparagraph") {
+      const match = label.match(/subparagraph \(([^)]+)\)/);
+      if (match) {
+        currentSubparagraph = match[1];
+      } else {
+        currentSubparagraph = node.node_number;
+      }
+    }
+
+    node.section_number = currentSection;
+    node.paragraph_number = currentParagraph;
+    node.subparagraph_number = currentSubparagraph;
+
+    if (node.children) {
+      for (const child of node.children) {
+        traverse(child);
+      }
+    }
+  }
+
+  for (const node of nodes) {
+    traverse(node);
+  }
+  return nodes;
+}
+
 
 const MODE_KEY = "customsLaw_mode";
 const FONT_KEY = "customsLaw_fontScale";
@@ -224,13 +275,8 @@ function NotePanel({ notes, onCreate, onEdit, onDelete, onClose }) {
 }
 
 function AiContextModal({ node, onClose }) {
-  const [entry, setEntry] = useState(() => getAiContext(node.id));
+  const [entry] = useState(() => getAiContext(node));
   const [copiedApp, setCopiedApp] = useState(null);
-  const [devOpen, setDevOpen] = useState(false);
-  const [devJson, setDevJson] = useState(() => (IS_DEV ? getDevPreviewRaw() : "{}"));
-  const [devError, setDevError] = useState(null);
-
-  const refresh = () => setEntry(getAiContext(node.id));
 
   const handleAskExternal = async (app) => {
     const prompt = entry?.prompt?.trim() ||
@@ -238,16 +284,6 @@ function AiContextModal({ node, onClose }) {
     await copyPromptAndOpen(prompt, app.url);
     setCopiedApp(app.id);
     setTimeout(() => setCopiedApp(null), 2500);
-  };
-
-  const handleSaveDevJson = () => {
-    try {
-      saveDevPreviewBatch(devJson);
-      setDevError(null);
-      refresh();
-    } catch (e) {
-      setDevError(e.message);
-    }
   };
 
   return (
@@ -287,38 +323,10 @@ function AiContextModal({ node, onClose }) {
             </p>
           )}
         </div>
-
-        {IS_DEV && (
-          <div className="mt-4 rounded-2xl border border-dashed border-amber-300 p-3 dark:border-amber-700">
-            <button onClick={() => setDevOpen((v) => !v)} className="w-full text-left text-xs font-bold uppercase tracking-wide text-amber-700 dark:text-amber-400">
-              🛠 Dev only: {devOpen ? "Hide" : "Add / Preview AI context (JSON)"}
-            </button>
-            {devOpen && (
-              <div className="mt-2">
-                <textarea
-                  value={devJson}
-                  onChange={(e) => setDevJson(e.target.value)}
-                  rows={8}
-                  style={{ fontSize: "13px" }}
-                  className="w-full rounded-lg border border-slate-200 bg-white p-2 font-mono text-xs text-slate-800 dark:border-slate-600 dark:bg-slate-950 dark:text-slate-200"
-                />
-                {devError && <p className="mt-1 text-xs text-red-500">{devError}</p>}
-                <div className="mt-2 flex flex-wrap gap-2">
-                  <button onClick={handleSaveDevJson} className="rounded-lg bg-amber-600 px-3 py-1.5 text-xs font-semibold text-white">Preview this JSON</button>
-                  <button onClick={() => { clearDevPreview(); setDevJson("{}"); refresh(); }} className="rounded-lg border border-slate-200 px-3 py-1.5 text-xs font-semibold text-slate-600 dark:border-slate-600 dark:text-slate-300">Clear preview</button>
-                </div>
-                <p className="mt-2 text-[11px] leading-relaxed text-slate-400 dark:text-slate-500">
-                  This box only exists in npm run dev. It's stripped out of the production build automatically — it will not show on the live site.
-                </p>
-              </div>
-            )}
-          </div>
-        )}
       </div>
     </div>
   );
 }
-
 const STUDY_TYPE_STYLES = {
   chapter: "text-xl sm:text-2xl font-bold text-navy-900 dark:text-slate-50",
   section: "text-lg sm:text-xl font-semibold text-slate-800 dark:text-slate-200",
@@ -340,7 +348,7 @@ function StudyNodeRenderer({ node, level = 0, expandedSet = new Set(), scrollToI
   const [expanded, setExpanded] = useState(false);
   const [notesOpen, setNotesOpen] = useState(false);
   const [aiModalOpen, setAiModalOpen] = useState(false);
-  const aiEntry = useMemo(() => getAiContext(node.id), [node.id]);
+  const aiEntry = useMemo(() => getAiContext(node), [node.id]);
   const { activeHighlightNodeId, setActiveHighlightNodeId } = useHighlightUI();
   const isHighlighting = activeHighlightNodeId === node.id;
   const hasChildren = node.children && node.children.length > 0;
@@ -436,7 +444,7 @@ function ReadingNodeRenderer({ node, level = 0, fontScale, expandedSet = new Set
   const nodeRef = useRef(null);
   const [notesOpen, setNotesOpen] = useState(false);
   const [aiModalOpen, setAiModalOpen] = useState(false);
-  const aiEntry = useMemo(() => getAiContext(node.id), [node.id]);
+  const aiEntry = useMemo(() => getAiContext(node), [node.id]);
   const hasChildren = node.children && node.children.length > 0;
   const { highlights, addHighlight, removeHighlight } = useNodeHighlights(node.id, !!node.content);
   const { notes, createNote, editNote, removeNote } = useNodeNotes(node.id, true);
@@ -595,7 +603,24 @@ function SearchView({ onNavigateChapter }) {
 
   const handleKeyDown = (e) => { if (e.key === "Enter") handleSearch(); };
   const clearQuery = () => { setQuery(""); setResults([]); setHasSearched(false); inputRef.current?.focus(); };
-  const handleResultClick = (item) => { onNavigateChapter(item.chapter_number, item.title_number, item.node_number); };
+  
+  const handleResultClick = async (item) => {
+    if (item.chapter_number) {
+      onNavigateChapter(item.chapter_number, item.title_number, item.node_id);
+    } else {
+      try {
+        const chapterInfo = await getChapterForNode(item.node_id);
+        if (chapterInfo) {
+          onNavigateChapter(chapterInfo.chapter_number, chapterInfo.title_number, item.node_id);
+        } else {
+          alert('This item is not under any chapter. Please browse manually.');
+        }
+      } catch (e) {
+        alert('Could not locate the chapter for this item.');
+        console.error(e);
+      }
+    }
+  };
   
   const exactResults = results.filter((r) => r.exact_match);
   const otherResults = results.filter((r) => !r.exact_match);
@@ -730,11 +755,11 @@ function SettingsView({ darkMode, setDarkMode, onReplayTutorial }) {
   );
 }
 
-function findNodeAndAncestors(node, targetNumber, ancestors = []) {
-  if (node.node_number === targetNumber) return { found: true, ancestors };
+function findNodeByIdAndAncestors(node, targetId, ancestors = []) {
+  if (node.id === targetId) return { found: true, ancestors, node };
   if (node.children) {
     for (const child of node.children) {
-      const result = findNodeAndAncestors(child, targetNumber, [...ancestors, node.id]);
+      const result = findNodeByIdAndAncestors(child, targetId, [...ancestors, node.id]);
       if (result.found) return result;
     }
   }
@@ -805,28 +830,27 @@ export default function ChapterBrowser() {
     setShowTutorial(true);
   }, []);
 
-  const loadChapter = useCallback(async (chapterNumber, titleNumber = null, focusSectionNumber = null) => {
+  const loadChapter = useCallback(async (chapterNumber, titleNumber = null, targetNodeId = null) => {
     setLoading(true); setError(null);
     try {
       const data = await getChapter(chapterNumber, titleNumber);
+    if (data && data.children) {
+      enrichNodesWithHierarchy(data.children);
+    }
       if (!data) throw new Error("Chapter not found");
       setChapterTree(data);
       setSelectedChapter(chapterNumber);
       setSelectedTitleNumber(titleNumber);
       setView("browse");
       setSidebarOpen(window.innerWidth >= 768);
-      if (focusSectionNumber && data) {
-        const { found, ancestors } = findNodeAndAncestors(data, focusSectionNumber);
+      if (targetNodeId && data) {
+        const { found, ancestors, node: foundNode } = findNodeByIdAndAncestors(data, targetNodeId);
         if (found) {
-          setExpandedNodeIds(new Set(ancestors));
-          let targetId = null;
-          const walk = (node) => {
-            if (node.node_number === focusSectionNumber && node.node_type === "section") { targetId = node.id; return true; }
-            if (node.children) { for (const child of node.children) { if (walk(child)) return true; } }
-            return false;
-          };
-          walk(data);
-          setScrollToNodeId(targetId);
+          setExpandedNodeIds(new Set([...ancestors, foundNode.id]));
+          setScrollToNodeId(foundNode.id);
+        } else {
+          setExpandedNodeIds(new Set());
+          setScrollToNodeId(null);
         }
       } else {
         setExpandedNodeIds(new Set());
@@ -892,13 +916,38 @@ export default function ChapterBrowser() {
     setStudyCollapseSignal((v) => v + 1);
   };
 
-  const handleCopyTemplate = async () => {
-    if (!chapterTree) return;
-    const payload = buildFullCopyPayload(chapterTree);
-    try { await navigator.clipboard.writeText(payload); } catch {}
-    alert("Copied! Master prompt + ID template + official CMTA source text — paste this straight into ChatGPT, Gemini, or Meta AI.");
-  };
-  
+  // 🔽 BINAGO: i-download bilang .txt file sa halip na clipboard
+  const handleCopyQuizTemplate = useCallback(async (titleNumber) => {
+    try {
+      const tree = await getTitleTree(titleNumber);
+      if (!tree) { alert("Could not load this title."); return; }
+      const payload = copyQuizPromptForTitle(tree);
+      // Gumawa ng .txt file at i-download
+      const blob = new Blob([payload], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `quiz-prompt-Title-${titleNumber}.txt`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+      // Ipakita ang confirmation message
+      alert(`✅ Na-download ang quiz-generation prompt para sa Title ${titleNumber} bilang .txt file.
+
+📝 INSTRUCTIONS FOR AI:
+1. Act like a professor designing a CuBLE exam.
+2. SELECTIVELY choose the most important and testable provisions.
+3. There is NO fixed number of questions — generate as many as educationally appropriate.
+4. Use web search (if available) to verify CuBLE exam patterns and frequently tested topics.
+5. Focus on QUALITY over QUANTITY — board-exam relevant questions only.
+
+⚠️ IMPORTANT: The AI will SKIP minor, procedural, or repetitive provisions.`);
+    } catch (err) {
+      alert("Failed to build quiz template: " + err.message);
+    }
+  }, []);
+
   const highlightUIValue = useMemo(() => ({ activeHighlightNodeId, setActiveHighlightNodeId }), [activeHighlightNodeId]);
 
   return (
@@ -917,10 +966,21 @@ export default function ChapterBrowser() {
                 const collapsed = collapsedTitles[key];
                 return (
                   <div key={key} className="mb-2">
-                    <button onClick={() => toggleTitleCollapse(key)} className="flex w-full items-center justify-between gap-2 rounded-lg px-2 py-2 text-left active:bg-slate-50 dark:active:bg-slate-800">
-                      <span className="text-sm font-bold uppercase tracking-wide text-navy-800 dark:text-slate-300">{titleGroup.title_number ? `Title ${titleGroup.title_number}` : titleGroup.title_title}</span>
-                      <span className="flex-shrink-0 text-xs text-slate-400 dark:text-slate-500">{collapsed ? "▸" : "▾"}</span>
-                    </button>
+                    <div className="flex items-center gap-1">
+                      <button onClick={() => toggleTitleCollapse(key)} className="flex min-h-[40px] flex-1 items-center justify-between gap-2 rounded-lg px-2 py-2 text-left active:bg-slate-50 dark:active:bg-slate-800">
+                        <span className="text-sm font-bold uppercase tracking-wide text-navy-800 dark:text-slate-300">{titleGroup.title_number ? `Title ${titleGroup.title_number}` : titleGroup.title_title}</span>
+                        <span className="flex-shrink-0 text-xs text-slate-400 dark:text-slate-500">{collapsed ? "▸" : "▾"}</span>
+                      </button>
+                      {IS_DEV && titleGroup.title_number && (
+                        <button
+                          onClick={() => handleCopyQuizTemplate(titleGroup.title_number)}
+                          title="Download Quiz Template as .txt"
+                          className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-dashed border-purple-400 text-sm text-purple-700 active:bg-purple-100 dark:border-purple-600 dark:text-purple-400"
+                        >
+                          📝
+                        </button>
+                      )}
+                    </div>
                     {!collapsed && (
                       <ul className="ml-1 space-y-0.5 border-l border-slate-100 pl-2 dark:border-slate-800">
                         {titleGroup.chapters.map((ch) => {
@@ -957,14 +1017,17 @@ export default function ChapterBrowser() {
                 <button onClick={() => setView("search")} aria-label="Search" className={`min-h-[34px] rounded-full px-2.5 py-1 font-medium transition-colors ${view === "search" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
                   <span aria-hidden>🔍</span><span className="hidden sm:inline ml-1">Search</span>
                 </button>
+                <button onClick={() => setView("quiz")} aria-label="Quiz/Exam" className={`min-h-[34px] rounded-full px-2.5 py-1 font-medium transition-colors ${view === "quiz" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
+                  <span aria-hidden>📝</span><span className="hidden sm:inline ml-1">Quiz/Exam</span>
+                </button>
                 <button onClick={() => setView("settings")} aria-label="Settings" className={`min-h-[34px] rounded-full px-2.5 py-1 font-medium transition-colors ${view === "settings" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
                   ⚙️
                 </button>
                 {IS_DEV && (
-                <button onClick={() => setView("dev")} aria-label="Dev Panel" className={`min-h-[34px] rounded-full px-2.5 py-1 font-medium transition-colors ${view === "dev" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
-                  🛠
-                </button>
-      )}
+                  <button onClick={() => setView("dev")} aria-label="Dev Panel" className={`min-h-[34px] rounded-full px-2.5 py-1 font-medium transition-colors ${view === "dev" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
+                    🛠
+                  </button>
+                )}
               </div>
               <span className="flex-1" />
               {view === "browse" && <ModeToggle mode={mode} setMode={setMode} />}
@@ -993,7 +1056,7 @@ export default function ChapterBrowser() {
                 <p className="text-sm">{error}</p>
               </div>
             )}
-            {view === "search" ? <SearchView onNavigateChapter={loadChapter} /> : view === "dev" && IS_DEV ? <DevPanel /> : view === "settings" ? <SettingsView darkMode={darkMode} setDarkMode={setDarkMode} onReplayTutorial={replayTutorial} /> : (
+            {view === "search" ? <SearchView onNavigateChapter={loadChapter} /> : view === "dev" && IS_DEV ? <DevPanel /> : view === "quiz" ? <QuizPage /> : view === "settings" ? <SettingsView darkMode={darkMode} setDarkMode={setDarkMode} onReplayTutorial={replayTutorial} /> : (
               <>
                 {loading && (
                   <div className="mx-auto max-w-3xl space-y-3">
@@ -1022,11 +1085,6 @@ export default function ChapterBrowser() {
                   <div className="mx-auto max-w-3xl">
                     {chapterTree.content && <p className="mb-4 rounded-xl bg-white p-4 text-base text-slate-600 shadow-card dark:bg-slate-900 dark:text-slate-300">{chapterTree.content}</p>}
                     <div className="mb-3 flex flex-wrap items-center justify-end gap-2">
-                      {IS_DEV && (
-                        <button onClick={handleCopyTemplate} className="flex h-9 items-center gap-1.5 rounded-full border border-dashed border-amber-400 bg-amber-50 px-3 text-sm font-medium text-amber-700 active:bg-amber-100 dark:border-amber-600 dark:bg-amber-950/30 dark:text-amber-400">
-                          <span aria-hidden>🛠</span> Copy ID Template
-                        </button>
-                      )}
                       <button onClick={expandAllStudy} className="flex h-9 items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 text-sm font-medium text-slate-600 active:bg-slate-100 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 dark:active:bg-slate-700">
                         <span aria-hidden>⤢</span> Expand All
                       </button>

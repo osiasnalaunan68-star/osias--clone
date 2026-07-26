@@ -164,12 +164,14 @@ export async function getChapter(chapterNumber, titleNumber = null) {
     }
   }
   function buildNode(node) {
+    const label = node.title ? `${node.node_type} ${node.node_number} — ${node.title}` : `${node.node_type} ${node.node_number}`;
     return {
       id: node.id,
       uuid: node.uuid || '',
       node_type: node.node_type,
       node_number: node.node_number,
       title: node.title,
+      _label: label,
       content: node.content,
       status: node.status,
       version: node.version,
@@ -182,50 +184,173 @@ export async function getChapter(chapterNumber, titleNumber = null) {
   return buildNode(root);
 }
 
+export async function getTitleTree(titleNumber) {
+  const titleRow = await queryOne(
+    "SELECT * FROM legal_nodes WHERE node_type = 'title' AND node_number = ?",
+    [titleNumber]
+  );
+  if (!titleRow) return null;
+
+  const sql = `
+    WITH RECURSIVE subtree(id, parent_id, node_type, node_number, title, content, depth, sort_order) AS (
+      SELECT id, parent_id, node_type, node_number, title, content, depth, sort_order
+      FROM legal_nodes WHERE id = ?
+      UNION ALL
+      SELECT n.id, n.parent_id, n.node_type, n.node_number, n.title, n.content, n.depth, n.sort_order
+      FROM legal_nodes n JOIN subtree s ON n.parent_id = s.id
+    )
+    SELECT * FROM subtree ORDER BY depth, sort_order
+  `;
+  const rows = await query(sql, [titleRow.id]);
+  const nodeMap = {};
+  const root = { ...titleRow, children: [] };
+  nodeMap[titleRow.id] = root;
+  for (const row of rows) {
+    if (row.id === titleRow.id) continue;
+    const parent = nodeMap[row.parent_id];
+    if (!parent) continue;
+    const node = { ...row, children: [] };
+    parent.children.push(node);
+    nodeMap[row.id] = node;
+  }
+  function buildNode(node) {
+    return {
+      id: node.id,
+      node_type: node.node_type,
+      node_number: node.node_number,
+      title: node.title,
+      content: node.content,
+      children: (node.children || []).map(buildNode)
+    };
+  }
+  return buildNode(root);
+}
+
+function escapeRegExp(str) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function buildExcerpt(content, tokens, radius = 90) {
+  if (!content) return '';
+  const lower = content.toLowerCase();
+  let matchIndex = -1;
+  let matchLen = 0;
+  for (const token of tokens) {
+    const idx = lower.indexOf(token.toLowerCase());
+    if (idx !== -1 && (matchIndex === -1 || idx < matchIndex)) {
+      matchIndex = idx;
+      matchLen = token.length;
+    }
+  }
+  let start = 0;
+  let end = Math.min(content.length, 200);
+  if (matchIndex !== -1) {
+    start = Math.max(0, matchIndex - radius);
+    end = Math.min(content.length, matchIndex + matchLen + radius);
+  }
+  let excerpt = content.slice(start, end);
+  if (start > 0) excerpt = `…${excerpt}`;
+  if (end < content.length) excerpt = `${excerpt}…`;
+
+  const sortedTokens = [...tokens].sort((a, b) => b.length - a.length);
+  for (const token of sortedTokens) {
+    if (!token) continue;
+    const re = new RegExp(`(${escapeRegExp(token)})`, 'gi');
+    excerpt = excerpt.replace(re, '[$1]');
+  }
+  return excerpt;
+}
+
 export async function search(queryText, filter = 'all', limit = 50) {
-  const tokens = queryText.trim().split(/\s+/).filter(t => t.length > 0);
+  const trimmedQuery = queryText.trim();
+  const tokens = trimmedQuery.split(/\s+/).filter(t => t.length > 0);
   if (!tokens.length) return [];
-  const matchExpr = tokens.map(t => `"${t}"`).join(' ');
+
+  const likeConditions = tokens.map(() =>
+    '(n.node_number LIKE ? OR n.title LIKE ? OR n.content LIKE ?)'
+  ).join(' OR ');
+
+  const likeParams = [];
+  for (const token of tokens) {
+    const like = `%${token}%`;
+    likeParams.push(like, like, like);
+  }
+
   let sql = `
-    SELECT s.node_id, n.node_type, n.node_number, n.title, n.content,
-           snippet(search_index, 4, '[', ']', '...', 20) AS excerpt,
-           t_parent.node_number AS title_number, t_parent.title AS title_title,
-           ch_parent.node_number AS chapter_number, ch_parent.title AS chapter_title,
-           0 AS exact_match
-    FROM search_index s
-    JOIN legal_nodes n ON n.id = s.node_id
+    SELECT
+      n.id AS node_id,
+      n.node_type,
+      n.node_number,
+      n.title,
+      n.content,
+      t_parent.node_number AS title_number,
+      t_parent.title AS title_title,
+      ch_parent.node_number AS chapter_number,
+      ch_parent.title AS chapter_title
+    FROM legal_nodes n
     LEFT JOIN legal_nodes ch_parent ON ch_parent.id = n.parent_id AND ch_parent.node_type = 'chapter'
     LEFT JOIN legal_nodes t_parent ON t_parent.id = ch_parent.parent_id AND t_parent.node_type = 'title'
-    WHERE search_index MATCH ?
+    WHERE ${likeConditions}
   `;
-  const params = [matchExpr];
-  if (filter !== 'all') { sql += " AND n.node_type = ?"; params.push(filter); }
-  sql += " ORDER BY bm25(search_index, 12.0, 6.0, 1.0, 4.0) LIMIT ?";
-  params.push(limit);
-  try {
-    return await query(sql, params);
-  } catch (e) {
-    let likeSql = `
-      SELECT n.id AS node_id, n.node_type, n.node_number, n.title, n.content,
-             substr(n.content, 1, 200) AS excerpt,
-             t_parent.node_number AS title_number, t_parent.title AS title_title,
-             ch_parent.node_number AS chapter_number, ch_parent.title AS chapter_title,
-             0 AS exact_match
-      FROM legal_nodes n
-      LEFT JOIN legal_nodes ch_parent ON ch_parent.id = n.parent_id AND ch_parent.node_type = 'chapter'
-      LEFT JOIN legal_nodes t_parent ON t_parent.id = ch_parent.parent_id AND t_parent.node_type = 'title'
-      WHERE ${tokens.map(() => '(n.node_number LIKE ? OR n.title LIKE ? OR n.content LIKE ? OR n.node_type LIKE ?)').join(' AND ')}
-    `;
-    const likeParams = [];
-    for (const token of tokens) {
-      const like = `%${token}%`;
-      likeParams.push(like, like, like, like);
-    }
-    if (filter !== 'all') { likeSql += " AND n.node_type = ?"; likeParams.push(filter); }
-    likeSql += " ORDER BY n.node_type, CAST(n.node_number AS INTEGER) LIMIT ?";
-    likeParams.push(limit);
-    return await query(likeSql, likeParams);
+
+  if (filter !== 'all') {
+    sql += " AND n.node_type = ?";
+    likeParams.push(filter);
   }
+
+  sql += " ORDER BY n.node_type, CAST(n.node_number AS INTEGER)";
+
+  const rows = await query(sql, likeParams);
+  const lowerQuery = trimmedQuery.toLowerCase();
+
+  const withMeta = rows.map((row) => {
+    const haystacks = [row.node_number, row.title, row.content]
+      .filter(Boolean)
+      .map((s) => String(s).toLowerCase());
+    const exact_match = haystacks.some((h) => h.includes(lowerQuery)) ? 1 : 0;
+    return {
+      ...row,
+      excerpt: buildExcerpt(row.content || '', tokens),
+      exact_match,
+    };
+  });
+
+  withMeta.sort((a, b) => b.exact_match - a.exact_match);
+  return withMeta.slice(0, limit);
+}
+
+export async function getChapterForNode(nodeId) {
+  const sql = `
+    WITH RECURSIVE ancestors(id, parent_id, node_type, node_number) AS (
+      SELECT id, parent_id, node_type, node_number
+      FROM legal_nodes
+      WHERE id = ?
+      UNION ALL
+      SELECT n.id, n.parent_id, n.node_type, n.node_number
+      FROM legal_nodes n
+      JOIN ancestors a ON n.id = a.parent_id
+    )
+    SELECT node_type, node_number, id
+    FROM ancestors
+    WHERE node_type = 'chapter'
+    LIMIT 1
+  `;
+  const result = await queryOne(sql, [nodeId]);
+  if (!result) return null;
+
+  const titleSql = `
+    SELECT t.node_number AS title_number
+    FROM legal_nodes t
+    WHERE t.id = (
+      SELECT parent_id FROM legal_nodes WHERE id = ? AND node_type = 'chapter'
+    )
+    AND t.node_type = 'title'
+  `;
+  const titleRow = await queryOne(titleSql, [result.id]);
+  return {
+    chapter_number: result.node_number,
+    title_number: titleRow ? titleRow.title_number : null
+  };
 }
 
 const HIGHLIGHTS_KEY = 'customsLaw_highlights';
@@ -249,7 +374,6 @@ export function removeHighlight(highlightId) {
   localStorage.setItem(HIGHLIGHTS_KEY, JSON.stringify(all));
 }
 
-// ---------- Notes ----------
 const NOTES_KEY = 'customsLaw_notes';
 
 export function getNotesForNode(nodeId) {
@@ -297,7 +421,6 @@ export function deleteNote(nodeId, noteId) {
   localStorage.setItem(NOTES_KEY, JSON.stringify(all));
 }
 
-// ---------- Resume Reading / Study Progress ----------
 const PROGRESS_KEY = 'customsLaw_lastPosition';
 
 export function saveProgress(progress) {
@@ -316,7 +439,6 @@ export function getProgress() {
   }
 }
 
-// ---------- Tutorial ----------
 const TUTORIAL_KEY = 'customsLaw_tutorialSeen';
 
 export function hasTutorialBeenSeen() {
