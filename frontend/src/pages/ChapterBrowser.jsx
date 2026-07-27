@@ -16,6 +16,8 @@ import DevPanel from "./DevPanel";
 import QuizPage from "./QuizPage";
 
 // Enrich nodes with hierarchy information for composite key lookup
+
+// Enrich nodes with hierarchy information for composite key lookup
 function enrichNodesWithHierarchy(nodes) {
   let currentSection = null;
   let currentParagraph = null;
@@ -43,6 +45,10 @@ function enrichNodesWithHierarchy(nodes) {
       } else {
         currentSubparagraph = node.node_number;
       }
+    } else if (node.node_type === "item") {
+      // Item: we can store item number separately if needed
+      // For now, we don't need to track item_number separately
+      // because getCompositeKey uses node.node_number for items if item_number not set
     }
 
     node.section_number = currentSection;
@@ -61,6 +67,7 @@ function enrichNodesWithHierarchy(nodes) {
   }
   return nodes;
 }
+
 
 
 const MODE_KEY = "customsLaw_mode";
