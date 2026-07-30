@@ -28,7 +28,7 @@ workflows:
     publishing:
       email:
         recipients:
-          - YOUR_REAL_EMAIL_HERE
+          - osiasnalaunan68@gmail.com
         notify:
           success: true
           failure: true
