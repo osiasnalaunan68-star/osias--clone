@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">RA10863</string>
+    <string name="title_activity_main">RA10863</string>
+    <string name="package_name">com.osias.ra10863</string>
+    <string name="custom_url_scheme">com.osias.ra10863</string>
+</resources>
