@@ -28,7 +28,7 @@ workflows:
     publishing:
       email:
         recipients:
-          - your-email@example.com
+          - YOUR_REAL_EMAIL_HERE
         notify:
           success: true
           failure: true
