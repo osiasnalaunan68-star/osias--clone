@@ -9,7 +9,7 @@ export const AI_APPS = [
 export function getAiContext(node) {
   if (!node) return null;
 
-  const idString = node.id ? node.id.toString() : "";
+  const idString = (node.node_number || node.id) ? String(node.node_number || node.id) : "";
   let preWrittenData = null;
   
   if (aiContextData && idString && aiContextData[idString]) {
