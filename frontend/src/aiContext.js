@@ -1,4 +1,4 @@
-import aiContextData from '../data/aiContext.json';
+import aiContextData from './data/aiContext.json';
 
 export const AI_APPS = [
   { id: "chatgpt", label: "ChatGPT", icon: "🟢", url: "https://chatgpt.com/" },
@@ -7,11 +7,17 @@ export const AI_APPS = [
 ];
 
 export function getAiContext(node) {
-  if (!node || !node.id) return null;
+  if (!node) return null;
 
-  // 1. Try to load the pre-written explanation from your JSON file
-  const preWrittenData = aiContextData[node.id.toString()];
+  // 1. Subukan kunin ang data mula sa JSON file gamit ang ID
+  const idString = node.id ? node.id.toString() : "";
+  let preWrittenData = null;
+  
+  if (aiContextData && idString && aiContextData[idString]) {
+    preWrittenData = aiContextData[idString];
+  }
 
+  // Kung may laman sa JSON, yun ang ipapakita
   if (preWrittenData) {
     return {
       title: preWrittenData.title,
@@ -20,10 +26,11 @@ export function getAiContext(node) {
     };
   }
 
-  // 2. FALLBACK: If the ID is missing (e.g., 141), generate it dynamically
-  const title = node.title ? `About ${node.title}` : `About ${node.node_type} ${node.node_number || ""}`;
+  // 2. FALLBACK: Kung WALA sa JSON (tulad ng id 141), gagawa siya ng dynamic content 
+  // Wala nang console.log na mag-e-error!
+  const title = node.title ? `About ${node.title}` : `About ${node.node_type || "Item"} ${node.node_number || ""}`;
   
-  const prompt = `Explain "${node.title || node.node_number}" (${node.node_type} ${node.node_number || ""}) from RA 10863, the Philippine Customs Modernization and Tariff Act, in simple terms with an example.`;
+  const prompt = `Explain "${node.title || node.node_number}" (${node.node_type || "Item"} ${node.node_number || ""}) from RA 10863, the Philippine Customs Modernization and Tariff Act, in simple terms with an example.`;
 
   const content = `An offline explanation for this specific section is currently being processed by Osias 6.7.\n\nHowever, you can instantly get a detailed explanation by tapping any of the AI buttons below. The prompt has already been copied to your clipboard!`;
 
@@ -36,7 +43,6 @@ export function getAiContext(node) {
 
 export async function copyPromptAndOpen(prompt, url) {
   try {
-    // Bulletproof Clipboard Fallback for Android WebView (Codemagic APK)
     const textArea = document.createElement("textarea");
     textArea.value = prompt;
     textArea.style.position = "fixed";
@@ -49,18 +55,15 @@ export async function copyPromptAndOpen(prompt, url) {
     try {
       document.execCommand("copy"); 
     } catch (err) {
-      console.warn("execCommand failed, trying navigator API", err);
       if (navigator.clipboard) {
         await navigator.clipboard.writeText(prompt);
       }
     }
     textArea.remove();
-    
   } catch (e) {
     console.error("Copy failed", e);
   }
 
-  // Reliable way to open external apps/links in both Web & APK
   const newWindow = window.open(url, "_blank");
   if (!newWindow) {
     window.location.href = url;
