@@ -1,11 +1,4 @@
-// Minimal offline-support service worker.
-// Strategy: try the network first (so data stays fresh when online),
-// and fall back to cache when the request fails (offline / weak signal).
-// Every successful GET response gets cached automatically, so chapters,
-// search results, and app files you've already opened once will keep
-// working with no internet connection.
-
-const CACHE_NAME = "cmta-app-cache-v1";
+const CACHE_NAME = "cmta-app-cache-v2";
 
 self.addEventListener("install", () => {
   self.skipWaiting();
@@ -35,7 +28,7 @@ self.addEventListener("fetch", (event) => {
         const cached = await caches.match(request);
         if (cached) return cached;
         if (request.mode === "navigate") {
-          const shell = await caches.match("/");
+          const shell = await caches.match(self.registration.scope);
           if (shell) return shell;
         }
         return Response.error();

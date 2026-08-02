@@ -282,7 +282,7 @@ function NotePanel({ notes, onCreate, onEdit, onDelete, onClose }) {
 
 function AiContextModal({ node, onClose }) {
   // FIX: recompute when node changes instead of using useState once
-  const entry = useMemo(() => getAiContext(node), [
+  const entry = useMemo(() => getAiContext(node.id), [
     node?.id,
     node?.section_number,
     node?.paragraph_number,
@@ -361,7 +361,7 @@ function StudyNodeRenderer({ node, level = 0, expandedSet = new Set(), scrollToI
   const [expanded, setExpanded] = useState(false);
   const [notesOpen, setNotesOpen] = useState(false);
   const [aiModalOpen, setAiModalOpen] = useState(false);
-  const aiEntry = useMemo(() => getAiContext(node), [node.id]);
+  const aiEntry = useMemo(() => getAiContext(node.id), [node.id]);
   const { activeHighlightNodeId, setActiveHighlightNodeId } = useHighlightUI();
   const isHighlighting = activeHighlightNodeId === node.id;
   const hasChildren = node.children && node.children.length > 0;
@@ -458,7 +458,7 @@ function ReadingNodeRenderer({ node, level = 0, fontScale, expandedSet = new Set
   const [notesOpen, setNotesOpen] = useState(false);
   const [aiModalOpen, setAiModalOpen] = useState(false);
   // FIX: recompute when any relevant node field changes, not just node.id
-  const aiEntry = useMemo(() => getAiContext(node), [
+  const aiEntry = useMemo(() => getAiContext(node.id), [
     node?.id,
     node?.section_number,
     node?.paragraph_number,
