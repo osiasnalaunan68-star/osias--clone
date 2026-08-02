@@ -14,6 +14,12 @@ workflows:
         script: |
           cd frontend
           npm run build
+      - name: Add Capacitor Android platform (if missing)
+        script: |
+          cd frontend
+          if [ ! -d android ]; then
+            npx cap add android
+          fi
       - name: Sync Capacitor Android
         script: |
           cd frontend
