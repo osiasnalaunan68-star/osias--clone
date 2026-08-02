@@ -1,0 +1,7904 @@
+[
+  {
+    "id": 1,
+    "parent_id": null,
+    "node_type": "title",
+    "node_number": "II",
+    "title": "BUREAU OF CUSTOMS",
+    "depth": 0,
+    "sort_order": 1
+  },
+  {
+    "id": 2,
+    "parent_id": 1,
+    "node_type": "chapter",
+    "node_number": "1",
+    "title": "GENERAL ADMINISTRATION",
+    "depth": 1,
+    "sort_order": 2
+  },
+  {
+    "id": 3,
+    "parent_id": 2,
+    "node_type": "section",
+    "node_number": "200",
+    "title": "Chief Officials of the Bureau",
+    "depth": 2,
+    "sort_order": 3
+  },
+  {
+    "id": 4,
+    "parent_id": 2,
+    "node_type": "section",
+    "node_number": "201",
+    "title": "Powers and Functions of the Commissioner",
+    "depth": 2,
+    "sort_order": 4
+  },
+  {
+    "id": 5,
+    "parent_id": 4,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 5
+  },
+  {
+    "id": 6,
+    "parent_id": 4,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 6
+  },
+  {
+    "id": 7,
+    "parent_id": 4,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 7
+  },
+  {
+    "id": 8,
+    "parent_id": 4,
+    "node_type": "paragraph",
+    "node_number": "(d)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 8
+  },
+  {
+    "id": 9,
+    "parent_id": 4,
+    "node_type": "paragraph",
+    "node_number": "(e)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 9
+  },
+  {
+    "id": 10,
+    "parent_id": 4,
+    "node_type": "paragraph",
+    "node_number": "(f)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 10
+  },
+  {
+    "id": 11,
+    "parent_id": 4,
+    "node_type": "paragraph",
+    "node_number": "(g)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 11
+  },
+  {
+    "id": 12,
+    "parent_id": 2,
+    "node_type": "section",
+    "node_number": "202",
+    "title": "Functions of the Bureau",
+    "depth": 2,
+    "sort_order": 12
+  },
+  {
+    "id": 13,
+    "parent_id": 12,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 13
+  },
+  {
+    "id": 14,
+    "parent_id": 12,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 14
+  },
+  {
+    "id": 15,
+    "parent_id": 12,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 15
+  },
+  {
+    "id": 16,
+    "parent_id": 12,
+    "node_type": "paragraph",
+    "node_number": "(d)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 16
+  },
+  {
+    "id": 17,
+    "parent_id": 12,
+    "node_type": "paragraph",
+    "node_number": "(e)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 17
+  },
+  {
+    "id": 18,
+    "parent_id": 12,
+    "node_type": "paragraph",
+    "node_number": "(f)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 18
+  },
+  {
+    "id": 19,
+    "parent_id": 12,
+    "node_type": "paragraph",
+    "node_number": "(g)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 19
+  },
+  {
+    "id": 20,
+    "parent_id": 12,
+    "node_type": "paragraph",
+    "node_number": "(h)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 20
+  },
+  {
+    "id": 21,
+    "parent_id": 12,
+    "node_type": "paragraph",
+    "node_number": "(i)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 21
+  },
+  {
+    "id": 22,
+    "parent_id": 12,
+    "node_type": "paragraph",
+    "node_number": "(j)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 22
+  },
+  {
+    "id": 23,
+    "parent_id": 12,
+    "node_type": "paragraph",
+    "node_number": "(k)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 23
+  },
+  {
+    "id": 24,
+    "parent_id": 2,
+    "node_type": "section",
+    "node_number": "203",
+    "title": "Annual Report of the Commissioner",
+    "depth": 2,
+    "sort_order": 24
+  },
+  {
+    "id": 25,
+    "parent_id": 2,
+    "node_type": "section",
+    "node_number": "204",
+    "title": "Promulgation of Rules and Regulations",
+    "depth": 2,
+    "sort_order": 25
+  },
+  {
+    "id": 26,
+    "parent_id": 2,
+    "node_type": "section",
+    "node_number": "205",
+    "title": "Copies of Goods Declaration",
+    "depth": 2,
+    "sort_order": 26
+  },
+  {
+    "id": 27,
+    "parent_id": 1,
+    "node_type": "chapter",
+    "node_number": "2",
+    "title": "CUSTOMS DISTRICTS AND PORTS OF ENTRY",
+    "depth": 1,
+    "sort_order": 27
+  },
+  {
+    "id": 28,
+    "parent_id": 27,
+    "node_type": "section",
+    "node_number": "206",
+    "title": "Customs Districts",
+    "depth": 2,
+    "sort_order": 28
+  },
+  {
+    "id": 29,
+    "parent_id": 27,
+    "node_type": "section",
+    "node_number": "207",
+    "title": "Ports of Entry",
+    "depth": 2,
+    "sort_order": 29
+  },
+  {
+    "id": 30,
+    "parent_id": 27,
+    "node_type": "section",
+    "node_number": "208",
+    "title": "Power of the President to Open and Close Any Port",
+    "depth": 2,
+    "sort_order": 30
+  },
+  {
+    "id": 31,
+    "parent_id": 27,
+    "node_type": "section",
+    "node_number": "209",
+    "title": "Assignment of Customs Officers and Employees to Other Duties",
+    "depth": 2,
+    "sort_order": 31
+  },
+  {
+    "id": 32,
+    "parent_id": 27,
+    "node_type": "section",
+    "node_number": "210",
+    "title": "Duties of the District Collector",
+    "depth": 2,
+    "sort_order": 32
+  },
+  {
+    "id": 33,
+    "parent_id": 32,
+    "node_type": "paragraph",
+    "node_number": "(1)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 33
+  },
+  {
+    "id": 34,
+    "parent_id": 32,
+    "node_type": "paragraph",
+    "node_number": "(2)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 34
+  },
+  {
+    "id": 35,
+    "parent_id": 32,
+    "node_type": "paragraph",
+    "node_number": "(3)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 35
+  },
+  {
+    "id": 36,
+    "parent_id": 32,
+    "node_type": "paragraph",
+    "node_number": "(4)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 36
+  },
+  {
+    "id": 37,
+    "parent_id": 32,
+    "node_type": "paragraph",
+    "node_number": "(5)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 37
+  },
+  {
+    "id": 38,
+    "parent_id": 32,
+    "node_type": "paragraph",
+    "node_number": "(6)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 38
+  },
+  {
+    "id": 39,
+    "parent_id": 32,
+    "node_type": "paragraph",
+    "node_number": "(7)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 39
+  },
+  {
+    "id": 40,
+    "parent_id": 32,
+    "node_type": "paragraph",
+    "node_number": "(8)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 40
+  },
+  {
+    "id": 41,
+    "parent_id": 27,
+    "node_type": "section",
+    "node_number": "211",
+    "title": "Temporary Succession of Deputy District Collector to Position of Acting District Collector",
+    "depth": 2,
+    "sort_order": 41
+  },
+  {
+    "id": 42,
+    "parent_id": 27,
+    "node_type": "section",
+    "node_number": "212",
+    "title": "Records to be Kept by Customs Officers",
+    "depth": 2,
+    "sort_order": 42
+  },
+  {
+    "id": 43,
+    "parent_id": 27,
+    "node_type": "section",
+    "node_number": "213",
+    "title": "Reports of the District Collector to the Commissioner",
+    "depth": 2,
+    "sort_order": 43
+  },
+  {
+    "id": 44,
+    "parent_id": 1,
+    "node_type": "chapter",
+    "node_number": "3",
+    "title": "EXERCISE OF POLICE AUTHORITY",
+    "depth": 1,
+    "sort_order": 44
+  },
+  {
+    "id": 45,
+    "parent_id": 44,
+    "node_type": "section",
+    "node_number": "214",
+    "title": "Persons Exercising Police Authority",
+    "depth": 2,
+    "sort_order": 45
+  },
+  {
+    "id": 46,
+    "parent_id": 45,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 46
+  },
+  {
+    "id": 47,
+    "parent_id": 45,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 47
+  },
+  {
+    "id": 48,
+    "parent_id": 45,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 48
+  },
+  {
+    "id": 49,
+    "parent_id": 44,
+    "node_type": "section",
+    "node_number": "215",
+    "title": "Place Where Authority May be Exercised",
+    "depth": 2,
+    "sort_order": 49
+  },
+  {
+    "id": 50,
+    "parent_id": 44,
+    "node_type": "section",
+    "node_number": "216",
+    "title": "Exercise of Power of Seizure",
+    "depth": 2,
+    "sort_order": 50
+  },
+  {
+    "id": 51,
+    "parent_id": 44,
+    "node_type": "section",
+    "node_number": "217",
+    "title": "Duty of Officer to Disclose Official Character",
+    "depth": 2,
+    "sort_order": 51
+  },
+  {
+    "id": 52,
+    "parent_id": 44,
+    "node_type": "section",
+    "node_number": "218",
+    "title": "Authority to Require Assistance and Information",
+    "depth": 2,
+    "sort_order": 52
+  },
+  {
+    "id": 53,
+    "parent_id": 44,
+    "node_type": "section",
+    "node_number": "219",
+    "title": "Authority to Enter Properties",
+    "depth": 2,
+    "sort_order": 53
+  },
+  {
+    "id": 54,
+    "parent_id": 44,
+    "node_type": "section",
+    "node_number": "220",
+    "title": "Authority to Search Dwelling House",
+    "depth": 2,
+    "sort_order": 54
+  },
+  {
+    "id": 55,
+    "parent_id": 44,
+    "node_type": "section",
+    "node_number": "221",
+    "title": "Authority to Search Vessels or Aircrafts and Persons or Goods Conveyed Therein",
+    "depth": 2,
+    "sort_order": 55
+  },
+  {
+    "id": 56,
+    "parent_id": 44,
+    "node_type": "section",
+    "node_number": "222",
+    "title": "Authority to Search Vehicles, Other Carriers, Persons and Animals",
+    "depth": 2,
+    "sort_order": 56
+  },
+  {
+    "id": 57,
+    "parent_id": 44,
+    "node_type": "section",
+    "node_number": "223",
+    "title": "Authority to Search Persons Arriving From Foreign Countries",
+    "depth": 2,
+    "sort_order": 57
+  },
+  {
+    "id": 58,
+    "parent_id": 44,
+    "node_type": "section",
+    "node_number": "224",
+    "title": "Power to Inspect and Visit",
+    "depth": 2,
+    "sort_order": 58
+  },
+  {
+    "id": 59,
+    "parent_id": null,
+    "node_type": "title",
+    "node_number": "I",
+    "title": "TITLE I – PRELIMINARY PROVISIONS",
+    "depth": 0,
+    "sort_order": 59
+  },
+  {
+    "id": 60,
+    "parent_id": 59,
+    "node_type": "chapter",
+    "node_number": "1",
+    "title": "SHORT TITLE",
+    "depth": 1,
+    "sort_order": 60
+  },
+  {
+    "id": 61,
+    "parent_id": 60,
+    "node_type": "section",
+    "node_number": "100",
+    "title": "Short Title",
+    "depth": 2,
+    "sort_order": 61
+  },
+  {
+    "id": 62,
+    "parent_id": 59,
+    "node_type": "chapter",
+    "node_number": "2",
+    "title": "GENERAL AND COMMON PROVISIONS",
+    "depth": 1,
+    "sort_order": 62
+  },
+  {
+    "id": 63,
+    "parent_id": 62,
+    "node_type": "section",
+    "node_number": "101",
+    "title": "Declaration of Policy",
+    "depth": 2,
+    "sort_order": 63
+  },
+  {
+    "id": 64,
+    "parent_id": 63,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 64
+  },
+  {
+    "id": 65,
+    "parent_id": 63,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 65
+  },
+  {
+    "id": 66,
+    "parent_id": 63,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 66
+  },
+  {
+    "id": 67,
+    "parent_id": 63,
+    "node_type": "paragraph",
+    "node_number": "(d)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 67
+  },
+  {
+    "id": 68,
+    "parent_id": 63,
+    "node_type": "paragraph",
+    "node_number": "(e)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 68
+  },
+  {
+    "id": 69,
+    "parent_id": 63,
+    "node_type": "paragraph",
+    "node_number": "(f)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 69
+  },
+  {
+    "id": 70,
+    "parent_id": 63,
+    "node_type": "paragraph",
+    "node_number": "(g)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 70
+  },
+  {
+    "id": 71,
+    "parent_id": 62,
+    "node_type": "section",
+    "node_number": "102",
+    "title": "Definition of Terms",
+    "depth": 2,
+    "sort_order": 71
+  },
+  {
+    "id": 72,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(a) Abatement",
+    "title": null,
+    "depth": 3,
+    "sort_order": 72
+  },
+  {
+    "id": 73,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(b) Actual or Outright Exportation",
+    "title": null,
+    "depth": 3,
+    "sort_order": 73
+  },
+  {
+    "id": 74,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(c) Admission",
+    "title": null,
+    "depth": 3,
+    "sort_order": 74
+  },
+  {
+    "id": 75,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(d) Airway Bill (AWB)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 75
+  },
+  {
+    "id": 76,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(e) Appeal",
+    "title": null,
+    "depth": 3,
+    "sort_order": 76
+  },
+  {
+    "id": 77,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(f) Assessment",
+    "title": null,
+    "depth": 3,
+    "sort_order": 77
+  },
+  {
+    "id": 78,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(g) Authorized Economic Operator (AEO)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 78
+  },
+  {
+    "id": 79,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(h) Bill of Lading (B/L)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 79
+  },
+  {
+    "id": 80,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(i) Bureau",
+    "title": null,
+    "depth": 3,
+    "sort_order": 80
+  },
+  {
+    "id": 81,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(j) Carrier",
+    "title": null,
+    "depth": 3,
+    "sort_order": 81
+  },
+  {
+    "id": 82,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(k) Clearance",
+    "title": null,
+    "depth": 3,
+    "sort_order": 82
+  },
+  {
+    "id": 83,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(l) Commission",
+    "title": null,
+    "depth": 3,
+    "sort_order": 83
+  },
+  {
+    "id": 84,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(m) Conditional Importation",
+    "title": null,
+    "depth": 3,
+    "sort_order": 84
+  },
+  {
+    "id": 85,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(n) Customs Broker",
+    "title": null,
+    "depth": 3,
+    "sort_order": 85
+  },
+  {
+    "id": 86,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(o) Customs Office",
+    "title": null,
+    "depth": 3,
+    "sort_order": 86
+  },
+  {
+    "id": 87,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(p) Customs Officer",
+    "title": null,
+    "depth": 3,
+    "sort_order": 87
+  },
+  {
+    "id": 88,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(q) Customs Territory",
+    "title": null,
+    "depth": 3,
+    "sort_order": 88
+  },
+  {
+    "id": 89,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(r) Entry",
+    "title": null,
+    "depth": 3,
+    "sort_order": 89
+  },
+  {
+    "id": 90,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(s) Exportation",
+    "title": null,
+    "depth": 3,
+    "sort_order": 90
+  },
+  {
+    "id": 91,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(t) Export Declaration",
+    "title": null,
+    "depth": 3,
+    "sort_order": 91
+  },
+  {
+    "id": 92,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(u) Flexible Clause",
+    "title": null,
+    "depth": 3,
+    "sort_order": 92
+  },
+  {
+    "id": 93,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(v) Foreign Exporter",
+    "title": null,
+    "depth": 3,
+    "sort_order": 93
+  },
+  {
+    "id": 94,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(w) Free Zone",
+    "title": null,
+    "depth": 3,
+    "sort_order": 94
+  },
+  {
+    "id": 95,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(x) Goods",
+    "title": null,
+    "depth": 3,
+    "sort_order": 95
+  },
+  {
+    "id": 96,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(y) Goods Declaration",
+    "title": null,
+    "depth": 3,
+    "sort_order": 96
+  },
+  {
+    "id": 97,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(z) Importation",
+    "title": null,
+    "depth": 3,
+    "sort_order": 97
+  },
+  {
+    "id": 98,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(aa) Freight Forwarder",
+    "title": null,
+    "depth": 3,
+    "sort_order": 98
+  },
+  {
+    "id": 99,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(bb) International Freight Forwarder",
+    "title": null,
+    "depth": 3,
+    "sort_order": 99
+  },
+  {
+    "id": 100,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(cc) Jurisdictional Control",
+    "title": null,
+    "depth": 3,
+    "sort_order": 100
+  },
+  {
+    "id": 101,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(dd) Lodgement",
+    "title": null,
+    "depth": 3,
+    "sort_order": 101
+  },
+  {
+    "id": 102,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(ee) Non-Vessel Operating Common Carrier (NVOCC)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 102
+  },
+  {
+    "id": 103,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(ff) Outright Smuggling",
+    "title": null,
+    "depth": 3,
+    "sort_order": 103
+  },
+  {
+    "id": 104,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(gg) Perishable Good",
+    "title": null,
+    "depth": 3,
+    "sort_order": 104
+  },
+  {
+    "id": 105,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(hh) Port of Entry",
+    "title": null,
+    "depth": 3,
+    "sort_order": 105
+  },
+  {
+    "id": 106,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(ii) Port of Discharge",
+    "title": null,
+    "depth": 3,
+    "sort_order": 106
+  },
+  {
+    "id": 107,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(jj) Reexportation",
+    "title": null,
+    "depth": 3,
+    "sort_order": 107
+  },
+  {
+    "id": 108,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(kk) Release of Goods",
+    "title": null,
+    "depth": 3,
+    "sort_order": 108
+  },
+  {
+    "id": 109,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(ll) Refund",
+    "title": null,
+    "depth": 3,
+    "sort_order": 109
+  },
+  {
+    "id": 110,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(mm) Security",
+    "title": null,
+    "depth": 3,
+    "sort_order": 110
+  },
+  {
+    "id": 111,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(nn) Smuggling",
+    "title": null,
+    "depth": 3,
+    "sort_order": 111
+  },
+  {
+    "id": 112,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(oo) Taxes",
+    "title": null,
+    "depth": 3,
+    "sort_order": 112
+  },
+  {
+    "id": 113,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(pp) Technical Smuggling",
+    "title": null,
+    "depth": 3,
+    "sort_order": 113
+  },
+  {
+    "id": 114,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(qq) Tentative Release",
+    "title": null,
+    "depth": 3,
+    "sort_order": 114
+  },
+  {
+    "id": 115,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(rr) Transit",
+    "title": null,
+    "depth": 3,
+    "sort_order": 115
+  },
+  {
+    "id": 116,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(ss) Transshipment",
+    "title": null,
+    "depth": 3,
+    "sort_order": 116
+  },
+  {
+    "id": 117,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(tt) Traveler",
+    "title": null,
+    "depth": 3,
+    "sort_order": 117
+  },
+  {
+    "id": 118,
+    "parent_id": 71,
+    "node_type": "paragraph",
+    "node_number": "(uu) Third Party",
+    "title": null,
+    "depth": 3,
+    "sort_order": 118
+  },
+  {
+    "id": 119,
+    "parent_id": 62,
+    "node_type": "section",
+    "node_number": "103",
+    "title": "When Importation Begins and Deemed Terminated",
+    "depth": 2,
+    "sort_order": 119
+  },
+  {
+    "id": 120,
+    "parent_id": 119,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 120
+  },
+  {
+    "id": 121,
+    "parent_id": 119,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 121
+  },
+  {
+    "id": 122,
+    "parent_id": 62,
+    "node_type": "section",
+    "node_number": "104",
+    "title": "When Duty and Tax are Due on Imported Goods",
+    "depth": 2,
+    "sort_order": 122
+  },
+  {
+    "id": 123,
+    "parent_id": 62,
+    "node_type": "section",
+    "node_number": "105",
+    "title": "Effective Date of Rate of Import Duty",
+    "depth": 2,
+    "sort_order": 123
+  },
+  {
+    "id": 124,
+    "parent_id": 62,
+    "node_type": "section",
+    "node_number": "106",
+    "title": "Declarant",
+    "depth": 2,
+    "sort_order": 124
+  },
+  {
+    "id": 125,
+    "parent_id": 124,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 125
+  },
+  {
+    "id": 126,
+    "parent_id": 124,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 126
+  },
+  {
+    "id": 127,
+    "parent_id": 124,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 127
+  },
+  {
+    "id": 128,
+    "parent_id": 124,
+    "node_type": "paragraph",
+    "node_number": "(d)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 128
+  },
+  {
+    "id": 129,
+    "parent_id": 62,
+    "node_type": "section",
+    "node_number": "107",
+    "title": "Rights and Responsibilities of the Declarant",
+    "depth": 2,
+    "sort_order": 129
+  },
+  {
+    "id": 130,
+    "parent_id": 62,
+    "node_type": "section",
+    "node_number": "108",
+    "title": "Penalties for Errors in Goods Declaration",
+    "depth": 2,
+    "sort_order": 130
+  },
+  {
+    "id": 131,
+    "parent_id": 62,
+    "node_type": "section",
+    "node_number": "109",
+    "title": "Application of Information and Communications Technology",
+    "depth": 2,
+    "sort_order": 131
+  },
+  {
+    "id": 132,
+    "parent_id": 131,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 132
+  },
+  {
+    "id": 133,
+    "parent_id": 131,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 133
+  },
+  {
+    "id": 134,
+    "parent_id": 131,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 134
+  },
+  {
+    "id": 135,
+    "parent_id": 62,
+    "node_type": "section",
+    "node_number": "110",
+    "title": "Relationship Between the Bureau and Third Parties",
+    "depth": 2,
+    "sort_order": 135
+  },
+  {
+    "id": 136,
+    "parent_id": 62,
+    "node_type": "section",
+    "node_number": "111",
+    "title": "Information of General Application",
+    "depth": 2,
+    "sort_order": 136
+  },
+  {
+    "id": 137,
+    "parent_id": 62,
+    "node_type": "section",
+    "node_number": "112",
+    "title": "Information of a Specific Nature",
+    "depth": 2,
+    "sort_order": 137
+  },
+  {
+    "id": 138,
+    "parent_id": 62,
+    "node_type": "section",
+    "node_number": "113",
+    "title": "Decision and Ruling",
+    "depth": 2,
+    "sort_order": 138
+  },
+  {
+    "id": 139,
+    "parent_id": 62,
+    "node_type": "section",
+    "node_number": "114",
+    "title": "Right of Appeal, Forms and Ground",
+    "depth": 2,
+    "sort_order": 139
+  },
+  {
+    "id": 140,
+    "parent_id": 59,
+    "node_type": "chapter",
+    "node_number": "3",
+    "title": "TYPES OF IMPORTATION",
+    "depth": 1,
+    "sort_order": 140
+  },
+  {
+    "id": 141,
+    "parent_id": 140,
+    "node_type": "section",
+    "node_number": "115",
+    "title": "Treatment of Importation",
+    "depth": 2,
+    "sort_order": 141
+  },
+  {
+    "id": 142,
+    "parent_id": 140,
+    "node_type": "section",
+    "node_number": "116",
+    "title": "Free Importation and Exportation",
+    "depth": 2,
+    "sort_order": 142
+  },
+  {
+    "id": 143,
+    "parent_id": 140,
+    "node_type": "section",
+    "node_number": "117",
+    "title": "Regulated Importation and Exportation",
+    "depth": 2,
+    "sort_order": 143
+  },
+  {
+    "id": 144,
+    "parent_id": 140,
+    "node_type": "section",
+    "node_number": "118",
+    "title": "Prohibited Importation and Exportation",
+    "depth": 2,
+    "sort_order": 144
+  },
+  {
+    "id": 145,
+    "parent_id": 144,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 145
+  },
+  {
+    "id": 146,
+    "parent_id": 144,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 146
+  },
+  {
+    "id": 147,
+    "parent_id": 144,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 147
+  },
+  {
+    "id": 148,
+    "parent_id": 144,
+    "node_type": "paragraph",
+    "node_number": "(d)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 148
+  },
+  {
+    "id": 149,
+    "parent_id": 144,
+    "node_type": "paragraph",
+    "node_number": "(e)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 149
+  },
+  {
+    "id": 150,
+    "parent_id": 144,
+    "node_type": "paragraph",
+    "node_number": "(f)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 150
+  },
+  {
+    "id": 151,
+    "parent_id": 144,
+    "node_type": "paragraph",
+    "node_number": "(g)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 151
+  },
+  {
+    "id": 152,
+    "parent_id": 140,
+    "node_type": "section",
+    "node_number": "119",
+    "title": "Restricted Importation and Exportation",
+    "depth": 2,
+    "sort_order": 152
+  },
+  {
+    "id": 153,
+    "parent_id": 152,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 153
+  },
+  {
+    "id": 154,
+    "parent_id": 152,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 154
+  },
+  {
+    "id": 155,
+    "parent_id": 152,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 155
+  },
+  {
+    "id": 156,
+    "parent_id": 152,
+    "node_type": "paragraph",
+    "node_number": "(d)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 156
+  },
+  {
+    "id": 157,
+    "parent_id": 152,
+    "node_type": "paragraph",
+    "node_number": "(e)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 157
+  },
+  {
+    "id": 158,
+    "parent_id": 152,
+    "node_type": "paragraph",
+    "node_number": "(f)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 158
+  },
+  {
+    "id": 159,
+    "parent_id": 59,
+    "node_type": "chapter",
+    "node_number": "4",
+    "title": "RELIEF CONSIGNMENT",
+    "depth": 1,
+    "sort_order": 159
+  },
+  {
+    "id": 160,
+    "parent_id": 159,
+    "node_type": "section",
+    "node_number": "120",
+    "title": "Relief Consignment",
+    "depth": 2,
+    "sort_order": 160
+  },
+  {
+    "id": 161,
+    "parent_id": 160,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 161
+  },
+  {
+    "id": 162,
+    "parent_id": 160,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 162
+  },
+  {
+    "id": 163,
+    "parent_id": 160,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 163
+  },
+  {
+    "id": 164,
+    "parent_id": 160,
+    "node_type": "paragraph",
+    "node_number": "(d)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 164
+  },
+  {
+    "id": 165,
+    "parent_id": 159,
+    "node_type": "section",
+    "node_number": "121",
+    "title": "Duty and Tax Treatment",
+    "depth": 2,
+    "sort_order": 165
+  },
+  {
+    "id": 166,
+    "parent_id": null,
+    "node_type": "title",
+    "node_number": "III",
+    "title": "CUSTOMS JURISDICTION AND CUSTOMS CONTROL",
+    "depth": 0,
+    "sort_order": 166
+  },
+  {
+    "id": 167,
+    "parent_id": 166,
+    "node_type": "chapter",
+    "node_number": "1",
+    "title": "CUSTOMS JURISDICTION",
+    "depth": 1,
+    "sort_order": 167
+  },
+  {
+    "id": 168,
+    "parent_id": 167,
+    "node_type": "section",
+    "node_number": "300",
+    "title": "Customs Jurisdiction",
+    "depth": 2,
+    "sort_order": 168
+  },
+  {
+    "id": 169,
+    "parent_id": 166,
+    "node_type": "chapter",
+    "node_number": "2",
+    "title": "CUSTOMS CONTROL",
+    "depth": 1,
+    "sort_order": 169
+  },
+  {
+    "id": 170,
+    "parent_id": 169,
+    "node_type": "section",
+    "node_number": "301",
+    "title": "Customs Control Over Goods",
+    "depth": 2,
+    "sort_order": 170
+  },
+  {
+    "id": 171,
+    "parent_id": 169,
+    "node_type": "section",
+    "node_number": "302",
+    "title": "Enforcement of Port Regulation of the Bureau of Quarantine",
+    "depth": 2,
+    "sort_order": 171
+  },
+  {
+    "id": 172,
+    "parent_id": 169,
+    "node_type": "section",
+    "node_number": "303",
+    "title": "Control Over Premises Used for Customs Purposes",
+    "depth": 2,
+    "sort_order": 172
+  },
+  {
+    "id": 173,
+    "parent_id": 169,
+    "node_type": "section",
+    "node_number": "304",
+    "title": "Power of the President to Subject Premises to Customs Jurisdiction",
+    "depth": 2,
+    "sort_order": 173
+  },
+  {
+    "id": 174,
+    "parent_id": 169,
+    "node_type": "section",
+    "node_number": "305",
+    "title": "Trespass or Obstruction of Customs Premises",
+    "depth": 2,
+    "sort_order": 174
+  },
+  {
+    "id": 175,
+    "parent_id": 169,
+    "node_type": "section",
+    "node_number": "306",
+    "title": "Special Surveillance for the Protection of Customs Revenue and Prevention of Smuggling",
+    "depth": 2,
+    "sort_order": 175
+  },
+  {
+    "id": 176,
+    "parent_id": 169,
+    "node_type": "section",
+    "node_number": "307",
+    "title": "Temporary Storage of Goods",
+    "depth": 2,
+    "sort_order": 176
+  },
+  {
+    "id": 177,
+    "parent_id": null,
+    "node_type": "title",
+    "node_number": "IV",
+    "title": "IMPORT CLEARANCE AND FORMALITIES",
+    "depth": 0,
+    "sort_order": 177
+  },
+  {
+    "id": 178,
+    "parent_id": 177,
+    "node_type": "chapter",
+    "node_number": "1",
+    "title": "GOODS DECLARATION",
+    "depth": 1,
+    "sort_order": 178
+  },
+  {
+    "id": 179,
+    "parent_id": 178,
+    "node_type": "section",
+    "node_number": "400",
+    "title": "Goods to be Imported through Customs Office",
+    "depth": 2,
+    "sort_order": 179
+  },
+  {
+    "id": 180,
+    "parent_id": 178,
+    "node_type": "section",
+    "node_number": "401",
+    "title": "Importations Subject to Goods Declaration",
+    "depth": 2,
+    "sort_order": 180
+  },
+  {
+    "id": 181,
+    "parent_id": 178,
+    "node_type": "section",
+    "node_number": "402",
+    "title": "Goods Declaration for Consumption",
+    "depth": 2,
+    "sort_order": 181
+  },
+  {
+    "id": 182,
+    "parent_id": 181,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 182
+  },
+  {
+    "id": 183,
+    "parent_id": 181,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 183
+  },
+  {
+    "id": 184,
+    "parent_id": 178,
+    "node_type": "section",
+    "node_number": "403",
+    "title": "Provisional Goods Declaration",
+    "depth": 2,
+    "sort_order": 184
+  },
+  {
+    "id": 185,
+    "parent_id": 178,
+    "node_type": "section",
+    "node_number": "404",
+    "title": "Owner of Imported Goods",
+    "depth": 2,
+    "sort_order": 185
+  },
+  {
+    "id": 186,
+    "parent_id": 178,
+    "node_type": "section",
+    "node_number": "405",
+    "title": "Liability of Importer for Duties and Taxes",
+    "depth": 2,
+    "sort_order": 186
+  },
+  {
+    "id": 187,
+    "parent_id": 178,
+    "node_type": "section",
+    "node_number": "406",
+    "title": "Importations by the Government",
+    "depth": 2,
+    "sort_order": 187
+  },
+  {
+    "id": 188,
+    "parent_id": 178,
+    "node_type": "section",
+    "node_number": "407",
+    "title": "Goods Declaration and Period of Filing",
+    "depth": 2,
+    "sort_order": 188
+  },
+  {
+    "id": 189,
+    "parent_id": 178,
+    "node_type": "section",
+    "node_number": "408",
+    "title": "Lodgement and Amendment of Goods Declaration",
+    "depth": 2,
+    "sort_order": 189
+  },
+  {
+    "id": 190,
+    "parent_id": 178,
+    "node_type": "section",
+    "node_number": "409",
+    "title": "Advance Lodgement and Clearance",
+    "depth": 2,
+    "sort_order": 190
+  },
+  {
+    "id": 191,
+    "parent_id": 178,
+    "node_type": "section",
+    "node_number": "410",
+    "title": "Entry of Goods in Part for Consumption and in Part for Warehousing",
+    "depth": 2,
+    "sort_order": 191
+  },
+  {
+    "id": 192,
+    "parent_id": 178,
+    "node_type": "section",
+    "node_number": "411",
+    "title": "Contents of Goods Declaration",
+    "depth": 2,
+    "sort_order": 192
+  },
+  {
+    "id": 193,
+    "parent_id": 178,
+    "node_type": "section",
+    "node_number": "412",
+    "title": "Statements to be Provided in the Goods Declaration",
+    "depth": 2,
+    "sort_order": 193
+  },
+  {
+    "id": 194,
+    "parent_id": 193,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 194
+  },
+  {
+    "id": 195,
+    "parent_id": 193,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 195
+  },
+  {
+    "id": 196,
+    "parent_id": 178,
+    "node_type": "section",
+    "node_number": "413",
+    "title": "Description of Goods",
+    "depth": 2,
+    "sort_order": 196
+  },
+  {
+    "id": 197,
+    "parent_id": 178,
+    "node_type": "section",
+    "node_number": "414",
+    "title": "Commercial and Noncommercial Invoice",
+    "depth": 2,
+    "sort_order": 197
+  },
+  {
+    "id": 198,
+    "parent_id": 197,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 198
+  },
+  {
+    "id": 199,
+    "parent_id": 197,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 199
+  },
+  {
+    "id": 200,
+    "parent_id": 197,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 200
+  },
+  {
+    "id": 201,
+    "parent_id": 197,
+    "node_type": "paragraph",
+    "node_number": "(d)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 201
+  },
+  {
+    "id": 202,
+    "parent_id": 197,
+    "node_type": "paragraph",
+    "node_number": "(e)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 202
+  },
+  {
+    "id": 203,
+    "parent_id": 197,
+    "node_type": "paragraph",
+    "node_number": "(f)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 203
+  },
+  {
+    "id": 204,
+    "parent_id": 197,
+    "node_type": "paragraph",
+    "node_number": "(g)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 204
+  },
+  {
+    "id": 205,
+    "parent_id": 178,
+    "node_type": "section",
+    "node_number": "415",
+    "title": "Mode of Payment and Terms of Trade",
+    "depth": 2,
+    "sort_order": 205
+  },
+  {
+    "id": 206,
+    "parent_id": 178,
+    "node_type": "section",
+    "node_number": "416",
+    "title": "Examination of Samples",
+    "depth": 2,
+    "sort_order": 206
+  },
+  {
+    "id": 207,
+    "parent_id": 178,
+    "node_type": "section",
+    "node_number": "417",
+    "title": "Forwarding of Cargo and Remains of Wrecked Vessel or Aircraft",
+    "depth": 2,
+    "sort_order": 207
+  },
+  {
+    "id": 208,
+    "parent_id": 178,
+    "node_type": "section",
+    "node_number": "418",
+    "title": "Derelicts and Goods from Abandoned Wrecks",
+    "depth": 2,
+    "sort_order": 208
+  },
+  {
+    "id": 209,
+    "parent_id": 177,
+    "node_type": "chapter",
+    "node_number": "2",
+    "title": "EXAMINATION OF GOODS",
+    "depth": 1,
+    "sort_order": 209
+  },
+  {
+    "id": 210,
+    "parent_id": 209,
+    "node_type": "section",
+    "node_number": "419",
+    "title": "Examination of Goods",
+    "depth": 2,
+    "sort_order": 210
+  },
+  {
+    "id": 211,
+    "parent_id": 209,
+    "node_type": "section",
+    "node_number": "420",
+    "title": "Conditions for Examination",
+    "depth": 2,
+    "sort_order": 211
+  },
+  {
+    "id": 212,
+    "parent_id": 211,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 212
+  },
+  {
+    "id": 213,
+    "parent_id": 211,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 213
+  },
+  {
+    "id": 214,
+    "parent_id": 211,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 214
+  },
+  {
+    "id": 215,
+    "parent_id": 211,
+    "node_type": "paragraph",
+    "node_number": "(d)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 215
+  },
+  {
+    "id": 216,
+    "parent_id": 211,
+    "node_type": "paragraph",
+    "node_number": "(e)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 216
+  },
+  {
+    "id": 217,
+    "parent_id": 209,
+    "node_type": "section",
+    "node_number": "421",
+    "title": "Duties of Customs Officer Tasked to Examine the Imported Goods",
+    "depth": 2,
+    "sort_order": 217
+  },
+  {
+    "id": 218,
+    "parent_id": 217,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 218
+  },
+  {
+    "id": 219,
+    "parent_id": 217,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 219
+  },
+  {
+    "id": 220,
+    "parent_id": 217,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 220
+  },
+  {
+    "id": 221,
+    "parent_id": 217,
+    "node_type": "paragraph",
+    "node_number": "(d)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 221
+  },
+  {
+    "id": 222,
+    "parent_id": 209,
+    "node_type": "section",
+    "node_number": "422",
+    "title": "Customs Expenses Constituting Charges on Goods",
+    "depth": 2,
+    "sort_order": 222
+  },
+  {
+    "id": 223,
+    "parent_id": 177,
+    "node_type": "chapter",
+    "node_number": "3",
+    "title": "ASSESSMENT AND RELEASE",
+    "depth": 1,
+    "sort_order": 223
+  },
+  {
+    "id": 224,
+    "parent_id": 223,
+    "node_type": "section",
+    "node_number": "423",
+    "title": "Determination of the De Minimis Value",
+    "depth": 2,
+    "sort_order": 224
+  },
+  {
+    "id": 225,
+    "parent_id": 223,
+    "node_type": "section",
+    "node_number": "424",
+    "title": "Duty of Customs Officer Tasked to Assess Imported Goods",
+    "depth": 2,
+    "sort_order": 225
+  },
+  {
+    "id": 226,
+    "parent_id": 223,
+    "node_type": "section",
+    "node_number": "425",
+    "title": "Tentative Assessment of Goods Subject to Dispute Settlement",
+    "depth": 2,
+    "sort_order": 226
+  },
+  {
+    "id": 227,
+    "parent_id": 223,
+    "node_type": "section",
+    "node_number": "426",
+    "title": "Tentative Assessment of Provisional Goods Declaration",
+    "depth": 2,
+    "sort_order": 227
+  },
+  {
+    "id": 228,
+    "parent_id": 223,
+    "node_type": "section",
+    "node_number": "427",
+    "title": "Readjustment of Appraisal, Classification or Return",
+    "depth": 2,
+    "sort_order": 228
+  },
+  {
+    "id": 229,
+    "parent_id": 228,
+    "node_type": "paragraph",
+    "node_number": "(1)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 229
+  },
+  {
+    "id": 230,
+    "parent_id": 228,
+    "node_type": "paragraph",
+    "node_number": "(2)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 230
+  },
+  {
+    "id": 231,
+    "parent_id": 228,
+    "node_type": "paragraph",
+    "node_number": "(3)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 231
+  },
+  {
+    "id": 232,
+    "parent_id": 228,
+    "node_type": "paragraph",
+    "node_number": "(4)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 232
+  },
+  {
+    "id": 233,
+    "parent_id": 223,
+    "node_type": "section",
+    "node_number": "428",
+    "title": "Assessment of Duty on Less Than Entered Value",
+    "depth": 2,
+    "sort_order": 233
+  },
+  {
+    "id": 234,
+    "parent_id": 223,
+    "node_type": "section",
+    "node_number": "429",
+    "title": "Final Assessment",
+    "depth": 2,
+    "sort_order": 234
+  },
+  {
+    "id": 235,
+    "parent_id": 223,
+    "node_type": "section",
+    "node_number": "430",
+    "title": "Period of Limitation",
+    "depth": 2,
+    "sort_order": 235
+  },
+  {
+    "id": 236,
+    "parent_id": 223,
+    "node_type": "section",
+    "node_number": "431",
+    "title": "Release of Goods after Payment of Duties and Taxes",
+    "depth": 2,
+    "sort_order": 236
+  },
+  {
+    "id": 237,
+    "parent_id": 223,
+    "node_type": "section",
+    "node_number": "432",
+    "title": "Release of Goods to the Holder of Bill of Lading or Airway Bill",
+    "depth": 2,
+    "sort_order": 237
+  },
+  {
+    "id": 238,
+    "parent_id": 223,
+    "node_type": "section",
+    "node_number": "433",
+    "title": "Release of Goods Without Production of Bill of Lading or Airway Bill",
+    "depth": 2,
+    "sort_order": 238
+  },
+  {
+    "id": 239,
+    "parent_id": 223,
+    "node_type": "section",
+    "node_number": "434",
+    "title": "Release of Goods Upon Order of Importer",
+    "depth": 2,
+    "sort_order": 239
+  },
+  {
+    "id": 240,
+    "parent_id": 223,
+    "node_type": "section",
+    "node_number": "435",
+    "title": "Withholding Release Pending Satisfaction of Lien",
+    "depth": 2,
+    "sort_order": 240
+  },
+  {
+    "id": 241,
+    "parent_id": 223,
+    "node_type": "section",
+    "node_number": "436",
+    "title": "Fine or Surcharge on Goods",
+    "depth": 2,
+    "sort_order": 241
+  },
+  {
+    "id": 242,
+    "parent_id": 177,
+    "node_type": "chapter",
+    "node_number": "4",
+    "title": "SPECIAL PROCEDURES",
+    "depth": 1,
+    "sort_order": 242
+  },
+  {
+    "id": 243,
+    "parent_id": 242,
+    "node_type": "section",
+    "node_number": "437",
+    "title": "Traveler and Passenger Baggage",
+    "depth": 2,
+    "sort_order": 243
+  },
+  {
+    "id": 244,
+    "parent_id": 242,
+    "node_type": "section",
+    "node_number": "438",
+    "title": "Postal Item or Mail",
+    "depth": 2,
+    "sort_order": 244
+  },
+  {
+    "id": 245,
+    "parent_id": 244,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 245
+  },
+  {
+    "id": 246,
+    "parent_id": 244,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 246
+  },
+  {
+    "id": 247,
+    "parent_id": 244,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 247
+  },
+  {
+    "id": 248,
+    "parent_id": 244,
+    "node_type": "paragraph",
+    "node_number": "(d)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 248
+  },
+  {
+    "id": 249,
+    "parent_id": 242,
+    "node_type": "section",
+    "node_number": "439",
+    "title": "Express Shipment",
+    "depth": 2,
+    "sort_order": 249
+  },
+  {
+    "id": 250,
+    "parent_id": 242,
+    "node_type": "section",
+    "node_number": "440",
+    "title": "Establishment of Advance Customs Clearance and Control Program",
+    "depth": 2,
+    "sort_order": 250
+  },
+  {
+    "id": 251,
+    "parent_id": null,
+    "node_type": "title",
+    "node_number": "V",
+    "title": "EXPORT CLEARANCE AND FORMALITIES",
+    "depth": 0,
+    "sort_order": 251
+  },
+  {
+    "id": 252,
+    "parent_id": 251,
+    "node_type": "chapter",
+    "node_number": "1",
+    "title": "EXPORT CLEARANCE AND DECLARATION",
+    "depth": 1,
+    "sort_order": 252
+  },
+  {
+    "id": 253,
+    "parent_id": 252,
+    "node_type": "section",
+    "node_number": "500",
+    "title": "Export Declaration",
+    "depth": 2,
+    "sort_order": 253
+  },
+  {
+    "id": 254,
+    "parent_id": 252,
+    "node_type": "section",
+    "node_number": "501",
+    "title": "Export Product to Conform to Standard Grades",
+    "depth": 2,
+    "sort_order": 254
+  },
+  {
+    "id": 255,
+    "parent_id": 252,
+    "node_type": "section",
+    "node_number": "502",
+    "title": "Lodgement and Processing of Export Declaration",
+    "depth": 2,
+    "sort_order": 255
+  },
+  {
+    "id": 256,
+    "parent_id": 252,
+    "node_type": "section",
+    "node_number": "503",
+    "title": "Rules of Origin",
+    "depth": 2,
+    "sort_order": 256
+  },
+  {
+    "id": 257,
+    "parent_id": null,
+    "node_type": "title",
+    "node_number": "VI",
+    "title": "CUSTOMS TRANSIT AND TRANSSHIPMENT",
+    "depth": 0,
+    "sort_order": 257
+  },
+  {
+    "id": 258,
+    "parent_id": 257,
+    "node_type": "chapter",
+    "node_number": "1",
+    "title": "CUSTOMS TRANSIT",
+    "depth": 1,
+    "sort_order": 258
+  },
+  {
+    "id": 259,
+    "parent_id": 258,
+    "node_type": "section",
+    "node_number": "600",
+    "title": "Customs Transit in the Customs Territory",
+    "depth": 2,
+    "sort_order": 259
+  },
+  {
+    "id": 260,
+    "parent_id": 259,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 260
+  },
+  {
+    "id": 261,
+    "parent_id": 259,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 261
+  },
+  {
+    "id": 262,
+    "parent_id": 259,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 262
+  },
+  {
+    "id": 263,
+    "parent_id": 259,
+    "node_type": "paragraph",
+    "node_number": "(d)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 263
+  },
+  {
+    "id": 264,
+    "parent_id": 258,
+    "node_type": "section",
+    "node_number": "601",
+    "title": "Duty and Tax on Goods Intended for Transit",
+    "depth": 2,
+    "sort_order": 264
+  },
+  {
+    "id": 265,
+    "parent_id": 258,
+    "node_type": "section",
+    "node_number": "602",
+    "title": "Carrier's Security",
+    "depth": 2,
+    "sort_order": 265
+  },
+  {
+    "id": 266,
+    "parent_id": 257,
+    "node_type": "chapter",
+    "node_number": "2",
+    "title": "CUSTOMS TRANSSHIPMENT",
+    "depth": 1,
+    "sort_order": 266
+  },
+  {
+    "id": 267,
+    "parent_id": 266,
+    "node_type": "section",
+    "node_number": "603",
+    "title": "Customs Transshipment",
+    "depth": 2,
+    "sort_order": 267
+  },
+  {
+    "id": 268,
+    "parent_id": 266,
+    "node_type": "section",
+    "node_number": "604",
+    "title": "Goods Entered for Immediate Reexportation",
+    "depth": 2,
+    "sort_order": 268
+  },
+  {
+    "id": 269,
+    "parent_id": null,
+    "node_type": "title",
+    "node_number": "VII",
+    "title": "IMPORT DUTY AND TAX",
+    "depth": 0,
+    "sort_order": 269
+  },
+  {
+    "id": 270,
+    "parent_id": 269,
+    "node_type": "chapter",
+    "node_number": "1",
+    "title": "BASIS OF VALUATION",
+    "depth": 1,
+    "sort_order": 270
+  },
+  {
+    "id": 271,
+    "parent_id": 270,
+    "node_type": "section",
+    "node_number": "700",
+    "title": "Sequential Application of Valuation Methods",
+    "depth": 2,
+    "sort_order": 271
+  },
+  {
+    "id": 272,
+    "parent_id": 270,
+    "node_type": "section",
+    "node_number": "701",
+    "title": "Transaction Value System – Method One",
+    "depth": 2,
+    "sort_order": 272
+  },
+  {
+    "id": 273,
+    "parent_id": 272,
+    "node_type": "paragraph",
+    "node_number": "Related Persons Criteria",
+    "title": null,
+    "depth": 3,
+    "sort_order": 273
+  },
+  {
+    "id": 274,
+    "parent_id": 273,
+    "node_type": "subparagraph",
+    "node_number": "(i)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 274
+  },
+  {
+    "id": 275,
+    "parent_id": 273,
+    "node_type": "subparagraph",
+    "node_number": "(ii)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 275
+  },
+  {
+    "id": 276,
+    "parent_id": 273,
+    "node_type": "subparagraph",
+    "node_number": "(iii)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 276
+  },
+  {
+    "id": 277,
+    "parent_id": 273,
+    "node_type": "subparagraph",
+    "node_number": "(iv)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 277
+  },
+  {
+    "id": 278,
+    "parent_id": 273,
+    "node_type": "subparagraph",
+    "node_number": "(v)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 278
+  },
+  {
+    "id": 279,
+    "parent_id": 273,
+    "node_type": "subparagraph",
+    "node_number": "(vi)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 279
+  },
+  {
+    "id": 280,
+    "parent_id": 273,
+    "node_type": "subparagraph",
+    "node_number": "(vii)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 280
+  },
+  {
+    "id": 281,
+    "parent_id": 273,
+    "node_type": "subparagraph",
+    "node_number": "(viii)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 281
+  },
+  {
+    "id": 282,
+    "parent_id": 272,
+    "node_type": "paragraph",
+    "node_number": "Sole Agent/Dealer",
+    "title": null,
+    "depth": 3,
+    "sort_order": 282
+  },
+  {
+    "id": 283,
+    "parent_id": 272,
+    "node_type": "paragraph",
+    "node_number": "Related Party Sale",
+    "title": null,
+    "depth": 3,
+    "sort_order": 283
+  },
+  {
+    "id": 284,
+    "parent_id": 283,
+    "node_type": "subparagraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 284
+  },
+  {
+    "id": 285,
+    "parent_id": 283,
+    "node_type": "subparagraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 285
+  },
+  {
+    "id": 286,
+    "parent_id": 283,
+    "node_type": "subparagraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 286
+  },
+  {
+    "id": 287,
+    "parent_id": 272,
+    "node_type": "paragraph",
+    "node_number": "Additions to Price",
+    "title": null,
+    "depth": 3,
+    "sort_order": 287
+  },
+  {
+    "id": 288,
+    "parent_id": 272,
+    "node_type": "paragraph",
+    "node_number": "Additions List",
+    "title": null,
+    "depth": 3,
+    "sort_order": 288
+  },
+  {
+    "id": 289,
+    "parent_id": 288,
+    "node_type": "subparagraph",
+    "node_number": "(1)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 289
+  },
+  {
+    "id": 290,
+    "parent_id": 289,
+    "node_type": "item",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 5,
+    "sort_order": 290
+  },
+  {
+    "id": 291,
+    "parent_id": 289,
+    "node_type": "item",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 5,
+    "sort_order": 291
+  },
+  {
+    "id": 292,
+    "parent_id": 289,
+    "node_type": "item",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 5,
+    "sort_order": 292
+  },
+  {
+    "id": 293,
+    "parent_id": 289,
+    "node_type": "item",
+    "node_number": "(d)",
+    "title": null,
+    "depth": 5,
+    "sort_order": 293
+  },
+  {
+    "id": 294,
+    "parent_id": 289,
+    "node_type": "item",
+    "node_number": "(e)",
+    "title": null,
+    "depth": 5,
+    "sort_order": 294
+  },
+  {
+    "id": 295,
+    "parent_id": 288,
+    "node_type": "subparagraph",
+    "node_number": "(2)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 295
+  },
+  {
+    "id": 296,
+    "parent_id": 288,
+    "node_type": "subparagraph",
+    "node_number": "(3)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 296
+  },
+  {
+    "id": 297,
+    "parent_id": 288,
+    "node_type": "subparagraph",
+    "node_number": "(4)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 297
+  },
+  {
+    "id": 298,
+    "parent_id": 288,
+    "node_type": "subparagraph",
+    "node_number": "(5)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 298
+  },
+  {
+    "id": 299,
+    "parent_id": 270,
+    "node_type": "section",
+    "node_number": "702",
+    "title": "Transaction Value of Identical Goods – Method Two",
+    "depth": 2,
+    "sort_order": 299
+  },
+  {
+    "id": 300,
+    "parent_id": 270,
+    "node_type": "section",
+    "node_number": "703",
+    "title": "Transaction Value of Similar Goods – Method Three",
+    "depth": 2,
+    "sort_order": 300
+  },
+  {
+    "id": 301,
+    "parent_id": 270,
+    "node_type": "section",
+    "node_number": "704",
+    "title": "Deductive Value – Method Four",
+    "depth": 2,
+    "sort_order": 301
+  },
+  {
+    "id": 302,
+    "parent_id": 301,
+    "node_type": "paragraph",
+    "node_number": "Deductions",
+    "title": null,
+    "depth": 3,
+    "sort_order": 302
+  },
+  {
+    "id": 303,
+    "parent_id": 302,
+    "node_type": "subparagraph",
+    "node_number": "(1)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 303
+  },
+  {
+    "id": 304,
+    "parent_id": 302,
+    "node_type": "subparagraph",
+    "node_number": "(2)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 304
+  },
+  {
+    "id": 305,
+    "parent_id": 302,
+    "node_type": "subparagraph",
+    "node_number": "(3)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 305
+  },
+  {
+    "id": 306,
+    "parent_id": 305,
+    "node_type": "item",
+    "node_number": "(i)",
+    "title": null,
+    "depth": 5,
+    "sort_order": 306
+  },
+  {
+    "id": 307,
+    "parent_id": 305,
+    "node_type": "item",
+    "node_number": "(ii)",
+    "title": null,
+    "depth": 5,
+    "sort_order": 307
+  },
+  {
+    "id": 308,
+    "parent_id": 305,
+    "node_type": "item",
+    "node_number": "(iii)",
+    "title": null,
+    "depth": 5,
+    "sort_order": 308
+  },
+  {
+    "id": 309,
+    "parent_id": 302,
+    "node_type": "subparagraph",
+    "node_number": "(4)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 309
+  },
+  {
+    "id": 310,
+    "parent_id": 270,
+    "node_type": "section",
+    "node_number": "705",
+    "title": "Computed Value – Method Five",
+    "depth": 2,
+    "sort_order": 310
+  },
+  {
+    "id": 311,
+    "parent_id": 310,
+    "node_type": "paragraph",
+    "node_number": "Computed Value Components",
+    "title": null,
+    "depth": 3,
+    "sort_order": 311
+  },
+  {
+    "id": 312,
+    "parent_id": 311,
+    "node_type": "subparagraph",
+    "node_number": "(1)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 312
+  },
+  {
+    "id": 313,
+    "parent_id": 311,
+    "node_type": "subparagraph",
+    "node_number": "(2)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 313
+  },
+  {
+    "id": 314,
+    "parent_id": 311,
+    "node_type": "subparagraph",
+    "node_number": "(3)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 314
+  },
+  {
+    "id": 315,
+    "parent_id": 311,
+    "node_type": "subparagraph",
+    "node_number": "(4)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 315
+  },
+  {
+    "id": 316,
+    "parent_id": 311,
+    "node_type": "subparagraph",
+    "node_number": "(5)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 316
+  },
+  {
+    "id": 317,
+    "parent_id": 270,
+    "node_type": "section",
+    "node_number": "706",
+    "title": "Fallback Value – Method Six",
+    "depth": 2,
+    "sort_order": 317
+  },
+  {
+    "id": 318,
+    "parent_id": 317,
+    "node_type": "paragraph",
+    "node_number": "Prohibited Bases",
+    "title": null,
+    "depth": 3,
+    "sort_order": 318
+  },
+  {
+    "id": 319,
+    "parent_id": 318,
+    "node_type": "subparagraph",
+    "node_number": "(1)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 319
+  },
+  {
+    "id": 320,
+    "parent_id": 318,
+    "node_type": "subparagraph",
+    "node_number": "(2)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 320
+  },
+  {
+    "id": 321,
+    "parent_id": 318,
+    "node_type": "subparagraph",
+    "node_number": "(3)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 321
+  },
+  {
+    "id": 322,
+    "parent_id": 318,
+    "node_type": "subparagraph",
+    "node_number": "(4)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 322
+  },
+  {
+    "id": 323,
+    "parent_id": 318,
+    "node_type": "subparagraph",
+    "node_number": "(5)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 323
+  },
+  {
+    "id": 324,
+    "parent_id": 318,
+    "node_type": "subparagraph",
+    "node_number": "(6)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 324
+  },
+  {
+    "id": 325,
+    "parent_id": 318,
+    "node_type": "subparagraph",
+    "node_number": "(7)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 325
+  },
+  {
+    "id": 326,
+    "parent_id": 270,
+    "node_type": "section",
+    "node_number": "707",
+    "title": "Ascertainment of the Accuracy of the Declared Value",
+    "depth": 2,
+    "sort_order": 326
+  },
+  {
+    "id": 327,
+    "parent_id": 270,
+    "node_type": "section",
+    "node_number": "708",
+    "title": "Exchange Rate",
+    "depth": 2,
+    "sort_order": 327
+  },
+  {
+    "id": 328,
+    "parent_id": 269,
+    "node_type": "chapter",
+    "node_number": "2",
+    "title": "SPECIAL DUTIES AND TRADE REMEDY MEASURES",
+    "depth": 1,
+    "sort_order": 328
+  },
+  {
+    "id": 329,
+    "parent_id": 328,
+    "node_type": "section",
+    "node_number": "709",
+    "title": "Government's Right of Compulsory Acquisition",
+    "depth": 2,
+    "sort_order": 329
+  },
+  {
+    "id": 330,
+    "parent_id": 328,
+    "node_type": "section",
+    "node_number": "710",
+    "title": "Marking of Imported Goods and Containers",
+    "depth": 2,
+    "sort_order": 330
+  },
+  {
+    "id": 331,
+    "parent_id": 330,
+    "node_type": "paragraph",
+    "node_number": "(1)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 331
+  },
+  {
+    "id": 332,
+    "parent_id": 330,
+    "node_type": "paragraph",
+    "node_number": "(2)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 332
+  },
+  {
+    "id": 333,
+    "parent_id": 330,
+    "node_type": "paragraph",
+    "node_number": "(3)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 333
+  },
+  {
+    "id": 334,
+    "parent_id": 333,
+    "node_type": "subparagraph",
+    "node_number": "(i)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 334
+  },
+  {
+    "id": 335,
+    "parent_id": 333,
+    "node_type": "subparagraph",
+    "node_number": "(ii)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 335
+  },
+  {
+    "id": 336,
+    "parent_id": 333,
+    "node_type": "subparagraph",
+    "node_number": "(iii)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 336
+  },
+  {
+    "id": 337,
+    "parent_id": 333,
+    "node_type": "subparagraph",
+    "node_number": "(iv)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 337
+  },
+  {
+    "id": 338,
+    "parent_id": 333,
+    "node_type": "subparagraph",
+    "node_number": "(v)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 338
+  },
+  {
+    "id": 339,
+    "parent_id": 333,
+    "node_type": "subparagraph",
+    "node_number": "(vi)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 339
+  },
+  {
+    "id": 340,
+    "parent_id": 333,
+    "node_type": "subparagraph",
+    "node_number": "(vii)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 340
+  },
+  {
+    "id": 341,
+    "parent_id": 333,
+    "node_type": "subparagraph",
+    "node_number": "(viii)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 341
+  },
+  {
+    "id": 342,
+    "parent_id": 333,
+    "node_type": "subparagraph",
+    "node_number": "(ix)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 342
+  },
+  {
+    "id": 343,
+    "parent_id": 333,
+    "node_type": "subparagraph",
+    "node_number": "(x)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 343
+  },
+  {
+    "id": 344,
+    "parent_id": 330,
+    "node_type": "paragraph",
+    "node_number": "(B)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 344
+  },
+  {
+    "id": 345,
+    "parent_id": 330,
+    "node_type": "paragraph",
+    "node_number": "(C)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 345
+  },
+  {
+    "id": 346,
+    "parent_id": 330,
+    "node_type": "paragraph",
+    "node_number": "(D)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 346
+  },
+  {
+    "id": 347,
+    "parent_id": 330,
+    "node_type": "paragraph",
+    "node_number": "(E)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 347
+  },
+  {
+    "id": 348,
+    "parent_id": 328,
+    "node_type": "section",
+    "node_number": "711",
+    "title": "Dumping Duty",
+    "depth": 2,
+    "sort_order": 348
+  },
+  {
+    "id": 349,
+    "parent_id": 328,
+    "node_type": "section",
+    "node_number": "712",
+    "title": "Safeguard Duty",
+    "depth": 2,
+    "sort_order": 349
+  },
+  {
+    "id": 350,
+    "parent_id": 328,
+    "node_type": "section",
+    "node_number": "713",
+    "title": "Countervailing Duty",
+    "depth": 2,
+    "sort_order": 350
+  },
+  {
+    "id": 351,
+    "parent_id": 328,
+    "node_type": "section",
+    "node_number": "714",
+    "title": "Discrimination by Foreign Countries",
+    "depth": 2,
+    "sort_order": 351
+  },
+  {
+    "id": 352,
+    "parent_id": 351,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 352
+  },
+  {
+    "id": 353,
+    "parent_id": 352,
+    "node_type": "subparagraph",
+    "node_number": "(1)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 353
+  },
+  {
+    "id": 354,
+    "parent_id": 352,
+    "node_type": "subparagraph",
+    "node_number": "(2)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 354
+  },
+  {
+    "id": 355,
+    "parent_id": 351,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 355
+  },
+  {
+    "id": 356,
+    "parent_id": 351,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 356
+  },
+  {
+    "id": 357,
+    "parent_id": 351,
+    "node_type": "paragraph",
+    "node_number": "(d)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 357
+  },
+  {
+    "id": 358,
+    "parent_id": 351,
+    "node_type": "paragraph",
+    "node_number": "(e)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 358
+  },
+  {
+    "id": 359,
+    "parent_id": 351,
+    "node_type": "paragraph",
+    "node_number": "(f)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 359
+  },
+  {
+    "id": 360,
+    "parent_id": null,
+    "node_type": "title",
+    "node_number": "VIII",
+    "title": "TAX AND DUTY DEFERMENT, PREFERENCE AND EXEMPTION",
+    "depth": 0,
+    "sort_order": 360
+  },
+  {
+    "id": 361,
+    "parent_id": 360,
+    "node_type": "chapter",
+    "node_number": "1",
+    "title": "CONDITIONALLY TAX AND/OR DUTY-EXEMPT IMPORTATION",
+    "depth": 1,
+    "sort_order": 361
+  },
+  {
+    "id": 362,
+    "parent_id": 361,
+    "node_type": "section",
+    "node_number": "800",
+    "title": "Conditionally Tax and/or Duty-Exempt Importation",
+    "depth": 2,
+    "sort_order": 362
+  },
+  {
+    "id": 363,
+    "parent_id": 362,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 363
+  },
+  {
+    "id": 364,
+    "parent_id": 362,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 364
+  },
+  {
+    "id": 365,
+    "parent_id": 362,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 365
+  },
+  {
+    "id": 366,
+    "parent_id": 362,
+    "node_type": "paragraph",
+    "node_number": "(d)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 366
+  },
+  {
+    "id": 367,
+    "parent_id": 362,
+    "node_type": "paragraph",
+    "node_number": "(e)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 367
+  },
+  {
+    "id": 368,
+    "parent_id": 362,
+    "node_type": "paragraph",
+    "node_number": "(f)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 368
+  },
+  {
+    "id": 369,
+    "parent_id": 368,
+    "node_type": "subparagraph",
+    "node_number": "(1)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 369
+  },
+  {
+    "id": 370,
+    "parent_id": 368,
+    "node_type": "subparagraph",
+    "node_number": "(2)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 370
+  },
+  {
+    "id": 371,
+    "parent_id": 368,
+    "node_type": "subparagraph",
+    "node_number": "(3)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 371
+  },
+  {
+    "id": 372,
+    "parent_id": 371,
+    "node_type": "item",
+    "node_number": "(i)",
+    "title": null,
+    "depth": 5,
+    "sort_order": 372
+  },
+  {
+    "id": 373,
+    "parent_id": 371,
+    "node_type": "item",
+    "node_number": "(ii)",
+    "title": null,
+    "depth": 5,
+    "sort_order": 373
+  },
+  {
+    "id": 374,
+    "parent_id": 371,
+    "node_type": "item",
+    "node_number": "(iii)",
+    "title": null,
+    "depth": 5,
+    "sort_order": 374
+  },
+  {
+    "id": 375,
+    "parent_id": 362,
+    "node_type": "paragraph",
+    "node_number": "(g)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 375
+  },
+  {
+    "id": 376,
+    "parent_id": 375,
+    "node_type": "subparagraph",
+    "node_number": "(1)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 376
+  },
+  {
+    "id": 377,
+    "parent_id": 375,
+    "node_type": "subparagraph",
+    "node_number": "(2)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 377
+  },
+  {
+    "id": 378,
+    "parent_id": 362,
+    "node_type": "paragraph",
+    "node_number": "(h)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 378
+  },
+  {
+    "id": 379,
+    "parent_id": 362,
+    "node_type": "paragraph",
+    "node_number": "(i)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 379
+  },
+  {
+    "id": 380,
+    "parent_id": 362,
+    "node_type": "paragraph",
+    "node_number": "(j)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 380
+  },
+  {
+    "id": 381,
+    "parent_id": 362,
+    "node_type": "paragraph",
+    "node_number": "(k)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 381
+  },
+  {
+    "id": 382,
+    "parent_id": 362,
+    "node_type": "paragraph",
+    "node_number": "(l)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 382
+  },
+  {
+    "id": 383,
+    "parent_id": 362,
+    "node_type": "paragraph",
+    "node_number": "(m)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 383
+  },
+  {
+    "id": 384,
+    "parent_id": 362,
+    "node_type": "paragraph",
+    "node_number": "(n)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 384
+  },
+  {
+    "id": 385,
+    "parent_id": 362,
+    "node_type": "paragraph",
+    "node_number": "(o)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 385
+  },
+  {
+    "id": 386,
+    "parent_id": 362,
+    "node_type": "paragraph",
+    "node_number": "(p)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 386
+  },
+  {
+    "id": 387,
+    "parent_id": 362,
+    "node_type": "paragraph",
+    "node_number": "(q)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 387
+  },
+  {
+    "id": 388,
+    "parent_id": 362,
+    "node_type": "paragraph",
+    "node_number": "(r)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 388
+  },
+  {
+    "id": 389,
+    "parent_id": 362,
+    "node_type": "paragraph",
+    "node_number": "(s)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 389
+  },
+  {
+    "id": 390,
+    "parent_id": 362,
+    "node_type": "paragraph",
+    "node_number": "(t)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 390
+  },
+  {
+    "id": 391,
+    "parent_id": 362,
+    "node_type": "paragraph",
+    "node_number": "(u)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 391
+  },
+  {
+    "id": 392,
+    "parent_id": 362,
+    "node_type": "paragraph",
+    "node_number": "(v)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 392
+  },
+  {
+    "id": 393,
+    "parent_id": 362,
+    "node_type": "paragraph",
+    "node_number": "(w)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 393
+  },
+  {
+    "id": 394,
+    "parent_id": 362,
+    "node_type": "paragraph",
+    "node_number": "(x)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 394
+  },
+  {
+    "id": 395,
+    "parent_id": 362,
+    "node_type": "paragraph",
+    "node_number": "(y)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 395
+  },
+  {
+    "id": 396,
+    "parent_id": 362,
+    "node_type": "paragraph",
+    "node_number": "(z)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 396
+  },
+  {
+    "id": 397,
+    "parent_id": 396,
+    "node_type": "subparagraph",
+    "node_number": "(1)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 397
+  },
+  {
+    "id": 398,
+    "parent_id": 396,
+    "node_type": "subparagraph",
+    "node_number": "(2)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 398
+  },
+  {
+    "id": 399,
+    "parent_id": 396,
+    "node_type": "subparagraph",
+    "node_number": "(3)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 399
+  },
+  {
+    "id": 400,
+    "parent_id": 396,
+    "node_type": "subparagraph",
+    "node_number": "(4)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 400
+  },
+  {
+    "id": 401,
+    "parent_id": 362,
+    "node_type": "paragraph",
+    "node_number": "(aa)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 401
+  },
+  {
+    "id": 402,
+    "parent_id": 362,
+    "node_type": "paragraph",
+    "node_number": "Concluding Provision",
+    "title": null,
+    "depth": 3,
+    "sort_order": 402
+  },
+  {
+    "id": 403,
+    "parent_id": 360,
+    "node_type": "chapter",
+    "node_number": "2",
+    "title": "CUSTOMS WAREHOUSES",
+    "depth": 1,
+    "sort_order": 403
+  },
+  {
+    "id": 404,
+    "parent_id": 403,
+    "node_type": "section",
+    "node_number": "801",
+    "title": "Establishment and Supervision of Customs Bonded Warehouses",
+    "depth": 2,
+    "sort_order": 404
+  },
+  {
+    "id": 405,
+    "parent_id": 404,
+    "node_type": "paragraph",
+    "node_number": "(1)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 405
+  },
+  {
+    "id": 406,
+    "parent_id": 404,
+    "node_type": "paragraph",
+    "node_number": "(2)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 406
+  },
+  {
+    "id": 407,
+    "parent_id": 404,
+    "node_type": "paragraph",
+    "node_number": "(3)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 407
+  },
+  {
+    "id": 408,
+    "parent_id": 404,
+    "node_type": "paragraph",
+    "node_number": "(4)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 408
+  },
+  {
+    "id": 409,
+    "parent_id": 404,
+    "node_type": "paragraph",
+    "node_number": "(5)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 409
+  },
+  {
+    "id": 410,
+    "parent_id": 403,
+    "node_type": "section",
+    "node_number": "802",
+    "title": "Types of Customs Bonded Warehouses (CBWs)",
+    "depth": 2,
+    "sort_order": 410
+  },
+  {
+    "id": 411,
+    "parent_id": 403,
+    "node_type": "section",
+    "node_number": "803",
+    "title": "Types of Customs Facilities and Warehouses (CFWs)",
+    "depth": 2,
+    "sort_order": 411
+  },
+  {
+    "id": 412,
+    "parent_id": 411,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 412
+  },
+  {
+    "id": 413,
+    "parent_id": 411,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 413
+  },
+  {
+    "id": 414,
+    "parent_id": 411,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 414
+  },
+  {
+    "id": 415,
+    "parent_id": 411,
+    "node_type": "paragraph",
+    "node_number": "(d)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 415
+  },
+  {
+    "id": 416,
+    "parent_id": 403,
+    "node_type": "section",
+    "node_number": "804",
+    "title": "Application for Operation of a Customs Warehouse",
+    "depth": 2,
+    "sort_order": 416
+  },
+  {
+    "id": 417,
+    "parent_id": 403,
+    "node_type": "section",
+    "node_number": "805",
+    "title": "Responsibility of Operators",
+    "depth": 2,
+    "sort_order": 417
+  },
+  {
+    "id": 418,
+    "parent_id": 403,
+    "node_type": "section",
+    "node_number": "806",
+    "title": "Customs Control Over CBWs and CFWs",
+    "depth": 2,
+    "sort_order": 418
+  },
+  {
+    "id": 419,
+    "parent_id": 403,
+    "node_type": "section",
+    "node_number": "807",
+    "title": "Discontinuance of CBW and CFW",
+    "depth": 2,
+    "sort_order": 419
+  },
+  {
+    "id": 420,
+    "parent_id": 403,
+    "node_type": "section",
+    "node_number": "808",
+    "title": "Warehousing Security on Goods Stored in CBWs",
+    "depth": 2,
+    "sort_order": 420
+  },
+  {
+    "id": 421,
+    "parent_id": 403,
+    "node_type": "section",
+    "node_number": "809",
+    "title": "Withdrawal of Goods from CBWs",
+    "depth": 2,
+    "sort_order": 421
+  },
+  {
+    "id": 422,
+    "parent_id": 403,
+    "node_type": "section",
+    "node_number": "810",
+    "title": "Release of Goods from CFWs",
+    "depth": 2,
+    "sort_order": 422
+  },
+  {
+    "id": 423,
+    "parent_id": 403,
+    "node_type": "section",
+    "node_number": "811",
+    "title": "Period of Storage in CBWs",
+    "depth": 2,
+    "sort_order": 423
+  },
+  {
+    "id": 424,
+    "parent_id": 403,
+    "node_type": "section",
+    "node_number": "812",
+    "title": "Exemption from Duty of Goods in CBWs",
+    "depth": 2,
+    "sort_order": 424
+  },
+  {
+    "id": 425,
+    "parent_id": 403,
+    "node_type": "section",
+    "node_number": "813",
+    "title": "Records to be Kept by CBW Operators",
+    "depth": 2,
+    "sort_order": 425
+  },
+  {
+    "id": 426,
+    "parent_id": 360,
+    "node_type": "chapter",
+    "node_number": "3",
+    "title": "FREE ZONES",
+    "depth": 1,
+    "sort_order": 426
+  },
+  {
+    "id": 427,
+    "parent_id": 426,
+    "node_type": "section",
+    "node_number": "814",
+    "title": "When Goods are Admitted and Withdrawn",
+    "depth": 2,
+    "sort_order": 427
+  },
+  {
+    "id": 428,
+    "parent_id": 426,
+    "node_type": "section",
+    "node_number": "815",
+    "title": "Exemption from Duty and Tax of Goods in Free Zones",
+    "depth": 2,
+    "sort_order": 428
+  },
+  {
+    "id": 429,
+    "parent_id": 426,
+    "node_type": "section",
+    "node_number": "816",
+    "title": "Movement of Goods into and from Free Zones",
+    "depth": 2,
+    "sort_order": 429
+  },
+  {
+    "id": 430,
+    "parent_id": 426,
+    "node_type": "section",
+    "node_number": "817",
+    "title": "Coordination With Free Zone Authority",
+    "depth": 2,
+    "sort_order": 430
+  },
+  {
+    "id": 431,
+    "parent_id": 360,
+    "node_type": "chapter",
+    "node_number": "4",
+    "title": "STORES",
+    "depth": 1,
+    "sort_order": 431
+  },
+  {
+    "id": 432,
+    "parent_id": 431,
+    "node_type": "section",
+    "node_number": "818",
+    "title": "Stores for Consumption",
+    "depth": 2,
+    "sort_order": 432
+  },
+  {
+    "id": 433,
+    "parent_id": 432,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 433
+  },
+  {
+    "id": 434,
+    "parent_id": 432,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 434
+  },
+  {
+    "id": 435,
+    "parent_id": 431,
+    "node_type": "section",
+    "node_number": "819",
+    "title": "Stores to be Taken Away",
+    "depth": 2,
+    "sort_order": 435
+  },
+  {
+    "id": 436,
+    "parent_id": 431,
+    "node_type": "section",
+    "node_number": "820",
+    "title": "Exemption from Duties and Taxes of Stores",
+    "depth": 2,
+    "sort_order": 436
+  },
+  {
+    "id": 437,
+    "parent_id": 436,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 437
+  },
+  {
+    "id": 438,
+    "parent_id": 436,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 438
+  },
+  {
+    "id": 439,
+    "parent_id": 436,
+    "node_type": "paragraph",
+    "node_number": "(1)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 439
+  },
+  {
+    "id": 440,
+    "parent_id": 436,
+    "node_type": "paragraph",
+    "node_number": "(2)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 440
+  },
+  {
+    "id": 441,
+    "parent_id": 431,
+    "node_type": "section",
+    "node_number": "821",
+    "title": "Goods Declaration for Stores",
+    "depth": 2,
+    "sort_order": 441
+  },
+  {
+    "id": 442,
+    "parent_id": 441,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 442
+  },
+  {
+    "id": 443,
+    "parent_id": 441,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 443
+  },
+  {
+    "id": 444,
+    "parent_id": null,
+    "node_type": "title",
+    "node_number": "IX",
+    "title": "DUTY DRAWBACK AND REFUND",
+    "depth": 0,
+    "sort_order": 444
+  },
+  {
+    "id": 445,
+    "parent_id": 444,
+    "node_type": "chapter",
+    "node_number": "1",
+    "title": "DUTY DRAWBACK",
+    "depth": 1,
+    "sort_order": 445
+  },
+  {
+    "id": 446,
+    "parent_id": 445,
+    "node_type": "section",
+    "node_number": "900",
+    "title": "Basis of Duty Drawback",
+    "depth": 2,
+    "sort_order": 446
+  },
+  {
+    "id": 447,
+    "parent_id": 446,
+    "node_type": "paragraph",
+    "node_number": "(A)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 447
+  },
+  {
+    "id": 448,
+    "parent_id": 446,
+    "node_type": "paragraph",
+    "node_number": "(B)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 448
+  },
+  {
+    "id": 449,
+    "parent_id": 446,
+    "node_type": "paragraph",
+    "node_number": "(C)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 449
+  },
+  {
+    "id": 450,
+    "parent_id": 449,
+    "node_type": "subparagraph",
+    "node_number": "(1)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 450
+  },
+  {
+    "id": 451,
+    "parent_id": 449,
+    "node_type": "subparagraph",
+    "node_number": "(2)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 451
+  },
+  {
+    "id": 452,
+    "parent_id": 449,
+    "node_type": "subparagraph",
+    "node_number": "(3)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 452
+  },
+  {
+    "id": 453,
+    "parent_id": 449,
+    "node_type": "subparagraph",
+    "node_number": "(4)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 453
+  },
+  {
+    "id": 454,
+    "parent_id": 449,
+    "node_type": "subparagraph",
+    "node_number": "(5)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 454
+  },
+  {
+    "id": 455,
+    "parent_id": 445,
+    "node_type": "section",
+    "node_number": "901",
+    "title": "Payment of Drawbacks",
+    "depth": 2,
+    "sort_order": 455
+  },
+  {
+    "id": 456,
+    "parent_id": 445,
+    "node_type": "section",
+    "node_number": "902",
+    "title": "Prescription of Drawback Claim",
+    "depth": 2,
+    "sort_order": 456
+  },
+  {
+    "id": 457,
+    "parent_id": 444,
+    "node_type": "chapter",
+    "node_number": "2",
+    "title": "REFUND AND ABATEMENT",
+    "depth": 1,
+    "sort_order": 457
+  },
+  {
+    "id": 458,
+    "parent_id": 457,
+    "node_type": "section",
+    "node_number": "903",
+    "title": "Refund of Duties and Taxes",
+    "depth": 2,
+    "sort_order": 458
+  },
+  {
+    "id": 459,
+    "parent_id": 457,
+    "node_type": "section",
+    "node_number": "904",
+    "title": "Abatement of Duties and Taxes",
+    "depth": 2,
+    "sort_order": 459
+  },
+  {
+    "id": 460,
+    "parent_id": 459,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 460
+  },
+  {
+    "id": 461,
+    "parent_id": 459,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 461
+  },
+  {
+    "id": 462,
+    "parent_id": 459,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 462
+  },
+  {
+    "id": 463,
+    "parent_id": 457,
+    "node_type": "section",
+    "node_number": "905",
+    "title": "Abatement for Damage Incurred During Voyage",
+    "depth": 2,
+    "sort_order": 463
+  },
+  {
+    "id": 464,
+    "parent_id": 457,
+    "node_type": "section",
+    "node_number": "906",
+    "title": "Abatement or Refund of Duty on Missing Package",
+    "depth": 2,
+    "sort_order": 464
+  },
+  {
+    "id": 465,
+    "parent_id": 457,
+    "node_type": "section",
+    "node_number": "907",
+    "title": "Abatement or Refund for Deficiency in Contents of Packages",
+    "depth": 2,
+    "sort_order": 465
+  },
+  {
+    "id": 466,
+    "parent_id": 457,
+    "node_type": "section",
+    "node_number": "908",
+    "title": "Abatement or Refund of Duties on Goods Lost or Destroyed After Arrival",
+    "depth": 2,
+    "sort_order": 466
+  },
+  {
+    "id": 467,
+    "parent_id": 466,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 467
+  },
+  {
+    "id": 468,
+    "parent_id": 466,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 468
+  },
+  {
+    "id": 469,
+    "parent_id": 466,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 469
+  },
+  {
+    "id": 470,
+    "parent_id": 466,
+    "node_type": "paragraph",
+    "node_number": "(d)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 470
+  },
+  {
+    "id": 471,
+    "parent_id": 457,
+    "node_type": "section",
+    "node_number": "909",
+    "title": "Abatement and Refund of Defective Goods",
+    "depth": 2,
+    "sort_order": 471
+  },
+  {
+    "id": 472,
+    "parent_id": 471,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 472
+  },
+  {
+    "id": 473,
+    "parent_id": 471,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 473
+  },
+  {
+    "id": 474,
+    "parent_id": 457,
+    "node_type": "section",
+    "node_number": "910",
+    "title": "Abatement of Duty on Dead or Injured Animals",
+    "depth": 2,
+    "sort_order": 474
+  },
+  {
+    "id": 475,
+    "parent_id": 457,
+    "node_type": "section",
+    "node_number": "911",
+    "title": "Investigation Required in Case of Abatements and Refunds",
+    "depth": 2,
+    "sort_order": 475
+  },
+  {
+    "id": 476,
+    "parent_id": 457,
+    "node_type": "section",
+    "node_number": "912",
+    "title": "Refund Arising from Correction of Errors",
+    "depth": 2,
+    "sort_order": 476
+  },
+  {
+    "id": 477,
+    "parent_id": 457,
+    "node_type": "section",
+    "node_number": "913",
+    "title": "Claims for Refund",
+    "depth": 2,
+    "sort_order": 477
+  },
+  {
+    "id": 478,
+    "parent_id": null,
+    "node_type": "title",
+    "node_number": "X",
+    "title": "POST CLEARANCE AUDIT",
+    "depth": 0,
+    "sort_order": 478
+  },
+  {
+    "id": 479,
+    "parent_id": 478,
+    "node_type": "chapter",
+    "node_number": "1",
+    "title": "POST CLEARANCE AUDIT",
+    "depth": 1,
+    "sort_order": 479
+  },
+  {
+    "id": 480,
+    "parent_id": 479,
+    "node_type": "section",
+    "node_number": "1000",
+    "title": "Audit and Examination of Records",
+    "depth": 2,
+    "sort_order": 480
+  },
+  {
+    "id": 481,
+    "parent_id": 479,
+    "node_type": "section",
+    "node_number": "1001",
+    "title": "Scope of the Audit",
+    "depth": 2,
+    "sort_order": 481
+  },
+  {
+    "id": 482,
+    "parent_id": 481,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 482
+  },
+  {
+    "id": 483,
+    "parent_id": 481,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 483
+  },
+  {
+    "id": 484,
+    "parent_id": 481,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 484
+  },
+  {
+    "id": 485,
+    "parent_id": 481,
+    "node_type": "paragraph",
+    "node_number": "(d)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 485
+  },
+  {
+    "id": 486,
+    "parent_id": 479,
+    "node_type": "section",
+    "node_number": "1002",
+    "title": "Access to Records",
+    "depth": 2,
+    "sort_order": 486
+  },
+  {
+    "id": 487,
+    "parent_id": 479,
+    "node_type": "section",
+    "node_number": "1003",
+    "title": "Requirement to Keep Records",
+    "depth": 2,
+    "sort_order": 487
+  },
+  {
+    "id": 488,
+    "parent_id": 487,
+    "node_type": "paragraph",
+    "node_number": "Importer Definition",
+    "title": null,
+    "depth": 3,
+    "sort_order": 488
+  },
+  {
+    "id": 489,
+    "parent_id": 488,
+    "node_type": "subparagraph",
+    "node_number": "(1)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 489
+  },
+  {
+    "id": 490,
+    "parent_id": 489,
+    "node_type": "item",
+    "node_number": "(i)",
+    "title": null,
+    "depth": 5,
+    "sort_order": 490
+  },
+  {
+    "id": 491,
+    "parent_id": 489,
+    "node_type": "item",
+    "node_number": "(ii)",
+    "title": null,
+    "depth": 5,
+    "sort_order": 491
+  },
+  {
+    "id": 492,
+    "parent_id": 488,
+    "node_type": "subparagraph",
+    "node_number": "(2)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 492
+  },
+  {
+    "id": 493,
+    "parent_id": 488,
+    "node_type": "subparagraph",
+    "node_number": "(3)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 493
+  },
+  {
+    "id": 494,
+    "parent_id": 487,
+    "node_type": "paragraph",
+    "node_number": "Exemption",
+    "title": null,
+    "depth": 3,
+    "sort_order": 494
+  },
+  {
+    "id": 495,
+    "parent_id": 494,
+    "node_type": "subparagraph",
+    "node_number": "(1)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 495
+  },
+  {
+    "id": 496,
+    "parent_id": 494,
+    "node_type": "subparagraph",
+    "node_number": "(2)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 496
+  },
+  {
+    "id": 497,
+    "parent_id": 494,
+    "node_type": "subparagraph",
+    "node_number": "(3)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 497
+  },
+  {
+    "id": 498,
+    "parent_id": 479,
+    "node_type": "section",
+    "node_number": "1004",
+    "title": "Power of the Commissioner to Obtain Information and Issue Summons",
+    "depth": 2,
+    "sort_order": 498
+  },
+  {
+    "id": 499,
+    "parent_id": 498,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 499
+  },
+  {
+    "id": 500,
+    "parent_id": 498,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 500
+  },
+  {
+    "id": 501,
+    "parent_id": 498,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 501
+  },
+  {
+    "id": 502,
+    "parent_id": 498,
+    "node_type": "paragraph",
+    "node_number": "(d)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 502
+  },
+  {
+    "id": 503,
+    "parent_id": 479,
+    "node_type": "section",
+    "node_number": "1005",
+    "title": "Failure to Pay Correct Duties and Taxes on Imported Goods",
+    "depth": 2,
+    "sort_order": 503
+  },
+  {
+    "id": 504,
+    "parent_id": 503,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 504
+  },
+  {
+    "id": 505,
+    "parent_id": 503,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 505
+  },
+  {
+    "id": 506,
+    "parent_id": 479,
+    "node_type": "section",
+    "node_number": "1006",
+    "title": "Records to be Kept by the Bureau",
+    "depth": 2,
+    "sort_order": 506
+  },
+  {
+    "id": 507,
+    "parent_id": 506,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 507
+  },
+  {
+    "id": 508,
+    "parent_id": 506,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 508
+  },
+  {
+    "id": 509,
+    "parent_id": 506,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 509
+  },
+  {
+    "id": 510,
+    "parent_id": 506,
+    "node_type": "paragraph",
+    "node_number": "(d)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 510
+  },
+  {
+    "id": 511,
+    "parent_id": 506,
+    "node_type": "paragraph",
+    "node_number": "(e)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 511
+  },
+  {
+    "id": 512,
+    "parent_id": 506,
+    "node_type": "paragraph",
+    "node_number": "(f)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 512
+  },
+  {
+    "id": 513,
+    "parent_id": null,
+    "node_type": "title",
+    "node_number": "XI",
+    "title": "ADMINISTRATIVE AND JUDICIAL PROCEDURES",
+    "depth": 0,
+    "sort_order": 513
+  },
+  {
+    "id": 514,
+    "parent_id": 513,
+    "node_type": "chapter",
+    "node_number": "1",
+    "title": "ADVANCE RULING AND DISPUTE SETTLEMENT",
+    "depth": 1,
+    "sort_order": 514
+  },
+  {
+    "id": 515,
+    "parent_id": 514,
+    "node_type": "section",
+    "node_number": "1100",
+    "title": "Classification Ruling",
+    "depth": 2,
+    "sort_order": 515
+  },
+  {
+    "id": 516,
+    "parent_id": 514,
+    "node_type": "section",
+    "node_number": "1101",
+    "title": "Valuation Ruling",
+    "depth": 2,
+    "sort_order": 516
+  },
+  {
+    "id": 517,
+    "parent_id": 514,
+    "node_type": "section",
+    "node_number": "1102",
+    "title": "Ruling on the Rules of Origin",
+    "depth": 2,
+    "sort_order": 517
+  },
+  {
+    "id": 518,
+    "parent_id": 514,
+    "node_type": "section",
+    "node_number": "1103",
+    "title": "Conditions for Application and Effect of Advance Ruling",
+    "depth": 2,
+    "sort_order": 518
+  },
+  {
+    "id": 519,
+    "parent_id": 514,
+    "node_type": "section",
+    "node_number": "1104",
+    "title": "Administrative and Judicial Appeals",
+    "depth": 2,
+    "sort_order": 519
+  },
+  {
+    "id": 520,
+    "parent_id": 514,
+    "node_type": "section",
+    "node_number": "1105",
+    "title": "Implementing Rules and Regulations",
+    "depth": 2,
+    "sort_order": 520
+  },
+  {
+    "id": 521,
+    "parent_id": 513,
+    "node_type": "chapter",
+    "node_number": "2",
+    "title": "PROTEST",
+    "depth": 1,
+    "sort_order": 521
+  },
+  {
+    "id": 522,
+    "parent_id": 521,
+    "node_type": "section",
+    "node_number": "1106",
+    "title": "Protest",
+    "depth": 2,
+    "sort_order": 522
+  },
+  {
+    "id": 523,
+    "parent_id": 521,
+    "node_type": "section",
+    "node_number": "1107",
+    "title": "Protest Exclusive Remedy in Protestable Case",
+    "depth": 2,
+    "sort_order": 523
+  },
+  {
+    "id": 524,
+    "parent_id": 521,
+    "node_type": "section",
+    "node_number": "1108",
+    "title": "Form and Scope of Protest",
+    "depth": 2,
+    "sort_order": 524
+  },
+  {
+    "id": 525,
+    "parent_id": 521,
+    "node_type": "section",
+    "node_number": "1109",
+    "title": "Samples to be Furnished by Protesting Parties",
+    "depth": 2,
+    "sort_order": 525
+  },
+  {
+    "id": 526,
+    "parent_id": 521,
+    "node_type": "section",
+    "node_number": "1110",
+    "title": "Decision in Protest",
+    "depth": 2,
+    "sort_order": 526
+  },
+  {
+    "id": 527,
+    "parent_id": 513,
+    "node_type": "chapter",
+    "node_number": "3",
+    "title": "ALERT ORDERS",
+    "depth": 1,
+    "sort_order": 527
+  },
+  {
+    "id": 528,
+    "parent_id": 527,
+    "node_type": "section",
+    "node_number": "1111",
+    "title": "Alert Orders",
+    "depth": 2,
+    "sort_order": 528
+  },
+  {
+    "id": 529,
+    "parent_id": 528,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 529
+  },
+  {
+    "id": 530,
+    "parent_id": 528,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 530
+  },
+  {
+    "id": 531,
+    "parent_id": 528,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 531
+  },
+  {
+    "id": 532,
+    "parent_id": 528,
+    "node_type": "paragraph",
+    "node_number": "(d)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 532
+  },
+  {
+    "id": 533,
+    "parent_id": 528,
+    "node_type": "paragraph",
+    "node_number": "(e)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 533
+  },
+  {
+    "id": 534,
+    "parent_id": 527,
+    "node_type": "section",
+    "node_number": "1112",
+    "title": "Alert Orders on Perishable Goods",
+    "depth": 2,
+    "sort_order": 534
+  },
+  {
+    "id": 535,
+    "parent_id": 513,
+    "node_type": "chapter",
+    "node_number": "4",
+    "title": "SEIZURE AND FORFEITURE",
+    "depth": 1,
+    "sort_order": 535
+  },
+  {
+    "id": 536,
+    "parent_id": 535,
+    "node_type": "section",
+    "node_number": "1113",
+    "title": "Property Subject to Seizure and Forfeiture",
+    "depth": 2,
+    "sort_order": 536
+  },
+  {
+    "id": 537,
+    "parent_id": 536,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 537
+  },
+  {
+    "id": 538,
+    "parent_id": 536,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 538
+  },
+  {
+    "id": 539,
+    "parent_id": 536,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 539
+  },
+  {
+    "id": 540,
+    "parent_id": 536,
+    "node_type": "paragraph",
+    "node_number": "(d)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 540
+  },
+  {
+    "id": 541,
+    "parent_id": 536,
+    "node_type": "paragraph",
+    "node_number": "(e)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 541
+  },
+  {
+    "id": 542,
+    "parent_id": 536,
+    "node_type": "paragraph",
+    "node_number": "(f)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 542
+  },
+  {
+    "id": 543,
+    "parent_id": 536,
+    "node_type": "paragraph",
+    "node_number": "(g)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 543
+  },
+  {
+    "id": 544,
+    "parent_id": 536,
+    "node_type": "paragraph",
+    "node_number": "(h)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 544
+  },
+  {
+    "id": 545,
+    "parent_id": 536,
+    "node_type": "paragraph",
+    "node_number": "(i)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 545
+  },
+  {
+    "id": 546,
+    "parent_id": 536,
+    "node_type": "paragraph",
+    "node_number": "(j)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 546
+  },
+  {
+    "id": 547,
+    "parent_id": 536,
+    "node_type": "paragraph",
+    "node_number": "(k)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 547
+  },
+  {
+    "id": 548,
+    "parent_id": 536,
+    "node_type": "paragraph",
+    "node_number": "(l)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 548
+  },
+  {
+    "id": 549,
+    "parent_id": 548,
+    "node_type": "subparagraph",
+    "node_number": "(1)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 549
+  },
+  {
+    "id": 550,
+    "parent_id": 548,
+    "node_type": "subparagraph",
+    "node_number": "(2)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 550
+  },
+  {
+    "id": 551,
+    "parent_id": 548,
+    "node_type": "subparagraph",
+    "node_number": "(3)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 551
+  },
+  {
+    "id": 552,
+    "parent_id": 548,
+    "node_type": "subparagraph",
+    "node_number": "(4)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 552
+  },
+  {
+    "id": 553,
+    "parent_id": 548,
+    "node_type": "subparagraph",
+    "node_number": "(5)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 553
+  },
+  {
+    "id": 554,
+    "parent_id": 535,
+    "node_type": "section",
+    "node_number": "1114",
+    "title": "Properties not Subject to Forfeiture in the Absence of Prima Facie Evidence",
+    "depth": 2,
+    "sort_order": 554
+  },
+  {
+    "id": 555,
+    "parent_id": 554,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 555
+  },
+  {
+    "id": 556,
+    "parent_id": 554,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 556
+  },
+  {
+    "id": 557,
+    "parent_id": 554,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 557
+  },
+  {
+    "id": 558,
+    "parent_id": 535,
+    "node_type": "section",
+    "node_number": "1115",
+    "title": "Conditions Affecting Forfeiture of Goods",
+    "depth": 2,
+    "sort_order": 558
+  },
+  {
+    "id": 559,
+    "parent_id": 535,
+    "node_type": "section",
+    "node_number": "1116",
+    "title": "Seizure or Release of Goods",
+    "depth": 2,
+    "sort_order": 559
+  },
+  {
+    "id": 560,
+    "parent_id": 535,
+    "node_type": "section",
+    "node_number": "1117",
+    "title": "Warrant of Seizure or Order of Release",
+    "depth": 2,
+    "sort_order": 560
+  },
+  {
+    "id": 561,
+    "parent_id": 535,
+    "node_type": "section",
+    "node_number": "1118",
+    "title": "Sale of Perishable Goods During Forfeiture Proceedings",
+    "depth": 2,
+    "sort_order": 561
+  },
+  {
+    "id": 562,
+    "parent_id": 535,
+    "node_type": "section",
+    "node_number": "1119",
+    "title": "Service of Warrant of Seizure",
+    "depth": 2,
+    "sort_order": 562
+  },
+  {
+    "id": 563,
+    "parent_id": 535,
+    "node_type": "section",
+    "node_number": "1120",
+    "title": "Description, Classification and Valuation of Seized Goods",
+    "depth": 2,
+    "sort_order": 563
+  },
+  {
+    "id": 564,
+    "parent_id": 535,
+    "node_type": "section",
+    "node_number": "1121",
+    "title": "Proceedings in Case of Property Belonging to Unknown Parties",
+    "depth": 2,
+    "sort_order": 564
+  },
+  {
+    "id": 565,
+    "parent_id": 535,
+    "node_type": "section",
+    "node_number": "1122",
+    "title": "Seizure of Vessel or Aircraft for Delinquency of Owner or Officer",
+    "depth": 2,
+    "sort_order": 565
+  },
+  {
+    "id": 566,
+    "parent_id": 535,
+    "node_type": "section",
+    "node_number": "1123",
+    "title": "Burden of Proof in Forfeiture Proceedings",
+    "depth": 2,
+    "sort_order": 566
+  },
+  {
+    "id": 567,
+    "parent_id": 535,
+    "node_type": "section",
+    "node_number": "1124",
+    "title": "Settlement of Pending Seizure Case by Payment of Fine or Redemption of Forfeited Goods",
+    "depth": 2,
+    "sort_order": 567
+  },
+  {
+    "id": 568,
+    "parent_id": 535,
+    "node_type": "section",
+    "node_number": "1125",
+    "title": "Decision in Forfeiture Cases",
+    "depth": 2,
+    "sort_order": 568
+  },
+  {
+    "id": 569,
+    "parent_id": 513,
+    "node_type": "chapter",
+    "node_number": "5",
+    "title": "APPEAL IN PROTEST AND FORFEITURE CASES",
+    "depth": 1,
+    "sort_order": 569
+  },
+  {
+    "id": 570,
+    "parent_id": 569,
+    "node_type": "section",
+    "node_number": "1126",
+    "title": "Appeal to the Commissioner",
+    "depth": 2,
+    "sort_order": 570
+  },
+  {
+    "id": 571,
+    "parent_id": 569,
+    "node_type": "section",
+    "node_number": "1127",
+    "title": "Automatic Review in Forfeiture Cases",
+    "depth": 2,
+    "sort_order": 571
+  },
+  {
+    "id": 572,
+    "parent_id": 569,
+    "node_type": "section",
+    "node_number": "1128",
+    "title": "Automatic Review by the Secretary of Finance in Other Cases",
+    "depth": 2,
+    "sort_order": 572
+  },
+  {
+    "id": 573,
+    "parent_id": 513,
+    "node_type": "chapter",
+    "node_number": "6",
+    "title": "ABANDONMENT",
+    "depth": 1,
+    "sort_order": 573
+  },
+  {
+    "id": 574,
+    "parent_id": 573,
+    "node_type": "section",
+    "node_number": "1129",
+    "title": "Abandonment, Kinds and Effects of",
+    "depth": 2,
+    "sort_order": 574
+  },
+  {
+    "id": 575,
+    "parent_id": 574,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 575
+  },
+  {
+    "id": 576,
+    "parent_id": 574,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 576
+  },
+  {
+    "id": 577,
+    "parent_id": 574,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 577
+  },
+  {
+    "id": 578,
+    "parent_id": 574,
+    "node_type": "paragraph",
+    "node_number": "(d)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 578
+  },
+  {
+    "id": 579,
+    "parent_id": 574,
+    "node_type": "paragraph",
+    "node_number": "(e)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 579
+  },
+  {
+    "id": 580,
+    "parent_id": 573,
+    "node_type": "section",
+    "node_number": "1130",
+    "title": "Treatment and Disposition of Abandoned Goods",
+    "depth": 2,
+    "sort_order": 580
+  },
+  {
+    "id": 581,
+    "parent_id": 513,
+    "node_type": "chapter",
+    "node_number": "7",
+    "title": "OTHER ADMINISTRATIVE PROCEEDINGS",
+    "depth": 1,
+    "sort_order": 581
+  },
+  {
+    "id": 582,
+    "parent_id": 581,
+    "node_type": "section",
+    "node_number": "1131",
+    "title": "Authority of the Commissioner to Make Compromise",
+    "depth": 2,
+    "sort_order": 582
+  },
+  {
+    "id": 583,
+    "parent_id": 513,
+    "node_type": "chapter",
+    "node_number": "8",
+    "title": "CIVIL REMEDIES FOR THE COLLECTION OF DUTIES AND TAXES",
+    "depth": 1,
+    "sort_order": 583
+  },
+  {
+    "id": 584,
+    "parent_id": 583,
+    "node_type": "section",
+    "node_number": "1132",
+    "title": "Remedies for the Collection of Duties, Taxes, Fines, Surcharges, Interests, and Other Charges",
+    "depth": 2,
+    "sort_order": 584
+  },
+  {
+    "id": 585,
+    "parent_id": 584,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 585
+  },
+  {
+    "id": 586,
+    "parent_id": 584,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 586
+  },
+  {
+    "id": 587,
+    "parent_id": 583,
+    "node_type": "section",
+    "node_number": "1133",
+    "title": "Constructive Distraint of the Property",
+    "depth": 2,
+    "sort_order": 587
+  },
+  {
+    "id": 588,
+    "parent_id": 583,
+    "node_type": "section",
+    "node_number": "1134",
+    "title": "Summary Remedies",
+    "depth": 2,
+    "sort_order": 588
+  },
+  {
+    "id": 589,
+    "parent_id": 513,
+    "node_type": "chapter",
+    "node_number": "9",
+    "title": "JUDICIAL PROCEEDINGS",
+    "depth": 1,
+    "sort_order": 589
+  },
+  {
+    "id": 590,
+    "parent_id": 589,
+    "node_type": "section",
+    "node_number": "1135",
+    "title": "Supervision and Control over Criminal and Civil Proceedings",
+    "depth": 2,
+    "sort_order": 590
+  },
+  {
+    "id": 591,
+    "parent_id": 589,
+    "node_type": "section",
+    "node_number": "1136",
+    "title": "Review by the CTA",
+    "depth": 2,
+    "sort_order": 591
+  },
+  {
+    "id": 592,
+    "parent_id": 589,
+    "node_type": "section",
+    "node_number": "1137",
+    "title": "Exclusive Jurisdiction of the Bureau",
+    "depth": 2,
+    "sort_order": 592
+  },
+  {
+    "id": 593,
+    "parent_id": 589,
+    "node_type": "section",
+    "node_number": "1138",
+    "title": "Fraud Investigation and Prosecution",
+    "depth": 2,
+    "sort_order": 593
+  },
+  {
+    "id": 594,
+    "parent_id": 513,
+    "node_type": "chapter",
+    "node_number": "10",
+    "title": "DISPOSITION OF PROPERTY IN CUSTOMS CUSTODY",
+    "depth": 1,
+    "sort_order": 594
+  },
+  {
+    "id": 595,
+    "parent_id": 594,
+    "node_type": "section",
+    "node_number": "1139",
+    "title": "Goods Subject to Disposition",
+    "depth": 2,
+    "sort_order": 595
+  },
+  {
+    "id": 596,
+    "parent_id": 595,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 596
+  },
+  {
+    "id": 597,
+    "parent_id": 595,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 597
+  },
+  {
+    "id": 598,
+    "parent_id": 595,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 598
+  },
+  {
+    "id": 599,
+    "parent_id": 595,
+    "node_type": "paragraph",
+    "node_number": "(d)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 599
+  },
+  {
+    "id": 600,
+    "parent_id": 594,
+    "node_type": "section",
+    "node_number": "1140",
+    "title": "Place of Disposition of Goods",
+    "depth": 2,
+    "sort_order": 600
+  },
+  {
+    "id": 601,
+    "parent_id": 594,
+    "node_type": "section",
+    "node_number": "1141",
+    "title": "Mode of Disposition",
+    "depth": 2,
+    "sort_order": 601
+  },
+  {
+    "id": 602,
+    "parent_id": 594,
+    "node_type": "section",
+    "node_number": "1142",
+    "title": "Disqualification to Participate in Auction Sale",
+    "depth": 2,
+    "sort_order": 602
+  },
+  {
+    "id": 603,
+    "parent_id": 594,
+    "node_type": "section",
+    "node_number": "1143",
+    "title": "Disposition of Proceeds",
+    "depth": 2,
+    "sort_order": 603
+  },
+  {
+    "id": 604,
+    "parent_id": 603,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 604
+  },
+  {
+    "id": 605,
+    "parent_id": 603,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 605
+  },
+  {
+    "id": 606,
+    "parent_id": 603,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 606
+  },
+  {
+    "id": 607,
+    "parent_id": 603,
+    "node_type": "paragraph",
+    "node_number": "(d)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 607
+  },
+  {
+    "id": 608,
+    "parent_id": 603,
+    "node_type": "paragraph",
+    "node_number": "(e)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 608
+  },
+  {
+    "id": 609,
+    "parent_id": 603,
+    "node_type": "paragraph",
+    "node_number": "(f)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 609
+  },
+  {
+    "id": 610,
+    "parent_id": 594,
+    "node_type": "section",
+    "node_number": "1144",
+    "title": "Disposition of Perishable Goods",
+    "depth": 2,
+    "sort_order": 610
+  },
+  {
+    "id": 611,
+    "parent_id": 594,
+    "node_type": "section",
+    "node_number": "1145",
+    "title": "Disposition of Goods Injurious to Public Health",
+    "depth": 2,
+    "sort_order": 611
+  },
+  {
+    "id": 612,
+    "parent_id": 594,
+    "node_type": "section",
+    "node_number": "1146",
+    "title": "Disposition of Prohibited Goods",
+    "depth": 2,
+    "sort_order": 612
+  },
+  {
+    "id": 613,
+    "parent_id": 594,
+    "node_type": "section",
+    "node_number": "1147",
+    "title": "Disposition of Restricted Goods",
+    "depth": 2,
+    "sort_order": 613
+  },
+  {
+    "id": 614,
+    "parent_id": 613,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 614
+  },
+  {
+    "id": 615,
+    "parent_id": 613,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 615
+  },
+  {
+    "id": 616,
+    "parent_id": 613,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 616
+  },
+  {
+    "id": 617,
+    "parent_id": 613,
+    "node_type": "paragraph",
+    "node_number": "(d)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 617
+  },
+  {
+    "id": 618,
+    "parent_id": 613,
+    "node_type": "paragraph",
+    "node_number": "(e)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 618
+  },
+  {
+    "id": 619,
+    "parent_id": 613,
+    "node_type": "paragraph",
+    "node_number": "(f)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 619
+  },
+  {
+    "id": 620,
+    "parent_id": 594,
+    "node_type": "section",
+    "node_number": "1148",
+    "title": "Disposition of Regulated Goods",
+    "depth": 2,
+    "sort_order": 620
+  },
+  {
+    "id": 621,
+    "parent_id": 594,
+    "node_type": "section",
+    "node_number": "1149",
+    "title": "Disposition of Unsold Goods for Want of Bidders",
+    "depth": 2,
+    "sort_order": 621
+  },
+  {
+    "id": 622,
+    "parent_id": 594,
+    "node_type": "section",
+    "node_number": "1150",
+    "title": "Disposition of Smuggled Goods",
+    "depth": 2,
+    "sort_order": 622
+  },
+  {
+    "id": 623,
+    "parent_id": 594,
+    "node_type": "section",
+    "node_number": "1151",
+    "title": "Forfeiture Fund",
+    "depth": 2,
+    "sort_order": 623
+  },
+  {
+    "id": 624,
+    "parent_id": 623,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 624
+  },
+  {
+    "id": 625,
+    "parent_id": 623,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 625
+  },
+  {
+    "id": 626,
+    "parent_id": 623,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 626
+  },
+  {
+    "id": 627,
+    "parent_id": 623,
+    "node_type": "paragraph",
+    "node_number": "(d)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 627
+  },
+  {
+    "id": 628,
+    "parent_id": null,
+    "node_type": "title",
+    "node_number": "XII",
+    "title": "THIRD PARTIES",
+    "depth": 0,
+    "sort_order": 628
+  },
+  {
+    "id": 629,
+    "parent_id": 628,
+    "node_type": "chapter",
+    "node_number": "1",
+    "title": "CUSTOMS SERVICE PROVIDERS",
+    "depth": 1,
+    "sort_order": 629
+  },
+  {
+    "id": 630,
+    "parent_id": 629,
+    "node_type": "section",
+    "node_number": "1200",
+    "title": "Customs Brokers and Other Service Providers",
+    "depth": 2,
+    "sort_order": 630
+  },
+  {
+    "id": 631,
+    "parent_id": 628,
+    "node_type": "chapter",
+    "node_number": "2",
+    "title": "CARRIERS, VESSELS, AND AIRCRAFTS",
+    "depth": 1,
+    "sort_order": 631
+  },
+  {
+    "id": 632,
+    "parent_id": 631,
+    "node_type": "section",
+    "node_number": "1201",
+    "title": "Ports Open to Vessels and Aircrafts Engaged in Foreign Trade",
+    "depth": 2,
+    "sort_order": 632
+  },
+  {
+    "id": 633,
+    "parent_id": 631,
+    "node_type": "section",
+    "node_number": "1202",
+    "title": "Control of Customs Officer Over Boarding or Leaving of Incoming Vessel and Over Other Vessel Approaching the Former",
+    "depth": 2,
+    "sort_order": 633
+  },
+  {
+    "id": 634,
+    "parent_id": 631,
+    "node_type": "section",
+    "node_number": "1203",
+    "title": "Documents to be Produced by the Master Upon Entry of Vessel",
+    "depth": 2,
+    "sort_order": 634
+  },
+  {
+    "id": 635,
+    "parent_id": 634,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 635
+  },
+  {
+    "id": 636,
+    "parent_id": 634,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 636
+  },
+  {
+    "id": 637,
+    "parent_id": 634,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 637
+  },
+  {
+    "id": 638,
+    "parent_id": 634,
+    "node_type": "paragraph",
+    "node_number": "(d)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 638
+  },
+  {
+    "id": 639,
+    "parent_id": 634,
+    "node_type": "paragraph",
+    "node_number": "(e)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 639
+  },
+  {
+    "id": 640,
+    "parent_id": 634,
+    "node_type": "paragraph",
+    "node_number": "(f)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 640
+  },
+  {
+    "id": 641,
+    "parent_id": 634,
+    "node_type": "paragraph",
+    "node_number": "(g)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 641
+  },
+  {
+    "id": 642,
+    "parent_id": 634,
+    "node_type": "paragraph",
+    "node_number": "(h)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 642
+  },
+  {
+    "id": 643,
+    "parent_id": 634,
+    "node_type": "paragraph",
+    "node_number": "(i)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 643
+  },
+  {
+    "id": 644,
+    "parent_id": 634,
+    "node_type": "paragraph",
+    "node_number": "(j)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 644
+  },
+  {
+    "id": 645,
+    "parent_id": 634,
+    "node_type": "paragraph",
+    "node_number": "(k)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 645
+  },
+  {
+    "id": 646,
+    "parent_id": 634,
+    "node_type": "paragraph",
+    "node_number": "(l)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 646
+  },
+  {
+    "id": 647,
+    "parent_id": 631,
+    "node_type": "section",
+    "node_number": "1204",
+    "title": "Manifest Required of Vessel from Foreign Port",
+    "depth": 2,
+    "sort_order": 647
+  },
+  {
+    "id": 648,
+    "parent_id": 631,
+    "node_type": "section",
+    "node_number": "1205",
+    "title": "Translation of Manifest",
+    "depth": 2,
+    "sort_order": 648
+  },
+  {
+    "id": 649,
+    "parent_id": 631,
+    "node_type": "section",
+    "node_number": "1206",
+    "title": "Manifests for the Commission on Audit and District Collector",
+    "depth": 2,
+    "sort_order": 649
+  },
+  {
+    "id": 650,
+    "parent_id": 631,
+    "node_type": "section",
+    "node_number": "1207",
+    "title": "Production of Philippine Crew",
+    "depth": 2,
+    "sort_order": 650
+  },
+  {
+    "id": 651,
+    "parent_id": 631,
+    "node_type": "section",
+    "node_number": "1208",
+    "title": "Record of Arrival and Entry of Vessels and Aircraft",
+    "depth": 2,
+    "sort_order": 651
+  },
+  {
+    "id": 652,
+    "parent_id": 631,
+    "node_type": "section",
+    "node_number": "1209",
+    "title": "Arrest of Vessel or Aircraft Departing Before Entry Made",
+    "depth": 2,
+    "sort_order": 652
+  },
+  {
+    "id": 653,
+    "parent_id": 631,
+    "node_type": "section",
+    "node_number": "1210",
+    "title": "Discharge of Ballast",
+    "depth": 2,
+    "sort_order": 653
+  },
+  {
+    "id": 654,
+    "parent_id": 631,
+    "node_type": "section",
+    "node_number": "1211",
+    "title": "Time of Unloading Cargo",
+    "depth": 2,
+    "sort_order": 654
+  },
+  {
+    "id": 655,
+    "parent_id": 631,
+    "node_type": "section",
+    "node_number": "1212",
+    "title": "Entrance of Vessel through Necessity",
+    "depth": 2,
+    "sort_order": 655
+  },
+  {
+    "id": 656,
+    "parent_id": 631,
+    "node_type": "section",
+    "node_number": "1213",
+    "title": "Unloading of Vessel in Port from Necessity",
+    "depth": 2,
+    "sort_order": 656
+  },
+  {
+    "id": 657,
+    "parent_id": 631,
+    "node_type": "section",
+    "node_number": "1214",
+    "title": "Entry and Clearance of Vessels of a Foreign Government",
+    "depth": 2,
+    "sort_order": 657
+  },
+  {
+    "id": 658,
+    "parent_id": 631,
+    "node_type": "section",
+    "node_number": "1215",
+    "title": "Clearance of Vessel for Foreign Port",
+    "depth": 2,
+    "sort_order": 658
+  },
+  {
+    "id": 659,
+    "parent_id": 658,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 659
+  },
+  {
+    "id": 660,
+    "parent_id": 658,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 660
+  },
+  {
+    "id": 661,
+    "parent_id": 658,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 661
+  },
+  {
+    "id": 662,
+    "parent_id": 658,
+    "node_type": "paragraph",
+    "node_number": "(d)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 662
+  },
+  {
+    "id": 663,
+    "parent_id": 658,
+    "node_type": "paragraph",
+    "node_number": "(e)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 663
+  },
+  {
+    "id": 664,
+    "parent_id": 658,
+    "node_type": "paragraph",
+    "node_number": "(f)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 664
+  },
+  {
+    "id": 665,
+    "parent_id": 631,
+    "node_type": "section",
+    "node_number": "1216",
+    "title": "Detention of Warlike Vessel Containing Arms and Munitions",
+    "depth": 2,
+    "sort_order": 665
+  },
+  {
+    "id": 666,
+    "parent_id": 631,
+    "node_type": "section",
+    "node_number": "1217",
+    "title": "Oath of Master of Departing Vessel",
+    "depth": 2,
+    "sort_order": 666
+  },
+  {
+    "id": 667,
+    "parent_id": 666,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 667
+  },
+  {
+    "id": 668,
+    "parent_id": 666,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 668
+  },
+  {
+    "id": 669,
+    "parent_id": 666,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 669
+  },
+  {
+    "id": 670,
+    "parent_id": 666,
+    "node_type": "paragraph",
+    "node_number": "(d)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 670
+  },
+  {
+    "id": 671,
+    "parent_id": 631,
+    "node_type": "section",
+    "node_number": "1218",
+    "title": "Extension of Time for Clearance",
+    "depth": 2,
+    "sort_order": 671
+  },
+  {
+    "id": 672,
+    "parent_id": 631,
+    "node_type": "section",
+    "node_number": "1219",
+    "title": "Advance Notice of Aircraft Arrival",
+    "depth": 2,
+    "sort_order": 672
+  },
+  {
+    "id": 673,
+    "parent_id": 631,
+    "node_type": "section",
+    "node_number": "1220",
+    "title": "Landing at International Airport of Entry",
+    "depth": 2,
+    "sort_order": 673
+  },
+  {
+    "id": 674,
+    "parent_id": 631,
+    "node_type": "section",
+    "node_number": "1221",
+    "title": "Report of Arrival and Entry of Aircraft",
+    "depth": 2,
+    "sort_order": 674
+  },
+  {
+    "id": 675,
+    "parent_id": 631,
+    "node_type": "section",
+    "node_number": "1222",
+    "title": "Documents Required in Making Entry for Aircraft",
+    "depth": 2,
+    "sort_order": 675
+  },
+  {
+    "id": 676,
+    "parent_id": 675,
+    "node_type": "paragraph",
+    "node_number": "(1)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 676
+  },
+  {
+    "id": 677,
+    "parent_id": 675,
+    "node_type": "paragraph",
+    "node_number": "(2)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 677
+  },
+  {
+    "id": 678,
+    "parent_id": 675,
+    "node_type": "paragraph",
+    "node_number": "(3)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 678
+  },
+  {
+    "id": 679,
+    "parent_id": 675,
+    "node_type": "paragraph",
+    "node_number": "(4)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 679
+  },
+  {
+    "id": 680,
+    "parent_id": 675,
+    "node_type": "paragraph",
+    "node_number": "(5)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 680
+  },
+  {
+    "id": 681,
+    "parent_id": 675,
+    "node_type": "paragraph",
+    "node_number": "(6)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 681
+  },
+  {
+    "id": 682,
+    "parent_id": 675,
+    "node_type": "paragraph",
+    "node_number": "(7)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 682
+  },
+  {
+    "id": 683,
+    "parent_id": 675,
+    "node_type": "paragraph",
+    "node_number": "(8)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 683
+  },
+  {
+    "id": 684,
+    "parent_id": 675,
+    "node_type": "paragraph",
+    "node_number": "(9)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 684
+  },
+  {
+    "id": 685,
+    "parent_id": 631,
+    "node_type": "section",
+    "node_number": "1223",
+    "title": "Manifests for the Commission on Audit (COA) and District Collector",
+    "depth": 2,
+    "sort_order": 685
+  },
+  {
+    "id": 686,
+    "parent_id": 631,
+    "node_type": "section",
+    "node_number": "1224",
+    "title": "Clearance of Aircraft for Foreign Port",
+    "depth": 2,
+    "sort_order": 686
+  },
+  {
+    "id": 687,
+    "parent_id": 686,
+    "node_type": "paragraph",
+    "node_number": "(1)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 687
+  },
+  {
+    "id": 688,
+    "parent_id": 686,
+    "node_type": "paragraph",
+    "node_number": "(2)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 688
+  },
+  {
+    "id": 689,
+    "parent_id": 686,
+    "node_type": "paragraph",
+    "node_number": "(3)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 689
+  },
+  {
+    "id": 690,
+    "parent_id": 686,
+    "node_type": "paragraph",
+    "node_number": "(4)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 690
+  },
+  {
+    "id": 691,
+    "parent_id": 686,
+    "node_type": "paragraph",
+    "node_number": "(5)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 691
+  },
+  {
+    "id": 692,
+    "parent_id": 686,
+    "node_type": "paragraph",
+    "node_number": "(6)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 692
+  },
+  {
+    "id": 693,
+    "parent_id": 686,
+    "node_type": "paragraph",
+    "node_number": "(7)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 693
+  },
+  {
+    "id": 694,
+    "parent_id": 686,
+    "node_type": "paragraph",
+    "node_number": "(8)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 694
+  },
+  {
+    "id": 695,
+    "parent_id": 631,
+    "node_type": "section",
+    "node_number": "1225",
+    "title": "Oath of Person-in-Charge of Departing Aircraft",
+    "depth": 2,
+    "sort_order": 695
+  },
+  {
+    "id": 696,
+    "parent_id": 695,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 696
+  },
+  {
+    "id": 697,
+    "parent_id": 695,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 697
+  },
+  {
+    "id": 698,
+    "parent_id": 628,
+    "node_type": "chapter",
+    "node_number": "3",
+    "title": "OTHER THIRD PARTIES",
+    "depth": 1,
+    "sort_order": 698
+  },
+  {
+    "id": 699,
+    "parent_id": 698,
+    "node_type": "section",
+    "node_number": "1226",
+    "title": "Supervision and Regulation of Third Parties",
+    "depth": 2,
+    "sort_order": 699
+  },
+  {
+    "id": 700,
+    "parent_id": 628,
+    "node_type": "chapter",
+    "node_number": "4",
+    "title": "AUTHORIZED ECONOMIC OPERATORS (AEOs)",
+    "depth": 1,
+    "sort_order": 700
+  },
+  {
+    "id": 701,
+    "parent_id": 700,
+    "node_type": "section",
+    "node_number": "1227",
+    "title": "Treatment of Authorized Economic Operators (AEOs)",
+    "depth": 2,
+    "sort_order": 701
+  },
+  {
+    "id": 702,
+    "parent_id": 701,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 702
+  },
+  {
+    "id": 703,
+    "parent_id": 701,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 703
+  },
+  {
+    "id": 704,
+    "parent_id": 701,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 704
+  },
+  {
+    "id": 705,
+    "parent_id": 704,
+    "node_type": "subparagraph",
+    "node_number": "(i)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 705
+  },
+  {
+    "id": 706,
+    "parent_id": 704,
+    "node_type": "subparagraph",
+    "node_number": "(ii)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 706
+  },
+  {
+    "id": 707,
+    "parent_id": 704,
+    "node_type": "subparagraph",
+    "node_number": "(iii)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 707
+  },
+  {
+    "id": 708,
+    "parent_id": 700,
+    "node_type": "section",
+    "node_number": "1228",
+    "title": "Trade Facility for AEO",
+    "depth": 2,
+    "sort_order": 708
+  },
+  {
+    "id": 709,
+    "parent_id": 708,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 709
+  },
+  {
+    "id": 710,
+    "parent_id": 708,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 710
+  },
+  {
+    "id": 711,
+    "parent_id": 708,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 711
+  },
+  {
+    "id": 712,
+    "parent_id": 711,
+    "node_type": "subparagraph",
+    "node_number": "(i)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 712
+  },
+  {
+    "id": 713,
+    "parent_id": 711,
+    "node_type": "subparagraph",
+    "node_number": "(ii)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 713
+  },
+  {
+    "id": 714,
+    "parent_id": 711,
+    "node_type": "subparagraph",
+    "node_number": "(iii)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 714
+  },
+  {
+    "id": 715,
+    "parent_id": 708,
+    "node_type": "paragraph",
+    "node_number": "Concluding Provision",
+    "title": null,
+    "depth": 3,
+    "sort_order": 715
+  },
+  {
+    "id": 716,
+    "parent_id": null,
+    "node_type": "title",
+    "node_number": "XIII",
+    "title": "CUSTOMS FEES AND CHARGES",
+    "depth": 0,
+    "sort_order": 716
+  },
+  {
+    "id": 717,
+    "parent_id": 716,
+    "node_type": "chapter",
+    "node_number": "1",
+    "title": "CUSTOMS FEES AND CHARGES",
+    "depth": 1,
+    "sort_order": 717
+  },
+  {
+    "id": 718,
+    "parent_id": 717,
+    "node_type": "section",
+    "node_number": "1300",
+    "title": "Customs Dues, Fees and Charges",
+    "depth": 2,
+    "sort_order": 718
+  },
+  {
+    "id": 719,
+    "parent_id": 717,
+    "node_type": "section",
+    "node_number": "1301",
+    "title": "General Provision on the Authority to Increase or Decrease Dues, Fees and Charges",
+    "depth": 2,
+    "sort_order": 719
+  },
+  {
+    "id": 720,
+    "parent_id": null,
+    "node_type": "title",
+    "node_number": "XIV",
+    "title": "OFFENSES AND PENALTIES",
+    "depth": 0,
+    "sort_order": 720
+  },
+  {
+    "id": 721,
+    "parent_id": 720,
+    "node_type": "chapter",
+    "node_number": "1",
+    "title": "CRIMES AND OTHER OFFENSES",
+    "depth": 1,
+    "sort_order": 721
+  },
+  {
+    "id": 722,
+    "parent_id": 721,
+    "node_type": "section",
+    "node_number": "1400",
+    "title": "Misdeclaration, Misclassification, Undervaluation in Goods Declaration",
+    "depth": 2,
+    "sort_order": 722
+  },
+  {
+    "id": 723,
+    "parent_id": 721,
+    "node_type": "section",
+    "node_number": "1401",
+    "title": "Unlawful Importation or Exportation",
+    "depth": 2,
+    "sort_order": 723
+  },
+  {
+    "id": 724,
+    "parent_id": 723,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 724
+  },
+  {
+    "id": 725,
+    "parent_id": 723,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 725
+  },
+  {
+    "id": 726,
+    "parent_id": 723,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 726
+  },
+  {
+    "id": 727,
+    "parent_id": 723,
+    "node_type": "paragraph",
+    "node_number": "(d)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 727
+  },
+  {
+    "id": 728,
+    "parent_id": 723,
+    "node_type": "paragraph",
+    "node_number": "(e)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 728
+  },
+  {
+    "id": 729,
+    "parent_id": 723,
+    "node_type": "paragraph",
+    "node_number": "(f)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 729
+  },
+  {
+    "id": 730,
+    "parent_id": 723,
+    "node_type": "paragraph",
+    "node_number": "(g)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 730
+  },
+  {
+    "id": 731,
+    "parent_id": 723,
+    "node_type": "paragraph",
+    "node_number": "(h)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 731
+  },
+  {
+    "id": 732,
+    "parent_id": 723,
+    "node_type": "paragraph",
+    "node_number": "Concluding Provisions",
+    "title": null,
+    "depth": 3,
+    "sort_order": 732
+  },
+  {
+    "id": 733,
+    "parent_id": 721,
+    "node_type": "section",
+    "node_number": "1402",
+    "title": "Failure or Refusal of Party to Give Evidence or Submit Documents for Assessment",
+    "depth": 2,
+    "sort_order": 733
+  },
+  {
+    "id": 734,
+    "parent_id": 721,
+    "node_type": "section",
+    "node_number": "1403",
+    "title": "Other Fraudulent Practices Against Customs Revenue",
+    "depth": 2,
+    "sort_order": 734
+  },
+  {
+    "id": 735,
+    "parent_id": 721,
+    "node_type": "section",
+    "node_number": "1404",
+    "title": "Failure to Declare Baggage",
+    "depth": 2,
+    "sort_order": 735
+  },
+  {
+    "id": 736,
+    "parent_id": 721,
+    "node_type": "section",
+    "node_number": "1405",
+    "title": "Vessel, Seacraft, or Aircraft Departing Before Undergoing Customs Formalities",
+    "depth": 2,
+    "sort_order": 736
+  },
+  {
+    "id": 737,
+    "parent_id": 721,
+    "node_type": "section",
+    "node_number": "1406",
+    "title": "Obstruction to Boarding Officer",
+    "depth": 2,
+    "sort_order": 737
+  },
+  {
+    "id": 738,
+    "parent_id": 721,
+    "node_type": "section",
+    "node_number": "1407",
+    "title": "Unlawful Boarding or Leaving of Vessel or Aircraft",
+    "depth": 2,
+    "sort_order": 738
+  },
+  {
+    "id": 739,
+    "parent_id": 721,
+    "node_type": "section",
+    "node_number": "1408",
+    "title": "Unloading of Cargo Before Arrival at Port of Entry",
+    "depth": 2,
+    "sort_order": 739
+  },
+  {
+    "id": 740,
+    "parent_id": 721,
+    "node_type": "section",
+    "node_number": "1409",
+    "title": "Unloading of Cargo at Improper Time or Place After Arrival",
+    "depth": 2,
+    "sort_order": 740
+  },
+  {
+    "id": 741,
+    "parent_id": 721,
+    "node_type": "section",
+    "node_number": "1410",
+    "title": "Failure to Exhibit or Deposit Documents",
+    "depth": 2,
+    "sort_order": 741
+  },
+  {
+    "id": 742,
+    "parent_id": 721,
+    "node_type": "section",
+    "node_number": "1411",
+    "title": "Bringing of Unmanifested Arms, Explosives or War Equipment",
+    "depth": 2,
+    "sort_order": 742
+  },
+  {
+    "id": 743,
+    "parent_id": 721,
+    "node_type": "section",
+    "node_number": "1412",
+    "title": "Failure to Supply Advance and Requisite Manifests",
+    "depth": 2,
+    "sort_order": 743
+  },
+  {
+    "id": 744,
+    "parent_id": 721,
+    "node_type": "section",
+    "node_number": "1413",
+    "title": "Disappearance of Manifested Goods",
+    "depth": 2,
+    "sort_order": 744
+  },
+  {
+    "id": 745,
+    "parent_id": 721,
+    "node_type": "section",
+    "node_number": "1414",
+    "title": "Discrepancy Between Actual and Declared Weight of Manifested Goods",
+    "depth": 2,
+    "sort_order": 745
+  },
+  {
+    "id": 746,
+    "parent_id": 721,
+    "node_type": "section",
+    "node_number": "1415",
+    "title": "Discrepancy With the Master's or Pilot's-in-Command Report",
+    "depth": 2,
+    "sort_order": 746
+  },
+  {
+    "id": 747,
+    "parent_id": 721,
+    "node_type": "section",
+    "node_number": "1416",
+    "title": "Failure to Report Fraud",
+    "depth": 2,
+    "sort_order": 747
+  },
+  {
+    "id": 748,
+    "parent_id": 721,
+    "node_type": "section",
+    "node_number": "1417",
+    "title": "False Statement of Vessel's or Aircraft's Destination",
+    "depth": 2,
+    "sort_order": 748
+  },
+  {
+    "id": 749,
+    "parent_id": 721,
+    "node_type": "section",
+    "node_number": "1418",
+    "title": "Affixing Seals",
+    "depth": 2,
+    "sort_order": 749
+  },
+  {
+    "id": 750,
+    "parent_id": 721,
+    "node_type": "section",
+    "node_number": "1419",
+    "title": "Breaking of Seal Placed by Customs Officers",
+    "depth": 2,
+    "sort_order": 750
+  },
+  {
+    "id": 751,
+    "parent_id": 721,
+    "node_type": "section",
+    "node_number": "1420",
+    "title": "Breaking of Lock or Fastening Placed by Customs Officers",
+    "depth": 2,
+    "sort_order": 751
+  },
+  {
+    "id": 752,
+    "parent_id": 721,
+    "node_type": "section",
+    "node_number": "1421",
+    "title": "Removal, Breakage, and Alteration of Marks",
+    "depth": 2,
+    "sort_order": 752
+  },
+  {
+    "id": 753,
+    "parent_id": 721,
+    "node_type": "section",
+    "node_number": "1422",
+    "title": "Unauthorized Withdrawal of Imported Goods from Bonded Warehouse",
+    "depth": 2,
+    "sort_order": 753
+  },
+  {
+    "id": 754,
+    "parent_id": 721,
+    "node_type": "section",
+    "node_number": "1423",
+    "title": "Removing or Repacking Goods in Warehouse",
+    "depth": 2,
+    "sort_order": 754
+  },
+  {
+    "id": 755,
+    "parent_id": 721,
+    "node_type": "section",
+    "node_number": "1424",
+    "title": "Removing Goods from Customs Custody",
+    "depth": 2,
+    "sort_order": 755
+  },
+  {
+    "id": 756,
+    "parent_id": 721,
+    "node_type": "section",
+    "node_number": "1425",
+    "title": "Failure to Pay Duties, Taxes and Other Charges",
+    "depth": 2,
+    "sort_order": 756
+  },
+  {
+    "id": 757,
+    "parent_id": 721,
+    "node_type": "section",
+    "node_number": "1426",
+    "title": "Breach of Security",
+    "depth": 2,
+    "sort_order": 757
+  },
+  {
+    "id": 758,
+    "parent_id": 721,
+    "node_type": "section",
+    "node_number": "1427",
+    "title": "Failure to Keep Importation Records and Full Access to Customs Officers",
+    "depth": 2,
+    "sort_order": 758
+  },
+  {
+    "id": 759,
+    "parent_id": 721,
+    "node_type": "section",
+    "node_number": "1428",
+    "title": "Concealment or Destruction of Evidence of Fraud",
+    "depth": 2,
+    "sort_order": 759
+  },
+  {
+    "id": 760,
+    "parent_id": 721,
+    "node_type": "section",
+    "node_number": "1429",
+    "title": "Other Offenses",
+    "depth": 2,
+    "sort_order": 760
+  },
+  {
+    "id": 761,
+    "parent_id": 760,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 761
+  },
+  {
+    "id": 762,
+    "parent_id": 760,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 762
+  },
+  {
+    "id": 763,
+    "parent_id": 760,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 763
+  },
+  {
+    "id": 764,
+    "parent_id": 760,
+    "node_type": "paragraph",
+    "node_number": "(d)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 764
+  },
+  {
+    "id": 765,
+    "parent_id": 760,
+    "node_type": "paragraph",
+    "node_number": "(e)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 765
+  },
+  {
+    "id": 766,
+    "parent_id": 760,
+    "node_type": "paragraph",
+    "node_number": "(f)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 766
+  },
+  {
+    "id": 767,
+    "parent_id": 760,
+    "node_type": "paragraph",
+    "node_number": "Concluding Provision",
+    "title": null,
+    "depth": 3,
+    "sort_order": 767
+  },
+  {
+    "id": 768,
+    "parent_id": 721,
+    "node_type": "section",
+    "node_number": "1430",
+    "title": "Violations of this Act and Rules and Regulations in General",
+    "depth": 2,
+    "sort_order": 768
+  },
+  {
+    "id": 769,
+    "parent_id": 720,
+    "node_type": "chapter",
+    "node_number": "2",
+    "title": "PENALTIES IMPOSED UPON BUREAU EMPLOYEES",
+    "depth": 1,
+    "sort_order": 769
+  },
+  {
+    "id": 770,
+    "parent_id": 769,
+    "node_type": "section",
+    "node_number": "1431",
+    "title": "Statutory Offenses of Officers and Employees",
+    "depth": 2,
+    "sort_order": 770
+  },
+  {
+    "id": 771,
+    "parent_id": 770,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 771
+  },
+  {
+    "id": 772,
+    "parent_id": 770,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 772
+  },
+  {
+    "id": 773,
+    "parent_id": 770,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 773
+  },
+  {
+    "id": 774,
+    "parent_id": 770,
+    "node_type": "paragraph",
+    "node_number": "(d)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 774
+  },
+  {
+    "id": 775,
+    "parent_id": 770,
+    "node_type": "paragraph",
+    "node_number": "(e)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 775
+  },
+  {
+    "id": 776,
+    "parent_id": 770,
+    "node_type": "paragraph",
+    "node_number": "(f)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 776
+  },
+  {
+    "id": 777,
+    "parent_id": 770,
+    "node_type": "paragraph",
+    "node_number": "(g)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 777
+  },
+  {
+    "id": 778,
+    "parent_id": 770,
+    "node_type": "paragraph",
+    "node_number": "(h)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 778
+  },
+  {
+    "id": 779,
+    "parent_id": 770,
+    "node_type": "paragraph",
+    "node_number": "(i)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 779
+  },
+  {
+    "id": 780,
+    "parent_id": 770,
+    "node_type": "paragraph",
+    "node_number": "(j)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 780
+  },
+  {
+    "id": 781,
+    "parent_id": 769,
+    "node_type": "section",
+    "node_number": "1432",
+    "title": "Failure to Report Fraud",
+    "depth": 2,
+    "sort_order": 781
+  },
+  {
+    "id": 782,
+    "parent_id": 769,
+    "node_type": "section",
+    "node_number": "1433",
+    "title": "Liability for Other Offenses",
+    "depth": 2,
+    "sort_order": 782
+  },
+  {
+    "id": 783,
+    "parent_id": null,
+    "node_type": "title",
+    "node_number": "XV",
+    "title": "MISCELLANEOUS PROVISIONS",
+    "depth": 0,
+    "sort_order": 783
+  },
+  {
+    "id": 784,
+    "parent_id": 783,
+    "node_type": "chapter",
+    "node_number": "1",
+    "title": "MISCELLANEOUS PROVISIONS",
+    "depth": 1,
+    "sort_order": 784
+  },
+  {
+    "id": 785,
+    "parent_id": 784,
+    "node_type": "section",
+    "node_number": "1500",
+    "title": "Information, Decisions, and Rulings",
+    "depth": 2,
+    "sort_order": 785
+  },
+  {
+    "id": 786,
+    "parent_id": 784,
+    "node_type": "section",
+    "node_number": "1501",
+    "title": "Period to Issue Ruling",
+    "depth": 2,
+    "sort_order": 786
+  },
+  {
+    "id": 787,
+    "parent_id": 784,
+    "node_type": "section",
+    "node_number": "1502",
+    "title": "Publication and Confidentiality of Certain Information in Ruling",
+    "depth": 2,
+    "sort_order": 787
+  },
+  {
+    "id": 788,
+    "parent_id": 784,
+    "node_type": "section",
+    "node_number": "1503",
+    "title": "Duty of District Collector to Report Rulings to the Commissioner",
+    "depth": 2,
+    "sort_order": 788
+  },
+  {
+    "id": 789,
+    "parent_id": 784,
+    "node_type": "section",
+    "node_number": "1504",
+    "title": "Application of Established Ruling or Decision",
+    "depth": 2,
+    "sort_order": 789
+  },
+  {
+    "id": 790,
+    "parent_id": 784,
+    "node_type": "section",
+    "node_number": "1505",
+    "title": "Authority of Official to Administer Oaths and Take Testimony",
+    "depth": 2,
+    "sort_order": 790
+  },
+  {
+    "id": 791,
+    "parent_id": 784,
+    "node_type": "section",
+    "node_number": "1506",
+    "title": "General Security",
+    "depth": 2,
+    "sort_order": 791
+  },
+  {
+    "id": 792,
+    "parent_id": 784,
+    "node_type": "section",
+    "node_number": "1507",
+    "title": "Security",
+    "depth": 2,
+    "sort_order": 792
+  },
+  {
+    "id": 793,
+    "parent_id": 784,
+    "node_type": "section",
+    "node_number": "1508",
+    "title": "Customs Service Fees",
+    "depth": 2,
+    "sort_order": 793
+  },
+  {
+    "id": 794,
+    "parent_id": 784,
+    "node_type": "section",
+    "node_number": "1509",
+    "title": "Testimony in Writing",
+    "depth": 2,
+    "sort_order": 794
+  },
+  {
+    "id": 795,
+    "parent_id": 784,
+    "node_type": "section",
+    "node_number": "1510",
+    "title": "District Collector Not Liable in Respect to Ruling in Customs Cases",
+    "depth": 2,
+    "sort_order": 795
+  },
+  {
+    "id": 796,
+    "parent_id": 784,
+    "node_type": "section",
+    "node_number": "1511",
+    "title": "Interest Prohibited to be Held by Customs Employees",
+    "depth": 2,
+    "sort_order": 796
+  },
+  {
+    "id": 797,
+    "parent_id": 784,
+    "node_type": "section",
+    "node_number": "1512",
+    "title": "Reward to Persons Instrumental in the Actual Collection of Additional Revenues Arising from the Discovery of Violations of this Act",
+    "depth": 2,
+    "sort_order": 797
+  },
+  {
+    "id": 798,
+    "parent_id": 784,
+    "node_type": "section",
+    "node_number": "1513",
+    "title": "Outsourcing of Non-Sovereign Customs Functions to Private Entities",
+    "depth": 2,
+    "sort_order": 798
+  },
+  {
+    "id": 799,
+    "parent_id": 784,
+    "node_type": "section",
+    "node_number": "1514",
+    "title": "International Standards and Best Practices",
+    "depth": 2,
+    "sort_order": 799
+  },
+  {
+    "id": 800,
+    "parent_id": null,
+    "node_type": "title",
+    "node_number": "XVI",
+    "title": "TARIFF ADMINISTRATION AND POLICY",
+    "depth": 0,
+    "sort_order": 800
+  },
+  {
+    "id": 801,
+    "parent_id": 800,
+    "node_type": "chapter",
+    "node_number": "1",
+    "title": "TARIFF COMMISSION",
+    "depth": 1,
+    "sort_order": 801
+  },
+  {
+    "id": 802,
+    "parent_id": 801,
+    "node_type": "section",
+    "node_number": "1600",
+    "title": "Chief Officials of the Tariff Commission and Qualifications",
+    "depth": 2,
+    "sort_order": 802
+  },
+  {
+    "id": 803,
+    "parent_id": 801,
+    "node_type": "section",
+    "node_number": "1601",
+    "title": "Appointment and Compensation of Officials and Employees",
+    "depth": 2,
+    "sort_order": 803
+  },
+  {
+    "id": 804,
+    "parent_id": 801,
+    "node_type": "section",
+    "node_number": "1602",
+    "title": "Official Seal",
+    "depth": 2,
+    "sort_order": 804
+  },
+  {
+    "id": 805,
+    "parent_id": 801,
+    "node_type": "section",
+    "node_number": "1603",
+    "title": "Functions of the Commission",
+    "depth": 2,
+    "sort_order": 805
+  },
+  {
+    "id": 806,
+    "parent_id": 805,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 806
+  },
+  {
+    "id": 807,
+    "parent_id": 805,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 807
+  },
+  {
+    "id": 808,
+    "parent_id": 805,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 808
+  },
+  {
+    "id": 809,
+    "parent_id": 805,
+    "node_type": "paragraph",
+    "node_number": "(d)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 809
+  },
+  {
+    "id": 810,
+    "parent_id": 805,
+    "node_type": "paragraph",
+    "node_number": "(e)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 810
+  },
+  {
+    "id": 811,
+    "parent_id": 805,
+    "node_type": "paragraph",
+    "node_number": "(f)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 811
+  },
+  {
+    "id": 812,
+    "parent_id": 805,
+    "node_type": "paragraph",
+    "node_number": "(g)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 812
+  },
+  {
+    "id": 813,
+    "parent_id": 805,
+    "node_type": "paragraph",
+    "node_number": "(h)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 813
+  },
+  {
+    "id": 814,
+    "parent_id": 805,
+    "node_type": "paragraph",
+    "node_number": "(i)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 814
+  },
+  {
+    "id": 815,
+    "parent_id": 801,
+    "node_type": "section",
+    "node_number": "1604",
+    "title": "Reports of the Commission",
+    "depth": 2,
+    "sort_order": 815
+  },
+  {
+    "id": 816,
+    "parent_id": 801,
+    "node_type": "section",
+    "node_number": "1605",
+    "title": "Access to Documents and Assistance to the Commission",
+    "depth": 2,
+    "sort_order": 816
+  },
+  {
+    "id": 817,
+    "parent_id": 801,
+    "node_type": "section",
+    "node_number": "1606",
+    "title": "Sworn and Verified Statements",
+    "depth": 2,
+    "sort_order": 817
+  },
+  {
+    "id": 818,
+    "parent_id": 801,
+    "node_type": "section",
+    "node_number": "1607",
+    "title": "Implementing Rules and Regulations",
+    "depth": 2,
+    "sort_order": 818
+  },
+  {
+    "id": 819,
+    "parent_id": 800,
+    "node_type": "chapter",
+    "node_number": "2",
+    "title": "FLEXIBLE TARIFF",
+    "depth": 1,
+    "sort_order": 819
+  },
+  {
+    "id": 820,
+    "parent_id": 819,
+    "node_type": "section",
+    "node_number": "1608",
+    "title": "Flexible Clause",
+    "depth": 2,
+    "sort_order": 820
+  },
+  {
+    "id": 821,
+    "parent_id": 820,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 821
+  },
+  {
+    "id": 822,
+    "parent_id": 821,
+    "node_type": "subparagraph",
+    "node_number": "(1)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 822
+  },
+  {
+    "id": 823,
+    "parent_id": 821,
+    "node_type": "subparagraph",
+    "node_number": "(2)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 823
+  },
+  {
+    "id": 824,
+    "parent_id": 821,
+    "node_type": "subparagraph",
+    "node_number": "(3)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 824
+  },
+  {
+    "id": 825,
+    "parent_id": 820,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 825
+  },
+  {
+    "id": 826,
+    "parent_id": 820,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 826
+  },
+  {
+    "id": 827,
+    "parent_id": 820,
+    "node_type": "paragraph",
+    "node_number": "(d)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 827
+  },
+  {
+    "id": 828,
+    "parent_id": 820,
+    "node_type": "paragraph",
+    "node_number": "(e)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 828
+  },
+  {
+    "id": 829,
+    "parent_id": 820,
+    "node_type": "paragraph",
+    "node_number": "(f)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 829
+  },
+  {
+    "id": 830,
+    "parent_id": 820,
+    "node_type": "paragraph",
+    "node_number": "Concluding Provision",
+    "title": null,
+    "depth": 3,
+    "sort_order": 830
+  },
+  {
+    "id": 831,
+    "parent_id": 819,
+    "node_type": "section",
+    "node_number": "1609",
+    "title": "Promotion of Foreign Trade",
+    "depth": 2,
+    "sort_order": 831
+  },
+  {
+    "id": 832,
+    "parent_id": 831,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 832
+  },
+  {
+    "id": 833,
+    "parent_id": 832,
+    "node_type": "subparagraph",
+    "node_number": "(1)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 833
+  },
+  {
+    "id": 834,
+    "parent_id": 832,
+    "node_type": "subparagraph",
+    "node_number": "(2)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 834
+  },
+  {
+    "id": 835,
+    "parent_id": 831,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 835
+  },
+  {
+    "id": 836,
+    "parent_id": 831,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 836
+  },
+  {
+    "id": 837,
+    "parent_id": 831,
+    "node_type": "paragraph",
+    "node_number": "(d)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 837
+  },
+  {
+    "id": 838,
+    "parent_id": 831,
+    "node_type": "paragraph",
+    "node_number": "(e)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 838
+  },
+  {
+    "id": 839,
+    "parent_id": 838,
+    "node_type": "subparagraph",
+    "node_number": "(1)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 839
+  },
+  {
+    "id": 840,
+    "parent_id": 838,
+    "node_type": "subparagraph",
+    "node_number": "(2)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 840
+  },
+  {
+    "id": 841,
+    "parent_id": 838,
+    "node_type": "subparagraph",
+    "node_number": "(3)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 841
+  },
+  {
+    "id": 842,
+    "parent_id": 831,
+    "node_type": "paragraph",
+    "node_number": "(f)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 842
+  },
+  {
+    "id": 843,
+    "parent_id": 831,
+    "node_type": "paragraph",
+    "node_number": "(g)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 843
+  },
+  {
+    "id": 844,
+    "parent_id": 800,
+    "node_type": "chapter",
+    "node_number": "3",
+    "title": "TARIFF NOMENCLATURE AND RATE OF DUTY",
+    "depth": 1,
+    "sort_order": 844
+  },
+  {
+    "id": 845,
+    "parent_id": 844,
+    "node_type": "section",
+    "node_number": "1610",
+    "title": "General Rules for the Interpretation (GRI)",
+    "depth": 2,
+    "sort_order": 845
+  },
+  {
+    "id": 846,
+    "parent_id": 845,
+    "node_type": "paragraph",
+    "node_number": "(1)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 846
+  },
+  {
+    "id": 847,
+    "parent_id": 845,
+    "node_type": "paragraph",
+    "node_number": "(2)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 847
+  },
+  {
+    "id": 848,
+    "parent_id": 847,
+    "node_type": "subparagraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 848
+  },
+  {
+    "id": 849,
+    "parent_id": 847,
+    "node_type": "subparagraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 849
+  },
+  {
+    "id": 850,
+    "parent_id": 845,
+    "node_type": "paragraph",
+    "node_number": "(3)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 850
+  },
+  {
+    "id": 851,
+    "parent_id": 850,
+    "node_type": "subparagraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 851
+  },
+  {
+    "id": 852,
+    "parent_id": 850,
+    "node_type": "subparagraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 852
+  },
+  {
+    "id": 853,
+    "parent_id": 850,
+    "node_type": "subparagraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 853
+  },
+  {
+    "id": 854,
+    "parent_id": 845,
+    "node_type": "paragraph",
+    "node_number": "(4)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 854
+  },
+  {
+    "id": 855,
+    "parent_id": 845,
+    "node_type": "paragraph",
+    "node_number": "(5)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 855
+  },
+  {
+    "id": 856,
+    "parent_id": 855,
+    "node_type": "subparagraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 856
+  },
+  {
+    "id": 857,
+    "parent_id": 855,
+    "node_type": "subparagraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 857
+  },
+  {
+    "id": 858,
+    "parent_id": 845,
+    "node_type": "paragraph",
+    "node_number": "(6)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 858
+  },
+  {
+    "id": 859,
+    "parent_id": 844,
+    "node_type": "section",
+    "node_number": "1611",
+    "title": "Tariff Nomenclature and Rates of Import Duty",
+    "depth": 2,
+    "sort_order": 859
+  },
+  {
+    "id": 860,
+    "parent_id": 844,
+    "node_type": "section",
+    "node_number": "1612",
+    "title": "Tariff Nomenclature and Rates of Export Duty",
+    "depth": 2,
+    "sort_order": 860
+  },
+  {
+    "id": 861,
+    "parent_id": null,
+    "node_type": "title",
+    "node_number": "XVII",
+    "title": "CONGRESSIONAL OVERSIGHT COMMITTEE",
+    "depth": 0,
+    "sort_order": 861
+  },
+  {
+    "id": 862,
+    "parent_id": 861,
+    "node_type": "chapter",
+    "node_number": "1",
+    "title": "CONGRESSIONAL OVERSIGHT COMMITTEE",
+    "depth": 1,
+    "sort_order": 862
+  },
+  {
+    "id": 863,
+    "parent_id": 862,
+    "node_type": "section",
+    "node_number": "1700",
+    "title": "Congressional Oversight Committee",
+    "depth": 2,
+    "sort_order": 863
+  },
+  {
+    "id": 864,
+    "parent_id": 863,
+    "node_type": "paragraph",
+    "node_number": "(a)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 864
+  },
+  {
+    "id": 865,
+    "parent_id": 863,
+    "node_type": "paragraph",
+    "node_number": "(b)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 865
+  },
+  {
+    "id": 866,
+    "parent_id": 863,
+    "node_type": "paragraph",
+    "node_number": "(c)",
+    "title": null,
+    "depth": 3,
+    "sort_order": 866
+  },
+  {
+    "id": 867,
+    "parent_id": 863,
+    "node_type": "paragraph",
+    "node_number": "Information",
+    "title": null,
+    "depth": 3,
+    "sort_order": 867
+  },
+  {
+    "id": 868,
+    "parent_id": 867,
+    "node_type": "subparagraph",
+    "node_number": "(1)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 868
+  },
+  {
+    "id": 869,
+    "parent_id": 867,
+    "node_type": "subparagraph",
+    "node_number": "(2)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 869
+  },
+  {
+    "id": 870,
+    "parent_id": 867,
+    "node_type": "subparagraph",
+    "node_number": "(3)",
+    "title": null,
+    "depth": 4,
+    "sort_order": 870
+  },
+  {
+    "id": 871,
+    "parent_id": null,
+    "node_type": "title",
+    "node_number": "XVIII",
+    "title": "FINAL PROVISIONS",
+    "depth": 0,
+    "sort_order": 871
+  },
+  {
+    "id": 872,
+    "parent_id": 871,
+    "node_type": "chapter",
+    "node_number": "1",
+    "title": "FINAL PROVISIONS",
+    "depth": 1,
+    "sort_order": 872
+  },
+  {
+    "id": 873,
+    "parent_id": 872,
+    "node_type": "section",
+    "node_number": "1800",
+    "title": "Implementing Rules and Regulations",
+    "depth": 2,
+    "sort_order": 873
+  },
+  {
+    "id": 874,
+    "parent_id": 872,
+    "node_type": "section",
+    "node_number": "1801",
+    "title": "Transitory Provisions",
+    "depth": 2,
+    "sort_order": 874
+  },
+  {
+    "id": 875,
+    "parent_id": 872,
+    "node_type": "section",
+    "node_number": "1802",
+    "title": "Saving Clause",
+    "depth": 2,
+    "sort_order": 875
+  },
+  {
+    "id": 876,
+    "parent_id": 872,
+    "node_type": "section",
+    "node_number": "1803",
+    "title": "Repealing Clause",
+    "depth": 2,
+    "sort_order": 876
+  },
+  {
+    "id": 877,
+    "parent_id": 872,
+    "node_type": "section",
+    "node_number": "1804",
+    "title": "Separability Clause",
+    "depth": 2,
+    "sort_order": 877
+  },
+  {
+    "id": 878,
+    "parent_id": 872,
+    "node_type": "section",
+    "node_number": "1805",
+    "title": "Effectivity",
+    "depth": 2,
+    "sort_order": 878
+  }
+]
