@@ -219,3 +219,33 @@ export function getSubjectStats(subjectId) {
     percentCorrect: answeredCount ? (correctCount / answeredCount) * 100 : 0,
   };
 }
+
+// ============================================================
+// DEFAULT SEED — auto-import from JSON files if empty
+// ============================================================
+import defaultCL from './data/defaultQuizzes/cl.json';
+import defaultCDP from './data/defaultQuizzes/cdp.json';
+import defaultTL from './data/defaultQuizzes/tl.json';
+import defaultPC from './data/defaultQuizzes/pc.json';
+
+const defaultDataMap = {
+  cl: defaultCL,
+  cdp: defaultCDP,
+  tl: defaultTL,
+  pc: defaultPC,
+};
+
+export function seedDefaultQuizzes() {
+  for (const [subjectId, data] of Object.entries(defaultDataMap)) {
+    const existing = getAllEntries(subjectId);
+    if (Object.keys(existing).length === 0) {
+      try {
+        const jsonString = JSON.stringify(data);
+        importSubjectQuizJson(subjectId, jsonString);
+        console.log(`✅ Seeded default quiz for ${subjectId}`);
+      } catch (e) {
+        console.warn(`Failed to seed ${subjectId}:`, e);
+      }
+    }
+  }
+}
