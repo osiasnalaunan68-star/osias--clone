@@ -14,6 +14,7 @@ import { IS_DEV } from "../env";
 import { copyQuizPromptForTitle } from "../quizContext";
 import DevPanel from "./DevPanel";
 import QuizPage from "./QuizPage";
+import QuizHub from "./QuizHub";
 
 // Enrich nodes with hierarchy information for composite key lookup
 
@@ -1076,7 +1077,7 @@ export default function ChapterBrowser() {
                 <p className="text-sm">{error}</p>
               </div>
             )}
-            {view === "search" ? <SearchView onNavigateChapter={loadChapter} /> : view === "dev" && IS_DEV ? <DevPanel /> : view === "quiz" ? <QuizPage /> : view === "settings" ? <SettingsView darkMode={darkMode} setDarkMode={setDarkMode} onReplayTutorial={replayTutorial} /> : (
+            {view === "search" ? <SearchView onNavigateChapter={loadChapter} /> : view === "dev" && IS_DEV ? <DevPanel /> : view === "quiz" ? null : view === "settings" ? <SettingsView darkMode={darkMode} setDarkMode={setDarkMode} onReplayTutorial={replayTutorial} /> : (
               <>
                 {loading && (
                   <div className="mx-auto max-w-3xl space-y-3">
@@ -1133,6 +1134,7 @@ export default function ChapterBrowser() {
             <span aria-hidden>✕</span> Exit Focus
           </button>
         )}
+        {view === "quiz" && <QuizHub onExit={() => setView("browse")} />}
         {showTutorial && <TutorialOverlay onFinish={finishTutorial} />}
       </div>
     </HighlightUIContext.Provider>

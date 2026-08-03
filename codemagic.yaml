@@ -24,6 +24,11 @@ workflows:
         script: |
           cd frontend
           npx cap sync android
+      - name: Install capacitor-assets and generate app icon
+        script: |
+          cd frontend
+          npm install @capacitor/assets --save-dev
+          npx capacitor-assets generate --android
       - name: Build debug APK
         script: |
           cd frontend/android
