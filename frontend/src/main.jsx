@@ -2,6 +2,7 @@ import "./index.css";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import ChapterBrowser from "./pages/ChapterBrowser";
+import { seedDefaultQuizzes } from "./subjectQuizStore";
 
 class ErrorBoundary extends React.Component {
   constructor(props) { super(props); this.state = { error: null }; }
@@ -24,6 +25,12 @@ window.addEventListener("unhandledrejection", (e) => {
   const msg = e.reason?.message || String(e.reason);
   document.body.innerHTML = `<div style="padding:20px;background:#1e1e1e;color:#ff6b6b;font-family:monospace;white-space:pre-wrap;">⚠️ ${msg}</div>`;
 });
+
+// Seed CL / CDP / TL / PC default quizzes (from src/data/defaultQuizzes/*.json)
+// into localStorage kapag walang laman pa. Kailangan ito para may laman
+// ang mga subject sa ANY bagong browser/origin — kasama ang GitHub Pages,
+// na may sarili at hiwalay na localStorage kumpara sa localhost.
+seedDefaultQuizzes();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
