@@ -4658,735 +4658,6 @@
       "reason": "Correct answer: Exclusive original jurisdiction. Section 202(j) grants the Bureau 'exclusive original jurisdiction over forfeiture cases under this Act.'"
     }
   },
-  "449": {
-    "_title": "Title II – Bureau of Customs",
-    "level1": {
-      "question": "Sino ang may kapangyarihang magbukas o magsara ng port of entry ayon sa Section 208?",
-      "choices": {
-        "A": "Ang Commissioner",
-        "B": "Ang Pangulo ng Pilipinas, batay sa rekomendasyon ng Secretary of Finance",
-        "C": "Ang Kongreso",
-        "D": "Ang District Collector"
-      },
-      "correct": "B",
-      "reason": "Tamang sagot: B. Ayon sa Section 208, 'Upon the recommendation of the Secretary of Finance, the President may open or close any port of entry.' Ang Commissioner naman ang mananagot sa reassignment ng personnel kapag nagsara ang isang port."
-    },
-    "level2": {
-      "question": "Under Section 208, the power to open or close any port of entry is exercised by the President upon:",
-      "choices": {
-        "A": "The Commissioner's sole discretion",
-        "B": "The recommendation of the Secretary of Finance",
-        "C": "A resolution of Congress",
-        "D": "The recommendation of the Tariff Commission"
-      },
-      "correct": "B",
-      "reason": "Correct answer: B. Section 208 states 'Upon the recommendation of the Secretary of Finance, the President may open or close any port of entry,' after which the Commissioner reassigns existing personnel subject to the Secretary's approval."
-    },
-    "level3": {
-      "question": "What is the significance of requiring the Secretary of Finance's recommendation before the President may open or close a port of entry under Section 208?",
-      "choices": {
-        "A": "It means the President cannot act on ports at all",
-        "B": "It ensures a check by the finance authority before this significant administrative action is taken, though the ultimate decision-making power rests with the President",
-        "C": "It transfers the decision entirely to the Secretary of Finance",
-        "D": "It applies only to closing ports, not opening them"
-      },
-      "correct": "B",
-      "reason": "Correct answer: B. Section 208 states 'Upon the recommendation of the Secretary of Finance, the President may open or close any port of entry,' showing the Secretary's recommendation as a required input while the President retains ultimate authority to act."
-    },
-    "level4": {
-      "question": "The Secretary of Finance recommends the closure of a minor subport in Northern Luzon due to declining trade volume. Under Section 208, who ultimately decides whether to close this port, and what happens to affected personnel?",
-      "choices": {
-        "A": "The Secretary of Finance decides alone and personnel are automatically terminated",
-        "B": "The President makes the final decision upon the recommendation, and the Commissioner reassigns existing personnel subject to the Secretary's approval",
-        "C": "The Commissioner alone decides both the closure and reassignment without any approval needed",
-        "D": "Congress must pass a law before any port can be closed"
-      },
-      "correct": "B",
-      "reason": "Correct answer: B. Section 208 states the President may open or close a port 'upon the recommendation of the Secretary of Finance,' and that upon closure, 'the existing personnel shall be reassigned by the Commissioner, subject to the approval of the Secretary of Finance.'"
-    },
-    "level5": {
-      "question": "Under Section 208, upon whose recommendation may the President open or close any port of entry?",
-      "correct": "The Secretary of Finance",
-      "reason": "Correct answer: The Secretary of Finance. Section 208 states 'Upon the recommendation of the Secretary of Finance, the President may open or close any port of entry.'"
-    }
-  },
-  "451": {
-    "_title": "Title II – Bureau of Customs",
-    "level1": {
-      "question": "Alin sa mga sumusunod ang isa sa mga tungkulin ng District Collector ayon sa Section 210?",
-      "choices": {
-        "A": "Magpasa ng batas",
-        "B": "Prevent importation and exportation of prohibited goods",
-        "C": "Mag-supervise ng eleksyon",
-        "D": "Magtakda ng income tax rate"
-      },
-      "correct": "B",
-      "reason": "Tamang sagot: B. Ayon sa Section 210(2), tungkulin ng District Collector na 'prevent importation and exportation of prohibited goods,' kasama ang pag-assess at pangongolekta ng duties, taxes at iba pang charges sa kanyang Customs District."
-    },
-    "level2": {
-      "question": "Under Section 210, which of the following is a duty of the District Collector in their assigned Customs District?",
-      "choices": {
-        "A": "Enacting customs legislation",
-        "B": "Preventing importation and exportation of prohibited goods",
-        "C": "Appointing the Commissioner",
-        "D": "Setting national tariff policy"
-      },
-      "correct": "B",
-      "reason": "Correct answer: B. Section 210(2) lists 'prevent importation and exportation of prohibited goods' among the District Collector's duties, alongside examining, classifying, and valuing goods and assessing duties and taxes."
-    },
-    "level3": {
-      "question": "How does the scope of a District Collector's duties under Section 210 compare to the broader functions of the Bureau under Section 202?",
-      "choices": {
-        "A": "They are entirely unrelated to each other",
-        "B": "The District Collector's duties operationalize the Bureau's broader functions at the district level, such as preventing prohibited goods entry and assessing duties",
-        "C": "District Collectors have greater authority than the Bureau itself",
-        "D": "Only the Commissioner, not District Collectors, may exercise any of the Bureau's functions"
-      },
-      "correct": "B",
-      "reason": "Correct answer: B. Section 210 duties such as 'prevent importation and exportation of prohibited goods,' 'assess and collect duties, taxes and other charges,' and 'prevent smuggling and other customs fraud' directly mirror and implement the Bureau-wide functions listed in Section 202, showing the District Collector as the district-level executor of Bureau policy."
-    },
-    "level4": {
-      "question": "At the Port of Cagayan de Oro, a District Collector personally examines and values an imported shipment of electronics before assessing applicable duties. Under Section 210, is this within the District Collector's duties?",
-      "choices": {
-        "A": "No, only the Commissioner may examine and value goods",
-        "B": "Yes, since Section 210 includes examining, classifying, and valuing imported goods, and assessing and collecting duties, among the District Collector's duties",
-        "C": "No, valuation is exclusively a Tariff Commission function",
-        "D": "Yes, but only for shipments valued above a certain threshold"
-      },
-      "correct": "B",
-      "reason": "Correct answer: B. Section 210(4) and (5) list 'examine, classify and value imported goods' and 'assess and collect duties, taxes and other charges on imported goods' among the District Collector's duties in their assigned Customs District."
-    },
-    "level5": {
-      "question": "Under Section 210, which customs official has the duty to examine, classify and value imported goods within their assigned Customs District?",
-      "correct": "The District Collector",
-      "reason": "Correct answer: The District Collector. Section 210(4) lists 'examine, classify and value imported goods' among the duties of the District Collector in their assigned Customs District."
-    }
-  },
-  "460": {
-    "_title": "Title II – Bureau of Customs",
-    "level1": {
-      "question": "Ilang oras ang ibinigay sa District Collector para i-report sa Commissioner ang designation ng acting District Collector ayon sa Section 211?",
-      "choices": {
-        "A": "12 oras",
-        "B": "24 oras",
-        "C": "48 oras",
-        "D": "72 oras"
-      },
-      "correct": "B",
-      "reason": "Tamang sagot: B. Ayon sa Section 211, 'The District Collector shall report the designation to the Commissioner within twenty-four (24) hours after the designation.' Ito ay kapag walang Deputy District Collector at kinailangang magtalaga ng senior ranking customs officer."
-    },
-    "level2": {
-      "question": "Under Section 211, within how many hours must the District Collector report the designation of an acting District Collector to the Commissioner?",
-      "choices": {
-        "A": "12 hours",
-        "B": "24 hours",
-        "C": "48 hours",
-        "D": "72 hours"
-      },
-      "correct": "B",
-      "reason": "Correct answer: B. Section 211 states 'The District Collector shall report the designation to the Commissioner within twenty-four (24) hours after the designation,' applicable when a senior ranking customs officer is designated in the absence of a Deputy District Collector."
-    },
-    "level3": {
-      "question": "Under Section 211, what is the correct order of succession when a District Collector is absent, disabled, or the position is vacant?",
-      "choices": {
-        "A": "The Commissioner immediately takes over personally",
-        "B": "The Deputy District Collector temporarily discharges the duties; if none exists, the District Collector designates a senior ranking customs officer, resolving ties by drawing of lots",
-        "C": "The most junior customs officer automatically takes over",
-        "D": "The position remains vacant until the Secretary of Finance appoints a replacement"
-      },
-      "correct": "B",
-      "reason": "Correct answer: B. Section 211 provides that 'the Deputy District Collector shall temporarily discharge the duties of the District Collector,' and 'should there be no Deputy District Collector, the District Collector shall designate, in writing, a senior ranking customs officer,' with 'a drawing of lots' used to break ties among equally senior officers."
-    },
-    "level4": {
-      "question": "The District Collector at the Port of Legazpi suddenly becomes incapacitated, and there is no Deputy District Collector at that port. Two customs officers have equal seniority and both are eligible for temporary designation. Under Section 211, how should this be resolved?",
-      "choices": {
-        "A": "Both officers share the position jointly",
-        "B": "A drawing of lots shall be undertaken to determine who is designated",
-        "C": "The Commissioner automatically breaks the tie",
-        "D": "The more senior officer's spouse decides"
-      },
-      "correct": "B",
-      "reason": "Correct answer: B. Section 211 provides that 'in case there are two (2) or more senior ranking customs officers with equal length of service, a drawing of lots shall be undertaken' to determine who temporarily discharges the duties of the District Collector."
-    },
-    "level5": {
-      "question": "Under Section 211, how is a tie resolved when two or more senior ranking customs officers have equal length of service for temporary designation as Acting District Collector?",
-      "correct": "A drawing of lots",
-      "reason": "Correct answer: A drawing of lots. Section 211 states that 'in case there are two (2) or more senior ranking customs officers with equal length of service, a drawing of lots shall be undertaken.'"
-    }
-  },
-  "470": {
-    "_title": "Title II – Bureau of Customs",
-    "level1": {
-      "question": "Ano ang dapat gawin ng isang authorized person kapag nagsasagawa ng police authority at siya ay tinanong?",
-      "choices": {
-        "A": "Huwag sumagot",
-        "B": "I-disclose ang kanyang authority at ipakita ang written authority mula sa Commissioner",
-        "C": "Umalis agad",
-        "D": "Tumawag ng abogado bago sumagot"
-      },
-      "correct": "B",
-      "reason": "Tamang sagot: B. Ayon sa Section 217, dapat 'disclose the nature of the authority upon being questioned at the time of exercise thereof and shall exhibit the corresponding written authority issued by the Commissioner.' Kailangan itong gawin para maprotektahan ang karapatan ng taong nire-regulate."
-    },
-    "level2": {
-      "question": "Under Section 217, what must an authorized person do when questioned while exercising police authority?",
-      "choices": {
-        "A": "Remain silent until legal counsel arrives",
-        "B": "Disclose the nature of the authority and exhibit the written authority issued by the Commissioner",
-        "C": "Immediately arrest the person questioning them",
-        "D": "Refer the matter to the Secretary of Finance"
-      },
-      "correct": "B",
-      "reason": "Correct answer: B. Section 217 requires that the authorized person 'shall disclose the nature of the authority upon being questioned at the time of exercise thereof and shall exhibit the corresponding written authority issued by the Commissioner.'"
-    },
-    "level3": {
-      "question": "What is the practical purpose of the disclosure requirement under Section 217 when police authority is being exercised?",
-      "choices": {
-        "A": "To slow down customs enforcement unnecessarily",
-        "B": "To ensure the person being subjected to police authority can verify the legitimacy of the authority being exercised",
-        "C": "To allow the authorized person to avoid liability entirely",
-        "D": "It has no practical purpose; it is purely ceremonial"
-      },
-      "correct": "B",
-      "reason": "Correct answer: B. Section 217 requires disclosure of 'the nature of the authority upon being questioned' and exhibition of 'the corresponding written authority issued by the Commissioner,' functioning as a safeguard so that individuals can verify that police authority is being lawfully and legitimately exercised."
-    },
-    "level4": {
-      "question": "A customs officer conducting a search at the Port of Manila is questioned by the shipment owner about the basis of the officer's authority. The officer refuses to explain or show any documentation. Under Section 217, is this conduct proper?",
-      "choices": {
-        "A": "Yes, officers are never required to explain their authority",
-        "B": "No, because Section 217 requires disclosure of the nature of the authority and exhibition of the written authority issued by the Commissioner when questioned",
-        "C": "Yes, as long as the officer is in uniform",
-        "D": "No, but only if the shipment owner is a foreign national"
-      },
-      "correct": "B",
-      "reason": "Correct answer: B. Section 217 requires that the authorized person 'disclose the nature of the authority upon being questioned at the time of exercise thereof and shall exhibit the corresponding written authority issued by the Commissioner,' making the officer's refusal improper."
-    },
-    "level5": {
-      "question": "Under Section 217, what must an authorized person exhibit when questioned about their authority while exercising police authority?",
-      "correct": "The written authority issued by the Commissioner",
-      "reason": "Correct answer: The written authority issued by the Commissioner. Section 217 requires that the person 'shall exhibit the corresponding written authority issued by the Commissioner.'"
-    }
-  },
-  "472": {
-    "_title": "Title II – Bureau of Customs",
-    "level1": {
-      "question": "Ayon sa Section 219, maaari bang pasukin ng taong may police authority ang isang warehouse nang walang warrant?",
-      "choices": {
-        "A": "Oo, dahil ang warehouse ay hindi principal na ginagamit bilang dwelling house",
-        "B": "Hindi, kailangan palaging may warrant",
-        "C": "Oo, pero kailangan munang humingi ng pahintulot sa court",
-        "D": "Hindi, dahil bawal ang pagpasok sa anumang building"
-      },
-      "correct": "A",
-      "reason": "Tamang sagot: A. Ayon sa Section 219, maaaring pasukin at hanapin 'any land, enclosure, warehouse, store, building or structure not principally used as a dwelling house' nang walang warrant. Iba ito sa dwelling house na kailangan ng warrant ayon sa Section 220."
-    },
-    "level2": {
-      "question": "Under Section 219, a person exercising police authority may enter and search which of the following without a warrant?",
-      "choices": {
-        "A": "Any structure not principally used as a dwelling house",
-        "B": "Any private residence at any time",
-        "C": "Only government buildings",
-        "D": "Only vessels docked at a port"
-      },
-      "correct": "A",
-      "reason": "Correct answer: A. Section 219 authorizes entry into 'any land, enclosure, warehouse, store, building or structure not principally used as a dwelling house,' distinguishing this from the warrant requirement for dwelling houses under Section 220."
-    },
-    "level3": {
-      "question": "Under Section 219, how does the CMTA treat a warehouse where a security guard resides, for purposes of the warrantless entry rule?",
-      "choices": {
-        "A": "It is always treated as a dwelling house requiring a warrant",
-        "B": "It is not considered a dwelling house under the CMTA, even if a security personnel or employee lives there",
-        "C": "It depends entirely on the discretion of the local court",
-        "D": "The CMTA does not address this situation at all"
-      },
-      "correct": "B",
-      "reason": "Correct answer: B. Section 219 explicitly states that 'when a security personnel or any other employee lives in the warehouse, store, or any building, structure or enclosure that is used for storage of goods, it shall not be considered as a dwelling house for purposes of this Act,' allowing warrantless entry despite residential use by staff."
-    },
-    "level4": {
-      "question": "Customs officers enter a bonded warehouse at the Port of Batangas without a warrant to inspect stored goods. A security guard who lives on-site objects, claiming the warehouse is his dwelling and requires a warrant. Under Section 219, is the warrantless entry valid?",
-      "choices": {
-        "A": "No, any residence by an employee automatically makes it a dwelling house requiring a warrant",
-        "B": "Yes, because a warehouse used for storage is not considered a dwelling house even if a security personnel lives there",
-        "C": "No, warehouses always require warrants regardless of use",
-        "D": "Yes, but only if the guard consents"
-      },
-      "correct": "B",
-      "reason": "Correct answer: B. Section 219 explicitly provides that when 'a security personnel or any other employee lives in the warehouse, store, or any building, structure or enclosure that is used for storage of goods, it shall not be considered as a dwelling house for purposes of this Act,' validating the warrantless entry."
-    },
-    "level5": {
-      "question": "Under Section 219, what type of structure is generally not considered a dwelling house even if a security personnel or employee lives there?",
-      "correct": "A warehouse, store, or building used for storage of goods",
-      "reason": "Correct answer: A warehouse, store, or building used for storage of goods. Section 219 states that such a structure 'shall not be considered as a dwelling house for purposes of this Act' even when a security personnel or employee resides there."
-    }
-  },
-  "473": {
-    "_title": "Title II – Bureau of Customs",
-    "level1": {
-      "question": "Ano ang kailangan bago mahalughog ang isang dwelling house ayon sa Section 220?",
-      "choices": {
-        "A": "Verbal na pahintulot ng may-ari",
-        "B": "Warrant mula sa isang Judge ng competent court",
-        "C": "Pahintulot lamang ng Commissioner",
-        "D": "Walang kailangan, basta may reasonable suspicion"
-      },
-      "correct": "B",
-      "reason": "Tamang sagot: B. Ayon sa Section 220, 'A dwelling house may be entered and searched only upon warrant issued by a Judge of a competent court,' kasama ang sworn application na nagpapakita ng probable cause. Mahigpit ito kumpara sa warehouse o iba pang structure."
-    },
-    "level2": {
-      "question": "Under Section 220, a dwelling house may only be entered and searched upon:",
-      "choices": {
-        "A": "Verbal consent of any occupant",
-        "B": "A warrant issued by a Judge of a competent court based on probable cause",
-        "C": "Written authorization from the Commissioner alone",
-        "D": "Any suspicion of wrongdoing without further requirement"
-      },
-      "correct": "B",
-      "reason": "Correct answer: B. Section 220 requires 'a warrant issued by a Judge of a competent court, the sworn application thereupon showing probable cause and particularly describing the place to be searched and the goods to be seized.'"
-    },
-    "level3": {
-      "question": "What specific requirements must a warrant application meet before a dwelling house may be searched under Section 220?",
-      "choices": {
-        "A": "It need only state a general suspicion of wrongdoing",
-        "B": "It must show probable cause and particularly describe both the place to be searched and the goods to be seized",
-        "C": "It only needs the signature of a customs officer, without judicial involvement",
-        "D": "No specific requirements exist beyond obtaining any court order"
-      },
-      "correct": "B",
-      "reason": "Correct answer: B. Section 220 requires 'the sworn application thereupon showing probable cause and particularly describing the place to be searched and the goods to be seized,' reflecting constitutional search warrant standards applied specifically to dwelling houses under the CMTA."
-    },
-    "level4": {
-      "question": "Customs officers suspect that smuggled goods are hidden inside a private residence in Quezon City. They wish to search the house without first obtaining any court document, citing urgency. Under Section 220, is this search lawful?",
-      "choices": {
-        "A": "Yes, urgency always excuses the warrant requirement",
-        "B": "No, because a dwelling house may only be entered and searched upon a warrant issued by a judge based on probable cause, particularly describing the place and goods",
-        "C": "Yes, as long as the Commissioner verbally approves",
-        "D": "No, but only if the residence belongs to a foreign national"
-      },
-      "correct": "B",
-      "reason": "Correct answer: B. Section 220 unambiguously requires that 'a dwelling house may be entered and searched only upon warrant issued by a Judge of a competent court, the sworn application thereupon showing probable cause and particularly describing the place to be searched and the goods to be seized.'"
-    },
-    "level5": {
-      "question": "Under Section 220, what must a warrant application for searching a dwelling house particularly describe?",
-      "correct": "The place to be searched and the goods to be seized",
-      "reason": "Correct answer: The place to be searched and the goods to be seized. Section 220 requires the sworn application to show probable cause and 'particularly describing the place to be searched and the goods to be seized.'"
-    }
-  },
-  "474": {
-    "_title": "Title II – Bureau of Customs",
-    "level1": {
-      "question": "Ayon sa Section 221, ano ang maaaring gawin ng taong may police authority sa isang barko o eroplano kung may probable violation ng CMTA?",
-      "choices": {
-        "A": "Wala, dapat kumuha muna ng warrant",
-        "B": "Maaari niyang kumpiskahin ang goods, vessel, aircraft, o bahagi nito",
-        "C": "Dapat lamang mag-ulat sa Kongreso",
-        "D": "Wala siyang karapatang maghalughog sa loob"
-      },
-      "correct": "B",
-      "reason": "Tamang sagot: B. Ayon sa Section 221, 'In case of any probable violation of this Act, the person exercising police authority may seize the goods, vessel, aircraft, or any part thereof.' Kasama rin dito ang karapatang alisin ang false bottom o partition para mahanap ang concealed goods."
-    },
-    "level2": {
-      "question": "Under Section 221, the authority to search a vessel or aircraft includes the power to:",
-      "choices": {
-        "A": "Only inspect visible cargo without further action",
-        "B": "Remove any false bottom, partition, bulkhead, or other obstruction to uncover concealed goods",
-        "C": "Detain the vessel indefinitely without cause",
-        "D": "Search only if the vessel is Philippine-registered"
-      },
-      "correct": "B",
-      "reason": "Correct answer: B. Section 221 states that the power to search 'includes removal of any false bottom, partition, bulkhead, or any other obstruction for the purpose of uncovering any concealed dutiable or forfeitable goods.'"
-    },
-    "level3": {
-      "question": "Under Section 221, when would a claim for damages arising from a search of a vessel or aircraft be valid against the person exercising police authority?",
-      "choices": {
-        "A": "Never, regardless of circumstances",
-        "B": "Only when there is gross negligence or abuse of authority in the exercise of the search",
-        "C": "Whenever any damage occurs during a search, regardless of cause",
-        "D": "Only if the vessel is a foreign-flagged vessel"
-      },
-      "correct": "B",
-      "reason": "Correct answer: B. Section 221 states that the search proceeding 'shall not give rise to any claim for damage caused to the goods, vessel or aircraft, unless there is gross negligence or abuse of authority in the exercise thereof,' establishing a high threshold before liability attaches."
-    },
-    "level4": {
-      "question": "During a search of a cargo vessel at the Port of Subic, customs officers remove a false bulkhead to check for concealed goods, causing minor damage to the vessel's interior panel. No negligence or abuse of authority is shown. Under Section 221, can the vessel owner successfully claim damages?",
-      "choices": {
-        "A": "Yes, any damage caused during a search is compensable",
-        "B": "No, because the proceeding does not give rise to a claim for damage unless there is gross negligence or abuse of authority",
-        "C": "Yes, but only for damage to sealed containers",
-        "D": "No, because vessel owners can never claim damages under the CMTA"
-      },
-      "correct": "B",
-      "reason": "Correct answer: B. Section 221 states that the search proceeding 'shall not give rise to any claim for damage caused to the goods, vessel or aircraft, unless there is gross negligence or abuse of authority in the exercise thereof,' and since neither is shown here, no valid claim arises."
-    },
-    "level5": {
-      "question": "Under Section 221, under what two conditions can a claim for damage caused during a search of a vessel or aircraft be validly raised?",
-      "correct": "Gross negligence or abuse of authority",
-      "reason": "Correct answer: Gross negligence or abuse of authority. Section 221 states the search proceeding shall not give rise to a damage claim 'unless there is gross negligence or abuse of authority in the exercise thereof.'"
-    }
-  },
-  "476": {
-    "_title": "Title II – Bureau of Customs",
-    "level1": {
-      "question": "Ayon sa Section 223, sino ang maaaring gamitin para maghalughog sa mga babaeng traveler na galing sa ibang bansa?",
-      "choices": {
-        "A": "Kahit sinong customs officer",
-        "B": "Female inspectors",
-        "C": "Pulis lamang",
-        "D": "Hindi maaaring halughugin ang mga babae"
-      },
-      "correct": "B",
-      "reason": "Tamang sagot: B. Ayon sa Section 223, 'Female inspectors may be employed for the examination and search of persons of their own sex,' habang iginagalang ang dignidad ng taong sinasala at dine-detain."
-    },
-    "level2": {
-      "question": "Under Section 223, who may be employed for the examination and search of female travelers arriving from foreign countries?",
-      "choices": {
-        "A": "Any available customs officer",
-        "B": "Female inspectors",
-        "C": "Only the District Collector personally",
-        "D": "Members of the PNP exclusively"
-      },
-      "correct": "B",
-      "reason": "Correct answer: B. Section 223 provides that 'Female inspectors may be employed for the examination and search of persons of their own sex,' while requiring that the dignity of the person searched be respected at all times."
-    },
-    "level3": {
-      "question": "How does Section 223 balance the Bureau's authority to search travelers with respect for individual dignity?",
-      "choices": {
-        "A": "It grants unlimited search authority without any dignity safeguards",
-        "B": "It allows search and detention only upon reasonable cause, requires that dignity be respected at all times, and provides for female inspectors to search persons of their own sex",
-        "C": "It prohibits all searches of arriving travelers",
-        "D": "It applies dignity protections only to Philippine citizens, not foreigners"
-      },
-      "correct": "B",
-      "reason": "Correct answer: B. Section 223 conditions search and detention on 'reasonable cause,' mandates that 'the dignity of the person under search and detention shall be respected at all times,' and provides that 'female inspectors may be employed for the examination and search of persons of their own sex,' balancing enforcement authority with personal dignity."
-    },
-    "level4": {
-      "question": "A female traveler arriving at NAIA is flagged for search based on reasonable cause. The airport has only male customs officers on duty at that moment. Under Section 223, what is the proper approach?",
-      "choices": {
-        "A": "Any male officer may proceed with the search immediately",
-        "B": "The search should involve female inspectors for examining persons of the same sex, while respecting the traveler's dignity at all times",
-        "C": "The traveler cannot be searched under any circumstance",
-        "D": "The search must be postponed indefinitely until a female inspector transfers permanently to that airport"
-      },
-      "correct": "B",
-      "reason": "Correct answer: B. Section 223 provides that 'female inspectors may be employed for the examination and search of persons of their own sex,' while also mandating that 'the dignity of the person under search and detention shall be respected at all times,' guiding proper procedure in this scenario."
-    },
-    "level5": {
-      "question": "Under Section 223, who may be employed for the examination and search of female travelers arriving from foreign countries?",
-      "correct": "Female inspectors",
-      "reason": "Correct answer: Female inspectors. Section 223 states that 'female inspectors may be employed for the examination and search of persons of their own sex.'"
-    }
-  },
-  "477": {
-    "_title": "Title II – Bureau of Customs",
-    "level1": {
-      "question": "Ilang araw ang ibinigay sa isang interested party para magpakita ng ebidensya ng pagbabayad ng duties and taxes bago ma-seize ang goods, ayon sa Section 224?",
-      "choices": {
-        "A": "5 araw",
-        "B": "10 araw",
-        "C": "15 araw",
-        "D": "30 araw"
-      },
-      "correct": "C",
-      "reason": "Tamang sagot: C. Ayon sa Section 224, 'In the event that the interested party fails to produce such evidence within fifteen (15) days, the goods may be seized and subjected to forfeiture proceedings.' Parehong 15 araw din ang ibinigay para sa release ng goods kapag na-quash ang warrant of seizure."
-    },
-    "level2": {
-      "question": "Under Section 224, within how many days must an interested party produce evidence of payment of duties and taxes before the goods may be seized?",
-      "choices": {
-        "A": "5 days",
-        "B": "10 days",
-        "C": "15 days",
-        "D": "30 days"
-      },
-      "correct": "C",
-      "reason": "Correct answer: C. Section 224 states that 'In the event that the interested party fails to produce such evidence within fifteen (15) days, the goods may be seized and subjected to forfeiture proceedings.' The same 15-day period applies to releasing goods after a warrant of seizure is quashed."
-    },
-    "level3": {
-      "question": "Under Section 224, what happens if a warrant of seizure has already been issued but the interested party later presents authentic documents proving proper payment?",
-      "choices": {
-        "A": "The goods remain forfeited regardless of the documents presented",
-        "B": "The District Collector must cause the immediate release of the goods within 15 days from receipt of the motion to quash, subject to clearance by the Commissioner",
-        "C": "The interested party must file a new case in regular court",
-        "D": "The documents are disregarded once a warrant has been issued"
-      },
-      "correct": "B",
-      "reason": "Correct answer: B. Section 224 provides that when subsequent documents are 'found to be authentic and in order, the District Collector shall, within fifteen (15) days from the receipt of the motion to quash or recall the warrant, cause the immediate release of the goods seized, subject to clearance by the Commissioner.'"
-    },
-    "level4": {
-      "question": "A retailer at Divisoria is found selling imported electronics without being able to immediately produce proof of duty payment. The Commissioner's authorized officer demands evidence. Fourteen days pass with no evidence produced. Under Section 224, what is the legal consequence on day 16?",
-      "choices": {
-        "A": "Nothing happens; there is no deadline under the CMTA",
-        "B": "The goods may be seized and subjected to forfeiture proceedings, since the 15-day period to produce evidence has lapsed",
-        "C": "The retailer is automatically imprisoned",
-        "D": "The goods are immediately destroyed without further process"
-      },
-      "correct": "B",
-      "reason": "Correct answer: B. Section 224 provides that 'in the event that the interested party fails to produce such evidence within fifteen (15) days, the goods may be seized and subjected to forfeiture proceedings,' though the retailer would still be given opportunity during proceedings to prove the source and payment."
-    },
-    "level5": {
-      "question": "Under Section 224, within how many days must an interested party produce evidence of payment of duties and taxes before goods openly for sale or in storage may be seized?",
-      "correct": "15 days",
-      "reason": "Correct answer: 15 days. Section 224 states that 'in the event that the interested party fails to produce such evidence within fifteen (15) days, the goods may be seized and subjected to forfeiture proceedings.'"
-    }
-  },
-  "484": {
-    "_title": "Title III – Customs Jurisdiction and Customs Control",
-    "level1": {
-      "question": "Sino ang may exclusive control, direction, at management sa mga customs office, warehouse, port, airport, at wharves sa loob ng Customs District ayon sa Section 303?",
-      "choices": {
-        "A": "Ang Bureau of Customs",
-        "B": "Ang local government unit",
-        "C": "Ang Philippine Coast Guard lamang",
-        "D": "Ang pribadong port operator"
-      },
-      "correct": "A",
-      "reason": "Tamang sagot: A. Ayon sa Section 303, ang Bureau ay may 'exclusive control, direction and management of customs offices, facilities, warehouses, ports, airports, wharves, infrastructure and other premises in the Customs Districts.' Hindi nito inaalis ang general police powers ng LGUs, Coast Guard, at iba pang law enforcement agencies."
-    },
-    "level2": {
-      "question": "Under Section 303, the Bureau's exclusive control, direction and management over customs premises is exercised without prejudice to the general police powers of:",
-      "choices": {
-        "A": "The Department of Trade and Industry only",
-        "B": "The LGUs, the Philippine Coast Guard, and law enforcement agencies",
-        "C": "Foreign customs administrations",
-        "D": "The Tariff Commission only"
-      },
-      "correct": "B",
-      "reason": "Correct answer: B. Section 303 states the Bureau's exclusive control over customs premises applies 'in all cases without prejudice to the general police powers of the local government units (LGUs), the Philippine Coast Guard and law enforcement agencies in the exercise of their respective functions.'"
-    },
-    "level3": {
-      "question": "How does Section 303's grant of exclusive control over customs premises to the Bureau interact with the authority of LGUs and the Philippine Coast Guard?",
-      "choices": {
-        "A": "It completely removes any authority from LGUs and the Coast Guard over those areas",
-        "B": "The Bureau's exclusive control coexists with, and does not diminish, the general police powers of LGUs, the Coast Guard, and law enforcement agencies",
-        "C": "LGUs and the Coast Guard have superior authority over the Bureau in customs premises",
-        "D": "Only the Coast Guard retains authority, while LGU powers are suspended"
-      },
-      "correct": "B",
-      "reason": "Correct answer: B. Section 303 grants the Bureau exclusive control over customs premises 'without prejudice to the general police powers of the local government units (LGUs), the Philippine Coast Guard and law enforcement agencies in the exercise of their respective functions,' meaning both authorities operate concurrently rather than one displacing the other."
-    },
-    "level4": {
-      "question": "A local government unit at the Port of Cebu attempts to conduct a routine police inspection near a Bureau-controlled wharf, and the Bureau objects, claiming exclusive control under Section 303. Is the Bureau's objection valid?",
-      "choices": {
-        "A": "Yes, the Bureau's exclusive control completely bars any LGU police action in the area",
-        "B": "No, because Section 303 exclusive control is without prejudice to the general police powers of LGUs in the exercise of their functions",
-        "C": "Yes, but only if the LGU has no prior coordination",
-        "D": "No, because the Bureau has no authority over wharves at all"
-      },
-      "correct": "B",
-      "reason": "Correct answer: B. Section 303 grants the Bureau exclusive control over customs premises but expressly states this is 'without prejudice to the general police powers of the local government units (LGUs)...in the exercise of their respective functions,' meaning the LGU's routine police inspection may proceed alongside Bureau control."
-    },
-    "level5": {
-      "question": "Under Section 303 of the CMTA, whose general police powers are expressly preserved despite the Bureau's exclusive control over customs premises?",
-      "correct": "LGUs, the Philippine Coast Guard, and law enforcement agencies",
-      "reason": "Correct answer: LGUs, the Philippine Coast Guard, and law enforcement agencies. Section 303 states the Bureau's exclusive control is exercised 'without prejudice to the general police powers of the local government units (LGUs), the Philippine Coast Guard and law enforcement agencies in the exercise of their respective functions.'"
-    }
-  },
-  "485": {
-    "_title": "Title III – Customs Jurisdiction and Customs Control",
-    "level1": {
-      "question": "Sino ang may kapangyarihang mag-declare, sa pamamagitan ng executive order, na ang isang public wharf o landing place ay ilalagay sa ilalim ng jurisdiction ng Bureau para sa customs purposes?",
-      "choices": {
-        "A": "Ang Commissioner",
-        "B": "Ang Kongreso",
-        "C": "Ang Pangulo ng Pilipinas",
-        "D": "Ang Secretary of Finance"
-      },
-      "correct": "C",
-      "reason": "Tamang sagot: C. Ayon sa Section 304, 'the President may, by executive order, declare any public wharf, landing place, infrastructure, street or land, in any port of entry under the jurisdiction of the Bureau as may be necessary, for customs purposes.' Kasama rin dito ang kapangyarihang mag-authorize ng transfer ng overstaying cargoes papunta sa inland depot."
-    },
-    "level2": {
-      "question": "Under Section 304, the President may, by executive order, place a public wharf, landing place, or land under Bureau jurisdiction:",
-      "choices": {
-        "A": "Only upon approval of the Tariff Commission",
-        "B": "Whenever a private port operator requests it",
-        "C": "When public interest requires it, for customs purposes",
-        "D": "Only after a Congressional resolution"
-      },
-      "correct": "C",
-      "reason": "Correct answer: C. Section 304 states 'when public interest requires, the President may, by executive order, declare any public wharf, landing place, infrastructure, street or land, in any port of entry under the jurisdiction of the Bureau as may be necessary, for customs purposes.'"
-    },
-    "level3": {
-      "question": "What is the significance of the phrase 'when public interest requires' in Section 304's grant of power to the President?",
-      "choices": {
-        "A": "It means the President may act at any time without justification",
-        "B": "It sets a threshold condition that limits the President's exercise of this power to situations justified by public interest",
-        "C": "It applies only during declared states of emergency",
-        "D": "It has no legal significance and is merely decorative language"
-      },
-      "correct": "B",
-      "reason": "Correct answer: B. Section 304 conditions the President's power to place premises under Bureau jurisdiction on the phrase 'when public interest requires,' establishing this as a substantive limitation rather than an unconditional grant of authority."
-    },
-    "level4": {
-      "question": "Cargo has been overstaying at the Port of Manila for several months, congesting the terminal. The port operator wants authority to transfer this cargo to an inland depot. Under Section 304, who may grant this authorization?",
-      "choices": {
-        "A": "The port operator may act unilaterally without any authorization",
-        "B": "Only the Bureau of Customs may authorize this, and only through a formal request to the LGU",
-        "C": "The President, by executive order, may authorize the port or terminal operator to transfer the overstaying cargoes to an inland depot or terminal",
-        "D": "Only the Tariff Commission may issue such authorization"
-      },
-      "correct": "C",
-      "reason": "Correct answer: C. Section 304 states the President may, by executive order, 'authorize a port or terminal operator to transfer overstaying cargoes in an inland depot or terminal,' addressing exactly this congestion scenario."
-    },
-    "level5": {
-      "question": "Under Section 304, through what legal instrument may the President place a public wharf or landing place under Bureau jurisdiction for customs purposes?",
-      "correct": "Executive order",
-      "reason": "Correct answer: Executive order. Section 304 states 'the President may, by executive order, declare any public wharf, landing place, infrastructure, street or land, in any port of entry under the jurisdiction of the Bureau as may be necessary, for customs purposes.'"
-    }
-  },
-  "486": {
-    "_title": "Title III – Customs Jurisdiction and Customs Control",
-    "level1": {
-      "question": "Ayon sa Section 305, ano ang bawal gawin sa isang customs office, warehouse, o wharf na nasa ilalim ng kontrol ng Bureau?",
-      "choices": {
-        "A": "Pagpasok o pag-obstruct nang walang prior authority",
-        "B": "Pagbisita ng mga customs officer",
-        "C": "Pagdaan ng mga sasakyan ng Bureau",
-        "D": "Paggamit ng mga awtorisadong empleyado"
-      },
-      "correct": "A",
-      "reason": "Tamang sagot: A. Ayon sa Section 305, 'no person shall enter or obstruct a customs office, warehouse, port, airport, wharf, or other premises under the control of the Bureau without prior authority,' kasama na rin ang mga kalye o eskinitang kinaroroonan ng mga pasilidad na ito."
-    },
-    "level2": {
-      "question": "Under Section 305, which areas are covered by the prohibition against unauthorized entry or obstruction of Bureau-controlled premises?",
-      "choices": {
-        "A": "Only the main customs office building",
-        "B": "Customs offices, warehouses, ports, airports, wharves, and the streets or alleys where these facilities are located",
-        "C": "Only privately owned warehouses",
-        "D": "Only areas within Metro Manila"
-      },
-      "correct": "B",
-      "reason": "Correct answer: B. Section 305 states 'no person shall enter or obstruct a customs office, warehouse, port, airport, wharf, or other premises under the control of the Bureau without prior authority, including the streets or alleys where these facilities are located.'"
-    },
-    "level3": {
-      "question": "Why does Section 305 extend the prohibition on unauthorized entry to include the streets or alleys where customs facilities are located, and not just the facilities themselves?",
-      "choices": {
-        "A": "To ensure comprehensive protection of the security perimeter surrounding customs operations, not just the buildings",
-        "B": "Streets and alleys are irrelevant and this is a drafting error",
-        "C": "It only applies to streets owned by the Bureau",
-        "D": "It was intended to replace, not supplement, protection of the buildings"
-      },
-      "correct": "A",
-      "reason": "Correct answer: A. Section 305 explicitly includes 'the streets or alleys where these facilities are located' within the scope of the trespass prohibition, extending protection beyond the physical structures to the surrounding access points relevant to customs security."
-    },
-    "level4": {
-      "question": "A group of individuals, without securing prior authority, enters an alley adjacent to a Bureau-controlled airport cargo facility at Clark to take photographs. Under Section 305, is this conduct prohibited?",
-      "choices": {
-        "A": "No, because only the interior of buildings is protected under Section 305",
-        "B": "Yes, because Section 305's prohibition on unauthorized entry extends to the streets or alleys where Bureau-controlled facilities are located",
-        "C": "No, because taking photographs is not considered 'entry' under the CMTA",
-        "D": "Yes, but only if the individuals are foreign nationals"
-      },
-      "correct": "B",
-      "reason": "Correct answer: B. Section 305 prohibits entry or obstruction of Bureau-controlled premises 'without prior authority, including the streets or alleys where these facilities are located,' meaning the adjacent alley is covered by the restriction."
-    },
-    "level5": {
-      "question": "Under Section 305, what CMTA term describes the unauthorized entry into or obstruction of a customs office, warehouse, port, airport, or wharf under Bureau control?",
-      "correct": "Trespass or Obstruction of Customs Premises",
-      "reason": "Correct answer: Trespass or Obstruction of Customs Premises. Section 305, titled accordingly, states that 'no person shall enter or obstruct a customs office, warehouse, port, airport, wharf, or other premises under the control of the Bureau without prior authority.'"
-    }
-  },
-  "487": {
-    "_title": "Title III – Customs Jurisdiction and Customs Control",
-    "level1": {
-      "question": "Aling ahensya ang patuloy na may function na pigilan at supprisahin ang illegal entry ng goods at smuggling sa dagat, ayon sa Section 306 at RA 9993?",
-      "choices": {
-        "A": "Ang Bureau of Internal Revenue",
-        "B": "Ang Philippine Coast Guard",
-        "C": "Ang Philippine National Police",
-        "D": "Ang Armed Forces of the Philippines"
-      },
-      "correct": "B",
-      "reason": "Tamang sagot: B. Ayon sa Section 306, 'the function of the Philippine Coast Guard to prevent and suppress the illegal entry of these goods, smuggling and other forms of customs fraud and violations of maritime law...shall continue to be in force' sa ilalim ng RA 9993 o ang Philippine Coast Guard Law of 2009."
-    },
-    "level2": {
-      "question": "Under Section 306, the Bureau's surveillance function on vessels and imported goods operates alongside which continuing function of the Philippine Coast Guard under RA 9993?",
-      "choices": {
-        "A": "Issuance of import permits",
-        "B": "Collection of customs duties",
-        "C": "Prevention and suppression of illegal entry of goods, smuggling, and customs fraud",
-        "D": "Assessment of tariff classification"
-      },
-      "correct": "C",
-      "reason": "Correct answer: C. Section 306 provides that the Coast Guard's function 'to prevent and suppress the illegal entry of these goods, smuggling and other forms of customs fraud and violations of maritime law...shall continue to be in force' under Republic Act No. 9993, the Philippine Coast Guard Law of 2009."
-    },
-    "level3": {
-      "question": "How does Section 306 delineate the Bureau's surveillance role from that of the Philippine Coast Guard regarding vessels entering Philippine territory?",
-      "choices": {
-        "A": "The Bureau's surveillance function operates alongside, and does not replace, the Coast Guard's continuing function under RA 9993 to prevent smuggling and enforce maritime law",
-        "B": "The Coast Guard's function is entirely absorbed by the Bureau under the CMTA",
-        "C": "Only the Bureau may conduct any surveillance of vessels",
-        "D": "The two agencies have no overlapping functions whatsoever"
-      },
-      "correct": "A",
-      "reason": "Correct answer: A. Section 306 states the Bureau shall conduct surveillance, 'Provided, That the function of the Philippine Coast Guard...shall continue to be in force' under RA 9993, showing the two functions operate in parallel rather than one superseding the other."
-    },
-    "level4": {
-      "question": "A foreign cargo vessel is suspected of attempting to smuggle goods into Philippine waters near Subic Bay. Both the Bureau of Customs and the Philippine Coast Guard begin monitoring the vessel independently. Under Section 306, is this dual monitoring consistent with the CMTA?",
-      "choices": {
-        "A": "No, only the Bureau may conduct surveillance under the CMTA",
-        "B": "Yes, because the Bureau's surveillance function operates alongside the Coast Guard's continuing function to prevent smuggling under RA 9993",
-        "C": "No, only the Coast Guard has jurisdiction over vessels at sea",
-        "D": "Yes, but only if the vessel has already docked at a Philippine port"
-      },
-      "correct": "B",
-      "reason": "Correct answer: B. Section 306 provides that the Bureau conducts surveillance on vessels entering Philippine territory, 'Provided, That the function of the Philippine Coast Guard to prevent and suppress the illegal entry of these goods, smuggling and other forms of customs fraud...shall continue to be in force,' validating concurrent monitoring by both agencies."
-    },
-    "level5": {
-      "question": "Under Section 306, what Republic Act preserves the Philippine Coast Guard's continuing function to prevent smuggling and enforce maritime law alongside the Bureau's surveillance activities?",
-      "correct": "Republic Act No. 9993",
-      "reason": "Correct answer: Republic Act No. 9993. Section 306 states that the Coast Guard's relevant function 'shall continue to be in force' under 'Republic Act No. 9993, otherwise known as the Philippine Coast Guard Law of 2009.'"
-    }
-  },
-  "488": {
-    "_title": "Title III – Customs Jurisdiction and Customs Control",
-    "level1": {
-      "question": "Sino ang mananagot sa pag-establish ng sistema para sa temporary storage ng mga abandoned o overstaying goods bago ang goods declaration, ayon sa Section 307?",
-      "choices": {
-        "A": "Ang District Collector",
-        "B": "Ang port operator",
-        "C": "Ang Commissioner",
-        "D": "Ang importer mismo"
-      },
-      "correct": "C",
-      "reason": "Tamang sagot: C. Ayon sa Section 307, 'subject to the rules and regulations to be issued by the Secretary of Finance, the Commissioner shall establish a system for temporary storage of imports prior to goods declaration in case of abandoned or overstaying goods.'"
-    },
-    "level2": {
-      "question": "Under Section 307, the Commissioner's establishment of a temporary storage system for imports is subject to rules and regulations issued by:",
-      "choices": {
-        "A": "The Secretary of Finance",
-        "B": "The Tariff Commission",
-        "C": "The port terminal operator",
-        "D": "The National Economic and Development Authority"
-      },
-      "correct": "A",
-      "reason": "Correct answer: A. Section 307 states that 'subject to the rules and regulations to be issued by the Secretary of Finance, the Commissioner shall establish a system for temporary storage of imports prior to goods declaration in case of abandoned or overstaying goods.'"
-    },
-    "level3": {
-      "question": "What is the specific circumstance under which the Commissioner's temporary storage system under Section 307 becomes relevant?",
-      "choices": {
-        "A": "For all imports, regardless of status, as a general storage facility",
-        "B": "Specifically for abandoned or overstaying goods prior to goods declaration",
-        "C": "Only for goods intended for free zones",
-        "D": "Only for relief consignment shipments"
-      },
-      "correct": "B",
-      "reason": "Correct answer: B. Section 307 limits the temporary storage system to imports 'in case of abandoned or overstaying goods,' occurring 'prior to goods declaration,' distinguishing it from general warehousing arrangements."
-    },
-    "level4": {
-      "question": "A shipment at the Port of Davao remains unclaimed and overstaying for an extended period, with no goods declaration filed. The Commissioner wants to place it in temporary storage pending resolution. Under Section 307, what governs the Commissioner's authority to do this?",
-      "choices": {
-        "A": "The Commissioner has unlimited discretion with no governing rules",
-        "B": "The Commissioner establishes the storage system subject to rules and regulations issued by the Secretary of Finance",
-        "C": "Only the District Collector, not the Commissioner, may establish such a system",
-        "D": "Temporary storage is prohibited under the CMTA for overstaying goods"
-      },
-      "correct": "B",
-      "reason": "Correct answer: B. Section 307 states that, 'subject to the rules and regulations to be issued by the Secretary of Finance, the Commissioner shall establish a system for temporary storage of imports prior to goods declaration in case of abandoned or overstaying goods,' directly matching this scenario."
-    },
-    "level5": {
-      "question": "Under Section 307, for what two categories of goods does the Commissioner establish a system of temporary storage prior to goods declaration?",
-      "correct": "Abandoned or overstaying goods",
-      "reason": "Correct answer: Abandoned or overstaying goods. Section 307 states the Commissioner shall establish a system for temporary storage of imports 'prior to goods declaration in case of abandoned or overstaying goods.'"
-    }
-  },
-  
   "446": {
     "_title": "Title IX – Duty Drawback and Refund",
     "level1": {
@@ -5907,6 +5178,58 @@
       "reason": "Section 904, titled 'Abatement of Duties and Taxes,' applies when goods 'have not yet been released for consumption or have been placed under another customs procedure,' provided no other offense or violation has been committed."
     }
   },
+  "460": {
+    "_title": "Title II – Bureau of Customs",
+    "level1": {
+      "question": "Ilang oras ang ibinigay sa District Collector para i-report sa Commissioner ang designation ng acting District Collector ayon sa Section 211?",
+      "choices": {
+        "A": "12 oras",
+        "B": "24 oras",
+        "C": "48 oras",
+        "D": "72 oras"
+      },
+      "correct": "B",
+      "reason": "Tamang sagot: B. Ayon sa Section 211, 'The District Collector shall report the designation to the Commissioner within twenty-four (24) hours after the designation.' Ito ay kapag walang Deputy District Collector at kinailangang magtalaga ng senior ranking customs officer."
+    },
+    "level2": {
+      "question": "Under Section 211, within how many hours must the District Collector report the designation of an acting District Collector to the Commissioner?",
+      "choices": {
+        "A": "12 hours",
+        "B": "24 hours",
+        "C": "48 hours",
+        "D": "72 hours"
+      },
+      "correct": "B",
+      "reason": "Correct answer: B. Section 211 states 'The District Collector shall report the designation to the Commissioner within twenty-four (24) hours after the designation,' applicable when a senior ranking customs officer is designated in the absence of a Deputy District Collector."
+    },
+    "level3": {
+      "question": "Under Section 211, what is the correct order of succession when a District Collector is absent, disabled, or the position is vacant?",
+      "choices": {
+        "A": "The Commissioner immediately takes over personally",
+        "B": "The Deputy District Collector temporarily discharges the duties; if none exists, the District Collector designates a senior ranking customs officer, resolving ties by drawing of lots",
+        "C": "The most junior customs officer automatically takes over",
+        "D": "The position remains vacant until the Secretary of Finance appoints a replacement"
+      },
+      "correct": "B",
+      "reason": "Correct answer: B. Section 211 provides that 'the Deputy District Collector shall temporarily discharge the duties of the District Collector,' and 'should there be no Deputy District Collector, the District Collector shall designate, in writing, a senior ranking customs officer,' with 'a drawing of lots' used to break ties among equally senior officers."
+    },
+    "level4": {
+      "question": "The District Collector at the Port of Legazpi suddenly becomes incapacitated, and there is no Deputy District Collector at that port. Two customs officers have equal seniority and both are eligible for temporary designation. Under Section 211, how should this be resolved?",
+      "choices": {
+        "A": "Both officers share the position jointly",
+        "B": "A drawing of lots shall be undertaken to determine who is designated",
+        "C": "The Commissioner automatically breaks the tie",
+        "D": "The more senior officer's spouse decides"
+      },
+      "correct": "B",
+      "reason": "Correct answer: B. Section 211 provides that 'in case there are two (2) or more senior ranking customs officers with equal length of service, a drawing of lots shall be undertaken' to determine who temporarily discharges the duties of the District Collector."
+    },
+    "level5": {
+      "question": "Under Section 211, how is a tie resolved when two or more senior ranking customs officers have equal length of service for temporary designation as Acting District Collector?",
+      "correct": "A drawing of lots",
+      "reason": "Correct answer: A drawing of lots. Section 211 states that 'in case there are two (2) or more senior ranking customs officers with equal length of service, a drawing of lots shall be undertaken.'"
+    }
+  },
   "463": {
     "_title": "Title IX – Duty Drawback and Refund",
     "level1": {
@@ -6011,6 +5334,58 @@
       "reason": "Paragraph (d) covers goods lost 'while released under sufficient security for export except in case of loss by theft,' making theft the sole named exclusion under that particular circumstance."
     }
   },
+  "470": {
+    "_title": "Title II – Bureau of Customs",
+    "level1": {
+      "question": "Ano ang dapat gawin ng isang authorized person kapag nagsasagawa ng police authority at siya ay tinanong?",
+      "choices": {
+        "A": "Huwag sumagot",
+        "B": "I-disclose ang kanyang authority at ipakita ang written authority mula sa Commissioner",
+        "C": "Umalis agad",
+        "D": "Tumawag ng abogado bago sumagot"
+      },
+      "correct": "B",
+      "reason": "Tamang sagot: B. Ayon sa Section 217, dapat 'disclose the nature of the authority upon being questioned at the time of exercise thereof and shall exhibit the corresponding written authority issued by the Commissioner.' Kailangan itong gawin para maprotektahan ang karapatan ng taong nire-regulate."
+    },
+    "level2": {
+      "question": "Under Section 217, what must an authorized person do when questioned while exercising police authority?",
+      "choices": {
+        "A": "Remain silent until legal counsel arrives",
+        "B": "Disclose the nature of the authority and exhibit the written authority issued by the Commissioner",
+        "C": "Immediately arrest the person questioning them",
+        "D": "Refer the matter to the Secretary of Finance"
+      },
+      "correct": "B",
+      "reason": "Correct answer: B. Section 217 requires that the authorized person 'shall disclose the nature of the authority upon being questioned at the time of exercise thereof and shall exhibit the corresponding written authority issued by the Commissioner.'"
+    },
+    "level3": {
+      "question": "What is the practical purpose of the disclosure requirement under Section 217 when police authority is being exercised?",
+      "choices": {
+        "A": "To slow down customs enforcement unnecessarily",
+        "B": "To ensure the person being subjected to police authority can verify the legitimacy of the authority being exercised",
+        "C": "To allow the authorized person to avoid liability entirely",
+        "D": "It has no practical purpose; it is purely ceremonial"
+      },
+      "correct": "B",
+      "reason": "Correct answer: B. Section 217 requires disclosure of 'the nature of the authority upon being questioned' and exhibition of 'the corresponding written authority issued by the Commissioner,' functioning as a safeguard so that individuals can verify that police authority is being lawfully and legitimately exercised."
+    },
+    "level4": {
+      "question": "A customs officer conducting a search at the Port of Manila is questioned by the shipment owner about the basis of the officer's authority. The officer refuses to explain or show any documentation. Under Section 217, is this conduct proper?",
+      "choices": {
+        "A": "Yes, officers are never required to explain their authority",
+        "B": "No, because Section 217 requires disclosure of the nature of the authority and exhibition of the written authority issued by the Commissioner when questioned",
+        "C": "Yes, as long as the officer is in uniform",
+        "D": "No, but only if the shipment owner is a foreign national"
+      },
+      "correct": "B",
+      "reason": "Correct answer: B. Section 217 requires that the authorized person 'disclose the nature of the authority upon being questioned at the time of exercise thereof and shall exhibit the corresponding written authority issued by the Commissioner,' making the officer's refusal improper."
+    },
+    "level5": {
+      "question": "Under Section 217, what must an authorized person exhibit when questioned about their authority while exercising police authority?",
+      "correct": "The written authority issued by the Commissioner",
+      "reason": "Correct answer: The written authority issued by the Commissioner. Section 217 requires that the person 'shall exhibit the corresponding written authority issued by the Commissioner.'"
+    }
+  },
   "471": {
     "_title": "Title IX – Duty Drawback and Refund",
     "level1": {
@@ -6063,6 +5438,110 @@
       "reason": "Section 909 requires that defective goods 'are returned either to the supplier or to another person designated by the supplier,' subject to conditions on non-use and timely reexportation or reimportation."
     }
   },
+  "472": {
+    "_title": "Title II – Bureau of Customs",
+    "level1": {
+      "question": "Ayon sa Section 219, maaari bang pasukin ng taong may police authority ang isang warehouse nang walang warrant?",
+      "choices": {
+        "A": "Oo, dahil ang warehouse ay hindi principal na ginagamit bilang dwelling house",
+        "B": "Hindi, kailangan palaging may warrant",
+        "C": "Oo, pero kailangan munang humingi ng pahintulot sa court",
+        "D": "Hindi, dahil bawal ang pagpasok sa anumang building"
+      },
+      "correct": "A",
+      "reason": "Tamang sagot: A. Ayon sa Section 219, maaaring pasukin at hanapin 'any land, enclosure, warehouse, store, building or structure not principally used as a dwelling house' nang walang warrant. Iba ito sa dwelling house na kailangan ng warrant ayon sa Section 220."
+    },
+    "level2": {
+      "question": "Under Section 219, a person exercising police authority may enter and search which of the following without a warrant?",
+      "choices": {
+        "A": "Any structure not principally used as a dwelling house",
+        "B": "Any private residence at any time",
+        "C": "Only government buildings",
+        "D": "Only vessels docked at a port"
+      },
+      "correct": "A",
+      "reason": "Correct answer: A. Section 219 authorizes entry into 'any land, enclosure, warehouse, store, building or structure not principally used as a dwelling house,' distinguishing this from the warrant requirement for dwelling houses under Section 220."
+    },
+    "level3": {
+      "question": "Under Section 219, how does the CMTA treat a warehouse where a security guard resides, for purposes of the warrantless entry rule?",
+      "choices": {
+        "A": "It is always treated as a dwelling house requiring a warrant",
+        "B": "It is not considered a dwelling house under the CMTA, even if a security personnel or employee lives there",
+        "C": "It depends entirely on the discretion of the local court",
+        "D": "The CMTA does not address this situation at all"
+      },
+      "correct": "B",
+      "reason": "Correct answer: B. Section 219 explicitly states that 'when a security personnel or any other employee lives in the warehouse, store, or any building, structure or enclosure that is used for storage of goods, it shall not be considered as a dwelling house for purposes of this Act,' allowing warrantless entry despite residential use by staff."
+    },
+    "level4": {
+      "question": "Customs officers enter a bonded warehouse at the Port of Batangas without a warrant to inspect stored goods. A security guard who lives on-site objects, claiming the warehouse is his dwelling and requires a warrant. Under Section 219, is the warrantless entry valid?",
+      "choices": {
+        "A": "No, any residence by an employee automatically makes it a dwelling house requiring a warrant",
+        "B": "Yes, because a warehouse used for storage is not considered a dwelling house even if a security personnel lives there",
+        "C": "No, warehouses always require warrants regardless of use",
+        "D": "Yes, but only if the guard consents"
+      },
+      "correct": "B",
+      "reason": "Correct answer: B. Section 219 explicitly provides that when 'a security personnel or any other employee lives in the warehouse, store, or any building, structure or enclosure that is used for storage of goods, it shall not be considered as a dwelling house for purposes of this Act,' validating the warrantless entry."
+    },
+    "level5": {
+      "question": "Under Section 219, what type of structure is generally not considered a dwelling house even if a security personnel or employee lives there?",
+      "correct": "A warehouse, store, or building used for storage of goods",
+      "reason": "Correct answer: A warehouse, store, or building used for storage of goods. Section 219 states that such a structure 'shall not be considered as a dwelling house for purposes of this Act' even when a security personnel or employee resides there."
+    }
+  },
+  "473": {
+    "_title": "Title II – Bureau of Customs",
+    "level1": {
+      "question": "Ano ang kailangan bago mahalughog ang isang dwelling house ayon sa Section 220?",
+      "choices": {
+        "A": "Verbal na pahintulot ng may-ari",
+        "B": "Warrant mula sa isang Judge ng competent court",
+        "C": "Pahintulot lamang ng Commissioner",
+        "D": "Walang kailangan, basta may reasonable suspicion"
+      },
+      "correct": "B",
+      "reason": "Tamang sagot: B. Ayon sa Section 220, 'A dwelling house may be entered and searched only upon warrant issued by a Judge of a competent court,' kasama ang sworn application na nagpapakita ng probable cause. Mahigpit ito kumpara sa warehouse o iba pang structure."
+    },
+    "level2": {
+      "question": "Under Section 220, a dwelling house may only be entered and searched upon:",
+      "choices": {
+        "A": "Verbal consent of any occupant",
+        "B": "A warrant issued by a Judge of a competent court based on probable cause",
+        "C": "Written authorization from the Commissioner alone",
+        "D": "Any suspicion of wrongdoing without further requirement"
+      },
+      "correct": "B",
+      "reason": "Correct answer: B. Section 220 requires 'a warrant issued by a Judge of a competent court, the sworn application thereupon showing probable cause and particularly describing the place to be searched and the goods to be seized.'"
+    },
+    "level3": {
+      "question": "What specific requirements must a warrant application meet before a dwelling house may be searched under Section 220?",
+      "choices": {
+        "A": "It need only state a general suspicion of wrongdoing",
+        "B": "It must show probable cause and particularly describe both the place to be searched and the goods to be seized",
+        "C": "It only needs the signature of a customs officer, without judicial involvement",
+        "D": "No specific requirements exist beyond obtaining any court order"
+      },
+      "correct": "B",
+      "reason": "Correct answer: B. Section 220 requires 'the sworn application thereupon showing probable cause and particularly describing the place to be searched and the goods to be seized,' reflecting constitutional search warrant standards applied specifically to dwelling houses under the CMTA."
+    },
+    "level4": {
+      "question": "Customs officers suspect that smuggled goods are hidden inside a private residence in Quezon City. They wish to search the house without first obtaining any court document, citing urgency. Under Section 220, is this search lawful?",
+      "choices": {
+        "A": "Yes, urgency always excuses the warrant requirement",
+        "B": "No, because a dwelling house may only be entered and searched upon a warrant issued by a judge based on probable cause, particularly describing the place and goods",
+        "C": "Yes, as long as the Commissioner verbally approves",
+        "D": "No, but only if the residence belongs to a foreign national"
+      },
+      "correct": "B",
+      "reason": "Correct answer: B. Section 220 unambiguously requires that 'a dwelling house may be entered and searched only upon warrant issued by a Judge of a competent court, the sworn application thereupon showing probable cause and particularly describing the place to be searched and the goods to be seized.'"
+    },
+    "level5": {
+      "question": "Under Section 220, what must a warrant application for searching a dwelling house particularly describe?",
+      "correct": "The place to be searched and the goods to be seized",
+      "reason": "Correct answer: The place to be searched and the goods to be seized. Section 220 requires the sworn application to show probable cause and 'particularly describing the place to be searched and the goods to be seized.'"
+    }
+  },
   "474": {
     "_title": "Title IX – Duty Drawback and Refund",
     "level1": {
@@ -6113,6 +5592,58 @@
       "question": "Under Section 910, aside from proper certification, what must the importer do with the carcass of a dead imported animal to qualify for abatement of duty?",
       "correct": "Remove the carcass in the manner required by the Bureau, at the importer's expense",
       "reason": "Section 910 conditions abatement on the requirement that 'its carcass on board or in customs custody is removed in the manner required by the Bureau and at the expense of the importer,' in addition to proper certification under pain of penalty for falsification or perjury."
+    }
+  },
+  "476": {
+    "_title": "Title II – Bureau of Customs",
+    "level1": {
+      "question": "Ayon sa Section 223, sino ang maaaring gamitin para maghalughog sa mga babaeng traveler na galing sa ibang bansa?",
+      "choices": {
+        "A": "Kahit sinong customs officer",
+        "B": "Female inspectors",
+        "C": "Pulis lamang",
+        "D": "Hindi maaaring halughugin ang mga babae"
+      },
+      "correct": "B",
+      "reason": "Tamang sagot: B. Ayon sa Section 223, 'Female inspectors may be employed for the examination and search of persons of their own sex,' habang iginagalang ang dignidad ng taong sinasala at dine-detain."
+    },
+    "level2": {
+      "question": "Under Section 223, who may be employed for the examination and search of female travelers arriving from foreign countries?",
+      "choices": {
+        "A": "Any available customs officer",
+        "B": "Female inspectors",
+        "C": "Only the District Collector personally",
+        "D": "Members of the PNP exclusively"
+      },
+      "correct": "B",
+      "reason": "Correct answer: B. Section 223 provides that 'Female inspectors may be employed for the examination and search of persons of their own sex,' while requiring that the dignity of the person searched be respected at all times."
+    },
+    "level3": {
+      "question": "How does Section 223 balance the Bureau's authority to search travelers with respect for individual dignity?",
+      "choices": {
+        "A": "It grants unlimited search authority without any dignity safeguards",
+        "B": "It allows search and detention only upon reasonable cause, requires that dignity be respected at all times, and provides for female inspectors to search persons of their own sex",
+        "C": "It prohibits all searches of arriving travelers",
+        "D": "It applies dignity protections only to Philippine citizens, not foreigners"
+      },
+      "correct": "B",
+      "reason": "Correct answer: B. Section 223 conditions search and detention on 'reasonable cause,' mandates that 'the dignity of the person under search and detention shall be respected at all times,' and provides that 'female inspectors may be employed for the examination and search of persons of their own sex,' balancing enforcement authority with personal dignity."
+    },
+    "level4": {
+      "question": "A female traveler arriving at NAIA is flagged for search based on reasonable cause. The airport has only male customs officers on duty at that moment. Under Section 223, what is the proper approach?",
+      "choices": {
+        "A": "Any male officer may proceed with the search immediately",
+        "B": "The search should involve female inspectors for examining persons of the same sex, while respecting the traveler's dignity at all times",
+        "C": "The traveler cannot be searched under any circumstance",
+        "D": "The search must be postponed indefinitely until a female inspector transfers permanently to that airport"
+      },
+      "correct": "B",
+      "reason": "Correct answer: B. Section 223 provides that 'female inspectors may be employed for the examination and search of persons of their own sex,' while also mandating that 'the dignity of the person under search and detention shall be respected at all times,' guiding proper procedure in this scenario."
+    },
+    "level5": {
+      "question": "Under Section 223, who may be employed for the examination and search of female travelers arriving from foreign countries?",
+      "correct": "Female inspectors",
+      "reason": "Correct answer: Female inspectors. Section 223 states that 'female inspectors may be employed for the examination and search of persons of their own sex.'"
     }
   },
   "477": {
@@ -6269,6 +5800,110 @@
       "question": "Under Section 1001 of the CMTA, what kind of system is used to select firms for a post clearance audit, based on objective and quantifiable data?",
       "correct": "Computer-aided risk management system",
       "reason": "Section 1001 states that the audit of importers 'shall be conducted when firms are selected by a computer-aided risk management system, the parameters of which are to be based on objective and quantifiable data.' This ensures that audit selection is data-driven rather than arbitrary or complaint-based."
+    }
+  },
+  "484": {
+    "_title": "Title III – Customs Jurisdiction and Customs Control",
+    "level1": {
+      "question": "Sino ang may exclusive control, direction, at management sa mga customs office, warehouse, port, airport, at wharves sa loob ng Customs District ayon sa Section 303?",
+      "choices": {
+        "A": "Ang Bureau of Customs",
+        "B": "Ang local government unit",
+        "C": "Ang Philippine Coast Guard lamang",
+        "D": "Ang pribadong port operator"
+      },
+      "correct": "A",
+      "reason": "Tamang sagot: A. Ayon sa Section 303, ang Bureau ay may 'exclusive control, direction and management of customs offices, facilities, warehouses, ports, airports, wharves, infrastructure and other premises in the Customs Districts.' Hindi nito inaalis ang general police powers ng LGUs, Coast Guard, at iba pang law enforcement agencies."
+    },
+    "level2": {
+      "question": "Under Section 303, the Bureau's exclusive control, direction and management over customs premises is exercised without prejudice to the general police powers of:",
+      "choices": {
+        "A": "The Department of Trade and Industry only",
+        "B": "The LGUs, the Philippine Coast Guard, and law enforcement agencies",
+        "C": "Foreign customs administrations",
+        "D": "The Tariff Commission only"
+      },
+      "correct": "B",
+      "reason": "Correct answer: B. Section 303 states the Bureau's exclusive control over customs premises applies 'in all cases without prejudice to the general police powers of the local government units (LGUs), the Philippine Coast Guard and law enforcement agencies in the exercise of their respective functions.'"
+    },
+    "level3": {
+      "question": "How does Section 303's grant of exclusive control over customs premises to the Bureau interact with the authority of LGUs and the Philippine Coast Guard?",
+      "choices": {
+        "A": "It completely removes any authority from LGUs and the Coast Guard over those areas",
+        "B": "The Bureau's exclusive control coexists with, and does not diminish, the general police powers of LGUs, the Coast Guard, and law enforcement agencies",
+        "C": "LGUs and the Coast Guard have superior authority over the Bureau in customs premises",
+        "D": "Only the Coast Guard retains authority, while LGU powers are suspended"
+      },
+      "correct": "B",
+      "reason": "Correct answer: B. Section 303 grants the Bureau exclusive control over customs premises 'without prejudice to the general police powers of the local government units (LGUs), the Philippine Coast Guard and law enforcement agencies in the exercise of their respective functions,' meaning both authorities operate concurrently rather than one displacing the other."
+    },
+    "level4": {
+      "question": "A local government unit at the Port of Cebu attempts to conduct a routine police inspection near a Bureau-controlled wharf, and the Bureau objects, claiming exclusive control under Section 303. Is the Bureau's objection valid?",
+      "choices": {
+        "A": "Yes, the Bureau's exclusive control completely bars any LGU police action in the area",
+        "B": "No, because Section 303 exclusive control is without prejudice to the general police powers of LGUs in the exercise of their functions",
+        "C": "Yes, but only if the LGU has no prior coordination",
+        "D": "No, because the Bureau has no authority over wharves at all"
+      },
+      "correct": "B",
+      "reason": "Correct answer: B. Section 303 grants the Bureau exclusive control over customs premises but expressly states this is 'without prejudice to the general police powers of the local government units (LGUs)...in the exercise of their respective functions,' meaning the LGU's routine police inspection may proceed alongside Bureau control."
+    },
+    "level5": {
+      "question": "Under Section 303 of the CMTA, whose general police powers are expressly preserved despite the Bureau's exclusive control over customs premises?",
+      "correct": "LGUs, the Philippine Coast Guard, and law enforcement agencies",
+      "reason": "Correct answer: LGUs, the Philippine Coast Guard, and law enforcement agencies. Section 303 states the Bureau's exclusive control is exercised 'without prejudice to the general police powers of the local government units (LGUs), the Philippine Coast Guard and law enforcement agencies in the exercise of their respective functions.'"
+    }
+  },
+  "485": {
+    "_title": "Title III – Customs Jurisdiction and Customs Control",
+    "level1": {
+      "question": "Sino ang may kapangyarihang mag-declare, sa pamamagitan ng executive order, na ang isang public wharf o landing place ay ilalagay sa ilalim ng jurisdiction ng Bureau para sa customs purposes?",
+      "choices": {
+        "A": "Ang Commissioner",
+        "B": "Ang Kongreso",
+        "C": "Ang Pangulo ng Pilipinas",
+        "D": "Ang Secretary of Finance"
+      },
+      "correct": "C",
+      "reason": "Tamang sagot: C. Ayon sa Section 304, 'the President may, by executive order, declare any public wharf, landing place, infrastructure, street or land, in any port of entry under the jurisdiction of the Bureau as may be necessary, for customs purposes.' Kasama rin dito ang kapangyarihang mag-authorize ng transfer ng overstaying cargoes papunta sa inland depot."
+    },
+    "level2": {
+      "question": "Under Section 304, the President may, by executive order, place a public wharf, landing place, or land under Bureau jurisdiction:",
+      "choices": {
+        "A": "Only upon approval of the Tariff Commission",
+        "B": "Whenever a private port operator requests it",
+        "C": "When public interest requires it, for customs purposes",
+        "D": "Only after a Congressional resolution"
+      },
+      "correct": "C",
+      "reason": "Correct answer: C. Section 304 states 'when public interest requires, the President may, by executive order, declare any public wharf, landing place, infrastructure, street or land, in any port of entry under the jurisdiction of the Bureau as may be necessary, for customs purposes.'"
+    },
+    "level3": {
+      "question": "What is the significance of the phrase 'when public interest requires' in Section 304's grant of power to the President?",
+      "choices": {
+        "A": "It means the President may act at any time without justification",
+        "B": "It sets a threshold condition that limits the President's exercise of this power to situations justified by public interest",
+        "C": "It applies only during declared states of emergency",
+        "D": "It has no legal significance and is merely decorative language"
+      },
+      "correct": "B",
+      "reason": "Correct answer: B. Section 304 conditions the President's power to place premises under Bureau jurisdiction on the phrase 'when public interest requires,' establishing this as a substantive limitation rather than an unconditional grant of authority."
+    },
+    "level4": {
+      "question": "Cargo has been overstaying at the Port of Manila for several months, congesting the terminal. The port operator wants authority to transfer this cargo to an inland depot. Under Section 304, who may grant this authorization?",
+      "choices": {
+        "A": "The port operator may act unilaterally without any authorization",
+        "B": "Only the Bureau of Customs may authorize this, and only through a formal request to the LGU",
+        "C": "The President, by executive order, may authorize the port or terminal operator to transfer the overstaying cargoes to an inland depot or terminal",
+        "D": "Only the Tariff Commission may issue such authorization"
+      },
+      "correct": "C",
+      "reason": "Correct answer: C. Section 304 states the President may, by executive order, 'authorize a port or terminal operator to transfer overstaying cargoes in an inland depot or terminal,' addressing exactly this congestion scenario."
+    },
+    "level5": {
+      "question": "Under Section 304, through what legal instrument may the President place a public wharf or landing place under Bureau jurisdiction for customs purposes?",
+      "correct": "Executive order",
+      "reason": "Correct answer: Executive order. Section 304 states 'the President may, by executive order, declare any public wharf, landing place, infrastructure, street or land, in any port of entry under the jurisdiction of the Bureau as may be necessary, for customs purposes.'"
     }
   },
   "486": {
@@ -12275,6 +11910,370 @@
       "question": "Under Section 1611, what additional duty is levied across-the-board on products of any foreign country that discriminates against Philippine export products?",
       "correct": "100%",
       "reason": "Correct answer: 100%. Section 1611 of the CMTA provides that 'An additional one hundred percent (100%) across-the-board duty shall be levied on the products of any foreign country which discriminates against Philippine export products.' This additional duty is layered on top of the regular applicable duty, and the specific rate is 100% ad valorem."
+    }
+  },
+  "863": {
+    "_title": "Title XVII – Congressional Oversight Committee",
+    "level1": {
+      "question": "Ayon sa Section 1700 ng CMTA, sino ang bumubuo sa Congressional Customs and Tariff Oversight Committee?",
+      "choices": {
+        "A": "Ang Commissioner of Customs kasama ang lahat ng Deputy Commissioner mula sa iba't ibang customs district",
+        "B": "Ang mga Chairpersons ng Committee on Ways and Means ng Senado at Kamara, kasama ang apat na karagdagang miyembro mula sa bawat Kapulungan",
+        "C": "Ang Kalihim ng Department of Finance kasama ang mga hinirang na kinatawan mula sa iba't ibang industriyang kaugnay ng kalakalan",
+        "D": "Ang Ombudsman kasama ang mga miyembro ng Commission on Audit na itinalaga upang mag-imbestiga sa Bureau"
+      },
+      "correct": "B",
+      "reason": "Tamang sagot: B. Ayon sa Section 1700, ang Committee ay binubuo ng 'the Chairpersons of the Committee on Ways and Means of the Senate and House of Representatives and four (4) additional members from each House, to be designated by the Senate President and the Speaker of the House of Representatives, respectively.' Hindi kasama rito ang Commissioner of Customs, ang Kalihim ng DOF, o ang Ombudsman dahil ito ay komite ng Kongreso, hindi ng ehekutibong sangay."
+    },
+    "level2": {
+      "question": "Under Section 1700 of the CMTA, the Congressional Customs and Tariff Oversight Committee performs its enumerated functions primarily in aid of what governmental function?",
+      "choices": {
+        "A": "Judicial review of Bureau of Customs decisions on tariff classification disputes",
+        "B": "Executive implementation of customs valuation rules across all ports of entry",
+        "C": "International trade negotiations with ASEAN member states on tariff concessions",
+        "D": "Legislation, through the Committee's monitoring of the Bureau's implementation, collection performance, and programs"
+      },
+      "correct": "D",
+      "reason": "Correct answer: D. Section 1700 states the Committee shall perform its enumerated functions 'in aid of legislation,' meaning its oversight role feeds back into Congress's law-making function rather than judicial, executive, or diplomatic action. Choices A, B, and C describe functions that belong to other branches or bodies, not to a congressional oversight committee."
+    },
+    "level3": {
+      "question": "Which of the following best explains why the Congressional Customs and Tariff Oversight Committee is composed of members from both the Senate and the House of Representatives, rather than being an internal Bureau of Customs body?",
+      "choices": {
+        "A": "Because its oversight function is legislative in nature, requiring representation from both chambers of Congress that enacted the CMTA",
+        "B": "Because the Bureau of Customs lacks the technical expertise needed to monitor its own performance and requires external legislative supervision",
+        "C": "Because the Department of Finance delegated its supervisory authority over the Bureau to a joint congressional committee",
+        "D": "Because international trade treaties signed by the Philippines require the creation of bicameral customs oversight committees"
+      },
+      "correct": "A",
+      "reason": "Correct answer: A. The Committee's bicameral composition mirrors the fact that it acts 'in aid of legislation,' meaning its oversight is an extension of Congress's law-making authority over the Bureau, not a delegation from the executive branch. Choices B, C, and D misattribute the Committee's basis to technical incapacity, DOF delegation, or treaty obligations, none of which appear in Section 1700."
+    },
+    "level4": {
+      "question": "A newly elected Senator wants to strengthen legislative oversight of the Bureau of Customs' tariff collection performance. Based on Section 1700, what is the appropriate mechanism already available for this purpose?",
+      "choices": {
+        "A": "Filing a resolution requesting the Ombudsman to conduct a direct audit of the Bureau's collection records",
+        "B": "Requesting the Supreme Court to issue a writ of mandamus compelling the Commissioner to release performance data",
+        "C": "Raising the matter through the Congressional Customs and Tariff Oversight Committee, which reviews the Bureau's collection performance",
+        "D": "Directly instructing the Bureau's internal audit office to submit quarterly reports to the Senate plenary"
+      },
+      "correct": "C",
+      "reason": "Correct answer: C. Section 1700 already provides that the Committee shall 'Review the collection performance of the Bureau,' making it the proper legislative channel for this concern rather than the Ombudsman, the courts, or direct instructions to Bureau personnel. Choices A, B, and D bypass the mechanism the CMTA itself established for congressional oversight."
+    },
+    "level5": {
+      "question": "What is the official name of the body created under Section 1700 of the CMTA to oversee implementation of the Act 'in aid of legislation'?",
+      "correct": "Congressional Customs and Tariff Oversight Committee",
+      "reason": "Correct answer: Congressional Customs and Tariff Oversight Committee. Section 1700 constitutes this body and states it acts 'in aid of legislation' to monitor the Bureau's implementation, collection performance, and programs. CuBLE identification items often test this exact official name rather than a paraphrased description."
+    }
+  },
+  "864": {
+    "_title": "Title XVII – Congressional Oversight Committee",
+    "level1": {
+      "question": "Alin sa mga sumusunod ang HINDI kabilang sa mga tungkulin ng Congressional Oversight Committee ayon sa Section 1700?",
+      "choices": {
+        "A": "Subaybayan ang tamang pagpapatupad ng CMTA sa lahat ng customs district sa bansa",
+        "B": "Suriin ang collection performance ng Bureau kada taon batay sa mga inisyumiteng datos",
+        "C": "Aprubahan ang appointment ng Commissioner of Customs bago ito opisyal na maupo sa katungkulan",
+        "D": "Suriin ang implementasyon ng mga programa ng Bureau kasama ang mga proyektong pangkalakalan"
+      },
+      "correct": "C",
+      "reason": "Tamang sagot: C. Ang tatlong tungkulin ng Committee ayon sa Section 1700 ay 'Monitor and ensure the proper implementation of this Act,' 'Review the collection performance of the Bureau,' at 'Review the implementation of the programs of the Bureau.' Wala sa mga ito ang tungkol sa pag-apruba ng appointment ng Commissioner, kaya't choice C ang hindi kasama."
+    },
+    "level2": {
+      "question": "Which of the following is expressly listed under Section 1700 as a function of the Committee?",
+      "choices": {
+        "A": "Monitor and ensure the proper implementation of the CMTA across all customs offices nationwide",
+        "B": "Approve the annual budget allocation of the Bureau of Customs before submission to the DBM",
+        "C": "Appoint Deputy Commissioners of the Bureau upon recommendation of the Commissioner",
+        "D": "Draft implementing rules and regulations governing tariff classification disputes"
+      },
+      "correct": "A",
+      "reason": "Correct answer: A. Section 1700 paragraph (a) states the Committee shall 'Monitor and ensure the proper implementation of this Act.' Budget approval, appointment of Deputy Commissioners, and drafting implementing rules are executive or fiscal functions not assigned to this Committee."
+    },
+    "level3": {
+      "question": "The Committee's three enumerated functions under Section 1700 share which common characteristic?",
+      "choices": {
+        "A": "They all require prior written approval from the Department of Finance before being carried out",
+        "B": "They all involve direct enforcement action, such as seizure or forfeiture, against erring importers",
+        "C": "They are all limited in application to seaport operations, excluding airports and free zones",
+        "D": "They are all oversight or review functions rather than direct administrative or enforcement powers"
+      },
+      "correct": "D",
+      "reason": "Correct answer: D. Section 1700 assigns the Committee parallel duties to 'Monitor and ensure the proper implementation of this Act,' to 'Review the collection performance of the Bureau,' and to 'Review the implementation of the programs of the Bureau,' all of which are oversight or review functions rather than direct administrative or enforcement powers. Choices A, B, and C introduce requirements or limitations that do not appear anywhere in Section 1700."
+    },
+    "level4": {
+      "question": "During a Senate hearing, a lawmaker cites data showing the Bureau of Customs fell short of its annual collection target for three consecutive years. Which function under Section 1700 authorizes the Committee to take up this specific concern?",
+      "choices": {
+        "A": "Monitor and ensure the proper implementation of this Act, which covers general CMTA compliance",
+        "B": "Review the collection performance of the Bureau, which directly covers annual revenue targets",
+        "C": "Review the implementation of the programs of the Bureau, which covers trade facilitation projects",
+        "D": "Require submission of industry audit reports, which covers third-party compliance verification"
+      },
+      "correct": "B",
+      "reason": "Correct answer: B. Paragraph (b) of Section 1700 specifically empowers the Committee to 'Review the collection performance of the Bureau,' which directly matches a shortfall in collection targets, distinct from monitoring general implementation, reviewing programs, or requiring industry audits."
+    },
+    "level5": {
+      "question": "Under Section 1700(a) of the CMTA, what specific function must the Committee perform with respect to the Act itself?",
+      "correct": "Monitor and ensure the proper implementation of the Act",
+      "reason": "Correct answer: Monitor and ensure the proper implementation of the Act. Section 1700, paragraph (a), states the Committee shall 'Monitor and ensure the proper implementation of this Act,' distinguishing it from paragraphs (b) and (c), which cover collection performance and program implementation review, respectively."
+    }
+  },
+  "867": {
+    "_title": "Title XVII – Congressional Oversight Committee",
+    "level1": {
+      "question": "Bakit kailangang magsumite ang Bureau of Customs ng mga impormasyon sa Congressional Oversight Committee?",
+      "choices": {
+        "A": "Dahil ito ay kailangan para sa taunang audit na isinasagawa ng Commission on Audit sa Bureau",
+        "B": "Dahil ito ay hinihingi ng Department of Trade and Industry para sa mga free trade agreement na pinasok",
+        "C": "Dahil ito ay isang kondisyon bago maglabas ng import permit sa mga negosyanteng kasangkot",
+        "D": "Dahil ito ay para tulungan ang Committee na maisagawa ang mga layuning nakasaad sa Section 1700"
+      },
+      "correct": "D",
+      "reason": "Tamang sagot: D. Ayon sa Section 1700, 'In furtherance of the hereinabove cited objectives, the Committee shall require the Bureau to submit all pertinent information.' Ibig sabihin, ang pagsusumite ng impormasyon ay para lamang suportahan ang mga layunin ng Committee, hindi para sa COA, DTI, o import permits."
+    },
+    "level2": {
+      "question": "The phrase 'in furtherance of the hereinabove cited objectives' in the Information provision of Section 1700 refers to which objectives?",
+      "choices": {
+        "A": "The objectives of the Bureau's Trade Facilitation and Border Protection mandate under separate legislation",
+        "B": "The Committee's functions of monitoring implementation and reviewing collection performance and programs",
+        "C": "The objectives of the Anti-Red Tape Authority in streamlining government transactions",
+        "D": "The objectives of the National Single Window system for electronic trade documentation"
+      },
+      "correct": "B",
+      "reason": "Correct answer: B. The Information provision opens with 'In furtherance of the hereinabove cited objectives,' directly linking the required submissions back to the Committee's earlier functions of monitoring implementation and reviewing collection performance and programs. Choices A, C, and D refer to entities or systems not mentioned in this provision."
+    },
+    "level3": {
+      "question": "What is the legal significance of requiring the Bureau to submit 'all pertinent information' to the Committee under Section 1700?",
+      "choices": {
+        "A": "It transfers supervisory authority over the Bureau from the executive branch to the legislative branch entirely",
+        "B": "It creates a private right of action allowing taxpayers to sue the Bureau directly in court",
+        "C": "It operationalizes the Committee's oversight function by giving it the factual basis needed to monitor and review",
+        "D": "It replaces the Bureau's existing obligation to submit annual reports to the Commission on Audit"
+      },
+      "correct": "C",
+      "reason": "Correct answer: C. Section 1700 requires the Bureau to submit 'all pertinent information' precisely so the Committee has the factual basis it needs to monitor and review the Bureau, rather than transferring authority, creating new causes of action, or displacing COA reporting requirements. Choices A, B, and D describe consequences not supported by the text of Section 1700."
+    },
+    "level4": {
+      "question": "The Committee formally requests the Bureau of Customs to submit data supporting its oversight functions for the current fiscal year. Under Section 1700, is the Bureau obligated to comply?",
+      "choices": {
+        "A": "Yes, because the Committee shall require the Bureau to submit all pertinent information supporting its oversight objectives",
+        "B": "No, because only the Department of Finance has authority to compel the Bureau to submit performance reports",
+        "C": "Yes, but only after the request is first cleared by the Office of the President for confidentiality reasons",
+        "D": "No, because information requests of this kind require a separate implementing rule issued by the Bureau"
+      },
+      "correct": "A",
+      "reason": "Correct answer: A. Section 1700 provides that 'the Committee shall require the Bureau to submit all pertinent information' in furtherance of its oversight objectives, so the Bureau is expected to comply without needing DOF, presidential, or separate implementing-rule approval. Choices B, C, and D impose extra conditions not found in the provision."
+    },
+    "level5": {
+      "question": "Under Section 1700, what must the Bureau of Customs submit to the Committee in furtherance of the Committee's oversight objectives?",
+      "correct": "All pertinent information",
+      "reason": "Correct answer: All pertinent information. Section 1700 states the Committee shall require the Bureau to submit 'all pertinent information,' which is further broken down into industry audits, collection performance data, and a status report on administrative, civil, and criminal actions."
+    }
+  },
+  "868": {
+    "_title": "Title XVII – Congressional Oversight Committee",
+    "level1": {
+      "question": "Alin sa mga sumusunod ang HINDI kabilang sa mga impormasyong dapat isumite ng Bureau sa Committee ayon sa Section 1700?",
+      "choices": {
+        "A": "Listahan ng mga empleyado ng Bureau na kasalukuyang nagbabakasyon o naka-leave sa taunang panahon",
+        "B": "Industry audits na isinasagawa upang masuri ang pagsunod ng mga negosyo sa customs regulations",
+        "C": "Collection performance data na nagpapakita ng antas ng koleksyon ng Bureau kada taon",
+        "D": "Status report tungkol sa administrative, civil, at criminal actions laban sa mga taong lumabag"
+      },
+      "correct": "A",
+      "reason": "Tamang sagot: A. Ang tatlong impormasyong dapat isumite ayon sa Section 1700 ay 'Industry audits,' 'Collection performance data,' at 'Status report on administrative, civil and criminal actions initiated against persons.' Walang binanggit tungkol sa listahan ng mga nagbabakasyong empleyado, kaya't choice A ang hindi kasama."
+    },
+    "level2": {
+      "question": "Which of the following is expressly listed under Section 1700 as information the Bureau must submit to the Committee?",
+      "choices": {
+        "A": "Personnel promotion records showing career advancement of Bureau employees across ranks",
+        "B": "Industry audits conducted to verify the compliance of businesses with customs regulations",
+        "C": "Import license renewal schedules maintained by the Bureau for regulated commodities",
+        "D": "Bureau organizational charts reflecting the current structure of customs districts"
+      },
+      "correct": "B",
+      "reason": "Correct answer: B. Section 1700 lists 'Industry audits' as one of three specific categories of information the Bureau must submit, alongside collection performance data and a status report on legal actions. The other choices are not mentioned anywhere in the provision."
+    },
+    "level3": {
+      "question": "Why does Section 1700 require the Bureau to submit a status report specifically on actions initiated against persons, in addition to industry audits and collection performance data?",
+      "choices": {
+        "A": "Because criminal actions automatically suspend the Bureau's annual collection targets during litigation",
+        "B": "Because civil actions filed by the Bureau require prior Committee approval before being initiated",
+        "C": "Because this gives the Committee visibility into enforcement outcomes, complementing financial and audit data",
+        "D": "Because administrative actions are treated as confidential and require Committee clearance to disclose"
+      },
+      "correct": "C",
+      "reason": "Correct answer: C. Pairing the 'Status report on administrative, civil and criminal actions initiated against persons' with industry audits and collection performance data gives the Committee visibility into both the Bureau's financial performance and its enforcement effectiveness. Choices A, B, and D invent consequences or requirements not found anywhere in Section 1700."
+    },
+    "level4": {
+      "question": "The Committee is preparing an oversight report and asks the Bureau for data on ongoing forfeiture cases against importers. Under Section 1700, which category of required information covers this request?",
+      "choices": {
+        "A": "Industry audits, since forfeiture proceedings begin with a compliance audit of the importer's records",
+        "B": "Collection performance data, since forfeiture cases affect the Bureau's overall revenue collection figures",
+        "C": "Programs of the Bureau, since forfeiture enforcement is considered part of a broader anti-smuggling program",
+        "D": "Status report on administrative, civil, and criminal actions initiated against persons, which covers forfeiture cases"
+      },
+      "correct": "D",
+      "reason": "Correct answer: D. Forfeiture cases against importers fall under the 'Status report on administrative, civil and criminal actions initiated against persons,' which Section 1700 specifically requires the Bureau to report, separate from industry audits, collection data, or general program reviews."
+    },
+    "level5": {
+      "question": "Aside from industry audits and collection performance data, what is the third category of information the Bureau must submit to the Committee under Section 1700?",
+      "correct": "Status report on administrative, civil and criminal actions initiated against persons",
+      "reason": "Correct answer: Status report on administrative, civil and criminal actions initiated against persons. Section 1700 lists this exact phrase as the third required category of information, giving the Committee visibility into enforcement actions initiated against individuals or entities."
+    }
+  },
+  "876": {
+    "_title": "Title XVIII – Final Provisions",
+    "level1": {
+      "question": "Alin sa mga sumusunod ang direktang pinawalang-bisa (expressly repealed) ng CMTA sa ilalim ng Section 1803?",
+      "choices": {
+        "A": "Republic Act No. 8800 (Safeguard Measures Act)",
+        "B": "Executive Order No. 206",
+        "C": "Presidential Decree No. 1464 (Tariff and Customs Code of 1978)",
+        "D": "Republic Act No. 9135"
+      },
+      "correct": "C",
+      "reason": "Tamang sagot: C. Ayon sa Section 1803, ang 'Presidential Decree No. 1464, otherwise known as the Tariff and Customs Code of the Philippines of 1978, as amended' ay 'hereby expressly repealed' sa ilalim ng CMTA. Mali ang ibang choices dahil hindi sila ang partikular na batas na direktang binanggit sa Repealing Clause."
+    },
+    "level2": {
+      "question": "Under Section 1803 (Repealing Clause) of the CMTA, which specific presidential decree required an applicant for a letter of credit covering imports to deposit the full amount of duties due on the importation, and was therefore expressly repealed?",
+      "choices": {
+        "A": "Presidential Decree No. 1464",
+        "B": "Presidential Decree No. 1853",
+        "C": "Presidential Decree No. 1096",
+        "D": "Presidential Decree No. 705"
+      },
+      "correct": "B",
+      "reason": "Correct answer: B. Section 1803 expressly repeals 'Presidential Decree No. 1853 which require any applicant for letter of credit covering imports to deposit the full amount of duties due on the importation.' PD 1464 is also repealed under the same section, but it is identified as the old Tariff and Customs Code, not the letter of credit deposit requirement."
+    },
+    "level3": {
+      "question": "How should the Repealing Clause (Section 1803) be reconciled with the Saving Clause (Section 1802) of the CMTA?",
+      "choices": {
+        "A": "Section 1803 repeals all CAOs and CMOs issued under PD 1464, while Section 1802 has no bearing on their validity",
+        "B": "Section 1802 preserves CAOs, CMOs, and other issuances under PD 1464 that are not inconsistent with the CMTA, while Section 1803 expressly repeals PD 1464, PD 1853, and any other law, order, or regulation inconsistent with the CMTA",
+        "C": "Both sections repeal the same laws, making one of them redundant and without legal effect",
+        "D": "Section 1803 applies only to future issuances, while Section 1802 applies only to past issuances"
+      },
+      "correct": "B",
+      "reason": "Correct answer: B. Section 1802 provides that prior orders and issuances 'not inconsistent with the provisions of this Act, shall remain valid,' while Section 1803 expressly repeals PD 1464, PD 1853, and 'all other laws, acts, presidential decrees, executive orders, rules and regulations or parts thereof inconsistent with the provisions of this Act.' The two clauses work together: consistency preserves old issuances, inconsistency triggers repeal, so they are complementary rather than redundant."
+    },
+    "level4": {
+      "question": "An importer operating in the Clark Freeport Zone presents an old Customs Memorandum Order (CMO) issued under Presidential Decree No. 1464 to justify a documentary requirement that appears to conflict with a specific procedure under the CMTA. Which provision governs whether this old CMO can still be validly applied?",
+      "choices": {
+        "A": "Section 1801 (Transitory Provisions), because it governs all pending cases regardless of consistency with the CMTA",
+        "B": "Section 1803 (Repealing Clause), because it expressly repeals PD 1464 and any inconsistent CMO automatically, while consistent ones are addressed under Section 1802",
+        "C": "Section 1805 (Effectivity), because only the effectivity date determines whether old CMOs apply",
+        "D": "Section 1800 (Implementing Rules and Regulations), because only new IRRs issued by the Secretary of Finance can apply in Freeport zones"
+      },
+      "correct": "B",
+      "reason": "Correct answer: B. Section 1803 expressly repeals PD 1464 along with 'all other laws, acts, presidential decrees, executive orders, rules and regulations or parts thereof inconsistent with the provisions of this Act,' while Section 1802 preserves only those orders 'not inconsistent with the provisions of this Act.' Since the CMO in the scenario conflicts with a CMTA procedure, it falls under the inconsistent category and is deemed repealed, not preserved."
+    },
+    "level5": {
+      "question": "Aside from Presidential Decree No. 1464, what other presidential decree did Section 1803 of the CMTA expressly repeal for requiring letter of credit applicants covering imports to deposit the full amount of duties due?",
+      "correct": "Presidential Decree No. 1853",
+      "reason": "Section 1803 expressly repeals 'Presidential Decree No. 1853 which require any applicant for letter of credit covering imports to deposit the full amount of duties due on the importation,' in addition to repealing PD 1464, the old Tariff and Customs Code. Examinees often forget PD 1853 since PD 1464 is more commonly emphasized in review materials."
+    }
+  },
+  "877": {
+    "_title": "Title XVIII – Final Provisions",
+    "level1": {
+      "question": "Kung ang isang partikular na probisyon ng CMTA ay ideklarang invalid o unconstitutional ng korte, ang buong RA 10863 ay awtomatikong nawawalan na ng bisa sa kabuuan.",
+      "choices": {
+        "A": "Bahagyang Tama",
+        "B": "Hindi Matukoy",
+        "C": "Tama",
+        "D": "Mali"
+      },
+      "correct": "D",
+      "reason": "Tamang sagot: D. Ayon sa Section 1804, kapag ang anumang probisyon ng Act ay na-deklarang invalid o unconstitutional, 'the remaining provisions or parts shall remain in full force and effect.' Kaya mali ang paniniwalang awtomatikong mawawalan ng bisa ang buong batas dahil lamang sa isang seksyon nito."
+    },
+    "level2": {
+      "question": "What is the legal term for a clause in a statute which provides that if one provision is declared invalid, the rest of the law remains in effect?",
+      "choices": {
+        "A": "Saving Clause",
+        "B": "Transitory Provision",
+        "C": "Separability Clause",
+        "D": "Repealing Clause"
+      },
+      "correct": "C",
+      "reason": "Correct answer: C. Section 1804 of the CMTA is titled 'Separability Clause' and provides that 'the remaining provisions or parts shall remain in full force and effect' if any provision is declared invalid or unconstitutional. A Saving Clause instead protects the validity of prior orders and issuances, which is a different concept found in Section 1802."
+    },
+    "level3": {
+      "question": "What underlying legislative intent does the Separability Clause in Section 1804 primarily serve to protect?",
+      "choices": {
+        "A": "That amendments to the CMTA automatically take effect once approved by the Bureau of Customs",
+        "B": "That the operability of the entire Act does not collapse merely because one provision is later struck down as invalid or unconstitutional",
+        "C": "That the Secretary of Finance may suspend the whole Act pending review of any single defective provision",
+        "D": "That only provisions relating to penalties are protected from invalidation"
+      },
+      "correct": "B",
+      "reason": "Correct answer: B. Section 1804 exists precisely so that if one provision is declared invalid or unconstitutional, 'the remaining provisions or parts shall remain in full force and effect,' preserving the rest of the law's operability. This reflects the general legal principle behind separability clauses in Philippine statutes, not merely a penalty-specific safeguard."
+    },
+    "level4": {
+      "question": "A Bureau of Customs examiner at the Ninoy Aquino International Airport (NAIA) refuses to release a shipment, arguing that since a court recently declared one specific CMTA provision on penalties unconstitutional, no part of the CMTA can be legally enforced until Congress passes a whole new law. Is the examiner's position correct under the Separability Clause?",
+      "choices": {
+        "A": "Incorrect, because Section 1804 provides that if one provision is declared invalid or unconstitutional, the remaining provisions remain in full force and effect",
+        "B": "Correct, because any successful constitutional challenge nullifies the entire CMTA",
+        "C": "Correct, but only for provisions involving penalties specifically",
+        "D": "Incorrect, because separability clauses apply only to provisions passed after 2016"
+      },
+      "correct": "A",
+      "reason": "Correct answer: A. Section 1804 (Separability Clause) explicitly states that should any provision be declared invalid or unconstitutional, 'the remaining provisions or parts shall remain in full force and effect.' The examiner's claim that the entire CMTA becomes unenforceable is a misapplication of this doctrine, since only the specific invalidated provision is affected."
+    },
+    "level5": {
+      "question": "What is the exact title given to Section 1804 of the CMTA, which provides that the remaining provisions of the Act stay in effect even if one provision is declared invalid or unconstitutional?",
+      "correct": "Separability Clause",
+      "reason": "Section 1804 of the CMTA is titled 'Separability Clause' and provides that if any provision of the Act is declared invalid or unconstitutional, 'the remaining provisions or parts shall remain in full force and effect.' This distinguishes it from the Saving Clause in Section 1802, which instead preserves prior orders and issuances rather than protecting the Act from partial invalidation."
+    }
+  },
+  "878": {
+    "_title": "Title XVIII – Final Provisions",
+    "level1": {
+      "question": "Batay sa Section 1805, ilang araw pagkatapos ng publikasyon nito sa Official Gazette o sa isang pahayagan ng pangkalahatang sirkulasyon magkakabisa ang CMTA?",
+      "choices": {
+        "A": "15 araw",
+        "B": "30 araw",
+        "C": "60 araw",
+        "D": "10 araw"
+      },
+      "correct": "A",
+      "reason": "Tamang sagot: A. Sinasabi ng Section 1805 na ang Act ay magkakabisa 'fifteen (15) days after its publication in the Official Gazette or in a newspaper of general circulation.' Karaniwang pagkakamali ng mga estudyante na ilagay ito sa 30 o 60 araw na katulad ng ibang batas."
+    },
+    "level2": {
+      "question": "Section 1805 of the CMTA governs which specific aspect of the law's implementation?",
+      "choices": {
+        "A": "Transitory Provisions",
+        "B": "Effectivity",
+        "C": "Implementing Rules and Regulations",
+        "D": "Separability Clause"
+      },
+      "correct": "B",
+      "reason": "Correct answer: B. Section 1805 is titled 'Effectivity' and states that 'this Act shall take effect fifteen (15) days after its publication in the Official Gazette or in a newspaper of general circulation.' Choice C refers instead to Section 1800, which tasks the Secretary of Finance with promulgating implementing rules."
+    },
+    "level3": {
+      "question": "Section 1805 states the CMTA takes effect fifteen (15) days after publication 'in the Official Gazette or in a newspaper of general circulation.' How should the word 'or' be interpreted for purposes of determining effectivity?",
+      "choices": {
+        "A": "Publication must occur in both the Official Gazette and a newspaper of general circulation before the 15-day period begins",
+        "B": "Publication in a newspaper of general circulation alone is insufficient; only the Official Gazette counts",
+        "C": "The 15-day period only begins once the Bureau of Customs issues an implementing CAO confirming publication",
+        "D": "Publication in either the Official Gazette or a newspaper of general circulation is sufficient to start the 15-day period, since the two modes are stated as alternatives"
+      },
+      "correct": "D",
+      "reason": "Correct answer: D. Section 1805 uses the disjunctive 'or' between 'Official Gazette' and 'newspaper of general circulation,' meaning either mode of publication triggers the running of the fifteen (15)-day period. This is a common board exam trap where examinees assume both modes are required, when the law only requires one."
+    },
+    "level4": {
+      "question": "A newly signed customs-related amendment to the CMTA was published in a newspaper of general circulation on August 1. A customs broker in Subic Bay Freeport insists that the amendment already governs a shipment being processed on August 10, citing 'immediate effectivity' of all new customs laws. Based on the pattern set by Section 1805, is the broker correct?",
+      "choices": {
+        "A": "Yes, because publication alone is sufficient regardless of any waiting period",
+        "B": "No, because such amendments typically take effect only after a stated period (such as fifteen days) following publication, unless the amendment itself provides otherwise",
+        "C": "Yes, because Freeport zones like Subic are exempt from effectivity clauses",
+        "D": "No, because amendments to the CMTA never require publication at all"
+      },
+      "correct": "B",
+      "reason": "Correct answer: B. Section 1805 establishes the standard pattern that the Act 'shall take effect fifteen (15) days after its publication in the Official Gazette or in a newspaper of general circulation,' and subsequent amendments typically follow a similar effectivity clause unless stated otherwise. The broker's assumption of immediate effect upon publication ignores this waiting period, a common scenario-based trap in board exams testing effectivity dates."
+    },
+    "level5": {
+      "question": "Under Section 1805 of the CMTA, how many days after publication in the Official Gazette or a newspaper of general circulation does the Act take effect? State the number of days only.",
+      "correct": "15",
+      "reason": "Section 1805 states that 'this Act shall take effect fifteen (15) days after its publication in the Official Gazette or in a newspaper of general circulation.' This fifteen-day rule is a frequently tested detail in board exams, often confused with the thirty-day periods used in other statutes."
     }
   }
 }
