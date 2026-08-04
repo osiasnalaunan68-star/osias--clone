@@ -2199,5 +2199,555 @@
     },
     "correct": "B",
     "reason": "The BOC may intercept imported goods subject to seizure even during land transport."
+  },
+  "201": {
+    "question": "At what specific juncture do customs duties and taxes officially become payable and legally collectible?",
+    "choices": {
+      "A": "Upon receipt of the formal notice of assessment.",
+      "B": "Upon the official filing of the goods declaration.",
+      "C": "Upon the moment the carrying vessel or aircraft arrives within Philippine territory.",
+      "D": "Upon the issuance of the final assessment order."
+    },
+    "correct": "B",
+    "reason": "Under the CMTA, duties and taxes become due and demandable upon the official filing or lodgement of the goods declaration."
+  },
+  "202": {
+    "question": "Can regulated imported merchandise be permitted to clear customs without first obtaining the mandatory import license or permit prior to filing the goods declaration?",
+    "choices": {
+      "A": "Yes, provided the Commissioner of Customs grants explicit approval.",
+      "B": "Yes, provided it is compliant with the prevailing laws, rules, and regulatory issuances.",
+      "C": "No, because such goods will be automatically deemed prohibited by the District Collector with jurisdiction over the shipment.",
+      "D": "No, because clearing them would constitute a direct violation of the law."
+    },
+    "correct": "D",
+    "reason": "Release of regulated goods without the required import permit is contrary to law and cannot be allowed."
+  },
+  "203": {
+    "question": "Which of the following options best describes the act of bringing goods into the country through the use of deceptive, falsified, or erroneous declaration regarding their nature, kind, quality, quantity, or weight, for the intent of diminishing or wholly avoiding prescribed duties, taxes, and other associated charges?",
+    "choices": {
+      "A": "Smuggling",
+      "B": "Importation contrary to law",
+      "C": "Technical smuggling",
+      "D": "Any of the choices provided are correct."
+    },
+    "correct": "C",
+    "reason": "Technical smuggling specifically refers to the fraudulent or erroneous declaration of goods to evade duties and taxes."
+  },
+  "204": {
+    "question": "Is it permissible for the Bureau of Customs to accept and act upon an appeal if it is submitted without the requisite supporting evidence?",
+    "choices": {
+      "A": "No, it is an established rule that the Bureau of Customs will outrightly reject an appeal devoid of supporting evidence.",
+      "B": "Yes, however, the supporting documentary proof must be submitted within a reasonable period of time.",
+      "C": "Yes, provided the administrative filing fee has been remitted.",
+      "D": "No, because failure to submit evidence constitutes a waiver of the right to file an appeal."
+    },
+    "correct": "A",
+    "reason": "Appeals before the Bureau of Customs strictly require supporting documents; otherwise, the appeal will not be accepted."
+  },
+  "205": {
+    "question": "Is it accurate to state that the statutory 20% annual legal interest is strictly and exclusively chargeable on outstanding customs duties and taxes, and does not apply to any other amounts?",
+    "choices": {
+      "A": "Yes, the legal interest is exclusively limited to unpaid principal customs duties and taxes.",
+      "B": "No, the legal interest also applies to administratively imposed fines and penalties.",
+      "C": "No, the legal interest equally applies to outstanding arrastre fees and storage charges.",
+      "D": "Yes, but the applicability is contingent upon the importer holding an SGL or AEO accreditation."
+    },
+    "correct": "B",
+    "reason": "The 20% legal interest applies not only to the unpaid duties and taxes but also to fines and penalties imposed in case of delinquency."
+  },
+  "206": {
+    "question": "What term defines the physical movement of goods from a foreign jurisdiction into Philippine territory, whether intended for domestic consumption, placement in a bonded warehouse, or admission into a free zone as defined by the CMTA?",
+    "choices": {
+      "A": "International trade",
+      "B": "Foreign trade",
+      "C": "Importation",
+      "D": "All of the above"
+    },
+    "correct": "C",
+    "reason": "Importation is defined as the act of bringing goods from a foreign territory into the Philippine territory."
+  },
+  "207": {
+    "question": "When a laden vessel carrying imported merchandise enters Philippine territorial waters for the specific purpose of discharging its cargo, what is the immediate legal and procedural implication?",
+    "choices": {
+      "A": "Duties and taxes automatically become collectible upon the imported goods.",
+      "B": "The legal act of importation commences.",
+      "C": "The vessel must immediately undergo formal boarding procedures.",
+      "D": "Customs authorities shall determine whether the goods are freely importable or regulated."
+    },
+    "correct": "B",
+    "reason": "Importation begins when a vessel carrying imported goods enters Philippine territory with the intention to discharge."
+  },
+  "208": {
+    "question": "While consignees may transact with the Bureau of Customs via a designated third-party representative, are they allowed to deal directly with the Bureau on their own behalf?",
+    "choices": {
+      "A": "No, consignees are mandated to transact exclusively via designated third-party representatives at all times.",
+      "B": "Yes.",
+      "C": "It is dependent upon the total declared value of the shipment.",
+      "D": "It is dependent upon the specific nature or classification of the importation."
+    },
+    "correct": "B",
+    "reason": "Consignees are allowed to transact directly with the Bureau of Customs."
+  },
+  "209": {
+    "question": "At what specific moment are imported goods legally considered to have been 'entered' for domestic consumption?",
+    "choices": {
+      "A": "When the carrying vessel has successfully entered Philippine territory.",
+      "B": "When the goods declaration has been processed by the Bureau of Customs.",
+      "C": "When the goods declaration, along with all necessary supporting documents, has been electronically lodged with the appropriate customs office.",
+      "D": "When the Inward Foreign Manifest has been transmitted electronically."
+    },
+    "correct": "C",
+    "reason": "Goods are deemed 'entered' for consumption upon the electronic lodgement of the goods declaration together with the required documents."
+  },
+  "210": {
+    "question": "Under the provisions of CMTA, which among the listed entities is legally endowed with the authority to formally declare synthetic drugs as habit-forming substances?",
+    "choices": {
+      "A": "Dangerous Drugs Board",
+      "B": "President of the Philippines",
+      "C": "Philippine Drug Enforcement Agency",
+      "D": "All of the above"
+    },
+    "correct": "A",
+    "reason": "The Dangerous Drugs Board (DDB) is the agency with the authority to declare drugs as habit-forming."
+  },
+  "211": {
+    "question": "If an importer utilizes the professional services of a customs broker to assist in completing the goods declaration, who is the legally recognized signatory of the document?",
+    "choices": {
+      "A": "The declarant only.",
+      "B": "The customs broker only.",
+      "C": "It is acceptable for either the customs broker or the declarant to sign.",
+      "D": "Both the declarant and the customs broker must affix their signatures."
+    },
+    "correct": "D",
+    "reason": "Both the declarant (importer) and the licensed customs broker are required to sign the goods declaration."
+  },
+  "212": {
+    "question": "The Bureau of Customs has the authority to impose penalties to deter recurring errors in goods declarations. What is the governing parameter in prescribing these penalties?",
+    "choices": {
+      "A": "The penalty must be pre-known to importers.",
+      "B": "The penalty must be incorporated into a formal memorandum order.",
+      "C": "The penalty must first be approved by the Department of Budget and Management (DBM).",
+      "D": "The penalty should not be excessively disproportionate."
+    },
+    "correct": "D",
+    "reason": "The penalty imposed for repetition of errors must not be excessive; it should be reasonable and proportionate."
+  },
+  "213": {
+    "question": "Identify the specific Republic Act that serves as the legal basis for the Customs Modernization and Tariff Act (CMTA).",
+    "choices": {
+      "A": "R.A. No. 10893",
+      "B": "R.A. No. 10963",
+      "C": "R.A. No. 10863",
+      "D": "R.A. No. 10836"
+    },
+    "correct": "C",
+    "reason": "The Customs Modernization and Tariff Act (CMTA) is Republic Act No. 10863."
+  },
+  "214": {
+    "question": "When imported goods are withdrawn from a customs bonded warehouse for domestic consumption, which specific customs duty rate should be applied?",
+    "choices": {
+      "A": "The customs duty rate that was prevailing when the warehousing entry was originally filed.",
+      "B": "The customs duty rate prevailing at the exact time the goods declaration for consumption is lodged.",
+      "C": "The customs duty rate prevailing at the moment the carrying vessel arrived in the country.",
+      "D": "Any of the above, depending on the specific circumstances of the transaction."
+    },
+    "correct": "B",
+    "reason": "For goods withdrawn from a customs bonded warehouse, the applicable duty rate is the rate prevailing at the time of lodgement of the goods declaration for consumption."
+  },
+  "215": {
+    "question": "While narcotics such as marijuana, opium, heroin, and their derivatives are generally declared prohibited imports, what specific purpose is legally exempted when imported by the government or an authorized person?",
+    "choices": {
+      "A": "For laboratory testing and analysis",
+      "B": "For medicinal treatment",
+      "C": "For research and development",
+      "D": "All of the above"
+    },
+    "correct": "D",
+    "reason": "The exception for importing narcotics is allowed for laboratory, medicinal, or research purposes when duly authorized by the DDB."
+  },
+  "216": {
+    "question": "On what specific date does the legal interest on unpaid duties and taxes on imported goods begin to accrue?",
+    "choices": {
+      "A": "From the date the goods declaration was formally lodged.",
+      "B": "From the date when the amount becomes legally due and demandable.",
+      "C": "From the date the importer receives the official notice of assessment.",
+      "D": "From the date the hard copy of the Single Administrative Document (SAD) is submitted to the Formal Entry Division (FED)."
+    },
+    "correct": "B",
+    "reason": "The legal interest begins to accrue from the date the duties and taxes become due and demandable."
+  },
+  "217": {
+    "question": "When is an importation that is exempt from customs duties and taxes considered legally terminated?",
+    "choices": {
+      "A": "When the goods declaration has been formally lodged.",
+      "B": "When the Online Release System (OLRS) has been triggered.",
+      "C": "When the imported merchandise has physically left the jurisdiction of the Bureau of Customs.",
+      "D": "When the merchandise is loaded onto a truck for delivery to the consignee."
+    },
+    "correct": "C",
+    "reason": "For duty and tax exempt goods, importation is deemed terminated once the goods have legally left the jurisdiction of the Bureau of Customs."
+  },
+  "218": {
+    "question": "This is an official statement, prescribed by the Bureau and other government agencies, through which concerned parties indicate the customs procedure to be followed for entering or admitting imported goods, along with the required particulars for customs administration.",
+    "choices": {
+      "A": "Entry",
+      "B": "Importer's Sworn Statement",
+      "C": "Goods declaration",
+      "D": "All of the above"
+    },
+    "correct": "C",
+    "reason": "Goods declaration is the statement prescribed for indicating entry or admission of imported goods."
+  },
+  "219": {
+    "question": "What is the applicable customs duty rate for imported goods that are disposed of through a public auction sale?",
+    "choices": {
+      "A": "The duty rate prevailing on the date of the public auction.",
+      "B": "The duty rate prevailing on the date of the auction's publication.",
+      "C": "The duty rate prevailing at the time the goods were offloaded from the carrying vessel.",
+      "D": "Any of the above choices may be applicable depending on specific circumstances, such as the date of abandonment."
+    },
+    "correct": "C",
+    "reason": "The applicable duty rate for goods disposed by public auction is the rate prevailing when the goods were discharged from the carrying vessel."
+  },
+  "220": {
+    "question": "Under the CMTA, who possesses the legal authority to officially designate narcotics or synthetic drugs as being habit-forming?",
+    "choices": {
+      "A": "PDEA",
+      "B": "DDB",
+      "C": "FDA",
+      "D": "President of the Philippines"
+    },
+    "correct": "B",
+    "reason": "The Dangerous Drugs Board (DDB) is the authority to declare narcotics or synthetic drugs as habit-forming."
+  },
+  "221": {
+    "question": "This customs procedure pertains to goods that are in free circulation, leaving the Philippine territory with the intention of remaining permanently outside its borders.",
+    "choices": {
+      "A": "Removal from the free zone",
+      "B": "Withdrawal from a bonded warehouse",
+      "C": "Actual exportation",
+      "D": "All of the above"
+    },
+    "correct": "C",
+    "reason": "Actual exportation is the procedure where goods in free circulation leave the territory permanently."
+  },
+  "222": {
+    "question": "Classify the type of importation for counterfeit or infringing goods.",
+    "choices": {
+      "A": "Regulated",
+      "B": "Prohibited",
+      "C": "Restricted",
+      "D": "Freely importable"
+    },
+    "correct": "B",
+    "reason": "Infringing goods (counterfeit goods) are classified as prohibited importation."
+  },
+  "223": {
+    "question": "What is the proper legal term for the act of officially submitting or registering a goods declaration with the Bureau of Customs?",
+    "choices": {
+      "A": "Submission of goods declaration",
+      "B": "Lodgement",
+      "C": "Electronic submission",
+      "D": "All of the above"
+    },
+    "correct": "B",
+    "reason": "Lodgement is the official term for the registration of a goods declaration with the Bureau of Customs."
+  },
+  "224": {
+    "question": "Under CMTA, the Bureau of Customs is allowed to release specific information to external parties. Which conditions must be met before such information is provided?",
+    "choices": {
+      "A": "The requesting party must be a legitimate third party officially registered with the Bureau of Customs.",
+      "B": "The requested information is not confidential, is intended strictly for internal use, and is utilized for legitimate purposes.",
+      "C": "The information exclusively concerns import and export data.",
+      "D": "All of the above conditions must be met."
+    },
+    "correct": "B",
+    "reason": "Information may be provided only if it is not confidential and is for legitimate use by the requesting party."
+  },
+  "225": {
+    "question": "This term describes any administrative unit within customs that is authorized and competent to perform any or all of the functions enumerated under customs and tariff laws.",
+    "choices": {
+      "A": "Bureau of Customs",
+      "B": "VASP",
+      "C": "e2m Customs System",
+      "D": "Customs office"
+    },
+    "correct": "D",
+    "reason": "A customs office is defined as a customs administrative unit authorized to perform customs and tariff functions."
+  },
+  "226": {
+    "question": "Upon full settlement of the duties and taxes by the importer, what official documents are furnished by the Bureau of Customs?",
+    "choices": {
+      "A": "A Certificate of Clearance shall be issued.",
+      "B": "An official receipt documenting the payment shall be issued.",
+      "C": "An order waiving the imposition of legal interest shall be issued.",
+      "D": "All of the above shall be issued."
+    },
+    "correct": "B",
+    "reason": "Upon payment, the Bureau issues a receipt or document evidencing payment of duties and taxes."
+  },
+  "227": {
+    "question": "Under the CMTA, who is legally authorized to process a lodged goods declaration at the Bureau of Customs?",
+    "choices": {
+      "A": "Freight forwarders",
+      "B": "Licensed Customs Brokers",
+      "C": "The Declarant",
+      "D": "Both b and c."
+    },
+    "correct": "D",
+    "reason": "Only the declarant and licensed customs brokers are allowed to process lodged goods declarations."
+  },
+  "228": {
+    "question": "This term defines the act of bringing goods into the Philippines through a fraudulent, falsified, or erroneous declaration of the goods' nature, kind, quantity, or weight for the sole purpose of evading the payment of prescribed charges, duties, and taxes.",
+    "choices": {
+      "A": "Technical smuggling",
+      "B": "Outright smuggling",
+      "C": "Smuggling",
+      "D": "All of the above"
+    },
+    "correct": "A",
+    "reason": "Technical smuggling is the fraudulent declaration of goods to evade duties and taxes."
+  },
+  "229": {
+    "question": "This customs procedure involves the transfer of cargo from the importing carrier to the exporting carrier under customs control, executed within a single Customs office that handles both the importation and exportation stages.",
+    "choices": {
+      "A": "Through shipment",
+      "B": "Transshipment",
+      "C": "Transit",
+      "D": "Any of the above"
+    },
+    "correct": "B",
+    "reason": "Transshipment is the transfer of goods from one carrier to another within the same customs office."
+  },
+  "230": {
+    "question": "Classify dynamite based on its type of importation.",
+    "choices": {
+      "A": "Freely importable importation",
+      "B": "Regulated importation",
+      "C": "Restricted importation",
+      "D": "Prohibited importation"
+    },
+    "correct": "C",
+    "reason": "Dynamite and other explosives are classified as restricted importation, requiring permits from regulatory agencies."
+  },
+  "231": {
+    "question": "This term refers to the complete fulfillment of all customs and governmental formalities required to allow the admission of goods for domestic consumption, warehousing, transit, transshipment, or exportation.",
+    "choices": {
+      "A": "Release",
+      "B": "Delivery",
+      "C": "Clearance",
+      "D": "All of the above"
+    },
+    "correct": "C",
+    "reason": "Clearance is the completion of all formalities to allow goods to be entered or exported."
+  },
+  "232": {
+    "question": "How does the Bureau of Customs treat customs transactions that are processed directly by a party rather than through a designated representative?",
+    "choices": {
+      "A": "A direct transaction shall not be subjected to more rigorous requirements or be treated unfavorably compared to transactions processed via a designated third party.",
+      "B": "An importer processing the transaction directly may be subjected to stricter scrutiny compared to those using third parties, due to the technical expertise possessed by customs brokers.",
+      "C": "Customs transactions shall not be delegated to third-party entities to prevent prejudice against government collection.",
+      "D": "None of the above."
+    },
+    "correct": "A",
+    "reason": "The Bureau must not treat direct transactions less favorably than those done through third parties."
+  },
+  "233": {
+    "question": "The Bureau of Customs is directed not to impose substantial penalties for errors in goods declarations. Under what conditions is this leniency applicable?",
+    "choices": {
+      "A": "The errors are not intentional on the part of the declarant.",
+      "B": "The errors are inadvertent, and there was no fraudulent intent or gross negligence involved.",
+      "C": "The errors are deliberate and intentional.",
+      "D": "All of the above conditions apply."
+    },
+    "correct": "B",
+    "reason": "Substantial penalties are not imposed when the errors are inadvertent and without fraudulent intent or gross negligence."
+  },
+  "234": {
+    "question": "This legal term refers to the geographic areas within the Philippines where customs laws and tariff regulations are enforceable.",
+    "choices": {
+      "A": "Philippine territory",
+      "B": "Customs territory",
+      "C": "Geographical territory",
+      "D": "All of the above"
+    },
+    "correct": "B",
+    "reason": "Customs territory refers to the areas where customs and tariff laws are enforced."
+  },
+  "235": {
+    "question": "This term signifies the act of bringing imported goods into a free zone, either directly or by passing through an intermediate transit area.",
+    "choices": {
+      "A": "Importation",
+      "B": "Entry",
+      "C": "Admission",
+      "D": "All of the above"
+    },
+    "correct": "C",
+    "reason": "Admission is the act of bringing imported goods into a free zone."
+  },
+  "236": {
+    "question": "For regulated goods where the import permit is obtained after the shipment's arrival, at what point must this permit be forwarded to the Bureau of Customs?",
+    "choices": {
+      "A": "At the time of lodging the goods declaration.",
+      "B": "Prior to the payment of customs duties and taxes.",
+      "C": "At any point before the goods are officially released from customs control.",
+      "D": "Prior to the Post Clearance Audit Group (PCAG) executing a post-entry audit."
+    },
+    "correct": "C",
+    "reason": "The import permit must be submitted at any time before the release of the goods from customs custody."
+  },
+  "237": {
+    "question": "Who has the legal authority to establish the guiding principles and rules regarding the relationship between the Bureau of Customs and third parties?",
+    "choices": {
+      "A": "The Commissioner of Customs.",
+      "B": "The Secretary of Finance, in consultation with the Secretary of Trade and Industry.",
+      "C": "The Collector of Customs, subject to the approval of the Commissioner of Customs.",
+      "D": "The Secretary of Finance."
+    },
+    "correct": "B",
+    "reason": "The Secretary of Finance, upon consultation with the Secretary of Trade and Industry, makes the guidelines for third-party relationships."
+  },
+  "238": {
+    "question": "Which party is legally liable for the accuracy of the goods declaration, but has no legal liability for the actual payment of the duties and taxes?",
+    "choices": {
+      "A": "The carrying vessel",
+      "B": "The customs broker",
+      "C": "The declarant",
+      "D": "The Bureau of Customs"
+    },
+    "correct": "B",
+    "reason": "The customs broker is responsible for the accuracy of the declaration, while the importer/declarant is responsible for payment."
+  },
+  "239": {
+    "question": "What is the prescribed rate of legal interest on overdue customs duties and taxes?",
+    "choices": {
+      "A": "CMTA imposes a 20% annual rate, subject to adjustment by the Monetary Board of the Bangko Sentral ng Pilipinas (BSP).",
+      "B": "15% per annum",
+      "C": "20% per annum",
+      "D": "25% per annum"
+    },
+    "correct": "C",
+    "reason": "The legal interest on unpaid customs duties and taxes is 20% per annum."
+  },
+  "240": {
+    "question": "Any party who suffers adverse effect from a decision, act, or omission of the Bureau concerning importation, exportation, or any legal claim has the right to file an appeal. What is the stipulated timeline for filing this appeal?",
+    "choices": {
+      "A": "The appeal must be filed within fifteen (15) days of receiving the adverse decision.",
+      "B": "The appeal must be filed within thirty (30) days of receiving the adverse decision.",
+      "C": "The appeal must be filed at the earliest possible opportunity.",
+      "D": "The appeal must be filed within seven (7) days of receiving the adverse decision."
+    },
+    "correct": "A",
+    "reason": "The appeal must be made within fifteen (15) days from receipt of the adverse decision."
+  },
+  "241": {
+    "question": "The overall administration of the Bureau of Customs is vested in:",
+    "choices": {
+      "A": "The Secretary of Finance",
+      "B": "The Commissioner of Customs",
+      "C": "The District Collector",
+      "D": "The Director General"
+    },
+    "correct": "B",
+    "reason": "The Bureau of Customs is headed by the Commissioner of Customs."
+  },
+  "242": {
+    "question": "By whom are the Commissioner and Deputy Commissioners of the Bureau of Customs appointed?",
+    "choices": {
+      "A": "The Secretary of Finance",
+      "B": "Congress",
+      "C": "The President of the Philippines",
+      "D": "The Court of Tax Appeals"
+    },
+    "correct": "C",
+    "reason": "The President of the Philippines appoints the Commissioner and Deputy Commissioners."
+  },
+  "243": {
+    "question": "Under the CMTA, what is the allowed number of Deputy Commissioners to assist the Commissioner?",
+    "choices": {
+      "A": "Not less than 2",
+      "B": "Exactly 3",
+      "C": "A minimum of 4, but not exceeding 6",
+      "D": "At least 5"
+    },
+    "correct": "C",
+    "reason": "Under Section 200 of the CMTA, the Commissioner shall be assisted by at least four (4) but not more than six (6) Deputy Commissioners."
+  },
+  "244": {
+    "question": "Which one of the following is NOT within the scope of the Bureau of Customs' official functions?",
+    "choices": {
+      "A": "Collection of customs revenues.",
+      "B": "Border control measures to combat smuggling activities.",
+      "C": "The issuance of general business operating permits.",
+      "D": "Enforcement of customs laws and tariff regulations."
+    },
+    "correct": "C",
+    "reason": "Issuance of business permits is not a function of the BOC; it falls under the DTI or LGUs."
+  },
+  "245": {
+    "question": "Which court has the exclusive original jurisdiction over cases involving seizure and forfeiture proceedings under the CMTA?",
+    "choices": {
+      "A": "Regional Trial Court",
+      "B": "Court of Tax Appeals",
+      "C": "Collector of Customs",
+      "D": "Secretary of Finance"
+    },
+    "correct": "C",
+    "reason": "The Collector of Customs has exclusive original jurisdiction over seizure and forfeiture cases."
+  },
+  "246": {
+    "question": "At what exact point does the Bureau of Customs legally acquire jurisdiction over imported goods?",
+    "choices": {
+      "A": "Upon the filing of a court case.",
+      "B": "Upon the full payment of duties and taxes.",
+      "C": "The moment the goods come into the physical custody or control of customs authorities.",
+      "D": "Only upon the issuance of a judicial warrant."
+    },
+    "correct": "C",
+    "reason": "Customs acquires jurisdiction over imported goods when they are in the possession or control of customs authorities."
+  },
+  "247": {
+    "question": "Which judicial body is vested with exclusive appellate jurisdiction over the decisions rendered by the Commissioner of Customs?",
+    "choices": {
+      "A": "Supreme Court",
+      "B": "Regional Trial Court",
+      "C": "Regular Court",
+      "D": "Court of Tax Appeals"
+    },
+    "correct": "D",
+    "reason": "The Court of Tax Appeals (CTA) has exclusive appellate jurisdiction over decisions of the Commissioner."
+  },
+  "248": {
+    "question": "Which specific power of the Commissioner is strictly non-delegable to any subordinate official?",
+    "choices": {
+      "A": "Reviewing the actions of customs officers.",
+      "B": "Promulgating, issuing, or altering customs rules and regulations.",
+      "C": "The general exercise of granted customs powers.",
+      "D": "The assignment or reassignment of customs officers."
+    },
+    "correct": "B",
+    "reason": "Under Section 201(e), the promulgation of rules and regulations is a non-delegable power of the Commissioner."
+  },
+  "249": {
+    "question": "The Commissioner is required to submit an annual performance report. By what date must this report be filed?",
+    "choices": {
+      "A": "December 31",
+      "B": "January 31",
+      "C": "March 31",
+      "D": "June 30"
+    },
+    "correct": "C",
+    "reason": "The annual report shall be submitted on or before March 31 of the following year."
+  },
+  "250": {
+    "question": "Which particular type of customs issuance outlines broad policy statements and the detailed implementing regulations of the CMTA?",
+    "choices": {
+      "A": "Customs Memorandum Circular (CMC)",
+      "B": "Customs Memorandum Order (CMO)",
+      "C": "Customs Administrative Order (CAO)",
+      "D": "Customs Tariff and Duty Code (CTDC)"
+    },
+    "correct": "C",
+    "reason": "Customs Administrative Orders (CAO) contain the policy statements and implementing rules and regulations of the CMTA."
   }
 }
