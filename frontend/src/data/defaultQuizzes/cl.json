@@ -1675,4 +1675,529 @@
   "153": {
     "question": "What is the exception to the 15‑day appeal period from the District Collector's decision to the Commissioner?",
     "choices": {
-      "A": "All appeals are 15 day
+      "A": "All appeals are 15 days.",
+      "B": "Appeals involving denial of refund.",
+      "C": "Both b and c.",
+      "D": "Appeals involving compulsory acquisition."
+    },
+    "correct": "C",
+    "reason": "Both compulsory acquisition and refund‑denial cases are exceptions."
+  },
+  "154": {
+    "question": "Who submits a statement of facts for rulings when the matter is not appealed in the ordinary course?",
+    "choices": {
+      "A": "Deputy Commissioner",
+      "B": "Customs Officer",
+      "C": "Commissioner",
+      "D": "District Collector"
+    },
+    "correct": "D",
+    "reason": "The District Collector submits the statement of facts."
+  },
+  "155": {
+    "question": "The authority under Section 222 of the CMTA to search vehicles and carriers extends to persons and animals suspected of:",
+    "choices": {
+      "A": "Carrying undeclared personal belongings",
+      "B": "Holding illegal goods",
+      "C": "Holding dutiable or forfeitable goods",
+      "D": "Holding dutiable or prohibited goods"
+    },
+    "correct": "D",
+    "reason": "Section 222 covers persons/animals suspected of holding dutiable or prohibited goods."
+  },
+  "156": {
+    "question": "If an importer hires a customs broker to prepare and lodge the goods declaration, must the importer still sign it?",
+    "choices": {
+      "A": "Yes, the importer must sign as declarant.",
+      "B": "None of the above.",
+      "C": "No, only one signature is allowed.",
+      "D": "No, the broker becomes the declarant."
+    },
+    "correct": "A",
+    "reason": "The importer remains the declarant and must sign."
+  },
+  "157": {
+    "question": "If an applicant for an Advance Ruling on origin imports the goods within 30 days after filing the application, what happens?",
+    "choices": {
+      "A": "The importation is deemed non‑originating.",
+      "B": "The shipment is subject to seizure.",
+      "C": "The application is considered withdrawn.",
+      "D": "The goods declaration is treated as high‑risk."
+    },
+    "correct": "C",
+    "reason": "Importing the goods within 30 days causes the application to be withdrawn."
+  },
+  "158": {
+    "question": "Under CMTA, when does special surveillance of vessels and their cargoes begin?",
+    "choices": {
+      "A": "Upon arrival at the port of discharge.",
+      "B": "Upon submission of the electronic Inward Cargo Manifest (ICM).",
+      "C": "Upon completion of boarding formalities.",
+      "D": "Upon entry into Philippine territory."
+    },
+    "correct": "D",
+    "reason": "Surveillance starts upon entry into Philippine territory."
+  },
+  "159": {
+    "question": "Which government agency regulates the importation of used machinery and equipment?",
+    "choices": {
+      "A": "DMB",
+      "B": "BOC",
+      "C": "BPS",
+      "D": "DTI"
+    },
+    "correct": "D",
+    "reason": "The DTI regulates importation of used machinery/equipment."
+  },
+  "160": {
+    "question": "Which of the following is NOT a power that the Commissioner may delegate?",
+    "choices": {
+      "A": "Issuance of an Alert Order",
+      "B": "Review and decide disputed assessments",
+      "C": "Compromise or abatement of customs obligations",
+      "D": "Issuance of a Notice of Seizure"
+    },
+    "correct": "C",
+    "reason": "Compromise or abatement of customs obligations is non‑delegable."
+  },
+  "161": {
+    "question": "The Commissioner's annual report on BOC performance must be furnished to all EXCEPT:",
+    "choices": {
+      "A": "NEDA",
+      "B": "President of the Philippines",
+      "C": "Congress",
+      "D": "Tariff Commission"
+    },
+    "correct": "D",
+    "reason": "The Tariff Commission is not among those required to receive the report."
+  },
+  "162": {
+    "question": "A Deputation Order was issued by the Collector of Customs to Police Captain Mark Balolong. Is this valid?",
+    "choices": {
+      "A": "No, it needs SOF approval.",
+      "B": "No, it is not valid under the CMTA.",
+      "C": "No, the power to visit and inspect is exclusive to customs officers.",
+      "D": "Yes, because authority is exercised outside customs premises."
+    },
+    "correct": "B",
+    "reason": "A DO must be issued by the Commissioner, not a Collector."
+  },
+  "163": {
+    "question": "If visiting officers discover prohibited goods during a Letter of Authority inspection, what should they do?",
+    "choices": {
+      "A": "Confiscate the goods.",
+      "B": "Condemn the goods immediately.",
+      "C": "Place the goods under constructive customs custody.",
+      "D": "Refer the matter to the concerned regulatory agency."
+    },
+    "correct": "D",
+    "reason": "Prohibited goods discovered during LOA inspection are referred to the proper regulatory agency."
+  },
+  "164": {
+    "question": "A CPO signed by the Commissioner and SOF designated the Deputy Commissioner for AOCG to approve Advance Rulings on Valuation. Is this delegation valid?",
+    "choices": {
+      "A": "Yes, because AOCG has technical competence.",
+      "B": "No, because the proper office is RCMG.",
+      "C": "No, because this power is non‑delegable.",
+      "D": "Yes, because it has SOF approval."
+    },
+    "correct": "C",
+    "reason": "Issuance/revocation/modification of rulings (including Advance Rulings) is non‑delegable."
+  },
+  "165": {
+    "question": "During the 15‑day period given to an importer to present payment evidence, what is presumed?",
+    "choices": {
+      "A": "The goods are under constructive customs custody.",
+      "B": "The importation is contrary to law.",
+      "C": "All of the above.",
+      "D": "Duties and taxes have not been paid."
+    },
+    "correct": "C",
+    "reason": "All three presumptions apply during the 15‑day period."
+  },
+  "166": {
+    "question": "Is a Mission Order required to implement a Letter of Authority (LOA)?",
+    "choices": {
+      "A": "No, if the LOA is executed within customs premises.",
+      "B": "Yes, a MO must be issued to implement an LOA.",
+      "C": "No, an LOA can be implemented without a MO.",
+      "D": "It depends on the Commissioner."
+    },
+    "correct": "B",
+    "reason": "A Mission Order is required to implement a Letter of Authority."
+  },
+  "167": {
+    "question": "What is the exception to the rule that customs law applies only within Philippine territory?",
+    "choices": {
+      "A": "In cases of fraud.",
+      "B": "In cases of hot pursuit.",
+      "C": "Within the 200‑nautical‑mile EEZ.",
+      "D": "There is no exception."
+    },
+    "correct": "B",
+    "reason": "Hot pursuit is the exception to the territorial limit of customs enforcement."
+  },
+  "168": {
+    "question": "Who chairs the Congressional Customs and Tariff Oversight Committee from the House of Representatives?",
+    "choices": {
+      "A": "Chairman of the Committee on Ways and Means",
+      "B": "Chairman of the Committee of Ways and Means",
+      "C": "Speaker of the House",
+      "D": "Joint Senate President and Speaker of the House"
+    },
+    "correct": "A",
+    "reason": "The Chairman of the House Committee on Ways and Means chairs the oversight committee."
+  },
+  "169": {
+    "question": "What is the effectivity date of the modification of an Advance Ruling?",
+    "choices": {
+      "A": "Date of the modification order",
+      "B": "Date of receipt of the modification notice by the beneficiary",
+      "C": "Date of issuance of the original ruling",
+      "D": "Date of publication of the modification"
+    },
+    "correct": "B",
+    "reason": "Modification takes effect upon receipt by the beneficiary."
+  },
+  "170": {
+    "question": "If the Tariff Commission issues an Advance Ruling adverse to the government, what action should the BOC take?",
+    "choices": {
+      "A": "Invalidate the ruling.",
+      "B": "Elevate to the SOF within 5 days.",
+      "C": "No action – the SOF reviews it automatically upon receipt.",
+      "D": "Elevate to the SOF within 15 days."
+    },
+    "correct": "C",
+    "reason": "The SOF automatically reviews an adverse TC ruling upon receipt."
+  },
+  "171": {
+    "question": "If a dispute involving a CMTA provision is decided by the District Collector and not appealed, what must the Collector do?",
+    "choices": {
+      "A": "Enforce the decision.",
+      "B": "Inform the Commissioner and submit case facts to DEP/OCOM.",
+      "C": "Inform the Commissioner and submit case facts to OCOM.",
+      "D": "Inform the losing party that appeal is barred."
+    },
+    "correct": "B",
+    "reason": "The District Collector must inform the Commissioner and submit facts to DEP/OCOM."
+  },
+  "172": {
+    "question": "Which statement is CORRECT? I. The SOF may increase/decrease duties/fees upon the Commissioner's recommendation. II. The general authority for this is found in Section 1300 of the CMTA.",
+    "choices": {
+      "A": "None",
+      "B": "Statement I only",
+      "C": "Both statements",
+      "D": "Statement I only"
+    },
+    "correct": "A",
+    "reason": "Statement I is wrong (President, not SOF, increases duties); Statement II is wrong (Section 1300 is not about this)."
+  },
+  "173": {
+    "question": "Which statement is INCORRECT? I. The SOF may increase/decrease duties/fees upon the Commissioner's recommendation. II. The general authority for this is found in Section 1300 of the CMTA.",
+    "choices": {
+      "A": "None",
+      "B": "Statement I only",
+      "C": "Statement II only",
+      "D": "Both statements"
+    },
+    "correct": "C",
+    "reason": "Statement I is correct; Statement II is incorrect, so Statement II is the incorrect one."
+  },
+  "174": {
+    "question": "A customs officer issued a Deputation Order authorizing the NBI to raid a warehouse in Mandaluyong. The owner asks for your advice. What should you recommend?",
+    "choices": {
+      "A": "Contest because the Port of Manila has no jurisdiction over Mandaluyong.",
+      "B": "Contest the DO because the officer is not authorized to issue it.",
+      "C": "Allow entry to avoid litigation.",
+      "D": "The DO is valid because it was legally issued."
+    },
+    "correct": "B",
+    "reason": "Only the Commissioner can issue a Deputation Order; a customs officer cannot."
+  },
+  "175": {
+    "question": "What must sea port and airport authorities do to support BOC enforcement?",
+    "choices": {
+      "A": "Recognize BOC's exclusive jurisdiction over imported goods.",
+      "B": "Post sufficient security for stored goods.",
+      "C": "Provide free examination areas and equipment.",
+      "D": "All of the above."
+    },
+    "correct": "D",
+    "reason": "All of the listed actions are required of port/airport authorities."
+  },
+  "176": {
+    "question": "Which office is directly under OCOM but reports to the Deputy Commissioner for IG, and maintains the e2m Selectivity Module?",
+    "choices": {
+      "A": "Office of the District Collector",
+      "B": "MISTG",
+      "C": "AMO",
+      "D": "RMO"
+    },
+    "correct": "B",
+    "reason": "MISTG maintains the e2m Selectivity Module."
+  },
+  "177": {
+    "question": "The Port Operations and Coordination Division belongs to which office?",
+    "choices": {
+      "A": "Office of the Deputy Collector for Operations",
+      "B": "Auction and Cargo Disposal Service",
+      "C": "Pier and Inspection Service",
+      "D": "Ports Operations Service"
+    },
+    "correct": "A",
+    "reason": "It belongs to the Office of the Deputy Collector for Operations."
+  },
+  "178": {
+    "question": "Which of the following are NOT considered customs duties?",
+    "choices": {
+      "A": "All of the above are service fees, not customs duties",
+      "B": "Export Processing Charge",
+      "C": "Bulk and Break Bulk Discharge Port Survey Fee",
+      "D": "Import Processing Charge"
+    },
+    "correct": "A",
+    "reason": "All choices are customs service fees, not customs duties."
+  },
+  "179": {
+    "question": "Who approves the outsourcing of non‑core customs functions to private entities?",
+    "choices": {
+      "A": "Secretary of DBM",
+      "B": "Secretary of Finance",
+      "C": "Commissioner",
+      "D": "President"
+    },
+    "correct": "B",
+    "reason": "The Secretary of Finance approves outsourcing."
+  },
+  "180": {
+    "question": "Who approves the Commissioner's changes to collection districts and ports of entry?",
+    "choices": {
+      "A": "Commissioner alone",
+      "B": "President",
+      "C": "The President",
+      "D": "Secretary of Finance"
+    },
+    "correct": "D",
+    "reason": "The Secretary of Finance approves changes to collection districts/ports."
+  },
+  "181": {
+    "question": "What is the maximum number of Deputy Commissioners under the CMTA?",
+    "choices": {
+      "A": "No maximum",
+      "B": "Six",
+      "C": "Four",
+      "D": "Five"
+    },
+    "correct": "B",
+    "reason": "Section 200 CMTA allows at most six Deputy Commissioners."
+  },
+  "182": {
+    "question": "Which office is responsible for establishing and implementing the e‑ARS on Rules of Origin?",
+    "choices": {
+      "A": "PDS",
+      "B": "IAS",
+      "C": "PCAG",
+      "D": "MISTG"
+    },
+    "correct": "C",
+    "reason": "PCAG is responsible for the e‑ARS on ROO."
+  },
+  "183": {
+    "question": "If an importer does not hire a customs broker, who signs the goods declaration?",
+    "choices": {
+      "A": "The BOC‑accredited broker and the importer",
+      "B": "It is not allowed – a broker is mandatory",
+      "C": "The importer alone",
+      "D": "Importer and a notary public"
+    },
+    "correct": "C",
+    "reason": "The importer alone signs the goods declaration if no broker is used."
+  },
+  "184": {
+    "question": "Two reviewers submitted a hypothetical valuation problem to the BOC as an Advance Ruling request. As Commissioner, how will you act?",
+    "choices": {
+      "A": "Deny because courts are better suited to decide.",
+      "B": "Deny because it is purely hypothetical.",
+      "C": "Issue the ruling if filed properly with the fee.",
+      "D": "Deny because the exam is less than 90 days away."
+    },
+    "correct": "B",
+    "reason": "Advance Rulings cannot be issued for hypothetical cases."
+  },
+  "185": {
+    "question": "The prevailing duty rate at the time of withdrawal from a free zone applies. What principle governs this?",
+    "choices": {
+      "A": "It depends on the rate.",
+      "B": "Duty is based on the character when admitted.",
+      "C": "Duty is based on the character of the goods when withdrawn.",
+      "D": "Either character may be used."
+    },
+    "correct": "C",
+    "reason": "Duty is imposed on the character of the goods as withdrawn."
+  },
+  "186": {
+    "question": "The President directed a terminal operator to transfer overstaying cargo from a congested port to an inland depot. What is the authority for this?",
+    "choices": {
+      "A": "Commissioner via executive order",
+      "B": "SOF through delegated powers",
+      "C": "BOC through the Commissioner",
+      "D": "President via executive order for customs purposes"
+    },
+    "correct": "D",
+    "reason": "The President may issue an executive order for customs purposes to transfer overstaying cargo."
+  },
+  "187": {
+    "question": "Which customs issuances must be published in a newspaper or the Official Gazette and deposited with ONAR at UP?",
+    "choices": {
+      "A": "Customs Administrative Orders",
+      "B": "Customs Memorandum Circulars",
+      "C": "Customs Memorandum Orders",
+      "D": "All of the above"
+    },
+    "correct": "A",
+    "reason": "Customs Administrative Orders require publication and ONAR deposit."
+  },
+  "188": {
+    "question": "The BOC's power to supervise all seas, coasts, ports, and inland waters is referred to as:",
+    "choices": {
+      "A": "Original and exclusive jurisdiction",
+      "B": "Police authority",
+      "C": "Surveillance",
+      "D": "Jurisdictional control"
+    },
+    "correct": "A",
+    "reason": "This is the definition of 'original and exclusive jurisdiction.'"
+  },
+  "189": {
+    "question": "When must the Commissioner submit the annual BOC performance report?",
+    "choices": {
+      "A": "On or before 31 March of the current year",
+      "B": "On or before 13 March of the following year",
+      "C": "On or before 31 January of the following year",
+      "D": "On or before 31 March of the following year"
+    },
+    "correct": "D",
+    "reason": "The report is due on or before 31 March of the following year."
+  },
+  "190": {
+    "question": "An OFW's pasalubong was smashed open by a BOC agent during a warranted search based on x‑ray suspicion, but it turned out empty. Is the agent liable for damages?",
+    "choices": {
+      "A": "Yes, due to abuse of authority without due process.",
+      "B": "No.",
+      "C": "Yes, due to negligence.",
+      "D": "Yes"
+    },
+    "correct": "B",
+    "reason": "The agent acted on reasonable suspicion and is not liable."
+  },
+  "191": {
+    "question": "To discourage repeated errors in goods declarations, what parameter must the penalty follow?",
+    "choices": {
+      "A": "It must be incorporated in a memorandum order.",
+      "B": "It must not be excessive.",
+      "C": "It must be approved by the DBM.",
+      "D": "It must be known to importers."
+    },
+    "correct": "B",
+    "reason": "The penalty must not be excessive."
+  },
+  "192": {
+    "question": "A vessel carrying imported goods merely passes through Philippine territorial waters en route to another country, without any intention to unload cargo in the Philippines. Does importation begin under the CMTA?",
+    "choices": {
+      "A": "No, importation begins only when the carrying vessel enters Philippine territory with intent to unload.",
+      "B": "Yes, importation begins the moment any vessel with imported goods enters Philippine territory, regardless of intent.",
+      "C": "Yes, but only if the vessel later docks at a Philippine port for any reason.",
+      "D": "No, importation never begins while goods remain aboard a vessel, even after discharge."
+    },
+    "correct": "A",
+    "reason": "Under Section 103 of the CMTA, importation begins when the carrying vessel or aircraft enters Philippine territory with the intention to unload therein. Mere passage through Philippine waters without intent to discharge cargo does not commence importation."
+  },
+  "193": {
+    "question": "BIR officials searched for proper handling of imported wines and cigarettes based on a letter signed only by the District Collector. Is the search valid?",
+    "choices": {
+      "A": "No",
+      "B": "Yes, if internal taxes are involved.",
+      "C": "No, the letter must be signed by the Commissioner.",
+      "D": "No, per Section 224 of the CMTA."
+    },
+    "correct": "C",
+    "reason": "Section 224 requires the search letter to be signed by the Commissioner, not just the District Collector."
+  },
+  "194": {
+    "question": "Is there a need for a Mission Order to implement a Deputation Order?",
+    "choices": {
+      "A": "An LOA (and DO) can be implemented without a MO.",
+      "B": "A MO must be issued to authorize implementation of a DO.",
+      "C": "It depends on the Commissioner.",
+      "D": "If exercised within customs premises, no MO is needed."
+    },
+    "correct": "B",
+    "reason": "A Mission Order must be issued to implement a Deputation Order."
+  },
+  "195": {
+    "question": "In the exercise of police authority, the BOC impounded frozen pork in a wet market for violating DA handling rules. Is this valid?",
+    "choices": {
+      "A": "Yes, for violating DA rules on imported goods.",
+      "B": "Yes.",
+      "C": "No, because a judicial warrant is required.",
+      "D": "No."
+    },
+    "correct": "D",
+    "reason": "The BOC cannot enforce DA rules; that is outside its police authority."
+  },
+  "196": {
+    "question": "Robbers broke into the Formal Entry Division and stole personal items. The Manila Police sent investigators, but Customs Police refused them entry, claiming exclusive control. Is this correct?",
+    "choices": {
+      "A": "Yes, exclusive control excludes other law enforcers unless deputized.",
+      "B": "Yes, because the BOC has primary jurisdiction.",
+      "C": "Yes, because customs investigators have police authority.",
+      "D": "No, exclusive control does not prejudice law‑enforcement functions."
+    },
+    "correct": "D",
+    "reason": "Exclusive control over customs premises does not prejudice the functions of regular law enforcement."
+  },
+  "197": {
+    "question": "Bernon's shipment contained firearms and ammunition. The BOC declared them restricted. To which agency must they be turned over?",
+    "choices": {
+      "A": "Dangerous Drugs Board",
+      "B": "Armed Forces of the Philippines",
+      "C": "PDEA",
+      "D": "Department of Justice"
+    },
+    "correct": "B",
+    "reason": "Firearms and ammunition are turned over to the AFP."
+  },
+  "198": {
+    "question": "Which CMTA section contains the Declaration of Policy?",
+    "choices": {
+      "A": "Sec. 103",
+      "B": "Sec. 101",
+      "C": "Sec. 102",
+      "D": "Sec. 100"
+    },
+    "correct": "B",
+    "reason": "Section 101 contains the Declaration of Policy."
+  },
+  "199": {
+    "question": "Which CMTA section contains the Transitory Provisions?",
+    "choices": {
+      "A": "1801",
+      "B": "1803",
+      "C": "1802",
+      "D": "1804"
+    },
+    "correct": "A",
+    "reason": "Section 1801 contains the Transitory Provisions."
+  },
+  "200": {
+    "question": "Shannel transported contraband by land from the pier to a private warehouse. Customs intercepted the truck en route. Was this within BOC jurisdiction?",
+    "choices": {
+      "A": "No, unless a court warrant is obtained.",
+      "B": "Yes, because the BOC may pursue imported goods subject to seizure during land transport.",
+      "C": "No, jurisdiction ends when goods leave the port.",
+      "D": "Yes, but only if the declaration is incomplete."
+    },
+    "correct": "B",
+    "reason": "The BOC may intercept imported goods subject to seizure even during land transport."
+  }
+}
