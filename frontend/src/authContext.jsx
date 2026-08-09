@@ -8,6 +8,7 @@ import { auth, db, googleProvider } from "./firebase";
 
 const DEVICE_ID_KEY = "cuble_deviceId";
 const PENDING_SIGNIN_KEY = "cuble_pendingSignIn";
+const PROFILE_CACHE_KEY = "cuble_profileCache_";
 
 function makeId() {
   if (window.crypto && window.crypto.randomUUID) return window.crypto.randomUUID();
@@ -63,12 +64,14 @@ export function AuthProvider({ children }) {
       };
       await setDoc(ref, fresh);
       setProfile(fresh);
+      try { localStorage.setItem(PROFILE_CACHE_KEY + fbUser.uid, JSON.stringify(fresh)); } catch (_) {}
       setNeedsFullName(true);
       setDeviceLimitReached(false);
       return;
     }
 
     const data = snap.data();
+    try { localStorage.setItem(PROFILE_CACHE_KEY + fbUser.uid, JSON.stringify(data)); } catch (_) {}
     const devices = data.devices || [];
     const already = devices.find((d) => d.id === currentDeviceId);
 
@@ -91,6 +94,10 @@ export function AuthProvider({ children }) {
     setNeedsFullName(!data.fullName);
     } catch (err) {
       console.warn("syncProfile failed (offline?):", err);
+      try {
+        const cached = localStorage.getItem(PROFILE_CACHE_KEY + fbUser.uid);
+        if (cached) setProfile(JSON.parse(cached));
+      } catch (_) {}
       setDeviceLimitReached(false);
     }
   }, [currentDeviceId]);
@@ -99,13 +106,29 @@ export function AuthProvider({ children }) {
     const unsub = onAuthStateChanged(auth, async (fbUser) => {
       setUser(fbUser);
       if (fbUser) {
-        await syncProfile(fbUser);
+        let hasCached = false;
+        try {
+          const cached = localStorage.getItem(PROFILE_CACHE_KEY + fbUser.uid);
+          if (cached) {
+            const parsedCached = JSON.parse(cached);
+            setProfile(parsedCached);
+            setNeedsFullName(!parsedCached.fullName);
+            hasCached = true;
+          }
+        } catch (_) {}
+        if (hasCached) {
+          setLoading(false);
+          syncProfile(fbUser);
+        } else {
+          await syncProfile(fbUser);
+          setLoading(false);
+        }
       } else {
         setProfile(null);
         setNeedsFullName(false);
         setDeviceLimitReached(false);
+        setLoading(false);
       }
-      setLoading(false);
     });
     return unsub;
   }, [syncProfile]);
