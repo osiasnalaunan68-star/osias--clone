@@ -16,6 +16,8 @@ import DevPanel from "./DevPanel";
 import QuizPage from "./QuizPage";
 import QuizHub from "./QuizHub";
 import AccountButton from "../components/AccountButton";
+import AdminPanel from "./AdminPanel";
+import { useAuth } from "../authContext";
 
 // Enrich nodes with hierarchy information for composite key lookup
 
@@ -799,6 +801,7 @@ function collectAllNodeIds(node, acc = []) {
 }
 
 export default function ChapterBrowser() {
+  const { profile } = useAuth();
   const [view, setView] = useState("browse");
   const [titles, setTitles] = useState([]);
   const [selectedChapter, setSelectedChapter] = useState(null);
@@ -1051,6 +1054,11 @@ export default function ChapterBrowser() {
                   </button>
                 )}
               </div>
+              {profile?.isAdmin && (
+                <button onClick={() => setView("admin")} aria-label="Admin Panel" className={`min-h-[34px] rounded-full px-2.5 py-1 font-medium transition-colors ${view === "admin" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
+                  👑
+                </button>
+              )}
               <span className="flex-1" />
               <AccountButton />
               {view === "browse" && <ModeToggle mode={mode} setMode={setMode} />}
@@ -1079,7 +1087,7 @@ export default function ChapterBrowser() {
                 <p className="text-sm">{error}</p>
               </div>
             )}
-            {view === "search" ? <SearchView onNavigateChapter={loadChapter} /> : view === "dev" && IS_DEV ? <DevPanel /> : view === "quiz" ? null : view === "settings" ? <SettingsView darkMode={darkMode} setDarkMode={setDarkMode} onReplayTutorial={replayTutorial} /> : (
+            {view === "search" ? <SearchView onNavigateChapter={loadChapter} /> : view === "dev" && IS_DEV ? <DevPanel /> : view === "admin" && profile?.isAdmin ? <AdminPanel /> : view === "quiz" ? null : view === "settings" ? <SettingsView darkMode={darkMode} setDarkMode={setDarkMode} onReplayTutorial={replayTutorial} /> : (
               <>
                 {loading && (
                   <div className="mx-auto max-w-3xl space-y-3">
