@@ -3,6 +3,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import ChapterBrowser from "./pages/ChapterBrowser";
 import { seedDefaultQuizzes } from "./subjectQuizStore";
+import { AuthProvider } from "./authContext";
+import AccountOverlay from "./components/AccountOverlay";
 
 class ErrorBoundary extends React.Component {
   constructor(props) { super(props); this.state = { error: null }; }
@@ -35,7 +37,10 @@ seedDefaultQuizzes();
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ErrorBoundary>
-      <ChapterBrowser />
+      <AuthProvider>
+        <ChapterBrowser />
+        <AccountOverlay />
+      </AuthProvider>
     </ErrorBoundary>
   </React.StrictMode>
 );

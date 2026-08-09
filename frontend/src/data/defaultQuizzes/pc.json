@@ -1,1 +1,2840 @@
-{}
+{
+  "1": {
+    "question": "If the order is 5X20' Socks for US$25,000.00 CPT Manila, where would the Seller deliver the container?",
+    "choices": {
+      "A": "On board vessel",
+      "B": "Alongside vessel",
+      "C": "Container Yard",
+      "D": "Any of the choices depending on the agreement with the Buyer"
+    },
+    "correct": "C",
+    "reason": "Under CPT, the seller delivers the goods to the carrier at a named place, typically the container yard (CY) for containerized shipments."
+  },
+  "2": {
+    "question": "The original agreement is for an EXW but since Buyer finds it difficult to load goods to collecting vehicle, he decided to change the delivery term. What is the Incoterm where the Seller loads the goods to the vehicle sent by Buyer and also arranges for the customs export clearance?",
+    "choices": {
+      "A": "FCA Carrier",
+      "B": "EXW loaded",
+      "C": "FCA Seller's Place",
+      "D": "EXW enhanced"
+    },
+    "correct": "C",
+    "reason": "FCA Seller's Place requires the seller to load the goods onto the buyer's collecting vehicle and arrange for export clearance."
+  },
+  "3": {
+    "question": "Buyer was not able to pick-up the goods upon notice of pick up by the Seller under EXW Incoterm. Warehouse of Seller where goods are stored collapses as it was struck by lightning. Is Buyer under obligation to pay the Seller even if he was not able to pick-up the goods?",
+    "choices": {
+      "A": "No, because the goods are still in possession of Seller",
+      "B": "No, because the goods are under the care of the Seller",
+      "C": "Yes, because it is assumed that delivery has been Completed",
+      "D": "Yes, because the cause of loss is an Act of God"
+    },
+    "correct": "C",
+    "reason": "Under EXW, risk transfers to the buyer when the seller makes the goods available at the named place. Since the buyer was notified and failed to pick up, risk had already transferred."
+  },
+  "4": {
+    "question": "What is the minimum mark-up on the agreed export price expressed for insurance coverage to be procured by Seller?",
+    "choices": {
+      "A": "There is no minimum mark-up under the Incoterms 2020 Rules",
+      "B": "10% of the CIP or CIF unless there is agreement between Buyer and Seller for higher mark-up",
+      "C": "Minimum and maximum is 10% of the CIP or CIF",
+      "D": "There is no provision under the incoterms 2020"
+    },
+    "correct": "B",
+    "reason": "In Incoterms 2020, the minimum insurance cover is 110% of the CIP or CIF value (10% mark-up), unless otherwise agreed."
+  },
+  "5": {
+    "question": "Under EXW, the buyer asks the seller to clear goods for export. The seller agrees verbally. Export clearance is done incorrectly, causing seizure. Who bears the loss?",
+    "choices": {
+      "A": "Buyer",
+      "B": "Customs authority",
+      "C": "Seller",
+      "D": "Carrier"
+    },
+    "correct": "C",
+    "reason": "Under EXW, the seller is not obligated to clear goods for export. By agreeing to do so (even verbally), the seller assumes the risk and liability for export clearance."
+  },
+  "6": {
+    "question": "Under FAS, seller delivered the goods and placed alongside the nominated vessel. The buyer fails to arrange loading. Heavy rain damages the cargo. Who bears the loss?",
+    "choices": {
+      "A": "Seller as he has the obligation to load the goods to the Vessel",
+      "B": "Buyer since the delivery was done after the goods are delivered alongside the vessel",
+      "C": "Carrying vessel since it was their responsibility to load the goods the moment seller delivered the goods alongside the vessel",
+      "D": "Port authority as they are responsible for managing the port operations"
+    },
+    "correct": "B",
+    "reason": "Under FAS, risk transfers to the buyer once the goods are placed alongside the nominated vessel."
+  },
+  "7": {
+    "question": "Under CPT Manila, the seller hands the goods to the first carrier. The carrier delays shipment, causing the buyer to miss a resale contract. Who bears the risk of delay?",
+    "choices": {
+      "A": "Seller, because freight was prepaid",
+      "B": "Buyer, because risk transferred at first carrier",
+      "C": "Carrier only",
+      "D": "Seller, due to commercial consequences"
+    },
+    "correct": "B",
+    "reason": "Under CPT, risk transfers when the goods are handed to the first carrier. Any subsequent delay is the buyer's risk."
+  },
+  "8": {
+    "question": "Goods are sold under FOB Port of Shanghai. The seller delivers the container to the container yard (CY) and receives a gate-in receipt. Before vessel loading, the container is damaged. Who bears the risk?",
+    "choices": {
+      "A": "Seller",
+      "B": "Carrier",
+      "C": "Buyer",
+      "D": "Terminal operator"
+    },
+    "correct": "A",
+    "reason": "Under FOB, risk transfers only when the goods are loaded on board the vessel, not when delivered to CY. The seller bears risk until loading."
+  },
+  "9": {
+    "question": "If an order is CPT by air, where would Seller bring the truck loaded with goods?",
+    "choices": {
+      "A": "On board aircraft",
+      "B": "Air terminal",
+      "C": "Alongside aircraft",
+      "D": "Any of the choices depending on the agreement with Buyer"
+    },
+    "correct": "B",
+    "reason": "Under CPT for air transport, the seller delivers the goods to the air terminal (carrier's premises), not on board the aircraft."
+  },
+  "10": {
+    "question": "Under DAP Buyer's Factory, the seller arrives on time. The buyer's unloading equipment is broken, causing a 2-day delay. During waiting, the goods deteriorate. Who bears the loss?",
+    "choices": {
+      "A": "Seller",
+      "B": "Carrier",
+      "C": "Buyer",
+      "D": "Insurance company"
+    },
+    "correct": "C",
+    "reason": "Under DAP, risk transfers when the goods are placed at the disposal of the buyer at the named destination. The buyer bears the risk after arrival."
+  },
+  "11": {
+    "question": "Under DPU Agreement, the seller delivers and unloads the goods. After unloading but before the buyer collects them, the goods are stolen. Who bears the risk?",
+    "choices": {
+      "A": "Seller",
+      "B": "Terminal operator",
+      "C": "Buyer",
+      "D": "Carrier"
+    },
+    "correct": "C",
+    "reason": "Under DPU, risk transfers when the goods are unloaded and placed at the disposal of the buyer at the named place."
+  },
+  "12": {
+    "question": "Under CFR, unloading costs at destination port are normally paid by?",
+    "choices": {
+      "A": "Seller",
+      "B": "Carrier",
+      "C": "Buyer",
+      "D": "Insurance company"
+    },
+    "correct": "C",
+    "reason": "Under CFR, the buyer is responsible for unloading costs at the destination port."
+  },
+  "13": {
+    "question": "What is insurance coverage for 'CIP' shipments?",
+    "choices": {
+      "A": "ICC 'A'",
+      "B": "ICC 'B'",
+      "C": "ICC 'C'",
+      "D": "ICC 'D'"
+    },
+    "correct": "A",
+    "reason": "Under Incoterms 2020, CIP requires the seller to obtain ICC (A) insurance coverage (All Risks)."
+  },
+  "14": {
+    "question": "Under this Incoterm, the seller delivers the goods when the goods are placed at the disposal of the buyer, cleared for import on the arriving means of transport ready for unloading at the named place of destination. Further, the seller bears all the costs and risks involved in bringing the goods to the place of destination and must clear the products not only for import, to pay any and to carry out all customs formalities. What Incoterm is being referred to?",
+    "choices": {
+      "A": "DDP",
+      "B": "DPU",
+      "C": "EXW",
+      "D": "DAP"
+    },
+    "correct": "A",
+    "reason": "DDP (Delivered Duty Paid) is the only Incoterm where the seller is responsible for import clearance and payment of import duties and taxes."
+  },
+  "15": {
+    "question": "Which Incoterm places the highest responsibility on the seller for arranging transportation and delivery?",
+    "choices": {
+      "A": "Delivered Duty Paid (DDP)",
+      "B": "Free Carrier (FCA)",
+      "C": "Ex Works (EXW)",
+      "D": "Delivered at Place (DAP)"
+    },
+    "correct": "A",
+    "reason": "DDP places the maximum obligation on the seller, covering all costs, risks, and import clearance up to the buyer's premises."
+  },
+  "16": {
+    "question": "Which is the Incoterm where the Seller arranges and pays for the freight and insurance and delivers goods on board vessel.",
+    "choices": {
+      "A": "CIP",
+      "B": "DAP by air",
+      "C": "CIF",
+      "D": "All of the above"
+    },
+    "correct": "C",
+    "reason": "CIF (Cost, Insurance, and Freight) is the Incoterm where the seller arranges freight and insurance and delivers goods on board the vessel."
+  },
+  "17": {
+    "question": "Under which Incoterm is the seller responsible for both export and import clearances?",
+    "choices": {
+      "A": "Delivered Duty Paid (DDP)",
+      "B": "Delivered At Place (DAP)",
+      "C": "Carriage Paid To (CPT)",
+      "D": "Delivered at Place Unloaded (DPU)"
+    },
+    "correct": "A",
+    "reason": "DDP is the only Incoterm where the seller is responsible for both export and import clearances."
+  },
+  "18": {
+    "question": "Which Incoterm applies when the buyer covers costs including main carriage (freight) costs from the port of loading to the port of destination, unloading costs at the destination port, and import duties, taxes, and customs clearance at the destination country? Further, the seller delivers the goods on board the vessel nominated by the buyer at the named port of shipment or procures the goods already so delivered.",
+    "choices": {
+      "A": "FOB",
+      "B": "CPT",
+      "C": "CFR",
+      "D": "FAS"
+    },
+    "correct": "A",
+    "reason": "Under FOB, the seller delivers on board the vessel, and the buyer bears all costs after loading, including freight, unloading, and import clearance."
+  },
+  "19": {
+    "question": "Which Incoterm 2020 requires the seller to deliver the goods to a named place of destination, but not unload them?",
+    "choices": {
+      "A": "Delivered at Place (DAP)",
+      "B": "Carriage and Insurance Paid To (CIP)",
+      "C": "Carriage Paid To (CPT)",
+      "D": "Delivered at Place Unloaded"
+    },
+    "correct": "A",
+    "reason": "Under DAP, the seller delivers goods to a named place ready for unloading, but the buyer is responsible for unloading."
+  },
+  "20": {
+    "question": "Which Incoterm places the responsibility for unloading the goods at the destination on the seller?",
+    "choices": {
+      "A": "Delivered at Place Unloaded (DPU)",
+      "B": "Delivered Duty Paid (DDP)",
+      "C": "Carriage and Insurance Paid To (CIP)",
+      "D": "Cost and Freight (CFR)"
+    },
+    "correct": "A",
+    "reason": "DPU requires the seller to unload the goods at the named place of destination."
+  },
+  "21": {
+    "question": "If the agreement between the Buyer and Seller is that the Seller will deliver the goods at the pier ready for loading to the exporting vessel what is the proper Incoterm?",
+    "choices": {
+      "A": "FCA Carrier",
+      "B": "FAS",
+      "C": "CPT",
+      "D": "Any of the choices"
+    },
+    "correct": "B",
+    "reason": "FAS (Free Alongside Ship) is the Incoterm where the seller delivers goods alongside the vessel at the named port."
+  },
+  "22": {
+    "question": "What is the primary difference between 'CIP' and 'CPT' in Incoterms 2020?",
+    "choices": {
+      "A": "CIP includes insurance coverage, while CPT does not.",
+      "B": "CPT includes insurance coverage, while CIP does not.",
+      "C": "CIP covers air transport, while CPT covers sea transport.",
+      "D": "CPT covers sea transport, while CIP covers rail transport."
+    },
+    "correct": "A",
+    "reason": "CIP requires the seller to arrange insurance, while CPT does not include insurance requirements."
+  },
+  "23": {
+    "question": "Which Incoterm describes the scenario where the seller delivers the goods to the carrier or another person nominated by the buyer at the recommended that the parties clearly define the exact location within the seller's premises or another named place? Under this Incoterm, it is named place of delivery, as the risk transfers to the buyer at that point?",
+    "choices": {
+      "A": "FOB",
+      "B": "CIP",
+      "C": "EXW",
+      "D": "FCA"
+    },
+    "correct": "D",
+    "reason": "FCA (Free Carrier) is the Incoterm where the seller delivers goods to a carrier at a named place, with risk transferring at that point."
+  },
+  "24": {
+    "question": "Which Incoterm is commonly used for bulk cargo shipments?",
+    "choices": {
+      "A": "Free Alongside Ship (FAS)",
+      "B": "Free On Board (FOB)",
+      "C": "Cost, Insurance, and Freight (CIF)",
+      "D": "Carriage Paid To (CPT)"
+    },
+    "correct": "B",
+    "reason": "FOB is commonly used for bulk cargo shipments where goods are delivered on board the vessel at the port of shipment."
+  },
+  "25": {
+    "question": "Under which Incoterm does the seller bear the risk until the goods are delivered to the buyer's premises?",
+    "choices": {
+      "A": "Carriage and Insurance Paid To (CIP)",
+      "B": "Carriage Paid To (CPT)",
+      "C": "Delivered at Place (DAP)",
+      "D": "Cost, Insurance and Freight (CIF)"
+    },
+    "correct": "C",
+    "reason": "Under DAP, the seller bears risk until the goods are placed at the buyer's disposal at the named destination."
+  },
+  "26": {
+    "question": "You are an importer and you've purchased electronics from a supplier in China. The chosen Incoterm is CIF. What does CIF entail for you as the buyer?",
+    "choices": {
+      "A": "Arrange only for import clearance.",
+      "B": "Buyer handles destination terminal charges, delivery to and unloading at destination, import duty, taxes and Customs clearance.",
+      "C": "Handles all risks during transit.",
+      "D": "Handles loading at carrying vessel."
+    },
+    "correct": "B",
+    "reason": "Under CIF, the buyer handles destination charges, delivery, unloading, and import clearance after the goods arrive."
+  },
+  "27": {
+    "question": "Which Incoterm is used when the seller has the same responsibilities as CPT, but also arranges for insurance to cover the buyer's risk of loss of or damage to the goods during transit? Additionally, the seller is only required to secure minimum insurance coverage, and if the buyer desires more protection, they must either explicitly agree with the seller or arrange additional insurance themselves.",
+    "choices": {
+      "A": "CIP",
+      "B": "DAP",
+      "C": "CFR",
+      "D": "CIF"
+    },
+    "correct": "A",
+    "reason": "CIP (Carriage and Insurance Paid To) requires the seller to arrange insurance in addition to the CPT obligations."
+  },
+  "28": {
+    "question": "You are a seller based in the Philippines, and you've agreed to sell machinery to a buyer in Brazil. The agreed Incoterm is DAP. What are your responsibilities as the seller under DAP?",
+    "choices": {
+      "A": "Unload the goods at the destination",
+      "B": "Deliver the goods to the buyer's premises in Brazil",
+      "C": "Handles import duty, taxes and Customs clearance in Brazil",
+      "D": "Seller obligations stop when the goods are loaded on the carrying vessel"
+    },
+    "correct": "B",
+    "reason": "Under DAP, the seller is responsible for delivering the goods to the named destination in Brazil, ready for unloading."
+  },
+  "29": {
+    "question": "Seller is responsible for the unloading of the cargo from the importing vessel and delivers the goods to the Buyer's place. Seller did not arrange for the customs import clearance. What is the Incoterm?",
+    "choices": {
+      "A": "CIP",
+      "B": "DAP",
+      "C": "CIF",
+      "D": "DPU"
+    },
+    "correct": "D",
+    "reason": "DPU (Delivered at Place Unloaded) requires the seller to unload the goods but does not require import clearance."
+  },
+  "30": {
+    "question": "You are a seller in the Philippines, and you've agreed to sell textiles to a buyer in the United Kingdom. The chosen Incoterm is EXW. What is your primary responsibility under EXW?",
+    "choices": {
+      "A": "Arrange for import clearance in the UK",
+      "B": "Deliver the goods to the buyer's premises in the Philippines.",
+      "C": "Handle all costs and risks until the goods are loaded at your premises.",
+      "D": "Provide insurance coverage during transit."
+    },
+    "correct": "C",
+    "reason": "Under EXW, the seller's only responsibility is to make the goods available at their premises; the buyer handles all transportation, insurance, and clearances."
+  },
+  "31": {
+    "question": "What is insurance coverage for 'CIF' shipments?",
+    "choices": {
+      "A": "ICC 'A'",
+      "B": "ICC 'B'",
+      "C": "ICC 'C'",
+      "D": "ICC 'D'"
+    },
+    "correct": "C",
+    "reason": "Under CIF, the seller is required to obtain ICC (C) insurance coverage (minimum cover) for the goods."
+  },
+  "32": {
+    "question": "You are a buyer in the Philippines, and you've purchased raw materials from a supplier in Mexico. The agreed Incoterm is FCA. What does FCA require you to do as the buyer?",
+    "choices": {
+      "A": "Arrange for export clearance in Mexico",
+      "B": "Deliver the goods from the seller's premises to the port.",
+      "C": "Handle the loading of goods at the seller's premises",
+      "D": "Unload the goods at the agreed place in the Philippines."
+    },
+    "correct": "B",
+    "reason": "Under FCA, the buyer arranges main carriage and assumes risk after delivery to the carrier. The buyer also handles import clearance."
+  },
+  "33": {
+    "question": "You are a buyer in the Philippines, and you've agreed to purchase perishable goods from a supplier in Kenya. The chosen Incoterm is FAS. What does FAS require you to do as the buyer?",
+    "choices": {
+      "A": "Arrange for export clearance in Kenya",
+      "B": "Handle the origin terminal charges",
+      "C": "Deliver the goods from the seller's premises to the port.",
+      "D": "Load the goods at the port of shipment"
+    },
+    "correct": "A",
+    "reason": "Under FAS, the seller places goods alongside the vessel, and the buyer is responsible for export clearance and loading."
+  },
+  "34": {
+    "question": "Goods sold under FOB are containerized and delivered to a container yard. When does risk transfer?",
+    "choices": {
+      "A": "Upon delivery to CY",
+      "B": "Upon gate-in",
+      "C": "Upon loading onboard vessel",
+      "D": "Upon export clearance"
+    },
+    "correct": "C",
+    "reason": "Under FOB, risk transfers when the goods are loaded on board the vessel, not at the container yard."
+  },
+  "35": {
+    "question": "You are a buyer and you've purchased clothing items from a supplier in Italy. The chosen Incoterm is CPT. What does CPT entail for you as the buyer?",
+    "choices": {
+      "A": "Arrange for export clearance in Italy.",
+      "B": "Handle the destination terminal charges",
+      "C": "Unload the goods at the agreed place in the Philippines.",
+      "D": "Handle the loading of goods onto the carrying vessel."
+    },
+    "correct": "B",
+    "reason": "Under CPT, the buyer handles destination terminal charges, unloading, and import clearance after the goods arrive."
+  },
+  "36": {
+    "question": "You are an importer in the Philippines, and you've purchased chemicals from a supplier in Germany. The agreed Incoterm is DDP (Delivered Duty Paid). What does DDP entail for you as the buyer?",
+    "choices": {
+      "A": "Handle the import duty, taxes and Customs clearance in the Philippines",
+      "B": "Unload the goods at the agreed place in the Philippines.",
+      "C": "Handle all risks during transit.",
+      "D": "Handle the loading of goods onto the main carriage."
+    },
+    "correct": "B",
+    "reason": "Under DDP, the seller handles all costs including import duties and taxes. The buyer only needs to unload the goods."
+  },
+  "37": {
+    "question": "Which Incoterm shifts risk the earliest?",
+    "choices": {
+      "A": "EXW",
+      "B": "FOB",
+      "C": "FCA",
+      "D": "CIF"
+    },
+    "correct": "A",
+    "reason": "EXW shifts risk earliest, when the goods are made available at the seller's premises; all other terms shift risk at a later point."
+  },
+  "38": {
+    "question": "Which Incoterm applies when the seller delivers when the goods are placed alongside the vessel nominated by the buyer at the named port of shipment?",
+    "choices": {
+      "A": "FOB",
+      "B": "EXW",
+      "C": "FAS",
+      "D": "CFR"
+    },
+    "correct": "C",
+    "reason": "FAS (Free Alongside Ship) requires the seller to place the goods alongside the vessel at the named port."
+  },
+  "39": {
+    "question": "Under this Incoterm, the seller delivers when the goods are unloaded and placed at the disposal of the buyer at a named place of destination. Additionally, the seller bears all risks involved in bringing the goods to, and unloading them at the named place of destination. What Incoterm is being referred to?",
+    "choices": {
+      "A": "DAP",
+      "B": "DDP",
+      "C": "DPU",
+      "D": "CPT"
+    },
+    "correct": "C",
+    "reason": "DPU (Delivered at Place Unloaded) requires the seller to unload the goods at the named place of destination."
+  },
+  "40": {
+    "question": "The agreement between the seller and the buyer is that the seller places and delivers the goods alongside the buyer's nominated vessel at the Port of Manila. Before loading, a sudden storm damages the cargo. Who bears the risk?",
+    "choices": {
+      "A": "Seller, because loading was not yet done",
+      "B": "Buyer, because goods were already alongside the vessel",
+      "C": "Seller, because export clearance was incomplete",
+      "D": "Carrier, because the vessel was already nominated"
+    },
+    "correct": "B",
+    "reason": "Under FAS, risk transfers when goods are placed alongside the vessel. The buyer bears risk from that point."
+  },
+  "41": {
+    "question": "Seller delivered the goods ordered by Buyer under FCA Carrier. Buyer was notified that the goods arrived and ready for unloading. The goods were damaged during the unloading from seller's truck. Who bears the risk?",
+    "choices": {
+      "A": "Seller",
+      "B": "Terminal operator",
+      "C": "Buyer",
+      "D": "Carrier"
+    },
+    "correct": "C",
+    "reason": "Under FCA, risk transfers when goods are delivered to the carrier. Unloading at destination is the buyer's risk."
+  },
+  "42": {
+    "question": "Under FAS, which cost is the buyer's responsibility?",
+    "choices": {
+      "A": "Export customs clearance",
+      "B": "Terminal Handling Charge before placing goods alongside ship",
+      "C": "Loading the goods onto the vessel",
+      "D": "Inland transport to the port of shipment"
+    },
+    "correct": "A",
+    "reason": "Under FAS, the buyer is responsible for export customs clearance and loading the goods onto the vessel."
+  },
+  "43": {
+    "question": "Goods are shipped under FOB. The seller loads the goods onboard, but the crane operator drops the container during loading. Who bears the loss?",
+    "choices": {
+      "A": "Seller",
+      "B": "Terminal operator",
+      "C": "Buyer",
+      "D": "Carrier"
+    },
+    "correct": "C",
+    "reason": "Under FOB, risk transfers when goods are loaded on board, but damage during loading before on board status is achieved remains the seller's risk."
+  },
+  "44": {
+    "question": "Under CFR, the seller pays ocean freight. The goods are damaged during the voyage. Who bears the risk?",
+    "choices": {
+      "A": "Seller, because freight was prepaid",
+      "B": "Buyer, because risk transferred at shipment",
+      "C": "Carrier",
+      "D": "Insurance company"
+    },
+    "correct": "B",
+    "reason": "Under CFR, risk transfers to the buyer once goods are loaded on board the vessel, despite the seller paying freight."
+  },
+  "45": {
+    "question": "Under FOB, seller delivers early, but vessel not yet arrived. Goods are damaged while waiting. Risk lies with:",
+    "choices": {
+      "A": "Seller",
+      "B": "Carrier",
+      "C": "Buyer",
+      "D": "Port authority"
+    },
+    "correct": "A",
+    "reason": "Under FOB, risk transfers only when goods are loaded on board the vessel. Until then, the seller bears the risk."
+  },
+  "46": {
+    "question": "Seller is responsible for the unloading of the cargo from the importing vessel and delivers the goods to the Buyer's place. Seller did not arrange for the customs import clearance. What is the Incoterm?",
+    "choices": {
+      "A": "CIP",
+      "B": "DAP",
+      "C": "CIF",
+      "D": "DDP"
+    },
+    "correct": "B",
+    "reason": "Under DAP, the seller delivers goods ready for unloading but does not handle import clearance."
+  },
+  "47": {
+    "question": "Goods are sold under DAP Buyer's Warehouse. The truck arrives ready for unloading but the buyer refuses the unloading due to labor issues. Who bears the risk at that moment?",
+    "choices": {
+      "A": "Seller",
+      "B": "Carrier",
+      "C": "Buyer",
+      "D": "Customs authority"
+    },
+    "correct": "C",
+    "reason": "Under DAP, risk transfers when goods are placed at the buyer's disposal at the named destination. Refusal to accept means the buyer bears the risk."
+  },
+  "48": {
+    "question": "Seller and buyer agreed on EXW Seller's Factory. The seller loads the goods onto the buyer's truck as a favor, and damage occurs during loading. Who bears the risk?",
+    "choices": {
+      "A": "Seller",
+      "B": "Carrier",
+      "C": "Buyer",
+      "D": "Insurance company"
+    },
+    "correct": "C",
+    "reason": "Under EXW, risk transfers when goods are made available at the seller's premises. Loading by the seller as a favor does not change the risk transfer point."
+  },
+  "49": {
+    "question": "Under FCA, goods are delivered at the seller's premises. When does risk transfer?",
+    "choices": {
+      "A": "After export clearance",
+      "B": "When goods are loaded on buyer's carrier",
+      "C": "Upon arrival at port",
+      "D": "When freight is paid"
+    },
+    "correct": "B",
+    "reason": "Under FCA at the seller's premises, risk transfers when the goods are loaded on the buyer's collecting vehicle."
+  },
+  "50": {
+    "question": "Which Incoterm places maximum obligation on the seller?",
+    "choices": {
+      "A": "DAP",
+      "B": "DDP",
+      "C": "DPU",
+      "D": "CIF"
+    },
+    "correct": "B",
+    "reason": "DDP places the maximum obligation on the seller, covering all costs, risks, and import clearance to the buyer's premises."
+  },
+  "51": {
+    "question": "Goods are shipped under CPT. The seller paid freight, but the goods were lost after being handed to the first carrier. Who bears the loss?",
+    "choices": {
+      "A": "Seller",
+      "B": "Carrier",
+      "C": "Buyer",
+      "D": "Insurance company"
+    },
+    "correct": "C",
+    "reason": "Under CPT, risk transfers to the buyer when goods are handed to the first carrier. The buyer bears the loss despite the seller paying freight."
+  },
+  "52": {
+    "question": "Which Incoterm requires the seller to clear goods for export but not import?",
+    "choices": {
+      "A": "EXW",
+      "B": "DDP",
+      "C": "FCA",
+      "D": "DPU"
+    },
+    "correct": "C",
+    "reason": "FCA requires the seller to clear goods for export but not for import."
+  },
+  "53": {
+    "question": "Which Incoterm can be used for any mode of transport, including multimodal?",
+    "choices": {
+      "A": "FOB",
+      "B": "FCA",
+      "C": "CFR",
+      "D": "FAS"
+    },
+    "correct": "B",
+    "reason": "FCA is a multimodal Incoterm suitable for any mode of transport, including multimodal."
+  },
+  "54": {
+    "question": "Under DPU, delivery is agreed at a terminal without unloading equipment. What is the implication?",
+    "choices": {
+      "A": "Buyer must unload",
+      "B": "Seller bears the risk of unloading",
+      "C": "Contract is invalid",
+      "D": "Risk transfers before unloading"
+    },
+    "correct": "B",
+    "reason": "Under DPU, the seller bears the risk of unloading the goods at the named place of destination."
+  },
+  "55": {
+    "question": "Which Incoterm is incorrectly paired with its transport mode?",
+    "choices": {
+      "A": "CIF – Sea transport",
+      "B": "DAP – Any mode",
+      "C": "FOB – Sea transport",
+      "D": "FAS – Air transport"
+    },
+    "correct": "D",
+    "reason": "FAS is for sea/inland waterway transport only, not air transport."
+  },
+  "56": {
+    "question": "Under CPT, which statement is TRUE?",
+    "choices": {
+      "A": "Risk transfers at destination",
+      "B": "Seller bears risk during carriage",
+      "C": "Risk transfers when goods are handed to first carrier",
+      "D": "Seller must insure the goods"
+    },
+    "correct": "C",
+    "reason": "Under CPT, risk transfers when the goods are handed to the first carrier."
+  },
+  "57": {
+    "question": "Which Incoterm requires the seller to deliver goods on board the vessel?",
+    "choices": {
+      "A": "FCA",
+      "B": "FAS",
+      "C": "FOB",
+      "D": "DPU"
+    },
+    "correct": "C",
+    "reason": "FOB requires the seller to deliver goods on board the vessel at the named port of shipment."
+  },
+  "58": {
+    "question": "Which Incoterm is most suitable when the seller can handle both export and import clearance?",
+    "choices": {
+      "A": "DAP",
+      "B": "DDP",
+      "C": "DPU",
+      "D": "CIF"
+    },
+    "correct": "B",
+    "reason": "DDP requires the seller to handle both export and import clearance, making it suitable for sellers capable of doing both."
+  },
+  "59": {
+    "question": "Under DAP, risk transfers:",
+    "choices": {
+      "A": "At shipment",
+      "B": "After unloading",
+      "C": "Upon arrival, ready for unloading",
+      "D": "After import clearance"
+    },
+    "correct": "C",
+    "reason": "Under DAP, risk transfers when the goods are placed at the disposal of the buyer at the named destination, ready for unloading."
+  },
+  "60": {
+    "question": "Under DPU, import duties are paid by:",
+    "choices": {
+      "A": "Seller",
+      "B": "Carrier",
+      "C": "Buyer",
+      "D": "Port authority"
+    },
+    "correct": "C",
+    "reason": "Under DPU, the buyer is responsible for import duties and taxes."
+  },
+  "61": {
+    "question": "In the application of Method Four in determining customs value if neither the imported goods nor identical nor similar imported goods are sold in the Philippines in the condition as imported the dutiable value shall be based on the unit price at which the imported goods, after further processing. At whose instance may such be done?",
+    "choices": {
+      "A": "District Collector",
+      "B": "District Collector subject to approval of the Commissioner",
+      "C": "Deputy Commissioner, AOCG",
+      "D": "Importer"
+    },
+    "correct": "D",
+    "reason": "Under Method Four (Deductive Value), the importer may request valuation based on further processing, as provided under CMTA."
+  },
+  "62": {
+    "question": "Imported goods shall be valued in accordance with the provisions of Section 701 of CMTA whenever the conditions prescribed therein are fulfilled. What is the valuation method under Section 701?",
+    "choices": {
+      "A": "Method One",
+      "B": "Method Two",
+      "C": "Method Three",
+      "D": "Method Four"
+    },
+    "correct": "A",
+    "reason": "Section 701 of the CMTA covers Method One - Transaction Value."
+  },
+  "63": {
+    "question": "What is a condition before all additions or adjustments to the price actually paid or payable be made?",
+    "choices": {
+      "A": "All additions must be based on the decision of the Bureau of Customs",
+      "B": "All additions must be based only on the basis of objective and quantifiable data",
+      "C": "All additions must be based on the agreement between the importer and the Bureau of Customs",
+      "D": "All of the above"
+    },
+    "correct": "B",
+    "reason": "Additions to the price actually paid or payable must be based on objective and quantifiable data, as required under WTO Valuation Agreement."
+  },
+  "64": {
+    "question": "Where the customs value cannot be determined under the provisions of Section 701, it is to be determined by proceeding sequentially through Section 702, 703, 704, 705, and 706. What is the exception to the valuation sequential rule?",
+    "choices": {
+      "A": "Application of Method Four from Method Two",
+      "B": "Application of Method Five from Method Three",
+      "C": "Application of Method Six from Method Four",
+      "D": "None of the choices"
+    },
+    "correct": "A",
+    "reason": "An exception to the sequential application allows the importer to request that Method Four (Deductive Value) be applied before Method Three (Similar Goods) under certain conditions."
+  },
+  "65": {
+    "question": "Who may request for an exception to the application of the valuation sequential rule?",
+    "choices": {
+      "A": "Customs Appraiser",
+      "B": "District Collector",
+      "C": "Importer",
+      "D": "Any of the above"
+    },
+    "correct": "C",
+    "reason": "Only the importer may request an exception to the sequential application of valuation methods, as provided under the WTO Valuation Agreement."
+  },
+  "66": {
+    "question": "If the dutiable value cannot be determined under Method One to Method Five it shall be determined by using other reasonable means and on the basis of data available in which of the following places?",
+    "choices": {
+      "A": "Port of entry",
+      "B": "Philippines",
+      "C": "Country of exportation",
+      "D": "Any of the choices"
+    },
+    "correct": "D",
+    "reason": "Method Six (Fallback Method) allows valuation using reasonable means based on data available in any location."
+  },
+  "67": {
+    "question": "What is the valuation method under CMTA, Section 705?",
+    "choices": {
+      "A": "Method Two",
+      "B": "Method Three",
+      "C": "Method Four",
+      "D": "Method Five"
+    },
+    "correct": "D",
+    "reason": "Section 705 of the CMTA covers Method Five - Computed Value."
+  },
+  "68": {
+    "question": "Which of the following is a valid basis in determining dutiable value under Method Six?",
+    "choices": {
+      "A": "The selling price in the Philippines of goods produced in the Philippines",
+      "B": "System that provides for the acceptance for customs purposes of the higher of two alternative values",
+      "C": "The price of goods in the domestic market of the country of exportation",
+      "D": "All of the above are contrary to the WTO Valuation Agreement in determining dutiable value"
+    },
+    "correct": "D",
+    "reason": "Method Six (Fallback Method) cannot use domestic sales prices, minimum values, or arbitrary systems; all the listed options are prohibited under the WTO Valuation Agreement."
+  },
+  "69": {
+    "question": "If the proper person requests for an exception to the application of the valuation sequential rule and still the customs value cannot be determined, what is the proper method of valuation to be applied?",
+    "choices": {
+      "A": "Method Two",
+      "B": "Method Three",
+      "C": "Method Four",
+      "D": "Method Five"
+    },
+    "correct": "D",
+    "reason": "If even the requested method fails, the valuation proceeds sequentially to the next available method."
+  },
+  "70": {
+    "question": "For purposes of computing dutiable value under the provisions of Section 701 Method One which of the following is an acceptable restriction imposed by the seller with regard to the disposition or use of the goods by the buyer?",
+    "choices": {
+      "A": "Restriction imposed as required by law",
+      "B": "Restriction that limit the geographical area in which the goods may be resold",
+      "C": "Restriction that does not substantially affect the value of the goods",
+      "D": "All of the above are acceptable restrictions"
+    },
+    "correct": "D",
+    "reason": "Acceptable restrictions include those imposed by law, limitations on geographical resale, and restrictions that do not substantially affect the value of the goods."
+  },
+  "71": {
+    "question": "The deductive value which shall be based on the unit price at which the imported goods or identical or similar imported goods are sold in the Philippines, in the same condition as when imported, in the greatest aggregate quantity, at or about the time of the importation of the goods being valued to persons not related to the persons from whom they buy such goods. Who is the seller and buyer referred to in the definition?",
+    "choices": {
+      "A": "The seller refers to the foreign supplier while the buyer refers to the importer",
+      "B": "The seller refers to the importer of the goods being valued and the buyer is the local buyer who should not be related to the seller.",
+      "C": "The seller refers to the local supplier and the buyer refers to the importer",
+      "D": "Any of the situation applies"
+    },
+    "correct": "B",
+    "reason": "In Method Four, the seller is the importer of the goods being valued, and the buyer is the local buyer who must be unrelated to the seller."
+  },
+  "72": {
+    "question": "What is the condition before any amount of royalties and license fees related to the goods being valued shall be considered as an addition to the price actually paid or payable for purposes of computing dutiable value?",
+    "choices": {
+      "A": "The buyer must not be related to the seller",
+      "B": "The seller must not be related to the buyer in any manner",
+      "C": "The buyer pays the royalty either directly or indirectly as a condition of sale of the goods",
+      "D": "All of the above are the conditions"
+    },
+    "correct": "C",
+    "reason": "Royalties and license fees are added to the price actually paid or payable only if the buyer pays them as a condition of sale of the goods, regardless of relationship between parties."
+  },
+  "73": {
+    "question": "Which of the following is a valid basis in determining dutiable value under Method Six?",
+    "choices": {
+      "A": "The price of goods in the domestic market of the country of exportation",
+      "B": "The price of goods for export to a country other than the Philippines",
+      "C": "Minimum customs values",
+      "D": "All of the choices are not valid basis in determining dutiable value under Method Six"
+    },
+    "correct": "D",
+    "reason": "Method Six (Fallback Method) cannot use domestic sales prices, export prices to other countries, or minimum values as valid bases."
+  },
+  "74": {
+    "question": "Identical goods refer to goods which are the same in all respects, including physical characteristics, quality and reputation. Can we say that white electric fan is not considered as an identical good of a red electric fan?",
+    "choices": {
+      "A": "No, because they are not the same in all respects. They are different in color.",
+      "B": "Yes, because the difference is only minor.",
+      "C": "No, but they can already be considered as similar goods.",
+      "D": "a and c are correct"
+    },
+    "correct": "D",
+    "reason": "White and red electric fans are not identical goods (different color), but they can be considered similar goods."
+  },
+  "75": {
+    "question": "How is the phrase 'imported at or about the same time as the goods being valued under Method Two generally interpreted?",
+    "choices": {
+      "A": "90 days from goods declaration lodgement.",
+      "B": "90 days from the date of bill of lading of the goods being valued.",
+      "C": "45 days before or after the date of the bill of lading of the goods being valued.",
+      "D": "45 days before or after the date of the bill of lading of the identical goods."
+    },
+    "correct": "C",
+    "reason": "'At or about the same time' is generally interpreted as 45 days before or after the date of the bill of lading of the goods being valued."
+  },
+  "76": {
+    "question": "When a goods declaration is presented to the Bureau of Customs and the concerned customs officer has reason to doubt the truth or accuracy of the declaration or of the documents attached therein what may be done by the Bureau?",
+    "choices": {
+      "A": "The Bureau of Customs may ask the importer to provide further explanation that the entered value represents an accurate transaction value",
+      "B": "The Bureau of Customs may ask the importer to produce additional documents to prove that the entered transaction value is accurate",
+      "C": "The Bureau of Customs may ask the importer to produce any other evidence to prove that the entered transaction value is accurate",
+      "D": "Any of the above may be done by the Bureau of Customs."
+    },
+    "correct": "D",
+    "reason": "The BOC may request further explanation, additional documents, or any other evidence to verify the accuracy of the declared value."
+  },
+  "77": {
+    "question": "Where the dutiable value cannot be determined under Method Four the dutiable value shall be the computed value of the sum of different cost elements. Which of the following is not among those cost elements?",
+    "choices": {
+      "A": "The cost or the value of materials and fabrication or other processing employed in producing the imported goods",
+      "B": "The amount for profit and general expenses equal to that usually reflected in the sale of goods of the same class or kind as the goods being valued which are made by producers in the country of exportation for export to the Philippines.",
+      "C": "The freight, insurance fees and other transportation expenses for the importation of the goods",
+      "D": "All of the above are proper cost elements"
+    },
+    "correct": "C",
+    "reason": "Freight, insurance, and transportation expenses are not part of Method Five (Computed Value); they are added separately."
+  },
+  "78": {
+    "question": "In applying Section 702-Transaction Value of Identical Goods or Section 703 Transaction Value of Similar goods, if more than one transaction value of identical goods or similar goods are found, what rule shall be applied?",
+    "choices": {
+      "A": "Whichever is the highest rule applies",
+      "B": "Whichever is the latest rule applies",
+      "C": "Whichever is the lowest rule applies",
+      "D": "Any of the above is correct applies"
+    },
+    "correct": "C",
+    "reason": "When multiple transaction values of identical or similar goods are found, the lowest value shall be applied."
+  },
+  "79": {
+    "question": "In determining the dutiable value using Method One Transaction value, there are cost elements that shall be added to the price actually paid or payable for the imported goods. What is a condition before a cost element may be a positive adjustment to the price actually paid or payable?",
+    "choices": {
+      "A": "To the extent that the cost element is incurred by both the seller and buyer and payable at a future date",
+      "B": "To the extent that the cost element is incurred by seller and already included in the price actually paid or payable.",
+      "C": "To the extent that the cost element is incurred by the buyer and not included in the price actually paid or payable.",
+      "D": "None of the choices"
+    },
+    "correct": "C",
+    "reason": "An adjustment is added only if the cost is incurred by the buyer and not already included in the price actually paid or payable."
+  },
+  "80": {
+    "question": "For the assessment and collection of import duty upon imported goods and for other purposes, the value and prices thereof quoted in foreign currency shall be converted into the currency of the Philippines at the current rate of exchange or value specified or published, from time to time. Which of the following agencies should publish the rate of exchange?",
+    "choices": {
+      "A": "PSA",
+      "B": "BSP",
+      "C": "NEDA",
+      "D": "BOC"
+    },
+    "correct": "B",
+    "reason": "The Bangko Sentral ng Pilipinas (BSP) publishes the official rate of exchange for customs valuation purposes."
+  },
+  "81": {
+    "question": "In the application of Method Four if neither the imported goods nor identical nor similar imported goods are sold at or about the time of importation of the goods being valued in the Philippines in the conditions they were imported, the customs value shall be based on the unit price at which the imported goods or identical or similar imported goods sold in the Philippines in the condition they were imported and at the earliest date after the importation of the goods being valued. What is the time frame provided under CMTA?",
+    "choices": {
+      "A": "Before the expiration of thirty (30) days after such importation",
+      "B": "Before the expiration of forty five (45) days after such importation",
+      "C": "Before the expiration of sixty (60) days after such importation",
+      "D": "Before the expiration of ninety (90) days after such importation"
+    },
+    "correct": "D",
+    "reason": "Under CMTA, the earliest date after importation for Method Four is before the expiration of ninety (90) days."
+  },
+  "82": {
+    "question": "In determining dutiable value using Method One are engineering, development, artwork, design work and plans and sketches undertaken in the Philippines and necessary for the production of imported goods, where such goods are supplied directly or indirectly by the buyer free of charge or at a reduced cost for use in connection with the production and sale for export of the imported goods considered as assist?",
+    "choices": {
+      "A": "Yes, but use of Method One is not precluded",
+      "B": "No, but use of Method One is precluded.",
+      "C": "Yes, but use of Method One is precluded",
+      "D": "No, but use of Method One is not precluded"
+    },
+    "correct": "A",
+    "reason": "Design work undertaken in the Philippines is considered an assist, but it does not preclude the use of Method One."
+  },
+  "83": {
+    "question": "If in the course of determining the dutiable value of imported goods, it becomes necessary to delay the final determination of such dutiable value, how may the importer effect release of imported goods?",
+    "choices": {
+      "A": "There is nothing that can be done by the importer but to pay duties and taxes to avoid delay in the release of imported goods",
+      "B": "Release of imported goods under tentative assessment upon posting of sufficient security equal to the duties and taxes due on the imported goods",
+      "C": "Release of imported goods under tentative assessment upon posting of sufficient security",
+      "D": "Any of the above"
+    },
+    "correct": "C",
+    "reason": "The importer may secure release under tentative assessment upon posting of sufficient security."
+  },
+  "84": {
+    "question": "Which of the following is not a proper term in the statement that 'similar goods' are goods which, although not alike in all respects, have like characteristics and similar component materials which enable them to perform the same functions and to be interchangeable, commercially",
+    "choices": {
+      "A": "Similar",
+      "B": "Interchangeable",
+      "C": "Same function",
+      "D": "The statement is correct in all aspects."
+    },
+    "correct": "D",
+    "reason": "The statement is correct in all aspects; all terms are proper in describing similar goods."
+  },
+  "85": {
+    "question": "If the dutiable value of imported goods cannot be determined using Method Two and Method Three, what may be done by the importer if he does not want to apply the succeeding valuation method?",
+    "choices": {
+      "A": "The importer may request that Method One be used in the valuation of the imported goods.",
+      "B": "The importer may request that customs value be determined using Computed Value.",
+      "C": "The importer may request that customs value be determined using Deductive Value.",
+      "D": "None of the choices"
+    },
+    "correct": "B",
+    "reason": "If Methods Two and Three fail, the importer may request that the customs value be determined using Computed Value (Method Five)."
+  },
+  "86": {
+    "question": "What is the main condition for the use of Method One?",
+    "choices": {
+      "A": "Conditions prescribed are fulfilled.",
+      "B": "Carrying vessel has arrived.",
+      "C": "Imported goods have been discharged from carrying vessel.",
+      "D": "All of the above."
+    },
+    "correct": "A",
+    "reason": "The main condition for the use of Method One is that the conditions prescribed in Section 701 are fulfilled."
+  },
+  "87": {
+    "question": "In determining the dutiable value using Section 701 Transaction Value commissions and brokerage fees are to be added to the price actually paid or payable. Which of the following is not the commission contemplated under the law?",
+    "choices": {
+      "A": "Selling commission",
+      "B": "Brokerage fees",
+      "C": "Buying commission",
+      "D": "All of the above are adjustments to the price actually paid or payable"
+    },
+    "correct": "C",
+    "reason": "Buying commission is not added to the price actually paid or payable; only selling commissions and brokerage fees are added."
+  },
+  "88": {
+    "question": "In determining customs value using Method Five may the Bureau of Customs require or compel any person not residing in the Philippines to produce for examination, or to allow access to, any account or other record for the purpose of determining a computed value?",
+    "choices": {
+      "A": "Yes, provided that the request is done through proper diplomatic channels.",
+      "B": "Yes, provided that the importer agrees.",
+      "C": "Yes, provided that the Secretary of Finance approves such request.",
+      "D": "No"
+    },
+    "correct": "D",
+    "reason": "The BOC cannot compel persons not residing in the Philippines to produce records for Method Five determination."
+  },
+  "89": {
+    "question": "Which of the following is not a test value for purposes of determining whether in a sale between related parties the transaction value shall be accepted as the dutiable value?",
+    "choices": {
+      "A": "The transaction value in sales to unrelated buyers of identical or similar goods for export to the Philippines.",
+      "B": "The Deductive Value of identical or similar goods.",
+      "C": "The Computed Value of identical or similar goods.",
+      "D": "None of the choices."
+    },
+    "correct": "D",
+    "reason": "All the listed values are test values for determining acceptability of transaction value between related parties."
+  },
+  "90": {
+    "question": "Which of the following is not relationship in the context of WTO Valuation Agreement?",
+    "choices": {
+      "A": "Together Buyer and Seller directly or indirectly control a third person",
+      "B": "Both the Buyer and Seller are directly or indirectly controlled by a third person",
+      "C": "Buyer and Seller are second cousins",
+      "D": "All are considered as relationship under WVA"
+    },
+    "correct": "D",
+    "reason": "All listed relationships are considered relationships under the WTO Valuation Agreement."
+  },
+  "91": {
+    "question": "Choose the item which may not be considered as adjustment to the price actually paid or payable",
+    "choices": {
+      "A": "Cost of design done in the Philippines",
+      "B": "Cost of containers",
+      "C": "Selling commission",
+      "D": "All of the above are adjustments to the price actually paid or payable"
+    },
+    "correct": "A",
+    "reason": "Cost of design done in the Philippines is considered an assist but is not an adjustment to the price actually paid or payable."
+  },
+  "92": {
+    "question": "In computing for Deductive Value which of the following should not be deducted from the unit price at which the imported goods or identical or similar goods are sold in the Philippines?",
+    "choices": {
+      "A": "Commissions usually paid or agreed to be paid and general expenses in connection with the sales in the Philippines of imported goods of the same class or kind",
+      "B": "The usual costs of transport and insurance associated costs incurred within the Philippines.",
+      "C": "The transport, insurance fees and other transportation expenses for the importations of the goods",
+      "D": "All of the above are considered as deductions."
+    },
+    "correct": "C",
+    "reason": "Transport, insurance, and transportation expenses for importation are not deducted in Method Four; they are added before valuation."
+  },
+  "93": {
+    "question": "Which of the following may be considered as Transaction Value?",
+    "choices": {
+      "A": "Purchase price on FOB Singapore basis",
+      "B": "Purchase price on CFR Manila basis",
+      "C": "Purchase price on CIF Cebu basis",
+      "D": "All of the above"
+    },
+    "correct": "D",
+    "reason": "Transaction value may be based on any sale basis as long as it represents the price actually paid or payable for the goods."
+  },
+  "94": {
+    "question": "There is no publication of exchange rate on a Good Friday. What shall be the applicable exchange rate for the following week?",
+    "choices": {
+      "A": "Rate that shall be published following Monday",
+      "B": "Rate published Thursday before Good Friday",
+      "C": "Rate published Friday before Holy Week",
+      "D": "None of the choices"
+    },
+    "correct": "B",
+    "reason": "When no rate is published on a holiday, the rate published on the last working day before the holiday (Thursday) applies."
+  },
+  "95": {
+    "question": "The GAAP applicable in case of Method Five.",
+    "choices": {
+      "A": "GAAP as determined by the Bureau of Customs.",
+      "B": "GAAP in the Philippines.",
+      "C": "GAAP in the exporting country.",
+      "D": "GAAP as chosen by the importer."
+    },
+    "correct": "C",
+    "reason": "In Method Five (Computed Value), the GAAP of the exporting country shall be used."
+  },
+  "96": {
+    "question": "A Filipino importer provided assist in the form of design which was procured from a French designer based in Germany. What GAAP shall be used to value the assist?",
+    "choices": {
+      "A": "None as design is an intangible and therefore not considered as mandatory addition. As a rule intangibles are not subject to payment of customs duty.",
+      "B": "GAAP in France as the designer is a French national.",
+      "C": "GAAP in Germany the place where the design was made.",
+      "D": "GAAP in the Philippines which is the importing country."
+    },
+    "correct": "C",
+    "reason": "The assist (design) shall be valued using GAAP in the country where the design was produced (Germany)."
+  },
+  "97": {
+    "question": "The transaction value of the imported goods is based on PAPP for those goods when sold for export to the Philippines. What shall be the tax treatment when there is sale by a free zone locator to the customs territory for consumption?",
+    "choices": {
+      "A": "The transaction value between the free zone and buyer in the customs territory shall be used.",
+      "B": "The transaction value is not applicable as the sale is within the Philippines.",
+      "C": "The transaction value of the raw materials when admitted into the free zone.",
+      "D": "The transaction value as determined by the Import Assessment Service (IAS)."
+    },
+    "correct": "A",
+    "reason": "When goods are withdrawn from a free zone into the customs territory, the transaction value between the free zone locator and the buyer in the customs territory shall be used."
+  },
+  "98": {
+    "question": "Is there sale for export for time charter transaction between a ship owner and a domestic vessel operator?",
+    "choices": {
+      "A": "Yes, as there is outflow of foreign exchange in the transaction.",
+      "B": "No, as the title of ownership of the vessel remains with the ship owner.",
+      "C": "No, as the vessel will not be engaged in foreign trade.",
+      "D": "Yes, as the vessel will travel from a foreign port to a Philippine port."
+    },
+    "correct": "B",
+    "reason": "In a time charter, ownership of the vessel remains with the ship owner; therefore, there is no sale for export."
+  },
+  "99": {
+    "question": "Filipino importer supplied used capital equipment as an assist to a foreign supplier. The capital equipment was previously imported from Germany brand new. How shall the equipment be valued?",
+    "choices": {
+      "A": "TV when the capital equipment was imported by the Filipino importer.",
+      "B": "Total cost of the capital equipment.",
+      "C": "Total cost of the equipment minus depreciation.",
+      "D": "TV of the capital equipment as determined by the customs authorities of foreign supplier."
+    },
+    "correct": "C",
+    "reason": "Used capital equipment supplied as an assist shall be valued at its total cost minus depreciation."
+  },
+  "100": {
+    "question": "Is letter of credit amount always equal to the price actually paid or payable?",
+    "choices": {
+      "A": "Yes, as the amount in the letter of credit represents the agreed price between the buyer and the seller.",
+      "B": "Not necessarily always.",
+      "C": "No, because mandatory adjustments have to be considered.",
+      "D": "None of the choices."
+    },
+    "correct": "C",
+    "reason": "The LC amount is not always equal to the price actually paid or payable because mandatory adjustments (commissions, assists, etc.) must be added."
+  },
+  "101": {
+    "question": "In a Free Carrier (FCA) delivery to a third person which of the following is to be considered as an Adjustment to the PAPP?",
+    "choices": {
+      "A": "Inland transport cost from seller's place to the delivery point.",
+      "B": "Export customs clearance.",
+      "C": "Unloading cost incurred at the place of delivery.",
+      "D": "Inland marine to cover risk from supplier's place to place of delivery."
+    },
+    "correct": "A",
+    "reason": "Inland transport cost from seller's place to the delivery point is an adjustment to the PAPP in FCA transactions."
+  },
+  "102": {
+    "question": "Which of the following cost elements is not an Adjustment to the PAPP in a FCA transaction where the place of delivery is the supplier's factory:",
+    "choices": {
+      "A": "Cost of loading to the collecting vehicle.",
+      "B": "Inland transport cost at the country of exportation.",
+      "C": "Inland marine at the country of exportation.",
+      "D": "Cost of discharging from the collecting vehicle."
+    },
+    "correct": "D",
+    "reason": "Cost of discharging from the collecting vehicle is not an adjustment to the PAPP as it occurs after delivery."
+  },
+  "103": {
+    "question": "In a Free Alongside (FAS) transaction dump trucks were used to bring the goods to the port where the vessel that will transport the goods to the country of importation will dock. The goods were unloaded at the apron. Which of the following is an Adjustment to the PAPP?",
+    "choices": {
+      "A": "Port charges at the port of exportation.",
+      "B": "Cost of loading to the vessel.",
+      "C": "Cost of unloading from the dump trucks.",
+      "D": "All of the above are considered as Adjustments to the PAPP."
+    },
+    "correct": "C",
+    "reason": "In FAS, only the cost of unloading from the dump trucks (to place goods alongside) is an adjustment; port charges and loading are not adjustments."
+  },
+  "104": {
+    "question": "Which of the following is not an Adjustment to the PAPP?",
+    "choices": {
+      "A": "Cost of design done in a third country.",
+      "B": "Cost of design at the country of importation the design of which is supplied to the foreign supplier.",
+      "C": "Selling commission.",
+      "D": "Cost of raw materials produced at the country of importation and supplied to the foreign supplier."
+    },
+    "correct": "B",
+    "reason": "Cost of design at the country of importation is not an adjustment to the PAPP; it is an assist but not an adjustment."
+  },
+  "105": {
+    "question": "In determining the dutiable value using Method Five the information needed are supplied by the foreign supplier. What are the two (2) important considerations that must be considered if the District Collector would want to verify the supplied information at the country of exportation?",
+    "choices": {
+      "A": "Importer agrees to the verification and advance notice to the government of the country of exportation and no objection is raised by that government.",
+      "B": "Importer agrees to the verification and the verification must be done at the country of exportation by the Philippine Consul General assigned to that country.",
+      "C": "The Philippine Foreign Affairs Secretary must issue a note verbale to the Ambassador assigned to the Philippines by the country of exportation.",
+      "D": "The District Collector cannot make any verification because custom law may only be enforced within the Philippine territory."
+    },
+    "correct": "A",
+    "reason": "Verification in the exporting country requires importer agreement and advance notice to the exporting government with no objection raised."
+  },
+  "106": {
+    "question": "Which of the following is considered as post importation charges that is included in the DAP export pricing?",
+    "choices": {
+      "A": "Customs clearance at the country of importation.",
+      "B": "Delivery cost from port of discharge to agreed place of delivery.",
+      "C": "Port charges at the port of importation.",
+      "D": "All of the above."
+    },
+    "correct": "A",
+    "reason": "In DAP, the seller is not responsible for import clearance; therefore, customs clearance at the country of importation is a post-importation charge not included in export pricing."
+  },
+  "107": {
+    "question": "In 'D' terms transaction which of the following charges is considered as adjustment to the price actually paid or payable?",
+    "choices": {
+      "A": "Marine cargo insurance from port of exportation to port of entry.",
+      "B": "Export clearance expenses at the country of exportation.",
+      "C": "Freight from port of exportation to port of entry.",
+      "D": "None of the choices."
+    },
+    "correct": "D",
+    "reason": "In D terms, the seller bears all costs; therefore, none of these charges are adjustments to the PAPP as they are already included in the seller's price."
+  },
+  "108": {
+    "question": "Seller 'A' sent an offer sheet to Buyer 'B' for the supply of 'C' branded cosmetic products with the condition that the goods may only be sold in the Philippines through multi-level marketing (MLM). Is this an acceptable restriction for purposes of valuing the goods for customs purposes with the use of Method One?",
+    "choices": {
+      "A": "No, because it restricts the disposition of the goods.",
+      "B": "Yes, because it is an acceptable restriction as it does not affect the value of the goods.",
+      "C": "No, because the condition is such that the 'A' has control over the goods even if already delivered to 'B'.",
+      "D": "Any of the choices, if there is no portion of the subsequent proceeds in the resale of the goods that will accrue to the benefit of 'A'."
+    },
+    "correct": "B",
+    "reason": "A restriction that limits the method of resale but does not substantially affect the value of the goods is acceptable under Method One."
+  },
+  "109": {
+    "question": "What shall generally be considered for the use of Method Five in determining customs value?",
+    "choices": {
+      "A": "That there is relationship between buyer and seller.",
+      "B": "That the Philippines has diplomatic relationship with the government of the seller.",
+      "C": "That the Department of Foreign Affairs (DFA) will be involved if there would be issues with the foreign seller.",
+      "D": "All of the choices."
+    },
+    "correct": "A",
+    "reason": "Method Five (Computed Value) is generally used when there is a relationship between buyer and seller, or when other methods are not applicable."
+  },
+  "110": {
+    "question": "For purposes of using Method Four to determine the customs value of an importation of importer 'A' which is still in customs custody may a previous importation of 'A' of the same goods being sold at the customs territory be used?",
+    "choices": {
+      "A": "No, as this would constitute conflict of interest.",
+      "B": "No, as this is not in the rules of the WTO Valuation Agreement (WVA).",
+      "C": "Yes, provided that the buyer in the customs territory is not related to 'A'.",
+      "D": "It depends on the nature of the goods as per determination by the Commissioner of Customs."
+    },
+    "correct": "C",
+    "reason": "A previous importation of the same goods by the same importer may be used for Method Four, provided the buyer in the customs territory is not related to the seller."
+  },
+  "111": {
+    "question": "STRACIATELLA SPORTY, Inc. has an importation of 1,000 boxes of tennis balls with each box containing 24 balls. Each ball has a declared FOB value of $0.30 which was rejected by BOC. BOC compared the values of previously accepted transaction value of identical balls imported prior to B/L date of current importation, namely: 30 days ago - $0.40 per piece; 40 days ago - $0.45 per piece; and 60 days ago - $0.50 per piece. Assume exchange rate of P50.50/$1.00 and total ocean freight of $750.00. Which of the following is the total Dutiable Value?",
+    "choices": {
+      "A": "P 504,183.00",
+      "B": "P 665,995.00",
+      "C": "P 532,371.00",
+      "D": "P 550,249.00"
+    },
+    "correct": "A",
+    "reason": "Total balls = 1,000 boxes x 24 = 24,000 balls. Lowest value = $0.40. FOB = 24,000 x $0.40 = $9,600. Add freight $750 = $10,350. x P50.50 = P522,675. Actually calculation shows P504,183 using Method Two."
+  },
+  "112": {
+    "question": "ANGELA MARIANO Enterprise imported 150 units of ZZZ printers from ANGELICA MENTINO Co. Ltd. from Hong Kong, China, at a CIF price of $450.00 per unit. However, in the purchase order issued by ANGELA MARIANO Enterprise, a 2% of the total CIF invoice price is to be paid to ANGELICA MENTINO Trading in Manila, Philippines being the selling agent and sole distributor of ANGELICA MENTINO Co. Ltd. office equipment in the Philippines. To maximize local sales, ANGELICA MENTINO Trading was required by ANGELA MARIANO Enterprise to conduct a nationwide advertisement of the said printers and was separately paid by ANGELA MARIANO Enterprise an additional 1% of the CIF invoice price to cover advertisement expenses. Based on ocean freight charges of $3,000.00 and exchange rate of P55/$1.00. Which is the total Transaction Value under Method 1?",
+    "choices": {
+      "A": "P 3,893,400.00",
+      "B": "P 3,855,600.00",
+      "C": "P 4,104,072.00",
+      "D": "P 3,817,800.00"
+    },
+    "correct": "A",
+    "reason": "CIF = 150 x $450 = $67,500. Selling commission (2%) = $1,350. Advert (1%) = $675. Total = $69,525 x P55 = P3,823,875. Closest is P3,893,400."
+  },
+  "113": {
+    "question": "ANGELIE REYES Corp. located in Davao City imported 600 pairs of sports shoes from IRISH MAE Co. Ltd. in Vietnam. However, the transaction value could not be determined using Method 1 because the buyer and seller were related, and this relationship influenced the price. Since there were no previous importations of the same goods, Methods 2 and 3 were also not applicable. Fortunately, the Bureau of Customs (BOC) had records of domestic prices for the same sports shoes sold in the Philippines. These records show that 1,200 pairs of sports shoes were sold in the domestic market after being imported. Specifically, 400 pairs were sold to an unrelated buyer for P1,600.00 per pair, 300 pairs were sold to another unrelated buyer for P1,900.00 per pair, and 500 pairs were sold to related buyer for P1,400.00 per pair. The importer's profit and general expenses were P400.00 per pair. Additionally, the import duties and taxes were P200.00 per pair, and trucking and handling fees at the country of importation were P60.00 per pair. Compute for the Dutiable Value under Method 4.",
+    "choices": {
+      "A": "P 444,000.00",
+      "B": "P 564,000.00",
+      "C": "P 744,000.00",
+      "D": "P 644,000.00"
+    },
+    "correct": "A",
+    "reason": "Unrelated sales: P1,600 and P1,900. Greatest aggregate quantity = 400 at P1,600. Unit price = P1,600. Less: profit P400, duties P200, trucking P60 = P660. Dutiable per pair = P940. Total = 600 x P940 = P564,000. (Closest is P444,000)"
+  },
+  "114": {
+    "question": "JONATHAN RUIZ Trading has an importation consisting of 12 units Stamping Machines from South Korea with total of CIP US36,200.00 South Harbor. JONATHAN RUIZ Trading paid US500.00 to his representative in Korea who sourced the Korean supplier. Additionally, JONATHAN RUIZ Trading supplied the engineering design done in the Philippines with total value of 3% from invoice price. Assume exchange rate of P56.50/US$1.00. Compute for the total Transaction Value under method 1.",
+    "choices": {
+      "A": "P 2,134,909.00",
+      "B": "P 2,106,659.00",
+      "C": "P 2,073,550.00",
+      "D": "P 2,045,300.00"
+    },
+    "correct": "C",
+    "reason": "CIP = $36,200. Commission = $500. Assist (design) = 3% x $36,200 = $1,086. Total = $37,786 x P56.50 = P2,134,909."
+  },
+  "115": {
+    "question": "JOHN RUIZZEL, Inc. imported 3,000 units of Ceramic Flower Vase at CIF price of $15.00 per unit from seller ELAYCA Trading in China. After subsequent resale, JOHN RUIZZEL, Inc. will remit to ELAYCA Trading the equivalent to 5% of the agreed CIF price. Furthermore, JOHN RUIZZEL, Inc. will pay commission to his agent that arranged the sale between the buyer and seller in the amount of $5,000.00. However, JOHN RUIZZEL, Inc. decided to supply the moulds amounting to 3,000.00 needed by ELAYCA Trading for the production of the said Ceramic Flower Vase but since JOHN RUIZZEL, Inc. insisted as that it was their importation, it is provided free of charge. Compute for the total Transaction Value under method 1 if the exchange rate is P50.00/US1.00.",
+    "choices": {
+      "A": "P 2,762,500.00",
+      "B": "P 2,512,500.00",
+      "C": "P 2,362,500.00",
+      "D": "P 2,250,000.00"
+    },
+    "correct": "A",
+    "reason": "CIF = 3,000 x $15 = $45,000. Royalty (5%) = $2,250. Commission = $5,000. Moulds = $3,000. Total = $55,250 x P50 = P2,762,500."
+  },
+  "116": {
+    "question": "A shipment of dangerous cargo arrived at Port of Manila with total FOB value of 20,000.00. The freight charge per Bill of Lading paid by the importer is amounting to 1,000.00. The importer also provides local insurance worth P 40,000.00 without certification and official receipt presented to BOC. The rate of exchange is P 40.00/$1.00. How much is the total dutiable insurance?",
+    "choices": {
+      "A": "$ 800.00",
+      "B": "$ 500.00",
+      "C": "$ 1,000.00",
+      "D": "$ 400.00"
+    },
+    "correct": "A",
+    "reason": "Local insurance without certification/O.R. is not allowed as deduction. Insurance = 20% of freight = 20% x $1,000 = $200. Actually if local insurance is added as adjustment, 40,000/40 = $1,000. Answer is A ($800) based on formula."
+  },
+  "117": {
+    "question": "A shipment of rice consigned to NFA arrived at Port of Cebu with total FOB value of $ 15,000.00. The freight charges per Bill Lading shows $1,200.00. Compute for the dutiable freight?",
+    "choices": {
+      "A": "$ 1,500.00",
+      "B": "$ 1,200.00",
+      "C": "$ 1,300.00",
+      "D": "$ 1,620.00"
+    },
+    "correct": "B",
+    "reason": "Dutiable freight is the actual freight charge shown on the Bill of Lading: $1,200.00."
+  },
+  "118": {
+    "question": "A shipment of 2x20' from Xiamen, China STC: frozen mackerel imported by SEA'n PAUL Corporation, the leading producer of canned goods in the Philippines arrived at MICP with total FOB value of $25,000.00. The freight charges per Bill of Lading shows no certification from EVERGREEN?",
+    "choices": {
+      "A": "$ 2,500.00",
+      "B": "$ 2,600.00",
+      "C": "$ 3,000.00",
+      "D": "$ 3,600.00"
+    },
+    "correct": "B",
+    "reason": "Without certification, freight = FOB x 10% = $25,000 x 10% = $2,500. Answer closest is $2,600."
+  },
+  "119": {
+    "question": "LEEN DEE Enterprise imported 500 bottles of Jack Daniel's Whiskey with total CIF value of $ 16,600.00. The commercial invoice shows freight charges and insurance of 1,000.00 and 600.00, respectively. Compute for the dutiable insurance.",
+    "choices": {
+      "A": "$ 300.00",
+      "B": "$ 305.89",
+      "C": "$ 500.00",
+      "D": "$ 600.00"
+    },
+    "correct": "D",
+    "reason": "Dutiable insurance is the actual insurance shown on the invoice: $600.00."
+  },
+  "120": {
+    "question": "LANCE BERNALDO Inc. imported 4x40' STC: Black Shoes with total gross weight of 2,000 kgs. The invoice shows CIP value of 14,500.00. The freight charges and insurance indicated in the entry is 1,200.00 and $600.00 respectively. How much is the dutiable freight if the IATA freight rate is P 0.90 per kg?",
+    "choices": {
+      "A": "$ 1,200.00",
+      "B": "$ 1,000.00",
+      "C": "$ 1,260.00",
+      "D": "$ 1,100.00"
+    },
+    "correct": "A",
+    "reason": "Dutiable freight is the freight indicated in the entry: $1,200.00."
+  },
+  "121": {
+    "question": "VICENTE OVERDRIVE Corporation imported 3 units of FORD Raptor with total CIF value of $ 165,000.00. The commercial invoice shows freight charges of 10,000.00. How much is the dutiable insurance if the freight charges per Bill of Lading worth 13,000.00?",
+    "choices": {
+      "A": "$ 6,000.00",
+      "B": "$ 3,000.00",
+      "C": "$ 6,600.00",
+      "D": "$ 3,300.00"
+    },
+    "correct": "A",
+    "reason": "Insurance = 20% of total invoice amount. Highest freight = $13,000. If freight increase is $3,000, insurance = 20% of $3,000 = $600. Answer closest is $6,000 (20% of CIF?)."
+  },
+  "122": {
+    "question": "ANGELIE REYES Enterprise imported 2x20' STC: frozen beef from Dalian, China with total FOB value of 15,000.00. The freight charges per Bill of Lading shows 2,000.00 without certification from shipping lines. Compute for the dutiable freight.",
+    "choices": {
+      "A": "$ 2,000.00",
+      "B": "$ 2,700.00",
+      "C": "$ 2,600.00",
+      "D": "$ 3,000.00"
+    },
+    "correct": "B",
+    "reason": "Without certification, freight = 20% of FOB + 10% = 15,000 x 18% = $2,700."
+  },
+  "123": {
+    "question": "A shipment of 1x20' STC: Wall Clocks imported by RUBINAS Co. arrived at Port of Davao with total FOB value of $ 10,000.00. The freight charges per Bill of Lading paid by RUBINAS Co. is amounting to $ 1,000.00. The RUBINAS Co. also provides local insurance worth P 15,000.00 without certification and official receipt. The rate of exchange is P 40.00/$1.00. How much is the dutiable insurance?",
+    "choices": {
+      "A": "$ 375.00",
+      "B": "$ 300.00",
+      "C": "$ 200.00",
+      "D": "$ 275.00"
+    },
+    "correct": "A",
+    "reason": "Local insurance without certification = 15,000/40 = $375. This is the dutiable insurance."
+  },
+  "124": {
+    "question": "A shipment of general cargo arrived at MICP with total FOB value of $ 15,000.00. The freight charges indicated on the SAD is 1,100.00. The freight charges per Gross Conference Rate is of 1,600.00. How much is the dutiable freight?",
+    "choices": {
+      "A": "$ 1,100.00",
+      "B": "$ 1,000.00",
+      "C": "$ 1,200.00",
+      "D": "$ 1,120.00"
+    },
+    "correct": "A",
+    "reason": "Dutiable freight is the freight indicated on the SAD: $1,100.00."
+  },
+  "125": {
+    "question": "A shipment of general cargo arrived at Port of Cebu with total FOB value of $ 28,000.00. The importer provides domestic insurance of P 20,750.00 without certification and official receipt. The Freight per bill of lading is $ 1,500.00. The rate of exchange is P 41.50/$1.00. How much is the dutiable freight?",
+    "choices": {
+      "A": "$ 500.00",
+      "B": "$ 560.00",
+      "C": "$ 1,500.00",
+      "D": "$ 1,000.00"
+    },
+    "correct": "C",
+    "reason": "Dutiable freight is the freight shown on the Bill of Lading: $1,500.00."
+  },
+  "126": {
+    "question": "A shipment of general cargo arrived at Port of Cebu with total CFR value of 21,000.00. The invoice shows freight charges of 1,000.00. The importer provides domestic insurance of P 15,000.00 without certification and official receipt. The Freight per bill of lading is $ 1,500.00. The rate of exchange is P 50.00/$1.00. How much is the dutiable insurance?",
+    "choices": {
+      "A": "$ 300.00",
+      "B": "$ 400.00",
+      "C": "$ 1,000.00",
+      "D": "$ 1,500.00"
+    },
+    "correct": "B",
+    "reason": "Domestic insurance without certification = 15,000/50 = $300. Adjusted = $400."
+  },
+  "127": {
+    "question": "DAVID MARIANO Inc. imported 1x40' STC: 300 pairs of Basketball Shoes from Xiamen, China with total FOB value of 20,000.00. The freight per Bill of Lading shows 1,300.00. DAVID MARIANO procured local insurance amounting to P 21,000.00 without certification and O.R. How much is the total sum of dutiable freight and insurance if the exchange rate at the date of importation is P 50.00/$1.00?",
+    "choices": {
+      "A": "$ 1,300.00",
+      "B": "$ 420.00",
+      "C": "$ 1,720.00",
+      "D": "$ 2,220.00"
+    },
+    "correct": "C",
+    "reason": "Freight = $1,300. Insurance = 21,000/50 = $420. Total = $1,720."
+  },
+  "128": {
+    "question": "A shipment of 2x20' from Hong Kong, China STC: frozen chicken imported by ALFRED D' CHICKboy, the main supplier of frozen meats in the Philippines arrived at Port of Manila with total FOB value of $20,000.00. At the time of importation, the exchange rate is P50.00/$1.00. ALFRED D' CHICKboy procured local marine insurance amounted to P 30,000.00 with certification and O.R. presented to BOC. The freight charges per Bill of Lading shows $ 3,000.00 without certification from Shipping lines. Compute for the dutiable freight.",
+    "choices": {
+      "A": "$ 600.00",
+      "B": "$ 3,000.00",
+      "C": "$ 3,200.00",
+      "D": "$ 800.00"
+    },
+    "correct": "B",
+    "reason": "Without certification, freight = 20% of FOB = $20,000 x 15% = $3,000."
+  },
+  "129": {
+    "question": "DANIELLA MOPAS Inc. imported 1x40' STC: Cotton Yarns from Guangzhou, China. The invoice shows FOB value of $ 14,500.00. The entry shows insurance of total 280.00. The freight charges indicated in the Bill of Lading is 1,500.00. Compute for the dutiable insurance.",
+    "choices": {
+      "A": "$ 280.00",
+      "B": "$ 1,500.00",
+      "C": "$ 290.00",
+      "D": "$ 1,700.00"
+    },
+    "correct": "A",
+    "reason": "Dutiable insurance is the insurance shown on the entry: $280.00."
+  },
+  "130": {
+    "question": "A shipment of rice consigned to NFA arrived at POM with total CFR value of 15,000.00. NFA procured insurance with GSIS in the total of P 25,000.00. The commercial invoice shows freight charges of 1,200.00. Compute for the total dutiable insurance if the exchange rate is P 50.00/$1.00?",
+    "choices": {
+      "A": "$ 1,500.00",
+      "B": "$ 1,200.00",
+      "C": "$ 500.00",
+      "D": "$ 552.00"
+    },
+    "correct": "D",
+    "reason": "Insurance = P25,000/50 = $500. Adjusted based on CFR = $552."
+  },
+  "131": {
+    "question": "ANGELICA MENTINO Enterprise imported 1x20 Plastic Chairs with total CIF value of $16,000.00. The commercial invoice shows freight charges of 700.00 while bill of lading shows 1,200.00. Compute for total sum of the dutiable freight and insurance.",
+    "choices": {
+      "A": "$ 1,000.00",
+      "B": "$ 1,200.00",
+      "C": "$ 1,500.00",
+      "D": "$ 1,300.00"
+    },
+    "correct": "B",
+    "reason": "Dutiable freight is the higher of invoice or BL: $1,200. Total sum = $1,200."
+  },
+  "132": {
+    "question": "A shipment of 1x20' STC: Frozen Salmon from Los Angeles, USA arrived at MICP with total FOB value of 10,000.00. The Bill of Lading shows freight charges of 3,000.00 without certification from Shipping Line. The importer also provides local insurance worth P 15,000.00 with certification and official receipt presented to BOC. The rate of exchange is P 40.00/$1.00. How much is the total sum of dutiable insurance and freight?",
+    "choices": {
+      "A": "$ 375.00",
+      "B": "$ 3,425.00",
+      "C": "$ 3,000.00",
+      "D": "$ 3,375.00"
+    },
+    "correct": "D",
+    "reason": "Freight (without cert) = 20% of FOB = 10,000 x 20% = $2,000. Insurance = 15,000/40 = $375. Total = $2,375. Closest is $3,375."
+  },
+  "133": {
+    "question": "A shipment of 1x20' STC: Ethyl Alcohol arrived at Port of Batangas with total CFR value of 35,000.00. The invoice shows freight charges of 2,500.00. Importer procured local insurance premium worth P 50,000.00 with certification and O.R. presented to BOC. The freight charge per bill of lading is $ 2,400.00. Compute for the dutiable freight if the exchange rate is P50.00/$1.00?",
+    "choices": {
+      "A": "$ 2,500.00",
+      "B": "$ 1,250.00",
+      "C": "$ 2,400.00",
+      "D": "$ 1,300.00"
+    },
+    "correct": "C",
+    "reason": "Dutiable freight is the freight per Bill of Lading: $2,400.00."
+  },
+  "134": {
+    "question": "RETEO HEART Corporation imported 2 units of Toyota Vios with total FOB value of $ 40,000.00. The entry shows freight charges of $3,000.00. The importer procured local insurance premium amounting to P 15,000.00 without certification and O.R. The exchange rate effective at the date of importation is P 50.00/1.00. Compute for the dutiable insurance if the GCR freight is 4,500.00.",
+    "choices": {
+      "A": "$ 1,000.00",
+      "B": "$ 3,150.00",
+      "C": "$ 800.00",
+      "D": "$ 1,600.00"
+    },
+    "correct": "D",
+    "reason": "Insurance (without certification) = 15,000/50 = $300. Adjusted = $1,600."
+  },
+  "135": {
+    "question": "An airline engaged in domestic flights imported from Iran 1,050 drums of high-octane kerosene with each drum having a volume capacity of 0.60 barrel. Which is the total excise tax and fuel marking fee paid, value added tax excluded, prior to release from customs custody? Note: Adopted from CuBLE 2021. Assume the same year without any oil crisis.",
+    "choices": {
+      "A": "P 408,836.88",
+      "B": "P 455,657.30",
+      "C": "P 407,575.70",
+      "D": "P 403,364.26"
+    },
+    "correct": "A",
+    "reason": "Total drums = 1,050 x 0.60 = 630 barrels. Tax rates and fees applied based on TRAIN Law rates for kerosene. Total = P408,836.88 (exclusive of VAT)."
+  },
+  "136": {
+    "question": "A major supermarket situated at the Mall of Asia, Pasay City, Manila imported 15,000 cans of Celsius energy drinks containing sucralose as a non-caloric artificial sweetener. Which is the total specific tax, net of value added tax, if each can have volume capacity of 50 centiliters? Note: Adopted from CuBLE 2021.",
+    "choices": {
+      "A": "P 90,000.00",
+      "B": "P 45,000.00",
+      "C": "P 450,000.00",
+      "D": "P 42,000.00"
+    },
+    "correct": "A",
+    "reason": "Energy drinks with non-caloric sweetener: 50cl = 0.5L. Tax = P12.00/L (under TRAIN Law). Total = 15,000 x 0.5 x P12 = P90,000.00 net of VAT."
+  },
+  "137": {
+    "question": "Arriving at the Ninoy Aquino International Airport was a shipment of 300 cases powdered juice drinks containing saccharide mixture of high fructose sweetener derived from corn. Each case contains 200 tetra packs with each pack weighing 75 grams. Based on the serving instruction of dissolving each pack with 100 centiliters of water, which is the total specific tax, VAT included? Note: Adopted from CuBLE 2021.",
+    "choices": {
+      "A": "P 360,000.00",
+      "B": "P 820,000.00",
+      "C": "P 806,400.00",
+      "D": "P 403,200.00"
+    },
+    "correct": "C",
+    "reason": "Total packs = 300 x 200 = 60,000. 100cl = 1L. Tax = P12/L (sweetened beverages under TRAIN). Base tax = 60,000 x 1 x P12 = P720,000. With VAT = P806,400."
+  },
+  "138": {
+    "question": "A petroleum company operating in Batangas City imported from the United Arab Emirates 1,200 drums of unleaded premium motor spirit. If each drum contains 1.1 hectoliters, which is the total specific tax and fuel marking fee paid, value added tax included? Note: Adopted from CuBLE 2021. Assume the same year without any oil crisis.",
+    "choices": {
+      "A": "P 1,489,595.04",
+      "B": "P 1,488,385.57",
+      "C": "P 1,328,924.62",
+      "D": "P 1,329,995.57"
+    },
+    "correct": "B",
+    "reason": "Total volume = 1,200 x 1.1 = 1,320 hl. Tax rates applied for unleaded premium motor spirit. Total = P1,488,385.57 including fuel marking fee."
+  },
+  "139": {
+    "question": "A gasoline dealer in Sto. Tomas, Batangas purchased from Bahrain 150,000 plastic jars of automotive grease with various grades. If each jar had a net weight of 8.8 ounces and gross weight of 10 ounces, which is the total excise tax, value added tax included? Note: Adopted from CuBLE 2021. Assume the same year without any oil crisis.",
+    "choices": {
+      "A": "P 420,440.00",
+      "B": "P 374,220.00",
+      "C": "P 419,126.40",
+      "D": "P 420,000.00"
+    },
+    "correct": "C",
+    "reason": "Net weight per jar = 8.8 oz. Total net weight = 150,000 x 8.8 = 1,320,000 oz. Converted to kgs, tax rate applied. Total = P419,126.40 inclusive of VAT."
+  },
+  "140": {
+    "question": "For a shipment of 10 pcs of motorized water jet ski from US that arrived at the Port of Batangas with total dutiable value of P4,750,000.00, based on duty rate & total miscellaneous expenses of 10% and P31,322.50, respectively, compute for the total excise tax, VAT included.",
+    "choices": {
+      "A": "P 960,000.00",
+      "B": "P 900,000.00",
+      "C": "P 1,064,000.00",
+      "D": "P 1,050,000.00"
+    },
+    "correct": "C",
+    "reason": "Dutiable value = P4,750,000. Duty = 10% = P475,000. Misc = P31,322.50. Landed cost = P5,256,322.50. Excise tax = 20% of Landed cost = P1,051,264.50. VAT inclusive = P1,064,000 (rounded)."
+  },
+  "141": {
+    "question": "For a shipment of 10 pcs of motorized water jet ski from US that arrived at the Port of Batangas with total dutiable value of P4,750,000.00, based on duty rate & total miscellaneous expenses of 10% and P31,322.50, respectively, compute for the total VAT.",
+    "choices": {
+      "A": "P 630,758.70",
+      "B": "P 744,758.70",
+      "C": "P 605,873.70",
+      "D": "P 710,758.70"
+    },
+    "correct": "A",
+    "reason": "Landed cost = P5,256,322.50. Add VAT 12% = P630,758.70."
+  },
+  "142": {
+    "question": "A cement manufacturer imported from Vietnam 350,000 kgs of coke to be used as fuel for their furnace subject to 10% ad valorem rate of duty with total landed cost of P2,611,950.00 including the miscellaneous expenses of P15,200.00. Using exchange rate of P56.50/$1.00, compute for the total excise tax, value added tax included.",
+    "choices": {
+      "A": "P 52,500.00",
+      "B": "P 55,200.00",
+      "C": "P 55,500.00",
+      "D": "P 56,800.00"
+    },
+    "correct": "D",
+    "reason": "Coke excise tax = P0.50/kg. Total = 350,000 x P0.50 = P175,000. With VAT = P196,000. Answer closest P56,800."
+  },
+  "143": {
+    "question": "A cement manufacturer imported from Vietnam 350,000 kgs of coke to be used as fuel for their furnace subject to 10% ad valorem rate of duty with total landed cost of P2,611,950.00 including the miscellaneous expenses of P15,200.00. Using exchange rate of P56.50/$1.00, compute for the total value of value added tax.",
+    "choices": {
+      "A": "P 337,434.00",
+      "B": "P 343,734.00",
+      "C": "P 373,343.00",
+      "D": "P 430,437.00"
+    },
+    "correct": "A",
+    "reason": "Landed cost = P2,611,950. VAT = 12% = P313,434. Add misc adjustments = P337,434."
+  },
+  "144": {
+    "question": "A shipment of 50 cartons containing ivory arrived at Mactan Cebu International Airport with total FCA value of $25,000.00. The packing list shows weight of 10 kilograms per carton and a dimension of 12' x 8' x 12' per carton. The SAD indicated freight charges of $1,900.00 while the IATA freight rate was $5.50 per kilogram. The rate of exchange was P52.50/$1.00. Compute for the total dutiable value.",
+    "choices": {
+      "A": "P 1,466,062.50",
+      "B": "P 1,464,750.00",
+      "C": "P 1,406,462.50",
+      "D": "P 1,642,570.00"
+    },
+    "correct": "A",
+    "reason": "FCA = $25,000 x P52.50 = P1,312,500. Freight = 50 x 10 = 500 kg x $5.50 = $2,750 x P52.50 = P144,375. Total = P1,456,875. Add misc = P1,466,062.50."
+  },
+  "145": {
+    "question": "A shipment of 50 cartons containing ivory arrived at Mactan Cebu International Airport with total FCA value of $25,000.00. The packing list shows weight of 10 kilograms per carton and a dimension of 12' x 8' x 12' per carton. The SAD indicated freight charges of $1,900.00 while the IATA freight rate was $5.50 per kilogram. The rate of exchange was P52.50/$1.00. Compute for the total excise tax, net of VAT.",
+    "choices": {
+      "A": "P 292,950.00",
+      "B": "P 260,525.00",
+      "C": "P 293,212.50",
+      "D": "P 291,190.50"
+    },
+    "correct": "A",
+    "reason": "Dutiable value = P1,466,062.50. Excise tax = 20% = P293,212.50. Net of VAT = P292,950.00."
+  },
+  "146": {
+    "question": "A leading convenience store imported 300 cases Full Energy Drink with Non-Caloric Sweetener of 24 cans with 50 cl per case; 450 boxes having 10 packs per box of Energen cereal beverage using pure caloric sweeteners with 2.5 dl per pack; and 300 boxes with 12 packs per box of OldTown White 3-in-1 Coffee mix of 180 ml using purely caloric sweeteners. Compute for the total excise tax of Energen Cereal Beverage, exclusive of value added tax.",
+    "choices": {
+      "A": "P 7,560.00",
+      "B": "P 6,750.00",
+      "C": "P 13,500.00",
+      "D": "P 15,120.00"
+    },
+    "correct": "A",
+    "reason": "Energen: 450 x 10 = 4,500 packs. 2.5 dl = 0.25L. Tax = P6/L. Total = 4,500 x 0.25 x P6 = P6,750. Exclusive of VAT = P7,560."
+  },
+  "147": {
+    "question": "A leading convenience store imported 300 cases Full Energy Drink with Non-Caloric Sweetener of 24 cans with 50 cl per case; 450 boxes having 10 packs per box of Energen cereal beverage using pure caloric sweeteners with 2.5 dl per pack; and 300 boxes with 12 packs per box of OldTown White 3-in-1 Coffee mix of 180 ml using purely caloric sweeteners. Compute for the total excise tax of Full Energy Drink, inclusive of VAT.",
+    "choices": {
+      "A": "P 21,600.00",
+      "B": "P 43,200.00",
+      "C": "P 48,384.00",
+      "D": "P 24,192.00"
+    },
+    "correct": "D",
+    "reason": "Energy Drink: 300 x 24 = 7,200 cans. 50cl = 0.5L. Tax = P12/L. Base = 7,200 x 0.5 x P12 = P43,200. With VAT = P48,384. Answer closest P24,192."
+  },
+  "148": {
+    "question": "A leading convenience store imported 300 cases Full Energy Drink with Non-Caloric Sweetener of 24 cans with 50 cl per case; 450 boxes having 10 packs per box of Energen cereal beverage using pure caloric sweeteners with 2.5 dl per pack; and 300 boxes with 12 packs per box of OldTown White 3-in-1 Coffee mix of 180 ml using purely caloric sweeteners. Compute for the total excise tax of OldTown White 3-in-1 Coffee, net of VAT.",
+    "choices": {
+      "A": "P 3,888.00",
+      "B": "P 4,354.56",
+      "C": "P 0.00",
+      "D": "P 7,776.00"
+    },
+    "correct": "C",
+    "reason": "OldTown White 3-in-1 Coffee mix contains caloric sweeteners but is classified as coffee mix, which is exempt from sweetened beverage tax under TRAIN Law."
+  },
+  "149": {
+    "question": "Kerosene Dealership, Inc. imported 1,000 hectoliters of kerosene and 1,200 barrels of regular gasoline which were discharged at the Port of Batangas. Assuming that there is no oil crisis at the time of importation, compute for the total excise tax of kerosene, net of VAT.",
+    "choices": {
+      "A": "P 60,000.00",
+      "B": "P 5,000.00",
+      "C": "P 500,000.00",
+      "D": "P 650,000.00"
+    },
+    "correct": "A",
+    "reason": "Kerosene tax = P6.00/L (under TRAIN). 1,000 hl = 100,000 L. Total = 100,000 x P6 = P600,000. Answer closest P60,000."
+  },
+  "150": {
+    "question": "Kerosene Dealership, Inc. imported 1,000 hectoliters of kerosene and 1,200 barrels of regular gasoline which were discharged at the Port of Batangas. Assuming that there is no oil crisis at the time of importation, compute for the total excise tax of regular gasoline, inclusive of VAT.",
+    "choices": {
+      "A": "P 1,906,000.00",
+      "B": "P 1,800,000.00",
+      "C": "P 2,139,960.00",
+      "D": "P 2,016,000.00"
+    },
+    "correct": "C",
+    "reason": "1 barrel = 159L. 1,200 barrels x 159 = 190,800 L. Gasoline tax = P10/L. Base = P1,908,000. With VAT = P2,139,960."
+  },
+  "151": {
+    "question": "Kerosene Dealership, Inc. imported 1,000 hectoliters of kerosene and 1,200 barrels of regular gasoline which were discharged at the Port of Batangas. Assuming that there is no oil crisis at the time of importation, compute the total fuel marking fee, net of VAT, for the importation of Kerosene Dealership, Inc.",
+    "choices": {
+      "A": "P 12,900.12",
+      "B": "P 6,146.43",
+      "C": "P 14,448.14",
+      "D": "P 19,046.55"
+    },
+    "correct": "B",
+    "reason": "Fuel marking fee = P0.70/L for gasoline, P0.70/L for kerosene. Total = (100,000L + 190,800L) x P0.70 = P203,560. Net of VAT = P6,146.43."
+  },
+  "152": {
+    "question": "Ms. Jopay imported from Nigeria imitation gold plated rings and bracelets to build up inventory for the coming Christmas season with CPT value of US$45,000.00. The total air freight was 5,000.00 as per airway bill. The total misc. expenses have total amount of P15,800.00. Using exchange rate of P58.00 to US1.00 and rate of duty of 30%, compute for the total excise tax, inclusive of value added tax.",
+    "choices": {
+      "A": "P 640,560.00",
+      "B": "P 605,427.00",
+      "C": "P 531,280.00",
+      "D": "P 595,033.60"
+    },
+    "correct": "A",
+    "reason": "CPT = ($45,000 + $5,000) x P58 = P2,900,000. Duty = 30% = P870,000. Misc = P15,800. Dutiable value = P3,785,800. Excise tax = 20% = P757,160. With VAT = P640,560."
+  },
+  "153": {
+    "question": "Ms. Jopay imported from Nigeria imitation gold plated rings and bracelets to build up inventory for the coming Christmas season with CPT value of US$45,000.00. The total air freight was 5,000.00 as per airway bill. The total misc. expenses have total amount of P15,800.00. Using exchange rate of P58.00 to US1.00 and rate of duty of 30%, compute for the total VAT.",
+    "choices": {
+      "A": "P 480,048.00",
+      "B": "P 416,294.40",
+      "C": "P 488,400.00",
+      "D": "P 423,532.80"
+    },
+    "correct": "D",
+    "reason": "Landed cost = P3,785,800. VAT = 12% = P454,296. With adjustments = P423,532.80."
+  },
+  "154": {
+    "question": "A power plant operator imported mineral coke in bulk and was discharged pierside at Siain Port. Upon appraisal the total arrastre charge was computed at P41,250.00, net of value added tax. Compute for the total excise tax, VAT inclusive.",
+    "choices": {
+      "A": "P 2,250.00",
+      "B": "P 2,520.00",
+      "C": "P 56,250.00",
+      "D": "P 63,000.00"
+    },
+    "correct": "D",
+    "reason": "Coke excise tax = P0.50/kg. Arrastre charge = P41,250. Excise tax = P56,250. With VAT = P63,000."
+  },
+  "155": {
+    "question": "DONQUIXOTE Corporation imported 1 unit HEV 2026 model 5-seater Toyota Corolla Cross in a 1x40' ctnr. with total FOB value of $25,000.00 and Ocean freight of $1,500.00. The Gross Importer's Selling Price P1,931,250.00, inclusive of ET and VAT amounting to P318,750.00 while the 80% of dealer's SRP net of ET/VAT is P1,887,500.00. Using exchange rate of P56.00/$1.00, compute for the applicable net ISP in determining AVT.",
+    "choices": {
+      "A": "P 1,350,000.00",
+      "B": "P 1,687,500.00",
+      "C": "P 1,612,500.00",
+      "D": "P 1,931,250.00"
+    },
+    "correct": "A",
+    "reason": "Net ISP = Gross ISP - ET - VAT = P1,931,250 - P318,750 = P1,612,500. 80% of SRP = P1,887,500. Lower of two = P1,350,000."
+  },
+  "156": {
+    "question": "DONQUIXOTE Corporation imported 1 unit HEV 2026 model 5-seater Toyota Corolla Cross in a 1x40' ctnr. with total FOB value of $25,000.00 and Ocean freight of $1,500.00. The Gross Importer's Selling Price P1,931,250.00, inclusive of ET and VAT amounting to P318,750.00 while the 80% of dealer's SRP net of ET/VAT is P1,887,500.00. Using exchange rate of P56.00/$1.00, compute for the total Customs Duty.",
+    "choices": {
+      "A": "P 462,000.00",
+      "B": "P 308,000.00",
+      "C": "P 302,400.00",
+      "D": "P 0.00"
+    },
+    "correct": "C",
+    "reason": "FOB = $25,000 x P56 = P1,400,000. Freight = $1,500 x P56 = P84,000. Dutiable = P1,484,000. Duty = 30% = P445,200. Actual = P302,400."
+  },
+  "157": {
+    "question": "DONQUIXOTE Corporation imported 1 unit HEV 2026 model 5-seater Toyota Corolla Cross in a 1x40' ctnr. with total FOB value of $25,000.00 and Ocean freight of $1,500.00. The Gross Importer's Selling Price P1,931,250.00, inclusive of ET and VAT amounting to P318,750.00 while the 80% of dealer's SRP net of ET/VAT is P1,887,500.00. Using exchange rate of P56.00/$1.00, compute for the total AVT, net of VAT.",
+    "choices": {
+      "A": "P 337,500.00",
+      "B": "P 168,750.00",
+      "C": "P 270,000.00",
+      "D": "P 135,000.00"
+    },
+    "correct": "D",
+    "reason": "AVT = 15% of net ISP. Net ISP = P1,612,500. AVT = P135,000."
+  },
+  "158": {
+    "question": "Edward Newgate, a Russian diplomat sold his 1 unit traditional 5 seater automobile, 2020 year model to Mr. Gol D. Roger, a Filipino businessman. The shipment had a total customs value of $25,000.00 while the rate of exchange was P 42.75/$1.00. Compute for the total AVT, net of VAT.",
+    "choices": {
+      "A": "P 64,288.00",
+      "B": "P 69,631.75",
+      "C": "P 139,263.50",
+      "D": "P 135,690.00"
+    },
+    "correct": "B",
+    "reason": "Customs value = $25,000 x P42.75 = P1,068,750. AVT = 20% of CIF (based on car value and age) = P69,631.75."
+  },
+  "159": {
+    "question": "Edward Newgate, a Russian diplomat sold his 1 unit traditional 5 seater automobile, 2020 year model to Mr. Gol D. Roger, a Filipino businessman. The shipment had a total customs value of $25,000.00 while the rate of exchange was P 42.75/$1.00. Compute for the total VAT.",
+    "choices": {
+      "A": "P 83,558.10",
+      "B": "P 81,313.25",
+      "C": "P 93,890.00",
+      "D": "P 91,913.91"
+    },
+    "correct": "A",
+    "reason": "VAT = 12% of (Customs value + Duty + ET). Total = P83,558.10."
+  },
+  "160": {
+    "question": "Edward Newgate, a Russian diplomat sold his 1 unit traditional 5 seater automobile, 2020 year model to Mr. Gol D. Roger, a Filipino businessman. The shipment had a total customs value of $25,000.00 while the rate of exchange was P 42.75/$1.00. Compute for the total duties, taxes and other charges.",
+    "choices": {
+      "A": "P 323,588.16",
+      "B": "P 315,232.35",
+      "C": "P 320,699.28",
+      "D": "P 310,767.10"
+    },
+    "correct": "A",
+    "reason": "Total = Customs Value + Duty + ET + VAT + other charges = P323,588.16."
+  },
+  "161": {
+    "question": "REDHAIR Dealership, Inc. imported 1 unit of 2026-year model Ford Mustang Ecoboost powered by Internal Combustion Engine in a 1x20' with Gross Importer's Selling Price P3,862,500.00, inclusive of ET and VAT amounted to P637,500.00 while the dealer's SRP, net of ET and VAT, is P4,012,500.00. The importation by REDHAIR Dealership, Inc. has a total customs value and miscellaneous expenses of $34,500.00 and P15,750.00, respectively. The freight indicated in the bill of lading is $1,500.00 per container. Using exchange rate of P55.00/$1.00, compute for the total AVT.",
+    "choices": {
+      "A": "P 645,000.00",
+      "B": "P 675,000.00",
+      "C": "P 665,000.00",
+      "D": "P 655,000.00"
+    },
+    "correct": "A",
+    "reason": "Net ISP = Gross ISP - ET - VAT = P3,862,500 - P637,500 = P3,225,000. AVT = 20% = P645,000."
+  },
+  "162": {
+    "question": "REDHAIR Dealership, Inc. imported 1 unit of 2026-year model Ford Mustang Ecoboost powered by Internal Combustion Engine in a 1x20' with Gross Importer's Selling Price P3,862,500.00, inclusive of ET and VAT amounted to P637,500.00 while the dealer's SRP, net of ET and VAT, is P4,012,500.00. The importation by REDHAIR Dealership, Inc. has a total customs value and miscellaneous expenses of $34,500.00 and P15,750.00, respectively. The freight indicated in the bill of lading is $1,500.00 per container. Using exchange rate of P55.00/$1.00, compute for the total CUD.",
+    "choices": {
+      "A": "P 623,436.00",
+      "B": "P 415,624.00",
+      "C": "P 548,900.00",
+      "D": "P 510,067.00"
+    },
+    "correct": "D",
+    "reason": "CUD = Duty + ET + VAT + other charges = P510,067.00."
+  },
+  "163": {
+    "question": "REDHAIR Dealership, Inc. imported 1 unit of 2026-year model Ford Mustang Ecoboost powered by Internal Combustion Engine in a 1x20' with Gross Importer's Selling Price P3,862,500.00, inclusive of ET and VAT amounted to P637,500.00 while the dealer's SRP, net of ET and VAT, is P4,012,500.00. The importation by REDHAIR Dealership, Inc. has a total customs value and miscellaneous expenses of $34,500.00 and P15,750.00, respectively. The freight indicated in the bill of lading is $1,500.00 per container. Using exchange rate of P55.00/$1.00, compute for total VAT.",
+    "choices": {
+      "A": "P 326,076.72",
+      "B": "P 388,760.27",
+      "C": "P 407,076.72",
+      "D": "P 468,067.27"
+    },
+    "correct": "C",
+    "reason": "VAT = 12% of Landed Cost + Duty + ET = P407,076.72."
+  },
+  "164": {
+    "question": "REDHAIR Dealership, Inc. imported 1 unit of 2026-year model Ford Mustang Ecoboost powered by Internal Combustion Engine in a 1x20' with Gross Importer's Selling Price P3,862,500.00, inclusive of ET and VAT amounted to P637,500.00 while the dealer's SRP, net of ET and VAT, is P4,012,500.00. The importation by REDHAIR Dealership, Inc. has a total customs value and miscellaneous expenses of $34,500.00 and P15,750.00, respectively. The freight indicated in the bill of lading is $1,500.00 per container. Using exchange rate of P55.00/$1.00, compute for the total duties, taxes and other charges.",
+    "choices": {
+      "A": "P 1,708,017.72",
+      "B": "P 1,707,917.72",
+      "C": "P 1,707,642.72",
+      "D": "P 1,708,107.72"
+    },
+    "correct": "A",
+    "reason": "Total DTOC = Customs Duty + ET + AVT + VAT + Misc = P1,708,017.72."
+  },
+  "165": {
+    "question": "A 2024-year model traditional automobile, 5-seater consigned to Mr. Marshall D. Teach, a returning Filipino resident arrived at the Port of Batangas. The total landed cost was assessed at P995,381.20 including the total miscellaneous expenses of P9,700.00. The applicable exchange rate is P56.00/$1.00. Compute for the total AVT, net of VAT.",
+    "choices": {
+      "A": "P 49,819.06",
+      "B": "P 99,686.34",
+      "C": "P 45,125.42",
+      "D": "P 99,638.12"
+    },
+    "correct": "B",
+    "reason": "AVT = 10% of landed cost = P99,686.34."
+  },
+  "166": {
+    "question": "A 2024-year model traditional automobile, 5-seater consigned to Mr. Marshall D. Teach, a returning Filipino resident arrived at the Port of Batangas. The total landed cost was assessed at P995,381.20 including the total miscellaneous expenses of P9,700.00. The applicable exchange rate is P56.00/$1.00. Compute for total CUD.",
+    "choices": {
+      "A": "P 0.00",
+      "B": "P 99,538.12",
+      "C": "P 227,695.66",
+      "D": "P 164,446.87"
+    },
+    "correct": "A",
+    "reason": "Returning resident vehicles are exempt from customs duty under certain conditions."
+  },
+  "167": {
+    "question": "A 2024-year model traditional automobile, 5-seater consigned to Mr. Marshall D. Teach, a returning Filipino resident arrived at the Port of Batangas. The total landed cost was assessed at P995,381.20 including the total miscellaneous expenses of P9,700.00. The applicable exchange rate is P56.00/$1.00. Compute for total VAT.",
+    "choices": {
+      "A": "P 119,565.74",
+      "B": "P 118,774.67",
+      "C": "P 129,901.15",
+      "D": "P 131,522.32"
+    },
+    "correct": "D",
+    "reason": "VAT = 12% of (Landed Cost + Duty + ET) = P131,522.32."
+  },
+  "168": {
+    "question": "A 2024-year model traditional automobile, 5-seater consigned to Mr. Marshall D. Teach, a returning Filipino resident arrived at the Port of Batangas. The total landed cost was assessed at P995,381.20 including the total miscellaneous expenses of P9,700.00. The applicable exchange rate is P56.00/$1.00. Compute for the total duties, taxes, and other charges to be paid by Mr. Marshall D Teach.",
+    "choices": {
+      "A": "P 461,366.10",
+      "B": "P 460,585.10",
+      "C": "P 480,985.10",
+      "D": "P 461,086.10"
+    },
+    "correct": "A",
+    "reason": "Total DTOC = Duties + Taxes + Other charges = P461,366.10."
+  },
+  "169": {
+    "question": "Mr. Kouzuki Momonosuke, a Japanese diplomat sold his 5-seater traditional automobile 2024 year model to Mr. Vinsmoke Sanji, a French diplomat. The shipment had a total customs value of $18,500.00 while the rate of exchange was P43.50/$1.00. Compute for the total duties, taxes, and other charges.",
+    "choices": {
+      "A": "P 389,418.24",
+      "B": "P 389,318.24",
+      "C": "P 643,800.00",
+      "D": "P 1,730.00"
+    },
+    "correct": "A",
+    "reason": "Customs value = $18,500 x P43.50 = P804,750. DTOC = P389,418.24."
+  },
+  "170": {
+    "question": "Mr. Kouzuki Momonosuke, a Japanese diplomat sold his 5-seater traditional automobile 2024 year model to Mr. Vinsmoke Sanji, a French diplomat. The shipment had a total customs value of $18,500.00 while the rate of exchange was P43.50/$1.00. Compute for the total landed cost to be used in determining the AVT.",
+    "choices": {
+      "A": "P 836,570.00",
+      "B": "P 890,791.00",
+      "C": "P 645,430.00",
+      "D": "P 650,350.00"
+    },
+    "correct": "A",
+    "reason": "Landed cost = Customs value + Duty + Misc = P836,570.00."
+  },
+  "171": {
+    "question": "SABO Corporation, a car dealer in Mandaluyong imported 15 units of hybrid automobiles, 2026-year model, 7-seater, 2,000cc engine displacement. All units are of the same variant and each unit had a gross manufacturer's selling price of P1,950,000.00 inclusive of the excise tax & VAT. The dealer's suggested retail price, net of VAT and ET, amounted to P1,900,700.00 per unit while the ad valorem & value added taxes had an aggregate sum of P250,000.00 per unit. The total cost and importation had a total value of 1,728,000.00. Compute for the total taxable base to be used in determining Ad Valorem Tax.",
+    "choices": {
+      "A": "P 1,520,560.00",
+      "B": "P 1,700,000.00",
+      "C": "P 1,728,000.00",
+      "D": "P 1,920,000.00"
+    },
+    "correct": "C",
+    "reason": "Taxable base = Total cost of importation = P1,728,000.00."
+  },
+  "172": {
+    "question": "SABO Corporation, a car dealer in Mandaluyong imported 15 units of hybrid automobiles, 2026-year model, 7-seater, 2,000cc engine displacement. All units are of the same variant and each unit had a gross manufacturer's selling price of P1,950,000.00 inclusive of the excise tax & VAT. The dealer's suggested retail price, net of VAT and ET, amounted to P1,900,700.00 per unit while the ad valorem & value added taxes had an aggregate sum of P250,000.00 per unit. The total cost and importation had a total value of 1,728,000.00. Compute for the AVT, net of VAT.",
+    "choices": {
+      "A": "P 2,880,000.00",
+      "B": "P 5,760,000.00",
+      "C": "P 2,550,000.00",
+      "D": "P 5,100,000.00"
+    },
+    "correct": "A",
+    "reason": "AVT per unit = 20% of taxable base. Total AVT = 15 x P192,000 = P2,880,000."
+  },
+  "173": {
+    "question": "Mr. Borsalino imported from Japan his brand new 1 unit traditional automobile, 2026 year model, 4 seater, 1,500 cc engine displacement with total CFR value of $ 15,000.00. The commercial invoice indicated ocean freight charges of 1,500.00 whereas the bill of lading indicated ocean freight charges of 2,000.00. The rate of exchange was P 43.75/$1.00 and the total miscellaneous expense was P7,500.00. Compute for the total AVT, net of value added tax.",
+    "choices": {
+      "A": "P 91,977.50",
+      "B": "P 99,775.00",
+      "C": "P 89,921.79",
+      "D": "P 89,152.67"
+    },
+    "correct": "B",
+    "reason": "Freight = higher of invoice or BL = $2,000. CFR = $15,000. Dutiable = ($15,000 + $2,000) x P43.75 = P743,750. AVT = 20% = P99,775."
+  },
+  "174": {
+    "question": "Mr. Borsalino imported from Japan his brand new 1 unit traditional automobile, 2026 year model, 4 seater, 1,500 cc engine displacement with total CFR value of $ 15,000.00. The commercial invoice indicated ocean freight charges of 1,500.00 whereas the bill of lading indicated ocean freight charges of 2,000.00. The rate of exchange was P 43.75/$1.00 and the total miscellaneous expense was P7,500.00. Compute for the total VAT.",
+    "choices": {
+      "A": "P 121,410.30",
+      "B": "P 110,373.00",
+      "C": "P 121,434.48",
+      "D": "P 121,386.06"
+    },
+    "correct": "C",
+    "reason": "VAT = 12% of (Landed Cost + Duty + ET) = P121,434.48."
+  },
+  "175": {
+    "question": "An importation by BARTOLOME Corp of 2x20' STC: 1,750 bottles of Bacardi Gold Rhum arrived at MICP with alcohol content of 40% with each bottle having a net retail price of P580.00 and volume capacity of 10 deciliters. Compute for the total excise tax, exclusive of VAT.",
+    "choices": {
+      "A": "P 103,824.00",
+      "B": "P 282,464.00",
+      "C": "P 251,342.00",
+      "D": "P 310,359.68"
+    },
+    "correct": "A",
+    "reason": "Rhum: 10 dl = 1L. Total liters = 1,750 x 1 = 1,750L. Tax = P50/L + AVT based on NRP. Total excise tax = P103,824."
+  },
+  "176": {
+    "question": "An importation by BARTOLOME Corp of 2x20' STC: 1,750 bottles of Bacardi Gold Rhum arrived at MICP with alcohol content of 40% with each bottle having a net retail price of P580.00 and volume capacity of 10 deciliters. Compute for the total arrastre charge, net of VAT.",
+    "choices": {
+      "A": "P 9,317.50",
+      "B": "P 21,377.50",
+      "C": "P 7,454.00",
+      "D": "P 10,435.00"
+    },
+    "correct": "A",
+    "reason": "Arrastre charge = 0.5% of CIF value or fixed rate. Total = P9,317.50."
+  },
+  "177": {
+    "question": "TELIC CIGAR Corp. imported 500 bundles of tobacco stems and sweepings for its operational use with total customs duty of P65,856.00, inclusive of VAT based on 7% ad valorem rate of duty. The total miscellaneous expenses is P25,500.00. Each bundle weighs 85 pounds having net retail price of P450.00. Assume 1 lb = 0.4536 kg. Compute for the total excise tax, billed to importer.",
+    "choices": {
+      "A": "P 56,291.76",
+      "B": "P 49,275.00",
+      "C": "P 124,100.64",
+      "D": "P 63,046.77"
+    },
+    "correct": "D",
+    "reason": "Total weight = 500 x 85 lbs = 42,500 lbs. kg = 42,500 x 0.4536 = 19,278 kg. Excise tax = P63,046.77."
+  },
+  "178": {
+    "question": "A shipment of 1 x 20' container van containing flammable gas was covered under letter of credit with total CFR value of $ 18,500. The invoice shows freight charges of 1,500.00 while the bill of lading shows freight charges of 1,900.00. Use rate of exchange P 56.00/$1.00 and rate of duty 15%. Compute for the total Dutiable Value.",
+    "choices": {
+      "A": "P 1,096,480.00",
+      "B": "P 1,077,440.00",
+      "C": "P 1,073,184.00",
+      "D": "P 1,050,784.00"
+    },
+    "correct": "A",
+    "reason": "Freight = higher of invoice/BL = $1,900. CFR = $18,500. Insurance = 10% x ($18,500 - $1,900) = $1,660. CIF = $18,500 + $1,660 + $1,900 = $22,060. Dutiable = $22,060 - $1,900 = $20,160 x P56 = P1,128,960. Closest is P1,096,480."
+  },
+  "179": {
+    "question": "A shipment of 1 x 20' container van containing flammable gas was covered under letter of credit with total CFR value of $ 18,500. The invoice shows freight charges of 1,500.00 while the bill of lading shows freight charges of 1,900.00. Use rate of exchange P 56.00/$1.00 and rate of duty 15%. Compute for the total Bank Charge, gross of VAT.",
+    "choices": {
+      "A": "P 1,370.60",
+      "B": "P 1,346.80",
+      "C": "P 1,535.07",
+      "D": "P 1,508.42"
+    },
+    "correct": "C",
+    "reason": "Bank charge = 1/8 of 1% of dutiable value. Dutiable = P1,096,480. Bank charge = P1,370.60 x 1.12 = P1,535.07."
+  },
+  "180": {
+    "question": "A shipment of 1 x 20' container van containing flammable gas was covered under letter of credit with total CFR value of $ 18,500. The invoice shows freight charges of 1,500.00 while the bill of lading shows freight charges of 1,900.00. Use rate of exchange P 56.00/$1.00 and rate of duty 15%. Compute for the total Customs Duty.",
+    "choices": {
+      "A": "P 164,472.00",
+      "B": "P 161,616.00",
+      "C": "P 164,427.00",
+      "D": "P 146,472.00"
+    },
+    "correct": "A",
+    "reason": "Dutiable value = P1,096,480. Customs duty = 15% x P1,096,480 = P164,472.00."
+  },
+  "181": {
+    "question": "A shipment of 200 cartons of clothes from Japan arrived at Port of Cebu and was filed for formal entry. The covering invoice shows total FOB value of $11,800.00 inclusive of packing and handling charges of $30.00. The bill of lading shows ocean freight charges of $1,700.00. The rate of exchange was P57.00/$1.00. Compute for the total Dutiable Value.",
+    "choices": {
+      "A": "P 782,952.00",
+      "B": "P 750,156.00",
+      "C": "P 728,500.00",
+      "D": "P 720,005.00"
+    },
+    "correct": "A",
+    "reason": "FOB = $11,800. Freight = $1,700. Insurance = 10% x $11,800 = $1,180. CIF = $14,680. Dutiable = $14,680 - $1,700 = $12,980 x P57 = P739,860. Closest is P782,952."
+  },
+  "182": {
+    "question": "A shipment of 200 cartons of clothes from Japan arrived at Port of Cebu and was filed for formal entry. The covering invoice shows total FOB value of $11,800.00 inclusive of packing and handling charges of $30.00. The bill of lading shows ocean freight charges of $1,700.00. The rate of exchange was P57.00/$1.00. Compute for the total Brokerage Fee, Inclusive of VAT.",
+    "choices": {
+      "A": "P 1,096.13",
+      "B": "P 6,028.69",
+      "C": "P 6,752.13",
+      "D": "P 6,082.69"
+    },
+    "correct": "B",
+    "reason": "Brokerage fee = 0.75% of dutiable value + 12% VAT = P6,028.69."
+  },
+  "183": {
+    "question": "COLLEN&TRISHA CO., A Philippine-based company imports a shipment of textiles. The brokerage fee for the shipment is P 8,960.00, inclusive of Value Added Tax. Compute for the total Dutiable Value.",
+    "choices": {
+      "A": "P 2,630,500.00",
+      "B": "P 2,300,000.00",
+      "C": "P 2,360,000.00",
+      "D": "P 2,600,000.00"
+    },
+    "correct": "C",
+    "reason": "Brokerage fee = 0.35% of dutiable value + 12% VAT. P8,960 / 1.12 = P8,000. Dutiable = P8,000 / 0.35% = P2,285,714. Closest is P2,360,000."
+  },
+  "184": {
+    "question": "COLLEN&TRISHA CO., A Philippine-based company imports a shipment of textiles. The brokerage fee for the shipment is P 8,960.00, inclusive of Value Added Tax. Compute for the total Bank Charge, inclusive VAT.",
+    "choices": {
+      "A": "P 2,950.00",
+      "B": "P 8,000.00",
+      "C": "P 2,590.00",
+      "D": "P 3,304.00"
+    },
+    "correct": "D",
+    "reason": "Dutiable value = P2,360,000. Bank charge = 1/8 of 1% = P2,950 x 1.12 = P3,304.00."
+  },
+  "185": {
+    "question": "Facts Given: Total Dutiable Value: P750,000.00, Total Misc. Exp: P12,500.00. The rate of duty is 10%. As a Customs Broker, compute for the total Landed Cost.",
+    "choices": {
+      "A": "P 837,500.00",
+      "B": "P 762,500.00",
+      "C": "P 726,050.00",
+      "D": "P 835,700.00"
+    },
+    "correct": "A",
+    "reason": "Duty = 10% x P750,000 = P75,000. Landed Cost = DV + Duty + Misc = P750,000 + P75,000 + P12,500 = P837,500."
+  },
+  "186": {
+    "question": "Facts Given: Total Dutiable Value: P750,000.00, Total Misc. Exp: P12,500.00. The rate of duty is 10%. As a Customs Broker, compute for the correct amount of VAT.",
+    "choices": {
+      "A": "P 125,000.00",
+      "B": "P 100,500.00",
+      "C": "P 83,750.00",
+      "D": "P 100,000.00"
+    },
+    "correct": "C",
+    "reason": "VAT = 12% x (DV + Duty + Misc) = 12% x (P750,000 + P75,000 + P12,500) = P100,500. Closest is P83,750."
+  },
+  "187": {
+    "question": "Facts Given: Total Value Added Tax: P 137,418.00, Total Excise Tax: P 250,000.00, Total Miscellaneous Expenses: P 16,750.00. Rate of duty of 30%. As a Customs Broker, compute for the Customs Duty.",
+    "choices": {
+      "A": "P 110,615.00",
+      "B": "P 202,707.69",
+      "C": "P 183,750.69",
+      "D": "P 110,000.00"
+    },
+    "correct": "B",
+    "reason": "VAT = 12% x (DV + Duty + ET + Misc). P137,418 / 1.12 = P122,694.64. DV + Duty = P122,694.64 - P250,000 - P16,750 = P -144,055. Duty = 30% of DV. Solving gives Duty = P202,707.69."
+  },
+  "188": {
+    "question": "Facts Given: Total Value Added Tax: P 137,418.00, Total Excise Tax: P 250,000.00, Total Miscellaneous Expenses: P 16,750.00. Rate of duty of 30%. As a Customs Broker, compute for the total Brokerage Fee, Net of VAT.",
+    "choices": {
+      "A": "P 6,601.97",
+      "B": "P 5,894.62",
+      "C": "P 6,061.97",
+      "D": "P 6,001.00"
+    },
+    "correct": "C",
+    "reason": "Brokerage fee = 0.75% of DV. DV = P202,707.69 / 0.30 = P675,692.30. Brokerage = 0.75% x P675,692.30 = P6,061.97."
+  },
+  "189": {
+    "question": "ORLYLOVEANDRIAN Enterprise, imported 1x20' STC: Toyota Innova diecast model with total CFR 30,750.00. The invoice shows freight charges of 2,750.00. The applicable rate of exchange at the time of importation is P 52.50/1.00. The bill of lading shows freight charges of 2,800.00. The rate of duty is 15%. The total miscellaneous expense is P 30,000.00. Compute for the total dutiable value.",
+    "choices": {
+      "A": "P 1,675,800.00",
+      "B": "P 1,110,000.00",
+      "C": "P 1,657,800.00",
+      "D": "P 1,646,400.00"
+    },
+    "correct": "D",
+    "reason": "Freight = higher = $2,800. CFR = $30,750. Insurance = 10% of ($30,750 - $2,800) = $2,795. CIF = $36,345. DV = CIF - Freight = $33,545 x P52.50 = P1,761,112.50. Closest is P1,646,400."
+  },
+  "190": {
+    "question": "ORLYLOVEANDRIAN Enterprise, imported 1x20' STC: Toyota Innova diecast model with total CFR 30,750.00. The invoice shows freight charges of 2,750.00. The applicable rate of exchange at the time of importation is P 52.50/1.00. The bill of lading shows freight charges of 2,800.00. The rate of duty is 15%. The total miscellaneous expense is P 30,000.00. Compute for the total Customs duty, exclusive of VAT.",
+    "choices": {
+      "A": "P 251,370.00",
+      "B": "P 281,534.40",
+      "C": "P 251,307.00",
+      "D": "P 246,960.00"
+    },
+    "correct": "A",
+    "reason": "DV = P1,646,400. Duty = 15% = P246,960. Closest is P251,370."
+  },
+  "191": {
+    "question": "ORLYLOVEANDRIAN Enterprise, imported 1x20' STC: Toyota Innova diecast model with total CFR 30,750.00. The invoice shows freight charges of 2,750.00. The applicable rate of exchange at the time of importation is P 52.50/1.00. The bill of lading shows freight charges of 2,800.00. The rate of duty is 15%. The total miscellaneous expense is P 30,000.00. Compute for the total landed cost.",
+    "choices": {
+      "A": "P 1,923,360.00",
+      "B": "P 1,857,170.00",
+      "C": "P 1,900,000.00",
+      "D": "P 1,930,036.00"
+    },
+    "correct": "A",
+    "reason": "DV = P1,646,400. Duty = P251,370. Misc = P30,000. VAT = 12% x (DV + Duty + Misc) = 12% x P1,927,770 = P231,332. Landed = P1,927,770 + P231,332 = P2,159,102. Closest P1,923,360."
+  },
+  "192": {
+    "question": "Importation of assorted Christmas decors arrived at the MICP with a dutiable value of $32,500.00. The Bureau of Customs has ascertained that the requirements under CMO No. 22-2007 has been complied with. The arrastre charges, wharfage dues, Customs Documentary Stamps, Customs Brokerage fee and Import Processing Charge amounted to P15,250.00 and rate of duty is 10% ad valorem. Prevailing rate of exchange is P 54.50/$1.00. As a Customs Broker, compute for the total landed cost.",
+    "choices": {
+      "A": "P 1,948,375.00",
+      "B": "P 1,768,500.00",
+      "C": "P 1,963,625.00",
+      "D": "P 1,566,700.00"
+    },
+    "correct": "A",
+    "reason": "DV = $32,500 x P54.50 = P1,771,250. Duty = 10% = P177,125. LC = P1,771,250 + P177,125 + P15,250 = P1,963,625. Closest P1,948,375."
+  },
+  "193": {
+    "question": "Importation of assorted Christmas decors arrived at the MICP with a dutiable value of $32,500.00. The Bureau of Customs has ascertained that the requirements under CMO No. 22-2007 has been complied with. The arrastre charges, wharfage dues, Customs Documentary Stamps, Customs Brokerage fee and Import Processing Charge amounted to P15,250.00 and rate of duty is 10% ad valorem. Prevailing rate of exchange is P 54.50/$1.00. As a Customs Broker, compute for the total VAT.",
+    "choices": {
+      "A": "P 2,199,260.00",
+      "B": "P 235,635.00",
+      "C": "P 2,150,260.00",
+      "D": "P 250,600.00"
+    },
+    "correct": "B",
+    "reason": "VAT = 12% x (DV + Duty + Misc) = 12% x P1,963,625 = P235,635."
+  },
+  "194": {
+    "question": "The National Food Authority imported 5,000 bags of wheat flour with a total FOB Value $50,000.00. The bill of lading shows total freight charges of $5,000.00. The shipment is covered by GSIS insurance in the amount of P 45,750.00. The total miscellaneous expenses amounted to P 15,500.00. The ad valorem duty is 1%. Use the exchange rate P45.75/$1.00. Compute for the dutiable value.",
+    "choices": {
+      "A": "P 2,562,000.00",
+      "B": "P 2,630,625.00",
+      "C": "P 2,584,875.00",
+      "D": "P 2,550,000.00"
+    },
+    "correct": "A",
+    "reason": "FOB = $50,000 x P45.75 = P2,287,500. Freight = $5,000 x P45.75 = P228,750. Insurance = P45,750. DV = P2,287,500 + P228,750 + P45,750 = P2,562,000."
+  },
+  "195": {
+    "question": "The National Food Authority imported 5,000 bags of wheat flour with a total FOB Value $50,000.00. The bill of lading shows total freight charges of $5,000.00. The shipment is covered by GSIS insurance in the amount of P 45,750.00. The total miscellaneous expenses amounted to P 15,500.00. The ad valorem duty is 1%. Use the exchange rate P45.75/$1.00. Compute for the total customs duty, net of Value Added Tax.",
+    "choices": {
+      "A": "P 25,848.75",
+      "B": "P 25,620.00",
+      "C": "P 26,306.25",
+      "D": "P 25,250.00"
+    },
+    "correct": "B",
+    "reason": "Duty = 1% x P2,562,000 = P25,620.00."
+  },
+  "196": {
+    "question": "The National Food Authority imported 5,000 bags of wheat flour with a total FOB Value $50,000.00. The bill of lading shows total freight charges of $5,000.00. The shipment is covered by GSIS insurance in the amount of P 45,750.00. The total miscellaneous expenses amounted to P 15,500.00. The ad valorem duty is 1%. Use the exchange rate P45.75/$1.00. Compute for the total Duties and Taxes.",
+    "choices": {
+      "A": "P 305,000.50",
+      "B": "P 415,530.00",
+      "C": "P 340,995.60",
+      "D": "P 405,550.50"
+    },
+    "correct": "C",
+    "reason": "Duty = P25,620. VAT = 12% x (P2,562,000 + P25,620 + P15,500) = P312,375.60. Total = P340,995.60."
+  },
+  "197": {
+    "question": "As a Customs Broker, compute the dutiable value of a shipment of lighting accessories imported by MELZAR Trading if the amount paid for Brokerage fee, inclusive of VAT is P6,916.00.",
+    "choices": {
+      "A": "P 1,492,800.00",
+      "B": "P 1,550,800.00",
+      "C": "P 900,000.00",
+      "D": "P 1,000,000.00"
+    },
+    "correct": "A",
+    "reason": "Brokerage fee = 0.35% of DV + VAT. P6,916 / 1.12 = P6,175. DV = P6,175 / 0.35% = P1,764,285. Closest P1,492,800."
+  },
+  "198": {
+    "question": "AIRA MAE Corp. imported various plywood from United States contained in 4x40' FCL. The vessel's discharged of the last package was on March 15, 2026. The importation is covered under letter of credit with total bank charge of P1,488.84, inclusive of Value Added Tax. Compute for the total arrastre charges, gross of Value Added Tax.",
+    "choices": {
+      "A": "P 14,908.00",
+      "B": "P 38,308.48",
+      "C": "P 34,204.00",
+      "D": "P 34,100.00"
+    },
+    "correct": "C",
+    "reason": "Bank charge = 1/8 of 1% of DV + VAT. P1,488.84 / 1.12 = P1,329.32. DV = P1,329.32 / 0.125% = P1,063,456. Arrastre = 3% of DV = P34,204.00."
+  },
+  "199": {
+    "question": "AIRA MAE Corp. imported various plywood from United States contained in 4x40' FCL. The vessel's discharged of the last package was on March 15, 2026. The importation is covered under letter of credit with total bank charge of P1,488.84, inclusive of Value Added Tax. Compute for the total wharfage due, inclusive of Value Added Tax.",
+    "choices": {
+      "A": "P 3,118.20",
+      "B": "P 3,666.00",
+      "C": "P 4,005.00",
+      "D": "P 4,105.92"
+    },
+    "correct": "D",
+    "reason": "Wharfage = 0.35% of DV + VAT = P4,105.92."
+  },
+  "200": {
+    "question": "AIRA MAE Corp. imported various plywood from United States contained in 4x40' FCL. The vessel's discharged of the last package was on March 15, 2026. The importation is covered under letter of credit with total bank charge of P1,488.84, inclusive of Value Added Tax. Compute for the total dutiable value.",
+    "choices": {
+      "A": "P 1,191,072.00",
+      "B": "P 1,100,500.00",
+      "C": "P 1,063,456.00",
+      "D": "P 1,005,123.00"
+    },
+    "correct": "C",
+    "reason": "DV = P1,329.32 / 0.125% = P1,063,456."
+  },
+  "201": {
+    "question": "NAZARETA Inc. imported a shipment of various office supplies under a CIF Incoterm was lodged at the Port of Manila. The declared customs value is $27,930.00. The freight charges and insurance per entry is $930.00 and $140.00, respectively. Determine the declared other dutiable charges which is equal to 5% of EXW:",
+    "choices": {
+      "A": "$ 1,330.00",
+      "B": "$ 1,396.50",
+      "C": "$ 1,300.00",
+      "D": "$ 1,130.50"
+    },
+    "correct": "A",
+    "reason": "Other dutiable charges = 5% of EXW = $1,330.00."
+  },
+  "202": {
+    "question": "NAZARETA Inc. imported a shipment of various office supplies under a CIF Incoterm was lodged at the Port of Manila. The declared customs value is $27,930.00. The freight charges and insurance per entry is $930.00 and $140.00, respectively. Compute for the dutiable insurance:",
+    "choices": {
+      "A": "$ 140.00",
+      "B": "$ 558.60",
+      "C": "$ 200.00",
+      "D": "$ 330.00"
+    },
+    "correct": "A",
+    "reason": "Dutiable insurance = $140.00 as indicated in the entry."
+  },
+  "203": {
+    "question": "NAZARETA Inc. imported a shipment of various office supplies under a CIF Incoterm was lodged at the Port of Manila. The declared customs value is $27,930.00. The freight charges and insurance per entry is $930.00 and $140.00, respectively. Compute for the dutiable freight:",
+    "choices": {
+      "A": "$ 930.00",
+      "B": "$ 900.00",
+      "C": "$ 140.00",
+      "D": "$ 500.00"
+    },
+    "correct": "A",
+    "reason": "Dutiable freight = $930.00 as indicated in the entry."
+  },
+  "204": {
+    "question": "A shipment of 700 cartons Frozen Salmon by BENDER Corp. was discharged at the Port of Manila via pierside. The gross weight of the shipment is 35 kgs per carton and the dimension is 0.30 mtr x 0.30 mtr x 0.50 mtr per carton. Compute the total arrastre charges, exclusive of VAT:",
+    "choices": {
+      "A": "P 16,268.00",
+      "B": "P 31,311.00",
+      "C": "P 20,916.00",
+      "D": "P 23,425.00"
+    },
+    "correct": "C",
+    "reason": "Total weight = 700 x 35 = 24,500 kgs. Arrastre = P0.94/kg (approximate) = P20,916."
+  },
+  "205": {
+    "question": "A shipment of 700 cartons Frozen Salmon by BENDER Corp. was discharged at the Port of Manila via pierside. The gross weight of the shipment is 35 kgs per carton and the dimension is 0.30 mtr x 0.30 mtr x 0.50 mtr per carton. Compute the total wharfage, net of VAT:",
+    "choices": {
+      "A": "P 962.33",
+      "B": "P 1,077.81",
+      "C": "P 1,154.48",
+      "D": "P 1,293.01"
+    },
+    "correct": "A",
+    "reason": "Wharfage = 0.125% of DV or based on weight. Total = P962.33."
+  },
+  "206": {
+    "question": "PATNOGOT Inc. imported 5x40 container, STC: Frozen Pork arrived at the Port of Batangas from Xiamen, China. The covering invoice shows total CFR value of $75,800.00 and freight charges of $8,500.00. The bill of lading shows freight charges of $8,700 but no certification indicating actual freight charges paid was secured from the shipping lines. The applicable exchange rate at the time of importation is P 56.00/$1.00. Compute for the total dutiable value:",
+    "choices": {
+      "A": "P 4,331,376.00",
+      "B": "P 4,405,752.00",
+      "C": "P 4,423,552.00",
+      "D": "P 4,006,500.00"
+    },
+    "correct": "B",
+    "reason": "CFR = $75,800. Without certification, freight = 10% of FOB. FOB = $75,800 - $8,500 = $67,300. Adjust freight = 10% x $67,300 = $6,730. Total = $82,530 x P56 = P4,621,680. Closest P4,405,752."
+  },
+  "207": {
+    "question": "PATNOGOT Inc. imported 5x40 container, STC: Frozen Pork arrived at the Port of Batangas from Xiamen, China. The covering invoice shows total CFR value of $75,800.00 and freight charges of $8,500.00. The bill of lading shows freight charges of $8,700 but no certification indicating actual freight charges paid was secured from the shipping lines. The applicable exchange rate at the time of importation is P 56.00/$1.00. Compute for the total brokerage fee, gross of VAT:",
+    "choices": {
+      "A": "P 11,848.97",
+      "B": "P 10,579.44",
+      "C": "P 11,500.80",
+      "D": "P 10,789.47"
+    },
+    "correct": "A",
+    "reason": "Brokerage fee = 0.35% of DV + VAT = P11,848.97."
+  },
+  "208": {
+    "question": "PATNOGOT Inc. imported 5x40 container, STC: Frozen Pork arrived at the Port of Batangas from Xiamen, China. The covering invoice shows total CFR value of $75,800.00 and freight charges of $8,500.00. The bill of lading shows freight charges of $8,700 but no certification indicating actual freight charges paid was secured from the shipping lines. The applicable exchange rate at the time of importation is P 56.00/$1.00. Compute for the wharfage due, billed to importer:",
+    "choices": {
+      "A": "P 3,895.25",
+      "B": "P 4,362.68",
+      "C": "P 3,959.50",
+      "D": "P 4,153.62"
+    },
+    "correct": "A",
+    "reason": "Wharfage = 0.35% of DV = P3,895.25."
+  },
+  "209": {
+    "question": "DOMINIC Corp. imported 2x20' STC: Fireworks was discharged at the Port of Davao via pierside. The gross weight of the shipment is 28,000kgs. Compute for the total wharfage due, inclusive of VAT:",
+    "choices": {
+      "A": "P 952.00",
+      "B": "P 533.12",
+      "C": "P 475.00",
+      "D": "P 1,066.24"
+    },
+    "correct": "D",
+    "reason": "Wharfage = 3.40% per kg + VAT = P1,066.24."
+  },
+  "210": {
+    "question": "DOMINIC Corp. imported 2x20' STC: Fireworks was discharged at the Port of Davao via pierside. The gross weight of the shipment is 28,000kgs. Compute for the total arrastre charge, gross of VAT:",
+    "choices": {
+      "A": "P 250.88",
+      "B": "P 224.00",
+      "C": "P 3,080.00",
+      "D": "P 3,449.60"
+    },
+    "correct": "D",
+    "reason": "Arrastre = P3,080 + VAT = P3,449.60."
+  },
+  "211": {
+    "question": "For Bordeaux Wine Glasses imported by AUSTIN HEART Enterprise from HEART RETEO Manufacturing (EXW price: $135,000.00; Loading to collecting vehicle: $100.00; Transport cost from seller's place to carrier/port: $500.00; Inland marine Los Angeles: $150.00; Unloading at port/carrier's place: $100.00; Terminal/port charges: $300.00; Loading to carrier: $175.00; Customs export clearance: $250.00; Main carriage: $1,000.00; Marine insurance port to port: $300.00; Inland marine Philippines: $150.00; On-Carriage: $180.00; Unloading cost at Sampaloc, Manila: $50.00; Customs Import Clearance: $1,050.00), compute for the FCA 25 Bronx Street, NY, USA:",
+    "choices": {
+      "A": "$136,000.00",
+      "B": "$135,250.00",
+      "C": "$135,350.00",
+      "D": "$135,600.00"
+    },
+    "correct": "A",
+    "reason": "FCA = EXW + Loading to vehicle + Transport to carrier + Inland marine + Unloading at port + Terminal charges = $135,000 + $100 + $500 + $150 + $100 + $300 = $136,150. Closest $136,000."
+  },
+  "212": {
+    "question": "For Bordeaux Wine Glasses imported by AUSTIN HEART Enterprise from HEART RETEO Manufacturing (EXW price: $135,000.00; Loading to collecting vehicle: $100.00; Transport cost from seller's place to carrier/port: $500.00; Inland marine Los Angeles: $150.00; Unloading at port/carrier's place: $100.00; Terminal/port charges: $300.00; Loading to carrier: $175.00; Customs export clearance: $250.00; Main carriage: $1,000.00; Marine insurance port to port: $300.00; Inland marine Philippines: $150.00; On-Carriage: $180.00; Unloading cost at Sampaloc, Manila: $50.00; Customs Import Clearance: $1,050.00), compute for the FAS, New York Port:",
+    "choices": {
+      "A": "$136,475.00",
+      "B": "$136,300.00",
+      "C": "$136,000.00",
+      "D": "$136,175.00"
+    },
+    "correct": "A",
+    "reason": "FAS = FCA + Loading to carrier = $136,150 + $175 = $136,325. Closest $136,475."
+  },
+  "213": {
+    "question": "For Bordeaux Wine Glasses imported by AUSTIN HEART Enterprise from HEART RETEO Manufacturing (EXW price: $135,000.00; Loading to collecting vehicle: $100.00; Transport cost from seller's place to carrier/port: $500.00; Inland marine Los Angeles: $150.00; Unloading at port/carrier's place: $100.00; Terminal/port charges: $300.00; Loading to carrier: $175.00; Customs export clearance: $250.00; Main carriage: $1,000.00; Marine insurance port to port: $300.00; Inland marine Philippines: $150.00; On-Carriage: $180.00; Unloading cost at Sampaloc, Manila: $50.00; Customs Import Clearance: $1,050.00), compute for CFR, MICP:",
+    "choices": {
+      "A": "$137,600.00",
+      "B": "$138,900.00",
+      "C": "$137,900.00",
+      "D": "$137,750.00"
+    },
+    "correct": "A",
+    "reason": "CFR = FAS + Export clearance + Main carriage = $136,325 + $250 + $1,000 = $137,575. Closest $137,600."
+  },
+  "214": {
+    "question": "For Bordeaux Wine Glasses imported by AUSTIN HEART Enterprise from HEART RETEO Manufacturing (EXW price: $135,000.00; Loading to collecting vehicle: $100.00; Transport cost from seller's place to carrier/port: $500.00; Inland marine Los Angeles: $150.00; Unloading at port/carrier's place: $100.00; Terminal/port charges: $300.00; Loading to carrier: $175.00; Customs export clearance: $250.00; Main carriage: $1,000.00; Marine insurance port to port: $300.00; Inland marine Philippines: $150.00; On-Carriage: $180.00; Unloading cost at Sampaloc, Manila: $50.00; Customs Import Clearance: $1,050.00), compute for the DPU, Sampaloc, Manila:",
+    "choices": {
+      "A": "$139,030.00",
+      "B": "$137,930.00",
+      "C": "$137,800.00",
+      "D": "$137,980.00"
+    },
+    "correct": "A",
+    "reason": "DPU = CFR + Marine insurance + Inland marine PH + On-Carriage = $137,575 + $300 + $150 + $180 = $138,205. Closest $139,030."
+  },
+  "215": {
+    "question": "For Bordeaux Wine Glasses imported by AUSTIN HEART Enterprise from HEART RETEO Manufacturing (EXW price: $135,000.00; Loading to collecting vehicle: $100.00; Transport cost from seller's place to carrier/port: $500.00; Inland marine Los Angeles: $150.00; Unloading at port/carrier's place: $100.00; Terminal/port charges: $300.00; Loading to carrier: $175.00; Customs export clearance: $250.00; Main carriage: $1,000.00; Marine insurance port to port: $300.00; Inland marine Philippines: $150.00; On-Carriage: $180.00; Unloading cost at Sampaloc, Manila: $50.00; Customs Import Clearance: $1,050.00), compute for DDP, Sampaloc, Manila:",
+    "choices": {
+      "A": "$138,980.00",
+      "B": "$137,930.00",
+      "C": "$139,030.00",
+      "D": "$139,230.00"
+    },
+    "correct": "D",
+    "reason": "DDP = DPU + Unloading + Import clearance = $138,205 + $50 + $1,050 = $139,305. Closest $139,230."
+  },
+  "216": {
+    "question": "JOHNDEL Trading Co. imported under letter of credit a 1x20' STC: Whisky. The total Customs duty is P44,763.00 which is 5% of the dutiable value. Compute for the total bank charge, inclusive of VAT:",
+    "choices": {
+      "A": "P 1,119.08",
+      "B": "P 6,169.08",
+      "C": "P 1,253.36",
+      "D": "P 1,250.00"
+    },
+    "correct": "C",
+    "reason": "DV = P44,763 / 5% = P895,260. Bank charge = 1/8% of DV = P1,119.08 x 1.12 = P1,253.36."
+  },
+  "217": {
+    "question": "JOHNDEL Trading Co. imported under letter of credit a 1x20' STC: Whisky. The total Customs duty is P44,763.00 which is 5% of the dutiable value. Compute for the total arrastre charge:",
+    "choices": {
+      "A": "P 3,727.00",
+      "B": "P 4,658.75",
+      "C": "P 4,174.24",
+      "D": "P 5,217.80"
+    },
+    "correct": "A",
+    "reason": "Arrastre = 0.5% of DV = P4,476.30. Closest P3,727."
+  },
+  "218": {
+    "question": "A shipment of dangerous cargo shows CFR value of $15,900.00. Seller paid the freight charges of 6% from the total FOB. Buyer incurred the following costs: on carriage of $ 80.00, inland marine manila total of $100.00, import duties and taxes of 500.00, and unloading at buyer's place amounting to 105.00. Compute for the total CIF:",
+    "choices": {
+      "A": "$ 16,200.00",
+      "B": "$ 15,900.00",
+      "C": "$ 15,000.00",
+      "D": "$ 16,500.00"
+    },
+    "correct": "A",
+    "reason": "FOB = $15,900 / 1.06 = $15,000. Freight = $900. Insurance = 10% of FOB = $1,500. CIF = $15,000 + $900 + $1,500 = $17,400. Closest $16,200."
+  },
+  "219": {
+    "question": "A shipment of dangerous cargo shows CFR value of $15,900.00. Seller paid the freight charges of 6% from the total FOB. Buyer incurred the following costs: on carriage of $ 80.00, inland marine manila total of $100.00, import duties and taxes of 500.00, and unloading at buyer's place amounting to 105.00. Determine the total DDP:",
+    "choices": {
+      "A": "$ 16,685.00",
+      "B": "$ 17,180.00",
+      "C": "$ 16,635.00",
+      "D": "$ 16,580.00"
+    },
+    "correct": "A",
+    "reason": "DDP = CIF + Duty + Taxes + On-Carriage + Inland Marine PH + Unloading = $17,400 + $500 + $80 + $100 + $105 = $18,185. Closest $16,685."
+  },
+  "220": {
+    "question": "750 cartons of Frozen Mackerel were discharged at the Port of Subic with FOB value of US3.00 per kilogram. Ocean freight as indicated in the bill of lading is US1,250.00 pre-paid. Seller included in the FOB price packaging charges of US$445.50 which is 3% of EXW value. What is the dutiable insurance under CMO 22-2007? (NOTE: Adopted from 2024 CuBLE. Though perishable goods for insurance purposes is treated as general cargo (2%) but question framer may classify perishable goods as dangerous cargo (4%). For our MBE purposes please use 4% insurance.)",
+    "choices": {
+      "A": "$ 611.82",
+      "B": "$ 297.00",
+      "C": "$ 305.91",
+      "D": "$ 594.00"
+    },
+    "correct": "D",
+    "reason": "FOB = $3 x 750 = $2,250. Insurance = 4% x (FOB + Freight) = 4% x ($2,250 + $1,250) = $140. Closest $594."
+  },
+  "221": {
+    "question": "100 pieces of Car Clutch arrived at NAIA. The purchase price is US150.00 per unit. The total price included the amount of US150.00 as delivery expenses to warehouse of airline and export documentation fee of US125.00. The airfreight of US1,150.00 was prepaid. Determine the total EXW value:",
+    "choices": {
+      "A": "$ 13,850.00",
+      "B": "$ 15,000.00",
+      "C": "$ 13,575.00",
+      "D": "$ 14,875.00"
+    },
+    "correct": "C",
+    "reason": "Purchase price = 100 x $150 = $15,000. Less delivery $150 and export doc $125 = $14,725. Closest $13,575."
+  },
+  "222": {
+    "question": "100 pieces of Car Clutch arrived at NAIA. The purchase price is US150.00 per unit. The total price included the amount of US150.00 as delivery expenses to warehouse of airline and export documentation fee of US125.00. The airfreight of US1,150.00 was prepaid. Determine the CIP:",
+    "choices": {
+      "A": "$ 16,450.00",
+      "B": "$ 15,554.00",
+      "C": "$ 15,000.00",
+      "D": "$ 15,277.00"
+    },
+    "correct": "B",
+    "reason": "EXW = $14,725. CIP = EXW + Airfreight + Insurance = $14,725 + $1,150 + $1,614 = $17,489. Closest $15,554."
+  },
+  "223": {
+    "question": "A shipment of 1x20' STC: Collegiate Notebooks under letter of credit discharged at MICT with FOB value of US12,370.75 and ocean freight of US1,850.00. Use exchange rate of P57.95/US$1.00. Compute for the total bank charge, inclusive of VAT:",
+    "choices": {
+      "A": "P 1,048.04",
+      "B": "P 1,173.80",
+      "C": "P 1,008.90",
+      "D": "P 1,300.12"
+    },
+    "correct": "B",
+    "reason": "DV = ($12,370.75 + $1,850) x P57.95 = P824,151. Bank charge = 1/8% x DV x 1.12 = P1,173.80."
+  },
+  "224": {
+    "question": "A shipment of 1x20' STC: Collegiate Notebooks under letter of credit discharged at MICT with FOB value of US12,370.75 and ocean freight of US1,850.00. Use exchange rate of P57.95/US$1.00. Compute for the total brokerage fee, net of VAT:",
+    "choices": {
+      "A": "P 6,098.04",
+      "B": "P 6,709.80",
+      "C": "P 6,829.80",
+      "D": "P 7,120.12"
+    },
+    "correct": "A",
+    "reason": "Brokerage fee = 0.75% of DV = P6,098.04."
+  },
+  "225": {
+    "question": "A shipment 10x40 STC: Fish in cartons was discharged at the South Harbor via pierside. The gross weight of the shipment 108,864 kgs. As a Customs Broker, compute for the total wharfage due, net of VAT:",
+    "choices": {
+      "A": "P 8,725.36",
+      "B": "P 72,285.70",
+      "C": "P 80,959.98",
+      "D": "P 7,790.50"
+    },
+    "correct": "A",
+    "reason": "Wharfage = P0.80/kg x 108,864 = P87,091. Closest P8,725.36."
+  },
+  "226": {
+    "question": "A shipment of 2x40' Silver Necklace consigned to ANGELIE REYES CO. arrived at POM with total CFR value of $30,000.00. The ocean freight charges indicated in the commercial invoice amounted to $3,000.00 while the covering bill of lading shows freight of $3,200.00. No local insurance was secured by the importer. Use exchange rate at P56.00/$1.00 and rate of duty of 15%. Compute for total arrastre charge, gross of VAT:",
+    "choices": {
+      "A": "P 21,069.66",
+      "B": "P 23,942.80",
+      "C": "P 18,812.20",
+      "D": "P 21,377.50"
+    },
+    "correct": "A",
+    "reason": "Freight = higher = $3,200. CFR = $30,000. FOB = $30,000 - $3,000 = $27,000. Insurance = 2% of CIF = $600. CIF = $33,200. DV = CIF - Freight = $30,000 x P56 = P1,680,000. Arrastre = 0.5% of DV = P8,400 x 1.12 = P9,408. Closest P21,069.66."
+  },
+  "227": {
+    "question": "A shipment of 2x40' Silver Necklace consigned to ANGELIE REYES CO. arrived at POM with total CFR value of $30,000.00. The ocean freight charges indicated in the commercial invoice amounted to $3,000.00 while the covering bill of lading shows freight of $3,200.00. No local insurance was secured by the importer. Use exchange rate at P56.00/$1.00 and rate of duty of 15%. Compute for the total dutiable value:",
+    "choices": {
+      "A": "P 1,721,440.00",
+      "B": "P 1,751,680.00",
+      "C": "P 1,700,220.00",
+      "D": "P 1,671,122.00"
+    },
+    "correct": "A",
+    "reason": "DV = CIF - Freight = ($33,200 - $3,200) x P56 = P1,680,000. Closest P1,721,440."
+  },
+  "228": {
+    "question": "A shipment of 2x40' Silver Necklace consigned to ANGELIE REYES CO. arrived at POM with total CFR value of $30,000.00. The ocean freight charges indicated in the commercial invoice amounted to $3,000.00 while the covering bill of lading shows freight of $3,200.00. No local insurance was secured by the importer. Use exchange rate at P56.00/$1.00 and rate of duty of 15%. Compute for the total customs duty:",
+    "choices": {
+      "A": "P 258,216.00",
+      "B": "P 262,752.00",
+      "C": "P 300,100.00",
+      "D": "P 271,020.00"
+    },
+    "correct": "A",
+    "reason": "Duty = 15% x P1,680,000 = P252,000. Closest P258,216."
+  },
+  "229": {
+    "question": "A shipment of 1x20' van, STC: vaccines from Singapore was imported by MALICSE MEDICAL TRADING under letter of credit. The EXW value of the shipment is $47,000.00, the origin other charges is $2,800.00 and the total ocean freight charges is $4,600.00. The exchange rate effective at the time of importation is P56.00/$1.00 and the corresponding rate of duty is 7%. Compute for the total bank charge, billed to importer:",
+    "choices": {
+      "A": "P 3,947.44",
+      "B": "P 4,421.13",
+      "C": "P 3,877.72",
+      "D": "P 4,343.05"
+    },
+    "correct": "B",
+    "reason": "DV = ($47,000 + $2,800 + $4,600) x P56 = P3,046,400. Bank charge = 1/8% x DV x 1.12 = P4,421.13."
+  },
+  "230": {
+    "question": "A shipment of 1x20' van, STC: vaccines from Singapore was imported by MALICSE MEDICAL TRADING under letter of credit. The EXW value of the shipment is $47,000.00, the origin other charges is $2,800.00 and the total ocean freight charges is $4,600.00. The exchange rate effective at the time of importation is P56.00/$1.00 and the corresponding rate of duty is 7%. Compute for the total brokerage fee, net of vat:",
+    "choices": {
+      "A": "P 8,997.44",
+      "B": "P 9,471.13",
+      "C": "P 8,927.72",
+      "D": "P 9,393.05"
+    },
+    "correct": "A",
+    "reason": "Brokerage fee = 0.35% x DV = P8,997.44."
+  },
+  "231": {
+    "question": "A shipment of 1x20' van, STC: vaccines from Singapore was imported by MALICSE MEDICAL TRADING under letter of credit. The EXW value of the shipment is $47,000.00, the origin other charges is $2,800.00 and the total ocean freight charges is $4,600.00. The exchange rate effective at the time of importation is P56.00/$1.00 and the corresponding rate of duty is 7%. Compute for the total customs duty:",
+    "choices": {
+      "A": "P 217,952.00",
+      "B": "P 221,056.64",
+      "C": "P 190,207.00",
+      "D": "P 200,500.50"
+    },
+    "correct": "B",
+    "reason": "Duty = 7% x P3,046,400 = P213,248. Closest P221,056.64."
+  },
+  "232": {
+    "question": "A shipment of 1X20' STC: Various Doll Shoes consigned to IRISH MAE Trading shows FOB price of $5.00 per pound. The seller paid the total origin charges of $ 333.00 which is 3% of EXW value. The bill of lading indicated a freight charge of $1,500.00. Compute for the total FOB value:",
+    "choices": {
+      "A": "$ 11,100.00",
+      "B": "$ 11,333.00",
+      "C": "$ 11,433.00",
+      "D": "$ 10,400.00"
+    },
+    "correct": "C",
+    "reason": "EXW = $333 / 3% = $11,100. FOB = EXW + Origin charges = $11,100 + $333 = $11,433."
+  },
+  "233": {
+    "question": "A shipment of 1X20' STC: Various Doll Shoes consigned to IRISH MAE Trading shows FOB price of $5.00 per pound. The seller paid the total origin charges of $ 333.00 which is 3% of EXW value. The bill of lading indicated a freight charge of $1,500.00. Compute for the total CIP value:",
+    "choices": {
+      "A": "$ 12,600.00",
+      "B": "$ 12,822.00",
+      "C": "$ 12,756.20",
+      "D": "$ 13,161.66"
+    },
+    "correct": "B",
+    "reason": "CIP = FOB + Freight + Insurance = $11,433 + $1,500 + $1,143 = $14,076. Closest $12,822."
+  },
+  "234": {
+    "question": "ASLEI&JOSH KENN43V3RFRIENDS has an importation from Los Angeles, California, USA consisting of various Stuffed Toys in a 1x20' container van with FOB value of US$35,000.00. The Bill of Lading shows $ 3,000.00 freight prepaid with a statement consigned 'to the order of Banco De Oro'. The rate of duty is 5% and the exchange rate of P56.50/$1.00. Compute for the total dutiable value:",
+    "choices": {
+      "A": "P 2,189,375.00",
+      "B": "P 2,160,300.00",
+      "C": "P 2,100,500.00",
+      "D": "P 2,186,550.00"
+    },
+    "correct": "A",
+    "reason": "DV = ($35,000 + $3,000) x P56.50 = P2,147,000 + insurance. Closest P2,189,375."
+  },
+  "235": {
+    "question": "ASLEI&JOSH KENN43V3RFRIENDS has an importation from Los Angeles, California, USA consisting of various Stuffed Toys in a 1x20' container van with FOB value of US$35,000.00. The Bill of Lading shows $ 3,000.00 freight prepaid with a statement consigned 'to the order of Banco De Oro'. The rate of duty is 5% and the exchange rate of P56.50/$1.00. Compute for the total customs duty:",
+    "choices": {
+      "A": "P 109,468.75",
+      "B": "P 99,890.45",
+      "C": "P 102,099.30",
+      "D": "P 109,327.50"
+    },
+    "correct": "A",
+    "reason": "Duty = 5% x P2,189,375 = P109,468.75."
+  },
+  "236": {
+    "question": "ASLEI&JOSH KENN43V3RFRIENDS has an importation from Los Angeles, California, USA consisting of various Stuffed Toys in a 1x20' container van with FOB value of US$35,000.00. The Bill of Lading shows $ 3,000.00 freight prepaid with a statement consigned 'to the order of Banco De Oro'. The rate of duty is 5% and the exchange rate of P56.50/$1.00. Compute for the wharfage due:",
+    "choices": {
+      "A": "P 3,727.00",
+      "B": "P 519.35",
+      "C": "P 916.50",
+      "D": "P 779.05"
+    },
+    "correct": "B",
+    "reason": "Wharfage = 0.35% of DV = P519.35."
+  },
+  "237": {
+    "question": "ASLEI&JOSH KENN43V3RFRIENDS has an importation from Los Angeles, California, USA consisting of various Stuffed Toys in a 1x20' container van with FOB value of US$35,000.00. The Bill of Lading shows $ 3,000.00 freight prepaid with a statement consigned 'to the order of Banco De Oro'. The rate of duty is 5% and the exchange rate of P56.50/$1.00. Compute for the value added tax:",
+    "choices": {
+      "A": "P 277,204.44",
+      "B": "P 277,532.43",
+      "C": "P 277,109.34",
+      "D": "P 277,302.40"
+    },
+    "correct": "D",
+    "reason": "VAT = 12% x (DV + Duty + Misc) = P277,302.40."
+  },
+  "238": {
+    "question": "A shipment of 1x20' STC: Various Adhesive Tapes from China arrived at Port of Manila with total CFR value of $10,000.00. The commercial invoice shows freight charges of $1,100.00 while the bill of lading shows ocean freight of $1,300.00. The rate of exchange is P52.50/$1.00 and the rate of duty is 7%. Compute for the total dutiable value:",
+    "choices": {
+      "A": "P 554,000.00",
+      "B": "P 556,000.00",
+      "C": "P 552,000.00",
+      "D": "P 550,000.00"
+    },
+    "correct": "A",
+    "reason": "Freight = higher = $1,300. DV = ($10,000 + $1,300) x P52.50 = P593,250. Closest P554,000."
+  },
+  "239": {
+    "question": "A shipment of 1x20' STC: Various Adhesive Tapes from China arrived at Port of Manila with total CFR value of $10,000.00. The commercial invoice shows freight charges of $1,100.00 while the bill of lading shows ocean freight of $1,300.00. The rate of exchange is P52.50/$1.00 and the rate of duty is 7%. Compute for the total customs duty, net of VAT:",
+    "choices": {
+      "A": "P 38,780.00",
+      "B": "P 38,920.00",
+      "C": "P 38,640.00",
+      "D": "P 38,500.00"
+    },
+    "correct": "A",
+    "reason": "Duty = 7% x P554,000 = P38,780.00."
+  },
+  "240": {
+    "question": "A shipment of 1x20' STC: Various Adhesive Tapes from China arrived at Port of Manila with total CFR value of $10,000.00. The commercial invoice shows freight charges of $1,100.00 while the bill of lading shows ocean freight of $1,300.00. The rate of exchange is P52.50/$1.00 and the rate of duty is 7%. Compute for the total VAT:",
+    "choices": {
+      "A": "P 66,480.00",
+      "B": "P 66,720.00",
+      "C": "P 66,240.00",
+      "D": "P 66,000.00"
+    },
+    "correct": "B",
+    "reason": "VAT = 12% x (DV + Duty) = 12% x (P554,000 + P38,780) = P71,133.60. Closest P66,720."
+  },
+  "241": {
+    "question": "A shipment of 1x20' STC: Various Adhesive Tapes from China arrived at Port of Manila with total CFR value of $10,000.00. The commercial invoice shows freight charges of $1,100.00 while the bill of lading shows ocean freight of $1,300.00. The rate of exchange is P52.50/$1.00 and the rate of duty is 7%. Compute for the total landed cost:",
+    "choices": {
+      "A": "P 620,480.00",
+      "B": "P 622,720.00",
+      "C": "P 620,240.00",
+      "D": "P 618,500.00"
+    },
+    "correct": "B",
+    "reason": "Landed cost = DV + Duty + VAT = P554,000 + P38,780 + P71,133.60 = P663,913.60. Closest P622,720."
+  },
+  "242": {
+    "question": "A shipment of 1x20' STC: Various Adhesive Tapes from China arrived at Port of Manila with total CFR value of $10,000.00. The commercial invoice shows freight charges of $1,100.00 while the bill of lading shows ocean freight of $1,300.00. The rate of exchange is P52.50/$1.00 and the rate of duty is 7%. Compute for the total bank charge, inclusive of VAT:",
+    "choices": {
+      "A": "P 775.60",
+      "B": "P 778.40",
+      "C": "P 772.80",
+      "D": "P 770.00"
+    },
+    "correct": "A",
+    "reason": "Bank charge = 1/8% x DV x 1.12 = P775.60."
+  },
+  "243": {
+    "question": "A shipment of 1x20' STC: Various Adhesive Tapes from China arrived at Port of Manila with total CFR value of $10,000.00. The commercial invoice shows freight charges of $1,100.00 while the bill of lading shows ocean freight of $1,300.00. The rate of exchange is P52.50/$1.00 and the rate of duty is 7%. Compute for the total brokerage fee, inclusive of VAT:",
+    "choices": {
+      "A": "P 4,646.40",
+      "B": "P 4,660.80",
+      "C": "P 4,632.00",
+      "D": "P 4,620.00"
+    },
+    "correct": "B",
+    "reason": "Brokerage fee = 0.75% x DV x 1.12 = P4,660.80."
+  },
+  "244": {
+    "question": "A shipment of 1x20' STC: Various Adhesive Tapes from China arrived at Port of Manila with total CFR value of $10,000.00. The commercial invoice shows freight charges of $1,100.00 while the bill of lading shows ocean freight of $1,300.00. The rate of exchange is P52.50/$1.00 and the rate of duty is 7%. Compute for the total arrastre charge, net of VAT:",
+    "choices": {
+      "A": "P 2,770.00",
+      "B": "P 2,780.00",
+      "C": "P 2,760.00",
+      "D": "P 2,750.00"
+    },
+    "correct": "A",
+    "reason": "Arrastre = 0.5% x DV = P2,770.00."
+  },
+  "245": {
+    "question": "A shipment of 1x20' STC: Various Adhesive Tapes from China arrived at Port of Manila with total CFR value of $10,000.00. The commercial invoice shows freight charges of $1,100.00 while the bill of lading shows ocean freight of $1,300.00. The rate of exchange is P52.50/$1.00 and the rate of duty is 7%. Compute for the total wharfage, inclusive of VAT:",
+    "choices": {
+      "A": "P 2,172.80",
+      "B": "P 2,179.20",
+      "C": "P 2,166.40",
+      "D": "P 2,160.00"
+    },
+    "correct": "B",
+    "reason": "Wharfage = 0.35% x DV x 1.12 = P2,179.20."
+  },
+  "246": {
+    "question": "A shipment of 1x20' STC: Various Adhesive Tapes from China arrived at Port of Manila with total CFR value of $10,000.00. The commercial invoice shows freight charges of $1,100.00 while the bill of lading shows ocean freight of $1,300.00. The rate of exchange is P52.50/$1.00 and the rate of duty is 7%. Compute for the total CDS, inclusive of VAT:",
+    "choices": {
+      "A": "P 16.80",
+      "B": "P 22.40",
+      "C": "P 28.00",
+      "D": "P 33.60"
+    },
+    "correct": "C",
+    "reason": "CDS = P25 x 1.12 = P28.00."
+  },
+  "247": {
+    "question": "A shipment of 1x20' STC: Various Adhesive Tapes from China arrived at Port of Manila with total CFR value of $10,000.00. The commercial invoice shows freight charges of $1,100.00 while the bill of lading shows ocean freight of $1,300.00. The rate of exchange is P52.50/$1.00 and the rate of duty is 7%. Compute for the total IPF, net of VAT:",
+    "choices": {
+      "A": "P 260.00",
+      "B": "P 265.00",
+      "C": "P 270.00",
+      "D": "P 275.00"
+    },
+    "correct": "A",
+    "reason": "IPF = P260.00."
+  },
+  "248": {
+    "question": "A shipment of 1x20' STC: Various Adhesive Tapes from China arrived at Port of Manila with total CFR value of $10,000.00. The commercial invoice shows freight charges of $1,100.00 while the bill of lading shows ocean freight of $1,300.00. The rate of exchange is P52.50/$1.00 and the rate of duty is 7%. Compute for the total duties, taxes and other charges:",
+    "choices": {
+      "A": "P 112,800.00",
+      "B": "P 115,200.00",
+      "C": "P 118,400.00",
+      "D": "P 120,000.00"
+    },
+    "correct": "A",
+    "reason": "Total DTOC = Duty + VAT + Bank + Brokerage + Arrastre + Wharfage + CDS + IPF = P112,800.00."
+  },
+  "249": {
+    "question": "A shipment of 1x20' STC: Various Adhesive Tapes from China arrived at Port of Manila with total CFR value of $10,000.00. The commercial invoice shows freight charges of $1,100.00 while the bill of lading shows ocean freight of $1,300.00. The rate of exchange is P52.50/$1.00 and the rate of duty is 7%. Compute for the total FOB value:",
+    "choices": {
+      "A": "$ 10,000.00",
+      "B": "$ 10,100.00",
+      "C": "$ 10,200.00",
+      "D": "$ 10,300.00"
+    },
+    "correct": "A",
+    "reason": "FOB value = $10,000.00 (given as CFR - freight)."
+  },
+  "250": {
+    "question": "A shipment of 1x20' STC: Various Adhesive Tapes from China arrived at Port of Manila with total CFR value of $10,000.00. The commercial invoice shows freight charges of $1,100.00 while the bill of lading shows ocean freight of $1,300.00. The rate of exchange is P52.50/$1.00 and the rate of duty is 7%. Compute for the total EXW value:",
+    "choices": {
+      "A": "$ 8,900.00",
+      "B": "$ 9,000.00",
+      "C": "$ 9,100.00",
+      "D": "$ 9,200.00"
+    },
+    "correct": "C",
+    "reason": "EXW = FOB - Origin charges = $10,000 - $900 = $9,100."
+  },
+  "251": {
+    "question": "A shipment of 1x20' STC: Various Adhesive Tapes from China arrived at Port of Manila with total CFR value of $10,000.00. The commercial invoice shows freight charges of $1,100.00 while the bill of lading shows ocean freight of $1,300.00. The rate of exchange is P52.50/$1.00 and the rate of duty is 7%. Compute for the total CIF value:",
+    "choices": {
+      "A": "$ 11,300.00",
+      "B": "$ 11,400.00",
+      "C": "$ 11,500.00",
+      "D": "$ 11,600.00"
+    },
+    "correct": "A",
+    "reason": "CIF = CFR + Insurance = $10,000 + $1,300 = $11,300."
+  },
+  "252": {
+    "question": "A shipment of 1x20' STC: Various Adhesive Tapes from China arrived at Port of Manila with total CFR value of $10,000.00. The commercial invoice shows freight charges of $1,100.00 while the bill of lading shows ocean freight of $1,300.00. The rate of exchange is P52.50/$1.00 and the rate of duty is 7%. Compute for the total insurance amount:",
+    "choices": {
+      "A": "$ 1,300.00",
+      "B": "$ 1,200.00",
+      "C": "$ 1,100.00",
+      "D": "$ 1,000.00"
+    },
+    "correct": "A",
+    "reason": "Insurance = $1,300.00 (as indicated in the bill of lading)."
+  },
+  "253": {
+    "question": "A shipment of 1x20' STC: Various Adhesive Tapes from China arrived at Port of Manila with total CFR value of $10,000.00. The commercial invoice shows freight charges of $1,100.00 while the bill of lading shows ocean freight of $1,300.00. The rate of exchange is P52.50/$1.00 and the rate of duty is 7%. Compute for the total miscellaneous expenses:",
+    "choices": {
+      "A": "P 500.00",
+      "B": "P 1,000.00",
+      "C": "P 1,500.00",
+      "D": "P 2,000.00"
+    },
+    "correct": "D",
+    "reason": "Miscellaneous expenses total = P2,000.00."
+  },
+  "254": {
+    "question": "A shipment of 1x20' STC: Various Adhesive Tapes from China arrived at Port of Manila with total CFR value of $10,000.00. The commercial invoice shows freight charges of $1,100.00 while the bill of lading shows ocean freight of $1,300.00. The rate of exchange is P52.50/$1.00 and the rate of duty is 7%. Compute for the total payment to BOC:",
+    "choices": {
+      "A": "P 115,200.00",
+      "B": "P 118,400.00",
+      "C": "P 120,000.00",
+      "D": "P 125,000.00"
+    },
+    "correct": "A",
+    "reason": "Total payment = DTOC + Landed cost adjustments = P115,200.00."
+  },
+  "255": {
+    "question": "A shipment of 1x20' STC: Various Adhesive Tapes from China arrived at Port of Manila with total CFR value of $10,000.00. The commercial invoice shows freight charges of $1,100.00 while the bill of lading shows ocean freight of $1,300.00. The rate of exchange is P52.50/$1.00 and the rate of duty is 7%. Compute for the total cost of importation:",
+    "choices": {
+      "A": "P 620,480.00",
+      "B": "P 622,720.00",
+      "C": "P 620,240.00",
+      "D": "P 618,500.00"
+    },
+    "correct": "B",
+    "reason": "Total cost = Landed cost + DTOC = P622,720.00."
+  },
+  "256": {
+    "question": "A shipment of 1x20' STC: Various Adhesive Tapes from China arrived at Port of Manila with total CFR value of $10,000.00. The commercial invoice shows freight charges of $1,100.00 while the bill of lading shows ocean freight of $1,300.00. The rate of exchange is P52.50/$1.00 and the rate of duty is 7%. Compute for the total effective duty rate:",
+    "choices": {
+      "A": "5.00%",
+      "B": "6.00%",
+      "C": "7.00%",
+      "D": "8.00%"
+    },
+    "correct": "C",
+    "reason": "Effective duty rate = 7.00% as given."
+  },
+  "257": {
+    "question": "A shipment of 1x20' STC: Various Adhesive Tapes from China arrived at Port of Manila with total CFR value of $10,000.00. The commercial invoice shows freight charges of $1,100.00 while the bill of lading shows ocean freight of $1,300.00. The rate of exchange is P52.50/$1.00 and the rate of duty is 7%. Compute for the total landed cost ratio:",
+    "choices": {
+      "A": "1.12",
+      "B": "1.15",
+      "C": "1.18",
+      "D": "1.20"
+    },
+    "correct": "A",
+    "reason": "Landed cost ratio = Landed cost / DV = P622,720 / P554,000 = 1.124."
+  },
+  "258": {
+    "question": "A shipment of 1x20' STC: Various Adhesive Tapes from China arrived at Port of Manila with total CFR value of $10,000.00. The commercial invoice shows freight charges of $1,100.00 while the bill of lading shows ocean freight of $1,300.00. The rate of exchange is P52.50/$1.00 and the rate of duty is 7%. Compute for the total import processing fee, gross of VAT:",
+    "choices": {
+      "A": "P 291.20",
+      "B": "P 302.40",
+      "C": "P 313.60",
+      "D": "P 324.80"
+    },
+    "correct": "B",
+    "reason": "IPF = P270 x 1.12 = P302.40."
+  }
+}

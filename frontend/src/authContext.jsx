@@ -1,0 +1,147 @@
+import { createContext, useContext, useEffect, useState, useCallback } from "react";
+import {
+  signInWithRedirect,
+  getRedirectResult,
+  onAuthStateChanged,
+  signOut,
+} from "firebase/auth";
+import { doc, getDoc, setDoc, updateDoc, serverTimestamp } from "firebase/firestore";
+import { auth, db, googleProvider } from "./firebase";
+
+const DEVICE_ID_KEY = "cuble_deviceId";
+
+function makeId() {
+  if (window.crypto && window.crypto.randomUUID) return window.crypto.randomUUID();
+  return "dev-" + Date.now() + "-" + Math.random().toString(16).slice(2);
+}
+
+function getOrCreateDeviceId() {
+  let id = localStorage.getItem(DEVICE_ID_KEY);
+  if (!id) {
+    id = makeId();
+    localStorage.setItem(DEVICE_ID_KEY, id);
+  }
+  return id;
+}
+
+function guessDeviceLabel() {
+  const ua = navigator.userAgent || "";
+  if (window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()) {
+    return "CuBLE App (Android)";
+  }
+  if (/Android/i.test(ua)) return "Android · Chrome";
+  if (/iPhone|iPad|iPod/i.test(ua)) return "iOS · Safari";
+  return "Desktop · Browser";
+}
+
+const AuthCtx = createContext(null);
+
+export function AuthProvider({ children }) {
+  const [user, setUser] = useState(null);
+  const [profile, setProfile] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [needsFullName, setNeedsFullName] = useState(false);
+  const [deviceLimitReached, setDeviceLimitReached] = useState(false);
+  const currentDeviceId = getOrCreateDeviceId();
+
+  const syncProfile = useCallback(async (fbUser) => {
+    const ref = doc(db, "users", fbUser.uid);
+    const snap = await getDoc(ref);
+
+    if (!snap.exists()) {
+      const fresh = {
+        email: fbUser.email || "",
+        displayName: fbUser.displayName || "",
+        photoURL: fbUser.photoURL || "",
+        fullName: null,
+        createdAt: serverTimestamp(),
+        devices: [{ id: currentDeviceId, label: guessDeviceLabel(), lastActive: Date.now() }],
+        subscriptions: { CL: false, TL: false, CDP: false, PC: false },
+      };
+      await setDoc(ref, fresh);
+      setProfile(fresh);
+      setNeedsFullName(true);
+      setDeviceLimitReached(false);
+      return;
+    }
+
+    const data = snap.data();
+    const devices = data.devices || [];
+    const already = devices.find((d) => d.id === currentDeviceId);
+
+    if (already) {
+      const updated = devices.map((d) =>
+        d.id === currentDeviceId ? { ...d, lastActive: Date.now() } : d
+      );
+      await updateDoc(ref, { devices: updated });
+      setProfile({ ...data, devices: updated });
+      setDeviceLimitReached(false);
+    } else if (devices.length < 2) {
+      const updated = [...devices, { id: currentDeviceId, label: guessDeviceLabel(), lastActive: Date.now() }];
+      await updateDoc(ref, { devices: updated });
+      setProfile({ ...data, devices: updated });
+      setDeviceLimitReached(false);
+    } else {
+      setProfile(data);
+      setDeviceLimitReached(true);
+    }
+    setNeedsFullName(!data.fullName);
+  }, [currentDeviceId]);
+
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, async (fbUser) => {
+      setUser(fbUser);
+      if (fbUser) {
+        await syncProfile(fbUser);
+      } else {
+        setProfile(null);
+        setNeedsFullName(false);
+        setDeviceLimitReached(false);
+      }
+      setLoading(false);
+    });
+    getRedirectResult(auth).catch((err) => {
+      console.warn("Google sign-in redirect error:", err);
+    });
+    return unsub;
+  }, [syncProfile]);
+
+  const signInWithGoogle = useCallback(() => signInWithRedirect(auth, googleProvider), []);
+  const signOutUser = useCallback(() => signOut(auth), []);
+
+  const completeFullName = useCallback(async (fullName) => {
+    if (!user) return;
+    await updateDoc(doc(db, "users", user.uid), { fullName });
+    setProfile((p) => ({ ...p, fullName }));
+    setNeedsFullName(false);
+  }, [user]);
+
+  const removeDevice = useCallback(async (deviceId) => {
+    if (!user || !profile) return;
+    const ref = doc(db, "users", user.uid);
+    const updated = (profile.devices || []).filter((d) => d.id !== deviceId);
+    await updateDoc(ref, { devices: updated });
+    setProfile((p) => ({ ...p, devices: updated }));
+
+    if (deviceId === currentDeviceId) {
+      await signOut(auth);
+      return;
+    }
+    if (deviceLimitReached) {
+      await syncProfile(user);
+    }
+  }, [user, profile, currentDeviceId, deviceLimitReached, syncProfile]);
+
+  const value = {
+    user, profile, loading, needsFullName, deviceLimitReached, currentDeviceId,
+    signInWithGoogle, signOutUser, completeFullName, removeDevice,
+  };
+
+  return <AuthCtx.Provider value={value}>{children}</AuthCtx.Provider>;
+}
+
+export function useAuth() {
+  const ctx = useContext(AuthCtx);
+  if (!ctx) throw new Error("useAuth must be used inside AuthProvider");
+  return ctx;
+}
