@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "../authContext";
+import { PLANS, PAYMENT_METHODS, generateReferenceCode, submitPendingPurchase } from "../payments";
 
 const SUBJECT_LABELS = { CL: "Customs Law", TL: "Tariff Law", CDP: "Customs Declarant Practice", PC: "Practical Customs" };
 
@@ -20,7 +21,78 @@ export default function AccountOverlay() {
   } = useAuth();
   const [nameInput, setNameInput] = useState("");
 
+  // Phase 3 — plan-selection + payment flow state.
+  // step: "profile" | "payment-method" | "qr"
+  const [step, setStep] = useState("profile");
+  const [selectedPlan, setSelectedPlan] = useState(null);
+  const [selectedMethod, setSelectedMethod] = useState(null);
+  const [referenceCode, setReferenceCode] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  // Reset ang payment flow tuwing magsasara ang overlay, para hindi
+  // ma-stuck ang susunod na pagbukas sa gitna ng isang lumang flow.
+  useEffect(() => {
+    if (!overlayOpen) {
+      setStep("profile");
+      setSelectedPlan(null);
+      setSelectedMethod(null);
+      setReferenceCode(null);
+      setSubmitted(false);
+      setSubmitting(false);
+    }
+  }, [overlayOpen]);
+
   if (!overlayOpen) return null;
+
+  const startPurchase = (plan) => {
+    setSelectedPlan(plan);
+    setSelectedMethod(null);
+    setSubmitted(false);
+    setReferenceCode(generateReferenceCode(plan.id));
+    setStep("payment-method");
+  };
+
+  const selectMethod = (methodId) => {
+    setSelectedMethod(methodId);
+    setStep("qr");
+  };
+
+  const backToProfile = () => {
+    setStep("profile");
+    setSelectedPlan(null);
+    setSelectedMethod(null);
+    setSubmitted(false);
+  };
+
+  const backToMethods = () => {
+    setStep("payment-method");
+    setSelectedMethod(null);
+    setSubmitted(false);
+  };
+
+  const confirmPaid = async () => {
+    if (!user || !selectedPlan || !selectedMethod || !referenceCode) return;
+    setSubmitting(true);
+    try {
+      await submitPendingPurchase(user.uid, {
+        planId: selectedPlan.id,
+        subjects: selectedPlan.subjects,
+        price: selectedPlan.price,
+        method: selectedMethod,
+        referenceCode,
+      });
+      setSubmitted(true);
+    } catch (err) {
+      console.warn("submitPendingPurchase failed:", err);
+      alert("May error sa pag-submit. Subukan ulit:\n" + (err?.message || err));
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const allSubscribed = Object.keys(SUBJECT_LABELS).every((code) => profile?.subscriptions?.[code]);
+  const activeMethod = PAYMENT_METHODS.find((m) => m.id === selectedMethod) || null;
 
   return (
     <div
@@ -97,7 +169,7 @@ export default function AccountOverlay() {
           </div>
         )}
 
-        {!loading && user && !deviceLimitReached && !needsFullName && (
+        {!loading && user && !deviceLimitReached && !needsFullName && step === "profile" && (
           <div className="space-y-4 py-2">
             <div className="flex items-center gap-3">
               {profile?.photoURL && (
@@ -112,15 +184,34 @@ export default function AccountOverlay() {
             <div>
               <p className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-slate-400">Subscription</p>
               <div className="space-y-1.5">
-                {Object.keys(SUBJECT_LABELS).map((code) => (
-                  <div key={code} className="flex items-center justify-between rounded-lg bg-slate-50 px-3 py-2 text-sm dark:bg-slate-900/40">
-                    <span className="text-slate-600 dark:text-slate-300">{SUBJECT_LABELS[code]}</span>
-                    <span className={profile?.subscriptions?.[code] ? "font-medium text-emerald-600 dark:text-emerald-400" : "text-slate-400"}>
-                      {profile?.subscriptions?.[code] ? "Unlocked" : "Locked"}
-                    </span>
-                  </div>
-                ))}
+                {Object.keys(SUBJECT_LABELS).map((code) => {
+                  const unlocked = !!profile?.subscriptions?.[code];
+                  const plan = PLANS.find((p) => p.id === code);
+                  return (
+                    <div key={code} className="flex items-center justify-between rounded-lg bg-slate-50 px-3 py-2 text-sm dark:bg-slate-900/40">
+                      <span className="text-slate-600 dark:text-slate-300">{SUBJECT_LABELS[code]}</span>
+                      {unlocked ? (
+                        <span className="font-medium text-emerald-600 dark:text-emerald-400">Unlocked</span>
+                      ) : (
+                        <button
+                          onClick={() => startPurchase(plan)}
+                          className="rounded-lg bg-navy-900 px-3 py-1.5 text-xs font-semibold text-white active:bg-navy-800 dark:bg-navy-700"
+                        >
+                          Mag-subscribe ₱{plan.price}
+                        </button>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
+              {!allSubscribed && (
+                <button
+                  onClick={() => startPurchase(PLANS.find((p) => p.id === "BUNDLE"))}
+                  className="mt-2 w-full rounded-lg border-2 border-gold-500 bg-gold-50 px-3 py-2 text-xs font-semibold text-navy-900 active:bg-gold-100 dark:border-gold-400 dark:bg-slate-900/40 dark:text-gold-400"
+                >
+                  🎁 Bundle — Lahat ng 4 Subjects ₱99
+                </button>
+              )}
             </div>
 
             <div>
@@ -154,6 +245,73 @@ export default function AccountOverlay() {
               Sign out
             </button>
             <button onClick={() => setOverlayOpen(false)} className="w-full text-sm text-slate-400">Close</button>
+          </div>
+        )}
+
+        {!loading && user && !deviceLimitReached && !needsFullName && step === "payment-method" && selectedPlan && (
+          <div className="space-y-4 py-2">
+            <button onClick={backToProfile} className="text-sm text-slate-400">← Bumalik</button>
+            <div className="rounded-xl bg-slate-50 p-4 text-center dark:bg-slate-900/40">
+              <p className="text-sm text-slate-500 dark:text-slate-400">{selectedPlan.label}</p>
+              <p className="text-2xl font-bold text-navy-900 dark:text-slate-100">₱{selectedPlan.price}</p>
+            </div>
+            <p className="text-sm font-medium text-slate-600 dark:text-slate-300">Piliin ang paraan ng pagbabayad:</p>
+            <div className="space-y-2">
+              {PAYMENT_METHODS.map((m) => (
+                <button
+                  key={m.id}
+                  onClick={() => selectMethod(m.id)}
+                  className="w-full rounded-xl border border-slate-200 px-4 py-3 text-left text-sm font-semibold text-slate-700 active:bg-slate-50 dark:border-slate-600 dark:text-slate-200 dark:active:bg-slate-900/40"
+                >
+                  {m.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {!loading && user && !deviceLimitReached && !needsFullName && step === "qr" && selectedPlan && activeMethod && (
+          <div className="space-y-4 py-2">
+            {!submitted ? (
+              <>
+                <button onClick={backToMethods} className="text-sm text-slate-400">← Bumalik</button>
+                <img
+                  src={activeMethod.qr}
+                  alt={`${activeMethod.label} QR code`}
+                  className="mx-auto w-full max-w-[280px] rounded-xl border border-slate-100 dark:border-slate-700"
+                />
+                <div className="rounded-xl bg-amber-50 p-3 text-center dark:bg-amber-950/30">
+                  <p className="text-xs text-slate-500 dark:text-slate-400">Reference Code — isulat sa payment note</p>
+                  <p className="text-xl font-bold tracking-widest text-navy-900 dark:text-amber-400">{referenceCode}</p>
+                </div>
+                <p className="text-center text-xs leading-relaxed text-slate-500 dark:text-slate-400">
+                  1. I-scan ang QR gamit ang {activeMethod.label} app mo.<br />
+                  2. Bayaran ang ₱{selectedPlan.price}, ilagay ang reference code sa note/message.<br />
+                  3. Pindutin ang "Nabayaran ko na" sa baba.
+                </p>
+                <button
+                  onClick={confirmPaid}
+                  disabled={submitting}
+                  className="w-full rounded-xl bg-navy-900 px-4 py-3 text-sm font-semibold text-white disabled:opacity-50 dark:bg-navy-700"
+                >
+                  {submitting ? "Sinusubmit..." : "✅ Nabayaran ko na"}
+                </button>
+              </>
+            ) : (
+              <div className="space-y-3 py-4 text-center">
+                <span className="text-4xl" aria-hidden>⏳</span>
+                <p className="font-semibold text-navy-900 dark:text-slate-100">Naka-pending na ang purchase mo</p>
+                <p className="text-sm text-slate-500 dark:text-slate-400">
+                  Ico-confirm ito manually sa loob ng ilang oras. Reference code: <span className="font-semibold">{referenceCode}</span>
+                </p>
+                <button
+                  onClick={backToProfile}
+                  className="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-medium text-slate-500 dark:border-slate-600 dark:text-slate-300"
+                >
+                  Bumalik sa Profile
+                </button>
+              </div>
+            )}
           </div>
         )}
       </div>
