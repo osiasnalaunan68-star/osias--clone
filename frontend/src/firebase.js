@@ -1,7 +1,7 @@
 // Firebase setup — Google Sign-In + Firestore (user profile at subscriptions)
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, enableIndexedDbPersistence } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyARhpqrQM2WysnLDYNi7zHAm7gnsJt4X5I",
@@ -16,3 +16,9 @@ export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const googleProvider = new GoogleAuthProvider();
+
+// Local IndexedDB cache para may bumabalik pang datos (profile, subscriptions)
+// kahit walang internet — kailangan lalo na sa APK offline-first na app.
+enableIndexedDbPersistence(db).catch((err) => {
+  console.warn("Firestore offline persistence not enabled:", err.code || err);
+});

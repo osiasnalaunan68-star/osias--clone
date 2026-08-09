@@ -47,6 +47,7 @@ export function AuthProvider({ children }) {
   const currentDeviceId = getOrCreateDeviceId();
 
   const syncProfile = useCallback(async (fbUser) => {
+    try {
     const ref = doc(db, "users", fbUser.uid);
     const snap = await getDoc(ref);
 
@@ -88,6 +89,10 @@ export function AuthProvider({ children }) {
       setDeviceLimitReached(true);
     }
     setNeedsFullName(!data.fullName);
+    } catch (err) {
+      console.warn("syncProfile failed (offline?):", err);
+      setDeviceLimitReached(false);
+    }
   }, [currentDeviceId]);
 
   useEffect(() => {
