@@ -1,9 +1,13 @@
 import { createContext, useContext, useEffect, useState, useCallback } from "react";
-import { signInWithPopup, onAuthStateChanged, signOut, setPersistence, indexedDBLocalPersistence } from "firebase/auth";
+import {
+  signInWithRedirect, getRedirectResult, onAuthStateChanged, signOut,
+  setPersistence, indexedDBLocalPersistence,
+} from "firebase/auth";
 import { doc, getDoc, setDoc, updateDoc, serverTimestamp } from "firebase/firestore";
 import { auth, db, googleProvider } from "./firebase";
 
 const DEVICE_ID_KEY = "cuble_deviceId";
+const PENDING_SIGNIN_KEY = "cuble_pendingSignIn";
 
 function makeId() {
   if (window.crypto && window.crypto.randomUUID) return window.crypto.randomUUID();
@@ -37,9 +41,9 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [needsFullName, setNeedsFullName] = useState(false);
   const [deviceLimitReached, setDeviceLimitReached] = useState(false);
-  const [overlayOpen, setOverlayOpen] = useState(false);
+  const [overlayOpen, setOverlayOpen] = useState(() => localStorage.getItem(PENDING_SIGNIN_KEY) === "1");
   const [authError, setAuthError] = useState(null);
-  const [signingIn, setSigningIn] = useState(false);
+  const [signingIn, setSigningIn] = useState(() => localStorage.getItem(PENDING_SIGNIN_KEY) === "1");
   const currentDeviceId = getOrCreateDeviceId();
 
   const syncProfile = useCallback(async (fbUser) => {
@@ -101,25 +105,43 @@ export function AuthProvider({ children }) {
     return unsub;
   }, [syncProfile]);
 
-  const signInWithGoogle = useCallback(async () => {
-    setAuthError(null);
-    setSigningIn(true);
-    try {
-      try {
-        await setPersistence(auth, indexedDBLocalPersistence);
-      } catch (persistErr) {
-        console.warn("indexedDBLocalPersistence setPersistence failed:", persistErr);
-      }
-      await signInWithPopup(auth, googleProvider);
-    } catch (err) {
-      console.warn("Google sign-in error:", err);
-      if (err?.code !== "auth/popup-closed-by-user" && err?.code !== "auth/cancelled-popup-request") {
+  // Catch the result of signInWithRedirect after the page navigates back.
+  useEffect(() => {
+    const wasPending = localStorage.getItem(PENDING_SIGNIN_KEY) === "1";
+    getRedirectResult(auth)
+      .catch((err) => {
+        console.warn("getRedirectResult error:", err);
         const code = err?.code || "unknown-error";
         const msg = err?.message || "";
         setAuthError(`[${code}] ${msg || "Hindi na-process ang sign-in. Subukan ulit."}`);
-      }
-    } finally {
+      })
+      .finally(() => {
+        if (wasPending) {
+          localStorage.removeItem(PENDING_SIGNIN_KEY);
+          setSigningIn(false);
+        }
+      });
+  }, []);
+
+  const signInWithGoogle = useCallback(async () => {
+    setAuthError(null);
+    setSigningIn(true);
+    localStorage.setItem(PENDING_SIGNIN_KEY, "1");
+    try {
+      await setPersistence(auth, indexedDBLocalPersistence);
+    } catch (persistErr) {
+      console.warn("setPersistence failed:", persistErr);
+    }
+    try {
+      await signInWithRedirect(auth, googleProvider);
+      // Page navigates away here — code after this line generally won't run.
+    } catch (err) {
+      console.warn("Google sign-in error:", err);
+      const code = err?.code || "unknown-error";
+      const msg = err?.message || "";
+      setAuthError(`[${code}] ${msg || "Hindi na-process ang sign-in. Subukan ulit."}`);
       setSigningIn(false);
+      localStorage.removeItem(PENDING_SIGNIN_KEY);
     }
   }, []);
 
