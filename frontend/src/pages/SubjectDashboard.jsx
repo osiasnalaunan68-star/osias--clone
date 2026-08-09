@@ -1,9 +1,38 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { ProgressCircle } from "../components/QuizShared";
+import { useAuth } from "../authContext";
 import {
   getAllEntries, getSortedItemIds, getSubjectStats,
   getSubjectProgress, saveSubjectProgress, resetSubjectProgress,
 } from "../subjectQuizStore";
+
+// First N items (by sorted order) na libre bawat subject — lahat ng lagpas dito
+// ay naka-lock hanggang mag-subscribe. Tugma sa pricing table sa handoff doc.
+const FREE_LIMITS = { cl: 100, cdp: 100, tl: 100, pc: 150 };
+
+function isItemUnlocked(idx, subjectId, profile) {
+  const freeLimit = FREE_LIMITS[subjectId] ?? Infinity;
+  if (idx < freeLimit) return true;
+  return !!profile?.subscriptions?.[subjectId.toUpperCase()];
+}
+
+function LockedPrompt({ subjectLabel, onUnlock }) {
+  return (
+    <div className="flex flex-col items-center gap-3 py-10 text-center">
+      <span className="text-4xl" aria-hidden>🔒</span>
+      <p className="text-lg font-semibold text-slate-800 dark:text-slate-100">Naka-lock ang item na ito</p>
+      <p className="max-w-xs text-sm text-slate-500 dark:text-slate-400">
+        Mag-subscribe para ma-unlock ang natitirang {subjectLabel} items.
+      </p>
+      <button
+        onClick={onUnlock}
+        className="mt-2 rounded-xl bg-navy-900 px-5 py-2.5 text-sm font-semibold text-white shadow-sm active:bg-navy-800 dark:bg-navy-700 dark:active:bg-navy-600"
+      >
+        Tingnan ang Subscription
+      </button>
+    </div>
+  );
+}
 
 function FlatQuizQuestion({ item, onAnswer, answered, selected }) {
   const [inputValue, setInputValue] = useState("");
@@ -64,6 +93,7 @@ function FlatQuizQuestion({ item, onAnswer, answered, selected }) {
 }
 
 function SubjectQuizPlay({ subjectId, subjectLabel, onBack }) {
+  const { profile, setOverlayOpen } = useAuth();
   const entries = useMemo(() => getAllEntries(subjectId), [subjectId]);
   const itemIds = useMemo(() => getSortedItemIds(subjectId), [subjectId]);
   const initialProgress = useMemo(() => getSubjectProgress(subjectId), [subjectId]);
@@ -76,13 +106,14 @@ function SubjectQuizPlay({ subjectId, subjectLabel, onBack }) {
   const currentItem = currentId ? entries[currentId] : null;
   const currentAnswer = currentId ? answers[currentId] : null;
   const isAnswered = currentAnswer !== undefined && currentAnswer !== null;
+  const currentLocked = currentId ? !isItemUnlocked(currentIndex, subjectId, profile) : false;
 
   const persist = useCallback((nextAnswers, nextIndex) => {
     saveSubjectProgress(subjectId, { answers: nextAnswers, currentIndex: nextIndex });
   }, [subjectId]);
 
   const handleAnswer = (value) => {
-    if (!currentId || answers[currentId] !== undefined) return;
+    if (!currentId || currentLocked || answers[currentId] !== undefined) return;
     const nextAnswers = { ...answers, [currentId]: value };
     setAnswers(nextAnswers);
     persist(nextAnswers, currentIndex);
@@ -131,13 +162,27 @@ function SubjectQuizPlay({ subjectId, subjectLabel, onBack }) {
           const isAnsweredDot = answers[id] !== undefined && answers[id] !== null;
           const isActive = idx === currentIndex;
           const isCorrect = entries[id] && answers[id] === entries[id].correct;
-          const dotColor = isAnsweredDot ? (isCorrect ? "bg-emerald-400 dark:bg-emerald-500" : "bg-red-400 dark:bg-red-500") : "bg-slate-300 dark:bg-slate-600";
-          return <button key={id} onClick={() => goTo(idx)} className={`h-3 w-3 rounded-full transition-all ${isActive ? "scale-125" : ""} ${dotColor}`} title={`Item ${id}`} />;
+          const locked = !isItemUnlocked(idx, subjectId, profile);
+          const dotColor = isAnsweredDot
+            ? (isCorrect ? "bg-emerald-400 dark:bg-emerald-500" : "bg-red-400 dark:bg-red-500")
+            : locked ? "bg-slate-200 dark:bg-slate-700" : "bg-slate-300 dark:bg-slate-600";
+          return (
+            <button
+              key={id}
+              onClick={() => goTo(idx)}
+              className={`h-3 w-3 rounded-full transition-all ${isActive ? "scale-125" : ""} ${dotColor} ${locked && !isAnsweredDot ? "opacity-50" : ""}`}
+              title={locked ? `Item ${id} (locked)` : `Item ${id}`}
+            />
+          );
         })}
       </div>
 
       <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-card dark:border-slate-700 dark:bg-slate-800">
-        <FlatQuizQuestion key={currentId} item={currentItem} onAnswer={handleAnswer} answered={isAnswered} selected={currentAnswer} />
+        {currentLocked ? (
+          <LockedPrompt subjectLabel={subjectLabel} onUnlock={() => setOverlayOpen(true)} />
+        ) : (
+          <FlatQuizQuestion key={currentId} item={currentItem} onAnswer={handleAnswer} answered={isAnswered} selected={currentAnswer} />
+        )}
       </div>
 
       <div className="mt-4 flex justify-between">
