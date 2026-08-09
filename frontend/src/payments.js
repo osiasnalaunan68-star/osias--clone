@@ -12,8 +12,8 @@ import { db } from "./firebase";
 export const PLANS = [
   { id: "CL", label: "Customs Law", price: 39, subjects: ["CL"] },
   { id: "TL", label: "Tariff Law", price: 39, subjects: ["TL"] },
-  { id: "CDP", label: "Customs Declarant Practice", price: 39, subjects: ["CDP"] },
-  { id: "PC", label: "Practical Customs", price: 29, subjects: ["PC"] },
+  { id: "CDP", label: "Customs Documentation & Procedures", price: 39, subjects: ["CDP"] },
+  { id: "PC", label: "Practical Computations", price: 29, subjects: ["PC"] },
   { id: "BUNDLE", label: "Bundle — Lahat ng 4 Subjects", price: 99, subjects: ["CL", "TL", "CDP", "PC"] },
 ];
 
