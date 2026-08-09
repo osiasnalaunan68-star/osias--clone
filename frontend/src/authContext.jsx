@@ -9,6 +9,7 @@ import { doc, getDoc, setDoc, updateDoc, serverTimestamp } from "firebase/firest
 import { auth, db, googleProvider } from "./firebase";
 
 const DEVICE_ID_KEY = "cuble_deviceId";
+const PENDING_SIGNIN_KEY = "cuble_pendingSignIn";
 
 function makeId() {
   if (window.crypto && window.crypto.randomUUID) return window.crypto.randomUUID();
@@ -42,6 +43,7 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [needsFullName, setNeedsFullName] = useState(false);
   const [deviceLimitReached, setDeviceLimitReached] = useState(false);
+  const [overlayOpen, setOverlayOpen] = useState(false);
   const currentDeviceId = getOrCreateDeviceId();
 
   const syncProfile = useCallback(async (fbUser) => {
@@ -99,6 +101,11 @@ export function AuthProvider({ children }) {
         setDeviceLimitReached(false);
       }
       setLoading(false);
+
+      if (localStorage.getItem(PENDING_SIGNIN_KEY)) {
+        localStorage.removeItem(PENDING_SIGNIN_KEY);
+        setOverlayOpen(true);
+      }
     });
     getRedirectResult(auth).catch((err) => {
       console.warn("Google sign-in redirect error:", err);
@@ -106,7 +113,11 @@ export function AuthProvider({ children }) {
     return unsub;
   }, [syncProfile]);
 
-  const signInWithGoogle = useCallback(() => signInWithRedirect(auth, googleProvider), []);
+  const signInWithGoogle = useCallback(() => {
+    localStorage.setItem(PENDING_SIGNIN_KEY, "1");
+    return signInWithRedirect(auth, googleProvider);
+  }, []);
+
   const signOutUser = useCallback(() => signOut(auth), []);
 
   const completeFullName = useCallback(async (fullName) => {
@@ -134,6 +145,7 @@ export function AuthProvider({ children }) {
 
   const value = {
     user, profile, loading, needsFullName, deviceLimitReached, currentDeviceId,
+    overlayOpen, setOverlayOpen,
     signInWithGoogle, signOutUser, completeFullName, removeDevice,
   };
 

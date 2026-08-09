@@ -15,6 +15,7 @@ import { copyQuizPromptForTitle } from "../quizContext";
 import DevPanel from "./DevPanel";
 import QuizPage from "./QuizPage";
 import QuizHub from "./QuizHub";
+import AccountButton from "../components/AccountButton";
 
 // Enrich nodes with hierarchy information for composite key lookup
 
@@ -1051,6 +1052,7 @@ export default function ChapterBrowser() {
                 )}
               </div>
               <span className="flex-1" />
+              <AccountButton />
               {view === "browse" && <ModeToggle mode={mode} setMode={setMode} />}
             </div>
             {view === "browse" && !(focusMode && mode === "reading") && (
