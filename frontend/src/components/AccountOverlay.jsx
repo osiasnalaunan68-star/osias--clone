@@ -15,7 +15,7 @@ function formatDate(ts) {
 export default function AccountOverlay() {
   const {
     user, profile, loading, needsFullName, deviceLimitReached, currentDeviceId,
-    overlayOpen, setOverlayOpen,
+    overlayOpen, setOverlayOpen, authError, signingIn,
     signInWithGoogle, signOutUser, completeFullName, removeDevice,
   } = useAuth();
   const [nameInput, setNameInput] = useState("");
@@ -40,10 +40,12 @@ export default function AccountOverlay() {
             </p>
             <button
               onClick={signInWithGoogle}
-              className="w-full rounded-xl bg-navy-900 px-4 py-3 font-medium text-white dark:bg-navy-700"
+              disabled={signingIn}
+              className="w-full rounded-xl bg-navy-900 px-4 py-3 font-medium text-white disabled:opacity-50 dark:bg-navy-700"
             >
-              Sign in with Google
+              {signingIn ? "Naghihintay sa Google..." : "Sign in with Google"}
             </button>
+            {authError && <p className="text-sm text-red-600 dark:text-red-400">{authError}</p>}
             <button onClick={() => setOverlayOpen(false)} className="text-sm text-slate-400">Cancel</button>
           </div>
         )}

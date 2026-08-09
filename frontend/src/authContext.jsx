@@ -1,15 +1,9 @@
 import { createContext, useContext, useEffect, useState, useCallback } from "react";
-import {
-  signInWithRedirect,
-  getRedirectResult,
-  onAuthStateChanged,
-  signOut,
-} from "firebase/auth";
+import { signInWithPopup, onAuthStateChanged, signOut } from "firebase/auth";
 import { doc, getDoc, setDoc, updateDoc, serverTimestamp } from "firebase/firestore";
 import { auth, db, googleProvider } from "./firebase";
 
 const DEVICE_ID_KEY = "cuble_deviceId";
-const PENDING_SIGNIN_KEY = "cuble_pendingSignIn";
 
 function makeId() {
   if (window.crypto && window.crypto.randomUUID) return window.crypto.randomUUID();
@@ -44,6 +38,8 @@ export function AuthProvider({ children }) {
   const [needsFullName, setNeedsFullName] = useState(false);
   const [deviceLimitReached, setDeviceLimitReached] = useState(false);
   const [overlayOpen, setOverlayOpen] = useState(false);
+  const [authError, setAuthError] = useState(null);
+  const [signingIn, setSigningIn] = useState(false);
   const currentDeviceId = getOrCreateDeviceId();
 
   const syncProfile = useCallback(async (fbUser) => {
@@ -101,21 +97,23 @@ export function AuthProvider({ children }) {
         setDeviceLimitReached(false);
       }
       setLoading(false);
-
-      if (localStorage.getItem(PENDING_SIGNIN_KEY)) {
-        localStorage.removeItem(PENDING_SIGNIN_KEY);
-        setOverlayOpen(true);
-      }
-    });
-    getRedirectResult(auth).catch((err) => {
-      console.warn("Google sign-in redirect error:", err);
     });
     return unsub;
   }, [syncProfile]);
 
-  const signInWithGoogle = useCallback(() => {
-    localStorage.setItem(PENDING_SIGNIN_KEY, "1");
-    return signInWithRedirect(auth, googleProvider);
+  const signInWithGoogle = useCallback(async () => {
+    setAuthError(null);
+    setSigningIn(true);
+    try {
+      await signInWithPopup(auth, googleProvider);
+    } catch (err) {
+      console.warn("Google sign-in error:", err);
+      if (err?.code !== "auth/popup-closed-by-user" && err?.code !== "auth/cancelled-popup-request") {
+        setAuthError("Hindi na-process ang sign-in. Subukan ulit — kung paulit-ulit, siguraduhin na hindi naka-Incognito/Guest mode ang browser mo.");
+      }
+    } finally {
+      setSigningIn(false);
+    }
   }, []);
 
   const signOutUser = useCallback(() => signOut(auth), []);
@@ -145,7 +143,7 @@ export function AuthProvider({ children }) {
 
   const value = {
     user, profile, loading, needsFullName, deviceLimitReached, currentDeviceId,
-    overlayOpen, setOverlayOpen,
+    overlayOpen, setOverlayOpen, authError, signingIn,
     signInWithGoogle, signOutUser, completeFullName, removeDevice,
   };
 
