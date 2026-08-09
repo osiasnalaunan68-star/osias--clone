@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState, useCallback } from "react";
-import { signInWithPopup, onAuthStateChanged, signOut } from "firebase/auth";
+import { signInWithPopup, onAuthStateChanged, signOut, setPersistence, indexedDBLocalPersistence } from "firebase/auth";
 import { doc, getDoc, setDoc, updateDoc, serverTimestamp } from "firebase/firestore";
 import { auth, db, googleProvider } from "./firebase";
 
@@ -105,11 +105,18 @@ export function AuthProvider({ children }) {
     setAuthError(null);
     setSigningIn(true);
     try {
+      try {
+        await setPersistence(auth, indexedDBLocalPersistence);
+      } catch (persistErr) {
+        console.warn("indexedDBLocalPersistence setPersistence failed:", persistErr);
+      }
       await signInWithPopup(auth, googleProvider);
     } catch (err) {
       console.warn("Google sign-in error:", err);
       if (err?.code !== "auth/popup-closed-by-user" && err?.code !== "auth/cancelled-popup-request") {
-        setAuthError("Hindi na-process ang sign-in. Subukan ulit — kung paulit-ulit, siguraduhin na hindi naka-Incognito/Guest mode ang browser mo.");
+        const code = err?.code || "unknown-error";
+        const msg = err?.message || "";
+        setAuthError(`[${code}] ${msg || "Hindi na-process ang sign-in. Subukan ulit."}`);
       }
     } finally {
       setSigningIn(false);
