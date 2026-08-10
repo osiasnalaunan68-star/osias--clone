@@ -1,4 +1,9 @@
 import { useState, useEffect } from "react";
+import { saveLastQuizPosition } from "../quizStore";
+
+export function answersMatch(a, b) {
+  return String(a ?? "").trim().toLowerCase() === String(b ?? "").trim().toLowerCase();
+}
 
 export const LEVELS = [
   { id: "level1", label: "🟢 Level 1 — Easy", tagalog: "Madali", color: "green" },
@@ -65,8 +70,8 @@ export function QuizQuestion({ level, questionData, onAnswer, answered, selected
           <button onClick={handleInputSubmit} disabled={answered || !inputValue.trim()} className="rounded-lg bg-navy-900 px-6 py-2 text-sm font-semibold text-white disabled:opacity-40 dark:bg-navy-700">Submit</button>
         </div>
         {answered && (
-          <div className={`mt-4 rounded-lg p-4 ${selected === correct ? "bg-emerald-50 dark:bg-emerald-950/30" : "bg-red-50 dark:bg-red-950/30"}`}>
-            <p className="font-medium text-slate-800 dark:text-slate-100">{selected === correct ? "✅ Correct!" : `❌ Incorrect. The correct answer is: ${correct}`}</p>
+          <div className={`mt-4 rounded-lg p-4 ${answersMatch(selected, correct) ? "bg-emerald-50 dark:bg-emerald-950/30" : "bg-red-50 dark:bg-red-950/30"}`}>
+            <p className="font-medium text-slate-800 dark:text-slate-100">{answersMatch(selected, correct) ? "✅ Correct!" : `❌ Incorrect. The correct answer is: ${correct}`}</p>
             {reason && <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{reason}</p>}
           </div>
         )}
@@ -98,8 +103,8 @@ export function QuizQuestion({ level, questionData, onAnswer, answered, selected
         })}
       </div>
       {answered && (
-        <div className={`mt-4 rounded-lg p-4 ${selected === correct ? "bg-emerald-50 dark:bg-emerald-950/30" : "bg-red-50 dark:bg-red-950/30"}`}>
-          <p className="font-medium text-slate-800 dark:text-slate-100">{selected === correct ? "✅ Correct!" : `❌ Incorrect. The correct answer is: ${correct}`}</p>
+        <div className={`mt-4 rounded-lg p-4 ${answersMatch(selected, correct) ? "bg-emerald-50 dark:bg-emerald-950/30" : "bg-red-50 dark:bg-red-950/30"}`}>
+          <p className="font-medium text-slate-800 dark:text-slate-100">{answersMatch(selected, correct) ? "✅ Correct!" : `❌ Incorrect. The correct answer is: ${correct}`}</p>
           {reason && <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{reason}</p>}
         </div>
       )}
@@ -111,25 +116,49 @@ export function QuizQuestion({ level, questionData, onAnswer, answered, selected
 // `quiz_progress_${progressKey}`). Pass a stable id — a batch id while
 // testing in Dev Panel, or the title string once baked into quizData.json.
 export function QuizPlayView({ title, entries, level, onBack, progressKey, backLabel = "← Back" }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [answers, setAnswers] = useState({});
+  const answerStorageKey = progressKey ? `quiz_answers_${progressKey}_${level}` : null;
+  const [currentIndex, setCurrentIndex] = useState(() => {
+    if (!answerStorageKey) return 0;
+    try {
+      const saved = JSON.parse(localStorage.getItem(answerStorageKey) || "null");
+      return saved?.currentIndex || 0;
+    } catch { return 0; }
+  });
+  const [answers, setAnswers] = useState(() => {
+    if (!answerStorageKey) return {};
+    try {
+      const saved = JSON.parse(localStorage.getItem(answerStorageKey) || "null");
+      return saved?.answers || {};
+    } catch { return {}; }
+  });
   const [progress, setProgress] = useState(0);
   const [score, setScore] = useState(0);
 
   const nodeIds = Object.keys(entries);
   const totalQuestions = nodeIds.length;
-  const currentId = nodeIds[currentIndex] || null;
+  const currentId = nodeIds[Math.min(currentIndex, Math.max(0, totalQuestions - 1))] || null;
   const currentEntry = currentId ? entries[currentId] : null;
   const currentQuestion = currentEntry?.[level] || null;
   const currentAnswer = currentId ? answers[currentId] : null;
   const isAnswered = currentAnswer !== undefined && currentAnswer !== null;
 
   useEffect(() => {
+    if (progressKey) saveLastQuizPosition(progressKey, level);
+  }, [progressKey, level]);
+
+  useEffect(() => {
+    if (!answerStorageKey) return;
+    try {
+      localStorage.setItem(answerStorageKey, JSON.stringify({ currentIndex, answers }));
+    } catch {}
+  }, [answerStorageKey, currentIndex, answers]);
+
+  useEffect(() => {
     if (totalQuestions === 0) return;
     const answeredIds = Object.keys(answers).filter((id) => answers[id] !== undefined && answers[id] !== null);
     const progressPct = (answeredIds.length / totalQuestions) * 100;
     setProgress(progressPct);
-    const correctCount = answeredIds.filter((id) => entries[id]?.[level]?.correct === answers[id]).length;
+    const correctCount = answeredIds.filter((id) => answersMatch(entries[id]?.[level]?.correct, answers[id])).length;
     setScore(totalQuestions ? (correctCount / totalQuestions) * 100 : 0);
     if (progressKey) {
       try {
@@ -187,7 +216,7 @@ export function QuizPlayView({ title, entries, level, onBack, progressKey, backL
           const isAnsweredDot = answers[id] !== undefined && answers[id] !== null;
           const isActive = idx === currentIndex;
           const q = entries[id]?.[level];
-          const isCorrect = answers[id] === q?.correct;
+          const isCorrect = answersMatch(answers[id], q?.correct);
           const dotColor = isAnsweredDot ? (isCorrect ? "bg-emerald-400 dark:bg-emerald-500" : "bg-red-400 dark:bg-red-500") : "bg-slate-300 dark:bg-slate-600";
           return <button key={id} onClick={() => goToQuestion(idx)} className={`h-3 w-3 rounded-full transition-all ${isActive ? "scale-125" : ""} ${dotColor}`} title={`Question ${idx + 1}`} />;
         })}

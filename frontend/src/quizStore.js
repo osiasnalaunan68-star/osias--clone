@@ -186,3 +186,19 @@ export function clearAllQuizImports() {
 export function getQuizImportedCount() {
   return Object.keys(loadStore().entries).length;
 }
+
+const LAST_POSITION_KEY = "customsLaw_quizLastPosition";
+
+export function saveLastQuizPosition(title, level) {
+  try {
+    localStorage.setItem(LAST_POSITION_KEY, JSON.stringify({ title, level, updatedAt: new Date().toISOString() }));
+  } catch {}
+}
+
+export function getLastQuizPosition() {
+  try {
+    return JSON.parse(localStorage.getItem(LAST_POSITION_KEY) || "null");
+  } catch {
+    return null;
+  }
+}

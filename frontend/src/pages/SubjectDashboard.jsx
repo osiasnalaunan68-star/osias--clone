@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
-import { ProgressCircle } from "../components/QuizShared";
+import { ProgressCircle, answersMatch } from "../components/QuizShared";
 import { useAuth } from "../authContext";
 import {
   getAllEntries, getSortedItemIds, getSubjectStats,
@@ -50,8 +50,8 @@ function FlatQuizQuestion({ item, onAnswer, answered, selected }) {
           <button onClick={handleSubmit} disabled={answered || !inputValue.trim()} className="rounded-lg bg-navy-900 px-6 py-2 text-sm font-semibold text-white disabled:opacity-40 dark:bg-navy-700">Submit</button>
         </div>
         {answered && (
-          <div className={`mt-4 rounded-lg p-4 ${selected === correct ? "bg-emerald-50 dark:bg-emerald-950/30" : "bg-red-50 dark:bg-red-950/30"}`}>
-            <p className="font-medium text-slate-800 dark:text-slate-100">{selected === correct ? "✅ Correct!" : `❌ Incorrect. The correct answer is: ${correct}`}</p>
+          <div className={`mt-4 rounded-lg p-4 ${answersMatch(selected, correct) ? "bg-emerald-50 dark:bg-emerald-950/30" : "bg-red-50 dark:bg-red-950/30"}`}>
+            <p className="font-medium text-slate-800 dark:text-slate-100">{answersMatch(selected, correct) ? "✅ Correct!" : `❌ Incorrect. The correct answer is: ${correct}`}</p>
             {reason && <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{reason}</p>}
           </div>
         )}
@@ -83,8 +83,8 @@ function FlatQuizQuestion({ item, onAnswer, answered, selected }) {
         })}
       </div>
       {answered && (
-        <div className={`mt-4 rounded-lg p-4 ${selected === correct ? "bg-emerald-50 dark:bg-emerald-950/30" : "bg-red-50 dark:bg-red-950/30"}`}>
-          <p className="font-medium text-slate-800 dark:text-slate-100">{selected === correct ? "✅ Correct!" : `❌ Incorrect. The correct answer is: ${correct}`}</p>
+        <div className={`mt-4 rounded-lg p-4 ${answersMatch(selected, correct) ? "bg-emerald-50 dark:bg-emerald-950/30" : "bg-red-50 dark:bg-red-950/30"}`}>
+          <p className="font-medium text-slate-800 dark:text-slate-100">{answersMatch(selected, correct) ? "✅ Correct!" : `❌ Incorrect. The correct answer is: ${correct}`}</p>
           {reason && <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{reason}</p>}
         </div>
       )}
@@ -92,7 +92,7 @@ function FlatQuizQuestion({ item, onAnswer, answered, selected }) {
   );
 }
 
-function SubjectQuizPlay({ subjectId, subjectLabel, onBack }) {
+export function SubjectQuizPlay({ subjectId, subjectLabel, onBack }) {
   const { profile, setOverlayOpen } = useAuth();
   const entries = useMemo(() => getAllEntries(subjectId), [subjectId]);
   const itemIds = useMemo(() => getSortedItemIds(subjectId), [subjectId]);
@@ -126,7 +126,7 @@ function SubjectQuizPlay({ subjectId, subjectLabel, onBack }) {
   };
 
   const answeredCount = Object.keys(answers).filter((id) => entries[id]).length;
-  const correctCount = Object.keys(answers).filter((id) => entries[id] && answers[id] === entries[id].correct).length;
+  const correctCount = Object.keys(answers).filter((id) => entries[id] && answersMatch(answers[id], entries[id].correct)).length;
   const progressPct = total ? (answeredCount / total) * 100 : 0;
   const scorePct = answeredCount ? (correctCount / answeredCount) * 100 : 0;
 
@@ -161,7 +161,7 @@ function SubjectQuizPlay({ subjectId, subjectLabel, onBack }) {
         {itemIds.map((id, idx) => {
           const isAnsweredDot = answers[id] !== undefined && answers[id] !== null;
           const isActive = idx === currentIndex;
-          const isCorrect = entries[id] && answers[id] === entries[id].correct;
+          const isCorrect = entries[id] && answersMatch(answers[id], entries[id].correct);
           const locked = !isItemUnlocked(idx, subjectId, profile);
           const dotColor = isAnsweredDot
             ? (isCorrect ? "bg-emerald-400 dark:bg-emerald-500" : "bg-red-400 dark:bg-red-500")

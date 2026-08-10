@@ -366,7 +366,7 @@ function StudyNodeRenderer({ node, level = 0, expandedSet = new Set(), scrollToI
   const [notesOpen, setNotesOpen] = useState(false);
   const [aiModalOpen, setAiModalOpen] = useState(false);
   const aiEntry = useMemo(() => getAiContext(node.id), [node.id]);
-  const { activeHighlightNodeId, setActiveHighlightNodeId } = useHighlightUI();
+  const { activeHighlightNodeId, setActiveHighlightNodeId, setLastViewedNodeId } = useHighlightUI();
   const isHighlighting = activeHighlightNodeId === node.id;
   const hasChildren = node.children && node.children.length > 0;
   const isExpandable = hasChildren || !!node.content;
@@ -391,7 +391,15 @@ function StudyNodeRenderer({ node, level = 0, expandedSet = new Set(), scrollToI
     }
   }, [scrollToId, node.id]);
 
-  const toggle = (e) => { e.stopPropagation(); if (isExpandable) setExpanded((v) => !v); };
+  const toggle = (e) => {
+    e.stopPropagation();
+    if (!isExpandable) return;
+    setExpanded((v) => {
+      const next = !v;
+      if (next && node.content && setLastViewedNodeId) setLastViewedNodeId(node.id);
+      return next;
+    });
+  };
 
   return (
     <div ref={nodeRef} style={{ marginLeft: `${Math.min(level, 6) * 0.9}rem` }} className="my-1 rounded-xl transition-colors">
@@ -814,6 +822,7 @@ export default function ChapterBrowser() {
   const [fontScale, setFontScale] = useState(() => { const saved = parseFloat(localStorage.getItem(FONT_KEY)); return isNaN(saved) ? 1 : saved; });
   const [darkMode, setDarkMode] = useState(() => localStorage.getItem(DARK_KEY) === "true");
   const [activeHighlightNodeId, setActiveHighlightNodeId] = useState(null);
+  const [lastViewedNodeId, setLastViewedNodeId] = useState(null);
   const [expandedNodeIds, setExpandedNodeIds] = useState(new Set());
   const [scrollToNodeId, setScrollToNodeId] = useState(null);
   const [collapsedTitles, setCollapsedTitles] = useState({});
@@ -899,8 +908,12 @@ export default function ChapterBrowser() {
   const resumeReading = useCallback(() => {
     if (!resumeAvailable) return;
     if (resumeAvailable.mode) setMode(resumeAvailable.mode);
-    pendingScrollRestore.current = resumeAvailable.scrollTop || 0;
-    loadChapter(resumeAvailable.chapter_number, resumeAvailable.title_number || null);
+    if (resumeAvailable.mode === "study" && resumeAvailable.studyNodeId) {
+      loadChapter(resumeAvailable.chapter_number, resumeAvailable.title_number || null, resumeAvailable.studyNodeId);
+    } else {
+      pendingScrollRestore.current = resumeAvailable.scrollTop || 0;
+      loadChapter(resumeAvailable.chapter_number, resumeAvailable.title_number || null);
+    }
   }, [resumeAvailable, loadChapter]);
 
   useEffect(() => {
@@ -913,6 +926,7 @@ export default function ChapterBrowser() {
         chapter_number: selectedChapter,
         mode,
         scrollTop: el.scrollTop,
+        studyNodeId: mode === "study" ? lastViewedNodeId : null,
       });
     };
     const onScroll = () => {
@@ -925,7 +939,7 @@ export default function ChapterBrowser() {
       el.removeEventListener("scroll", onScroll);
       if (scrollSaveTimeout.current) clearTimeout(scrollSaveTimeout.current);
     };
-  }, [chapterTree, selectedChapter, selectedTitleNumber, mode, view]);
+  }, [chapterTree, selectedChapter, selectedTitleNumber, mode, view, lastViewedNodeId]);
 
   const toggleTitleCollapse = (key) => { setCollapsedTitles(prev => ({ ...prev, [key]: !prev[key] })); };
   
@@ -973,7 +987,7 @@ export default function ChapterBrowser() {
     }
   }, []);
 
-  const highlightUIValue = useMemo(() => ({ activeHighlightNodeId, setActiveHighlightNodeId }), [activeHighlightNodeId]);
+  const highlightUIValue = useMemo(() => ({ activeHighlightNodeId, setActiveHighlightNodeId, setLastViewedNodeId }), [activeHighlightNodeId, setLastViewedNodeId]);
 
   return (
     <HighlightUIContext.Provider value={highlightUIValue}>

@@ -38,7 +38,7 @@ function groupByTitle(flatEntries) {
 // preview immediately. Once a batch is finished, export it and merge into
 // src/data/quizData.json so it ships with the app and works fully offline
 // for every user — same pattern as aiContext.json.
-function loadQuizData() {
+export function loadQuizData() {
   try {
     const flat = getFlattenedEntries();
     if (Object.keys(flat).length > 0) return groupByTitle(flat);
