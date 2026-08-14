@@ -125,7 +125,7 @@ export default function QuizHub({ onExit }) {
               onContinue={handleContinueRA10863}
               onSelectTitle={() => setActiveView({ type: "ra10863-titles" })}
             />
-            {["cl", "tl", "cdp", "pc"].map((id) => (
+            {["tl", "cdp", "pc"].map((id) => (
               <SubjectCard key={id} subjectId={id} expanded={expandedCard === id} onToggle={() => toggleCard(id)} onPlay={handlePlaySubject} />
             ))}
           </div>

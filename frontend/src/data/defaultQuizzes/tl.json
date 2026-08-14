@@ -29,8 +29,8 @@
       "C": "The President reduced the tariff rate of a commodity from 15% to 10%.",
       "D": "The President imposed additional duty on all import at 100% ad valorem"
     },
-    "correct": "B",
-    "reason": "The Flexible Clause (Sec. 1608) allows modification of tariff rates, but not the imposition of quantitative restrictions like import quotas, which are covered under trade remedy laws."
+    "correct": "D",
+    "reason": "Under CMTA Section 1608, the President MAY establish import quotas, so option B is a valid exercise of the Flexible Clause. The improper scenario is D: imposing an additional duty of 100% ad valorem, because the maximum additional duty allowed under the Flexible Clause is only 10% ad valorem."
   },
   "4": {
     "question": "Final Reports and Recommendations of the Tariff Commission on petitions filed in pursuant to Sections 1608 and 1609 are submitted to the NEDA for subsequent endorsement to the inter-agency Committee on Tariff and Related Matters (CTRM) first to the Technical level and then to the Cabinet level for their considerations. Which among the choices sit as the Chairman and Co-Chairman of the CTRM?",
@@ -40,8 +40,8 @@
       "C": "DA Secretary as Chairman, with Director-General of the NEDA as Co-Chairman",
       "D": "Finance Secretary as Chairman, with the Executive Secretary as Co-Chairman"
     },
-    "correct": "A",
-    "reason": "By established inter-agency practice, the DTI Secretary chairs the CTRM, with the NEDA Director-General as Co-Chairman."
+    "correct": "",
+    "reason": "The specific chairmanship arrangement of the inter-agency Committee on Tariff and Related Matters (CTRM) depends on executive orders that may be amended; answer removed pending verification."
   },
   "5": {
     "question": "Which of the following choices appropriately describes the function of the Tariff Commission with respect to the investigation of trade remedy cases?",
@@ -73,8 +73,8 @@
       "C": "Director III with salary grade of 27",
       "D": "None. All are Presidential appointees"
     },
-    "correct": "D",
-    "reason": "All chief officials of the Tariff Commission, including Division Chiefs and Directors, are appointed by the President under CMTA."
+    "correct": "",
+    "reason": "Under CMTA Section 1600, the Chairperson and two Commissioners are the Chief Officials appointed by the President. Directors and Division Chiefs are appointed by the Chairperson under Section 1601. The precise classification of each listed position requires direct verification of the TC rationalization plan; answer removed pending confirmation."
   },
   "8": {
     "question": "A local producer of billiard balls petitioned the Tariff Commission to have a specific tariff line under Section 1611 of the CMTA for billiard balls since it is alleged that there is misclassification being done by certain importers of billiard balls sourced from China resulting in a lower tariff rate and therefore eroding its competitive stature. The petition does not include amendment of tariff rates. Which Section of the CMTA mandates such action?",
@@ -326,8 +326,8 @@
       "C": "Every first Monday of March each year",
       "D": "On or before December 31"
     },
-    "correct": "A",
-    "reason": "The Tariff Commission submits its annual report on or before March 31 each year."
+    "correct": "B",
+    "reason": "Under CMTA Section 1604, the Tariff Commission submits its annual report to the President and Congress on the first Monday of December each year."
   },
   "31": {
     "question": "Which of the following is NOT a function of the Tariff Commission?",
@@ -491,8 +491,8 @@
       "C": "Seven years from the date of appointment",
       "D": "None of the choices"
     },
-    "correct": "B",
-    "reason": "The Chairperson and Commissioners have a fixed term of six (6) years from the date of appointment."
+    "correct": "",
+    "reason": "CMTA Section 1600 specifies the fixed terms of the Chairperson and Commissioners. The Chairperson's term is commonly stated as 7 years in legal references, which would make C the correct answer, not B (6 years). Answer removed pending direct verification of the CMTA text."
   },
   "47": {
     "question": "CMTA Sec. 1603 (c) mandates the Tariff Commission to administer the Philippine tariff schedules and tariff nomenclature. Which among the following were amendments administered by the Commission but are not included under the TAP-AHTN?",
@@ -656,8 +656,8 @@
       "C": "Chapter 97 (Works of art, collectors' pieces, and antiques)",
       "D": "Chapter 65 (Headgear and parts thereof)"
     },
-    "correct": "A",
-    "reason": "Plastic hair brushes are classified under Chapter 39 (Plastics and articles thereof), as they are made primarily of plastic."
+    "correct": "B",
+    "reason": "Under the HS, hairbrushes and combs are classified under Chapter 96 (Miscellaneous manufactured articles), specifically Heading 9603, regardless of their material of construction. Chapter 39 covers plastics as raw materials, not finished brushes."
   },
   "62": {
     "question": "Which WTO trade agreement, effective February 22, 2017, focuses on accelerating movement, release, and clearance of goods in transit?",
@@ -876,8 +876,8 @@
       "C": "Myanmar",
       "D": "Brunei"
     },
-    "correct": "A",
-    "reason": "ASEAN chair rotation follows English alphabetical order. After Malaysia, the next chair is the Philippines."
+    "correct": "C",
+    "reason": "ASEAN chair rotation follows English alphabetical order. After Malaysia (Ma-), the next member in alphabetical order is Myanmar (My-), then the Philippines. This is also confirmed by the correct answer in Item 184 of this same set."
   },
   "82": {
     "question": "In ASEAN, what is the highest decision-making level meeting for Heads of State or Government?",
@@ -1811,8 +1811,8 @@
       "C": "MAV Management Committee",
       "D": "MAV Secretariat"
     },
-    "correct": "C",
-    "reason": "The MAV Management Committee, chaired by the DA Secretary, oversees agricultural import quotas."
+    "correct": "",
+    "reason": "Item 53 in this same set identifies the MAV oversight body as the MAV Council (Choice A), while this item marks the MAV Management Committee (Choice C). The two items are contradictory; the correct body name requires verification of the relevant executive orders. Answer removed pending confirmation."
   },
   "167": {
     "question": "In the Harmonized System nomenclature, under which Chapter are plastic hairbrushes and combs categorized based on their material and function?",
@@ -1965,8 +1965,8 @@
       "C": "Alphanumeric Subheadings",
       "D": "10-digit Subheadings"
     },
-    "correct": "B",
-    "reason": "AHTN standardizes national tariff lines at the 8-digit level."
+    "correct": "",
+    "reason": "The AHTN is standardized at 8 digits across ASEAN; the Philippines adds national subheadings beyond the 8-digit level. Before AHTN 2022, the Philippines used 11-digit national subheadings (as stated in Item 94). The answer depends on whether the question asks about the AHTN standard level or the Philippine national subheading level; removed pending clarification."
   },
   "181": {
     "question": "Laptops manufactured in the US are imported into the Philippines. Under the Information Technology Agreement (ITA), what is the MFN duty rate for these items under HS Code 8471.30.20?",
@@ -4220,8 +4220,8 @@
       "C": "Less than 40%",
       "D": "From 20% to less than 40%"
     },
-    "correct": "B",
-    "reason": "Partial accumulation under ATIGA requires RVC ranging from 40% to not more than 60%."
+    "correct": "D",
+    "reason": "Under the ATIGA ROO, partial accumulation applies when the material/good achieves a Regional Value Content of at least 20% but less than 40%. A good with RVC of 40% or more would qualify for full accumulation (treated as fully originating)."
   },
   "386": {
     "question": "Which one among the following is a set of principles used to determine the country of origin of a good for purposes of international trade?",
@@ -4869,8 +4869,8 @@
       "C": "The Philippines issued CO Form AI for export to Indonesia under the AIFTA",
       "D": "Singapore issued CO Form AK for export to Korea under the AKFTA"
     },
-    "correct": "A",
-    "reason": "CO Form E is issued by China, not the Philippines, for exports under ACFTA."
+    "correct": "",
+    "reason": "Under ACFTA, CO Form E is used by both China and ASEAN member states for exports under the agreement. Whether the Philippines can issue Form E for exports to China (option A) or whether China issuing Form AHK under AHKFTA (option B, where only Hong Kong SAR — not mainland China — is a party) is the invalid scenario requires clarification. Answer removed pending verification."
   },
   "445": {
     "question": "What CO Form is used under AIFTA?",
@@ -5309,8 +5309,8 @@
       "C": "3 years from date of imposition",
       "D": "7 years from date of imposition without any extension"
     },
-    "correct": "B",
-    "reason": "A General Safeguard Measure under RA 8800 has a maximum effective period of five (5) years."
+    "correct": "",
+    "reason": "Under RA 8800, the initial safeguard measure period cannot exceed four (4) years, with possible extensions up to a total of eight (8) years. The marked answer of five (5) years does not match either threshold. Answer removed pending direct verification of RA 8800 Section 9."
   },
   "485": {
     "question": "What is the key factor in determining material injury caused by dumped imports?",
@@ -5749,8 +5749,8 @@
       "C": "GIRs 4 and 6",
       "D": "GIRs 1 and 6"
     },
-    "correct": "A",
-    "reason": "GIR 2(b) applies to goods presented unassembled or disassembled for ease of transport, combined with GIR 6 for subheading."
+    "correct": "B",
+    "reason": "GIR 2(a) explicitly covers articles presented unassembled or disassembled. Plastic Christmas trees imported in unassembled parts still have the essential character of a festive article classifiable under Heading 95.05. GIR 2(b) applies to mixtures of materials, not to disassembled articles."
   },
   "525": {
     "question": "Which one among the following GIRs were used in the classification of car seats imported without their head rests under AHTN code 9401.20.00? Heading 94.01 provides for 'Seats (other than those of heading 94.02), whether or not convertible into beds, and parts thereof.'",
@@ -5782,8 +5782,8 @@
       "C": "GIRs 2(b) and 6",
       "D": "GIRs 1 and 6"
     },
-    "correct": "C",
-    "reason": "GIR 2(b) applies to goods presented unassembled, combined with GIR 6."
+    "correct": "D",
+    "reason": "Heading 91.10 specifically provides for 'complete watch or clock movements, unassembled or partly assembled.' Because the heading text itself covers the goods as presented (unassembled), GIR 1 governs classification at the heading level, and GIR 6 governs the subheading level."
   },
   "528": {
     "question": "Which one among the following GIRs is considered in the classification of goods that are imported in an unassembled state under a Heading which covers the goods in its assembled condition?",
@@ -5826,8 +5826,8 @@
       "C": "6",
       "D": "4"
     },
-    "correct": "C",
-    "reason": "There are six (6) General Interpretative Rules governing classification at the Heading level."
+    "correct": "B",
+    "reason": "General Interpretative Rules 1 through 5 govern the classification of goods at the Heading level. GIR 6 governs classification at the Subheading level. Therefore, five (5) GIRs govern heading-level classification."
   },
   "532": {
     "question": "Which GIR governs classification of goods at the Subheading level?",
@@ -5947,8 +5947,8 @@
       "C": "GIRs 5(b) and 6",
       "D": "GIRs 2(a), 5(a) and 6"
     },
-    "correct": "D",
-    "reason": "GIR 2(a) for unassembled goods with essential character; GIR 5(a) for packing containers classified with the goods."
+    "correct": "B",
+    "reason": "GIR 2(a) applies because the unicycles are presented unassembled. The plastic wrapping and carton boxes are not specially fitted for the unicycles; they are ordinary packing materials not suitable for repetitive use, so GIR 5(b) — not 5(a) — applies. GIR 6 governs the subheading."
   },
   "543": {
     "question": "What GIRs were used in the classification of violins under AHTN code 9202.10.00, each imported inside a fiberglass case? Heading 92.02 covers 'Other string musical instruments (for example, guitars, violins, harps).'",
@@ -6057,8 +6057,8 @@
       "C": "GIRs 2(a) and 6",
       "D": "GIRs 2(b) and 6"
     },
-    "correct": "D",
-    "reason": "GIR 2(b) applies to goods presented disassembled; GIR 6 for subheading."
+    "correct": "C",
+    "reason": "GIR 2(a) covers finished articles presented unassembled or disassembled for ease of packing and transport. A carousel imported disassembled retains the essential character of the complete article classifiable under Heading 95.08. GIR 2(b) applies to mixtures/combinations of materials, not to disassembled articles."
   },
   "553": {
     "question": "What GIRs were used in the classification of several incomplete watch movements imported assembled under AHTN code 9110.12.00? Heading 91.10 covers 'Complete watch or clock movements, unassembled or partly assembled (movement sets); incomplete watch or clock movements, assembled; rough watch or clock movements.'",

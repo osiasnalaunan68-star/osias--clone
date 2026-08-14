@@ -74,20 +74,35 @@ export function getImportedCount(subjectId) {
   return Object.keys(loadStore(subjectId).entries).length;
 }
 
-// Mag-import ng isang flat batch para sa isang subject. Returns { count, label }.
+// Mag-import ng isang flat batch para sa isang subject. Returns { count, label, skipped }.
 export function importSubjectQuizJson(subjectId, jsonText) {
   const parsed = JSON.parse(jsonText);
   const rawLabel = parsed._batch;
   if (parsed._batch !== undefined) delete parsed._batch;
   if (parsed._title !== undefined) delete parsed._title; // fallback kung "_title" ang nagamit mo dati
-  const ids = Object.keys(parsed);
-  if (!ids.length) throw new Error("Walang laman ang pinaste mong JSON.");
 
-  for (const id of ids) {
+  // Huwag ibagsak ang BUONG batch dahil lang sa iilang sirang item —
+  // i-skip na lang ang mga invalid, at ituloy ang pag-import ng mga valid.
+  const skipped = [];
+  for (const id of Object.keys(parsed)) {
     const item = parsed[id];
-    if (!item || typeof item !== "object") throw new Error(`Item "${id}" ay hindi valid na object.`);
-    if (!item.question || typeof item.question !== "string") throw new Error(`Item "${id}" ay walang "question".`);
-    if (!item.correct || typeof item.correct !== "string") throw new Error(`Item "${id}" ay walang "correct" answer.`);
+    const invalid =
+      !item || typeof item !== "object" ||
+      !item.question || typeof item.question !== "string" || !item.question.trim() ||
+      !item.correct || typeof item.correct !== "string" || !item.correct.trim();
+    if (invalid) {
+      skipped.push(id);
+      delete parsed[id];
+    }
+  }
+
+  const ids = Object.keys(parsed);
+  if (!ids.length) {
+    throw new Error(
+      skipped.length
+        ? `Walang na-import: lahat ng ${skipped.length} item ay may kulang na "question" o "correct" answer (IDs: ${skipped.slice(0, 10).join(", ")}${skipped.length > 10 ? "…" : ""}).`
+        : "Walang laman ang pinaste mong JSON."
+    );
   }
 
   const store = loadStore(subjectId);
@@ -124,7 +139,10 @@ export function importSubjectQuizJson(subjectId, jsonText) {
   }
 
   saveStore(subjectId, store);
-  return { count: Object.keys(store.entries).length, label: label || "New batch" };
+  if (skipped.length) {
+    console.warn(`[${subjectId}] Skipped ${skipped.length} invalid item(s) during import:`, skipped);
+  }
+  return { count: Object.keys(store.entries).length, label: label || "New batch", skipped };
 }
 
 export function renameBatch(subjectId, batchId, newLabel) {
@@ -241,8 +259,9 @@ export function seedDefaultQuizzes() {
     if (Object.keys(existing).length === 0) {
       try {
         const jsonString = JSON.stringify(data);
-        importSubjectQuizJson(subjectId, jsonString);
-        console.log(`✅ Seeded default quiz for ${subjectId}`);
+        const result = importSubjectQuizJson(subjectId, jsonString);
+        const skippedNote = result.skipped.length ? `, skipped ${result.skipped.length} invalid: ${result.skipped.join(", ")}` : "";
+        console.log(`✅ Seeded default quiz for ${subjectId} (${result.count} items${skippedNote})`);
       } catch (e) {
         console.warn(`Failed to seed ${subjectId}:`, e);
       }

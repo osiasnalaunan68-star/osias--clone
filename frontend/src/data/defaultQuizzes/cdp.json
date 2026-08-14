@@ -1272,8 +1272,8 @@
       "C": "Sec. 403",
       "D": "Sec. 401"
     },
-    "correct": "A",
-    "reason": "Section 400 of the CMTA provides for 'Importation Subject to Goods Declarations.'"
+    "correct": "D",
+    "reason": "Section 401 of the CMTA (RA 10863) provides for \"Importations Subject to Goods Declaration.\" Section 400 is a different provision (\"Goods to be Imported through Customs Office\")."
   },
   "117": {
     "question": "Who shall adjust the de minimis value every three (3) years after CMTA effectivity?",
@@ -2665,12 +2665,12 @@
     "question": "Which of the following goods may NOT be exempt from marking requirement?",
     "choices": {
       "A": "Such goods cannot be marked prior to shipment to the Philippines, except at an expense economically prohibitive of their importation.",
-      "B": "Such goods were produced more than thirty (30) years prior to their importation into the Philippines",
+      "B": "Such goods were produced more than twenty (20) years prior to their importation into the Philippines",
       "C": "The marking of a container of such goods will reasonably indicate the origin of such goods.",
       "D": "All of the above goods are exempt from marking requirement."
     },
     "correct": "D",
-    "reason": "All the listed goods are exempt from the marking requirement under CMTA."
+    "reason": "All the listed conditions are valid grounds for exemption from marking under Sec. 710(A)(3) of the CMTA. Note: the correct threshold under the law is more than twenty (20) years, not thirty (30)."
   },
   "244": {
     "question": "Aside from paying the five percent (5%) marking duty what else should be done by the importer?",
