@@ -10,7 +10,6 @@ import { doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "./firebase";
 
 export const PLANS = [
-  { id: "CL", label: "Customs Law", price: 39, subjects: ["CL"] },
   { id: "TL", label: "Tariff Law", price: 39, subjects: ["TL"] },
   { id: "CDP", label: "Customs Documentation & Procedures", price: 39, subjects: ["CDP"] },
   { id: "PC", label: "Practical Computations", price: 29, subjects: ["PC"] },

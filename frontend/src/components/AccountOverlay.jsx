@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../authContext";
 import { PLANS, PAYMENT_METHODS, generateReferenceCode, submitPendingPurchase } from "../payments";
 
-const SUBJECT_LABELS = { CL: "Customs Law", TL: "Tariff Law", CDP: "Customs Documentation & Procedures", PC: "Practical Computations" };
+const SUBJECT_LABELS = { TL: "Tariff Law", CDP: "Customs Documentation & Procedures", PC: "Practical Computations" };
 
 function formatDate(ts) {
   try {
