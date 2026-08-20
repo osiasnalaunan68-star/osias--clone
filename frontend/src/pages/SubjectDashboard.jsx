@@ -8,7 +8,7 @@ import {
 
 // First N items (by sorted order) na libre bawat subject — lahat ng lagpas dito
 // ay naka-lock hanggang mag-subscribe. Tugma sa pricing table sa handoff doc.
-const FREE_LIMITS = { cl: 100, cdp: 100, tl: 100, pc: 150 };
+const FREE_LIMITS = { cl: 10, cdp: 10, tl: 10, pc: 10 };
 
 function isItemUnlocked(idx, subjectId, profile) {
   const freeLimit = FREE_LIMITS[subjectId] ?? Infinity;
