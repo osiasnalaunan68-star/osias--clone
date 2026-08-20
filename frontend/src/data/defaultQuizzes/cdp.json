@@ -1000,17 +1000,6 @@
     "correct": "B",
     "reason": "Temporary admission of goods for re-exportation falls under conditional importation."
   },
-  "92": {
-    "question": "Goods were discharged from the vessel on March 1. The importer lodged the goods declaration on March 16 without requesting an extension. Is the lodgement timely?",
-    "choices": {
-      "A": "Yes, within 20 days",
-      "B": "Yes, within 15 days",
-      "C": "No, beyond the allowed period",
-      "D": "No, unless provisional"
-    },
-    "correct": "C",
-    "reason": "Goods declaration must be lodged within 15 days from discharge. March 16 is beyond the 15-day period."
-  },
   "93": {
     "question": "Goods declaration shall be submitted electronically pursuant to:",
     "choices": {
@@ -1517,17 +1506,6 @@
     "correct": "C",
     "reason": "Renewal applications filed within a reasonable period after expiration may be approved as renewal."
   },
-  "139": {
-    "question": "Before approving BOC registration of an enterprise from BIMP-EAGA, which office conducts inspection of the business address?",
-    "choices": {
-      "A": "[No choices visible in the supplied image]",
-      "B": "[No choices visible in the supplied image]",
-      "C": "[No choices visible in the supplied image]",
-      "D": "[No choices visible in the supplied image]"
-    },
-    "correct": "N/A",
-    "reason": "The answer choices for Item 139 were not visible in the uploaded photo. No answer can be determined."
-  },
   "140": {
     "question": "A shipment of crude oil is pumped directly into the vessel's hold without packaging and its duties and taxes are determined by weight. How is this cargo classified?",
     "choices": {
@@ -1602,8 +1580,8 @@
       "C": "One Hundred Fifty Thousand Pesos (P150,000.00) FOB or FCA.",
       "D": "None of the choices."
     },
-    "correct": "A",
-    "reason": "A Filipino national who stayed abroad for five (5) years is entitled to bring P350,000.00 worth of personal and household effects conditionally free."
+    "correct": "B",
+    "reason": "A Filipino who stayed abroad for exactly 5 years falls in the 'at least 5 but not more than 10 years' bracket, entitled to P250,000.00 FOB/FCA conditionally free. The P350,000.00 threshold applies only to those who stayed abroad at least 10 years."
   },
   "147": {
     "question": "Which of the following choices has the authority to suspend disallow or completely withdraw, in whole or in part a conditionally free importation under CMTA, Section 800?",
@@ -2209,17 +2187,6 @@
     },
     "correct": "B",
     "reason": "A returning resident who stayed abroad for 7 years is entitled to P250,000 duty-free; the excess P50,000 is dutiable."
-  },
-  "202": {
-    "question": "An OFW sent four balikbayan boxes in one year with total value P120,000. What is the status?",
-    "choices": {
-      "A": "All exempt",
-      "B": "Only three shipments allowed duty-free",
-      "C": "Fourth shipment confiscated",
-      "D": "All taxable"
-    },
-    "correct": "A",
-    "reason": "All shipments are exempt as long as the total value does not exceed P150,000 and the number of shipments does not exceed three."
   },
   "203": {
     "question": "Aside from the use of trailer chassis by the authorized importer for purposes of importing conditionally free there are other conditions that must be satisfied. Which of the following is not among the conditions?",
@@ -5224,17 +5191,6 @@
     "correct": "D",
     "reason": "Aquatic products, accompanied tourist goods, and honorary medals/trophies do not require TEI."
   },
-  "476": {
-    "question": "A Filipino national with temporary residence in Canada sent BBB to his father with total value of P32,000.00 FCA last January. He also sent BBB to his mother last March this time with value of P40,000 FCA. Last August he sent BBB to his brother valued at P20,000 FCA. What is the value of BBB he can send this coming December?",
-    "choices": {
-      "A": "P60,000.00",
-      "B": "He is not entitled to send any BBB duty and tax free this coming December",
-      "C": "P160,000",
-      "D": "It depends on his length of stay abroad"
-    },
-    "correct": "A",
-    "reason": "The total value sent so far is P92,000 (32,000 + 40,000 + 20,000). The annual limit is P150,000, so P58,000 (or approximately P60,000) remains."
-  },
   "477": {
     "question": "An item which is under the list of goods under the Istanbul Convention on Temporary Admission System was sent to the Philippines through postal air parcel. Will the Bureau of Customs accept the ATA Carnet issued by the NIGA?",
     "choices": {
@@ -5400,39 +5356,6 @@
     "correct": "C",
     "reason": "Customs brokers can check the status by opening a ticket in the Customer Care Portal System (CCPS) under Goods Declaration."
   },
-  "492": {
-    "question": "A qualified Filipino while abroad sends a Balikbayan Box to their family in the Philippines. The shipment contains personal household items with a total FCA value of Php12,000. How will this shipment be treated?",
-    "choices": {
-      "A": "The shipment will be considered as one availment since it exceeds the de minimis value of Php10,000.",
-      "B": "The shipment will not be counted as an availment because the FCA value is below Php20,000.",
-      "C": "The shipment is automatically exempt from duties and taxes since it is a personal shipment.",
-      "D": "The shipment will be allowed without limitation as long as it is sent within this calendar year."
-    },
-    "correct": "A",
-    "reason": "Any BBB shipment exceeding the de minimis value of P10,000 counts as one availment."
-  },
-  "493": {
-    "question": "Goods were discharged from the vessel on March 1. The importer lodged the goods declaration on March 16 without requesting an extension. Is the lodgement timely?",
-    "choices": {
-      "A": "Yes, within 20 days",
-      "B": "Yes, within 15 days",
-      "C": "No, beyond the allowed period",
-      "D": "No, unless provisional"
-    },
-    "correct": "C",
-    "reason": "Goods declaration must be lodged within 15 days from discharge. March 16 is beyond the 15-day period."
-  },
-  "494": {
-    "question": "A Balikbayan Box arrives as unaccompanied baggage and the total shipment value is Php8,000. How will the customs authorities handle this shipment?",
-    "choices": {
-      "A": "The shipment will not be counted as one availment because its value is below Php10,000.",
-      "B": "The shipment will be counted as one availment because it is sent as unaccompanied baggage.",
-      "C": "The shipment will be taxed on the excess value beyond Php 10,000.",
-      "D": "The shipment will be included in a different CAD because it is below the de minimis value"
-    },
-    "correct": "B",
-    "reason": "A BBB shipment with value below P10,000 is still counted as one availment."
-  },
   "495": {
     "question": "What is the condition before the owner of the vessel or aircraft may be permitted to export the remains of the salvaged wreck?",
     "choices": {
@@ -5575,17 +5498,6 @@
     },
     "correct": "A",
     "reason": "A shipment with a clean LPS is generally subject to immediate release or transfer to the importer's warehouse."
-  },
-  "508": {
-    "question": "Animals and plants for scientific, experimental propagation or breeding, and for other botanical zoological and national defense purposes may enter conditionally free. Which of the following may not be imported conditionally free under the provisions of Section 800?",
-    "choices": {
-      "A": "Cocks",
-      "B": "Race horses",
-      "C": "Labrador for breeding purposes",
-      "D": "All of the above may not be imported conditionally free."
-    },
-    "correct": "D",
-    "reason": "Animals and plants for scientific, experimental, or breeding purposes may enter conditionally free under Section 800."
   },
   "509": {
     "question": "Animals and plants may enter conditionally free but if the importation is necessary for economic development, which of the following is the proper agency that should issue the certification to that effect?",

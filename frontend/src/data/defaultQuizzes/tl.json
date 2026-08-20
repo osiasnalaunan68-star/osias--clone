@@ -32,17 +32,6 @@
     "correct": "D",
     "reason": "Under CMTA Section 1608, the President MAY establish import quotas, so option B is a valid exercise of the Flexible Clause. The improper scenario is D: imposing an additional duty of 100% ad valorem, because the maximum additional duty allowed under the Flexible Clause is only 10% ad valorem."
   },
-  "4": {
-    "question": "Final Reports and Recommendations of the Tariff Commission on petitions filed in pursuant to Sections 1608 and 1609 are submitted to the NEDA for subsequent endorsement to the inter-agency Committee on Tariff and Related Matters (CTRM) first to the Technical level and then to the Cabinet level for their considerations. Which among the choices sit as the Chairman and Co-Chairman of the CTRM?",
-    "choices": {
-      "A": "DTI Secretary as Chairman, with the Director-General of the NEDA as Co-Chairman",
-      "B": "Director-General of the NEDA as Chairman, with the Executive Secretary as Co-Chairman",
-      "C": "DA Secretary as Chairman, with Director-General of the NEDA as Co-Chairman",
-      "D": "Finance Secretary as Chairman, with the Executive Secretary as Co-Chairman"
-    },
-    "correct": "",
-    "reason": "The specific chairmanship arrangement of the inter-agency Committee on Tariff and Related Matters (CTRM) depends on executive orders that may be amended; answer removed pending verification."
-  },
   "5": {
     "question": "Which of the following choices appropriately describes the function of the Tariff Commission with respect to the investigation of trade remedy cases?",
     "choices": {
@@ -64,17 +53,6 @@
     },
     "correct": "A",
     "reason": "Sec. 1609 allows the President to modify import duties to promote foreign trade, such as issuing an Executive Order adjusting MFN rates based on local industry petitions."
-  },
-  "7": {
-    "question": "The following Chief Officials of the Tariff Commission are Presidential appointees, except for one. Which one is not?",
-    "choices": {
-      "A": "Division Chief with salary grade of 24",
-      "B": "Director II with a salary grade of 26",
-      "C": "Director III with salary grade of 27",
-      "D": "None. All are Presidential appointees"
-    },
-    "correct": "",
-    "reason": "Under CMTA Section 1600, the Chairperson and two Commissioners are the Chief Officials appointed by the President. Directors and Division Chiefs are appointed by the Chairperson under Section 1601. The precise classification of each listed position requires direct verification of the TC rationalization plan; answer removed pending confirmation."
   },
   "8": {
     "question": "A local producer of billiard balls petitioned the Tariff Commission to have a specific tariff line under Section 1611 of the CMTA for billiard balls since it is alleged that there is misclassification being done by certain importers of billiard balls sourced from China resulting in a lower tariff rate and therefore eroding its competitive stature. The petition does not include amendment of tariff rates. Which Section of the CMTA mandates such action?",
@@ -128,8 +106,8 @@
       "C": "Department of Economy, Planning, and Development",
       "D": "Department of Finance"
     },
-    "correct": "A",
-    "reason": "The Tariff Commission is an independent agency attached to the Office of the President for policy and administrative coordination."
+    "correct": "C",
+    "reason": "The Tariff Commission is an attached agency of the Department of Economy, Planning, and Development (DEPDev), formerly the National Economic and Development Authority (NEDA), which was renamed via RA 12145 in April 2025."
   },
   "13": {
     "question": "Which of the following government agencies has the mandate to implement the provisions of Section 1608 of the CMTA?",
@@ -483,17 +461,6 @@
     "correct": "D",
     "reason": "Both statements are correct: the TC issues advance rulings on classification and analyzes goods for classification purposes."
   },
-  "46": {
-    "question": "How many years is the fixed term of the Chairperson of the Tariff Commission as appointed by the President of the Philippines pursuant to CMTA Section 1600?",
-    "choices": {
-      "A": "Three years from the date of appointment",
-      "B": "Six years from the date of appointment",
-      "C": "Seven years from the date of appointment",
-      "D": "None of the choices"
-    },
-    "correct": "",
-    "reason": "CMTA Section 1600 specifies the fixed terms of the Chairperson and Commissioners. The Chairperson's term is commonly stated as 7 years in legal references, which would make C the correct answer, not B (6 years). Answer removed pending direct verification of the CMTA text."
-  },
   "47": {
     "question": "CMTA Sec. 1603 (c) mandates the Tariff Commission to administer the Philippine tariff schedules and tariff nomenclature. Which among the following were amendments administered by the Commission but are not included under the TAP-AHTN?",
     "choices": {
@@ -652,7 +619,7 @@
     "question": "Under the HS Code framework, plastic hair brushes are categorized under which Chapter?",
     "choices": {
       "A": "Chapter 39 (Plastics and articles thereof)",
-      "B": "Chapter 95 (Miscellaneous manufactured articles)",
+      "B": "Chapter 96 (Miscellaneous manufactured articles)",
       "C": "Chapter 97 (Works of art, collectors' pieces, and antiques)",
       "D": "Chapter 65 (Headgear and parts thereof)"
     },
@@ -1693,17 +1660,6 @@
     "correct": "B",
     "reason": "The ASEAN Charter provided ASEAN with a legal personality and structural rules."
   },
-  "156": {
-    "question": "When modifications or structural updates are introduced to the Harmonized System (HS) codes incorporated in the national tariff system, which government entity holds the authority to approve these amendments?",
-    "choices": {
-      "A": "Tariff Commission",
-      "B": "Department of Finance",
-      "C": "NEDA Board",
-      "D": "Bureau of Customs"
-    },
-    "correct": "C",
-    "reason": "Under Philippine law (CMTA/Tariff Code), modifications to tariff lines/HS codes are approved by the NEDA Board."
-  },
   "157": {
     "question": "Pursuant to Section 1606 of the Customs Modernization and Tariff Act (CMTA), the Tariff Commission may require local manufacturers to submit which of the following under oath?",
     "choices": {
@@ -1802,17 +1758,6 @@
     },
     "correct": "D",
     "reason": "The WTO Agreement on Agriculture (AoA) covers HS 1–24 (excluding fish)."
-  },
-  "166": {
-    "question": "Which government agency body, chaired by the Secretary of Agriculture, manages the allocation and administration of Tariff-Rate Quotas (TRQs) under the Minimum Access Volume (MAV) system?",
-    "choices": {
-      "A": "MAV Council",
-      "B": "MAV Board",
-      "C": "MAV Management Committee",
-      "D": "MAV Secretariat"
-    },
-    "correct": "",
-    "reason": "Item 53 in this same set identifies the MAV oversight body as the MAV Council (Choice A), while this item marks the MAV Management Committee (Choice C). The two items are contradictory; the correct body name requires verification of the relevant executive orders. Answer removed pending confirmation."
   },
   "167": {
     "question": "In the Harmonized System nomenclature, under which Chapter are plastic hairbrushes and combs categorized based on their material and function?",
@@ -1956,17 +1901,6 @@
     },
     "correct": "C",
     "reason": "The Basel Convention controls transboundary movements of hazardous wastes."
-  },
-  "180": {
-    "question": "At what digit level does the Philippines specify national subheadings within the ASEAN Harmonized Tariff Nomenclature (AHTN)?",
-    "choices": {
-      "A": "11-digit Subheadings",
-      "B": "8-digit Subheadings",
-      "C": "Alphanumeric Subheadings",
-      "D": "10-digit Subheadings"
-    },
-    "correct": "",
-    "reason": "The AHTN is standardized at 8 digits across ASEAN; the Philippines adds national subheadings beyond the 8-digit level. Before AHTN 2022, the Philippines used 11-digit national subheadings (as stated in Item 94). The answer depends on whether the question asks about the AHTN standard level or the Philippine national subheading level; removed pending clarification."
   },
   "181": {
     "question": "Laptops manufactured in the US are imported into the Philippines. Under the Information Technology Agreement (ITA), what is the MFN duty rate for these items under HS Code 8471.30.20?",
@@ -4861,17 +4795,6 @@
     "correct": "C",
     "reason": "The importer submits the original Proof of Origin to the Customs authority at the port of importation."
   },
-  "444": {
-    "question": "Which of the following choices is considered as invalid in the issuance of a proof of origin by the exporting FTA Party?",
-    "choices": {
-      "A": "The Philippines issued CO Form E for export to China under the ACFTA",
-      "B": "China issued CO Form AHK for export to the Philippines under the AHKFTA",
-      "C": "The Philippines issued CO Form AI for export to Indonesia under the AIFTA",
-      "D": "Singapore issued CO Form AK for export to Korea under the AKFTA"
-    },
-    "correct": "",
-    "reason": "Under ACFTA, CO Form E is used by both China and ASEAN member states for exports under the agreement. Whether the Philippines can issue Form E for exports to China (option A) or whether China issuing Form AHK under AHKFTA (option B, where only Hong Kong SAR — not mainland China — is a party) is the invalid scenario requires clarification. Answer removed pending verification."
-  },
   "445": {
     "question": "What CO Form is used under AIFTA?",
     "choices": {
@@ -5300,17 +5223,6 @@
     },
     "correct": "B",
     "reason": "Arm's length transaction is one where the price is not affected by any relationship between buyer and seller."
-  },
-  "484": {
-    "question": "Per Rule 12 of the IRR of R.A. No. 8800, what is the maximum effective period of a General Safeguard Measure?",
-    "choices": {
-      "A": "10 years from date of imposition",
-      "B": "5 years from date of imposition",
-      "C": "3 years from date of imposition",
-      "D": "7 years from date of imposition without any extension"
-    },
-    "correct": "",
-    "reason": "Under RA 8800, the initial safeguard measure period cannot exceed four (4) years, with possible extensions up to a total of eight (8) years. The marked answer of five (5) years does not match either threshold. Answer removed pending direct verification of RA 8800 Section 9."
   },
   "485": {
     "question": "What is the key factor in determining material injury caused by dumped imports?",
