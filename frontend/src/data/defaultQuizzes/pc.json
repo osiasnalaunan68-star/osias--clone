@@ -242,7 +242,7 @@
     "reason": "CIP requires the seller to arrange insurance, while CPT does not include insurance requirements."
   },
   "23": {
-    "question": "Which Incoterm describes the scenario where the seller delivers the goods to the carrier or another person nominated by the buyer at the recommended that the parties clearly define the exact location within the seller's premises or another named place? Under this Incoterm, it is named place of delivery, as the risk transfers to the buyer at that point?",
+    "question": "Which Incoterm describes the scenario where the seller delivers the goods to the carrier or another person nominated by the buyer at a named place of delivery, with risk transferring to the buyer at that point? It is recommended that the parties clearly define the exact point within the named place of delivery.",
     "choices": {
       "A": "FOB",
       "B": "CIP",
@@ -286,7 +286,7 @@
     "reason": "Under CIF, the buyer handles destination charges, delivery, unloading, and import clearance after the goods arrive."
   },
   "27": {
-    "question": "Which Incoterm is used when the seller has the same responsibilities as CPT, but also arranges for insurance to cover the buyer's risk of loss of or damage to the goods during transit? Additionally, the seller is only required to secure minimum insurance coverage, and if the buyer desires more protection, they must either explicitly agree with the seller or arrange additional insurance themselves.",
+    "question": "Which Incoterm is used when the seller has the same responsibilities as CPT, but also arranges for insurance to cover the buyer's risk of loss of or damage to the goods during transit? Under Incoterms 2020, the seller must secure the widest available insurance cover (Institute Cargo Clauses (A)) by default, unless the parties agree on a different level of cover.",
     "choices": {
       "A": "CIP",
       "B": "DAP",
@@ -294,7 +294,7 @@
       "D": "CIF"
     },
     "correct": "A",
-    "reason": "CIP (Carriage and Insurance Paid To) requires the seller to arrange insurance in addition to the CPT obligations."
+    "reason": "CIP (Carriage and Insurance Paid To) requires the seller to arrange insurance in addition to the CPT obligations. Incoterms 2020 upgraded CIP's default insurance requirement to Institute Cargo Clauses (A) — all-risk, maximum cover — unlike CIF, which keeps the minimum cover of Clauses (C)."
   },
   "28": {
     "question": "You are a seller based in the Philippines, and you've agreed to sell machinery to a buyer in Brazil. The agreed Incoterm is DAP. What are your responsibilities as the seller under DAP?",
@@ -323,7 +323,7 @@
     "choices": {
       "A": "Arrange for import clearance in the UK",
       "B": "Deliver the goods to the buyer's premises in the Philippines.",
-      "C": "Handle all costs and risks until the goods are loaded at your premises.",
+      "C": "Handle all costs and risks until the goods are made available at your premises.",
       "D": "Provide insurance coverage during transit."
     },
     "correct": "C",
@@ -495,17 +495,6 @@
     "reason": "Under FOB, risk transfers only when goods are loaded on board the vessel. Until then, the seller bears the risk."
   },
   "46": {
-    "question": "Seller is responsible for the unloading of the cargo from the importing vessel and delivers the goods to the Buyer's place. Seller did not arrange for the customs import clearance. What is the Incoterm?",
-    "choices": {
-      "A": "CIP",
-      "B": "DAP",
-      "C": "CIF",
-      "D": "DDP"
-    },
-    "correct": "B",
-    "reason": "Under DAP, the seller delivers goods ready for unloading but does not handle import clearance."
-  },
-  "47": {
     "question": "Goods are sold under DAP Buyer's Warehouse. The truck arrives ready for unloading but the buyer refuses the unloading due to labor issues. Who bears the risk at that moment?",
     "choices": {
       "A": "Seller",
@@ -516,7 +505,7 @@
     "correct": "C",
     "reason": "Under DAP, risk transfers when goods are placed at the buyer's disposal at the named destination. Refusal to accept means the buyer bears the risk."
   },
-  "48": {
+  "47": {
     "question": "Seller and buyer agreed on EXW Seller's Factory. The seller loads the goods onto the buyer's truck as a favor, and damage occurs during loading. Who bears the risk?",
     "choices": {
       "A": "Seller",
@@ -527,7 +516,7 @@
     "correct": "C",
     "reason": "Under EXW, risk transfers when goods are made available at the seller's premises. Loading by the seller as a favor does not change the risk transfer point."
   },
-  "49": {
+  "48": {
     "question": "Under FCA, goods are delivered at the seller's premises. When does risk transfer?",
     "choices": {
       "A": "After export clearance",
@@ -538,7 +527,7 @@
     "correct": "B",
     "reason": "Under FCA at the seller's premises, risk transfers when the goods are loaded on the buyer's collecting vehicle."
   },
-  "50": {
+  "49": {
     "question": "Which Incoterm places maximum obligation on the seller?",
     "choices": {
       "A": "DAP",
@@ -549,7 +538,7 @@
     "correct": "B",
     "reason": "DDP places the maximum obligation on the seller, covering all costs, risks, and import clearance to the buyer's premises."
   },
-  "51": {
+  "50": {
     "question": "Goods are shipped under CPT. The seller paid freight, but the goods were lost after being handed to the first carrier. Who bears the loss?",
     "choices": {
       "A": "Seller",
@@ -560,7 +549,7 @@
     "correct": "C",
     "reason": "Under CPT, risk transfers to the buyer when goods are handed to the first carrier. The buyer bears the loss despite the seller paying freight."
   },
-  "52": {
+  "51": {
     "question": "Which Incoterm can be used for any mode of transport, including multimodal?",
     "choices": {
       "A": "FOB",
@@ -571,7 +560,7 @@
     "correct": "B",
     "reason": "FCA is a multimodal Incoterm suitable for any mode of transport, including multimodal."
   },
-  "53": {
+  "52": {
     "question": "Under DPU, delivery is agreed at a terminal without unloading equipment. What is the implication?",
     "choices": {
       "A": "Buyer must unload",
@@ -582,7 +571,7 @@
     "correct": "B",
     "reason": "Under DPU, the seller bears the risk of unloading the goods at the named place of destination."
   },
-  "54": {
+  "53": {
     "question": "Which Incoterm is incorrectly paired with its transport mode?",
     "choices": {
       "A": "CIF – Sea transport",
@@ -593,7 +582,7 @@
     "correct": "D",
     "reason": "FAS is for sea/inland waterway transport only, not air transport."
   },
-  "55": {
+  "54": {
     "question": "Under CPT, which statement is TRUE?",
     "choices": {
       "A": "Risk transfers at destination",
@@ -604,7 +593,7 @@
     "correct": "C",
     "reason": "Under CPT, risk transfers when the goods are handed to the first carrier."
   },
-  "56": {
+  "55": {
     "question": "Which Incoterm requires the seller to deliver goods on board the vessel?",
     "choices": {
       "A": "FCA",
@@ -615,7 +604,7 @@
     "correct": "C",
     "reason": "FOB requires the seller to deliver goods on board the vessel at the named port of shipment."
   },
-  "57": {
+  "56": {
     "question": "Which Incoterm is most suitable when the seller can handle both export and import clearance?",
     "choices": {
       "A": "DAP",
@@ -626,7 +615,7 @@
     "correct": "B",
     "reason": "DDP requires the seller to handle both export and import clearance, making it suitable for sellers capable of doing both."
   },
-  "58": {
+  "57": {
     "question": "Under DAP, risk transfers:",
     "choices": {
       "A": "At shipment",
@@ -637,7 +626,7 @@
     "correct": "C",
     "reason": "Under DAP, risk transfers when the goods are placed at the disposal of the buyer at the named destination, ready for unloading."
   },
-  "59": {
+  "58": {
     "question": "Under DPU, import duties are paid by:",
     "choices": {
       "A": "Seller",
@@ -648,7 +637,7 @@
     "correct": "C",
     "reason": "Under DPU, the buyer is responsible for import duties and taxes."
   },
-  "60": {
+  "59": {
     "question": "In the application of Method Four in determining customs value if neither the imported goods nor identical nor similar imported goods are sold in the Philippines in the condition as imported the dutiable value shall be based on the unit price at which the imported goods, after further processing. At whose instance may such be done?",
     "choices": {
       "A": "District Collector",
@@ -659,7 +648,7 @@
     "correct": "D",
     "reason": "Under Method Four (Deductive Value), the importer may request valuation based on further processing, as provided under CMTA."
   },
-  "61": {
+  "60": {
     "question": "Imported goods shall be valued in accordance with the provisions of Section 701 of CMTA whenever the conditions prescribed therein are fulfilled. What is the valuation method under Section 701?",
     "choices": {
       "A": "Method One",
@@ -670,7 +659,7 @@
     "correct": "A",
     "reason": "Section 701 of the CMTA covers Method One - Transaction Value."
   },
-  "62": {
+  "61": {
     "question": "What is a condition before all additions or adjustments to the price actually paid or payable be made?",
     "choices": {
       "A": "All additions must be based on the decision of the Bureau of Customs",
@@ -681,7 +670,7 @@
     "correct": "B",
     "reason": "Additions to the price actually paid or payable must be based on objective and quantifiable data, as required under WTO Valuation Agreement."
   },
-  "63": {
+  "62": {
     "question": "Where the customs value cannot be determined under the provisions of Section 701, it is to be determined by proceeding sequentially through Section 702, 703, 704, 705, and 706. What is the exception to the valuation sequential rule?",
     "choices": {
       "A": "Application of Method Four from Method Two",
@@ -692,7 +681,7 @@
     "correct": "D",
     "reason": "Under CMTA Section 700, the actual exception allows the importer to request that Method Five (Computed Value, Sec. 705) be applied before Method Four (Deductive Value, Sec. 704). None of choices A-C correctly describe this swap, so the answer is None of the choices."
   },
-  "64": {
+  "63": {
     "question": "Who may request for an exception to the application of the valuation sequential rule?",
     "choices": {
       "A": "Customs Appraiser",
@@ -703,7 +692,7 @@
     "correct": "C",
     "reason": "Only the importer may request an exception to the sequential application of valuation methods, as provided under the WTO Valuation Agreement."
   },
-  "65": {
+  "64": {
     "question": "If the dutiable value cannot be determined under Method One to Method Five it shall be determined by using other reasonable means and on the basis of data available in which of the following places?",
     "choices": {
       "A": "Port of entry",
@@ -711,10 +700,10 @@
       "C": "Country of exportation",
       "D": "Any of the choices"
     },
-    "correct": "D",
-    "reason": "Method Six (Fallback Method) allows valuation using reasonable means based on data available in any location."
+    "correct": "B",
+    "reason": "Method Six (Fallback Method) values are determined using reasonable means consistent with the Agreement's principles, based on data available in the country of importation — i.e., the Philippines — not on data from any location generally."
   },
-  "66": {
+  "65": {
     "question": "What is the valuation method under CMTA, Section 705?",
     "choices": {
       "A": "Method Two",
@@ -725,7 +714,7 @@
     "correct": "D",
     "reason": "Section 705 of the CMTA covers Method Five - Computed Value."
   },
-  "67": {
+  "66": {
     "question": "Which of the following is a valid basis in determining dutiable value under Method Six?",
     "choices": {
       "A": "The selling price in the Philippines of goods produced in the Philippines",
@@ -736,7 +725,7 @@
     "correct": "D",
     "reason": "Method Six (Fallback Method) cannot use domestic sales prices, minimum values, or arbitrary systems; all the listed options are prohibited under the WTO Valuation Agreement."
   },
-  "68": {
+  "67": {
     "question": "If the proper person requests for an exception to the application of the valuation sequential rule and still the customs value cannot be determined, what is the proper method of valuation to be applied?",
     "choices": {
       "A": "Method Two",
@@ -747,7 +736,7 @@
     "correct": "C",
     "reason": "If the importer's request to use Method Five (Computed Value) ahead of Method Four fails to yield a value, the customs value shall then be determined under Method Four (Deductive Value), per CMTA Section 700."
   },
-  "69": {
+  "68": {
     "question": "For purposes of computing dutiable value under the provisions of Section 701 Method One which of the following is an acceptable restriction imposed by the seller with regard to the disposition or use of the goods by the buyer?",
     "choices": {
       "A": "Restriction imposed as required by law",
@@ -758,7 +747,7 @@
     "correct": "D",
     "reason": "Acceptable restrictions include those imposed by law, limitations on geographical resale, and restrictions that do not substantially affect the value of the goods."
   },
-  "70": {
+  "69": {
     "question": "The deductive value which shall be based on the unit price at which the imported goods or identical or similar imported goods are sold in the Philippines, in the same condition as when imported, in the greatest aggregate quantity, at or about the time of the importation of the goods being valued to persons not related to the persons from whom they buy such goods. Who is the seller and buyer referred to in the definition?",
     "choices": {
       "A": "The seller refers to the foreign supplier while the buyer refers to the importer",
@@ -769,7 +758,7 @@
     "correct": "B",
     "reason": "In Method Four, the seller is the importer of the goods being valued, and the buyer is the local buyer who must be unrelated to the seller."
   },
-  "71": {
+  "70": {
     "question": "What is the condition before any amount of royalties and license fees related to the goods being valued shall be considered as an addition to the price actually paid or payable for purposes of computing dutiable value?",
     "choices": {
       "A": "The buyer must not be related to the seller",
@@ -780,7 +769,7 @@
     "correct": "C",
     "reason": "Royalties and license fees are added to the price actually paid or payable only if the buyer pays them as a condition of sale of the goods, regardless of relationship between parties."
   },
-  "72": {
+  "71": {
     "question": "Which of the following is a valid basis in determining dutiable value under Method Six?",
     "choices": {
       "A": "The price of goods in the domestic market of the country of exportation",
@@ -791,29 +780,18 @@
     "correct": "D",
     "reason": "Method Six (Fallback Method) cannot use domestic sales prices, export prices to other countries, or minimum values as valid bases."
   },
+  "72": {
+    "question": "Identical goods refer to goods which are the same in all respects, including physical characteristics, quality and reputation, although minor differences in appearance do not preclude goods from being regarded as identical. A shipment of white electric fans and a shipment of red electric fans are otherwise the same brand, model, specifications, and quality. Can the red electric fans be treated as 'identical goods' to the white ones for customs valuation purposes?",
+    "choices": {
+      "A": "No, because any physical difference, including color, disqualifies them from being identical",
+      "B": "Yes, because color is a minor difference in appearance that does not preclude an identical goods classification",
+      "C": "No, but they can still be treated as similar goods instead",
+      "D": "It depends on whether the Bureau of Customs specifically approves the classification"
+    },
+    "correct": "B",
+    "reason": "Under the CMTA and the WTO Valuation Agreement, 'identical goods' are goods that are the same in all respects, but minor differences in appearance — such as color — do not preclude goods from being regarded as identical, provided they otherwise conform to the definition."
+  },
   "73": {
-    "question": "Identical goods refer to goods which are the same in all respects, including physical characteristics, quality and reputation. Can we say that white electric fan is not considered as an identical good of a red electric fan?",
-    "choices": {
-      "A": "No, because they are not the same in all respects. They are different in color.",
-      "B": "Yes, because the difference is only minor.",
-      "C": "No, but they can already be considered as similar goods.",
-      "D": "a and c are correct"
-    },
-    "correct": "D",
-    "reason": "White and red electric fans are not identical goods (different color), but they can be considered similar goods."
-  },
-  "74": {
-    "question": "How is the phrase 'imported at or about the same time as the goods being valued under Method Two generally interpreted?",
-    "choices": {
-      "A": "90 days from goods declaration lodgement.",
-      "B": "90 days from the date of bill of lading of the goods being valued.",
-      "C": "45 days before or after the date of the bill of lading of the goods being valued.",
-      "D": "45 days before or after the date of the bill of lading of the identical goods."
-    },
-    "correct": "C",
-    "reason": "'At or about the same time' is generally interpreted as 45 days before or after the date of the bill of lading of the goods being valued."
-  },
-  "75": {
     "question": "When a goods declaration is presented to the Bureau of Customs and the concerned customs officer has reason to doubt the truth or accuracy of the declaration or of the documents attached therein what may be done by the Bureau?",
     "choices": {
       "A": "The Bureau of Customs may ask the importer to provide further explanation that the entered value represents an accurate transaction value",
@@ -824,7 +802,7 @@
     "correct": "D",
     "reason": "The BOC may request further explanation, additional documents, or any other evidence to verify the accuracy of the declared value."
   },
-  "76": {
+  "74": {
     "question": "Where the dutiable value cannot be determined under Method Four the dutiable value shall be the computed value of the sum of different cost elements. Which of the following is not among those cost elements?",
     "choices": {
       "A": "The cost or the value of materials and fabrication or other processing employed in producing the imported goods",
@@ -835,7 +813,7 @@
     "correct": "C",
     "reason": "Freight, insurance, and transportation expenses are not part of Method Five (Computed Value); they are added separately."
   },
-  "77": {
+  "75": {
     "question": "In applying Section 702-Transaction Value of Identical Goods or Section 703 Transaction Value of Similar goods, if more than one transaction value of identical goods or similar goods are found, what rule shall be applied?",
     "choices": {
       "A": "Whichever is the highest rule applies",
@@ -846,7 +824,7 @@
     "correct": "C",
     "reason": "When multiple transaction values of identical or similar goods are found, the lowest value shall be applied."
   },
-  "78": {
+  "76": {
     "question": "In determining the dutiable value using Method One Transaction value, there are cost elements that shall be added to the price actually paid or payable for the imported goods. What is a condition before a cost element may be a positive adjustment to the price actually paid or payable?",
     "choices": {
       "A": "To the extent that the cost element is incurred by both the seller and buyer and payable at a future date",
@@ -857,7 +835,7 @@
     "correct": "C",
     "reason": "An adjustment is added only if the cost is incurred by the buyer and not already included in the price actually paid or payable."
   },
-  "79": {
+  "77": {
     "question": "For the assessment and collection of import duty upon imported goods and for other purposes, the value and prices thereof quoted in foreign currency shall be converted into the currency of the Philippines at the current rate of exchange or value specified or published, from time to time. Which of the following agencies should publish the rate of exchange?",
     "choices": {
       "A": "PSA",
@@ -868,7 +846,7 @@
     "correct": "B",
     "reason": "The Bangko Sentral ng Pilipinas (BSP) publishes the official rate of exchange for customs valuation purposes."
   },
-  "80": {
+  "78": {
     "question": "In the application of Method Four if neither the imported goods nor identical nor similar imported goods are sold at or about the time of importation of the goods being valued in the Philippines in the conditions they were imported, the customs value shall be based on the unit price at which the imported goods or identical or similar imported goods sold in the Philippines in the condition they were imported and at the earliest date after the importation of the goods being valued. What is the time frame provided under CMTA?",
     "choices": {
       "A": "Before the expiration of thirty (30) days after such importation",
@@ -879,7 +857,7 @@
     "correct": "D",
     "reason": "Under CMTA, the earliest date after importation for Method Four is before the expiration of ninety (90) days."
   },
-  "81": {
+  "79": {
     "question": "In determining dutiable value using Method One are engineering, development, artwork, design work and plans and sketches undertaken in the Philippines and necessary for the production of imported goods, where such goods are supplied directly or indirectly by the buyer free of charge or at a reduced cost for use in connection with the production and sale for export of the imported goods considered as assist?",
     "choices": {
       "A": "Yes, but use of Method One is not precluded",
@@ -890,7 +868,7 @@
     "correct": "D",
     "reason": "Engineering, design work, and similar work undertaken in the Philippines (the country of importation) is explicitly excluded from being treated as an assist. Since it is not an assist, no addition is required, and the use of Method One is not precluded."
   },
-  "82": {
+  "80": {
     "question": "If in the course of determining the dutiable value of imported goods, it becomes necessary to delay the final determination of such dutiable value, how may the importer effect release of imported goods?",
     "choices": {
       "A": "There is nothing that can be done by the importer but to pay duties and taxes to avoid delay in the release of imported goods",
@@ -901,7 +879,7 @@
     "correct": "C",
     "reason": "The importer may secure release under tentative assessment upon posting of sufficient security."
   },
-  "83": {
+  "81": {
     "question": "Which of the following is not a proper term in the statement that 'similar goods' are goods which, although not alike in all respects, have like characteristics and similar component materials which enable them to perform the same functions and to be interchangeable, commercially",
     "choices": {
       "A": "Similar",
@@ -912,7 +890,7 @@
     "correct": "D",
     "reason": "The statement is correct in all aspects; all terms are proper in describing similar goods."
   },
-  "84": {
+  "82": {
     "question": "If the dutiable value of imported goods cannot be determined using Method Two and Method Three, what may be done by the importer if he does not want to apply the succeeding valuation method?",
     "choices": {
       "A": "The importer may request that Method One be used in the valuation of the imported goods.",
@@ -923,7 +901,7 @@
     "correct": "B",
     "reason": "If Methods Two and Three fail, the importer may request that the customs value be determined using Computed Value (Method Five)."
   },
-  "85": {
+  "83": {
     "question": "What is the main condition for the use of Method One?",
     "choices": {
       "A": "Conditions prescribed are fulfilled.",
@@ -934,7 +912,7 @@
     "correct": "A",
     "reason": "The main condition for the use of Method One is that the conditions prescribed in Section 701 are fulfilled."
   },
-  "86": {
+  "84": {
     "question": "In determining the dutiable value using Section 701 Transaction Value commissions and brokerage fees are to be added to the price actually paid or payable. Which of the following is not the commission contemplated under the law?",
     "choices": {
       "A": "Selling commission",
@@ -945,7 +923,7 @@
     "correct": "C",
     "reason": "Buying commission is not added to the price actually paid or payable; only selling commissions and brokerage fees are added."
   },
-  "87": {
+  "85": {
     "question": "In determining customs value using Method Five may the Bureau of Customs require or compel any person not residing in the Philippines to produce for examination, or to allow access to, any account or other record for the purpose of determining a computed value?",
     "choices": {
       "A": "Yes, provided that the request is done through proper diplomatic channels.",
@@ -956,7 +934,7 @@
     "correct": "D",
     "reason": "The BOC cannot compel persons not residing in the Philippines to produce records for Method Five determination."
   },
-  "88": {
+  "86": {
     "question": "Which of the following is not a test value for purposes of determining whether in a sale between related parties the transaction value shall be accepted as the dutiable value?",
     "choices": {
       "A": "The transaction value in sales to unrelated buyers of identical or similar goods for export to the Philippines.",
@@ -967,7 +945,7 @@
     "correct": "D",
     "reason": "All the listed values are test values for determining acceptability of transaction value between related parties."
   },
-  "89": {
+  "87": {
     "question": "Which of the following is not relationship in the context of WTO Valuation Agreement?",
     "choices": {
       "A": "Together Buyer and Seller directly or indirectly control a third person",
@@ -978,7 +956,7 @@
     "correct": "C",
     "reason": "The WTO Valuation Agreement's definition of 'related persons' enumerates specific family relationships (spouse, parent-child, siblings, grandparent-grandchild, uncle/aunt-nephew/niece, in-laws), which does not include cousins. 'Second cousins' therefore falls outside the defined relationship categories."
   },
-  "90": {
+  "88": {
     "question": "Choose the item which may not be considered as adjustment to the price actually paid or payable",
     "choices": {
       "A": "Cost of design done in the Philippines",
@@ -989,7 +967,7 @@
     "correct": "A",
     "reason": "Cost of design done in the Philippines is considered an assist but is not an adjustment to the price actually paid or payable."
   },
-  "91": {
+  "89": {
     "question": "In computing for Deductive Value which of the following should not be deducted from the unit price at which the imported goods or identical or similar goods are sold in the Philippines?",
     "choices": {
       "A": "Commissions usually paid or agreed to be paid and general expenses in connection with the sales in the Philippines of imported goods of the same class or kind",
@@ -1000,7 +978,7 @@
     "correct": "C",
     "reason": "Transport, insurance, and transportation expenses for importation are not deducted in Method Four; they are added before valuation."
   },
-  "92": {
+  "90": {
     "question": "Which of the following may be considered as Transaction Value?",
     "choices": {
       "A": "Purchase price on FOB Singapore basis",
@@ -1011,8 +989,8 @@
     "correct": "D",
     "reason": "Transaction value may be based on any sale basis as long as it represents the price actually paid or payable for the goods."
   },
-  "93": {
-    "question": "There is no publication of exchange rate on a Good Friday. What shall be the applicable exchange rate for the following week?",
+  "91": {
+    "question": "There is no publication of exchange rate on a Good Friday. What shall be the applicable exchange rate for that day?",
     "choices": {
       "A": "Rate that shall be published following Monday",
       "B": "Rate published Thursday before Good Friday",
@@ -1022,7 +1000,7 @@
     "correct": "B",
     "reason": "When no rate is published on a holiday, the rate published on the last working day before the holiday (Thursday) applies."
   },
-  "94": {
+  "92": {
     "question": "The GAAP applicable in case of Method Five.",
     "choices": {
       "A": "GAAP as determined by the Bureau of Customs.",
@@ -1033,7 +1011,7 @@
     "correct": "C",
     "reason": "In Method Five (Computed Value), the GAAP of the exporting country shall be used."
   },
-  "95": {
+  "93": {
     "question": "A Filipino importer provided assist in the form of design which was procured from a French designer based in Germany. What GAAP shall be used to value the assist?",
     "choices": {
       "A": "None as design is an intangible and therefore not considered as mandatory addition. As a rule intangibles are not subject to payment of customs duty.",
@@ -1044,7 +1022,7 @@
     "correct": "C",
     "reason": "The assist (design) shall be valued using GAAP in the country where the design was produced (Germany)."
   },
-  "96": {
+  "94": {
     "question": "The transaction value of the imported goods is based on PAPP for those goods when sold for export to the Philippines. What shall be the tax treatment when there is sale by a free zone locator to the customs territory for consumption?",
     "choices": {
       "A": "The transaction value between the free zone and buyer in the customs territory shall be used.",
@@ -1055,7 +1033,7 @@
     "correct": "A",
     "reason": "When goods are withdrawn from a free zone into the customs territory, the transaction value between the free zone locator and the buyer in the customs territory shall be used."
   },
-  "97": {
+  "95": {
     "question": "Is there sale for export for time charter transaction between a ship owner and a domestic vessel operator?",
     "choices": {
       "A": "Yes, as there is outflow of foreign exchange in the transaction.",
@@ -1066,7 +1044,7 @@
     "correct": "B",
     "reason": "In a time charter, ownership of the vessel remains with the ship owner; therefore, there is no sale for export."
   },
-  "98": {
+  "96": {
     "question": "Filipino importer supplied used capital equipment as an assist to a foreign supplier. The capital equipment was previously imported from Germany brand new. How shall the equipment be valued?",
     "choices": {
       "A": "TV when the capital equipment was imported by the Filipino importer.",
@@ -1077,7 +1055,7 @@
     "correct": "C",
     "reason": "Used capital equipment supplied as an assist shall be valued at its total cost minus depreciation."
   },
-  "99": {
+  "97": {
     "question": "Is letter of credit amount always equal to the price actually paid or payable?",
     "choices": {
       "A": "Yes, as the amount in the letter of credit represents the agreed price between the buyer and the seller.",
@@ -1088,7 +1066,7 @@
     "correct": "C",
     "reason": "The LC amount is not always equal to the price actually paid or payable because mandatory adjustments (commissions, assists, etc.) must be added."
   },
-  "100": {
+  "98": {
     "question": "In a Free Carrier (FCA) delivery to a third person which of the following is to be considered as an Adjustment to the PAPP?",
     "choices": {
       "A": "Inland transport cost from seller's place to the delivery point.",
@@ -1099,7 +1077,7 @@
     "correct": "A",
     "reason": "Inland transport cost from seller's place to the delivery point is an adjustment to the PAPP in FCA transactions."
   },
-  "101": {
+  "99": {
     "question": "Which of the following cost elements is not an Adjustment to the PAPP in a FCA transaction where the place of delivery is the supplier's factory:",
     "choices": {
       "A": "Cost of loading to the collecting vehicle.",
@@ -1110,7 +1088,7 @@
     "correct": "D",
     "reason": "Cost of discharging from the collecting vehicle is not an adjustment to the PAPP as it occurs after delivery."
   },
-  "102": {
+  "100": {
     "question": "Which of the following is not an Adjustment to the PAPP?",
     "choices": {
       "A": "Cost of design done in a third country.",
@@ -1121,7 +1099,7 @@
     "correct": "B",
     "reason": "Cost of design at the country of importation is not an adjustment to the PAPP; it is an assist but not an adjustment."
   },
-  "103": {
+  "101": {
     "question": "In determining the dutiable value using Method Five the information needed are supplied by the foreign supplier. What are the two (2) important considerations that must be considered if the District Collector would want to verify the supplied information at the country of exportation?",
     "choices": {
       "A": "Importer agrees to the verification and advance notice to the government of the country of exportation and no objection is raised by that government.",
@@ -1132,7 +1110,7 @@
     "correct": "A",
     "reason": "Verification in the exporting country requires importer agreement and advance notice to the exporting government with no objection raised."
   },
-  "104": {
+  "102": {
     "question": "In 'D' terms transaction which of the following charges is considered as adjustment to the price actually paid or payable?",
     "choices": {
       "A": "Marine cargo insurance from port of exportation to port of entry.",
@@ -1143,7 +1121,7 @@
     "correct": "D",
     "reason": "In D terms, the seller bears all costs; therefore, none of these charges are adjustments to the PAPP as they are already included in the seller's price."
   },
-  "105": {
+  "103": {
     "question": "Seller 'A' sent an offer sheet to Buyer 'B' for the supply of 'C' branded cosmetic products with the condition that the goods may only be sold in the Philippines through multi-level marketing (MLM). Is this an acceptable restriction for purposes of valuing the goods for customs purposes with the use of Method One?",
     "choices": {
       "A": "No, because it restricts the disposition of the goods.",
@@ -1154,7 +1132,7 @@
     "correct": "B",
     "reason": "A restriction that limits the method of resale but does not substantially affect the value of the goods is acceptable under Method One."
   },
-  "106": {
+  "104": {
     "question": "What shall generally be considered for the use of Method Five in determining customs value?",
     "choices": {
       "A": "That there is relationship between buyer and seller.",
@@ -1165,7 +1143,7 @@
     "correct": "A",
     "reason": "Method Five (Computed Value) is generally used when there is a relationship between buyer and seller, or when other methods are not applicable."
   },
-  "107": {
+  "105": {
     "question": "For purposes of using Method Four to determine the customs value of an importation of importer 'A' which is still in customs custody may a previous importation of 'A' of the same goods being sold at the customs territory be used?",
     "choices": {
       "A": "No, as this would constitute conflict of interest.",
@@ -1176,7 +1154,7 @@
     "correct": "C",
     "reason": "A previous importation of the same goods by the same importer may be used for Method Four, provided the buyer in the customs territory is not related to the seller."
   },
-  "108": {
+  "106": {
     "question": "JOHN RUIZZEL, Inc. imported 3,000 units of Ceramic Flower Vase at CIF price of $15.00 per unit from seller ELAYCA Trading in China. After subsequent resale, JOHN RUIZZEL, Inc. will remit to ELAYCA Trading the equivalent to 5% of the agreed CIF price. Furthermore, JOHN RUIZZEL, Inc. will pay commission to his agent that arranged the sale between the buyer and seller in the amount of $5,000.00. However, JOHN RUIZZEL, Inc. decided to supply the moulds amounting to 3,000.00 needed by ELAYCA Trading for the production of the said Ceramic Flower Vase but since JOHN RUIZZEL, Inc. insisted as that it was their importation, it is provided free of charge. Compute for the total Transaction Value under method 1 if the exchange rate is P50.00/US1.00.",
     "choices": {
       "A": "P 2,762,500.00",
@@ -1184,10 +1162,10 @@
       "C": "P 2,362,500.00",
       "D": "P 2,250,000.00"
     },
-    "correct": "A",
-    "reason": "CIF = 3,000 x $15 = $45,000. Royalty (5%) = $2,250. Commission = $5,000. Moulds = $3,000. Total = $55,250 x P50 = P2,762,500."
+    "correct": "B",
+    "reason": "CIF = 3,000 x $15.00 = $45,000. Addition of 5% of CIF remitted to the seller after resale = $2,250. Moulds supplied free of charge (assist) = $3,000. The $5,000 paid to JOHN RUIZZEL's own agent for arranging/sourcing the purchase is a buying commission, which is excluded from the transaction value. Total = $45,000 + $2,250 + $3,000 = $50,250 x P50.00 = P2,512,500.00."
   },
-  "109": {
+  "107": {
     "question": "A shipment of rice consigned to NFA arrived at Port of Cebu with total FOB value of $ 15,000.00. The freight charges per Bill Lading shows $1,200.00. Compute for the dutiable freight?",
     "choices": {
       "A": "$ 1,500.00",
@@ -1198,7 +1176,7 @@
     "correct": "B",
     "reason": "Dutiable freight is the actual freight charge shown on the Bill of Lading: $1,200.00."
   },
-  "110": {
+  "108": {
     "question": "LEEN DEE Enterprise imported 500 bottles of Jack Daniel's Whiskey with total CIF value of $ 16,600.00. The commercial invoice shows freight charges and insurance of 1,000.00 and 600.00, respectively. Compute for the dutiable insurance.",
     "choices": {
       "A": "$ 300.00",
@@ -1209,7 +1187,7 @@
     "correct": "D",
     "reason": "Dutiable insurance is the actual insurance shown on the invoice: $600.00."
   },
-  "111": {
+  "109": {
     "question": "LANCE BERNALDO Inc. imported 4x40' STC: Black Shoes with total gross weight of 2,000 kgs. The invoice shows CIP value of 14,500.00. The freight charges and insurance indicated in the entry is 1,200.00 and $600.00 respectively. How much is the dutiable freight if the IATA freight rate is P 0.90 per kg?",
     "choices": {
       "A": "$ 1,200.00",
@@ -1220,7 +1198,7 @@
     "correct": "A",
     "reason": "Dutiable freight is the freight indicated in the entry: $1,200.00."
   },
-  "112": {
+  "110": {
     "question": "A shipment of 1x20' STC: Wall Clocks imported by RUBINAS Co. arrived at Port of Davao with total FOB value of $ 10,000.00. The freight charges per Bill of Lading paid by RUBINAS Co. is amounting to $ 1,000.00. The RUBINAS Co. also provides local insurance worth P 15,000.00 without certification and official receipt. The rate of exchange is P 40.00/$1.00. How much is the dutiable insurance?",
     "choices": {
       "A": "$ 375.00",
@@ -1231,7 +1209,7 @@
     "correct": "A",
     "reason": "Local insurance without certification = 15,000/40 = $375. This is the dutiable insurance."
   },
-  "113": {
+  "111": {
     "question": "A shipment of general cargo arrived at MICP with total FOB value of $ 15,000.00. The freight charges indicated on the SAD is 1,100.00. The freight charges per Gross Conference Rate is of 1,600.00. How much is the dutiable freight?",
     "choices": {
       "A": "$ 1,100.00",
@@ -1242,7 +1220,7 @@
     "correct": "A",
     "reason": "Dutiable freight is the freight indicated on the SAD: $1,100.00."
   },
-  "114": {
+  "112": {
     "question": "A shipment of general cargo arrived at Port of Cebu with total FOB value of $ 28,000.00. The importer provides domestic insurance of P 20,750.00 without certification and official receipt. The Freight per bill of lading is $ 1,500.00. The rate of exchange is P 41.50/$1.00. How much is the dutiable freight?",
     "choices": {
       "A": "$ 500.00",
@@ -1253,7 +1231,7 @@
     "correct": "C",
     "reason": "Dutiable freight is the freight shown on the Bill of Lading: $1,500.00."
   },
-  "115": {
+  "113": {
     "question": "DAVID MARIANO Inc. imported 1x40' STC: 300 pairs of Basketball Shoes from Xiamen, China with total FOB value of 20,000.00. The freight per Bill of Lading shows 1,300.00. DAVID MARIANO procured local insurance amounting to P 21,000.00 without certification and O.R. How much is the total sum of dutiable freight and insurance if the exchange rate at the date of importation is P 50.00/$1.00?",
     "choices": {
       "A": "$ 1,300.00",
@@ -1264,7 +1242,7 @@
     "correct": "C",
     "reason": "Freight = $1,300. Insurance = 21,000/50 = $420. Total = $1,720."
   },
-  "116": {
+  "114": {
     "question": "DANIELLA MOPAS Inc. imported 1x40' STC: Cotton Yarns from Guangzhou, China. The invoice shows FOB value of $ 14,500.00. The entry shows insurance of total 280.00. The freight charges indicated in the Bill of Lading is 1,500.00. Compute for the dutiable insurance.",
     "choices": {
       "A": "$ 280.00",
@@ -1275,18 +1253,7 @@
     "correct": "A",
     "reason": "Dutiable insurance is the insurance shown on the entry: $280.00."
   },
-  "117": {
-    "question": "ANGELICA MENTINO Enterprise imported 1x20 Plastic Chairs with total CIF value of $16,000.00. The commercial invoice shows freight charges of 700.00 while bill of lading shows 1,200.00. Compute for total sum of the dutiable freight and insurance.",
-    "choices": {
-      "A": "$ 1,000.00",
-      "B": "$ 1,200.00",
-      "C": "$ 1,500.00",
-      "D": "$ 1,300.00"
-    },
-    "correct": "B",
-    "reason": "Dutiable freight is the higher of invoice or BL: $1,200. Total sum = $1,200."
-  },
-  "118": {
+  "115": {
     "question": "A shipment of 1x20' STC: Ethyl Alcohol arrived at Port of Batangas with total CFR value of 35,000.00. The invoice shows freight charges of 2,500.00. Importer procured local insurance premium worth P 50,000.00 with certification and O.R. presented to BOC. The freight charge per bill of lading is $ 2,400.00. Compute for the dutiable freight if the exchange rate is P50.00/$1.00?",
     "choices": {
       "A": "$ 2,500.00",
@@ -1294,10 +1261,10 @@
       "C": "$ 2,400.00",
       "D": "$ 1,300.00"
     },
-    "correct": "C",
-    "reason": "Dutiable freight is the freight per Bill of Lading: $2,400.00."
+    "correct": "A",
+    "reason": "Dutiable freight is the higher of the freight shown in the commercial invoice ($2,500.00) or the Bill of Lading ($2,400.00), per CMO 22-2007. Since the invoice amount is higher, it is used: $2,500.00."
   },
-  "119": {
+  "116": {
     "question": "A major supermarket situated at the Mall of Asia, Pasay City, Manila imported 15,000 cans of Celsius energy drinks containing sucralose as a non-caloric artificial sweetener. Which is the total specific tax, net of value added tax, if each can have volume capacity of 50 centiliters? Note: Adopted from CuBLE 2021.",
     "choices": {
       "A": "P 90,000.00",
@@ -1308,7 +1275,7 @@
     "correct": "B",
     "reason": "Sucralose is a non-caloric sweetener, not high fructose corn syrup, so the P6.00/liter rate applies (not the P12/liter HFCS rate). 15,000 cans x 0.5L x P6.00 = P45,000.00, net of VAT."
   },
-  "120": {
+  "117": {
     "question": "Arriving at the Ninoy Aquino International Airport was a shipment of 300 cases powdered juice drinks containing saccharide mixture of high fructose sweetener derived from corn. Each case contains 200 tetra packs with each pack weighing 75 grams. Based on the serving instruction of dissolving each pack with 100 centiliters of water, which is the total specific tax, VAT included? Note: Adopted from CuBLE 2021.",
     "choices": {
       "A": "P 360,000.00",
@@ -1319,7 +1286,7 @@
     "correct": "C",
     "reason": "Total packs = 300 x 200 = 60,000. 100cl = 1L. Tax = P12/L (sweetened beverages under TRAIN). Base tax = 60,000 x 1 x P12 = P720,000. With VAT = P806,400."
   },
-  "121": {
+  "118": {
     "question": "A leading convenience store imported 300 cases Full Energy Drink with Non-Caloric Sweetener of 24 cans with 50 cl per case; 450 boxes having 10 packs per box of Energen cereal beverage using pure caloric sweeteners with 2.5 dl per pack; and 300 boxes with 12 packs per box of OldTown White 3-in-1 Coffee mix of 180 ml using purely caloric sweeteners. Compute for the total excise tax of Energen Cereal Beverage, exclusive of value added tax.",
     "choices": {
       "A": "P 7,560.00",
@@ -1330,7 +1297,7 @@
     "correct": "B",
     "reason": "Energen: 450 boxes x 10 packs = 4,500 packs. 2.5dl = 0.25L. Tax = P6.00/L (caloric sweetener rate). Total = 4,500 x 0.25 x P6.00 = P6,750.00, exclusive of VAT."
   },
-  "122": {
+  "119": {
     "question": "A leading convenience store imported 300 cases Full Energy Drink with Non-Caloric Sweetener of 24 cans with 50 cl per case; 450 boxes having 10 packs per box of Energen cereal beverage using pure caloric sweeteners with 2.5 dl per pack; and 300 boxes with 12 packs per box of OldTown White 3-in-1 Coffee mix of 180 ml using purely caloric sweeteners. Compute for the total excise tax of OldTown White 3-in-1 Coffee, net of VAT.",
     "choices": {
       "A": "P 3,888.00",
@@ -1341,7 +1308,7 @@
     "correct": "C",
     "reason": "OldTown White 3-in-1 Coffee mix contains caloric sweeteners but is classified as coffee mix, which is exempt from sweetened beverage tax under TRAIN Law."
   },
-  "123": {
+  "120": {
     "question": "REDHAIR Dealership, Inc. imported 1 unit of 2026-year model Ford Mustang Ecoboost powered by Internal Combustion Engine in a 1x20' with Gross Importer's Selling Price P3,862,500.00, inclusive of ET and VAT amounted to P637,500.00 while the dealer's SRP, net of ET and VAT, is P4,012,500.00. The importation by REDHAIR Dealership, Inc. has a total customs value and miscellaneous expenses of $34,500.00 and P15,750.00, respectively. The freight indicated in the bill of lading is $1,500.00 per container. Using exchange rate of P55.00/$1.00, compute for the total AVT.",
     "choices": {
       "A": "P 645,000.00",
@@ -1352,7 +1319,7 @@
     "correct": "A",
     "reason": "Net ISP = Gross ISP - ET - VAT = P3,862,500 - P637,500 = P3,225,000. AVT = 20% = P645,000."
   },
-  "124": {
+  "121": {
     "question": "SABO Corporation, a car dealer in Mandaluyong imported 15 units of hybrid automobiles, 2026-year model, 7-seater, 2,000cc engine displacement. All units are of the same variant and each unit had a gross manufacturer's selling price of P1,950,000.00 inclusive of the excise tax & VAT. The dealer's suggested retail price, net of VAT and ET, amounted to P1,900,700.00 per unit while the ad valorem & value added taxes had an aggregate sum of P250,000.00 per unit. The total cost and importation had a total value of 1,728,000.00. Compute for the total taxable base to be used in determining Ad Valorem Tax.",
     "choices": {
       "A": "P 1,520,560.00",
@@ -1360,10 +1327,10 @@
       "C": "P 1,728,000.00",
       "D": "P 1,920,000.00"
     },
-    "correct": "C",
-    "reason": "Taxable base = Total cost of importation = P1,728,000.00."
+    "correct": "B",
+    "reason": "Since SABO Corporation is a dealer importing the vehicles FOR SALE, the Ad Valorem Tax base is the net manufacturer's/importer's selling price, not the cost of importation (the cost-of-importation/landed-value basis applies only to imported automobiles NOT for sale). Net MSP = Gross MSP - (AVT + VAT) = P1,950,000.00 - P250,000.00 = P1,700,000.00."
   },
-  "125": {
+  "122": {
     "question": "Facts Given: Total Dutiable Value: P750,000.00, Total Misc. Exp: P12,500.00. The rate of duty is 10%. As a Customs Broker, compute for the total Landed Cost.",
     "choices": {
       "A": "P 837,500.00",
@@ -1374,7 +1341,7 @@
     "correct": "A",
     "reason": "Duty = 10% x P750,000 = P75,000. Landed Cost = DV + Duty + Misc = P750,000 + P75,000 + P12,500 = P837,500."
   },
-  "126": {
+  "123": {
     "question": "Importation of assorted Christmas decors arrived at the MICP with a dutiable value of $32,500.00. The Bureau of Customs has ascertained that the requirements under CMO No. 22-2007 has been complied with. The arrastre charges, wharfage dues, Customs Documentary Stamps, Customs Brokerage fee and Import Processing Charge amounted to P15,250.00 and rate of duty is 10% ad valorem. Prevailing rate of exchange is P 54.50/$1.00. As a Customs Broker, compute for the total VAT.",
     "choices": {
       "A": "P 2,199,260.00",
@@ -1385,7 +1352,7 @@
     "correct": "B",
     "reason": "VAT = 12% x (DV + Duty + Misc) = 12% x P1,963,625 = P235,635."
   },
-  "127": {
+  "124": {
     "question": "The National Food Authority imported 5,000 bags of wheat flour with a total FOB Value $50,000.00. The bill of lading shows total freight charges of $5,000.00. The shipment is covered by GSIS insurance in the amount of P 45,750.00. The total miscellaneous expenses amounted to P 15,500.00. The ad valorem duty is 1%. Use the exchange rate P45.75/$1.00. Compute for the dutiable value.",
     "choices": {
       "A": "P 2,562,000.00",
@@ -1396,7 +1363,7 @@
     "correct": "A",
     "reason": "FOB = $50,000 x P45.75 = P2,287,500. Freight = $5,000 x P45.75 = P228,750. Insurance = P45,750. DV = P2,287,500 + P228,750 + P45,750 = P2,562,000."
   },
-  "128": {
+  "125": {
     "question": "The National Food Authority imported 5,000 bags of wheat flour with a total FOB Value $50,000.00. The bill of lading shows total freight charges of $5,000.00. The shipment is covered by GSIS insurance in the amount of P 45,750.00. The total miscellaneous expenses amounted to P 15,500.00. The ad valorem duty is 1%. Use the exchange rate P45.75/$1.00. Compute for the total customs duty, net of Value Added Tax.",
     "choices": {
       "A": "P 25,848.75",
@@ -1407,7 +1374,7 @@
     "correct": "B",
     "reason": "Duty = 1% x P2,562,000 = P25,620.00."
   },
-  "129": {
+  "126": {
     "question": "NAZARETA Inc. imported a shipment of various office supplies under a CIF Incoterm was lodged at the Port of Manila. The declared customs value is $27,930.00. The freight charges and insurance per entry is $930.00 and $140.00, respectively. Compute for the dutiable insurance:",
     "choices": {
       "A": "$ 140.00",
@@ -1418,7 +1385,7 @@
     "correct": "A",
     "reason": "Dutiable insurance = $140.00 as indicated in the entry."
   },
-  "130": {
+  "127": {
     "question": "NAZARETA Inc. imported a shipment of various office supplies under a CIF Incoterm was lodged at the Port of Manila. The declared customs value is $27,930.00. The freight charges and insurance per entry is $930.00 and $140.00, respectively. Compute for the dutiable freight:",
     "choices": {
       "A": "$ 930.00",
@@ -1429,7 +1396,7 @@
     "correct": "A",
     "reason": "Dutiable freight = $930.00 as indicated in the entry."
   },
-  "131": {
+  "128": {
     "question": "A shipment of 1X20' STC: Various Doll Shoes consigned to IRISH MAE Trading shows FOB price of $5.00 per pound. The seller paid the total origin charges of $ 333.00 which is 3% of EXW value. The bill of lading indicated a freight charge of $1,500.00. Compute for the total FOB value:",
     "choices": {
       "A": "$ 11,100.00",
