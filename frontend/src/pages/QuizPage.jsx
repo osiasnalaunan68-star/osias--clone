@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import staticQuizData from "../data/quizData.json";
 import { getFlattenedEntries } from "../quizStore";
-import { LEVELS, QuizLevelButton, QuizPlayView } from "../components/QuizShared";
+import { LEVELS, QuizLevelButton, QuizPlayView, resetLevelProgress } from "../components/QuizShared";
 
 // Helper to extract Roman numeral from title string like "Title I – ..."
 function extractTitleNumber(title) {
@@ -83,6 +83,20 @@ function QuizTitleCard({ title, data, onSelectLevel }) {
     onSelectLevel(title, data, levelId);
   };
 
+  // Reset lang ang progress ng ISANG level ng ISANG title. Hindi nagagalaw
+  // ang mga tanong (data) o ang progress ng ibang levels/titles.
+  const handleResetLevel = (levelId) => {
+    const levelLabel = LEVELS.find((l) => l.id === levelId)?.label || levelId;
+    const ok = confirm(`I-reset ang progress mo sa "${levelLabel}" ng ${title}?\n\nMagsisimula ulit ito sa Tanong 1 — hindi madedelete ang mga tanong, mga sagot mo lang dito ang mabubura.`);
+    if (!ok) return;
+    resetLevelProgress(title, levelId);
+    setProgress((prev) => {
+      const next = { ...prev };
+      delete next[levelId];
+      return next;
+    });
+  };
+
   const total = Object.values(totalQuestions).reduce((a, b) => a + b, 0);
 
   return (
@@ -98,7 +112,13 @@ function QuizTitleCard({ title, data, onSelectLevel }) {
           {LEVELS.map((level) => {
             if (!totalQuestions[level.id]) return null;
             return (
-              <QuizLevelButton key={level.id} level={level} progress={progress[level.id] || 0} onClick={() => handleLevelSelect(level.id)} />
+              <QuizLevelButton
+                key={level.id}
+                level={level}
+                progress={progress[level.id] || 0}
+                onClick={() => handleLevelSelect(level.id)}
+                onReset={() => handleResetLevel(level.id)}
+              />
             );
           })}
         </div>

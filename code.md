@@ -578,7 +578,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../authContext";
 import { PLANS, PAYMENT_METHODS, generateReferenceCode, submitPendingPurchase } from "../payments";
 
-const SUBJECT_LABELS = { CL: "Customs Law", TL: "Tariff Law", CDP: "Customs Documentation & Procedures", PC: "Practical Computations" };
+const SUBJECT_LABELS = { TL: "Tariff Law", CDP: "Customs Documentation & Procedures", PC: "Practical Computations" };
 
 function formatDate(ts) {
   try {
@@ -3082,7 +3082,7 @@ import {
 
 // First N items (by sorted order) na libre bawat subject — lahat ng lagpas dito
 // ay naka-lock hanggang mag-subscribe. Tugma sa pricing table sa handoff doc.
-const FREE_LIMITS = { cl: 100, cdp: 100, tl: 100, pc: 150 };
+const FREE_LIMITS = { cl: 10, cdp: 10, tl: 10, pc: 10 };
 
 function isItemUnlocked(idx, subjectId, profile) {
   const freeLimit = FREE_LIMITS[subjectId] ?? Infinity;
@@ -4859,7 +4859,6 @@ import { doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "./firebase";
 
 export const PLANS = [
-  { id: "CL", label: "Customs Law", price: 39, subjects: ["CL"] },
   { id: "TL", label: "Tariff Law", price: 39, subjects: ["TL"] },
   { id: "CDP", label: "Customs Documentation & Procedures", price: 39, subjects: ["CDP"] },
   { id: "PC", label: "Practical Computations", price: 29, subjects: ["PC"] },
