@@ -372,16 +372,34 @@ export function ProgressCircle({ progress, size = 60, strokeWidth = 6, color = "
   );
 }
 
-export function QuizLevelButton({ level, progress, onClick }) {
+// level: one of LEVELS above. progress: 0-100. onClick opens the level.
+// onReset (optional): if passed AND progress > 0, shows a small "↺ Reset"
+// button so the user can wipe just THIS level's saved answers without
+// touching the other levels or the quiz questions themselves. Callers that
+// don't pass onReset (e.g. the Dev Panel quiz preview) keep the old look.
+export function QuizLevelButton({ level, progress, onClick, onReset }) {
   const colorClass = LEVEL_BORDER[level.color] || LEVEL_BORDER.green;
   return (
-    <button onClick={onClick} className={`flex items-center gap-4 rounded-xl border-2 p-4 w-full transition-all ${colorClass}`}>
-      <ProgressCircle progress={progress} color={LEVEL_STROKE[level.color] || LEVEL_STROKE.green} />
-      <div className="flex-1 text-left">
-        <p className="font-semibold text-slate-800 dark:text-slate-100">{level.label}</p>
-        <p className="text-sm text-slate-500 dark:text-slate-400">{level.tagalog} · {progress > 0 ? `${Math.round(progress)}% completed` : "Not started"}</p>
-      </div>
-    </button>
+    <div className={`flex items-center gap-2 rounded-xl border-2 p-4 w-full transition-all ${colorClass}`}>
+      <button onClick={onClick} className="flex min-w-0 flex-1 items-center gap-4 text-left">
+        <ProgressCircle progress={progress} color={LEVEL_STROKE[level.color] || LEVEL_STROKE.green} />
+        <div className="min-w-0 flex-1">
+          <p className="font-semibold text-slate-800 dark:text-slate-100">{level.label}</p>
+          <p className="text-sm text-slate-500 dark:text-slate-400">{level.tagalog} · {progress > 0 ? `${Math.round(progress)}% completed` : "Not started"}</p>
+        </div>
+      </button>
+      {onReset && progress > 0 && (
+        <button
+          type="button"
+          onClick={(e) => { e.stopPropagation(); onReset(); }}
+          title="I-reset ang progress ng level na ito"
+          aria-label={`Reset progress — ${level.label}`}
+          className="flex-shrink-0 whitespace-nowrap rounded-lg border border-slate-200 px-2.5 py-2 text-xs font-medium text-slate-500 active:bg-slate-100 dark:border-slate-600 dark:text-slate-400 dark:active:bg-slate-700"
+        >
+          ↺ Reset
+        </button>
+      )}
+    </div>
   );
 }
 
@@ -445,6 +463,27 @@ export function QuizQuestion({ level, questionData, onAnswer, answered, selected
       )}
     </div>
   );
+}
+
+// Clears the saved progress + saved answers for ONE level of ONE quiz
+// (progressKey = title string for RA10863, or batch id in Dev Panel).
+// Mirrors the exact localStorage keys QuizPlayView below reads/writes, so
+// after calling this, re-opening that level starts fresh at question 1
+// with a clean 0% — the OTHER levels, and the quiz questions themselves,
+// are never touched. Safe to call even if nothing was saved yet.
+export function resetLevelProgress(progressKey, level) {
+  if (!progressKey || !level) return;
+  try {
+    localStorage.removeItem(`quiz_answers_${progressKey}_${level}`);
+  } catch {}
+  try {
+    const key = `quiz_progress_${progressKey}`;
+    const saved = JSON.parse(localStorage.getItem(key) || "{}");
+    if (saved && typeof saved === "object" && level in saved) {
+      delete saved[level];
+      localStorage.setItem(key, JSON.stringify(saved));
+    }
+  } catch {}
 }
 
 // progressKey identifies WHERE to save/read progress (localStorage key
@@ -2701,7 +2740,7 @@ export default function DevPanel() {
 import { useState, useEffect } from "react";
 import staticQuizData from "../data/quizData.json";
 import { getFlattenedEntries } from "../quizStore";
-import { LEVELS, QuizLevelButton, QuizPlayView } from "../components/QuizShared";
+import { LEVELS, QuizLevelButton, QuizPlayView, resetLevelProgress } from "../components/QuizShared";
 
 // Helper to extract Roman numeral from title string like "Title I – ..."
 function extractTitleNumber(title) {
@@ -2783,6 +2822,20 @@ function QuizTitleCard({ title, data, onSelectLevel }) {
     onSelectLevel(title, data, levelId);
   };
 
+  // Reset lang ang progress ng ISANG level ng ISANG title. Hindi nagagalaw
+  // ang mga tanong (data) o ang progress ng ibang levels/titles.
+  const handleResetLevel = (levelId) => {
+    const levelLabel = LEVELS.find((l) => l.id === levelId)?.label || levelId;
+    const ok = confirm(`I-reset ang progress mo sa "${levelLabel}" ng ${title}?\n\nMagsisimula ulit ito sa Tanong 1 — hindi madedelete ang mga tanong, mga sagot mo lang dito ang mabubura.`);
+    if (!ok) return;
+    resetLevelProgress(title, levelId);
+    setProgress((prev) => {
+      const next = { ...prev };
+      delete next[levelId];
+      return next;
+    });
+  };
+
   const total = Object.values(totalQuestions).reduce((a, b) => a + b, 0);
 
   return (
@@ -2798,7 +2851,13 @@ function QuizTitleCard({ title, data, onSelectLevel }) {
           {LEVELS.map((level) => {
             if (!totalQuestions[level.id]) return null;
             return (
-              <QuizLevelButton key={level.id} level={level} progress={progress[level.id] || 0} onClick={() => handleLevelSelect(level.id)} />
+              <QuizLevelButton
+                key={level.id}
+                level={level}
+                progress={progress[level.id] || 0}
+                onClick={() => handleLevelSelect(level.id)}
+                onReset={() => handleResetLevel(level.id)}
+              />
             );
           })}
         </div>

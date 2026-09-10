@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import QuizPage, { loadQuizData } from "./QuizPage";
 import { SubjectQuizPlay } from "./SubjectDashboard";
+import CustomQuizHub from "./CustomQuizHub";
 import { ProgressCircle, QuizPlayView } from "../components/QuizShared";
 import { getSubjectStats, resetSubjectProgress } from "../subjectQuizStore";
 import { getLastQuizPosition } from "../quizStore";
@@ -128,6 +129,17 @@ export default function QuizHub({ onExit }) {
             {["tl", "cdp", "pc"].map((id) => (
               <SubjectCard key={id} subjectId={id} expanded={expandedCard === id} onToggle={() => toggleCard(id)} onPlay={handlePlaySubject} />
             ))}
+            <button
+              onClick={() => setActiveView({ type: "custom-quiz" })}
+              className="col-span-2 flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-4 text-left shadow-card transition-all active:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:active:bg-slate-700/50"
+            >
+              <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-violet-400 to-fuchsia-600 text-lg" aria-hidden>🧩</span>
+              <div className="min-w-0 flex-1">
+                <p className="truncate font-bold text-navy-900 dark:text-slate-100">Your Own Quiz</p>
+                <p className="truncate text-xs text-slate-400 dark:text-slate-500">Gumawa ng sarili mong subject at tanong</p>
+              </div>
+              <span className="flex-shrink-0 text-slate-300 dark:text-slate-600" aria-hidden>→</span>
+            </button>
           </div>
         )}
         {activeView?.type === "subject-play" && (
@@ -136,6 +148,7 @@ export default function QuizHub({ onExit }) {
           </div>
         )}
         {activeView?.type === "ra10863-titles" && <QuizPage />}
+        {activeView?.type === "custom-quiz" && <CustomQuizHub onBack={backToHub} />}
         {activeView?.type === "ra10863-play" && (
           <div className="mx-auto max-w-2xl p-4">
             <QuizPlayView
