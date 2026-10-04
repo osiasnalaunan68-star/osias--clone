@@ -10,6 +10,7 @@ export const SUBJECTS = [
   { id: "cdp", label: "CDP", kind: "flat" },
   { id: "tl", label: "TL", kind: "flat" },
   { id: "pc", label: "PC", kind: "flat" },
+  { id: "tcp", label: "TCP", kind: "flat" },
 ];
 
 export const FLAT_SUBJECTS = SUBJECTS.filter((s) => s.kind === "flat");

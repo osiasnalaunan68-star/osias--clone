@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../authContext";
 import { PLANS, PAYMENT_METHODS, generateReferenceCode, submitPendingPurchase } from "../payments";
 
-const SUBJECT_LABELS = { TL: "Tariff Law", CDP: "Customs Documentation & Procedures", PC: "Practical Computations" };
+const SUBJECT_LABELS = { TL: "Tariff Law", CDP: "Customs Documentation & Procedures", PC: "Practical Computations", TCP: "Tariff Commission Primer" };
 
 function formatDate(ts) {
   try {
@@ -91,7 +91,7 @@ export default function AccountOverlay() {
     }
   };
 
-  const allSubscribed = Object.keys(SUBJECT_LABELS).every((code) => profile?.subscriptions?.[code]);
+  const allSubscribed = Object.keys(SUBJECT_LABELS).filter((c) => c !== "TCP").every((code) => profile?.subscriptions?.[code]);
   const activeMethod = PAYMENT_METHODS.find((m) => m.id === selectedMethod) || null;
 
   return (

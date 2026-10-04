@@ -245,12 +245,14 @@ import defaultCL from './data/defaultQuizzes/cl.json';
 import defaultCDP from './data/defaultQuizzes/cdp.json';
 import defaultTL from './data/defaultQuizzes/tl.json';
 import defaultPC from './data/defaultQuizzes/pc.json';
+import defaultTCP from './data/defaultQuizzes/tcp.json';
 
 const defaultDataMap = {
   cl: defaultCL,
   cdp: defaultCDP,
   tl: defaultTL,
   pc: defaultPC,
+  tcp: defaultTCP,
 };
 
 export function seedDefaultQuizzes() {

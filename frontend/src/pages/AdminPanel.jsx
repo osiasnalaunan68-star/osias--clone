@@ -3,7 +3,7 @@ import { collection, getDocs, doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { PLANS, PAYMENT_METHODS } from "../payments";
 
-const SUBJECT_CODES = ["CL", "CDP", "TL", "PC"];
+const SUBJECT_CODES = ["CL", "CDP", "TL", "PC", "TCP"];
 const SUBJECT_LABELS = Object.fromEntries(
   PLANS.filter((p) => p.id !== "BUNDLE").map((p) => [p.id, p.label])
 );

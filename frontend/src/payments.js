@@ -13,6 +13,7 @@ export const PLANS = [
   { id: "TL", label: "Tariff Law", price: 39, subjects: ["TL"] },
   { id: "CDP", label: "Customs Documentation & Procedures", price: 39, subjects: ["CDP"] },
   { id: "PC", label: "Practical Computations", price: 29, subjects: ["PC"] },
+  { id: "TCP", label: "Tariff Commission Primer", price: 399, subjects: ["TCP"] },
   { id: "BUNDLE", label: "Bundle — Lahat ng 4 Subjects", price: 99, subjects: ["CL", "TL", "CDP", "PC"] },
 ];
 

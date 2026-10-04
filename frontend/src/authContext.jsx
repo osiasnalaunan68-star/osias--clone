@@ -60,7 +60,7 @@ export function AuthProvider({ children }) {
         fullName: null,
         createdAt: serverTimestamp(),
         devices: [{ id: currentDeviceId, label: guessDeviceLabel(), lastActive: Date.now() }],
-        subscriptions: { CL: false, TL: false, CDP: false, PC: false },
+        subscriptions: { CL: false, TL: false, CDP: false, PC: false, TCP: false },
       };
       await setDoc(ref, fresh);
       setProfile(fresh);
