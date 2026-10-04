@@ -17210,6 +17210,10164 @@
   }
 }```
 
+## File: ./frontend/src/data/defaultQuizzes/tcp.json
+```
+{
+  "1": {
+    "question": "When was Republic Act No. 10863 (Customs Modernization and Tariff Act) signed into law?",
+    "choices": {
+      "A": "28 July 2017",
+      "B": "30 May 2016",
+      "C": "20 July 1991",
+      "D": "17 October 2011"
+    },
+    "correct": "B",
+    "reason": "RA 10863 (CMTA) was signed into law on 30 May 2016 (Primer p.1)."
+  },
+  "2": {
+    "question": "Which laws were repealed by the CMTA?",
+    "choices": {
+      "A": "RA 8435 and RA 9281",
+      "B": "EO 470 and EO 20",
+      "C": "PD 1464 (Tariff and Customs Code of 1978, as amended) and PD 1853 of 1982",
+      "D": "EO 61 and EO 574"
+    },
+    "correct": "C",
+    "reason": "The CMTA repealed PD 1464 (TCCP of 1978, as amended) and PD 1853 of 1982 (Primer p.1)."
+  },
+  "3": {
+    "question": "PD No. 1853 of 1982, which was repealed by the CMTA, required what?",
+    "choices": {
+      "A": "Deposits of duties at the time of opening of letter of credit covering imports",
+      "B": "Payment of duties only after release of the goods",
+      "C": "Pre-shipment inspection of all imports",
+      "D": "Registration of all customs brokers"
+    },
+    "correct": "A",
+    "reason": "PD 1853 required deposits of duties at the time of opening of letter of credit covering imports and for other purposes (Primer p.1)."
+  },
+  "4": {
+    "question": "Which of the following is NOT an objective of the CMTA?",
+    "choices": {
+      "A": "To adopt clear and transparent customs rules consistent with international standards",
+      "B": "To employ modern practices and utilize information and communications technology",
+      "C": "To institute professionalism and meritocracy in customs tax administration",
+      "D": "To ban the importation of all competing agricultural products"
+    },
+    "correct": "D",
+    "reason": "The listed CMTA objectives include harmonized procedures, transparency, consultation, fair appellate remedies, modern practices and meritocracy. Banning all competing agricultural imports is not one of them (Primer p.1)."
+  },
+  "5": {
+    "question": "Which of the following goods is PROHIBITED (not merely restricted) for importation and exportation under the CMTA?",
+    "choices": {
+      "A": "Firearms and weapons of war",
+      "B": "Infringing goods as defined under the Intellectual Property Code and related laws",
+      "C": "Lottery and sweepstakes tickets",
+      "D": "Opium pipes or parts thereof"
+    },
+    "correct": "B",
+    "reason": "Infringing goods are in the prohibited list. Firearms, lottery tickets and opium pipes are in the list of goods prohibited 'except when authorized by law or regulation' (Primer pp.2-3)."
+  },
+  "6": {
+    "question": "Which of the following may be imported only by the government or a person duly authorized by the Dangerous Drugs Board for medicinal purposes?",
+    "choices": {
+      "A": "Marijuana, opium, poppies, coca leaves, heroin or other narcotics or synthetic drugs",
+      "B": "Opium pipes",
+      "C": "Loaded dice and marked cards",
+      "D": "Lottery tickets"
+    },
+    "correct": "A",
+    "reason": "The exception for the government or persons authorized by the Dangerous Drugs Board for medicinal purposes applies to narcotics and synthetic drugs (Primer p.3)."
+  },
+  "7": {
+    "question": "The restriction on the importation or exportation of the restricted goods under the CMTA shall also include the restriction on their:",
+    "choices": {
+      "A": "storage",
+      "B": "sale",
+      "C": "repair",
+      "D": "transit"
+    },
+    "correct": "D",
+    "reason": "The restriction to import or export the goods shall include the restriction on their transit (Primer p.3)."
+  },
+  "8": {
+    "question": "The Tariff Commission may deputize or delegate its function of rendering rulings on tariff classification disputes to an appropriate government agency, but such delegation shall NOT extend beyond how many years from the effectivity of the CMTA?",
+    "choices": {
+      "A": "One (1) year",
+      "B": "Two (2) years",
+      "C": "Three (3) years",
+      "D": "Five (5) years"
+    },
+    "correct": "C",
+    "reason": "The delegation shall not extend beyond three (3) years from the effectivity of the Act (Primer p.4)."
+  },
+  "9": {
+    "question": "Under Section 1100, within how many days from receipt of a properly documented application must the Tariff Commission render a ruling on advance ruling for tariff classification?",
+    "choices": {
+      "A": "15 days",
+      "B": "30 days",
+      "C": "60 days",
+      "D": "90 days"
+    },
+    "correct": "B",
+    "reason": "The Commission shall render a ruling within thirty (30) days from receipt of a properly documented application (Primer p.4)."
+  },
+  "10": {
+    "question": "Rulings of the Tariff Commission on commodity classification are binding upon the Bureau of Customs unless:",
+    "choices": {
+      "A": "the Secretary of Finance shall rule otherwise",
+      "B": "the President shall rule otherwise",
+      "C": "the Commissioner of Customs shall rule otherwise",
+      "D": "the NEDA Board shall rule otherwise"
+    },
+    "correct": "A",
+    "reason": "Section 1100: the Commission's rulings on commodity classification are binding upon the Bureau unless the Secretary of Finance shall rule otherwise (Primer p.4)."
+  },
+  "11": {
+    "question": "Under Section 1102, who acts on an application for advance ruling on origin, and within what period from receipt of the application and supporting documents?",
+    "choices": {
+      "A": "Tariff Commission - 60 days",
+      "B": "NEDA - 30 days",
+      "C": "Secretary of Finance - 15 days",
+      "D": "Commissioner of Customs - 30 days"
+    },
+    "correct": "D",
+    "reason": "The application for advance ruling on origin is filed with the Commissioner, who shall act on it within thirty (30) days (Primer p.4)."
+  },
+  "12": {
+    "question": "Under the Flexible Clause (Section 1608), the increased rate of import duty shall in no case be higher than a maximum of:",
+    "choices": {
+      "A": "10% ad valorem",
+      "B": "50% ad valorem",
+      "C": "100% ad valorem",
+      "D": "200% ad valorem"
+    },
+    "correct": "C",
+    "reason": "Section 1608(a)(1): in no case shall the increased rate be higher than one hundred percent (100%) ad valorem (Primer p.5)."
+  },
+  "13": {
+    "question": "Under Section 1608(a)(3), the President may impose an additional duty on all imports not exceeding:",
+    "choices": {
+      "A": "10% ad valorem",
+      "B": "5% ad valorem",
+      "C": "20% ad valorem",
+      "D": "30% ad valorem"
+    },
+    "correct": "A",
+    "reason": "The additional duty on all imports shall not exceed ten percent (10%) ad valorem (Primer p.5)."
+  },
+  "14": {
+    "question": "Under the Flexible Clause (Section 1608), the President exercises the power to modify import duties upon the recommendation of the:",
+    "choices": {
+      "A": "Tariff Commission",
+      "B": "NEDA",
+      "C": "Department of Finance",
+      "D": "Bureau of Customs"
+    },
+    "correct": "B",
+    "reason": "Section 1608(a): the President, upon the recommendation of the NEDA, is empowered to increase, reduce or remove duties (Primer p.5)."
+  },
+  "15": {
+    "question": "After the termination of public hearings, within how many days shall the Tariff Commission submit its findings and recommendations to the NEDA under Section 1608(b)?",
+    "choices": {
+      "A": "15 days",
+      "B": "45 days",
+      "C": "60 days",
+      "D": "30 days"
+    },
+    "correct": "D",
+    "reason": "The Commission shall submit its findings and recommendations to the NEDA within thirty (30) days after the termination of the public hearings (Primer p.5)."
+  },
+  "16": {
+    "question": "When does an order issued by the President under Section 1608 take effect?",
+    "choices": {
+      "A": "Immediately upon signing",
+      "B": "Fifteen (15) days after promulgation",
+      "C": "Thirty (30) days after promulgation, except an additional duty not exceeding 10% which takes effect at the President's discretion",
+      "D": "Sixty (60) days after promulgation"
+    },
+    "correct": "C",
+    "reason": "Section 1608(d): orders take effect thirty (30) days after promulgation, except the additional duty not exceeding 10% ad valorem, which takes effect at the discretion of the President (Primer p.5)."
+  },
+  "17": {
+    "question": "The power delegated to the President under Section 1608 may be exercised only when:",
+    "choices": {
+      "A": "Congress is in session",
+      "B": "Congress is not in session",
+      "C": "the Supreme Court allows it",
+      "D": "a state of emergency is declared"
+    },
+    "correct": "B",
+    "reason": "Section 1608(e): the delegated power shall be exercised only when Congress is not in session (Primer p.5)."
+  },
+  "18": {
+    "question": "The power delegated to the President under Section 1608 may be withdrawn or terminated by Congress through a:",
+    "choices": {
+      "A": "joint resolution",
+      "B": "simple Senate resolution",
+      "C": "executive order",
+      "D": "court order"
+    },
+    "correct": "A",
+    "reason": "Section 1608(f): the power may be withdrawn or terminated by Congress through a joint resolution (Primer p.5)."
+  },
+  "19": {
+    "question": "Under Section 1608(c), in modifying the form of duty, the ad valorem or specific equivalents shall be based on imports from:",
+    "choices": {
+      "A": "the average of ASEAN countries",
+      "B": "the lowest-cost supplier country",
+      "C": "the principal competing foreign country for the most recent representative period",
+      "D": "the world market price index"
+    },
+    "correct": "C",
+    "reason": "The corresponding ad valorem or specific equivalents of the duty with respect to imports from the principal competing foreign country for the most recent representative period shall be used as basis (Primer p.5)."
+  },
+  "20": {
+    "question": "Before a trade agreement is concluded, the Tariff Commission shall seek information and advice from which agencies under Section 1609(d)?",
+    "choices": {
+      "A": "DOJ, DILG and DOLE",
+      "B": "DTI, DOLE and DOH",
+      "C": "DepEd, DOST and DOTr",
+      "D": "DTI, DA, DOF, DENR, DFA and BSP"
+    },
+    "correct": "D",
+    "reason": "Section 1609(d) names the DTI, DA, DOF, DENR, DFA and BSP, and other sources the Commission deems appropriate (Primer p.6)."
+  },
+  "21": {
+    "question": "Under Section 1609(b), the President may suspend the application of a concession to goods of a specific country because of acts or policies which tend to defeat the purposes of the section, including the operations of:",
+    "choices": {
+      "A": "international cartels",
+      "B": "local cooperatives",
+      "C": "customs brokers",
+      "D": "foreign embassies"
+    },
+    "correct": "A",
+    "reason": "Section 1609(b) mentions acts or policies, including the operations of international cartels (Primer p.6)."
+  },
+  "22": {
+    "question": "Under Section 1609(e), who evaluates the Commission's report on a trade agreement and submits recommendations to the President?",
+    "choices": {
+      "A": "DTI",
+      "B": "NEDA",
+      "C": "DOF",
+      "D": "Bureau of Customs"
+    },
+    "correct": "B",
+    "reason": "Section 1609(e)(2): the NEDA shall evaluate the report of the Commission and submit recommendations to the President (Primer p.6)."
+  },
+  "23": {
+    "question": "Section 1609(c) states that nothing in the section shall be construed to give authority to:",
+    "choices": {
+      "A": "negotiate trade agreements",
+      "B": "suspend concessions",
+      "C": "modify import quotas",
+      "D": "cancel or reduce the indebtedness of any foreign country to the Philippines"
+    },
+    "correct": "D",
+    "reason": "Nothing shall be construed to give authority to cancel or reduce the indebtedness of any foreign country to the Philippines or any claim of the Philippines against any foreign country (Primer p.6)."
+  },
+  "24": {
+    "question": "How many Tariff Reform Programs (TRPs) were undertaken starting from 1980?",
+    "choices": {
+      "A": "Two (2)",
+      "B": "Three (3)",
+      "C": "Four (4)",
+      "D": "Five (5)"
+    },
+    "correct": "C",
+    "reason": "Four (4) TRPs were undertaken from 1980 (Primer p.8)."
+  },
+  "25": {
+    "question": "TRP-I was undertaken during which period?",
+    "choices": {
+      "A": "1981 to 1985",
+      "B": "1986 to 1990",
+      "C": "1991 to 1995",
+      "D": "1995 to 2000"
+    },
+    "correct": "A",
+    "reason": "TRP-I proceeded as scheduled from 1981 to 1985 and covered Chapters 1 to 97 of Section 104 of the TCCP (Primer p.8)."
+  },
+  "26": {
+    "question": "TRP-I narrowed the tariff band from 10%-100% to 10%-50%. The average nominal tariff fell from 42% in 1981 to what level at the end of TRP-I?",
+    "choices": {
+      "A": "20%",
+      "B": "28%",
+      "C": "13%",
+      "D": "8%"
+    },
+    "correct": "B",
+    "reason": "The average nominal tariff fell from 42% in 1981 to 28% at the end of TRP-I (Primer p.9)."
+  },
+  "27": {
+    "question": "EO 470, signed on 20 July 1991 and effective 24 August 1991 under TRP-II, covered about what share of total tariff lines?",
+    "choices": {
+      "A": "50%",
+      "B": "60%",
+      "C": "80%",
+      "D": "95%"
+    },
+    "correct": "C",
+    "reason": "EO 470 covered about 80% of the total number of tariff lines, with a five-year phase-in from 1991 to 1995 (Primer p.9)."
+  },
+  "28": {
+    "question": "After TRP-II in July 1995, almost 95% of total tariff lines were dutiable at:",
+    "choices": {
+      "A": "0%, 5%, 15% and 25%",
+      "B": "3%, 5%, 7% and 10%",
+      "C": "5%, 10%, 15% and 20%",
+      "D": "3%, 10%, 20% and 30%"
+    },
+    "correct": "D",
+    "reason": "Almost 95% of lines were dutiable at 3%, 10%, 20% and 30%; the rest were at 0%, 5%, 15%, 25% and 50% (Primer p.9)."
+  },
+  "29": {
+    "question": "Under TRP-II, the number of HS tariff lines was reduced from 6,193 to 5,561 due to:",
+    "choices": {
+      "A": "simplification of the tariff nomenclature, where lines that would have the same rates were combined into one",
+      "B": "removal of agricultural products from coverage",
+      "C": "creation of new tariff lines for IT products",
+      "D": "adoption of AHTN 2017"
+    },
+    "correct": "A",
+    "reason": "The 10% reduction was due to simplification of the tariff nomenclature, combining lines that would eventually have the same duty rate, for ease of customs administration (Primer p.9)."
+  },
+  "30": {
+    "question": "The issuance of which EO on 18 July 1994 marked the onset of TRP-III?",
+    "choices": {
+      "A": "EO 470",
+      "B": "EO 189",
+      "C": "EO 264",
+      "D": "EO 461"
+    },
+    "correct": "B",
+    "reason": "The issuance of EO 189 on 18 July 1994 marked the onset of TRP-III (Primer p.10)."
+  },
+  "31": {
+    "question": "Under EO 264, the final rate structure under TRP-III will consist of a uniform tariff rate of:",
+    "choices": {
+      "A": "3% in 2003",
+      "B": "10% in 2004",
+      "C": "7% in 2005",
+      "D": "5% in 2004"
+    },
+    "correct": "D",
+    "reason": "The final structure is a uniform 5% in 2004, after a penultimate stage of 3% (raw materials and intermediate goods) and 10% (finished products) in 2003 (Primer p.10)."
+  },
+  "32": {
+    "question": "EO 313 (effective 07 May 1996) provided interim tariff protection to sensitive agricultural products and identified a total of how many tariff lines subject to tariff quotas?",
+    "choices": {
+      "A": "144",
+      "B": "193",
+      "C": "170",
+      "D": "722"
+    },
+    "correct": "C",
+    "reason": "EO 313 identified a total of 170 tariff lines subject to tariff quotas as part of the Philippines' WTO commitment (Primer p.10)."
+  },
+  "33": {
+    "question": "The more flexible tariff structure adopted under TRP-IV consisted of which rates?",
+    "choices": {
+      "A": "3%, 10%, 20% and 30%",
+      "B": "3%, 5%, 7%, 10%, 15%, 20%, 25% and 30%",
+      "C": "0%, 5%, 10% and 15%",
+      "D": "A uniform 5%"
+    },
+    "correct": "B",
+    "reason": "TRP-IV used 3%, 5%, 7%, 10%, 15%, 20%, 25% and 30% in place of the earlier 3%, 10%, 20% and 30% (Primer p.11)."
+  },
+  "34": {
+    "question": "How many industries identified as 'Philippine Winners' were initially targeted for re-calibration of tariff rates under TRP-IV?",
+    "choices": {
+      "A": "22",
+      "B": "12",
+      "C": "32",
+      "D": "42"
+    },
+    "correct": "A",
+    "reason": "Twenty-two (22) industries identified as 'Philippine Winners' were initially targeted (Primer p.11)."
+  },
+  "35": {
+    "question": "EO 486 (effective 10 July 1998) reduced the number of tariff lines subject to tariff quotas from 170 under EO 313 to:",
+    "choices": {
+      "A": "100",
+      "B": "162",
+      "C": "144",
+      "D": "193"
+    },
+    "correct": "C",
+    "reason": "EO 486 reduced the tariff lines subject to quotas from 170 to 144 (Primer p.11)."
+  },
+  "36": {
+    "question": "The 2015 comprehensive review of the MFN tariff structure (for 2016 to 2020) was concluded upon the issuance of which EO?",
+    "choices": {
+      "A": "EO 61",
+      "B": "EO 574",
+      "C": "EO 470",
+      "D": "EO 20, s. 2017"
+    },
+    "correct": "D",
+    "reason": "The review was concluded with EO 20 signed on 27 April 2017 (Primer p.12)."
+  },
+  "37": {
+    "question": "Under EO 61 (signed 17 October 2011, effective 14 January 2012), tariff rates were maintained at 2010 levels for what percentage of tariff lines?",
+    "choices": {
+      "A": "96%",
+      "B": "85%",
+      "C": "80%",
+      "D": "14%"
+    },
+    "correct": "A",
+    "reason": "Tariff rates under EO 61 were maintained at 2010 levels for 96% of tariff lines (Primer p.12)."
+  },
+  "38": {
+    "question": "EO 20, s. 2017 maintained the tariff rates for 85% of total tariff lines. How many lines is this?",
+    "choices": {
+      "A": "722",
+      "B": "8,460",
+      "C": "10,004",
+      "D": "11,058"
+    },
+    "correct": "B",
+    "reason": "EO 20 maintained rates for 85% of total tariff lines (8,460 lines) and reduced rates for 722 lines (Primer p.13)."
+  },
+  "39": {
+    "question": "The adoption of AHTN 2017 on 28 July 2017 increased the number of Philippine tariff lines by 11%, from 10,004 to:",
+    "choices": {
+      "A": "9,822",
+      "B": "8,460",
+      "C": "11,058",
+      "D": "9,820"
+    },
+    "correct": "C",
+    "reason": "The tariff lines increased from 10,004 (AHTN 2012) to 11,058 (AHTN 2017) (Primer p.15)."
+  },
+  "40": {
+    "question": "As of June 2020, which product has the highest MFN tariff rate, and at what rate?",
+    "choices": {
+      "A": "Rice at 30%",
+      "B": "Coffee at 35%",
+      "C": "Sugar at 50%",
+      "D": "Sugar at 65%"
+    },
+    "correct": "D",
+    "reason": "Rice and sugar have the highest MFN rates at 50% and 65%, respectively (Primer p.15)."
+  },
+  "41": {
+    "question": "EO 82 (took effect 17 June 2019) modified the rates of duty on:",
+    "choices": {
+      "A": "crude petroleum oil",
+      "B": "mechanically deboned meat of chicken and turkey, and turkey meat and its offals",
+      "C": "36 non-rice tariff lines",
+      "D": "IT products under the ITA"
+    },
+    "correct": "B",
+    "reason": "EO 82 covered mechanically deboned meat of chicken, and turkey, and turkey meat and its offals (Primer pp.14, 20)."
+  },
+  "42": {
+    "question": "EO 113 (took effect 6 May 2020) temporarily modified the MFN rates of import duty on:",
+    "choices": {
+      "A": "crude petroleum oil and refined petroleum products",
+      "B": "cement and cement clinker",
+      "C": "milling wheat",
+      "D": "motor vehicles"
+    },
+    "correct": "A",
+    "reason": "EO 113 covers crude petroleum oil and refined petroleum products under Section 1611 of the CMTA (Primer pp.14, 20)."
+  },
+  "43": {
+    "question": "EO 23 (took effect 24 May 2017) was issued in relation to:",
+    "choices": {
+      "A": "the ITA Expansion Schedule",
+      "B": "the comprehensive tariff review of 2015",
+      "C": "36 non-rice tariff lines, in relation to the special treatment for rice under the WTO",
+      "D": "the APEC environmental goods list"
+    },
+    "correct": "C",
+    "reason": "EO 23 covered 36 non-rice tariff lines in relation to the special treatment of rice under the WTO (Primer p.14)."
+  },
+  "44": {
+    "question": "In the last fifteen (15) years, the overall average MFN tariffs stayed within the range of:",
+    "choices": {
+      "A": "3% to 4%",
+      "B": "4% to 5%",
+      "C": "9% to 10%",
+      "D": "7% to 8%"
+    },
+    "correct": "D",
+    "reason": "Overall average tariffs stayed within 7% to 8% over the last 15 years (Table 1.1, Primer p.14)."
+  },
+  "45": {
+    "question": "The Effective Protection Rate (EPR) is the percentage excess of domestic value added, made possible by tariffs and other protective measures on the product and its inputs, over:",
+    "choices": {
+      "A": "the nominal tariff rate",
+      "B": "world market value added",
+      "C": "the border price",
+      "D": "total production cost"
+    },
+    "correct": "B",
+    "reason": "Annex A defines EPR as the percentage excess of domestic value added over world market value added (Primer p.21)."
+  },
+  "46": {
+    "question": "In the EPR formula, what does Pbj represent?",
+    "choices": {
+      "A": "Border price of the product",
+      "B": "Selling price of the product, net of sales tax",
+      "C": "Cost of imported raw materials used",
+      "D": "Actual tariff rate on material input i"
+    },
+    "correct": "A",
+    "reason": "Pbj is the border price of the product, while Psj is the selling price net of sales tax (Annex A, Primer p.21)."
+  },
+  "47": {
+    "question": "In the EPR formula, Aij(m) represents:",
+    "choices": {
+      "A": "cost of local raw materials used",
+      "B": "1 + value added tax",
+      "C": "cost of imported raw materials used",
+      "D": "selling price net of sales tax"
+    },
+    "correct": "C",
+    "reason": "Aij(m) is the cost of imported raw materials used. Aij(l) is the cost of local raw materials (Annex A, Primer p.21)."
+  },
+  "48": {
+    "question": "EO 890 (10 June 2010) eliminated the 3% duty on crude oil, petroleum products and asphalts imported from:",
+    "choices": {
+      "A": "ASEAN countries only",
+      "B": "Japan only",
+      "C": "all countries",
+      "D": "non-ASEAN sources"
+    },
+    "correct": "D",
+    "reason": "EO 890 eliminated the 3% duty on crude oil, petroleum products and asphalts imported from non-ASEAN (Table 1.3, Primer p.19)."
+  },
+  "49": {
+    "question": "EO 418 (04 April 2005) temporarily imposed an additional specific duty of Php500,000 on:",
+    "choices": {
+      "A": "all new motor vehicles",
+      "B": "used motor vehicles except trucks, buses and special purpose vehicles",
+      "C": "hybrid vehicles",
+      "D": "CKD parts for low-displacement vehicles"
+    },
+    "correct": "B",
+    "reason": "EO 418 imposed the additional specific duty on used motor vehicles except trucks, buses and special purpose vehicles. EO 477 later amended it (Table 1.3, Primer p.18)."
+  },
+  "50": {
+    "question": "Which EO provided a recalibrated tariff structure as a result of the 2005 comprehensive tariff review?",
+    "choices": {
+      "A": "EO 574",
+      "B": "EO 61",
+      "C": "EO 20",
+      "D": "EO 470"
+    },
+    "correct": "A",
+    "reason": "EO 574 (signed 04 November 2006) provided the recalibrated structure from the 2005 review, which took effect in 2007 (Table 1.3, Primer pp.12, 18)."
+  },
+  "51": {
+    "question": "When did RA No. 11203 (The Rice Tariffication Law) take effect?",
+    "choices": {
+      "A": "14 February 2019",
+      "B": "5 March 2019",
+      "C": "5 April 2019",
+      "D": "28 July 2017"
+    },
+    "correct": "B",
+    "reason": "RA 11203 was signed on 14 February 2019 and took effect on 5 March 2019 (Primer p.22)."
+  },
+  "52": {
+    "question": "RA No. 11203 amends which law?",
+    "choices": {
+      "A": "RA 8435 (AFMA)",
+      "B": "RA 9281",
+      "C": "RA 8178 (Agricultural Tariffication Act)",
+      "D": "RA 10863 (CMTA)"
+    },
+    "correct": "C",
+    "reason": "RA 11203 amends RA No. 8178, otherwise known as the Agricultural Tariffication Act (Primer p.22)."
+  },
+  "53": {
+    "question": "As defined in RA 11203, 'tariffication' refers to:",
+    "choices": {
+      "A": "the lifting of all existing quantitative restrictions such as import quotas or prohibitions on agricultural products and replacing them with tariffs",
+      "B": "the increase of tariffs on all agricultural products to 100%",
+      "C": "the replacement of tariffs with import quotas",
+      "D": "the exemption of rice from all duties and taxes"
+    },
+    "correct": "A",
+    "reason": "Tariffication is the lifting of all existing QRs such as import quotas or prohibitions on agricultural products and replacing these restrictions with tariffs (Primer p.22, footnote 3)."
+  },
+  "54": {
+    "question": "To give farmers equivalent protection, RA 11203 imposes a tariff rate on rice imports of at least:",
+    "choices": {
+      "A": "5%",
+      "B": "10%",
+      "C": "20%",
+      "D": "35%"
+    },
+    "correct": "D",
+    "reason": "One objective is to provide farmers equivalent protection with the imposition of 35% or higher tariff rates on rice imports (Primer p.22)."
+  },
+  "55": {
+    "question": "Under Section 5 of RA 11203, the bound rate on rice imported outside the ASEAN region is 180% or the tariff equivalent calculated by the Tariff Commission (WTO methodology, approved by the NEDA Board), whichever is:",
+    "choices": {
+      "A": "lower",
+      "B": "the average of the two",
+      "C": "higher",
+      "D": "set by the Secretary of Finance"
+    },
+    "correct": "C",
+    "reason": "The bound rate shall be 180% or the tariff equivalent calculated by the Commission and approved by the NEDA Board, whichever is higher (Primer p.22)."
+  },
+  "56": {
+    "question": "Which of the following is NOT an objective of the Rice Tariffication Law?",
+    "choices": {
+      "A": "Lower domestic rice prices to levels affordable to the majority of the population",
+      "B": "Allow private traders, big or small, to participate in importing rice",
+      "C": "Give farmers the opportunity to earn in the world market by lifting the restriction on rice exports",
+      "D": "Increase government intervention in the domestic rice market"
+    },
+    "correct": "D",
+    "reason": "The law aims for the market to function effectively with reduced or no government intervention, so increasing intervention is not an objective (Primer p.22)."
+  },
+  "57": {
+    "question": "The IRR of RA 11203 was issued through Joint Memorandum Circular No. 01-2019 of which agencies?",
+    "choices": {
+      "A": "NEDA, DA and DBM",
+      "B": "DOF, DTI and BOC",
+      "C": "DA, DTI and the Tariff Commission",
+      "D": "NEDA, DOF and BSP"
+    },
+    "correct": "A",
+    "reason": "JMC No. 01-2019 of the NEDA, DA and DBM was issued on 05 April 2019 (Primer p.23)."
+  },
+  "58": {
+    "question": "Among the salient provisions of the IRR of RA 11203 are guidelines on:",
+    "choices": {
+      "A": "customs valuation of imported rice",
+      "B": "the President's powers and the enforcement of safeguard measures in emergencies like a sudden rise or drop in domestic prices",
+      "C": "registration of rice importers with the BOI",
+      "D": "advance rulings on rice classification"
+    },
+    "correct": "B",
+    "reason": "The IRR contains guidelines on the President's powers and safeguard measures in emergency situations such as sudden rise or drop in domestic prices (Primer p.23)."
+  },
+  "59": {
+    "question": "RA 11203 already took effect on 05 March 2019, before its IRR was issued, because it has:",
+    "choices": {
+      "A": "a retroactive clause",
+      "B": "a Supreme Court order",
+      "C": "self-executing provisions such as on applicable tariff rates",
+      "D": "a presidential proclamation"
+    },
+    "correct": "C",
+    "reason": "RA 11203 took effect on 05 March 2019 with its self-executing provisions such as on applicable tariff rates (Primer p.23)."
+  },
+  "60": {
+    "question": "RA No. 8502 is otherwise known as the:",
+    "choices": {
+      "A": "Jewelry Industry Development Act of 1998",
+      "B": "Export Development Act of 1994",
+      "C": "Special Economic Zone Act of 1995",
+      "D": "Omnibus Investments Code"
+    },
+    "correct": "A",
+    "reason": "RA 8502 is the Jewelry Industry Development Act of 1998, signed on 13 February 1998 (Primer p.24)."
+  },
+  "61": {
+    "question": "RA 8502 was signed on 13 February 1998. When did it take effect?",
+    "choices": {
+      "A": "13 February 1998",
+      "B": "25 January 1999",
+      "C": "14 February 2019",
+      "D": "09 July 1998"
+    },
+    "correct": "D",
+    "reason": "RA 8502 took effect on 09 July 1998. Its IRR (DOF and BOC) took effect on 25 January 1999 (Primer p.24)."
+  },
+  "62": {
+    "question": "Under RA 8502, jewelry enterprises get an additional deduction from taxable income equal to what percentage of expenses incurred in approved training schemes?",
+    "choices": {
+      "A": "25%",
+      "B": "50%",
+      "C": "75%",
+      "D": "100%"
+    },
+    "correct": "B",
+    "reason": "The incentive is an additional deduction of 50% of expenses incurred in training schemes approved by the appropriate agency (Primer p.24)."
+  },
+  "63": {
+    "question": "Which of the following is an incentive granted under RA 8502?",
+    "choices": {
+      "A": "Exemption from income tax for ten years",
+      "B": "Zero duty on all imported finished jewelry",
+      "C": "Inclusion of locally manufactured jewelry in the government's tourist duty free shops, including promotion, advertisement and sale",
+      "D": "Waiver of all BOI registration requirements"
+    },
+    "correct": "C",
+    "reason": "RA 8502 incentives include zero duty on imported raw materials and capital equipment, excise tax exemption on jewelry, and inclusion of local jewelry in tourist duty free shops (Primer p.24)."
+  },
+  "64": {
+    "question": "To qualify for incentives under Section 4 of RA 8502, a jewelry enterprise must be duly registered with the:",
+    "choices": {
+      "A": "Tariff Commission",
+      "B": "Board of Investments",
+      "C": "Bureau of Customs",
+      "D": "Department of Trade and Industry"
+    },
+    "correct": "B",
+    "reason": "Section 4 of RA 8502 requires jewelry enterprises to be duly registered with the Board of Investments (Primer p.24)."
+  },
+  "65": {
+    "question": "What was the role of the Tariff Commission in the implementation of RA 8502?",
+    "choices": {
+      "A": "Setting the price of gold and silver",
+      "B": "Registering jewelry enterprises",
+      "C": "Collecting excise taxes on jewelry",
+      "D": "Providing technical expertise in tariff classification and preparing the list of products and equipment entitled to tax and duty exemption"
+    },
+    "correct": "D",
+    "reason": "The Commission provided technical expertise in tariff classification and prepared the list of products and equipment entitled to tax and duty exemption (Primer p.25)."
+  },
+  "66": {
+    "question": "In what year did the Tariff Commission launch the Philippine Tariff Finder (PTF)?",
+    "choices": {
+      "A": "2013",
+      "B": "2015",
+      "C": "2017",
+      "D": "2020"
+    },
+    "correct": "A",
+    "reason": "The PTF was launched in 2013 as a free online facility. It was upgraded in 2015 to include Rules of Origin and FTA rates (Primer p.26)."
+  },
+  "67": {
+    "question": "How many Philippine tariff schedules can be accessed on the PTF?",
+    "choices": {
+      "A": "Nine (9)",
+      "B": "Ten (10)",
+      "C": "Twelve (12)",
+      "D": "Fifteen (15)"
+    },
+    "correct": "C",
+    "reason": "All twelve (12) tariff schedules of the Philippines are on the PTF, including MFN, the FTAs and the three PH-EFTA FTA schedules (Primer p.26)."
+  },
+  "68": {
+    "question": "The PH-EFTA FTA has how many tariff schedules on the PTF?",
+    "choices": {
+      "A": "Two",
+      "B": "Three",
+      "C": "Four",
+      "D": "One"
+    },
+    "correct": "B",
+    "reason": "The PH-EFTA FTA has three tariff schedules: NOR, CHE/LIE and ISL (Primer pp.26, 28)."
+  },
+  "69": {
+    "question": "The PTF is hosted on which website?",
+    "choices": {
+      "A": "www.customs.gov.ph",
+      "B": "www.neda.gov.ph",
+      "C": "www.dof.gov.ph",
+      "D": "www.tariffcommission.gov.ph"
+    },
+    "correct": "D",
+    "reason": "The PTF is hosted on the Commission's website www.tariffcommission.gov.ph and at finder.tariffcommission.gov.ph (Primer p.26)."
+  },
+  "70": {
+    "question": "Which PTF menu item links directly to the AHTN 2017 Tariff Book?",
+    "choices": {
+      "A": "AHTN 2017",
+      "B": "E-Manual on Classification",
+      "C": "Tariff Schedules",
+      "D": "Acronyms"
+    },
+    "correct": "A",
+    "reason": "AHTN 2017 directly links to the AHTN 2017 Tariff Book (Figure 1.4, Primer p.27)."
+  },
+  "71": {
+    "question": "Which PTF menu item gives an overview of tariff classification using the General Rules for the Interpretation of the HS?",
+    "choices": {
+      "A": "Rules of Origin",
+      "B": "Links",
+      "C": "E-Manual on Classification",
+      "D": "Suggestions"
+    },
+    "correct": "C",
+    "reason": "The E-Manual on Classification gives an overview of tariff classification using the GIR (Figure 1.4, Primer p.27)."
+  },
+  "72": {
+    "question": "Which PTF menu item provides overviews of the twelve tariff schedules of the Philippines?",
+    "choices": {
+      "A": "Home",
+      "B": "How To's",
+      "C": "The AHTN",
+      "D": "Tariff Schedules"
+    },
+    "correct": "D",
+    "reason": "Tariff Schedules provides overviews of the twelve (12) tariff schedules of the Philippines (Figure 1.4, Primer p.27)."
+  },
+  "73": {
+    "question": "What is the first step in using the PTF search, per the Primer?",
+    "choices": {
+      "A": "Select the year from the dropdown menu",
+      "B": "Click the 'Please start your search here' button on the PTF home page",
+      "C": "Type the AHTN code in the search bar",
+      "D": "Tick the All checkbox"
+    },
+    "correct": "B",
+    "reason": "Step a: click the 'Please start your search here' button on the PTF home page, and the search page appears (Primer p.28)."
+  },
+  "74": {
+    "question": "After a keyword search such as 'corn', the PTF provides an initial listing of subheadings at which levels?",
+    "choices": {
+      "A": "4-digit, 6-digit and 8-digit",
+      "B": "8-digit only",
+      "C": "2-digit chapters only",
+      "D": "10-digit statistical codes"
+    },
+    "correct": "A",
+    "reason": "The PTF lists all 4-digit, 6-digit and 8-digit subheadings containing the keyword (Primer p.29)."
+  },
+  "75": {
+    "question": "What does the Tariff Heading Map show?",
+    "choices": {
+      "A": "The Rules of Origin of each FTA",
+      "B": "The year-by-year tariff concessions",
+      "C": "The parent and sibling codes of the chosen code for reference",
+      "D": "Only the MFN rate"
+    },
+    "correct": "C",
+    "reason": "The Tariff Heading Map results box shows the parent and sibling codes of the chosen code (Primer pp.29-30)."
+  },
+  "76": {
+    "question": "In the PTF example, popcorn (1005.90.10) is in the Exclusion List (EL) of the AIFTA. What is the applicable tariff?",
+    "choices": {
+      "A": "0%",
+      "B": "The MFN rate of 7%",
+      "C": "2%",
+      "D": "5%"
+    },
+    "correct": "B",
+    "reason": "Because popcorn is in the AIFTA Exclusion List, the applicable tariff is the MFN rate of 7% (Figure 1.13, Primer p.32)."
+  },
+  "77": {
+    "question": "In the PTF example, the ATIGA rate of 0% on postage stamps (4907.00.21) is marked 'Except KH' (Cambodia). What tariff applies to imports from Cambodia?",
+    "choices": {
+      "A": "0%",
+      "B": "7%",
+      "C": "10%",
+      "D": "The MFN rate of 5%"
+    },
+    "correct": "D",
+    "reason": "'Except KH' means the 0% ATIGA rate applies to all ASEAN members except Cambodia, so Cambodia's imports pay the MFN rate of 5% (Figure 1.16, Primer p.33)."
+  },
+  "78": {
+    "question": "The World Customs Organization (WCO) was established in 1952 as the:",
+    "choices": {
+      "A": "Customs Co-operation Council (CCC)",
+      "B": "International Customs Union",
+      "C": "General Agreement on Customs",
+      "D": "ASEAN Customs Committee"
+    },
+    "correct": "A",
+    "reason": "The WCO was established in 1952 as the Customs Co-operation Council (CCC) (Primer p.36)."
+  },
+  "79": {
+    "question": "The WCO has its headquarters in:",
+    "choices": {
+      "A": "Geneva, Switzerland",
+      "B": "Paris, France",
+      "C": "Brussels, Belgium",
+      "D": "Manila, Philippines"
+    },
+    "correct": "C",
+    "reason": "The WCO has its headquarters in Brussels, Belgium (Primer p.36)."
+  },
+  "80": {
+    "question": "'World Customs Organization' is only an informal working name because:",
+    "choices": {
+      "A": "the WTO did not approve the name",
+      "B": "the Convention establishing the CCC has not been amended, so CCC remains its official name",
+      "C": "the Philippines objected to the name",
+      "D": "the HS Convention replaced the CCC"
+    },
+    "correct": "B",
+    "reason": "The WCO adopted the informal working name to indicate its nature, but the Convention establishing the CCC has not been amended (Primer p.36)."
+  },
+  "81": {
+    "question": "According to the Primer, the WCO has worldwide membership of how many customs administrations, collectively processing about 98% of world trade?",
+    "choices": {
+      "A": "98",
+      "B": "150",
+      "C": "200",
+      "D": "182"
+    },
+    "correct": "D",
+    "reason": "The printed text states a worldwide membership of 182 customs administrations (Primer p.36)."
+  },
+  "82": {
+    "question": "The primary objective of the WCO is to:",
+    "choices": {
+      "A": "enhance the efficiency and effectiveness of member customs administrations",
+      "B": "collect customs duties for its members",
+      "C": "replace national customs administrations",
+      "D": "set the tariff rates of its members"
+    },
+    "correct": "A",
+    "reason": "The primary objective is to enhance the efficiency and effectiveness of member customs administrations (Primer p.36)."
+  },
+  "83": {
+    "question": "Which of the following is NOT a main function of the WCO?",
+    "choices": {
+      "A": "To study all questions relating to cooperation in customs matters",
+      "B": "To prepare draft Conventions and amendments and recommend their adoption",
+      "C": "To impose import duties on its member countries",
+      "D": "To make recommendations, in a conciliatory capacity, for the settlement of disputes on the Conventions"
+    },
+    "correct": "C",
+    "reason": "The WCO functions are items (a) to (h), such as studying cooperation, preparing draft Conventions, conciliation and cooperating with other organizations. Imposing duties is not one (Primer pp.36-37)."
+  },
+  "84": {
+    "question": "How are votes allotted among WCO members?",
+    "choices": {
+      "A": "Two votes per member",
+      "B": "Each member has one representative and is entitled to one vote",
+      "C": "Votes are weighted by share of world trade",
+      "D": "Only the Council members may vote"
+    },
+    "correct": "B",
+    "reason": "Delegates discuss customs issues on equal footing. Each member has one representative and is entitled to one vote (Primer p.37)."
+  },
+  "85": {
+    "question": "The highest body of the WCO, composed of the Directors-General of Customs from all members, is the:",
+    "choices": {
+      "A": "Policy Commission",
+      "B": "Finance Committee",
+      "C": "Harmonized System Committee",
+      "D": "Council"
+    },
+    "correct": "D",
+    "reason": "The Council is the highest body of the WCO. It meets once a year (Primer p.37)."
+  },
+  "86": {
+    "question": "The WCO Council is assisted by the Finance Committee and the Policy Commission. How many members does each have?",
+    "choices": {
+      "A": "Finance Committee - 17; Policy Commission - 24",
+      "B": "Finance Committee - 24; Policy Commission - 17",
+      "C": "Finance Committee - 12; Policy Commission - 6",
+      "D": "Finance Committee - 30; Policy Commission - 20"
+    },
+    "correct": "A",
+    "reason": "The Council is assisted by the Finance Committee (17 members) and the Policy Commission (24 members) (Primer p.37)."
+  },
+  "87": {
+    "question": "The Harmonized System (HS) is the amalgamation of which two systems?",
+    "choices": {
+      "A": "AHTN and TCCP",
+      "B": "GIR and PTF",
+      "C": "CCCN and SITC Revision 2",
+      "D": "ATIGA and ACFTA"
+    },
+    "correct": "C",
+    "reason": "The HS is the amalgamation of the Customs Co-operation Council Nomenclature (CCCN) and the Standard International Trade Classification (SITC) Revision 2 (Primer p.40)."
+  },
+  "88": {
+    "question": "The HS is organized into how many Sections and Chapters?",
+    "choices": {
+      "A": "15 Sections and 90 Chapters",
+      "B": "21 Sections and 97 Chapters",
+      "C": "21 Sections and 99 Chapters",
+      "D": "22 Sections and 97 Chapters"
+    },
+    "correct": "B",
+    "reason": "The HS is organized into 21 Sections subdivided into 97 Chapters (Primer p.40)."
+  },
+  "89": {
+    "question": "Which HS Chapter is reserved for future international use?",
+    "choices": {
+      "A": "Chapter 97",
+      "B": "Chapter 21",
+      "C": "Chapter 66",
+      "D": "Chapter 77"
+    },
+    "correct": "D",
+    "reason": "Chapter 77 is reserved for future international use (Primer p.40)."
+  },
+  "90": {
+    "question": "In the 6-digit HS subheading, the first two digits indicate the:",
+    "choices": {
+      "A": "Chapter number",
+      "B": "position of the heading in the Chapter",
+      "C": "subheading number within the heading",
+      "D": "statistical reporting number"
+    },
+    "correct": "A",
+    "reason": "The first two digits indicate the Chapter number, the next two the position of the heading in the Chapter, and the last two the subheading number (Primer p.40)."
+  },
+  "91": {
+    "question": "Sections 1610 and 1611 of the CMTA reflect the HS by providing for, respectively:",
+    "choices": {
+      "A": "the HS Convention and the HS Committee",
+      "B": "the AHTN and the PTF",
+      "C": "the GIR and the list of headings with corresponding rates of import duty",
+      "D": "advance rulings and rules of origin"
+    },
+    "correct": "C",
+    "reason": "The HS is reflected in Sections 1610 and 1611 of the CMTA, which provide for the GIR and the list of headings with corresponding import duty rates, respectively (Primer p.42)."
+  },
+  "92": {
+    "question": "WCO member countries are mandated to adopt the HS up to what digit level?",
+    "choices": {
+      "A": "4-digit",
+      "B": "6-digit",
+      "C": "8-digit",
+      "D": "10-digit"
+    },
+    "correct": "B",
+    "reason": "It is mandatory to adopt the HS up to the 6-digit level. Modifications should be done beyond that level (Primer p.40)."
+  },
+  "93": {
+    "question": "At the tariff-rate line (legal) level a country may assign 8 digits. How many final non-legal digits may be added for statistical reporting, for a total of 10?",
+    "choices": {
+      "A": "One",
+      "B": "Three",
+      "C": "Four",
+      "D": "Two"
+    },
+    "correct": "D",
+    "reason": "Two final non-legal digits may be assigned as statistical reporting numbers, for a total of 10 digits (Primer p.40)."
+  },
+  "94": {
+    "question": "The General Rules for the Interpretation of the HS (GIR) consist of how many rules, and how should they be applied?",
+    "choices": {
+      "A": "Six rules, applied in hierarchical order",
+      "B": "Five rules, applied in any order",
+      "C": "Seven rules, applied simultaneously",
+      "D": "Four rules, applied by the importer's choice"
+    },
+    "correct": "A",
+    "reason": "The GIR provide six (6) rules and should be applied in hierarchical order (Primer p.41)."
+  },
+  "95": {
+    "question": "Section and Chapter Notes, including Subheading Notes, have what legal force in the HS?",
+    "choices": {
+      "A": "Advisory only",
+      "B": "Lower than the GIR",
+      "C": "The same legal force as the GIR",
+      "D": "Apply only to chemical products"
+    },
+    "correct": "C",
+    "reason": "Section and Chapter Notes form an integral part of the HS and have the same legal force as the GIR (Primer p.41)."
+  },
+  "96": {
+    "question": "How often is the Harmonized System Committee convened by the WCO Secretary General to update the HS regularly?",
+    "choices": {
+      "A": "Once a year",
+      "B": "Twice a year",
+      "C": "Every five years",
+      "D": "Monthly"
+    },
+    "correct": "B",
+    "reason": "The HS Committee is composed of representatives of each contracting party and is convened by the Secretary General twice a year (Primer p.41)."
+  },
+  "97": {
+    "question": "Which WCO body administers the International Convention on the HS, resolves classification problems and acts as arbitrator in customs disputes between countries?",
+    "choices": {
+      "A": "HS Review Sub-Committee",
+      "B": "Scientific Sub-Committee",
+      "C": "Technical Committee on Customs Valuation",
+      "D": "Harmonized System Committee"
+    },
+    "correct": "D",
+    "reason": "The HS Committee administers the HS Convention and resolves specific classification problems. It also acts as arbitrator in customs disputes between countries (Primer p.38)."
+  },
+  "98": {
+    "question": "In what year did the ten ASEAN Member States, including the Philippines, adopt the 8-digit ASEAN Harmonized Tariff Nomenclature (AHTN)?",
+    "choices": {
+      "A": "2004",
+      "B": "1995",
+      "C": "2012",
+      "D": "2017"
+    },
+    "correct": "A",
+    "reason": "The ten AMSs adopted the 8-digit AHTN in 2004, reflecting AMSs' requirements beyond the HS 6-digit level (Primer p.42)."
+  },
+  "99": {
+    "question": "The Philippine Instrument of Accession to the HS Convention was formally deposited to the WCO on:",
+    "choices": {
+      "A": "23 September 1998",
+      "B": "5 February 2001",
+      "C": "25 June 2001",
+      "D": "1 July 1988"
+    },
+    "correct": "C",
+    "reason": "The Instrument was signed on 23 Sept 1998 and concurred in by the Senate on 5 Feb 2001. It was formally deposited to the WCO on 25 June 2001 (Primer p.42)."
+  },
+  "100": {
+    "question": "The Philippines formally adopted the HS on July 1, 1988 and implemented it in:",
+    "choices": {
+      "A": "January 1989",
+      "B": "October 1988",
+      "C": "June 2001",
+      "D": "September 1998"
+    },
+    "correct": "B",
+    "reason": "The Philippines formally adopted the HS on July 1, 1988 and implemented it in October 1988 (Primer p.42)."
+  },
+  "101": {
+    "question": "Before its Instrument of Accession was approved, why did the Philippines adopt the HS on a de facto basis?",
+    "choices": {
+      "A": "To avoid paying WCO membership fees",
+      "B": "Because the Senate had not yet been constituted",
+      "C": "To keep abreast of the latest internationally-accepted nomenclature in goods classification in conducting trade with the rest of the world",
+      "D": "Because ASEAN required it"
+    },
+    "correct": "C",
+    "reason": "The Philippines opted to adopt the HS on a de facto basis for the conduct of trade with the rest of the world to keep abreast of the latest internationally-accepted nomenclature (Primer p.42)."
+  },
+  "102": {
+    "question": "Under HS heading 17.04 (Table 2.1), AMSs further subdivided subheading 1704.90 to provide separate lines for:",
+    "choices": {
+      "A": "medicated pastilles and drops, white chocolate, and soft candies containing gelatin",
+      "B": "chewing gum, cocoa butter and candy floss",
+      "C": "fresh fruits, nuts and dried fruits",
+      "D": "medicated syrups, milk chocolate and hard candies"
+    },
+    "correct": "A",
+    "reason": "AMSs subdivided 1704.90 into medicated pastilles and drops, white chocolate, and soft candies containing gelatin. These 8-digit lines pertain to AHTN lines agreed by AMSs (Primer pp.42-43)."
+  },
+  "103": {
+    "question": "At its first session, the HS Committee set up which body to revise the HS and prepare amendments to the HS Nomenclature?",
+    "choices": {
+      "A": "Scientific Sub-Committee",
+      "B": "HS Working Party",
+      "C": "Policy Commission",
+      "D": "HS Review Sub-Committee"
+    },
+    "correct": "D",
+    "reason": "The HS Committee set up the Harmonized System Review Sub-Committee, tasked with revising the HS and preparing amendments to the HS Nomenclature (Primer p.43)."
+  },
+  "104": {
+    "question": "Under Article 16 of the HS Convention, the HS Committee agreed to allow an interval of how many years between each recommendation amending the HS Nomenclature?",
+    "choices": {
+      "A": "Two (2) to three (3) years",
+      "B": "Four (4) to six (6) years",
+      "C": "Seven (7) to ten (10) years",
+      "D": "One (1) year"
+    },
+    "correct": "B",
+    "reason": "The Committee agreed to an interval of four (4) to six (6) years between each recommendation amending the HS Nomenclature under Article 16 (Primer p.43)."
+  },
+  "105": {
+    "question": "Following NEDA Board approval on June 27, 2017 and pursuant to EO 688 (s. 1981), the Philippines implemented the 2017 version of the HS starting:",
+    "choices": {
+      "A": "27 June 2017",
+      "B": "1 January 2017",
+      "C": "28 July 2017",
+      "D": "25 June 2001"
+    },
+    "correct": "C",
+    "reason": "The Philippines implemented the HS 2017 amendments starting July 28, 2017 (Primer p.44)."
+  },
+  "106": {
+    "question": "How many sets of amendments are contained in the HS 2017?",
+    "choices": {
+      "A": "233",
+      "B": "193",
+      "C": "322",
+      "D": "97"
+    },
+    "correct": "A",
+    "reason": "There are 233 sets of amendments in the HS 2017 (Primer p.43)."
+  },
+  "107": {
+    "question": "The HS 2017 amendments on advances in technology created lines for which of the following?",
+    "choices": {
+      "A": "Bamboo and rattan products",
+      "B": "Anti-malarial commodities",
+      "C": "Chemicals controlled under the Chemical Weapons Convention",
+      "D": "Light-emitting diode (LED) lamps, multi-component integrated circuits, and hybrid, plug-in hybrid and all-electric vehicles"
+    },
+    "correct": "D",
+    "reason": "The technology-related amendments created lines for LED lamps, MCOs, and hybrid, plug-in hybrid and all-electric vehicles. The others fall under environmental and social issues (Primer pp.43-44)."
+  },
+  "108": {
+    "question": "The Explanatory Notes to the HS consist of how many volumes in English and French?",
+    "choices": {
+      "A": "Three (3)",
+      "B": "Five (5)",
+      "C": "Seven (7)",
+      "D": "Ten (10)"
+    },
+    "correct": "B",
+    "reason": "The Explanatory Notes consist of five (5) volumes. They do not form an integral part of the HS Convention but are the official interpretation of the HS at international level (Primer p.44)."
+  },
+  "109": {
+    "question": "The AHTN is an 8-digit commodity nomenclature based on the HS of the WCO. Who conceptualized it?",
+    "choices": {
+      "A": "The ten (10) ASEAN Member States",
+      "B": "The World Trade Organization",
+      "C": "The Tariff Commission alone",
+      "D": "The WCO Council"
+    },
+    "correct": "A",
+    "reason": "The AHTN was conceptualized by the ten ASEAN Member States to have a common tariff nomenclature. The first AHTN Code, using the HS 2002 edition, was adopted in 2004 (Primer p.46)."
+  },
+  "110": {
+    "question": "In the AHTN code, the 7th and 8th digits are assigned to:",
+    "choices": {
+      "A": "Chapters",
+      "B": "Headings",
+      "C": "ASEAN subheadings",
+      "D": "Statistical reporting numbers"
+    },
+    "correct": "C",
+    "reason": "Adhering to the HS 6-digit level, the 7th and 8th digits of the AHTN Code are assigned to ASEAN subheadings (Primer p.46)."
+  },
+  "111": {
+    "question": "The AHTN serves as the base for preferential tariff purposes in:",
+    "choices": {
+      "A": "the WTO Agreement on Safeguards",
+      "B": "the Revised Kyoto Convention",
+      "C": "the HS Convention",
+      "D": "the ASEAN Free Trade Area (AFTA) and other free trade areas"
+    },
+    "correct": "D",
+    "reason": "The AHTN is used as a uniform tariff nomenclature within ASEAN, a base for preferential tariff purposes in AFTA and other FTAs, and a base for collecting trade statistics (Primer p.46)."
+  },
+  "112": {
+    "question": "The AHTN Protocol, which defines the legal framework for the implementation of the AHTN, was signed by the ten ASEAN governments in Manila on:",
+    "choices": {
+      "A": "08 April 2010",
+      "B": "07 August 2003",
+      "C": "01 March 1997",
+      "D": "28 July 2017"
+    },
+    "correct": "B",
+    "reason": "The AHTN Protocol was signed on 07 August 2003 in Manila (Primer p.47)."
+  },
+  "113": {
+    "question": "The Second Protocol to amend the Protocol Governing the Implementation of the AHTN was signed on 08 April 2010 in:",
+    "choices": {
+      "A": "Viet Nam",
+      "B": "Manila",
+      "C": "Jakarta",
+      "D": "Bangkok"
+    },
+    "correct": "A",
+    "reason": "The Second Protocol was signed on 08 April 2010 in Viet Nam (Primer p.47)."
+  },
+  "114": {
+    "question": "Which ASEAN body is responsible for monitoring, reviewing and supervising all aspects of the implementation of the AHTN Protocol?",
+    "choices": {
+      "A": "ASEAN Secretariat",
+      "B": "ASEAN Finance Ministers Meeting",
+      "C": "ASEAN Directors-General of Customs",
+      "D": "ASEAN Free Trade Council"
+    },
+    "correct": "C",
+    "reason": "The ASEAN Directors-General of Customs monitor, review and supervise all aspects of AHTN Protocol implementation (Primer p.47)."
+  },
+  "115": {
+    "question": "Which ASEAN body is the forum for all decisions relating to the implementation of the AHTN Protocol?",
+    "choices": {
+      "A": "ASEAN Directors-General of Customs",
+      "B": "ASEAN Finance Ministers Meeting",
+      "C": "ASEAN Secretariat",
+      "D": "WCO Council"
+    },
+    "correct": "B",
+    "reason": "The ASEAN Finance Ministers Meeting is the forum for all decisions relating to AHTN Protocol implementation. The ASEAN Secretariat provides support (Primer p.47)."
+  },
+  "116": {
+    "question": "Under the AHTN Protocol, each AMS shall apply the AHTN up to which level for all trade transactions for tariff, statistical and other purposes?",
+    "choices": {
+      "A": "4-digit level",
+      "B": "6-digit level",
+      "C": "10-digit level",
+      "D": "8-digit level"
+    },
+    "correct": "D",
+    "reason": "Each AMS shall abide by the HS Code and apply the AHTN up to the 8-digit level (Primer p.47)."
+  },
+  "117": {
+    "question": "The Philippines uses alpha-numeric codes beyond the 8-digit AHTN level. Which tariff line in Table 2.3 carries such a code and a 5% rate for 2018-2020?",
+    "choices": {
+      "A": "8417.80.00A - Waste incinerators",
+      "B": "8417.20.00 - Bakery ovens",
+      "C": "8417.90.00 - Parts",
+      "D": "8417.10.00 - Furnaces for roasting, melting or heat-treatment of ores"
+    },
+    "correct": "A",
+    "reason": "8417.80.00A (waste incinerators) has a 5% rate. 8417.80.00B (other) is 7%, bakery ovens 7%, parts 1% and 8417.10.00 is 0% (Primer pp.47-48)."
+  },
+  "118": {
+    "question": "One criterion for providing a subheading in the AHTN is that import and/or export of the product amount to at least what value for the last three (3) years preceding the review?",
+    "choices": {
+      "A": "US$100,000",
+      "B": "US$500,000",
+      "C": "US$1 million",
+      "D": "US$10 million"
+    },
+    "correct": "C",
+    "reason": "Among the criteria, imports and/or exports must amount to at least US$1 million for the last three years preceding the review (Primer p.48)."
+  },
+  "119": {
+    "question": "In what instances may the AHTN be amended?",
+    "choices": {
+      "A": "Only upon order of the WTO",
+      "B": "Only when the Tariff Commission decides",
+      "C": "Only every ten years",
+      "D": "When there are amendments to the HS Nomenclature or amendments to the ASEAN Codes for simplification, AMS requirements, or changes in technology and trade"
+    },
+    "correct": "D",
+    "reason": "The AHTN may be amended when there are (i) amendments to the HS Nomenclature and (ii) amendments to the ASEAN Codes for simplification, AMS requirements and changes in technology and trade (Primer p.48)."
+  },
+  "120": {
+    "question": "Decisions of the ASEAN Directors-General of Customs on proposed AHTN amendments are made by:",
+    "choices": {
+      "A": "majority vote",
+      "B": "consensus",
+      "C": "the ASEAN Secretariat",
+      "D": "two-thirds vote"
+    },
+    "correct": "B",
+    "reason": "The Directors-General of Customs are the forum to allow amendments and may convene an experts' panel. Their decisions are made by consensus (Primer p.48)."
+  },
+  "121": {
+    "question": "The Tariff Commission is mandated by which EO, dated 01 May 1981, to align the Philippine Tariff Nomenclature with all future amendments to the CCCN?",
+    "choices": {
+      "A": "EO 688",
+      "B": "EO 470",
+      "C": "EO 61",
+      "D": "EO 189"
+    },
+    "correct": "A",
+    "reason": "The Commission is mandated by EO 688, dated 01 May 1981, to align the Philippine Tariff Nomenclature with all future amendments to the CCCN (Primer p.49)."
+  },
+  "122": {
+    "question": "The Philippines is bound to implement the AHTN by Article 4 of the ASEAN Agreement on Customs, dated:",
+    "choices": {
+      "A": "07 August 2003",
+      "B": "08 April 2010",
+      "C": "01 March 1997",
+      "D": "23 September 1998"
+    },
+    "correct": "C",
+    "reason": "The Philippines is bound by Article 4 of the ASEAN Agreement on Customs dated 01 March 1997 and by the AHTN Protocol (Primer p.49)."
+  },
+  "123": {
+    "question": "After the Commission submits its report on AHTN amendments to the NEDA, which committee considers it?",
+    "choices": {
+      "A": "Committee on Finance",
+      "B": "Committee on Ways and Means",
+      "C": "Policy Commission",
+      "D": "Committee on Tariff and Related Matters (CTRM)"
+    },
+    "correct": "D",
+    "reason": "The report is submitted to NEDA for consideration by the Committee on Tariff and Related Matters (CTRM), then a NEDA Board resolution formally adopts the amendments (Primer p.49)."
+  },
+  "124": {
+    "question": "When did the NEDA Board approve the adoption of the 2017 version of the AHTN?",
+    "choices": {
+      "A": "28 July 2017",
+      "B": "27 June 2017",
+      "C": "29 August 2017",
+      "D": "5 October 2017"
+    },
+    "correct": "B",
+    "reason": "NEDA Board approval was on 27 June 2017, and the Philippines implemented AHTN 2017 starting 28 July 2017 (Primer p.49)."
+  },
+  "125": {
+    "question": "Which action did the Tariff Commission take to ensure the smooth implementation of AHTN 2017?",
+    "choices": {
+      "A": "Notified the Secretary of Finance and the BOC Commissioner of the non-validity of tariff classification rulings based on the old nomenclature",
+      "B": "Abolished the Philippine Tariff Finder",
+      "C": "Reduced all MFN rates to zero",
+      "D": "Removed the 8-digit level from the tariff lines"
+    },
+    "correct": "A",
+    "reason": "Actions included notification to the Secretary of Finance and the BOC Commissioner, newspaper publication, transposition of MFN and FTA schedules, correlation tables, and publication of the Tariff Book (Primer pp.49-50)."
+  },
+  "126": {
+    "question": "The Supplementary Explanatory Notes (SEN) are:",
+    "choices": {
+      "A": "a list of FTA partners' tariff rates",
+      "B": "a compilation of the official interpretations of ASEAN subheadings, included in the AHTN 2017 publication",
+      "C": "a database of HS Committee classification decisions",
+      "D": "amendments to the HS Convention"
+    },
+    "correct": "B",
+    "reason": "The SEN is a compilation of the official interpretations of ASEAN subheadings, included in the Tariff Administration and Policy AHTN 2017 publication (Primer p.50)."
+  },
+  "127": {
+    "question": "Per the Primer, when is the next cycle of review of the AHTN expected to be conducted?",
+    "choices": {
+      "A": "In 2030",
+      "B": "In 2025",
+      "C": "After 2022",
+      "D": "Before 2022"
+    },
+    "correct": "D",
+    "reason": "The WCO implements HS amendments every four to six years. Since the AHTN follows the HS, the next review is expected before 2022 (Primer p.50)."
+  },
+  "128": {
+    "question": "Tariff classification is:",
+    "choices": {
+      "A": "the act or process of assigning an appropriate HS or AHTN code to traded goods",
+      "B": "the computation of the dutiable value of goods",
+      "C": "the determination of the country of origin of goods",
+      "D": "the collection of customs duties"
+    },
+    "correct": "A",
+    "reason": "Tariff classification is the act or process of assigning an appropriate HS or AHTN code to traded goods. It requires special skills and knowledge of products and classification rules (Primer p.51)."
+  },
+  "129": {
+    "question": "Which of the following is contained in an advance ruling on tariff classification?",
+    "choices": {
+      "A": "The importer's tax identification number",
+      "B": "The CIF value of the goods",
+      "C": "The 8-digit AHTN code, applicable MFN and preferential rates, legal justification and validity period",
+      "D": "The name of the customs broker"
+    },
+    "correct": "C",
+    "reason": "An AR contains a ruling number, date of issue, applicant's name and detailed description of the good, the 8-digit AHTN Code, applicable rates, legal justification and validity period (Primer p.51)."
+  },
+  "130": {
+    "question": "Faulty customs declarations caused by wrong tariff classification can result in:",
+    "choices": {
+      "A": "faster clearance of goods",
+      "B": "delays in clearance and release, overpayment of duties, and penalties including seizure",
+      "C": "automatic duty exemption",
+      "D": "lower duties for the importer"
+    },
+    "correct": "B",
+    "reason": "Delays in clearance and release, overpayment of duties and other penalties, including seizure, can result from faulty customs declarations (Primer p.51)."
+  },
+  "131": {
+    "question": "Commission Order No. 2017-01 (Procedure on Application for an Advance Ruling) took effect on:",
+    "choices": {
+      "A": "20 September 2017",
+      "B": "29 August 2017",
+      "C": "28 July 2017",
+      "D": "5 October 2017"
+    },
+    "correct": "D",
+    "reason": "The Order was published in The Manila Times on 20 September 2017 and took effect on 5 October 2017, fifteen days after publication (Primer pp.51-52, 60)."
+  },
+  "132": {
+    "question": "Commission Order No. 2017-01 was signed by Tariff Commission Chairperson Marilou P. Mendoza and approved by:",
+    "choices": {
+      "A": "Secretary of Finance Carlos G. Dominguez III",
+      "B": "NEDA Secretary",
+      "C": "The President",
+      "D": "Secretary of Trade and Industry"
+    },
+    "correct": "A",
+    "reason": "The Order was approved by Secretary of Finance Carlos G. Dominguez III (Primer pp.51, 60)."
+  },
+  "133": {
+    "question": "An application for an advance ruling on tariff classification may cover:",
+    "choices": {
+      "A": "up to five products",
+      "B": "all goods in one shipment",
+      "C": "only one product or good, as determined by the Commission",
+      "D": "multiple goods under the same chapter"
+    },
+    "correct": "C",
+    "reason": "An application for an AR shall cover only one product or good, as determined by the Commission (Primer pp.52, 56)."
+  },
+  "134": {
+    "question": "Under Section 1103 of the CMTA, an application for an advance ruling should be filed at least how many days before the date of importation or exportation?",
+    "choices": {
+      "A": "30 days",
+      "B": "90 days",
+      "C": "60 days",
+      "D": "120 days"
+    },
+    "correct": "B",
+    "reason": "The application shall be filed at least ninety (90) days before the date of importation or exportation (Primer p.52)."
+  },
+  "135": {
+    "question": "How many copies of the filled-out application form must an applicant submit together with supporting documents and samples, if required?",
+    "choices": {
+      "A": "One (1)",
+      "B": "Two (2)",
+      "C": "Five (5)",
+      "D": "Three (3)"
+    },
+    "correct": "D",
+    "reason": "Applicants submit three (3) copies of the prescribed application form with supporting documents and samples, if required (Primer p.52)."
+  },
+  "136": {
+    "question": "Which of the following is NOT a ground for non-acceptance of an application for an advance ruling?",
+    "choices": {
+      "A": "The application was filed by an authorized representative",
+      "B": "The application is not in the prescribed form",
+      "C": "The application is filed less than ninety (90) days before importation or exportation",
+      "D": "Non-payment of the filing fee"
+    },
+    "correct": "A",
+    "reason": "An authorized representative may apply for an AR. Grounds for non-acceptance include wrong form, undeterminable classification, multiple goods, late filing and non-payment of fee (Primer pp.52, 56-57)."
+  },
+  "137": {
+    "question": "Within how many calendar days shall the Commission acknowledge receipt of the application and notify the applicant of the need for additional information and on-site verification?",
+    "choices": {
+      "A": "Three (3)",
+      "B": "Five (5)",
+      "C": "Ten (10)",
+      "D": "Thirty (30)"
+    },
+    "correct": "C",
+    "reason": "Within ten (10) calendar days the Commission acknowledges receipt and notifies the applicant. The applicant then has ten (10) calendar days to submit the information or allow verification (Primer pp.52, 57)."
+  },
+  "138": {
+    "question": "Pending the applicant's submission of additional information or on-site verification, what happens to the 30-day period to issue a ruling?",
+    "choices": {
+      "A": "It continues to run",
+      "B": "It is suspended (the running of the period shall stay)",
+      "C": "It is extended to 90 days",
+      "D": "It is deemed waived"
+    },
+    "correct": "B",
+    "reason": "Pending submission of additional information or on-site verification, the running of the 30-day period to issue a ruling shall stay (Primer pp.52, 57)."
+  },
+  "139": {
+    "question": "The Commission may NOT issue an advance ruling when:",
+    "choices": {
+      "A": "the applicant is a foreign exporter",
+      "B": "the goods are imported by sea",
+      "C": "the product is subject to an MFN rate",
+      "D": "the goods are subject of a pending court litigation, administrative review or appeal involving tariff classification"
+    },
+    "correct": "D",
+    "reason": "Grounds for non-issuance include failure to give requested information, pending litigation or review involving tariff classification, no on-site verification, and misrepresentation (Primer pp.53, 57)."
+  },
+  "140": {
+    "question": "An advance ruling is effective from the date it is issued and is valid for:",
+    "choices": {
+      "A": "five (5) years from issuance, unless earlier revoked or modified due to changes in facts or circumstances",
+      "B": "one (1) year",
+      "C": "three (3) years",
+      "D": "ten (10) years"
+    },
+    "correct": "A",
+    "reason": "The AR is valid for five (5) years from the date of issuance unless earlier revoked or modified (Primer pp.53, 58)."
+  },
+  "141": {
+    "question": "A modification of an advance ruling is of:",
+    "choices": {
+      "A": "retroactive application",
+      "B": "immediate and retroactive application",
+      "C": "prospective application",
+      "D": "automatic application after three years"
+    },
+    "correct": "C",
+    "reason": "An AR may be modified for an error, change in material facts, law or judicial decision, or policy. Modification is of prospective application (Primer pp.53, 58)."
+  },
+  "142": {
+    "question": "An advance ruling may be revoked by the Commission upon discovery of:",
+    "choices": {
+      "A": "a change in the MFN rate",
+      "B": "any false or misleading material information provided in the application",
+      "C": "a change in the importer's address",
+      "D": "a delay in the arrival of the goods"
+    },
+    "correct": "B",
+    "reason": "The AR may be revoked upon discovery of any false or misleading material information, without prejudice to criminal, civil or administrative cases against the applicant (Primer pp.53, 58)."
+  },
+  "143": {
+    "question": "If the BOC deems an advance ruling adverse to the government, within how many days from receipt of a copy must it elevate the matter to the Secretary of Finance?",
+    "choices": {
+      "A": "Three (3) days",
+      "B": "Ten (10) days",
+      "C": "Fifteen (15) days",
+      "D": "Five (5) days"
+    },
+    "correct": "D",
+    "reason": "The BOC shall, within five (5) days from receipt of a copy of the ruling, elevate it to the Secretary of Finance for review under Section 1128 of the CMTA (Primer p.58)."
+  },
+  "144": {
+    "question": "How soon must the Secretary of Finance automatically review the ruling, and what happens if no ruling is rendered within that period?",
+    "choices": {
+      "A": "Within 15 days of the BOC notice; the Commission's decision is deemed confirmed",
+      "B": "Within 30 days; the decision is deemed reversed",
+      "C": "Within 10 days; the decision is deemed modified",
+      "D": "Within 60 days; the decision is deemed confirmed"
+    },
+    "correct": "A",
+    "reason": "The Secretary shall automatically review within 15 days from receipt of the BOC notice. If none is rendered, the Commission's decision is deemed confirmed (Primer p.58)."
+  },
+  "145": {
+    "question": "A motion for reconsideration of an advance ruling must be filed in writing within how many days from receipt, and how many motions are allowed?",
+    "choices": {
+      "A": "30 days; two motions",
+      "B": "15 days; unlimited motions",
+      "C": "10 days; only one (1) motion",
+      "D": "5 days; only one (1) motion"
+    },
+    "correct": "C",
+    "reason": "The applicant may file a motion within ten (10) days from receipt, on grounds such as mistake of fact, excusable negligence or newly discovered evidence. Only one motion is allowed (Primer p.59)."
+  },
+  "146": {
+    "question": "An appeal from the Commission's decision denying the motion for reconsideration may be filed before the Court of Tax Appeals within:",
+    "choices": {
+      "A": "10 days",
+      "B": "30 days",
+      "C": "15 days",
+      "D": "60 days"
+    },
+    "correct": "B",
+    "reason": "An appeal may be filed before the Court of Tax Appeals within thirty (30) days from receipt of the decision denying the motion, or of the Secretary of Finance's decision (Primer p.59)."
+  },
+  "147": {
+    "question": "Under Commission Order No. 2017-01, requests for advance rulings on valuation and on rules of origin are filed with the:",
+    "choices": {
+      "A": "Tariff Commission",
+      "B": "Department of Finance",
+      "C": "NEDA",
+      "D": "Bureau of Customs"
+    },
+    "correct": "D",
+    "reason": "Requests for ARs on valuation (Sec. 1101) and rules of origin (Sec. 1102) are filed with the BOC. The Order also applies to goods moving into and from free zones (Primer p.54)."
+  },
+  "148": {
+    "question": "For purposes of Commission Order No. 2017-01, the date of importation shall be the date of:",
+    "choices": {
+      "A": "lodgment of the goods declaration",
+      "B": "arrival of the vessel",
+      "C": "payment of duties",
+      "D": "release of the goods"
+    },
+    "correct": "A",
+    "reason": "The date of importation shall be the date of lodgment of the goods declaration (Primer pp.55-56)."
+  },
+  "149": {
+    "question": "Unless otherwise provided, Commission Order No. 2017-01 shall be reviewed every:",
+    "choices": {
+      "A": "year",
+      "B": "two (2) years",
+      "C": "three (3) years",
+      "D": "five (5) years"
+    },
+    "correct": "C",
+    "reason": "Section 10: the Order shall be reviewed every three (3) years and amended or revised, if necessary (Primer p.60)."
+  },
+  "150": {
+    "question": "Under Section 13, Commission Order No. 2017-01 takes effect how many days after its complete publication in the Official Gazette or a newspaper of general circulation?",
+    "choices": {
+      "A": "Five (5) days",
+      "B": "Fifteen (15) days",
+      "C": "Thirty (30) days",
+      "D": "Sixty (60) days"
+    },
+    "correct": "B",
+    "reason": "The Order takes effect fifteen (15) days after complete publication. Three certified copies go to the Office of the National Administrative Register of the UP Law Center (Primer p.60)."
+  },
+  "151": {
+    "question": "Under the Tariff Commission Primer, dumping is best described as what kind of practice?",
+    "choices": {
+      "A": "A form of price discrimination between two national markets",
+      "B": "A form of currency manipulation between two countries",
+      "C": "A customs valuation method for imported goods",
+      "D": "A tariff classification dispute mechanism"
+    },
+    "correct": "A",
+    "reason": "Dumping occurs when an exporter sells at a lower price in the importing market than in its own domestic market, or below cost of production (Primer p.61)."
+  },
+  "152": {
+    "question": "According to the Primer, is dumping always illegal under World Trade Organization rules?",
+    "choices": {
+      "A": "Yes, it is always illegal regardless of effect",
+      "B": "No, it is legal unless its injurious effect on the importing country's producers can be established",
+      "C": "Yes, but only for agricultural products",
+      "D": "No, it is never regulated by the WTO"
+    },
+    "correct": "B",
+    "reason": "Dumping is legal under WTO rules unless its injurious effect on the importing country's producers can be established (Primer p.61)."
+  },
+  "153": {
+    "question": "A dumped import/product is introduced into the Philippines at what kind of price relative to its normal value?",
+    "choices": {
+      "A": "An export price equal to its normal value",
+      "B": "An export price higher than its normal value",
+      "C": "An export price less than its normal value in the ordinary course of trade",
+      "D": "A price fixed by the Bureau of Customs"
+    },
+    "correct": "C",
+    "reason": "A dumped import/product refers to a product introduced into the Philippines at an export price less than its normal value in the ordinary course of trade (Primer p.61)."
+  },
+  "154": {
+    "question": "What is the difference between the export price and the normal value of a dumped product called?",
+    "choices": {
+      "A": "The tariff differential",
+      "B": "The dumping margin",
+      "C": "The countervailing offset",
+      "D": "The customs adjustment value"
+    },
+    "correct": "B",
+    "reason": "An anti-dumping duty is imposed on a dumped product, and the difference between the export price and the normal value of such product is the dumping margin (Primer p.61)."
+  },
+  "155": {
+    "question": "An anti-dumping measure, as defined in the Primer, is best described as what?",
+    "choices": {
+      "A": "A penalty imposed solely on foreign governments",
+      "B": "A trade remedy measure adopted by government to protect the domestic industry against dumping",
+      "C": "A subsidy given to domestic exporters",
+      "D": "A quota system on all imported goods"
+    },
+    "correct": "B",
+    "reason": "An anti-dumping measure refers to a trade remedy measure adopted by government to protect the domestic industry against the unfair trade practice of dumping (Primer p.61)."
+  },
+  "156": {
+    "question": "What is Republic Act No. 8752 commonly known as, and when did it take effect?",
+    "choices": {
+      "A": "The Safeguard Measures Act, effective 1 January 2000",
+      "B": "The Customs Modernization Act, effective 4 September 1999",
+      "C": "The Anti-Dumping Act of 1999, effective 4 September 1999",
+      "D": "The Tariff and Customs Code, effective 12 August 1999"
+    },
+    "correct": "C",
+    "reason": "Republic Act No. 8752, otherwise known as the Anti-Dumping Act of 1999, was signed on 12 August 1999 and took effect on 4 September 1999 (Primer p.62)."
+  },
+  "157": {
+    "question": "The provisions of Republic Act No. 8752 on anti-dumping protection were adopted in which section of the Customs Modernization and Tariff Act?",
+    "choices": {
+      "A": "Section 800",
+      "B": "Section 1100",
+      "C": "Section 711",
+      "D": "Section 1608"
+    },
+    "correct": "C",
+    "reason": "The provisions of RA No. 8752 were adopted in Section 711 of the Customs Modernization and Tariff Act (Primer p.62)."
+  },
+  "158": {
+    "question": "Aligning the Philippines' domestic anti-dumping law with which international instrument was part of the rationale for passing Republic Act No. 8752?",
+    "choices": {
+      "A": "The WTO Agreement on Anti-Dumping Practice (Article VI of GATT 1994)",
+      "B": "The WTO Agreement on Safeguards",
+      "C": "The ASEAN Trade in Goods Agreement",
+      "D": "The Kyoto Convention"
+    },
+    "correct": "A",
+    "reason": "One rationale for RA No. 8752 was to align the domestic law with the WTO Agreement on Anti-Dumping Practice, Article VI of the GATT 1994 (Primer p.63)."
+  },
+  "159": {
+    "question": "When did the Implementing Rules and Regulations of Republic Act No. 8752, issued as Joint Administrative Order No. 01, series of 2000, take effect?",
+    "choices": {
+      "A": "5 July 2000",
+      "B": "10 July 2000",
+      "C": "31 August 2000",
+      "D": "25 September 2000"
+    },
+    "correct": "B",
+    "reason": "Joint Administrative Order No. 01, series of 2000, the IRR of RA No. 8752, took effect on 10 July 2000 (Primer p.63)."
+  },
+  "160": {
+    "question": "Tariff Commission Order No. 00-01, which governs the Commission's internal conduct of anti-dumping investigations, took effect on what date?",
+    "choices": {
+      "A": "4 September 1999",
+      "B": "12 August 1999",
+      "C": "5 July 2000",
+      "D": "10 July 2000"
+    },
+    "correct": "C",
+    "reason": "Tariff Commission Order No. 00-01 took effect on 05 July 2000 (Primer p.63)."
+  },
+  "161": {
+    "question": "In administering anti-dumping legislation, which agency receives the properly documented application and determines whether a prima facie case exists?",
+    "choices": {
+      "A": "The Bureau of Customs",
+      "B": "The Tariff Commission",
+      "C": "The Department of Agriculture or Department of Trade and Industry (Bureau of Import Services)",
+      "D": "The Department of Finance"
+    },
+    "correct": "C",
+    "reason": "The DA or DTI-BIS receives the properly documented application and determines whether a prima facie case exists to warrant initiation of an investigation (Primer p.63)."
+  },
+  "162": {
+    "question": "Which agency conducts the formal investigation and makes the final determination on the imposition of a definitive anti-dumping duty?",
+    "choices": {
+      "A": "The Tariff Commission",
+      "B": "The Bureau of Customs",
+      "C": "The Department of Trade and Industry",
+      "D": "The Securities and Exchange Commission"
+    },
+    "correct": "A",
+    "reason": "The Tariff Commission conducts the formal investigation and makes the final determination for purposes of imposing a definitive anti-dumping duty (Primer p.63)."
+  },
+  "163": {
+    "question": "Which agency is responsible for collecting anti-dumping duties once imposed?",
+    "choices": {
+      "A": "The Department of Trade and Industry",
+      "B": "The Tariff Commission",
+      "C": "The Bureau of Internal Revenue",
+      "D": "The Bureau of Customs"
+    },
+    "correct": "D",
+    "reason": "The Bureau of Customs collects the anti-dumping duties (Primer p.63)."
+  },
+  "164": {
+    "question": "What must be true of a product's export price relative to its normal value for it to fall under the coverage of an anti-dumping investigation?",
+    "choices": {
+      "A": "The export price must be higher than the normal value",
+      "B": "The export price must be equal to the normal value",
+      "C": "The export price must be less than the normal value in the ordinary course of trade",
+      "D": "The export price must be set by the government of origin"
+    },
+    "correct": "C",
+    "reason": "An anti-dumping investigation covers any product imported at an export price less than its normal value in the ordinary course of trade, causing or threatening material injury (Primer p.64)."
+  },
+  "165": {
+    "question": "A country of export, as defined in the Primer, is best described as what?",
+    "choices": {
+      "A": "The country where the product was manufactured regardless of shipment",
+      "B": "The country where the allegedly dumped product was shipped to the Philippines, regardless of the seller's location",
+      "C": "The country where the importer is registered",
+      "D": "The country that issued the certificate of origin"
+    },
+    "correct": "B",
+    "reason": "A country of export is the country where the allegedly dumped product was shipped to the Philippines, regardless of the location of the seller (Primer p.64)."
+  },
+  "166": {
+    "question": "A country of origin, under the Primer's definition, is the country where what occurred?",
+    "choices": {
+      "A": "The product was shipped from, regardless of manufacture",
+      "B": "The product was wholly obtained or where the last substantial transformation took place",
+      "C": "The importer's head office is located",
+      "D": "The product was first offered for sale"
+    },
+    "correct": "B",
+    "reason": "A country of origin is the country where the allegedly dumped product was either wholly obtained or where the last substantial transformation took place (Primer p.64)."
+  },
+  "167": {
+    "question": "Under the Primer, an agricultural product subject to anti-dumping rules is classified under which chapters of the Harmonized System?",
+    "choices": {
+      "A": "Chapters 25 to 97",
+      "B": "Chapters 1 to 24",
+      "C": "Chapters 1 to 97",
+      "D": "Chapters 50 to 75"
+    },
+    "correct": "B",
+    "reason": "An agricultural product refers to a product classified under Chapters 1 to 24 of the Harmonized System, including those under Annex A (Primer p.64)."
+  },
+  "168": {
+    "question": "Non-agricultural or industrial goods that may be subject to anti-dumping measures are classified under which Harmonized System chapters?",
+    "choices": {
+      "A": "Chapters 1 to 24",
+      "B": "Chapters 25 to 97",
+      "C": "Chapters 1 to 97",
+      "D": "Chapters 90 to 97 only"
+    },
+    "correct": "B",
+    "reason": "Non-agricultural or industrial goods refer to products classified under Chapters 25 to 97 of the HS and excluded from Annex A (Primer p.64)."
+  },
+  "169": {
+    "question": "Which of the following importations is exempted from an anti-dumping protest?",
+    "choices": {
+      "A": "Products imported by private traders for resale",
+      "B": "Products imported by or consigned to government agencies not organized for profit to stabilize or supplement shortages",
+      "C": "Products imported through a free port zone",
+      "D": "Products imported by multinational corporations"
+    },
+    "correct": "B",
+    "reason": "Products imported by or consigned to government agencies not organized for profit and designated to import, stabilize, or supplement shortages are exempted from anti-dumping protest (Primer p.64)."
+  },
+  "170": {
+    "question": "Who may file a written application for an anti-dumping protest under Republic Act No. 8752?",
+    "choices": {
+      "A": "Only government agencies",
+      "B": "Only the Bureau of Customs",
+      "C": "Any person, whether natural or juridical, representing a domestic industry",
+      "D": "Only foreign exporters"
+    },
+    "correct": "C",
+    "reason": "Any person, whether natural or juridical, representing a domestic industry, may file a written application using the proforma protestant's questionnaire (Primer p.64)."
+  },
+  "171": {
+    "question": "Within how many days must an applicant post the surety bond required under Republic Act No. 8752, failing which the application is dismissed?",
+    "choices": {
+      "A": "5 days",
+      "B": "30 days",
+      "C": "10 days",
+      "D": "60 days"
+    },
+    "correct": "C",
+    "reason": "Failure to post the surety bond within ten (10) days results in the dismissal of the application (Primer p.65)."
+  },
+  "172": {
+    "question": "Which of the following is a factor considered in determining whether an anti-dumping application is frivolous?",
+    "choices": {
+      "A": "Whether the applicant is a large corporation",
+      "B": "Whether there is intentional misrepresentation of information or evidence supplied in the application",
+      "C": "Whether the applicant filed the case more than once",
+      "D": "Whether the product involved is agricultural"
+    },
+    "correct": "B",
+    "reason": "A factor in determining whether an application is frivolous is whether there is any intentional misrepresentation of the information or evidence supplied (Primer p.65)."
+  },
+  "173": {
+    "question": "The term domestic industry, as used in anti-dumping investigations, generally refers to what?",
+    "choices": {
+      "A": "Only the single largest producer of the like product",
+      "B": "The domestic producers as a whole of the like product, or those whose collective output is a major proportion of total domestic production",
+      "C": "Only producers located in Metro Manila",
+      "D": "Only producers who export the like product"
+    },
+    "correct": "B",
+    "reason": "Domestic industry refers to the domestic producers as a whole of the like product, or to those whose collective output constitutes a major proportion of total domestic production (Primer p.65)."
+  },
+  "174": {
+    "question": "What are the two thresholds of producer support needed for an anti-dumping protest to be accepted?",
+    "choices": {
+      "A": "Support from producers representing more than 50% of production, and support from producers accounting for at least 25% of production of the alleged dumped product",
+      "B": "Support from producers representing more than 75% of production only",
+      "C": "Support from at least three producers regardless of output",
+      "D": "Support from producers representing exactly 50% of production"
+    },
+    "correct": "A",
+    "reason": "The thresholds require support by producers whose collective output is more than fifty percent (50%) of total production, and support by producers accounting for at least twenty-five percent (25%) of the product alleged to be dumped (Primer p.65)."
+  },
+  "175": {
+    "question": "Under what condition may an anti-dumping investigation be initiated without a written application from the domestic industry?",
+    "choices": {
+      "A": "Never, a written application is always mandatory",
+      "B": "In special circumstances, when the DA or DTI, on its own motion, has sufficient evidence of dumping, injury, and causal link",
+      "C": "Only when the exporter requests it",
+      "D": "Only upon order of the President"
+    },
+    "correct": "B",
+    "reason": "In special circumstances, the DA or DTI may, on its own motion, initiate an anti-dumping investigation without a written application if there is sufficient evidence of dumping, injury, and a causal link (Primer p.65)."
+  },
+  "176": {
+    "question": "Which of the following must be included in a properly documented anti-dumping application under the Primer?",
+    "choices": {
+      "A": "A notarized waiver of appeal rights",
+      "B": "A complete description of the allegedly dumped product",
+      "C": "A certificate of good standing from the SEC",
+      "D": "A bank guarantee equal to the full value of imports"
+    },
+    "correct": "B",
+    "reason": "Among the twelve required items, a properly documented application must contain a complete description of the allegedly dumped product (Primer p.66)."
+  },
+  "177": {
+    "question": "What must the applicant include at the end of a properly documented anti-dumping application?",
+    "choices": {
+      "A": "A list of competitor companies",
+      "B": "A certification signed by the applicant that the information presented is accurate and complete",
+      "C": "A copy of the applicant's business permit",
+      "D": "A notarized deed of sale"
+    },
+    "correct": "B",
+    "reason": "The application must include a certification signed by the applicant that the information presented is accurate and complete to the best of his knowledge (Primer p.66)."
+  },
+  "178": {
+    "question": "How many working days does the DA or DTI-BIS have to make a Prima Facie Determination upon acceptance of a properly documented protest?",
+    "choices": {
+      "A": "10 working days",
+      "B": "5 working days",
+      "C": "30 working days",
+      "D": "60 working days"
+    },
+    "correct": "B",
+    "reason": "The DA or DTI-BIS has five (5) working days to decide whether the facts would constitute a dumping case (Primer p.67)."
+  },
+  "179": {
+    "question": "From receipt of answers to the questionnaire, how many working days does the DA or DTI-BIS have to make its Preliminary Determination on the imposition of a provisional anti-dumping duty?",
+    "choices": {
+      "A": "15 working days",
+      "B": "60 working days",
+      "C": "30 working days",
+      "D": "120 working days"
+    },
+    "correct": "C",
+    "reason": "The DA or DTI-BIS has thirty (30) working days from receipt of the answers to the questionnaire to make its preliminary determination (Primer p.67)."
+  },
+  "180": {
+    "question": "How many days does the Tariff Commission have to complete its formal investigation and submit its report of findings for a Final Determination?",
+    "choices": {
+      "A": "60 days",
+      "B": "90 days",
+      "C": "30 days",
+      "D": "120 days"
+    },
+    "correct": "D",
+    "reason": "The Commission has one hundred twenty (120) days from receipt of the advice from either the DA or DTI Secretary to complete its investigation and submit its report of findings (Primer p.67)."
+  },
+  "181": {
+    "question": "Within how many days from receipt of an affirmative final determination by the Tariff Commission must the DA or DTI Secretary issue a Department Order imposing an anti-dumping measure?",
+    "choices": {
+      "A": "Five (5) days",
+      "B": "Thirty (30) days",
+      "C": "Sixty (60) days",
+      "D": "Ten (10) days"
+    },
+    "correct": "D",
+    "reason": "Within ten (10) days from receipt of an affirmative final determination, the Secretary shall issue a Department Order for the imposition of an anti-dumping measure, unless an undertaking was earlier accepted (Primer p.67)."
+  },
+  "182": {
+    "question": "In case of a negative final determination, what happens to the anti-dumping bond posted by the importer?",
+    "choices": {
+      "A": "It is forfeited to the government",
+      "B": "It is immediately released to the importer after the appeal period to the Court of Tax Appeals lapses",
+      "C": "It is transferred to the domestic industry as damages",
+      "D": "It is held indefinitely by the Tariff Commission"
+    },
+    "correct": "B",
+    "reason": "In case of a negative determination, an Order is issued for the Commissioner of Customs to immediately release the anti-dumping bond to the importer after the lapse of the appeal period to the Court of Tax Appeals (Primer p.67)."
+  },
+  "183": {
+    "question": "Where should the official request for the conduct of a formal anti-dumping investigation be secured, for industrial products?",
+    "choices": {
+      "A": "The Office of the Secretary of the Department of Trade and Industry",
+      "B": "The Bureau of Customs",
+      "C": "Two newspapers of general circulation",
+      "D": "The Office of the Secretary of the Department of Agriculture"
+    },
+    "correct": "A",
+    "reason": "The Checklist of Requirements shows that for industrial products, the official request is secured from the DTI - Office of the Secretary (Primer p.67)."
+  },
+  "184": {
+    "question": "Under the Primer, an anti-dumping petition may be rejected or an investigation terminated if the provisionally estimated margin of dumping is less than what percentage of export price?",
+    "choices": {
+      "A": "5%",
+      "B": "2%",
+      "C": "10%",
+      "D": "1%"
+    },
+    "correct": "B",
+    "reason": "A petition may be rejected if the provisionally estimated margin of dumping is less than two percent (2%) of export price (Primer p.68)."
+  },
+  "185": {
+    "question": "The volume of dumped imports from a particular country is normally regarded as negligible if it accounts for less than what percentage of total imports of the like article in the Philippines?",
+    "choices": {
+      "A": "Less than 3%",
+      "B": "Less than 10%",
+      "C": "Less than 1%",
+      "D": "Less than 7%"
+    },
+    "correct": "A",
+    "reason": "The volume of dumped imports from a particular country shall normally be regarded as negligible if it accounts for less than three percent (3%) of imports of the like article (Primer p.68)."
+  },
+  "186": {
+    "question": "Before a final determination, how many days are interested parties given from receipt of the disclosed essential facts to defend their interests in writing?",
+    "choices": {
+      "A": "Ten (10) days",
+      "B": "Five (5) days",
+      "C": "Thirty (30) days",
+      "D": "Fifteen (15) days"
+    },
+    "correct": "B",
+    "reason": "Parties are given five (5) days from the date of receipt of the essential facts to defend their interests in writing (Primer p.68)."
+  },
+  "187": {
+    "question": "What may investigating authorities do if exporting enterprises refuse to cooperate or provide incorrect or incomplete information during an investigation?",
+    "choices": {
+      "A": "Automatically dismiss the case",
+      "B": "Decide based on the best information available",
+      "C": "Impose the maximum possible duty automatically",
+      "D": "Refer the matter to the WTO immediately"
+    },
+    "correct": "B",
+    "reason": "The authorities can decide based on the best information available when exporting enterprises refuse to cooperate or provide incorrect or incomplete information (Primer p.68)."
+  },
+  "188": {
+    "question": "Under the four elements of dumping, what does like product refer to?",
+    "choices": {
+      "A": "A product that is cheaper than the product under consideration",
+      "B": "A product identical or alike in all respects to the product under consideration, or one closely resembling it",
+      "C": "A product manufactured only in the Philippines",
+      "D": "A product that has never been imported before"
+    },
+    "correct": "B",
+    "reason": "Like product refers to a product which is identical or alike in all respects to the product under consideration, or one with characteristics closely resembling it (Primer p.68)."
+  },
+  "189": {
+    "question": "The price difference or dumping margin element of dumping refers to what amount?",
+    "choices": {
+      "A": "The amount by which the export price exceeds the normal value",
+      "B": "The amount by which the normal value exceeds the export price",
+      "C": "The total customs duty paid on the import",
+      "D": "The shipping cost difference between countries"
+    },
+    "correct": "B",
+    "reason": "Price difference/dumping margin is the amount by which the normal value exceeds the export price (selling price to an importer in the Philippines) (Primer p.68)."
+  },
+  "190": {
+    "question": "Material injury, as an element of dumping, includes which of the following?",
+    "choices": {
+      "A": "Only actual financial loss of a single company",
+      "B": "Material injury to a domestic industry, threat of material injury, or material retardation of the establishment of a domestic industry",
+      "C": "Only loss of export markets",
+      "D": "Only a decline in the exporter's profits"
+    },
+    "correct": "B",
+    "reason": "Material injury means material injury to a domestic industry, threat of material injury, or material retardation of the establishment of a domestic industry (Primer p.68)."
+  },
+  "191": {
+    "question": "Causal link, as an element of dumping, refers to a finding of what?",
+    "choices": {
+      "A": "That the material injury suffered is the direct result of the importation of the dumped product",
+      "B": "That the exporter intended to cause harm",
+      "C": "That the domestic industry failed to modernize",
+      "D": "That the importer violated customs rules"
+    },
+    "correct": "A",
+    "reason": "Causal link refers to a finding that the material injury suffered by the domestic industry is the direct result of the importation of the dumped product (Primer p.69)."
+  },
+  "192": {
+    "question": "Normal value, under the Primer, is best defined as what?",
+    "choices": {
+      "A": "The export price plus freight charges",
+      "B": "The comparable price at the date of sale of the like product in the ordinary course of trade in the country of export or origin",
+      "C": "The price set by the Philippine government for imports",
+      "D": "The average world market price"
+    },
+    "correct": "B",
+    "reason": "Normal value is the comparable price at the date of sale of the like product, commodity, or article in the ordinary course of trade when destined for consumption in the country of export or origin (Primer p.69)."
+  },
+  "193": {
+    "question": "A comparable price, for purposes of determining normal value, is normally assessed at what level of trade?",
+    "choices": {
+      "A": "The retail level",
+      "B": "The wholesale export level",
+      "C": "The ex-factory level",
+      "D": "The port of destination level"
+    },
+    "correct": "C",
+    "reason": "A comparable price refers to the domestic price of the like product in the country of export or origin at the same level of trade, normally at the ex-factory level (Primer p.69)."
+  },
+  "194": {
+    "question": "An arm's length transaction refers to a transaction where the price is affected by what?",
+    "choices": {
+      "A": "Government subsidies only",
+      "B": "Exchange rate fluctuations only",
+      "C": "Not affected by any relationship between the buyer and seller, or compensation, reimbursement, or other consideration",
+      "D": "Freight and insurance costs only"
+    },
+    "correct": "C",
+    "reason": "An arm's length transaction refers to a transaction where the price is not affected by any relationship between the buyer and seller, or any compensation, reimbursement, benefit, or other consideration (Primer p.69)."
+  },
+  "195": {
+    "question": "A foreign producer's domestic selling price cannot be used as the basis for normal value if the volume of domestic sales is less than what percentage of export sales to the Philippines?",
+    "choices": {
+      "A": "Less than 10%",
+      "B": "Less than 5%",
+      "C": "Less than 25%",
+      "D": "Less than 1%"
+    },
+    "correct": "B",
+    "reason": "One instance where domestic selling price cannot be used is when the volume of domestic sales is less than five percent (5%) of export sales to the Philippines (Primer p.69)."
+  },
+  "196": {
+    "question": "If a foreign producer's domestic selling price cannot be used, what may be used as an alternative basis for normal value?",
+    "choices": {
+      "A": "The price charged for the like product exported to an appropriate third country, or a constructed value based on production costs, GS&A, and profit",
+      "B": "The retail price in the Philippines",
+      "C": "The price set by the WTO Secretariat",
+      "D": "The average of all ASEAN country prices"
+    },
+    "correct": "A",
+    "reason": "The normal value may be based on the comparable price charged for the like product exported to an appropriate third country, or the constructed value in the exporting country (Primer p.69)."
+  },
+  "197": {
+    "question": "Under the Primer, export price is defined as which of the following?",
+    "choices": {
+      "A": "The retail price in the country of destination",
+      "B": "The ex-factory price at the point of sale for export, or the FOB price at the point of shipment",
+      "C": "The price set by the importer's bank",
+      "D": "The landed cost including all duties"
+    },
+    "correct": "B",
+    "reason": "Export price is (1) the ex-factory price at the point of sale for export, or (2) the FOB price at the point of shipment of the allegedly dumped product (Primer p.70)."
+  },
+  "198": {
+    "question": "When is an alternative export value used instead of the actual export price?",
+    "choices": {
+      "A": "Whenever the exporter requests it",
+      "B": "When no export price is defined, or when it is unreliable due to a relationship or compensatory arrangement between the exporter and importer",
+      "C": "Only for agricultural products",
+      "D": "Only when the shipment exceeds a certain volume"
+    },
+    "correct": "B",
+    "reason": "An alternative export value is used when no export price is defined, or when the export price is unreliable because of a relationship or compensatory arrangement (Primer p.70)."
+  },
+  "199": {
+    "question": "What may be used as the basis for an alternative export price?",
+    "choices": {
+      "A": "A constructed or deductive price based on the resale price to an independent buyer, less costs, or a reasonable price determined by the Secretary or the Commission",
+      "B": "The price listed in the exporter's catalog only",
+      "C": "The average retail price in the Philippines",
+      "D": "The original invoice price without adjustment"
+    },
+    "correct": "A",
+    "reason": "An alternative export price may be based on a constructed or deductive price from the resale price to an independent buyer less costs, or a reasonable price determined by the Secretary or Commission (Primer p.70)."
+  },
+  "200": {
+    "question": "Which foreign exchange rate should generally be used in converting currencies for anti-dumping computations?",
+    "choices": {
+      "A": "The rate at the time of final determination",
+      "B": "The rate prevailing on the date of sale, unless the transaction is based on a forward contract rate",
+      "C": "The rate set by the Bangko Sentral ng Pilipinas at year-end",
+      "D": "The average rate for the entire investigation period"
+    },
+    "correct": "B",
+    "reason": "The exchange rate prevailing on the date of sale should be used, but if the transaction is based on an exchange rate stated in a forward contract, that rate should be used (Primer p.70)."
+  },
+  "201": {
+    "question": "In determining material injury to a domestic industry, authorities must objectively examine which of the following, among others?",
+    "choices": {
+      "A": "The political affiliation of the exporter",
+      "B": "The rate and amount of increase of dumped imports, relative to production or consumption",
+      "C": "The exporter's marketing budget",
+      "D": "The domestic industry's advertising expenses"
+    },
+    "correct": "B",
+    "reason": "Material injury determination requires objective examination of the rate and amount of increase of imports, among other factors, based on positive evidence (Primer p.70)."
+  },
+  "202": {
+    "question": "Price depression, as a modality in determining price effects of dumped imports, refers to what?",
+    "choices": {
+      "A": "The extent to which the domestic producer reduces his selling price to compete with the dumped product",
+      "B": "The extent to which dumped imports are seized by customs",
+      "C": "The extent to which the exporter raises prices",
+      "D": "The extent to which freight costs decrease"
+    },
+    "correct": "A",
+    "reason": "Price depression refers to the extent to which the domestic producer reduces his selling price to compete with the allegedly dumped product (Primer p.71)."
+  },
+  "203": {
+    "question": "Price suppression refers to the extent to which dumped imports do what to the domestic producer?",
+    "choices": {
+      "A": "Increase the domestic producer's market share",
+      "B": "Prevent the domestic producer from increasing his selling price to a level allowing full cost recovery",
+      "C": "Force the domestic producer to export more",
+      "D": "Reduce the domestic producer's production capacity"
+    },
+    "correct": "B",
+    "reason": "Price suppression refers to the extent by which dumped imports prevent the domestic producer from increasing the selling price to a level that allows full recovery of production costs (Primer p.71)."
+  },
+  "204": {
+    "question": "Price undercutting, as defined in the Primer, refers to what?",
+    "choices": {
+      "A": "The extent to which the dumped product is consistently sold at a price below the domestic selling price of the like product",
+      "B": "The extent to which import duties are reduced",
+      "C": "The extent to which exporters offer discounts to retailers",
+      "D": "The extent to which currency depreciates"
+    },
+    "correct": "A",
+    "reason": "Price undercutting refers to the extent to which the allegedly dumped product is consistently sold at a price below the domestic selling price of the like product (Primer p.71)."
+  },
+  "205": {
+    "question": "A determination of threat of material injury must be based on what kind of evidence under the Primer?",
+    "choices": {
+      "A": "Allegation or conjecture alone",
+      "B": "Remote possibility of future harm",
+      "C": "Facts, and not merely on allegation, conjecture, or remote possibility",
+      "D": "Public opinion surveys"
+    },
+    "correct": "C",
+    "reason": "A determination of threat of material injury shall be based on facts and not merely on allegation, conjecture, or remote possibility (Primer p.71)."
+  },
+  "206": {
+    "question": "Which of the following is a factor considered in determining the existence of a threat of material injury?",
+    "choices": {
+      "A": "A significant rate of increase of dumped imports indicating likelihood of substantially increased importation",
+      "B": "The number of employees of the exporting company",
+      "C": "The exporter's annual revenue",
+      "D": "The domestic industry's stock price"
+    },
+    "correct": "A",
+    "reason": "A significant rate of increase of the dumped imports in the domestic market, indicating the likelihood of substantially increased importation, is a factor in determining threat of material injury (Primer p.71)."
+  },
+  "207": {
+    "question": "In assessing other causes of injury not related to dumping, which is relevant evidence the authorities may consider?",
+    "choices": {
+      "A": "The volume and value of imported products not sold at dumping prices",
+      "B": "The exporter's internal corporate structure",
+      "C": "The number of trademarks registered by the exporter",
+      "D": "The domestic industry's dividend policy"
+    },
+    "correct": "A",
+    "reason": "Relevant evidence for other causes of injury includes the volume and value of imported products not sold at dumping prices (Primer p.71)."
+  },
+  "208": {
+    "question": "Besides contraction in demand, which of the following is also examined as another cause of injury not related to dumping?",
+    "choices": {
+      "A": "Developments in technology",
+      "B": "The exporter's tax filings",
+      "C": "The number of competing domestic brands",
+      "D": "The weather conditions in the exporting country"
+    },
+    "correct": "A",
+    "reason": "Other relevant factors examined include trade restrictive practices and competition between foreign and domestic producers, and developments in technology (Primer p.72)."
+  },
+  "209": {
+    "question": "A provisional measure against dumping may take the form of what?",
+    "choices": {
+      "A": "A permanent import ban",
+      "B": "A provisional duty or a security by cash deposit or bond equal to the estimated difference between normal value and export price",
+      "C": "A fine on the domestic industry",
+      "D": "A reduction of the MFN tariff rate"
+    },
+    "correct": "B",
+    "reason": "A provisional measure takes the form of a provisional duty or, preferably, a security by cash deposit or bond equal to the estimated difference between the normal value and export price (Primer p.72)."
+  },
+  "210": {
+    "question": "A definitive anti-dumping duty is imposed following what kind of determination?",
+    "choices": {
+      "A": "A preliminary negative determination",
+      "B": "An affirmative final determination",
+      "C": "A request from the importer",
+      "D": "A WTO Secretariat recommendation"
+    },
+    "correct": "B",
+    "reason": "A definitive anti-dumping duty is the final anti-dumping duty imposed on a protested product following an affirmative final determination (Primer p.72)."
+  },
+  "211": {
+    "question": "How long is a provisional anti-dumping measure generally imposed, and to what period may it be extended?",
+    "choices": {
+      "A": "Two months, extendable to four months",
+      "B": "Four months, extendable to six months upon request by exporters representing a significant percentage of the trade",
+      "C": "One year, extendable to two years",
+      "D": "Six months, extendable to twelve months"
+    },
+    "correct": "B",
+    "reason": "A provisional measure is imposed for four (4) months, extendable to six (6) months upon request by exporters representing a significant percentage of the trade involved (Primer p.72)."
+  },
+  "212": {
+    "question": "A provisional anti-dumping duty lower than the provisionally estimated margin of dumping may be imposed for how long if deemed sufficient to remove or prevent material injury?",
+    "choices": {
+      "A": "Three to five months",
+      "B": "Six to nine months",
+      "C": "One to three months",
+      "D": "Ten to twelve months"
+    },
+    "correct": "B",
+    "reason": "A provisional anti-dumping duty lower than the provisionally estimated margin can be imposed for six (6) to nine (9) months if deemed sufficient to remove or prevent the material injury (Primer p.72)."
+  },
+  "213": {
+    "question": "What is the maximum duration of a definitive anti-dumping duty from the date of imposition?",
+    "choices": {
+      "A": "Three years",
+      "B": "Ten years",
+      "C": "Five years",
+      "D": "Seven years"
+    },
+    "correct": "C",
+    "reason": "A definitive anti-dumping duty shall not exceed five (5) years from the date of imposition (Primer p.72)."
+  },
+  "214": {
+    "question": "A price undertaking, as defined in the Primer, is best described as what?",
+    "choices": {
+      "A": "A mandatory price ceiling imposed by the Tariff Commission",
+      "B": "A voluntary commitment by the exporter to increase his price or cease exporting at a dumped price",
+      "C": "A government subsidy to offset dumping losses",
+      "D": "A compulsory license to manufacture locally"
+    },
+    "correct": "B",
+    "reason": "A price undertaking is a voluntary commitment by the exporter to increase his price or cease exporting to the Philippines at a dumped price, eliminating the material injury (Primer p.72)."
+  },
+  "215": {
+    "question": "A price undertaking is effective for what period unless the foreign exporter proves it is no longer necessary?",
+    "choices": {
+      "A": "Three years",
+      "B": "Five years",
+      "C": "Ten years",
+      "D": "One year"
+    },
+    "correct": "B",
+    "reason": "Price undertaking is effective for a period of five (5) years unless the foreign exporter proves to the satisfaction of the authorities that it is no longer necessary (Primer p.72)."
+  },
+  "216": {
+    "question": "The lesser duty rule allows the imposition of an anti-dumping duty at what level?",
+    "choices": {
+      "A": "Always equal to the calculated margin of dumping",
+      "B": "Amounts lower than the calculated margin of dumping if adequate to remove the injury to the domestic industry",
+      "C": "Always double the calculated margin of dumping",
+      "D": "A fixed rate set by the WTO"
+    },
+    "correct": "B",
+    "reason": "The lesser duty rule is the imposition of an anti-dumping duty in amounts lower than the calculated margin of dumping, if such lesser duty is adequate to remove the injury (Primer p.73)."
+  },
+  "217": {
+    "question": "The New Shipper's Review is conducted for what purpose?",
+    "choices": {
+      "A": "To determine individual margins of dumping for new exporters who did not export the product during the period of investigation",
+      "B": "To re-investigate the original domestic industry's finances",
+      "C": "To cancel an existing anti-dumping duty automatically",
+      "D": "To review the exporter's tax compliance"
+    },
+    "correct": "A",
+    "reason": "The New Shipper's Review is carried out to determine individual margins of dumping for new exporters who have not exported the product during the period of investigation (Primer p.73)."
+  },
+  "218": {
+    "question": "How much time should have elapsed since the imposition of the anti-dumping duty before an Interim or Changed Circumstances Review can be initiated?",
+    "choices": {
+      "A": "At least six (6) months",
+      "B": "At least one (1) year",
+      "C": "At least two (2) years",
+      "D": "At least three (3) years"
+    },
+    "correct": "B",
+    "reason": "At least one (1) year should have elapsed since the imposition of the anti-dumping duty before an interim review can be initiated (Primer p.73)."
+  },
+  "219": {
+    "question": "A Sunset or Expiry Review is conducted before what milestone in the life of an anti-dumping duty?",
+    "choices": {
+      "A": "The first year",
+      "B": "The third year",
+      "C": "The fifth year (sunset date)",
+      "D": "The tenth year"
+    },
+    "correct": "C",
+    "reason": "A Sunset or Expiry Review may be initiated before the sunset date, i.e., the 5th year, to determine whether expiry of the duty would lead to continuation or recurrence of dumping and injury (Primer p.73)."
+  },
+  "220": {
+    "question": "In the anti-dumping case involving Polypropylene resins from South Korea, what ultimately happened to the imposed measure?",
+    "choices": {
+      "A": "The measure remains permanently in force",
+      "B": "The measure was terminated after the Korean Government elevated the case to the WTO Dispute Settlement Body and an amicable settlement was reached",
+      "C": "The measure was increased after appeal",
+      "D": "The case was dismissed for lack of evidence"
+    },
+    "correct": "B",
+    "reason": "The imposition of the measure on Polypropylene resins from South Korea was terminated after the Korean Government brought the case before the WTO Dispute Settlement Body and the parties agreed to an amicable settlement (Primer p.74)."
+  },
+  "221": {
+    "question": "What was the final determination in the anti-dumping case involving Cold rolled steel coils and sheet from Ukraine (2000)?",
+    "choices": {
+      "A": "Positive, with measure imposed",
+      "B": "Negative, due to negligible volume of imports",
+      "C": "Case dismissed by mutual agreement",
+      "D": "Positive, but measure withheld for public interest"
+    },
+    "correct": "B",
+    "reason": "The 2000 case on Cold rolled steel coils and sheet from Ukraine resulted in a Negative determination due to negligible volume of imports (Primer p.73)."
+  },
+  "222": {
+    "question": "What happened to the 2007 anti-dumping case on Sodium Tripolyphosphates from China?",
+    "choices": {
+      "A": "It resulted in a Positive determination with duty imposed",
+      "B": "The case was dismissed after the domestic industry withdrew its petition for expiry review and the parties settled amicably",
+      "C": "It was escalated to the WTO",
+      "D": "It remains pending to date"
+    },
+    "correct": "B",
+    "reason": "The Sodium Tripolyphosphates case against China was dismissed because the domestic industry withdrew its petition for expiry review and the parties settled the case amicably (Primer p.74)."
+  },
+  "223": {
+    "question": "What was the outcome of the 2010 anti-dumping case involving Mosquito Coil from Indonesia?",
+    "choices": {
+      "A": "Positive, duty imposed",
+      "B": "Negative, due to a de minimis dumping margin",
+      "C": "Case dismissed for lack of standing",
+      "D": "Positive, but public interest exemption applied"
+    },
+    "correct": "B",
+    "reason": "The 2010 Mosquito Coil case from Indonesia resulted in a Negative determination because of a de minimis dumping margin (Primer p.74)."
+  },
+  "224": {
+    "question": "What was the result of the 2001 anti-dumping case involving Clear figured glass from China?",
+    "choices": {
+      "A": "Positive, dumping was established",
+      "B": "Negative, because dumping was not established",
+      "C": "Case withdrawn by the applicant",
+      "D": "Positive, but measure not imposed for public interest"
+    },
+    "correct": "B",
+    "reason": "The 2001 Clear figured glass case against China resulted in a Negative determination because dumping was not established (Primer p.74)."
+  },
+  "225": {
+    "question": "What was the final determination for the 2014 anti-dumping case on Wheat flour from Turkey?",
+    "choices": {
+      "A": "Negative, material injury not established",
+      "B": "Case dismissed by agreement",
+      "C": "Positive",
+      "D": "Negative, negligible volume of imports"
+    },
+    "correct": "C",
+    "reason": "The Table of Summary of Cases shows that the 2014 Wheat flour case from Turkey had a Positive final determination (Primer p.74)."
+  },
+  "226": {
+    "question": "A subsidy and countervailing measure, as defined in the Primer, is best described as what?",
+    "choices": {
+      "A": "A tariff classification ruling",
+      "B": "A trade counter-measure adopted by government to offset a specific subsidy causing or threatening material injury to a domestic industry",
+      "C": "A quota restriction on agricultural imports",
+      "D": "A voluntary export restraint agreement"
+    },
+    "correct": "B",
+    "reason": "A subsidy and countervailing measure is a trade counter-measure adopted by government to offset any specific subsidy given to exporters or manufacturers causing or threatening material injury to a domestic industry (Primer p.75)."
+  },
+  "227": {
+    "question": "Which of the following is given as an example of a financial contribution that may constitute a subsidy?",
+    "choices": {
+      "A": "A reduction in the exporter's shipping insurance",
+      "B": "Grants, soft loans, guarantees, and equity infusions provided by the government of the country of export or origin",
+      "C": "A private bank loan to a domestic importer",
+      "D": "A reduction in freight costs by a shipping line"
+    },
+    "correct": "B",
+    "reason": "Examples of financial contributions constituting a subsidy include grants, soft loans, guarantees, certain equity infusions, tax credits, and goods or services provided by governments (Primer p.75)."
+  },
+  "228": {
+    "question": "Non-actionable or green subsidies are protected from countervailing action because they are considered what?",
+    "choices": {
+      "A": "Illegal under all circumstances",
+      "B": "Of particular value and not to be discouraged, or having no or minimal trade-distorting effects",
+      "C": "Always contingent on export performance",
+      "D": "Reserved only for agricultural products"
+    },
+    "correct": "B",
+    "reason": "Non-actionable or green subsidies refer to subsidies protected from countervailing action because they are of particular value and not to be discouraged, or have no or minimal trade-distorting effects (Primer p.75)."
+  },
+  "229": {
+    "question": "For research assistance to foreign firms to qualify as a non-actionable subsidy, the assistance must not exceed what percentage of the costs of industrial research?",
+    "choices": {
+      "A": "50 percent",
+      "B": "25 percent",
+      "C": "75 percent",
+      "D": "100 percent"
+    },
+    "correct": "C",
+    "reason": "Research assistance qualifies as non-actionable if it covers not more than seventy-five percent (75%) of the costs of industrial research, or fifty percent (50%) of pre-competitive development activity costs (Primer p.75)."
+  },
+  "230": {
+    "question": "For a region to be considered disadvantaged under the non-actionable subsidy criteria, its income or GDP per capita must not be above what percentage of the average for the territory concerned?",
+    "choices": {
+      "A": "85 percent",
+      "B": "110 percent",
+      "C": "50 percent",
+      "D": "75 percent"
+    },
+    "correct": "A",
+    "reason": "One criterion is that income per capita, household income per capita, or GDP per capita must not be above eighty-five percent (85%) of the average for the territory concerned (Primer p.76)."
+  },
+  "231": {
+    "question": "For a region to be considered disadvantaged based on unemployment rate, that rate must be at least what percentage of the average, measured over a three-year period?",
+    "choices": {
+      "A": "85 percent",
+      "B": "100 percent",
+      "C": "110 percent",
+      "D": "150 percent"
+    },
+    "correct": "C",
+    "reason": "The unemployment rate must be at least one hundred ten percent (110%) of the average for the territory concerned, measured over a three-year period (Primer p.76)."
+  },
+  "232": {
+    "question": "Assistance to promote adaptation of existing facilities to new environmental requirements, to qualify as non-actionable, must be limited to what percentage of the cost of adaptation?",
+    "choices": {
+      "A": "Fifty percent (50%)",
+      "B": "Twenty percent (20%)",
+      "C": "Seventy-five percent (75%)",
+      "D": "Ten percent (10%)"
+    },
+    "correct": "B",
+    "reason": "Environmental adaptation assistance must be limited to twenty percent (20%) of the cost of adaptation to qualify as non-actionable (Primer p.76)."
+  },
+  "233": {
+    "question": "Prohibited or red subsidies are generally contingent on what?",
+    "choices": {
+      "A": "Domestic consumption levels",
+      "B": "Export performance, or the use of domestic over imported goods",
+      "C": "Foreign exchange reserves",
+      "D": "Employment of local workers only"
+    },
+    "correct": "B",
+    "reason": "Prohibited subsidies or red subsidies include export subsidies contingent on export performance and subsidies contingent on the use of domestic over imported goods (Primer p.77)."
+  },
+  "234": {
+    "question": "Which of the following is listed as an example of a prohibited (red) subsidy?",
+    "choices": {
+      "A": "Export credits at rates below the government's cost of borrowing used to secure a material advantage",
+      "B": "A tax credit available to all domestic firms equally",
+      "C": "A publicly funded agricultural research program",
+      "D": "A regional development grant for disadvantaged areas"
+    },
+    "correct": "A",
+    "reason": "Export credits at rates below the government's cost of borrowing, used to secure a material advantage in export credit terms, is listed as an example of a red subsidy (Primer p.77)."
+  },
+  "235": {
+    "question": "A specific subsidy, as defined in the Primer, refers to a subsidy limited to what?",
+    "choices": {
+      "A": "Only subsidies given to state-owned enterprises",
+      "B": "An enterprise or industry, or a group of enterprises or industries, or to certain regions",
+      "C": "Only subsidies for research and development",
+      "D": "Only subsidies exceeding a fixed peso amount"
+    },
+    "correct": "B",
+    "reason": "A specific subsidy refers to a subsidy limited to an enterprise or industry, or a group of enterprises or industries, and can be limited to certain regions (Primer p.77)."
+  },
+  "236": {
+    "question": "Actionable or yellow subsidies are those that fall under what category?",
+    "choices": {
+      "A": "The definition of subsidy described in the Primer, without being prohibited or non-actionable",
+      "B": "Only subsidies given by international organizations",
+      "C": "Only subsidies for environmental protection",
+      "D": "Only subsidies granted after a countervailing investigation"
+    },
+    "correct": "A",
+    "reason": "Actionable subsidies or yellow subsidies are those falling under the definition of subsidy described in the Primer (Primer p.78)."
+  },
+  "237": {
+    "question": "A subsidized import/product is one that is granted a subsidy and that does what to a domestic industry?",
+    "choices": {
+      "A": "Has no effect on the domestic industry",
+      "B": "Causes or threatens to cause material injury, or materially retards growth or establishment of the domestic industry",
+      "C": "Only affects export-oriented industries",
+      "D": "Only affects the government budget"
+    },
+    "correct": "B",
+    "reason": "A subsidized import/product is one causing or threatening to cause material injury to a domestic industry, or materially retarding the growth or establishment of a domestic industry (Primer p.78)."
+  },
+  "238": {
+    "question": "What is Republic Act No. 8751 commonly known as, and when did it take effect?",
+    "choices": {
+      "A": "The Anti-Dumping Act of 1999, effective 4 September 1999",
+      "B": "An Act Strengthening the Mechanisms for the Imposition of Countervailing Duties, effective 31 August 1999",
+      "C": "The Tariff Reform Program, effective 1 January 2000",
+      "D": "The Customs Modernization Act, effective 31 August 1999"
+    },
+    "correct": "B",
+    "reason": "RA No. 8751, which strengthens the mechanisms for imposing countervailing duties on subsidized imports, was signed on 7 August 1999 and took effect on 31 August 1999 (Primer p.78)."
+  },
+  "239": {
+    "question": "The provisions of Republic Act No. 8751 on countervailing duties were adopted in which section of the Customs Modernization and Tariff Act?",
+    "choices": {
+      "A": "Section 711",
+      "B": "Section 800",
+      "C": "Section 713",
+      "D": "Section 1102"
+    },
+    "correct": "C",
+    "reason": "The provisions of RA No. 8751 were adopted in Section 713 of the Customs Modernization and Tariff Act (Primer p.78)."
+  },
+  "240": {
+    "question": "When did the Implementing Rules and Regulations of Republic Act No. 8751, issued as Joint Administrative Order No. 02, series of 2000, take effect?",
+    "choices": {
+      "A": "10 July 2000",
+      "B": "25 September 2000",
+      "C": "5 July 2000",
+      "D": "31 August 2000"
+    },
+    "correct": "B",
+    "reason": "Joint Administrative Order No. 02, series of 2000, the IRR of RA No. 8751, took effect on 25 September 2000 (Primer p.78)."
+  },
+  "241": {
+    "question": "Aligning the domestic countervailing duty law with which international agreement was part of the rationale for passing Republic Act No. 8751?",
+    "choices": {
+      "A": "The WTO Agreement on Subsidies and Countervailing Measures (Article XVI of GATT 1994)",
+      "B": "The WTO Anti-Dumping Agreement",
+      "C": "The ASEAN Free Trade Agreement",
+      "D": "The Paris Convention"
+    },
+    "correct": "A",
+    "reason": "One rationale for RA No. 8751 was to align the domestic law with the WTO Agreement on Subsidies and Countervailing Measures, Article XVI of GATT 1994 (Primer p.78)."
+  },
+  "242": {
+    "question": "In administering countervailing legislation, which agency receives the properly documented application and conducts the preliminary investigation?",
+    "choices": {
+      "A": "The Tariff Commission",
+      "B": "The Bureau of Customs",
+      "C": "The Department of Finance",
+      "D": "The DA or DTI-BIS"
+    },
+    "correct": "D",
+    "reason": "The DA or DTI-BIS receives the properly documented application, determines whether a prima facie case exists, and conducts the preliminary investigation (Primer p.78)."
+  },
+  "243": {
+    "question": "Which agency conducts the formal investigation and makes the final determination for imposing a definitive countervailing duty?",
+    "choices": {
+      "A": "The Department of Trade and Industry",
+      "B": "The Tariff Commission",
+      "C": "The Bureau of Customs",
+      "D": "The National Economic and Development Authority"
+    },
+    "correct": "B",
+    "reason": "The Tariff Commission conducts the formal investigation and makes the final determination for purposes of imposing the definitive countervailing duty (Primer p.79)."
+  },
+  "244": {
+    "question": "Which agency collects countervailing duties once imposed?",
+    "choices": {
+      "A": "The Bureau of Customs",
+      "B": "The Department of Trade and Industry",
+      "C": "The Tariff Commission",
+      "D": "The Bureau of Internal Revenue"
+    },
+    "correct": "A",
+    "reason": "The Bureau of Customs collects the countervailing duties (Primer p.79)."
+  },
+  "245": {
+    "question": "A countervailing duty protest applies to any product that is granted what, by the government of the country of export or origin?",
+    "choices": {
+      "A": "A favorable tax treaty",
+      "B": "Any kind or form of specific subsidy upon exportation or manufacture, causing or threatening material injury",
+      "C": "A free trade certificate",
+      "D": "A quality certification"
+    },
+    "correct": "B",
+    "reason": "A countervailing duty protest applies to a product granted, directly or indirectly, any kind or form of specific subsidy upon exportation or manufacture, causing or threatening material injury to a domestic industry (Primer p.79)."
+  },
+  "246": {
+    "question": "In countervailing cases, a country of export refers to what?",
+    "choices": {
+      "A": "The country where the product was manufactured",
+      "B": "The country from where the allegedly subsidized product was shipped to the Philippines, regardless of the seller's location",
+      "C": "The country where the subsidy program was enacted into law",
+      "D": "The country of the buyer's citizenship"
+    },
+    "correct": "B",
+    "reason": "A country of export is the country from where the allegedly subsidized product was shipped to the Philippines, regardless of the location of the seller (Primer p.79)."
+  },
+  "247": {
+    "question": "In countervailing cases, a country of origin refers to what?",
+    "choices": {
+      "A": "Where the allegedly subsidized product was wholly obtained or where the last substantial transformation took place",
+      "B": "Where the product was first advertised",
+      "C": "Where the importer's business is registered",
+      "D": "Where the shipping vessel is flagged"
+    },
+    "correct": "A",
+    "reason": "A country of origin is where the allegedly subsidized product was either wholly obtained or where the last substantial transformation took place (Primer p.79)."
+  },
+  "248": {
+    "question": "For countervailing purposes, an agricultural product that may be subsidized is classified under which Harmonized System chapters?",
+    "choices": {
+      "A": "Chapters 25 to 97",
+      "B": "Chapters 1 to 24",
+      "C": "Chapters 50 to 63",
+      "D": "Chapters 1 to 97"
+    },
+    "correct": "B",
+    "reason": "An agricultural product refers to a product classified under Chapters 1 to 24 of the HS, including specific tariff lines under Annex A (Primer p.79)."
+  },
+  "249": {
+    "question": "For countervailing purposes, non-agricultural or industrial goods that may be subsidized are classified under which Harmonized System chapters?",
+    "choices": {
+      "A": "Chapters 1 to 24",
+      "B": "Chapters 1 to 50",
+      "C": "Chapters 25 to 97",
+      "D": "Chapters 90 to 99"
+    },
+    "correct": "C",
+    "reason": "Non-agricultural or industrial goods refer to products classified under Chapters 25 to 97 of the HS and excluded from Annex A (Primer p.79)."
+  },
+  "250": {
+    "question": "Which importations are exempted from countervailing duty protest?",
+    "choices": {
+      "A": "Articles imported by or consigned to government agencies not organized for profit to stabilize or supplement shortages, and conditionally duty-free importations under Section 800 of the CMTA",
+      "B": "Articles imported by private corporations for resale",
+      "C": "Articles imported during an election period",
+      "D": "Articles imported by foreign embassies only"
+    },
+    "correct": "A",
+    "reason": "Exempted importations include articles imported by or consigned to government agencies not organized for profit to stabilize or supplement shortages, and conditionally duty-free importations under Section 800 of the CMTA (Primer p.80)."
+  },
+  "251": {
+    "question": "To whom should a verified petition for countervailing action on industrial goods be filed?",
+    "choices": {
+      "A": "The Secretary of Finance",
+      "B": "The Secretary of Trade and Industry",
+      "C": "The Tariff Commission Chairperson",
+      "D": "The Bureau of Customs Commissioner"
+    },
+    "correct": "B",
+    "reason": "A verified petition requesting imposition of a countervailing duty on industrial goods is filed with the Secretary of Trade and Industry (Primer p.80)."
+  },
+  "252": {
+    "question": "In countervailing investigations, the term domestic industry may exclude producers who are related to exporters or importers, or who are themselves importers of what?",
+    "choices": {
+      "A": "Raw materials used by the domestic industry",
+      "B": "The allegedly subsidized product or a like product from other countries",
+      "C": "Capital equipment for manufacturing",
+      "D": "Office supplies"
+    },
+    "correct": "B",
+    "reason": "The term domestic industry may be interpreted as referring to the rest of the producers when producers are related to exporters/importers or are themselves importers of the allegedly subsidized product or a like product from other countries (Primer p.80)."
+  },
+  "253": {
+    "question": "What are the two thresholds of producer support needed for a countervailing petition to be accepted?",
+    "choices": {
+      "A": "Support from producers representing more than 50% and support from producers accounting for at least 25% of total production of the like product",
+      "B": "Support from exactly two producers regardless of output",
+      "C": "Support from producers representing more than 90% of total production",
+      "D": "Support from the government agency alone"
+    },
+    "correct": "A",
+    "reason": "The thresholds require support by producers whose collective output is more than fifty percent (50%), and support by producers accounting for at least twenty-five percent (25%) of total production of the like product (Primer p.80)."
+  },
+  "254": {
+    "question": "Under what condition may a countervailing investigation be initiated without a written application from the domestic industry?",
+    "choices": {
+      "A": "Never, it is always mandatory",
+      "B": "In special circumstances, when the DA or DTI, on its own motion, has sufficient evidence of subsidy, injury, and causal link",
+      "C": "Only at the request of the foreign government",
+      "D": "Only when ordered by Congress"
+    },
+    "correct": "B",
+    "reason": "In special circumstances, the DA or DTI may, on its own motion, initiate a countervailing action even without a written application, if there is sufficient evidence of subsidy, injury, and causal link (Primer p.81)."
+  },
+  "255": {
+    "question": "A properly documented countervailing application must contain information on what, regarding the alleged subsidy?",
+    "choices": {
+      "A": "The exporter's annual tax return",
+      "B": "The nature, extent, and estimated amount of the subsidy in question",
+      "C": "The exporter's shareholders' names",
+      "D": "The exporter's marketing strategy"
+    },
+    "correct": "B",
+    "reason": "Among the required items, a properly documented countervailing application must state the nature, extent, and estimated amount of the subsidy in question (Primer p.81)."
+  },
+  "256": {
+    "question": "Which of the following must also be included in a properly documented countervailing application, relating to the shipment itself?",
+    "choices": {
+      "A": "The estimated aggregate or cumulative quantity, the port, and the date of arrival, and the import entry declaration of the allegedly subsidized product",
+      "B": "The exporter's corporate logo",
+      "C": "The buyer's personal identification number",
+      "D": "The vessel's insurance policy number"
+    },
+    "correct": "A",
+    "reason": "The application must include the estimated aggregate or cumulative quantity, the port, and the date of arrival, and the import entry declaration of the allegedly subsidized product (Primer p.81)."
+  },
+  "257": {
+    "question": "A properly documented countervailing application must also disclose what information about the domestic industry's workforce?",
+    "choices": {
+      "A": "The average age of employees",
+      "B": "The number of persons employed by the affected domestic industry",
+      "C": "The union affiliation of employees",
+      "D": "The salary scale of management"
+    },
+    "correct": "B",
+    "reason": "The application must state the number of persons employed by the affected domestic industry (Primer p.81)."
+  },
+  "258": {
+    "question": "Under the Primer, what is the purpose of government-to-government consultations in a countervailing case?",
+    "choices": {
+      "A": "To negotiate a new free trade agreement",
+      "B": "To clarify the situation on matters in the application and arrive at a mutually agreed solution with the government of the country of export or origin",
+      "C": "To determine the exchange rate for duty computation",
+      "D": "To settle disputes between competing domestic producers"
+    },
+    "correct": "B",
+    "reason": "The DA or DTI Secretary notifies the government of the country of export or origin about the impending application and invites consultation to clarify matters and arrive at a mutually agreed upon solution (Primer p.83)."
+  },
+  "259": {
+    "question": "When must government-to-government consultations in a countervailing case be conducted?",
+    "choices": {
+      "A": "After the final determination is issued",
+      "B": "Only if the importer requests it",
+      "C": "Upon acceptance of a properly documented application and before initiating an investigation",
+      "D": "Only during the formal investigation by the Tariff Commission"
+    },
+    "correct": "C",
+    "reason": "Consultations are conducted upon acceptance of a properly documented application and before initiating an investigation (Primer p.83)."
+  },
+  "260": {
+    "question": "For a product originating from a developed country, a countervailing petition may be rejected if the amount of subsidy is de minimis, meaning less than what percentage ad valorem of export price?",
+    "choices": {
+      "A": "Less than two percent (2%)",
+      "B": "Less than three percent (3%)",
+      "C": "Less than five percent (5%)",
+      "D": "Less than one percent (1%)"
+    },
+    "correct": "D",
+    "reason": "For a developed country, the subsidy is considered de minimis if it is less than one per cent (1%) ad valorem as a percentage of export price (Primer p.83)."
+  },
+  "261": {
+    "question": "For a product originating from a developing country, what is the de minimis subsidy threshold, and what is it for least developed countries?",
+    "choices": {
+      "A": "Two percent (2%) for developing countries and three percent (3%) for least developed countries",
+      "B": "One percent (1%) for both categories",
+      "C": "Five percent (5%) for developing countries and ten percent (10%) for least developed countries",
+      "D": "Three percent (3%) for developing countries and two percent (2%) for least developed countries"
+    },
+    "correct": "A",
+    "reason": "For developing countries the de minimis threshold is two per cent (2%), and for least developed countries it is three per cent (3%) (Primer p.83)."
+  },
+  "262": {
+    "question": "For a product from a developing country, the volume of imports is considered negligible if it accounts for less than what percentage of total imports of the product, unless such countries collectively account for more than nine percent?",
+    "choices": {
+      "A": "Less than three percent (3%)",
+      "B": "Less than four percent (4%)",
+      "C": "Less than seven percent (7%)",
+      "D": "Less than ten percent (10%)"
+    },
+    "correct": "B",
+    "reason": "The volume of imports from a developing country is considered negligible if it accounts for less than four per cent (4%) of total imports, unless such countries collectively account for more than nine per cent (9%) (Primer p.83)."
+  },
+  "263": {
+    "question": "In a countervailing investigation, before making the final determination, the Tariff Commission is required to disclose essential facts to which of the following parties?",
+    "choices": {
+      "A": "Only the Bureau of Customs",
+      "B": "The domestic industry, exporters or foreign producers, their governments, and importers",
+      "C": "Only the domestic industry",
+      "D": "Only the foreign government involved"
+    },
+    "correct": "B",
+    "reason": "Before the final determination, the Tariff Commission must disclose to interested parties, such as the domestic industry, exporters or foreign producers, their governments, and importers, the essential facts on which the decision is based (Primer p.83)."
+  },
+  "264": {
+    "question": "If exporting enterprises in a countervailing investigation refuse to cooperate or provide incorrect or incomplete information, what may the investigating authorities do?",
+    "choices": {
+      "A": "Automatically impose the maximum countervailing duty allowed",
+      "B": "Decide based on the best information available",
+      "C": "Immediately terminate the entire investigation",
+      "D": "Refer the matter directly to the WTO Dispute Settlement Body"
+    },
+    "correct": "B",
+    "reason": "The authorities can decide based on the best information available if exporting enterprises refuse to cooperate, impede the investigation, or provide incorrect or incomplete information (Primer p.84)."
+  },
+  "265": {
+    "question": "What are the four elements that must be established for countervailing, according to the Primer?",
+    "choices": {
+      "A": "Like product, subsidy, material injury, and causal link",
+      "B": "Like product, dumping margin, material injury, and causal link",
+      "C": "Subsidy, export price, normal value, and causal link",
+      "D": "Like product, tariff classification, subsidy, and injury"
+    },
+    "correct": "A",
+    "reason": "The four elements of countervailing are like product, subsidy, material injury, and causal link (Primer p.84)."
+  },
+  "266": {
+    "question": "In a countervailing investigation, a determination of injury must be based on positive evidence and involve an objective examination of which two matters?",
+    "choices": {
+      "A": "The volume of subsidized imports' effect on prices in the domestic market, and the consequent impact on domestic producers",
+      "B": "The exporter's tax returns and shipping manifests",
+      "C": "The importer's profit margin and the exporter's employee count",
+      "D": "The exchange rate trend and the shipping insurance cost"
+    },
+    "correct": "A",
+    "reason": "A determination of injury shall be based on positive evidence and involve an objective examination of the volume of subsidized imports on prices in the domestic market and the consequent impact of these imports on domestic producers (Primer p.84)."
+  },
+  "267": {
+    "question": "Price depression, as a modality in determining price effects of subsidized imports, refers to what?",
+    "choices": {
+      "A": "The extent to which the exporter increases subsidy amounts",
+      "B": "The extent to which the domestic producer reduces his selling price to compete with the allegedly subsidized product",
+      "C": "The extent to which currency appreciates",
+      "D": "The extent to which freight rates decrease"
+    },
+    "correct": "B",
+    "reason": "Price depression refers to the extent to which the domestic producer reduces his selling price to compete with the allegedly subsidized product (Primer p.85)."
+  },
+  "268": {
+    "question": "Price suppression, in the context of subsidized imports, refers to what?",
+    "choices": {
+      "A": "The extent by which the subsidized product prevents the domestic producer from increasing his selling price to a level allowing full cost recovery",
+      "B": "The extent to which the subsidized product is banned from entry",
+      "C": "The extent to which the domestic producer raises export volumes",
+      "D": "The extent to which the government grants tax holidays"
+    },
+    "correct": "A",
+    "reason": "Price suppression refers to the extent by which the allegedly subsidized product prevents the domestic producer from increasing his selling price to a level allowing full recovery of production costs (Primer p.85)."
+  },
+  "269": {
+    "question": "Price undercutting, in a countervailing context, refers to what?",
+    "choices": {
+      "A": "The extent to which the subsidized product is consistently sold at a price below the domestic selling price of the like product",
+      "B": "The extent to which the government recovers subsidy costs",
+      "C": "The extent to which import duties increase",
+      "D": "The extent to which the exporter's profit margin shrinks"
+    },
+    "correct": "A",
+    "reason": "Price undercutting refers to the extent to which the allegedly subsidized product is consistently sold at a price below the domestic selling price of the like product (Primer p.85)."
+  },
+  "270": {
+    "question": "Which of the following is a factor considered in determining the existence of a threat of material injury in a countervailing investigation?",
+    "choices": {
+      "A": "The nature of the subsidy in question and the trade effects likely to arise therefrom",
+      "B": "The exporter's dividend history",
+      "C": "The number of patents held by the exporter",
+      "D": "The buyer's nationality"
+    },
+    "correct": "A",
+    "reason": "A factor in determining threat of material injury is the nature of the subsidy in question and the trade effects likely to arise therefrom (Primer p.85)."
+  },
+  "271": {
+    "question": "Which of the following is listed as an example of an injury factor not related to subsidization, under the Primer?",
+    "choices": {
+      "A": "Volumes and prices of non-subsidized imports of the product, commodity, or article in question",
+      "B": "The subsidized exporter's annual budget",
+      "C": "The domestic industry's export performance",
+      "D": "The amount of the subsidy granted"
+    },
+    "correct": "A",
+    "reason": "Examples of injury factors not related to subsidization include the volumes and prices of non-subsidized imports of the product, commodity, or article in question (Primer p.85)."
+  },
+  "272": {
+    "question": "Aside from contraction in demand, which of the following is also listed as an injury factor not related to subsidization?",
+    "choices": {
+      "A": "Developments in technology",
+      "B": "The exporter's board composition",
+      "C": "The number of subsidy programs in the exporting country",
+      "D": "The buyer's credit rating"
+    },
+    "correct": "A",
+    "reason": "Injury factors not related to subsidization also include developments in technology, along with trade restrictive practices and export performance of the domestic industry (Primer p.86)."
+  },
+  "273": {
+    "question": "A provisional measure against subsidization takes the form of a security equal to what amount, and when may it be applied?",
+    "choices": {
+      "A": "The full value of the shipment, applied immediately upon filing of the petition",
+      "B": "The provisionally calculated amount of subsidy, applied only after an affirmative preliminary determination and no sooner than 60 days from initiation of the case",
+      "C": "A fixed peso amount set by the Bureau of Customs",
+      "D": "Double the amount of the alleged subsidy, applied at any time during the investigation"
+    },
+    "correct": "B",
+    "reason": "A provisional measure takes the form of a security (cash deposit or bond) equal to the provisionally calculated amount of subsidy, applied only after an affirmative preliminary determination and no sooner than 60 days from initiation of the case (Primer p.86)."
+  },
+  "274": {
+    "question": "What is the maximum duration of a provisional countervailing measure?",
+    "choices": {
+      "A": "Not exceeding four (4) months",
+      "B": "Not exceeding six (6) months",
+      "C": "Not exceeding two (2) months",
+      "D": "Not exceeding one (1) year"
+    },
+    "correct": "A",
+    "reason": "A provisional countervailing measure shall not exceed four (4) months (Primer p.86)."
+  },
+  "275": {
+    "question": "What is the maximum duration of a definitive countervailing duty from the date of imposition?",
+    "choices": {
+      "A": "Three (3) years",
+      "B": "Ten (10) years",
+      "C": "Five (5) years",
+      "D": "Seven (7) years"
+    },
+    "correct": "C",
+    "reason": "A definitive countervailing duty shall not exceed five (5) years from the date of imposition (Primer p.86)."
+  },
+  "276": {
+    "question": "A voluntary undertaking in a countervailing case may take the form of what?",
+    "choices": {
+      "A": "A unilateral tariff reduction by the Philippines",
+      "B": "An offer by the exporting government to eliminate or limit the subsidy, or a commitment by the foreign exporter or producer to increase prices or cease exporting at the subsidized price",
+      "C": "A loan guarantee extended by the Bureau of Customs",
+      "D": "A request by the domestic industry to withdraw its petition"
+    },
+    "correct": "B",
+    "reason": "Voluntary undertaking is an offer by the exporting government to eliminate or limit the subsidy, or a voluntary commitment by the foreign exporter/producer to increase prices or cease exporting at the subsidized price (Primer p.86)."
+  },
+  "277": {
+    "question": "A voluntary undertaking offer in a countervailing case may only be made after what has occurred?",
+    "choices": {
+      "A": "A final negative determination",
+      "B": "A preliminary affirmative determination of subsidization and injury to the domestic industry",
+      "C": "The lapse of the five-year duty period",
+      "D": "The filing of the original petition"
+    },
+    "correct": "B",
+    "reason": "An offer of price undertaking shall be made only after a preliminary affirmative determination of subsidization and injury to the domestic industry has been reached (Primer p.86)."
+  },
+  "278": {
+    "question": "How long is a price undertaking in a countervailing case effective, unless the foreign exporter proves it is no longer necessary?",
+    "choices": {
+      "A": "Three (3) years",
+      "B": "Ten (10) years",
+      "C": "One (1) year",
+      "D": "Five (5) years"
+    },
+    "correct": "D",
+    "reason": "Price undertaking is effective for a period of five (5) years unless the foreign exporter proves to the satisfaction of the authorities that it is no longer necessary (Primer p.86)."
+  },
+  "279": {
+    "question": "An Interim or Changed Circumstances Review of a countervailing duty may be initiated by whom?",
+    "choices": {
+      "A": "Only the foreign government concerned",
+      "B": "The Commission motu proprio, or upon direction of the Secretary, or upon petition of any interested party",
+      "C": "Only the Bureau of Customs",
+      "D": "Only the original petitioner"
+    },
+    "correct": "B",
+    "reason": "The Interim or Changed Circumstances Review is conducted by the Commission motu proprio, or upon the direction of the Secretary, or upon petition of any interested party (Primer p.86)."
+  },
+  "280": {
+    "question": "How much time must have elapsed since the imposition of a countervailing duty before an Interim Review can be initiated?",
+    "choices": {
+      "A": "At least six (6) months",
+      "B": "At least one (1) year",
+      "C": "At least two (2) years",
+      "D": "At least three (3) years"
+    },
+    "correct": "B",
+    "reason": "At least one (1) year should have elapsed since the imposition of the countervailing duty before an interim review can be initiated (Primer p.86)."
+  },
+  "281": {
+    "question": "A Sunset or Expiry Review of a countervailing duty may be initiated before what point in the duty's lifespan?",
+    "choices": {
+      "A": "The first year",
+      "B": "The sunset date, i.e., the 5th year",
+      "C": "The 10th year",
+      "D": "The 3rd year only"
+    },
+    "correct": "B",
+    "reason": "A Sunset or Expiry Review may be initiated by any interested party or upon the Commission's own motion before the sunset date, i.e., the 5th year (Primer p.86)."
+  },
+  "282": {
+    "question": "According to the Primer, how many countervailing cases has the Tariff Commission formally investigated under Republic Act No. 8751 since it took effect?",
+    "choices": {
+      "A": "Three cases, all resulting in positive determinations",
+      "B": "None; no case has been endorsed to the Tariff Commission for formal investigation",
+      "C": "Five cases, mostly negative determinations",
+      "D": "One case, which is still pending"
+    },
+    "correct": "B",
+    "reason": "Since RA No. 8751 took effect in August 1999, no case has been endorsed to the Tariff Commission for formal investigation (Primer p.87)."
+  },
+  "283": {
+    "question": "According to the Primer, safeguard measures are trade remedy measures adopted by government for what purpose?",
+    "choices": {
+      "A": "To offset a specific subsidy granted by a foreign government",
+      "B": "To protect a specific domestic industry from an increase in imports causing or threatening to cause serious injury to the industry",
+      "C": "To penalize exporters who dump products below normal value",
+      "D": "To regulate currency exchange rates on imports"
+    },
+    "correct": "B",
+    "reason": "Safeguard measures are trade remedy measures adopted by government to protect a specific domestic industry from an increase in imports causing, or threatening to cause, serious injury to the industry (Primer p.87)."
+  },
+  "284": {
+    "question": "A general safeguard measure is imposed against imports under what kind of conditions?",
+    "choices": {
+      "A": "When products are imported in increased quantities, absolute or relative to domestic production, causing or threatening serious injury",
+      "B": "Only when the exporter fails to pay export duties",
+      "C": "Only when imports originate from a single specific country",
+      "D": "Only when the product is classified as agricultural"
+    },
+    "correct": "A",
+    "reason": "A general safeguard measure is imposed against imports if the products are being imported in increased quantities, either absolute or relative to domestic production, causing or threatening serious injury (Primer p.87)."
+  },
+  "285": {
+    "question": "A special safeguard measure under the Primer is imposed against which products, and what symbol are they designated with?",
+    "choices": {
+      "A": "Industrial products marked 'MFN'",
+      "B": "Agricultural products whose quantitative restrictions were tariffied and designated with the symbol 'SSG' in the GATT Schedule of Concessions",
+      "C": "Luxury goods marked 'LUX'",
+      "D": "Mining products marked 'SG'"
+    },
+    "correct": "B",
+    "reason": "A special safeguard measure is imposed against importations of agricultural products whose quantitative import restrictions were converted into ordinary customs duties and designated with the symbol SSG in the GATT Schedule of Concessions (Primer p.87)."
+  },
+  "286": {
+    "question": "A special safeguard measure may be invoked if which of the following conditions is met?",
+    "choices": {
+      "A": "The cumulative import volume each year exceeds its trigger volume, or the actual CIF import price is less than its trigger price",
+      "B": "The exporter fails to disclose its subsidy program",
+      "C": "The domestic industry files for bankruptcy",
+      "D": "The importer fails to pay customs duties on time"
+    },
+    "correct": "A",
+    "reason": "A special safeguard measure may be invoked if the cumulative import volume each year exceeds its trigger volume, or, not concurrently, if the actual CIF import price is less than its trigger price (Primer p.87)."
+  },
+  "287": {
+    "question": "For a special safeguard measure, must injury to the domestic industry be established?",
+    "choices": {
+      "A": "Yes, injury must always be established first",
+      "B": "No, injury to the domestic industry need not be established in either case",
+      "C": "Only if the trigger volume is exceeded by more than 50%",
+      "D": "Only for non-agricultural products"
+    },
+    "correct": "B",
+    "reason": "For a special safeguard measure, in either case (trigger volume or trigger price), injury to the domestic industry need not be established (Primer p.87)."
+  },
+  "288": {
+    "question": "What is Republic Act No. 8800 commonly known as, and when did it take effect?",
+    "choices": {
+      "A": "The Safeguard Measures Act, effective 9 August 2000",
+      "B": "The Anti-Dumping Act, effective 4 September 1999",
+      "C": "The Countervailing Duty Act, effective 31 August 1999",
+      "D": "The Customs Modernization Act, effective 1 January 2000"
+    },
+    "correct": "A",
+    "reason": "RA No. 8800, otherwise known as the Safeguard Measures Act, was signed on 19 July 2000 and took effect on 9 August 2000 (Primer p.87)."
+  },
+  "289": {
+    "question": "The provisions of Republic Act No. 8800 on safeguard measures were adopted in which section of the Customs Modernization and Tariff Act?",
+    "choices": {
+      "A": "Section 711",
+      "B": "Section 712",
+      "C": "Section 713",
+      "D": "Section 800"
+    },
+    "correct": "B",
+    "reason": "The provisions of RA No. 8800 were adopted in Section 712 of the Customs Modernization and Tariff Act (Primer p.87)."
+  },
+  "290": {
+    "question": "Aligning the domestic safeguards law with which international agreements was part of the rationale for passing Republic Act No. 8800?",
+    "choices": {
+      "A": "The WTO Agreement on Safeguards (GATT Article XIX) and the WTO Agreement on Agriculture",
+      "B": "The WTO Anti-Dumping Agreement only",
+      "C": "The Kyoto Convention and the Harmonized System Convention",
+      "D": "The ASEAN Trade in Goods Agreement only"
+    },
+    "correct": "A",
+    "reason": "One rationale for RA No. 8800 was to align the domestic law with the WTO Agreement on Safeguards (GATT Article XIX) and the WTO Agreement on Agriculture (Primer p.89)."
+  },
+  "291": {
+    "question": "When did the Implementing Rules and Regulations of Republic Act No. 8800, issued as Joint Administrative Order No. 03, series of 2000, take effect?",
+    "choices": {
+      "A": "5 July 2000",
+      "B": "9 August 2000",
+      "C": "11 October 2000",
+      "D": "25 September 2000"
+    },
+    "correct": "C",
+    "reason": "Joint Administrative Order No. 03, series of 2000, the IRR of RA No. 8800, took effect on 11 October 2000 (Primer p.89)."
+  },
+  "292": {
+    "question": "Tariff Commission Order No. 00-02, governing the Commission's internal conduct of safeguard investigations, took effect on what date?",
+    "choices": {
+      "A": "11 October 2000",
+      "B": "5 July 2000",
+      "C": "9 August 2000",
+      "D": "19 July 2000"
+    },
+    "correct": "B",
+    "reason": "Tariff Commission Order No. 00-02 took effect on 05 July 2000 (Primer p.89)."
+  },
+  "293": {
+    "question": "In administering a general safeguard measure, which agency decides on the form of the measure to impose and issues the Department Order?",
+    "choices": {
+      "A": "The Tariff Commission",
+      "B": "The Secretary of either the DA or DTI, as applicable",
+      "C": "The Bureau of Customs",
+      "D": "The National Economic and Development Authority"
+    },
+    "correct": "B",
+    "reason": "The Secretary of either Department decides on the form of safeguard measure to impose and issues a Department Order implementing it, pursuant to the results of the preliminary and formal investigation (Primer p.89)."
+  },
+  "294": {
+    "question": "For a special safeguard measure on sensitive agricultural products, within how many working days from receipt of the petition must the Department of Agriculture make its finding?",
+    "choices": {
+      "A": "Ten (10) working days",
+      "B": "Thirty (30) working days",
+      "C": "Five (5) working days",
+      "D": "Sixty (60) working days"
+    },
+    "correct": "C",
+    "reason": "The DA makes its finding within five (5) working days from receipt of the petition for a special safeguard measure (Primer p.89)."
+  },
+  "295": {
+    "question": "For a general safeguard measure, a petition filed with the Secretary of Agriculture or Secretary of Trade and Industry, upon affirmative preliminary findings, is endorsed to which body for formal investigation?",
+    "choices": {
+      "A": "The Bureau of Customs",
+      "B": "The Tariff Commission",
+      "C": "The Court of Tax Appeals",
+      "D": "The Department of Finance"
+    },
+    "correct": "B",
+    "reason": "Upon affirmative preliminary findings by the Secretary, the case for a general safeguard measure is endorsed to the Tariff Commission for formal investigation (Primer p.90)."
+  },
+  "296": {
+    "question": "For a special safeguard measure, what may any person, whether natural or juridical, request?",
+    "choices": {
+      "A": "A verification of whether a particular agricultural product can be imposed a special safeguard duty",
+      "B": "A reduction in the MFN tariff rate",
+      "C": "An advance ruling on tariff classification",
+      "D": "A refund of previously paid customs duties"
+    },
+    "correct": "A",
+    "reason": "For a special safeguard measure, any person, whether natural or juridical, may request a verification if a particular agricultural product can be imposed a special safeguard duty (Primer p.90)."
+  },
+  "297": {
+    "question": "Under what circumstance may the DA or DTI Secretary initiate a safeguard investigation on his own motion, without a written application from the domestic industry?",
+    "choices": {
+      "A": "Never, a written application is always required",
+      "B": "In special circumstances, where there is evidence that increased imports are a substantial cause of, or threaten to substantially cause, serious injury",
+      "C": "Only upon instruction of a foreign government",
+      "D": "Only during a declared state of emergency"
+    },
+    "correct": "B",
+    "reason": "In special circumstances, the DA or DTI Secretary may, on his own motion, initiate a preliminary safeguard investigation if there is evidence that increased imports are a substantial cause of, or threaten to substantially cause, serious injury (Primer p.91)."
+  },
+  "298": {
+    "question": "Aside from the Secretary's own motion, a safeguard investigation may also be initiated upon the request of whom?",
+    "choices": {
+      "A": "The President, or a resolution of the House of Representatives or Senate Committee on Agriculture, or the HOR or Senate Committee on Trade and Commerce",
+      "B": "Only a foreign exporter",
+      "C": "Only the Bureau of Internal Revenue",
+      "D": "Only a private law firm representing importers"
+    },
+    "correct": "A",
+    "reason": "The Secretary may also initiate action upon the request of the President, or a resolution of the House of Representatives or Senate Committee on Agriculture, or HOR or Senate Committee on Trade and Commerce (Primer p.91)."
+  },
+  "299": {
+    "question": "A properly documented safeguard petition must include a complete description of the imported product specifying what, among other details?",
+    "choices": {
+      "A": "The HS Code under which the product is classified, and the present MFN and preferential tariff rates",
+      "B": "The exporter's annual net income",
+      "C": "The buyer's personal tax identification number",
+      "D": "The vessel's registry and flag state"
+    },
+    "correct": "A",
+    "reason": "A safeguard petition must contain a complete description of the imported product specifying the HS Code under which it is classified and the present tariff rates, both MFN and preferential (Primer p.91)."
+  },
+  "300": {
+    "question": "How many years of import volume and value data preceding the date of application must a safeguard petition generally include?",
+    "choices": {
+      "A": "The last two (2) years",
+      "B": "The last five (5) years",
+      "C": "The last ten (10) years",
+      "D": "The last three (3) years"
+    },
+    "correct": "B",
+    "reason": "The petition must include information on the volume and value of imports for the last five (5) years preceding the date of application (Primer p.91)."
+  },
+  "301": {
+    "question": "In the Prima Facie Determination stage for a general safeguard measure, how many calendar days does the DA or DTI-BIS have to decide whether a prima facie case exists?",
+    "choices": {
+      "A": "Ten (10) calendar days",
+      "B": "Thirty (30) calendar days",
+      "C": "Five (5) calendar days",
+      "D": "Sixty (60) calendar days"
+    },
+    "correct": "C",
+    "reason": "Upon acceptance of a properly documented petition, the DA or DTI-BIS has five (5) calendar days to decide whether a prima facie case exists to merit initiation of a preliminary investigation (Primer p.91)."
+  },
+  "302": {
+    "question": "In the Preliminary Determination stage for a general safeguard measure, how many calendar days does the DA or DTI-BIS have to decide whether to impose a provisional safeguard measure?",
+    "choices": {
+      "A": "Thirty (30) calendar days",
+      "B": "Sixty (60) calendar days",
+      "C": "Fifteen (15) calendar days",
+      "D": "Ninety (90) calendar days"
+    },
+    "correct": "A",
+    "reason": "The DA or DTI-BIS has thirty (30) calendar days from receipt of the properly documented application or a motu proprio initiation to make its preliminary determination on imposing a provisional safeguard measure (Primer p.91)."
+  },
+  "303": {
+    "question": "In the Final Determination stage, how many calendar days does the Tariff Commission have to conclude its formal investigation, and how many if the Secretary certifies the case as urgent?",
+    "choices": {
+      "A": "120 calendar days, or 60 days if certified urgent",
+      "B": "90 calendar days, or 45 days if certified urgent",
+      "C": "60 calendar days, or 30 days if certified urgent",
+      "D": "150 calendar days, or 90 days if certified urgent"
+    },
+    "correct": "A",
+    "reason": "The Tariff Commission has 120 calendar days (or 60 days if the Secretary certifies the case as urgent) from receipt of the endorsement to conclude its formal investigation and submit its report (Primer p.92)."
+  },
+  "304": {
+    "question": "In the Issuance of Department Order stage, how many calendar days does the Secretary have from receipt of the Commission's report to decide on the level and form of the safeguard measure?",
+    "choices": {
+      "A": "Ten (10) calendar days",
+      "B": "Thirty (30) calendar days",
+      "C": "Fifteen (15) calendar days",
+      "D": "Sixty (60) calendar days"
+    },
+    "correct": "C",
+    "reason": "The Secretary has fifteen (15) calendar days from receipt of the Commission's report of findings and recommendation to decide on the level and form of the safeguard measure, if the determination is affirmative (Primer p.92)."
+  },
+  "305": {
+    "question": "In case of a negative determination in a general safeguard investigation, what does the Secretary authorize through the Secretary of Finance?",
+    "choices": {
+      "A": "The forfeiture of the cash bond to the government",
+      "B": "The return of the cash bond previously collected to the importer",
+      "C": "The transfer of the cash bond to the domestic industry",
+      "D": "The conversion of the cash bond into a permanent duty"
+    },
+    "correct": "B",
+    "reason": "In case of a negative determination, the Secretary issues a Department Order terminating the case and a written instruction to the BOC Commissioner, through the Secretary of Finance, authorizing the return of the cash bond previously collected (Primer p.92)."
+  },
+  "306": {
+    "question": "Under the formal investigation checklist for a general safeguard measure, where is the required Adjustment Plan secured?",
+    "choices": {
+      "A": "From the publisher of two newspapers of general circulation",
+      "B": "From the petitioner or the domestic producer(s)",
+      "C": "From the Bureau of Customs",
+      "D": "From the foreign exporter"
+    },
+    "correct": "B",
+    "reason": "Table 3.4 shows that the Adjustment Plan is secured from the petitioner or domestic producer(s) (Primer p.93)."
+  },
+  "307": {
+    "question": "Under the elements for imposition of a general safeguard measure, what does a like product refer to?",
+    "choices": {
+      "A": "A domestic product identical, i.e., alike in all respects, to the imported product under consideration, or one with closely resembling characteristics",
+      "B": "Any product imported from an MFN country",
+      "C": "A product that competes only in export markets",
+      "D": "A product with the same HS Code regardless of characteristics"
+    },
+    "correct": "A",
+    "reason": "A like product shall mean a domestic product which is identical, i.e., alike in all respects, to the imported product under consideration, or one with characteristics closely resembling it (Primer p.93)."
+  },
+  "308": {
+    "question": "Under the Primer, directly competitive products in a safeguard investigation shall mean what?",
+    "choices": {
+      "A": "Domestically produced substitutable products",
+      "B": "Products manufactured exclusively for export",
+      "C": "Products imported under a preferential tariff rate",
+      "D": "Products subject to an existing anti-dumping duty"
+    },
+    "correct": "A",
+    "reason": "Directly competitive products shall mean domestically produced substitutable products (Primer p.93)."
+  },
+  "309": {
+    "question": "For purposes of establishing increased imports in a safeguard case, what characteristics must the increase have?",
+    "choices": {
+      "A": "It must be gradual, minor, and long-term",
+      "B": "It must be recent, sharp, and significant",
+      "C": "It must exceed 50% of total domestic production",
+      "D": "It must originate from a single exporting country"
+    },
+    "correct": "B",
+    "reason": "Increased imports may be either in absolute terms or relative to domestic production; the increase should be recent, sharp, and significant (Primer p.93)."
+  },
+  "310": {
+    "question": "Serious injury, as defined in the Primer's safeguard provisions, means what kind of impairment?",
+    "choices": {
+      "A": "Any decline in profit, however minor",
+      "B": "A significant impairment in the position of a domestic industry after evaluation of all relevant factors of an objective and quantifiable nature",
+      "C": "A temporary reduction in exports only",
+      "D": "A reduction in the number of competitors in the market"
+    },
+    "correct": "B",
+    "reason": "Serious injury shall mean a significant impairment in the position of a domestic industry after evaluation by competent authorities of all relevant factors of an objective and quantifiable nature (Primer p.93)."
+  },
+  "311": {
+    "question": "How is a threat of serious injury understood under the Primer's safeguard provisions?",
+    "choices": {
+      "A": "As serious injury that is imminent",
+      "B": "As a mere allegation by the domestic industry",
+      "C": "As any decline in export volume",
+      "D": "As a hypothetical future scenario with no evidentiary basis"
+    },
+    "correct": "A",
+    "reason": "Threat of serious injury shall be understood to mean serious injury that is imminent (Primer p.93)."
+  },
+  "312": {
+    "question": "Causality, as an element for a general safeguard measure, refers to what overall assessment?",
+    "choices": {
+      "A": "That the serious injury suffered by the domestic industry is the direct result of increased imports of the product under consideration",
+      "B": "That the exporter acted in bad faith",
+      "C": "That the domestic industry failed to innovate",
+      "D": "That the importer violated the CMTA"
+    },
+    "correct": "A",
+    "reason": "Causality refers to the overall assessment that the serious injury suffered by the domestic industry is the direct result of increased imports of the product under consideration (Primer p.93)."
+  },
+  "313": {
+    "question": "Among the economic factors the Secretary and Commission consider in determining serious injury, which of the following is included?",
+    "choices": {
+      "A": "Significant idling of productive facilities, including closure of plants or underutilization of production capacity",
+      "B": "The exporter's marketing expenditures",
+      "C": "The number of trademarks filed by competitors",
+      "D": "The buyer's preferred payment method"
+    },
+    "correct": "A",
+    "reason": "In determining serious injury, the Secretary and Commission consider economic factors including significant idling of productive facilities, including closure of plants or underutilization of production capacity (Primer p.94)."
+  },
+  "314": {
+    "question": "Which of the following is a factor in determining the existence of a threat of serious injury in a general safeguard case?",
+    "choices": {
+      "A": "A significant rate of increase in imports evidenced by letters of credit, supply or sales contracts, or the award of a tender",
+      "B": "The exporter's compliance with environmental regulations",
+      "C": "The number of patents filed by the domestic industry",
+      "D": "The buyer's country of citizenship"
+    },
+    "correct": "A",
+    "reason": "A significant rate of increase in imports into the Philippines, evidenced inter alia by letters of credit, supply or sales contracts, the award of a tender, or an irrevocable offer, is a factor in determining threat of serious injury (Primer p.94)."
+  },
+  "315": {
+    "question": "In the case of non-agricultural products, before a provisional general safeguard measure in the form of a tariff increase may be imposed, what must the Secretary first establish?",
+    "choices": {
+      "A": "That the measure is in the public interest",
+      "B": "That the exporter has agreed to the measure",
+      "C": "That the WTO has approved the measure",
+      "D": "That a bilateral agreement exists with the exporting country"
+    },
+    "correct": "A",
+    "reason": "For non-agricultural products, the Secretary shall first establish that imposition of the provisional safeguard measure would be in the public interest (Primer p.94)."
+  },
+  "316": {
+    "question": "Which of the following is one of the forms a definitive general safeguard measure may take?",
+    "choices": {
+      "A": "A decrease in or imposition of a tariff-rate quota (Minimum Access Volume) on the product",
+      "B": "A permanent ban on all imports of the product",
+      "C": "A reduction of the domestic industry's own production",
+      "D": "A requirement that exporters register with the Tariff Commission"
+    },
+    "correct": "A",
+    "reason": "A definitive safeguard measure may take the form of a decrease in or imposition of a tariff-rate quota (Minimum Access Volume) on the product, among other forms (Primer p.94)."
+  },
+  "317": {
+    "question": "Under the special safeguard measure's volume test for SSG-denominated agricultural products, the additional duty should not exceed what fraction of the applicable out-quota customs duty?",
+    "choices": {
+      "A": "One-half (1/2)",
+      "B": "One-third (1/3)",
+      "C": "Two-thirds (2/3)",
+      "D": "One-fourth (1/4)"
+    },
+    "correct": "B",
+    "reason": "Under the volume test, the additional duty should not exceed one-third (1/3) of the applicable out-quota customs duty on the agricultural product (Primer p.95)."
+  },
+  "318": {
+    "question": "Under the special safeguard measure's price test, what additional duty applies if the price difference exceeds 10% but is at most 40% of the trigger price?",
+    "choices": {
+      "A": "Zero additional duty",
+      "B": "Fifty percent (50%) of the amount exceeding the trigger price",
+      "C": "Thirty percent (30%) of the amount by which the price difference exceeds ten percent of the trigger price",
+      "D": "Ninety percent (90%) of the amount exceeding the trigger price"
+    },
+    "correct": "C",
+    "reason": "Under the price test, if the price difference exceeds ten percent (10%) but is at most forty percent (40%) of the trigger price, the additional duty is thirty percent (30%) of the amount by which the price difference exceeds ten percent of the trigger price (Primer p.95)."
+  },
+  "319": {
+    "question": "What is the maximum initial period for the application of a definitive general safeguard measure, including the period the provisional measure was imposed?",
+    "choices": {
+      "A": "Two (2) years",
+      "B": "Four (4) years",
+      "C": "Six (6) years",
+      "D": "Eight (8) years"
+    },
+    "correct": "B",
+    "reason": "The maximum initial period for the application of a definitive general safeguard measure is four (4) years, including the period in which the provisional measure is imposed (Primer p.96)."
+  },
+  "320": {
+    "question": "To what maximum total period may a definitive general safeguard measure be extended?",
+    "choices": {
+      "A": "A maximum of six (6) years",
+      "B": "A maximum of ten (10) years",
+      "C": "A maximum of fifteen (15) years",
+      "D": "A maximum of five (5) years"
+    },
+    "correct": "B",
+    "reason": "The initial period of a definitive general safeguard measure may be extended up to a maximum of ten (10) years (Primer p.96)."
+  },
+  "321": {
+    "question": "What is the maximum duration of a provisional general safeguard measure from the date of imposition?",
+    "choices": {
+      "A": "100 calendar days",
+      "B": "200 calendar days",
+      "C": "300 calendar days",
+      "D": "365 calendar days"
+    },
+    "correct": "B",
+    "reason": "A provisional general safeguard measure shall not exceed 200 calendar days from the date of imposition (Primer p.95)."
+  },
+  "322": {
+    "question": "A special safeguard measure on SSG-denominated agricultural products remains in effect for how long?",
+    "choices": {
+      "A": "Five (5) years from imposition",
+      "B": "Only until the end of the year in which the measure is imposed",
+      "C": "Ten (10) years, same as general safeguard measures",
+      "D": "Indefinitely until revoked by Congress"
+    },
+    "correct": "B",
+    "reason": "A special safeguard measure shall be in effect only until the end of the year in which the measure is imposed (Primer p.96)."
+  },
+  "323": {
+    "question": "When quantitative import restrictions are used as a general safeguard measure, such measures shall not reduce import quantity below what benchmark, absent clear justification?",
+    "choices": {
+      "A": "The average imports for the three (3) preceding representative years",
+      "B": "Zero imports",
+      "C": "Fifty percent (50%) of current import levels",
+      "D": "The trigger volume used for special safeguards"
+    },
+    "correct": "A",
+    "reason": "When quantitative import restrictions are used, such measures shall not reduce the quantity of imports below the average imports for the three (3) preceding representative years, unless clear justification is given (Primer p.96)."
+  },
+  "324": {
+    "question": "General safeguard measures shall not be applied to a product from a developing country if that country's share of total imports is less than what percentage, unless such countries collectively exceed nine percent?",
+    "choices": {
+      "A": "Less than three percent (3%)",
+      "B": "Less than five percent (5%)",
+      "C": "Less than one percent (1%)",
+      "D": "Less than ten percent (10%)"
+    },
+    "correct": "A",
+    "reason": "General safeguard measures shall not apply to a product from a developing country if its share of total imports is less than three percent (3%), provided developing countries with less than 3% share collectively account for not more than nine percent (9%) of total imports (Primer p.96)."
+  },
+  "325": {
+    "question": "Can the Tariff Commission recommend the application of general safeguard measures on a bilateral or selective basis against specific countries?",
+    "choices": {
+      "A": "Yes, provided the exporting country agrees in advance",
+      "B": "No, because safeguard measures must be applied on a non-selective or MFN basis irrespective of source",
+      "C": "Yes, but only against non-WTO member countries",
+      "D": "Yes, if the domestic industry specifically names the country in its petition"
+    },
+    "correct": "B",
+    "reason": "One of the major guiding principles of the WTO Agreement on Safeguards is that measures be applied on a non-selective or MFN basis; a Member may not choose specific countries against whose exports it applies the measures (Primer p.96)."
+  },
+  "326": {
+    "question": "Does the Philippines generally have to pay compensation to affected WTO Members when it applies a general safeguard measure?",
+    "choices": {
+      "A": "No, safeguard measures never require compensation",
+      "B": "Yes, through compensation substantially equivalent to the level of concessions and obligations affected",
+      "C": "Only if the measure lasts more than ten years",
+      "D": "Only for agricultural products"
+    },
+    "correct": "B",
+    "reason": "The Philippines, when applying safeguard measures, must generally pay compensation substantially equivalent to the level of concessions and other obligations affecting the exporting WTO Members (Primer p.97)."
+  },
+  "327": {
+    "question": "If no agreement on compensation is reached within how many days, may affected exporting WTO Members individually suspend substantially equivalent concessions (retaliate)?",
+    "choices": {
+      "A": "15 days",
+      "B": "60 days",
+      "C": "30 days",
+      "D": "90 days"
+    },
+    "correct": "C",
+    "reason": "In the absence of an agreement on compensation within 30 days, the affected exporting Members may individually suspend substantially equivalent concessions, unless the Council for Trade in Goods disapproves (Primer p.97)."
+  },
+  "328": {
+    "question": "For how many years may the right to retaliate generally not be exercised, provided the safeguard measure resulted from an absolute increase in imports and conforms to the Safeguards Agreement?",
+    "choices": {
+      "A": "The first one (1) year",
+      "B": "The first three (3) years",
+      "C": "The first five (5) years",
+      "D": "The first ten (10) years"
+    },
+    "correct": "B",
+    "reason": "The right to retaliate may not be exercised for the first three (3) years that a safeguard measure is in effect, provided the measure resulted from an absolute increase in imports and conforms to the provisions of the Safeguards Agreement (Primer p.97)."
+  },
+  "329": {
+    "question": "An adjustment plan, as defined in the Primer, is best described as what?",
+    "choices": {
+      "A": "A government subsidy program for exporters",
+      "B": "The action plan of a domestic industry describing quantified goals, specific plans, and timetables to facilitate its positive adjustment to import competition",
+      "C": "A tariff schedule revision proposal",
+      "D": "A customs valuation methodology"
+    },
+    "correct": "B",
+    "reason": "An adjustment plan is the action plan of a domestic industry describing the set of quantified goals, specific plans, and timetables it commits to undertake to facilitate its positive adjustment to import competition (Primer p.97)."
+  },
+  "330": {
+    "question": "Within how many calendar days must the domestic industry submit its adjustment plan to the Tariff Commission, and how many days if the investigation is certified as urgent?",
+    "choices": {
+      "A": "60 days, or 45 days if urgent",
+      "B": "45 calendar days, or 30 calendar days if certified urgent",
+      "C": "90 days, or 60 days if urgent",
+      "D": "30 days, or 15 days if urgent"
+    },
+    "correct": "B",
+    "reason": "The domestic industry submits its adjustment plan to the Tariff Commission within 45 calendar days, or 30 calendar days if the investigation is certified as urgent, upon receipt of the notice of submission (Primer p.97)."
+  },
+  "331": {
+    "question": "Does the Tariff Commission monitor an industry's implementation of its adjustment plan?",
+    "choices": {
+      "A": "No, monitoring is solely the responsibility of the Bureau of Customs",
+      "B": "Yes, including conduct of public hearings, on-site inspection, and data verification, with findings reported to the DA or DTI Secretary",
+      "C": "No, the plan is self-reported with no verification",
+      "D": "Yes, but only once at the end of the measure's duration"
+    },
+    "correct": "B",
+    "reason": "The Commission monitors developments in the domestic industry's adjustment, including conduct of a public hearing and on-site inspection and data verification, and submits a report of findings and recommendations to the DA or DTI Secretary (Primer p.97)."
+  },
+  "332": {
+    "question": "According to the Table of Summary of Formal Investigations under Republic Act No. 8800, what was the final determination for the 2001 Cement case (Original Petition)?",
+    "choices": {
+      "A": "Positive",
+      "B": "Negative",
+      "C": "Case dismissed",
+      "D": "Measure not imposed for public interest"
+    },
+    "correct": "B",
+    "reason": "The 2001 Cement case under RA No. 8800, filed as an Original Petition, had a Negative final determination (Primer p.98)."
+  },
+  "333": {
+    "question": "What was the outcome of the 2006 Sodium Tripolyphosphate - Technical Grade case under RA No. 8800?",
+    "choices": {
+      "A": "Positive, but the measure was not imposed for reason of public interest",
+      "B": "Negative, due to negligible import volume",
+      "C": "Case dismissed by mutual agreement",
+      "D": "Positive, with the maximum duty imposed"
+    },
+    "correct": "A",
+    "reason": "The 2006 Sodium Tripolyphosphate - Technical Grade case (Original Petition) resulted in a Positive determination, but the measure was not imposed for reason of public interest (Primer p.98)."
+  },
+  "334": {
+    "question": "In the 2006 Figured Glass, Clear and Tinted Float Glass and Glass Mirror case (First Extension), what happened to the measures on figured glass and glass mirror, respectively?",
+    "choices": {
+      "A": "Both were extended for another five years",
+      "B": "The measure on figured glass was suspended, and the measure on glass mirror was terminated, due to non-production by the domestic industry",
+      "C": "Both measures were immediately revoked by the WTO",
+      "D": "Both were converted into permanent tariff increases"
+    },
+    "correct": "B",
+    "reason": "In the 2006 case, measures on figured glass and glass mirror were suspended and terminated, respectively, due to non-production of the domestic industry (Primer p.98)."
+  },
+  "335": {
+    "question": "What was the final determination for the 2019 Ceramic Tiles case (Original Petition) under Republic Act No. 8800?",
+    "choices": {
+      "A": "Positive",
+      "B": "Negative",
+      "C": "Case withdrawn",
+      "D": "Measure suspended"
+    },
+    "correct": "B",
+    "reason": "The Table of Summary of Cases shows the 2019 Ceramic Tiles case (Original Petition) had a Negative final determination (Primer p.99)."
+  },
+  "336": {
+    "question": "Under Table 3.6 comparing anti-dumping/countervailing measures with safeguard measures, what kind of imports do anti-dumping and countervailing measures address?",
+    "choices": {
+      "A": "Fairly traded imports that exceed a trigger volume",
+      "B": "Unfairly traded imports, such as those priced below normal value or benefiting from a subsidy",
+      "C": "Imports that violate intellectual property rights",
+      "D": "Imports that fail quality control standards"
+    },
+    "correct": "B",
+    "reason": "Anti-dumping and countervailing measures address unfairly traded imports, such as those with an export price lower than normal value or benefiting from subsidized production or exportation (Primer p.100)."
+  },
+  "337": {
+    "question": "Under Table 3.6, how does the coverage of anti-dumping and countervailing measures differ from that of general safeguard measures?",
+    "choices": {
+      "A": "Anti-dumping/countervailing measures are limited to like products and are country-specific and exporter-specific, while general safeguards apply to all like or directly competitive products from all countries",
+      "B": "Anti-dumping/countervailing measures apply to all countries, while safeguards are country-specific",
+      "C": "There is no difference in coverage between the two sets of measures",
+      "D": "Safeguard measures apply only to a single named exporter"
+    },
+    "correct": "A",
+    "reason": "Anti-dumping/countervailing measures are limited to like products and are country-specific and exporter-specific, whereas general safeguards can be applied to all goods, whether agricultural or industrial, and all countries exporting the like or directly competitive product (Primer p.100)."
+  },
+  "338": {
+    "question": "Under Table 3.6, what is required before a provisional measure can be imposed in an anti-dumping or countervailing case, and for what period?",
+    "choices": {
+      "A": "A referendum among affected consumers, for an indefinite period",
+      "B": "A preliminary investigation with an affirmative preliminary determination, for a period of four (4) months or 120 days",
+      "C": "A unilateral declaration by the Bureau of Customs, for one year",
+      "D": "Approval by the WTO Secretariat, for sixty (60) days"
+    },
+    "correct": "B",
+    "reason": "The imposition of a provisional measure in anti-dumping/countervailing cases requires the conduct of a preliminary investigation (affirmative preliminary determination) prior to imposition of a bond for a period of four (4) months or 120 days (Primer p.101)."
+  },
+  "339": {
+    "question": "Under Table 3.6 of the Primer, the five-year duration of a definitive anti-dumping or countervailing duty is subject to what kind of review to determine whether to extend it?",
+    "choices": {
+      "A": "A sunset review",
+      "B": "An interim review only",
+      "C": "A new shipper's review",
+      "D": "A compliance audit"
+    },
+    "correct": "A",
+    "reason": "The definitive anti-dumping/countervailing measure lasts five (5) years, subject to sunset review to determine whether or not to extend the effectivity of the duty (Primer p.101)."
+  },
+  "340": {
+    "question": "Under Table 3.6, a definitive general safeguard measure lasting four years may be extended for another four years, with an additional extension of how many years available specifically for developing countries?",
+    "choices": {
+      "A": "One (1) year",
+      "B": "Three (3) years",
+      "C": "Two (2) years",
+      "D": "Five (5) years"
+    },
+    "correct": "C",
+    "reason": "General safeguards last four (4) years, extendable for another four (4) years if structural adjustment is shown, with an extension of another two (2) years for developing countries (Primer p.101)."
+  },
+  "341": {
+    "question": "The Tariff Commission's mandate on non-tariff measures is provided under which section of Republic Act No. 10863?",
+    "choices": {
+      "A": "Section 1100",
+      "B": "Section 1608",
+      "C": "Section 1603(e)",
+      "D": "Section 712"
+    },
+    "correct": "C",
+    "reason": "The Tariff Commission's mandate on NTMs is provided under Section 1603(e) of RA No. 10863, the Customs Modernization and Tariff Act (Primer p.103)."
+  },
+  "342": {
+    "question": "Under Section 1603(e) of the Customs Modernization and Tariff Act, the Tariff Commission is tasked to provide the President and Congress with what kind of support on tariff and nontariff matters?",
+    "choices": {
+      "A": "Independent analysis, information and technical support for policy guidance",
+      "B": "Direct enforcement authority over all customs ports",
+      "C": "Binding legislative recommendations",
+      "D": "Exclusive rulemaking power over import quotas"
+    },
+    "correct": "A",
+    "reason": "Section 1603(e) tasks the Commission to provide the President and Congress with independent analysis, information, and technical support on matters related to tariff and nontariff measures affecting Philippine industries and exports for policy guidance (Primer p.103)."
+  },
+  "343": {
+    "question": "According to the UNCTAD definition cited in the Primer, non-tariff measures (NTMs) are best described as what?",
+    "choices": {
+      "A": "Policy measures, other than ordinary customs tariffs, that can potentially have an economic impact on international trade in goods",
+      "B": "Only measures that completely ban the importation of a product",
+      "C": "Exclusively measures imposed by the WTO Secretariat",
+      "D": "Tariff rate increases applied under the Flexible Clause"
+    },
+    "correct": "A",
+    "reason": "UNCTAD defines NTMs as policy measures, other than ordinary customs tariffs, that can potentially have an economic impact on international trade in goods, changing quantities traded, prices, or both (Primer p.103)."
+  },
+  "344": {
+    "question": "According to the Primer, how do Non-Tariff Barriers (NTBs) differ from Non-Tariff Measures (NTMs) in general?",
+    "choices": {
+      "A": "NTBs are a subset of NTMs applied with a protectionist or discriminatory intent or whose restrictiveness exceeds what is needed",
+      "B": "NTBs and NTMs are identical terms with no distinction",
+      "C": "NTBs refer only to tariff-rate quotas while NTMs refer only to subsidies",
+      "D": "NTBs apply only to agricultural products while NTMs apply only to industrial goods"
+    },
+    "correct": "A",
+    "reason": "NTBs are a subset of NTMs that are applied with a protectionist or discriminatory intent, or where the restrictiveness of the measure exceeds what is needed for the measure to achieve its underlying non-trade objective (Primer p.103)."
+  },
+  "345": {
+    "question": "Which of the following is cited in the Primer as a reason why trade is regulated?",
+    "choices": {
+      "A": "To protect consumers, protect the environment, and regulate domestic industries",
+      "B": "To eliminate all forms of international trade",
+      "C": "To guarantee equal market share for every trading country",
+      "D": "To prevent any form of tariff collection"
+    },
+    "correct": "A",
+    "reason": "Trade is regulated to protect consumers, protect the environment, regulate domestic industries, protect domestic firms, and avoid unintended spillovers (Primer p.103)."
+  },
+  "346": {
+    "question": "According to UNCTAD's classification cited in the Primer, NTMs are broadly classified into which two categories?",
+    "choices": {
+      "A": "Import Measures and Export Measures",
+      "B": "Tariff Measures and Quota Measures",
+      "C": "Agricultural Measures and Industrial Measures",
+      "D": "Preferential Measures and MFN Measures"
+    },
+    "correct": "A",
+    "reason": "The UNCTAD classifies NTMs into two broad categories: Import Measures and Export Measures (Primer p.104)."
+  },
+  "347": {
+    "question": "Under the UNCTAD classification, Import Measures are further classified into which two sub-categories?",
+    "choices": {
+      "A": "Technical and Non-Technical Measures",
+      "B": "Tariff and Non-Tariff Measures",
+      "C": "Preferential and MFN Measures",
+      "D": "Agricultural and Industrial Measures"
+    },
+    "correct": "A",
+    "reason": "Import Measures are further classified into (a) Technical, and (b) Non-Technical Measures (Primer p.104)."
+  },
+  "348": {
+    "question": "Sanitary and Phytosanitary Measures (SPS), as described in the Primer's NTM classification, are measures aimed at what?",
+    "choices": {
+      "A": "Restricting substances, ensuring food safety, and preventing the dissemination of diseases or pests",
+      "B": "Regulating foreign exchange access for importers",
+      "C": "Granting exclusive distribution rights to certain firms",
+      "D": "Restricting the origin of a product's inputs"
+    },
+    "correct": "A",
+    "reason": "SPS are measures such as those restricting substances, ensuring food safety, and preventing the dissemination of diseases or pests, including conformity-assessment measures like certification, testing, and inspection (Primer p.104)."
+  },
+  "349": {
+    "question": "Technical Barriers to Trade (TBT), as a category of NTMs, relate to measures concerning what?",
+    "choices": {
+      "A": "Product characteristics, technical specifications, quality requirements, and related production methods",
+      "B": "Only the pricing of imported luxury goods",
+      "C": "Only customs valuation disputes",
+      "D": "Only the collection of anti-dumping duties"
+    },
+    "correct": "A",
+    "reason": "TBT describes measures related to product characteristics such as technical specifications and quality requirements, related processes and production methods, and measures like labelling and packaging (Primer p.104)."
+  },
+  "350": {
+    "question": "Pre-Shipment Inspection and Other Formalities, as a category of NTMs, comprise measures related to what?",
+    "choices": {
+      "A": "Direct consignment requirements, pass-through requirements, import monitoring and surveillance, and automatic licensing measures",
+      "B": "Only the collection of countervailing duties",
+      "C": "Only product labelling standards",
+      "D": "Only the issuance of advance rulings"
+    },
+    "correct": "A",
+    "reason": "Pre-Shipment Inspection and Other Formalities comprise measures related to pre-shipment inspections such as direct consignment requirements, pass-through requirements, import monitoring and surveillance, automatic licensing measures, and other formalities (Primer p.104)."
+  },
+  "351": {
+    "question": "Under the Primer's NTM classification, Contingent Trade-Protective Measures (Chapter D) include which of the following, more commonly known as trade remedy measures?",
+    "choices": {
+      "A": "Anti-dumping, countervailing, and safeguard measures",
+      "B": "Sanitary and phytosanitary measures only",
+      "C": "Price control measures only",
+      "D": "Rules of origin only"
+    },
+    "correct": "A",
+    "reason": "Contingent Trade-Protective Measures include measures implemented to counteract the adverse effects of imports, including anti-dumping, countervailing, and safeguard measures, more commonly known as trade remedy measures (Primer p.104)."
+  },
+  "352": {
+    "question": "Price-control measures, as a category of NTMs, are implemented for which of the following purposes?",
+    "choices": {
+      "A": "To support the domestic price of certain products, or to increase or preserve tax revenue",
+      "B": "To eliminate the need for an anti-dumping investigation",
+      "C": "To automatically grant duty exemptions to all importers",
+      "D": "To restrict the origin of a product's inputs only"
+    },
+    "correct": "A",
+    "reason": "Price control measures are implemented to control or affect the prices of imported goods, such as to support the domestic price of certain products or to increase or preserve tax revenue (Primer p.105)."
+  },
+  "353": {
+    "question": "Finance measures, as an NTM category, restrict the payment of imports in what manner?",
+    "choices": {
+      "A": "By regulating the access and cost of foreign exchange, and imposing restrictions on terms of payment",
+      "B": "By banning all cash transactions for imported goods",
+      "C": "By requiring importers to use only domestic banks",
+      "D": "By eliminating letters of credit entirely"
+    },
+    "correct": "A",
+    "reason": "Finance measures restrict the payment of imports, such as when the access and cost of foreign exchange is regulated, and also include restrictions on terms of payment (Primer p.105)."
+  },
+  "354": {
+    "question": "Which of the following is an example of a measure affecting competition, as described in the Primer's NTM classification?",
+    "choices": {
+      "A": "State trading, sole importing agencies, or compulsory national insurance or transport",
+      "B": "A reduction of the MFN tariff rate",
+      "C": "An advance ruling on tariff classification",
+      "D": "A reduction in anti-dumping bond requirements"
+    },
+    "correct": "A",
+    "reason": "Measures affecting competition include the grant of exclusive preferences to limited groups of economic operators, mainly monopolistic measures such as state trading, sole importing agencies, or compulsory national insurance or transport (Primer p.105)."
+  },
+  "355": {
+    "question": "Trade-related investment measures, as an NTM category, restrict investment in what way?",
+    "choices": {
+      "A": "By requiring local content or by requesting that investment be related to exports to balance imports",
+      "B": "By banning all foreign direct investment outright",
+      "C": "By requiring investors to register with the Securities and Exchange Commission only",
+      "D": "By imposing a fixed foreign ownership ceiling of 40%"
+    },
+    "correct": "A",
+    "reason": "Investment measures restrict investment by requiring local content or requesting that investment be related to exports to balance imports (Primer p.105)."
+  },
+  "356": {
+    "question": "Restrictions on post-sales services, as an NTM category, refer to what kind of limitation imposed by importing countries?",
+    "choices": {
+      "A": "Restrictions on exporters' ability to provide post-sales services within the importing country's borders through preferred or desired channels",
+      "B": "A prohibition on all warranty claims",
+      "C": "A requirement that all products be insured locally",
+      "D": "A ban on after-sales advertising"
+    },
+    "correct": "A",
+    "reason": "Importing countries may impose restrictions on exporters' ability to provide within their borders post-sales services through their preferred or desired channels (Primer p.105)."
+  },
+  "357": {
+    "question": "Under the Primer's NTM classification, subsidies are described as measures or practices by any level of government that involve what?",
+    "choices": {
+      "A": "A financial transfer attributable to an identifiable beneficiary that creates or could potentially create an advantage",
+      "B": "A tariff increase on imported goods only",
+      "C": "A ban on the importation of subsidized products",
+      "D": "A requirement that beneficiaries export all of their output"
+    },
+    "correct": "A",
+    "reason": "Subsidies are measures or practices by any level of government that involve a financial transfer attributable to an identifiable beneficiary or group of beneficiaries that create or could potentially create an advantage for those beneficiaries (Primer p.106)."
+  },
+  "358": {
+    "question": "Government procurement restrictions, as an NTM category, usually involve what kind of restriction?",
+    "choices": {
+      "A": "Restrictions regarding the selling of products and services to the government",
+      "B": "Restrictions on private sector hiring practices",
+      "C": "Restrictions on the number of government employees",
+      "D": "Restrictions on foreign ownership of banks"
+    },
+    "correct": "A",
+    "reason": "Countries usually impose government procurement restrictions regarding the selling of products and services to the government (Primer p.106)."
+  },
+  "359": {
+    "question": "Rules of origin, as an NTM category described in the Primer, are measures which restrict what?",
+    "choices": {
+      "A": "The origin of products or their inputs",
+      "B": "The destination country of exported goods only",
+      "C": "The currency used in international trade transactions",
+      "D": "The mode of transport used for shipment"
+    },
+    "correct": "A",
+    "reason": "Rules of origin are measures which restrict the origin of products or its inputs (Primer p.106)."
+  },
+  "360": {
+    "question": "Export Measures, as the second broad UNCTAD category of NTMs, include but are not limited to which of the following?",
+    "choices": {
+      "A": "Export taxes, export quotas, and export prohibitions",
+      "B": "Import tariffs and import quotas only",
+      "C": "Sanitary and phytosanitary measures only",
+      "D": "Technical barriers to trade only"
+    },
+    "correct": "A",
+    "reason": "Export Measures include all measures applied by a country to the exports of its products, including but not limited to export taxes, export quotas, and export prohibitions (Primer p.106)."
+  },
+  "361": {
+    "question": "According to the Primer, the effects of non-tariff measures can be broadly grouped into which two categories?",
+    "choices": {
+      "A": "Effects on Trade and Effects on Other Policy Areas",
+      "B": "Effects on Exporters and Effects on Importers",
+      "C": "Positive Effects and Negative Effects",
+      "D": "Short-term Effects and Long-term Effects"
+    },
+    "correct": "A",
+    "reason": "Effects of NTMs can be broadly grouped into two categories: Effects on Trade and Effects on Other Policy Areas, as shown in Figure 4.1 (Primer p.107)."
+  },
+  "362": {
+    "question": "Under Figure 4.1 of the Primer, which of the following is listed as an effect of NTMs on trade?",
+    "choices": {
+      "A": "Change influence on market access",
+      "B": "Safeguard national security and international peace",
+      "C": "Ensure minimum product quality and safety",
+      "D": "Safeguard the environment"
+    },
+    "correct": "A",
+    "reason": "Figure 4.1 lists change influence on market access, increase trade costs, and change consumers' demand as effects of NTMs on trade (Primer p.107)."
+  },
+  "363": {
+    "question": "Under Figure 4.1 of the Primer, which of the following is listed as an effect of NTMs on other policy areas?",
+    "choices": {
+      "A": "Increase trade costs",
+      "B": "Safeguard human, animal, and plant health",
+      "C": "Change consumers' demand",
+      "D": "Change influence on market access"
+    },
+    "correct": "B",
+    "reason": "Figure 4.1 lists safeguard human, animal, and plant health, among others, as effects of NTMs on other policy areas (Primer p.107)."
+  },
+  "364": {
+    "question": "In the APEC region, the Ad Valorem Equivalent (NTMAdVAL) of NTMs was estimated to be around what percentage, compared to an average tariff level of 2.9%?",
+    "choices": {
+      "A": "4.5%",
+      "B": "9.7%",
+      "C": "15.2%",
+      "D": "2.9%"
+    },
+    "correct": "B",
+    "reason": "In the APEC region, the NTMAdVAL of NTMs was estimated to be around 9.7% compared to an average tariff level of 2.9% (Primer p.108)."
+  },
+  "365": {
+    "question": "According to the Primer, what is cited as the core rule of the World Trade Organization regarding domestic policy space for NTMs?",
+    "choices": {
+      "A": "Non-discrimination: regulatory measures should not be designed to protect domestic producers by discriminating against foreign products",
+      "B": "All member countries must apply identical NTMs",
+      "C": "NTMs are completely prohibited under WTO rules",
+      "D": "Only developed countries may impose NTMs"
+    },
+    "correct": "A",
+    "reason": "The core rule of the WTO is non-discrimination: regulatory measures should not be designed to protect domestic producers by discriminating against foreign products (Primer p.108)."
+  },
+  "366": {
+    "question": "According to a 2018 study by the Economic Research Institute for ASEAN and East Asia (ERIA) cited in the Primer, how many government agencies in the Philippines have issued various NTMs?",
+    "choices": {
+      "A": "10 agencies",
+      "B": "25 agencies",
+      "C": "42 agencies",
+      "D": "100 agencies"
+    },
+    "correct": "C",
+    "reason": "A 2018 ERIA study found that 42 agencies in the Philippines have issued various NTMs (Primer p.109)."
+  },
+  "367": {
+    "question": "Based on Table 4.1 of the Primer, which agency issued the most NTMs among the top 10 NTM-issuing agencies in the Philippines as of 2018?",
+    "choices": {
+      "A": "The Food and Drug Administration",
+      "B": "The Department of Agriculture - Bureau of Animal Industry",
+      "C": "The Philippine National Police - Firearms and Explosives Office",
+      "D": "The National Telecommunications Commission"
+    },
+    "correct": "B",
+    "reason": "Table 4.1 shows the Department of Agriculture - Bureau of Animal Industry issued 198 NTMs, the highest among the top 10 issuing agencies in 2018 (Primer p.109)."
+  },
+  "368": {
+    "question": "According to Table 4.2 of the Primer, how many NTMs had been implemented by different Philippine government agencies as of 2018?",
+    "choices": {
+      "A": "785 NTMs",
+      "B": "9,502 NTMs",
+      "C": "1,220 NTMs",
+      "D": "363 NTMs"
+    },
+    "correct": "C",
+    "reason": "Table 4.2 shows that 1,220 NTMs have been implemented by different government agencies in the Philippines as of 2018 (Primer p.109)."
+  },
+  "369": {
+    "question": "Under Table 4.2, which chapter of NTMs in force in the Philippines as of 2018 had the highest proportion, Sanitary and Phytosanitary Measures or Technical Barriers to Trade?",
+    "choices": {
+      "A": "Technical Barriers to Trade, at 36.20%",
+      "B": "Sanitary and Phytosanitary Measures, at 29.75%, slightly higher than Technical Barriers to Trade at 29.26%",
+      "C": "They are exactly equal at 30.00%",
+      "D": "Technical Barriers to Trade, at 50%"
+    },
+    "correct": "B",
+    "reason": "Table 4.2 shows Sanitary and Phytosanitary Measures (SPS) at 363 NTMs or 29.75%, slightly higher than Technical Barriers to Trade (TBT) at 357 NTMs or 29.26% (Primer p.109)."
+  },
+  "370": {
+    "question": "According to a 2019 study cited in the Primer (Reyes, 2019), how many NTMs were in force in the ASEAN region as of 2018?",
+    "choices": {
+      "A": "1,220 NTMs",
+      "B": "9,502 NTMs",
+      "C": "785 NTMs",
+      "D": "42 NTMs"
+    },
+    "correct": "B",
+    "reason": "A study found that 9,502 NTMs were in force in the ASEAN region in 2018 (Primer p.110)."
+  },
+  "371": {
+    "question": "Comparing the Philippines' NTM composition to ASEAN's, the Primer notes that the proportion of which type of NTM is notably higher in the Philippines than in the rest of the region?",
+    "choices": {
+      "A": "Non-automatic licensing measures, at 17.13% compared to the ASEAN average of 8.60%",
+      "B": "Sanitary and phytosanitary measures only",
+      "C": "Government procurement restrictions",
+      "D": "Rules of origin"
+    },
+    "correct": "A",
+    "reason": "The Philippines has a larger composition of non-automatic licensing measures in place (17.13%) compared to the rest of the region (8.60%) (Primer p.111)."
+  },
+  "372": {
+    "question": "According to Box 4.1 of the Primer, the Coverage Ratio (CR) is an NTM indicator that captures what?",
+    "choices": {
+      "A": "A country's share of traded product lines subject to at least one NTM",
+      "B": "A country's share of trade subject to NTMs, weighted by import values",
+      "C": "The number of distinct NTMs applied on a regulated product",
+      "D": "The increase in trading costs associated with NTMs"
+    },
+    "correct": "B",
+    "reason": "The Coverage Ratio (CR) captures a country's share of trade subject to NTMs, and it is weighted by import values rather than using traded product lines (Primer p.111)."
+  },
+  "373": {
+    "question": "According to Box 4.1, the Prevalence Score (PS) indicates what about NTM policy in a country?",
+    "choices": {
+      "A": "The number of distinct NTMs applied on a regulated product, indicating the diversity and intensity of regulation",
+      "B": "The increase in trading costs due to NTMs",
+      "C": "A country's share of traded product lines subject to at least one NTM",
+      "D": "A country's total volume of imports"
+    },
+    "correct": "A",
+    "reason": "The Prevalence Score (PS) indicates the number of distinct NTMs applied on a regulated product, measuring the diversity of NTM types applied and the intensity of regulation (Primer p.111)."
+  },
+  "374": {
+    "question": "According to the Primer, what is the Philippines' Coverage Ratio (CR) for NTMs, and what does this figure indicate?",
+    "choices": {
+      "A": "71%, meaning 71% of all tariff lines have an associated NTM",
+      "B": "29%, meaning only 29% of tariff lines have an NTM",
+      "C": "100%, meaning all tariff lines have an NTM",
+      "D": "3.2%, meaning very few tariff lines have an NTM"
+    },
+    "correct": "A",
+    "reason": "The Philippines has a high CR of 71%, meaning that 71% of all tariff lines have an associated NTM (Primer p.111)."
+  },
+  "375": {
+    "question": "According to the Primer, the Philippines' Ad Valorem Equivalent (AVE) for Sanitary and Phytosanitary (SPS) measures is how it compares to the rest of ASEAN?",
+    "choices": {
+      "A": "The highest in ASEAN at 16.6%",
+      "B": "The lowest in ASEAN at 3.7%",
+      "C": "Exactly average among ASEAN members",
+      "D": "The second lowest in ASEAN after Cambodia"
+    },
+    "correct": "B",
+    "reason": "The Philippines' AVE of 3.7% for SPS Measures is the lowest in ASEAN (Primer p.112)."
+  },
+  "376": {
+    "question": "According to the Primer, the Philippines' AVE for Technical Barriers to Trade (TBT) of 3.4% ranks as what among ASEAN countries?",
+    "choices": {
+      "A": "The highest in ASEAN",
+      "B": "The 3rd lowest, with only Myanmar and Cambodia having lower figures",
+      "C": "Exactly tied with Vietnam",
+      "D": "The 3rd highest in ASEAN"
+    },
+    "correct": "B",
+    "reason": "The Philippines' AVE of 3.4% for TBTs is the 3rd lowest in ASEAN, with only Myanmar (3.1%) and Cambodia (2.8%) having lower figures (Primer p.112)."
+  },
+  "377": {
+    "question": "According to the WTO report cited in the Primer, how many distinct tariff lines under the Philippines' 2017 ASEAN Harmonized Tariff Nomenclature were found to cover medical products deemed necessary in the fight against COVID-19?",
+    "choices": {
+      "A": "122 tariff lines",
+      "B": "785 tariff lines",
+      "C": "1,220 tariff lines",
+      "D": "363 tariff lines"
+    },
+    "correct": "B",
+    "reason": "Products necessary in the fight against COVID-19 were found in seven hundred and eighty-five (785) distinct tariff lines under the Philippines' 2017 AHTN (Primer p.113)."
+  },
+  "378": {
+    "question": "According to Table 4.4 of the Primer, how many total NTMs were found on pharmaceutical products under HS Chapter 30 as of 2020?",
+    "choices": {
+      "A": "66",
+      "B": "80",
+      "C": "122",
+      "D": "3"
+    },
+    "correct": "C",
+    "reason": "Table 4.4 shows a total of 122 NTMs existing on pharmaceutical products under Chapter 30 as of 2020 (Primer p.113-114)."
+  },
+  "379": {
+    "question": "According to Table 4.6 of the Primer, what was the total number of existing NTMs on medical equipment and technology as of 2020?",
+    "choices": {
+      "A": "66",
+      "B": "122",
+      "C": "3",
+      "D": "80"
+    },
+    "correct": "D",
+    "reason": "Table 4.6 shows a total of 80 existing NTMs on medical equipment and technology as of 2020 (Primer p.114-115)."
+  },
+  "380": {
+    "question": "According to Table 4.7 of the Primer, how many total NTMs were found on personal protective products (such as hand soap, sanitizers, face masks, and protective spectacles) as of 2020?",
+    "choices": {
+      "A": "3",
+      "B": "122",
+      "C": "80",
+      "D": "66"
+    },
+    "correct": "A",
+    "reason": "Table 4.7 shows a total of 3 existing NTMs on personal protective products as of 2020 (Primer p.115)."
+  },
+  "381": {
+    "question": "According to Table 4.8 of the Primer, how many NTMs on meat and processed food products were issued in response to COVID-19 between 13 March 2020 and 15 July 2020?",
+    "choices": {
+      "A": "None",
+      "B": "Only one (1)",
+      "C": "Three (3)",
+      "D": "Ten (10)"
+    },
+    "correct": "B",
+    "reason": "A Tariff Commission review found that only one (1) NTM for meat and processed food products was issued between 13 March 2020 and 15 July 2020 (Primer p.116)."
+  },
+  "382": {
+    "question": "According to Table 4.8, the new NTM on meat and processed food products required which additional document, among others, from importers to ensure proper cold chain management?",
+    "choices": {
+      "A": "A Certificate of Availability of Space of Accredited Cost Storage Warehouse (CSW)",
+      "B": "A certificate of origin from the WTO Secretariat",
+      "C": "An advance ruling from the Tariff Commission",
+      "D": "A surety bond equal to the value of the shipment"
+    },
+    "correct": "A",
+    "reason": "The new NTM required, among other documents, a Certificate of Availability of Space of Accredited Cost Storage Warehouse (CSW) from all importers to ensure proper cold chain management (Primer p.116)."
+  },
+  "383": {
+    "question": "According to the Primer, the World Trade Organization (WTO) is best described as what kind of body?",
+    "choices": {
+      "A": "A private arbitration body for commercial disputes only",
+      "B": "The only formal and international organization, composed of member governments, dealing with the rules of trade between nations",
+      "C": "A regional trading bloc limited to ASEAN members",
+      "D": "A non-governmental organization with no formal international status"
+    },
+    "correct": "B",
+    "reason": "The WTO is the only formal and international organization, composed of member governments, dealing with the rules of trade between nations (Primer p.120)."
+  },
+  "384": {
+    "question": "The history of the WTO begins with the signing of which agreement in 1947?",
+    "choices": {
+      "A": "The Agreement Establishing the WTO",
+      "B": "The General Agreement on Tariffs and Trade (GATT)",
+      "C": "The Bretton Woods Agreement",
+      "D": "The Uruguay Round Final Act"
+    },
+    "correct": "B",
+    "reason": "The history of the WTO begins with the signing of the General Agreement on Tariffs and Trade (GATT) in 1947, which provided the rules for the bulk of world trade (Primer p.120)."
+  },
+  "385": {
+    "question": "The initial objective behind the GATT was to create what organization, which ultimately failed to materialize?",
+    "choices": {
+      "A": "The International Trade Organization (ITO)",
+      "B": "The World Bank",
+      "C": "The International Monetary Fund",
+      "D": "The United Nations Conference on Trade and Development"
+    },
+    "correct": "A",
+    "reason": "The initial objective was to create an International Trade Organization (ITO) to handle the trade side of international economic cooperation, complementing the two Bretton Woods Institutions, but with the failure of the ITO's creation, the GATT served as an interim organization (Primer p.120)."
+  },
+  "386": {
+    "question": "The GATT trade rounds developed rules for the Multilateral Trading System through how many rounds of negotiations, with which round being the most comprehensive and leading to the creation of the WTO?",
+    "choices": {
+      "A": "Six rounds, with the sixth (Tokyo Round) being the most comprehensive",
+      "B": "Eight rounds, with the eighth (Uruguay Round) being the most comprehensive",
+      "C": "Four rounds, with the fourth being the most comprehensive",
+      "D": "Ten rounds, with the final round being the most comprehensive"
+    },
+    "correct": "B",
+    "reason": "The GATT developed rules through eight (8) rounds of trade negotiations, with the eighth round, the Uruguay Round, being the most comprehensive and eventually leading to the creation of the WTO (Primer p.120)."
+  },
+  "387": {
+    "question": "On what date did the WTO enter into force?",
+    "choices": {
+      "A": "1 January 1995",
+      "B": "4 September 1999",
+      "C": "19 July 2000",
+      "D": "1 January 2000"
+    },
+    "correct": "A",
+    "reason": "The WTO was instituted on 1 January 1995 after the long and intense Uruguay Round of Negotiations (Primer p.121)."
+  },
+  "388": {
+    "question": "As of the Primer's writing, how many countries had ratified their accession to the WTO, and which were the two newest members mentioned?",
+    "choices": {
+      "A": "150 countries, with China and India being the newest members",
+      "B": "164 countries, with Liberia and Afghanistan being the newest members",
+      "C": "100 countries, with Vietnam and Cambodia being the newest members",
+      "D": "200 countries, with no new members mentioned"
+    },
+    "correct": "B",
+    "reason": "Currently, 164 countries have ratified their accession to the WTO, with the newest Members being Liberia and Afghanistan, who acceded on 14 July 2016 and 29 July 2016, respectively (Primer p.121)."
+  },
+  "389": {
+    "question": "Among the main objectives of the WTO listed in the Primer, which of the following is included?",
+    "choices": {
+      "A": "To raise living standards and to ensure full employment",
+      "B": "To eliminate all forms of international commerce",
+      "C": "To guarantee identical tariff rates for every WTO Member",
+      "D": "To centralize all customs administration under one global authority"
+    },
+    "correct": "A",
+    "reason": "Among the main objectives of the WTO listed in the Agreement's preamble are to raise living standards and to ensure full employment (Primer p.120-121)."
+  },
+  "390": {
+    "question": "Which of the following is listed as a function of the WTO under Article III of the Agreement Establishing the WTO?",
+    "choices": {
+      "A": "To serve as a forum for Members to settle their disputes",
+      "B": "To set binding domestic tax policy for all Members",
+      "C": "To directly manage the central banks of Member countries",
+      "D": "To determine the exchange rate of every Member's currency"
+    },
+    "correct": "A",
+    "reason": "Among the main functions of the WTO is to serve as a forum for Members to settle their disputes (Primer p.121)."
+  },
+  "391": {
+    "question": "Which of the following is listed as a fundamental principle of the WTO?",
+    "choices": {
+      "A": "Non-discrimination, covering the Most-Favoured-Nation principle and the national treatment principle",
+      "B": "Mandatory uniform tariffs for all products worldwide",
+      "C": "Exclusive trade preferences for the largest economies only",
+      "D": "Automatic approval of all subsidy programs"
+    },
+    "correct": "A",
+    "reason": "Non-discrimination is a fundamental principle of the WTO, meaning Members shall not discriminate between their trading partners (MFN principle) or between national and foreign like products, services, or nationals (national treatment principle) (Primer p.121)."
+  },
+  "392": {
+    "question": "Under the WTO's fundamental principles, what does the principle of special and differential treatment for less developed Members entail?",
+    "choices": {
+      "A": "Less developed Members are provided greater flexibility, more time to adjust to the rules, and other special rights",
+      "B": "Less developed Members are exempted from WTO membership entirely",
+      "C": "Less developed Members must adopt identical trade policies as developed Members",
+      "D": "Less developed Members are barred from participating in dispute settlement"
+    },
+    "correct": "A",
+    "reason": "Special and differential treatment for less developed Members means that developing and least-developing Members facing particular challenges are provided greater flexibility, more time to adjust to the rules, and other special rights (Primer p.121)."
+  },
+  "393": {
+    "question": "According to the Primer, the highest decision-making body of the WTO, the Ministerial Conference, meets how often?",
+    "choices": {
+      "A": "At least once every two (2) years",
+      "B": "At least once a year",
+      "C": "Only once every five (5) years",
+      "D": "Only when a trade dispute arises"
+    },
+    "correct": "A",
+    "reason": "The Ministerial Conference (MC), the highest decision-making body of the WTO, shall meet at least once every two (2) years to review the ongoing work and provide political guidance (Primer p.121)."
+  },
+  "394": {
+    "question": "The Ministerial Conference of the WTO is composed of what representatives from the Members?",
+    "choices": {
+      "A": "The Trade Ministers of all Members, with some exceptions such as the EU Trade Commissioner and the US Trade Representative",
+      "B": "Only the Heads of State of each Member country",
+      "C": "Only the WTO Secretariat staff",
+      "D": "Only representatives from developed Members"
+    },
+    "correct": "A",
+    "reason": "The MC is composed of the Trade Ministers of all the Members, except for some, such as the EU Trade Commissioner and the US Trade Representative for the European Union and the United States, respectively (Primer p.122)."
+  },
+  "395": {
+    "question": "The General Council (GC), as the second level of the WTO's organizational structure, is composed of what kind of representatives?",
+    "choices": {
+      "A": "Representatives from all Members, usually Members' Ambassadors or Permanent Representatives based in Geneva",
+      "B": "Only representatives from the five largest trading economies",
+      "C": "Only representatives appointed directly by the WTO Director-General",
+      "D": "Only judges of the Dispute Settlement Body"
+    },
+    "correct": "A",
+    "reason": "The General Council is composed of representatives from all Members, usually their Ambassadors or Permanent Representatives based in Geneva (Primer p.122)."
+  },
+  "396": {
+    "question": "When the General Council meets as the Dispute Settlement Body (DSB), what is its function?",
+    "choices": {
+      "A": "To establish panels of independent experts to resolve disputes, adopt rulings, and oversee their implementation",
+      "B": "To set tariff rates for Member countries",
+      "C": "To approve new WTO memberships",
+      "D": "To audit the financial statements of Member governments"
+    },
+    "correct": "A",
+    "reason": "When meeting as the Dispute Settlement Body, the GC establishes panels of independent experts to resolve disputes, adopts the rulings of the panels, and oversees the implementation of those rulings (Primer p.122)."
+  },
+  "397": {
+    "question": "The Trade Policy Review Body (TPRB), one of the forms the General Council takes, administers what?",
+    "choices": {
+      "A": "Trade policy reviews as mandated by the Trade Policy Review Mechanism of the WTO",
+      "B": "The negotiation of new free trade agreements",
+      "C": "The collection of countervailing duties across Members",
+      "D": "The accreditation of customs brokers"
+    },
+    "correct": "A",
+    "reason": "The Trade Policy Review Body administers trade policy reviews as mandated by the Trade Policy Review Mechanism of the WTO (Primer p.122)."
+  },
+  "398": {
+    "question": "At the third level of the WTO's organizational structure, the Councils and Subsidiary Bodies, which three councils report to the General Council?",
+    "choices": {
+      "A": "The Goods Council, Services Council, and TRIPS Council",
+      "B": "The Finance Council, Agriculture Council, and Security Council",
+      "C": "The Tariff Council, Quota Council, and Subsidy Council",
+      "D": "The Dispute Council, Accession Council, and Review Council"
+    },
+    "correct": "A",
+    "reason": "Three councils report to the General Council: the Council for Trade in Goods, the Council for Trade in Services, and the Council for Trade-Related Aspects of Intellectual Property Rights (TRIPS Council) (Primer p.122)."
+  },
+  "399": {
+    "question": "Which of the following is listed as a subsidiary body that reports directly to the WTO General Council on horizontal issues?",
+    "choices": {
+      "A": "The Committee on Trade and Development (CTD)",
+      "B": "The Bureau of Import Services",
+      "C": "The Tariff Commission",
+      "D": "The Bureau of Customs Valuation and Classification Division"
+    },
+    "correct": "A",
+    "reason": "The Committee on Trade and Development (CTD) is one of several subsidiary bodies that report directly to the General Council on horizontal issues (Primer p.122)."
+  },
+  "400": {
+    "question": "According to the Primer, how does the WTO generally make its decisions, following GATT's tradition?",
+    "choices": {
+      "A": "By majority vote of the Director-General alone",
+      "B": "Not by voting but by consensus, with voting allowed only where consensus is not possible",
+      "C": "By binding arbitration of a single appointed judge",
+      "D": "By unanimous written consent submitted by mail"
+    },
+    "correct": "B",
+    "reason": "The WTO continues GATT's tradition of making decisions not by voting but by consensus; where consensus is not possible, the WTO Agreement allows for voting, with a vote won by a majority of the votes cast unless otherwise provided (Primer p.122-123)."
+  },
+  "401": {
+    "question": "According to the Primer, in what ways does the WTO operate?",
+    "choices": {
+      "A": "As a set of multilaterally agreed rules, a forum for trade negotiations, and an international court for resolving disputes between members",
+      "B": "Solely as a body that sets global interest rates",
+      "C": "Solely as a certifying agency for product quality standards",
+      "D": "Solely as an international customs valuation authority"
+    },
+    "correct": "A",
+    "reason": "The WTO operates as a set of multilaterally agreed rules governing trade behavior, as a forum for trade negotiations, and as an international court where governments can resolve disputes with other WTO members (Primer p.123)."
+  },
+  "402": {
+    "question": "Since the creation of GATT in 1948, how many rounds of multilateral trade negotiations have been held, and what was the resulting average tariff level in developed countries from the earlier rounds?",
+    "choices": {
+      "A": "Eight (8) rounds, resulting in industrial tariffs in developed countries lowered to about 7% on average",
+      "B": "Four (4) rounds, resulting in a 50% average tariff",
+      "C": "Twelve (12) rounds, resulting in a 20% average tariff",
+      "D": "Eight (8) rounds, resulting in a 33% average tariff"
+    },
+    "correct": "A",
+    "reason": "Since the creation of GATT in 1948, eight (8) rounds of negotiations have been held, with earlier rounds focused on tariff reduction that lowered industrial tariffs in developed countries to about 7% on average (Primer p.123)."
+  },
+  "403": {
+    "question": "The Uruguay Round, the eighth round of multilateral trade negotiations, spanned what years and included how many countries as contracting parties?",
+    "choices": {
+      "A": "1986 to 1994, with 123 countries",
+      "B": "1973 to 1979, with 100 countries",
+      "C": "1947 to 1960, with 50 countries",
+      "D": "2001 to 2005, with 164 countries"
+    },
+    "correct": "A",
+    "reason": "The Uruguay Round was the eighth Round of Multilateral Trade Negotiations, spanning from 1986 to 1994 and including 123 countries as contracting parties (Primer p.123)."
+  },
+  "404": {
+    "question": "The Final Act embodying the agreements resulting from the Uruguay Round, along with the Agreement to establish the WTO, was signed on what date and in which city?",
+    "choices": {
+      "A": "15 April 1994 in Marrakesh, Morocco",
+      "B": "1 January 1995 in Geneva, Switzerland",
+      "C": "9 November 2001 in Doha, Qatar",
+      "D": "13 December 1996 in Singapore"
+    },
+    "correct": "A",
+    "reason": "The Final Act embodying the thirty agreements and 22 ministerial decisions from the Uruguay Round, and the Agreement to establish the WTO, was signed on 15 April 1994 at Marrakesh, Morocco (Primer p.123)."
+  },
+  "405": {
+    "question": "What are the three key result areas of the Uruguay Round, as listed in the Primer?",
+    "choices": {
+      "A": "Market Access, Rules and Disciplines, and Institutional Topics",
+      "B": "Tariff Reduction, Quota Elimination, and Dispute Resolution",
+      "C": "Agriculture, Services, and Intellectual Property only",
+      "D": "Safeguards, Subsidies, and Rules of Origin only"
+    },
+    "correct": "A",
+    "reason": "The three key result areas of the Uruguay Round are Market Access, Rules and Disciplines, and Institutional Topics (Primer p.123)."
+  },
+  "406": {
+    "question": "Under the Rules and Disciplines result area of the Uruguay Round, which trade remedy measures against unfair trade were among the topics negotiated?",
+    "choices": {
+      "A": "Anti-dumping and countervailing measures",
+      "B": "Only export subsidies",
+      "C": "Only government procurement restrictions",
+      "D": "Only tariff bindings"
+    },
+    "correct": "A",
+    "reason": "Rules and Disciplines negotiations ranged from trade measures against unfair trade, such as anti-dumping and countervailing measures, among other topics (Primer p.123)."
+  },
+  "407": {
+    "question": "Under the emergency measures sanctioned by the WTO, Balance-of-Payments Measures allow a country to restrict imports under what circumstance, and how many months are required for consultations from the adoption of such restrictions?",
+    "choices": {
+      "A": "When its balance-of-payments is threatened by increased imports, with consultations required within four (4) months",
+      "B": "When its currency appreciates, with consultations required within one (1) month",
+      "C": "When its exports exceed its imports, with no consultation required",
+      "D": "When a trading partner requests it, with consultations required within twelve (12) months"
+    },
+    "correct": "A",
+    "reason": "The Uruguay Round reaffirmed that a country can restrict imports if its balance-of-payments is threatened by increased imports, with consultations required within four (4) months from the adoption of the balance-of-payments measures (Primer p.124)."
+  },
+  "408": {
+    "question": "Under the renegotiation of tariff concessions sanctioned by the WTO, what must a Member do if it wants to return to a higher bound tariff?",
+    "choices": {
+      "A": "Compensate affected trading partners, such as by reducing the tariff on a different product",
+      "B": "Pay a fixed penalty to the WTO Secretariat",
+      "C": "Withdraw entirely from the Agreement on Agriculture",
+      "D": "Obtain unanimous approval from the Ministerial Conference"
+    },
+    "correct": "A",
+    "reason": "The WTO allows a renegotiation of bound tariffs, subject to the requirement that a return to higher tariffs be compensated for, such as through a reduction in the tariff on another product (Primer p.124)."
+  },
+  "409": {
+    "question": "Which Philippine law, signed on 28 March 1996, changed the basis of dutiable value of imported articles from home consumption value to transaction value?",
+    "choices": {
+      "A": "RA No. 8181",
+      "B": "RA No. 8178",
+      "C": "EO No. 313",
+      "D": "EO No. 465"
+    },
+    "correct": "A",
+    "reason": "RA No. 8181, signed on 28 March 1996, changed the basis of dutiable value of imported articles subject to an ad valorem rate of duty from home consumption value to transaction value (Primer p.124)."
+  },
+  "410": {
+    "question": "Which Philippine law, also signed on 28 March 1996, replaced quantitative import restrictions on agricultural products (except rice) with tariffs and created the Agricultural Competitiveness Enhancement Fund?",
+    "choices": {
+      "A": "RA No. 8178",
+      "B": "RA No. 8181",
+      "C": "RA No. 11203",
+      "D": "EO No. 313"
+    },
+    "correct": "A",
+    "reason": "RA No. 8178, signed on 28 March 1996, replaced quantitative import restrictions on agricultural products, except rice, with tariffs, and created the Agricultural Competitiveness Enhancement Fund (Primer p.124)."
+  },
+  "411": {
+    "question": "According to Table 5.1 of the Primer, which Executive Order, taking effect to complement the lifting of quantitative restrictions under RA No. 8178, set tariff rates on previously restricted agricultural products?",
+    "choices": {
+      "A": "EO No. 313",
+      "B": "EO No. 395",
+      "C": "EO No. 465",
+      "D": "EO No. 627"
+    },
+    "correct": "A",
+    "reason": "EO No. 313, signed on 29 March 1996, set the tariff rates on agricultural products previously covered by quantitative restrictions, except rice, to complement the lifting of quantitative restrictions under RA No. 8178 (Primer p.124)."
+  },
+  "412": {
+    "question": "Which law signed on 14 February 2019 lifted the quantitative import restriction on rice and provided for the tariff equivalent thereof?",
+    "choices": {
+      "A": "RA No. 11203",
+      "B": "RA No. 8178",
+      "C": "EO No. 23",
+      "D": "EO No. 82"
+    },
+    "correct": "A",
+    "reason": "RA No. 11203, signed on 14 February 2019, lifted quantitative restrictions on rice and provided for the tariff equivalent thereof (Primer p.124)."
+  },
+  "413": {
+    "question": "A tariff binding, as defined in the Primer, refers to what kind of commitment by WTO Members?",
+    "choices": {
+      "A": "A commitment not to increase a tariff rate beyond its bound rate, i.e., the tariff ceiling or maximum tariff rate",
+      "B": "A commitment to eliminate all tariffs within five years",
+      "C": "A commitment to apply identical tariffs to all trading partners without exception",
+      "D": "A commitment to convert all tariffs into quantitative restrictions"
+    },
+    "correct": "A",
+    "reason": "A tariff binding refers to a commitment by WTO Members not to increase a tariff rate beyond its bound rate, i.e., the tariff ceiling or maximum tariff rate (Primer p.125)."
+  },
+  "414": {
+    "question": "In the Uruguay Round, by what weighted average did Japan cut its overall tariffs, and by what percentage did the European Union and the United States cut theirs, respectively?",
+    "choices": {
+      "A": "Japan by 61%, the European Union by 37%, and the United States by 34%",
+      "B": "Japan by 33%, the European Union by 61%, and the United States by 37%",
+      "C": "Japan by 50%, the European Union by 50%, and the United States by 50%",
+      "D": "Japan by 10%, the European Union by 15%, and the United States by 20%"
+    },
+    "correct": "A",
+    "reason": "In the Uruguay Round, Japan cut its overall tariffs by a weighted average of 61%, the European Union by 37%, and the United States by 34% (Primer p.125)."
+  },
+  "415": {
+    "question": "Did the Philippines reduce its applied tariffs during the Uruguay Round, and what did it commit to instead?",
+    "choices": {
+      "A": "No; instead, it committed to bind tariffs on about 2,800 industrial tariff lines at ceiling rates ten percentage points above the 1995 applied rate",
+      "B": "Yes, it reduced all applied tariffs by 33% across the board",
+      "C": "Yes, it eliminated all tariffs on industrial products entirely",
+      "D": "No commitment of any kind was undertaken by the Philippines"
+    },
+    "correct": "A",
+    "reason": "The Philippines did not reduce its applied tariffs; instead, it committed to bind the tariffs on some 2,800 industrial tariff lines at ceiling rates of ten (10) percentage points above the 1995 applied rate (Primer p.125)."
+  },
+  "416": {
+    "question": "If agricultural tariff lines were included in the Philippines' Uruguay Round tariff binding commitment, numbering some 744 lines, what percentage of total tariff lines would the scope of bindings reach?",
+    "choices": {
+      "A": "50%",
+      "B": "63%",
+      "C": "33%",
+      "D": "100%"
+    },
+    "correct": "B",
+    "reason": "If the commitment to bind agricultural tariff lines (744 lines) were included, the scope of bindings would reach 63% of total tariff lines (Primer p.125)."
+  },
+  "417": {
+    "question": "In 2004, tariffs on how many tariff lines, accounting for 0.01% of total tariff lines and covering agricultural and textile/clothing products, were reduced by the Philippines?",
+    "choices": {
+      "A": "66 tariff lines",
+      "B": "2,800 tariff lines",
+      "C": "744 tariff lines",
+      "D": "122 tariff lines"
+    },
+    "correct": "A",
+    "reason": "In 2004, the tariffs on 66 tariff lines, accounting for 0.01% of total tariff lines and referring to agricultural (42 lines) and textiles and clothing (24 lines) products, were reduced (Primer p.125)."
+  },
+  "418": {
+    "question": "Since the Philippines' applied tariff rates fall well below its bound rates committed under the Uruguay Round, what effect did this have on the structure of tariff protection to domestic industries?",
+    "choices": {
+      "A": "There was no change in the structure of tariff protection to domestic industries",
+      "B": "Domestic industries lost all tariff protection immediately",
+      "C": "Domestic industries gained significantly higher tariff protection",
+      "D": "Tariff protection was shifted entirely to quantitative restrictions"
+    },
+    "correct": "A",
+    "reason": "Since the applied tariff rates fall way below the bound rates committed by the Philippines under the UR, there was no change in the structure of tariff protection to domestic industries (Primer p.126)."
+  },
+  "419": {
+    "question": "The WTO Agreement on Agriculture (AoA) covers agricultural products under which HS Chapters, excluding fish and fish products, plus certain products in additional chapters?",
+    "choices": {
+      "A": "Chapters 1 to 24, plus certain products in Chapters 29, 33, 35, 38, 41, 43, 50, 51, 52, and 53",
+      "B": "Chapters 25 to 97 only",
+      "C": "Chapters 1 to 97 with no exclusions",
+      "D": "Chapters 1 to 24 only, with fish and fish products included"
+    },
+    "correct": "A",
+    "reason": "The Agreement on Agriculture covers agricultural products under HS Chapters 1 to 24, excluding fish and fish products, plus certain products in Chapters 29, 33, 35, 38, 41, 43, 50, 51, 52, and 53 (Primer p.126)."
+  },
+  "420": {
+    "question": "Under the Agreement on Agriculture, the current rule for market access in agricultural products is based on what?",
+    "choices": {
+      "A": "Tariffs only, with all non-tariff border measures converted into ordinary customs duties through a process known as tariffication",
+      "B": "Import quotas only",
+      "C": "Import licensing requirements only",
+      "D": "A combination of tariffs and permanent import bans"
+    },
+    "correct": "A",
+    "reason": "The current rule for market access in agricultural products under the AoA is tariffs only; all non-tariff border measures were removed and converted into ordinary customs duties through a process known as tariffication (Primer p.126)."
+  },
+  "421": {
+    "question": "Under the tariffication system of the Agreement on Agriculture, what mechanism operates through pre-negotiated Minimum Access Volumes (MAVs) at low in-quota tariffs?",
+    "choices": {
+      "A": "The tariff quota mechanism",
+      "B": "The Swiss Formula",
+      "C": "The lesser duty rule",
+      "D": "The special safeguard mechanism alone"
+    },
+    "correct": "A",
+    "reason": "Tariffication operates through a mechanism called tariff quotas, where pre-negotiated Minimum Access Volumes (MAVs) are set at low in-quota tariffs, with volumes outside the MAV levied higher out-quota tariffs (Primer p.126)."
+  },
+  "422": {
+    "question": "For developing countries like the Philippines, out-quota tariffs under the Agreement on Agriculture were reduced by a minimum of what percentage for each tariff line, and by what average over ten years?",
+    "choices": {
+      "A": "A minimum of 10% per tariff line and a simple average of 24% for all tariff lines",
+      "B": "A minimum of 15% per tariff line and an average of 36%",
+      "C": "A minimum of 33% per tariff line and an average of 50%",
+      "D": "A minimum of 5% per tariff line and an average of 10%"
+    },
+    "correct": "A",
+    "reason": "For developing countries like the Philippines, out-quota tariffs were reduced by a minimum of 10% for each tariff line and by a simple average of 24% for all tariff lines within ten (10) years (Primer p.127)."
+  },
+  "423": {
+    "question": "For developed countries, tariff rates under the Agreement on Agriculture were reduced by a minimum of what percentage per product, and over how many years?",
+    "choices": {
+      "A": "A minimum of 15% per product and an average cut of 36%, over six (6) years from 1995 to 2000",
+      "B": "A minimum of 10% per product over ten (10) years",
+      "C": "A minimum of 24% per product over five (5) years",
+      "D": "A minimum of 33% per product over eight (8) years"
+    },
+    "correct": "A",
+    "reason": "For developed countries, tariff rates were reduced by a minimum of 15% per product and by an average cut of 36% for all products over six (6) years from 1995 to 2000 (Primer p.127)."
+  },
+  "424": {
+    "question": "Which law, signed on 28 March 1996, implements the tariffication of agricultural products under the Agreement on Agriculture?",
+    "choices": {
+      "A": "RA No. 8178",
+      "B": "RA No. 8181",
+      "C": "EO No. 313",
+      "D": "RA No. 8751"
+    },
+    "correct": "A",
+    "reason": "RA No. 8178, signed on 28 March 1996, implements the tariffication of agricultural products under the Agreement on Agriculture (Primer p.127)."
+  },
+  "425": {
+    "question": "The sensitive agricultural products on which Minimum Access Volumes (MAVs) were provided are listed in which part of the Philippine schedule?",
+    "choices": {
+      "A": "Section I-B Tariff Quotas of Schedule LXXV - Philippines",
+      "B": "Section I-A Tariffs of Schedule LXXV - Philippines",
+      "C": "Annex A of Joint Administrative Order No. 01",
+      "D": "Table 3.2 of the Tariff Commission's Summary of Cases"
+    },
+    "correct": "A",
+    "reason": "The sensitive agricultural products on which MAVs were provided are listed in Section I-B Tariff Quotas of Schedule LXXV - Philippines (Primer p.127)."
+  },
+  "426": {
+    "question": "What mechanism, provided under RA No. 8178, authorizes the President, with the concurrence of Congress, to increase the Minimum Access Volume in case of commodity shortages or abnormal price increases?",
+    "choices": {
+      "A": "MAV Plus",
+      "B": "The lesser duty rule",
+      "C": "The Swiss Formula",
+      "D": "Tariff rebalancing"
+    },
+    "correct": "A",
+    "reason": "RA No. 8178 provides for a mechanism called MAV Plus, which authorizes the President to increase the MAV with the concurrence of Congress in case of commodity shortages or abnormal price increases (Primer p.128)."
+  },
+  "427": {
+    "question": "Which committee, chaired by the Secretary of Agriculture, administers all importations under the Minimum Access Volume scheme?",
+    "choices": {
+      "A": "The MAV Management Committee",
+      "B": "The Tariff Commission",
+      "C": "The National Economic and Development Authority Board",
+      "D": "The Committee on Tariff and Related Matters"
+    },
+    "correct": "A",
+    "reason": "The MAV Management Committee, composed of the Secretary of Agriculture as Chairman and the Secretaries of Agrarian Reform, Finance, Science and Technology, Trade and Industry, and the Director-General of NEDA, implements and administers all importations under the MAV scheme (Primer p.128)."
+  },
+  "428": {
+    "question": "Under the Agreement on Agriculture, out-quota tariffs on non-sensitive agricultural products initially ranged from what minimum to what maximum rate?",
+    "choices": {
+      "A": "A minimum of 10% to a maximum of 100%",
+      "B": "A minimum of 5% to a maximum of 50%",
+      "C": "A minimum of 24% to a maximum of 60%",
+      "D": "A minimum of 1% to a maximum of 20%"
+    },
+    "correct": "A",
+    "reason": "Out-quota tariffs on non-sensitive products, set forth in Section I-A Tariffs of Schedule LXXV - Philippines, initially ranged from a minimum of 10% to a maximum of 100% (Primer p.128)."
+  },
+  "429": {
+    "question": "As the predominant staple grain in the traditional diet of a developing country like the Philippines, how was rice treated under the Uruguay Round's tariffication rules?",
+    "choices": {
+      "A": "Rice was exempt from tariffication, but a Minimum Access Volume corresponding to 1%, increasing over time to up to 4% of domestic consumption, had to be provided",
+      "B": "Rice was subject to full tariffication like all other agricultural products",
+      "C": "Rice was entirely banned from importation",
+      "D": "Rice was given an unlimited MAV with no corresponding tariff"
+    },
+    "correct": "A",
+    "reason": "As the basic staple grain, rice was not tariffied under the UR, but a Minimum Access Volume had to be provided, corresponding to 1% of base period domestic consumption and increasing over time to up to 4% in the final year of implementation (Primer p.128-129)."
+  },
+  "430": {
+    "question": "Executive Order No. 627, issued on 15 June 2007, reduced the MFN rates on certain agricultural products such as mechanically deboned meat for what purpose?",
+    "choices": {
+      "A": "To compensate other WTO member countries for the requested seven-year extension of the special treatment on rice until 2012",
+      "B": "To implement the ITA Expansion commitments",
+      "C": "To lift quantitative restrictions on rice permanently",
+      "D": "To eliminate the MAV Plus mechanism"
+    },
+    "correct": "A",
+    "reason": "EO No. 627 was issued on 15 June 2007 to reduce the MFN rates on certain agricultural products, such as mechanically deboned meat, to compensate other WTO member countries for the requested seven-year extension of the special treatment on rice until 2012 (Primer p.128)."
+  },
+  "431": {
+    "question": "Executive Order Nos. 190 and 191, both issued on 05 November 2015, modified what, respectively?",
+    "choices": {
+      "A": "EO No. 190 provided a temporary modification of MFN rates on rice and non-rice products, while EO No. 191 modified preferential tariff rates on certain agricultural products under the AANZFTA",
+      "B": "EO No. 190 eliminated anti-dumping duties, while EO No. 191 eliminated countervailing duties",
+      "C": "EO No. 190 modified ITA tariff rates, while EO No. 191 modified NAMA tariff rates",
+      "D": "EO No. 190 created the ACEF, while EO No. 191 abolished it"
+    },
+    "correct": "A",
+    "reason": "EO No. 190 provided a temporary modification of MFN rates on rice and non-rice products, while EO No. 191 modified the preferential tariff rates on certain agricultural products under EO No. 851 (s. 2009), accelerating AANZFTA tariff reductions (Primer p.128)."
+  },
+  "432": {
+    "question": "Republic Act No. 11203, otherwise known as what, was signed on 14 February 2019 and took effect on 05 March 2019?",
+    "choices": {
+      "A": "An Act Liberalizing the Importation, Exportation and Trading of Rice",
+      "B": "The Anti-Dumping Act of 1999",
+      "C": "The Safeguard Measures Act",
+      "D": "The Customs Modernization and Tariff Act"
+    },
+    "correct": "A",
+    "reason": "RA No. 11203, otherwise known as An Act Liberalizing the Importation, Exportation and Trading of Rice, Lifting for the Purpose the Quantitative Import Restriction on Rice, and for Other Purposes, took effect on 05 March 2019 and amends RA No. 8178 (Primer p.128)."
+  },
+  "433": {
+    "question": "Under Article 5 of the Agreement on Agriculture, what is the maximum level of additional duty that may be levied through special safeguards on agricultural products facing import surges?",
+    "choices": {
+      "A": "Not exceeding 33% of the level of the ordinary customs duty applied at the time of importation",
+      "B": "Not exceeding 10% of the import value",
+      "C": "Not exceeding 50% of the normal value",
+      "D": "Not exceeding 100% of the ordinary customs duty"
+    },
+    "correct": "A",
+    "reason": "Article 5 of the AoA provides that the additional duty levied as a special safeguard shall not exceed 33% of the level of the ordinary customs duty applied on imports of the product at the time of importation (Primer p.129)."
+  },
+  "434": {
+    "question": "The Information Technology Agreement (ITA), as defined in the Primer, is a multilateral agreement enforced by the WTO that aims to do what?",
+    "choices": {
+      "A": "Eliminate tariff and non-tariff barriers to trade on information technology products",
+      "B": "Impose anti-dumping duties on IT products",
+      "C": "Regulate intellectual property rights for IT companies",
+      "D": "Establish a global minimum wage for IT workers"
+    },
+    "correct": "A",
+    "reason": "The Information Technology Agreement (ITA) is a multilateral agreement enforced by the WTO which aims to eliminate tariff and non-tariff barriers to trade on information technology (IT) products (Primer p.129)."
+  },
+  "435": {
+    "question": "The Ministerial Declaration on Trade in Information Technology Products, which became the ITA, was concluded at which Ministerial Conference, and when did the ITA officially enter into force?",
+    "choices": {
+      "A": "Concluded at the Singapore Ministerial Conference on 13 December 1996; entered into force on 01 July 1997",
+      "B": "Concluded at the Nairobi Ministerial Conference in December 2015; entered into force on 01 July 2016",
+      "C": "Concluded at the Hong Kong Ministerial Conference in 2005; entered into force in 2006",
+      "D": "Concluded at the Doha Ministerial Conference in 2001; entered into force in 2002"
+    },
+    "correct": "A",
+    "reason": "The ITA was concluded at the Singapore Ministerial Conference on 13 December 1996 and officially entered into force on 01 July 1997 (Primer p.129)."
+  },
+  "436": {
+    "question": "How many countries, counting the member states of the European Union as one, were the original signatories of the ITA Declaration?",
+    "choices": {
+      "A": "Fourteen (14) countries",
+      "B": "Fifty-three (53) countries",
+      "C": "Eighty-two (82) countries",
+      "D": "One hundred sixty-four (164) countries"
+    },
+    "correct": "A",
+    "reason": "Fourteen (14) countries, counting the five member states of the European Union as one, signed the ITA Declaration (Primer p.129)."
+  },
+  "437": {
+    "question": "The ITA Expansion, which expanded the product coverage of the original ITA, was concluded at which Ministerial Conference, and when did it officially enter into force?",
+    "choices": {
+      "A": "Concluded at the Nairobi Ministerial Conference in December 2015; entered into force on 01 July 2016",
+      "B": "Concluded at the Singapore Ministerial Conference in 1996; entered into force in 1997",
+      "C": "Concluded at the Marrakesh Ministerial Conference in 1994; entered into force in 1995",
+      "D": "Concluded at the Hong Kong Ministerial Conference in 2005; entered into force in 2006"
+    },
+    "correct": "A",
+    "reason": "The ITA Expansion was concluded at the Nairobi Ministerial Conference in December 2015 and officially entered into force on 01 July 2016 (Primer p.129)."
+  },
+  "438": {
+    "question": "How many WTO Members participated in the negotiations for the ITA Expansion?",
+    "choices": {
+      "A": "Fifty-three (53) Members",
+      "B": "Fourteen (14) Members",
+      "C": "Eighty-two (82) Members",
+      "D": "One hundred twenty-three (123) Members"
+    },
+    "correct": "A",
+    "reason": "There were fifty-three (53) WTO Members that participated in the negotiations for the ITA Expansion (Primer p.129)."
+  },
+  "439": {
+    "question": "Which of the following is one of the three basic principles that an ITA and ITA Expansion participant must abide by?",
+    "choices": {
+      "A": "All products listed in the Declarations must be covered, and their tariffs reduced to and bound at zero",
+      "B": "Only products manufactured domestically must be covered",
+      "C": "Tariffs on listed products must be reduced to exactly 5%",
+      "D": "Only developed countries are bound by the Declarations"
+    },
+    "correct": "A",
+    "reason": "One of the three basic principles is that all products listed in the Declarations must be covered, and all products listed must have their tariffs reduced to and bound at zero (Primer p.130)."
+  },
+  "440": {
+    "question": "Under the ITA's Table 5.2 timeframe for staging of concessions, by when was the complete elimination of duties required to take place, not later than?",
+    "choices": {
+      "A": "01 January 2000",
+      "B": "01 July 2019",
+      "C": "01 January 1998",
+      "D": "01 July 1997"
+    },
+    "correct": "A",
+    "reason": "Under the ITA's staging timeframe, complete elimination of duties was required not later than 01 January 2000, the 4th stage (Primer p.130)."
+  },
+  "441": {
+    "question": "Under the ITA Expansion's Table 5.2 timeframe for staging of concessions, by when was the complete elimination of duties required to take place, not later than?",
+    "choices": {
+      "A": "01 July 2019",
+      "B": "01 January 2000",
+      "C": "01 July 2017",
+      "D": "01 July 2016"
+    },
+    "correct": "A",
+    "reason": "Under the ITA Expansion's staging timeframe, complete elimination of duties was required not later than 01 July 2019, the 4th stage (Primer p.130)."
+  },
+  "442": {
+    "question": "Were the staging timeframes for the ITA and ITA Expansion strictly implemented, and what was the furthest extended period allowed in each case?",
+    "choices": {
+      "A": "No; extensions were approved but never allowed to go beyond year 2005 for the ITA and year 2023 for the ITA Expansion",
+      "B": "Yes, they were strictly implemented with no exceptions allowed",
+      "C": "No; extensions were allowed indefinitely with no cap",
+      "D": "No; only the ITA allowed extensions, while the ITA Expansion had none"
+    },
+    "correct": "A",
+    "reason": "A number of developing countries requested extensions, which were approved, but in no case were the extended staging periods allowed to go beyond year 2005 for the ITA and year 2023 for the ITA Expansion (Primer p.130)."
+  },
+  "443": {
+    "question": "Which of the following is listed in the Primer as part of the product landscape of the original ITA?",
+    "choices": {
+      "A": "Computer hardware products, semiconductor and integrated circuits, and computer software",
+      "B": "Video game consoles and touch screens",
+      "C": "Global Positioning Systems (GPS) navigation equipment",
+      "D": "Portable interactive electronic education devices"
+    },
+    "correct": "A",
+    "reason": "The product landscape of the ITA includes computer hardware products, semiconductor and integrated circuits, computer software, telecommunication equipment, and other IT products (Primer p.131)."
+  },
+  "444": {
+    "question": "Which of the following is listed in the Primer as part of the product landscape of the ITA Expansion, unlike the original ITA?",
+    "choices": {
+      "A": "Video game consoles and Global Positioning Systems (GPS) navigation equipment",
+      "B": "Computer hardware products",
+      "C": "Telecommunication equipment",
+      "D": "Computer software"
+    },
+    "correct": "A",
+    "reason": "The product landscape of the ITA Expansion includes new items such as video game consoles and Global Positioning Systems (GPS) navigation equipment, among others (Primer p.131)."
+  },
+  "445": {
+    "question": "Which committee, established in March 1997, oversees the implementation of the ITA and ITA Expansion and serves as a forum for consultations among participants?",
+    "choices": {
+      "A": "The Committee of Participants on the Expansion of Trade in Information Technology Products (ITA Committee)",
+      "B": "The Tariff Commission",
+      "C": "The Dispute Settlement Body",
+      "D": "The MAV Management Committee"
+    },
+    "correct": "A",
+    "reason": "Established in March 1997, the Committee of Participants on the Expansion of Trade in Information Technology Products (ITA Committee) oversees the implementation of the provisions of the ITA, serving as a forum for meetings and collective consultations among participants (Primer p.131)."
+  },
+  "446": {
+    "question": "How are all decisions of the ITA Committee arrived at?",
+    "choices": {
+      "A": "By consensus",
+      "B": "By majority vote of the Ministerial Conference",
+      "C": "By the sole discretion of the WTO Director-General",
+      "D": "By binding arbitration"
+    },
+    "correct": "A",
+    "reason": "All decisions of the ITA Committee are arrived at by consensus (Primer p.131)."
+  },
+  "447": {
+    "question": "Was the Philippines one of the original signatories of the ITA, and when did it accede and formally sign the agreement?",
+    "choices": {
+      "A": "No, the Philippines did not participate in the ITA negotiations; it acceded and formally signed the ITA on 01 April 1997",
+      "B": "Yes, the Philippines was one of the fourteen original signatories in 1996",
+      "C": "No, the Philippines has never signed or acceded to the ITA",
+      "D": "Yes, the Philippines signed the ITA in 2015 along with the ITA Expansion"
+    },
+    "correct": "A",
+    "reason": "The Philippines did not participate in the ITA negotiations and was not one of the original signatories; it acceded and formally signed the ITA on 01 April 1997 (Primer p.132)."
+  },
+  "448": {
+    "question": "When did the Philippine Senate concur in the ratification of the ITA, and when did the Philippines notify the WTO of the completion of its domestic procedures for the ITA Expansion?",
+    "choices": {
+      "A": "The Senate concurred on 03 December 1998; the Philippines notified the WTO on 19 June 2017 for the ITA Expansion",
+      "B": "The Senate concurred in 1996; notification for the ITA Expansion was made in 1997",
+      "C": "The Senate concurred in 2015; notification was made in 2016",
+      "D": "The Senate has never concurred in the ratification of the ITA"
+    },
+    "correct": "A",
+    "reason": "The Philippine Senate concurred in the ratification of the ITA Agreement on 03 December 1998, and following the issuance of EO No. 21, the Philippines notified the WTO on 19 June 2017 of the completion of its domestic procedures for the ITA Expansion (Primer p.132)."
+  },
+  "449": {
+    "question": "Under the Philippines' tariff phase-out schedule for the ITA, when were tariffs eliminated for products which are not locally produced, whether bound or unbound under the WTO?",
+    "choices": {
+      "A": "In year 2000",
+      "B": "In year 2005",
+      "C": "In year 2017",
+      "D": "In year 1997"
+    },
+    "correct": "A",
+    "reason": "For products not locally produced, whether bound or unbound under the WTO, tariffs were eliminated in year 2000 under the Philippines' ITA tariff phase-out schedule (Primer p.132)."
+  },
+  "450": {
+    "question": "Pursuant to which sections of the Customs Modernization and Tariff Act does the Tariff Commission conduct public hearings and consultations for Philippine participation in the ITA and ITA Expansion?",
+    "choices": {
+      "A": "Sections 1608 and 1609 of the CMTA",
+      "B": "Sections 711 and 713 of the CMTA",
+      "C": "Sections 1100 and 1102 of the CMTA",
+      "D": "Sections 800 and 1611 of the CMTA"
+    },
+    "correct": "A",
+    "reason": "Pursuant to Sections 1608 and 1609 of the CMTA (formerly Sections 401 and 402 of the TCCP, as amended), the Commission conducts public hearings/consultations to afford interested parties the opportunity to present their views on ITA and ITA Expansion participation (Primer p.132)."
+  },
+  "451": {
+    "question": "Under the Philippines' tariff phase-out schedule for the ITA Expansion, the Philippines requested to defer implementation by how long to complete its domestic procedures?",
+    "choices": {
+      "A": "One (1) year",
+      "B": "Three (3) years",
+      "C": "Six (6) months",
+      "D": "Five (5) years"
+    },
+    "correct": "A",
+    "reason": "The Philippines requested to defer for one (1) year its implementation of the ITA Expansion to complete its domestic procedures (Primer p.132)."
+  },
+  "452": {
+    "question": "Executive Orders 465 and 163, issued on 13 January 1998 and 18 October 1999 respectively, implemented the Philippines' commitment under the ITA to liberalize tariffs on IT products starting on what date?",
+    "choices": {
+      "A": "01 January 2000",
+      "B": "01 July 1997",
+      "C": "01 July 2017",
+      "D": "01 January 1998"
+    },
+    "correct": "A",
+    "reason": "EOs 465 and 163 were issued to implement the Philippines' commitment to liberalize tariffs on IT products starting 01 January 2000 (Primer p.133)."
+  },
+  "453": {
+    "question": "Executive Order No. 395, issued on 31 December 2004, bound the duty on the remaining tariff lines of IT products at what rate?",
+    "choices": {
+      "A": "Zero",
+      "B": "Ten percent (10%)",
+      "C": "Five percent (5%)",
+      "D": "Twenty percent (20%)"
+    },
+    "correct": "A",
+    "reason": "EO No. 395 was issued on 31 December 2004, binding the duty at zero on the remaining tariff lines (Primer p.133)."
+  },
+  "454": {
+    "question": "Executive Order No. 21, issued on 27 April 2017, implemented the Philippines' commitment to liberalize tariffs under the ITA Expansion starting on what date?",
+    "choices": {
+      "A": "01 July 2017",
+      "B": "01 January 2000",
+      "C": "01 July 2016",
+      "D": "31 December 2004"
+    },
+    "correct": "A",
+    "reason": "EO No. 21 was issued on 27 April 2017 to implement the Philippines' commitment to liberalize tariffs covered by the ITA Expansion starting 01 July 2017 (Primer p.133)."
+  },
+  "455": {
+    "question": "The ITA Committee approved a one-year work program on non-tariff measures on ITA products, consisting of how many phases?",
+    "choices": {
+      "A": "Three (3) phases",
+      "B": "Two (2) phases",
+      "C": "Five (5) phases",
+      "D": "One (1) phase"
+    },
+    "correct": "A",
+    "reason": "The ITA Committee approved on 13 November 2000 a one-year work program on non-tariff measures on ITA products, consisting of three (3) phases (Primer p.133)."
+  },
+  "456": {
+    "question": "Which of the following was cited by the IT industry as a non-tariff barrier adversely affecting the expansion of trade in IT products?",
+    "choices": {
+      "A": "Redundant testing and certification requirements by various countries",
+      "B": "Excessive anti-dumping duties",
+      "C": "Excessive countervailing duties",
+      "D": "Mandatory safeguard investigations"
+    },
+    "correct": "A",
+    "reason": "Among the non-tariff barriers cited by the IT industry which adversely affect the expansion of trade in IT are redundant testing and certification requirements by various countries, and problems with import licenses (Primer p.134)."
+  },
+  "457": {
+    "question": "The Doha Round, semi-officially known as the Doha Development Agenda (DDA), is the latest round of multilateral trade negotiations launched where and when?",
+    "choices": {
+      "A": "In Doha, Qatar, on 9-13 November 2001",
+      "B": "In Marrakesh, Morocco, on 15 April 1994",
+      "C": "In Singapore, on 13 December 1996",
+      "D": "In Hong Kong, on 13-18 December 2005"
+    },
+    "correct": "A",
+    "reason": "The Doha Round, semi-officially known as the Doha Development Agenda (DDA), is the latest round of multilateral trade negotiations at the WTO, launched on 9-13 November 2001 in Doha, Qatar (Primer p.135)."
+  },
+  "458": {
+    "question": "Which of the following is listed among the main areas of negotiation of the Doha Development Agenda?",
+    "choices": {
+      "A": "Non-agricultural market access (NAMA)",
+      "B": "Customs valuation harmonization only",
+      "C": "Tariff classification disputes only",
+      "D": "Anti-dumping bond amounts only"
+    },
+    "correct": "A",
+    "reason": "The main areas of negotiation of the DDA include Agriculture, Non-agricultural market access (NAMA), Services, Intellectual property, Trade and development, Trade and environment, Trade facilitation, WTO rules, and Dispute Settlement Understanding (Primer p.135)."
+  },
+  "459": {
+    "question": "Under the Philippines' initial position on Agriculture during the Doha Round, Stage 1 (Harmonization) proposed harmonizing tariff peaks at what rates for developing and developed countries, respectively?",
+    "choices": {
+      "A": "150% for developing countries and 50% for developed countries, within three (3) years",
+      "B": "50% for developing countries and 150% for developed countries",
+      "C": "100% for both developing and developed countries",
+      "D": "10% for developing countries and 5% for developed countries"
+    },
+    "correct": "A",
+    "reason": "Stage 1 (Harmonization) of the Philippines' initial position proposed harmonizing all tariff peaks at 150% for developing countries and 50% for developed countries within three (3) years (Primer p.135)."
+  },
+  "460": {
+    "question": "Under the Export Competition negotiating area of the Doha Round on Agriculture, export subsidies were to be eliminated over how many years for developed countries and how many years for developing countries?",
+    "choices": {
+      "A": "Three (3) years for developed countries and six (6) years for developing countries",
+      "B": "Six (6) years for developed countries and three (3) years for developing countries",
+      "C": "Five (5) years for both",
+      "D": "Ten (10) years for developed countries and five (5) years for developing countries"
+    },
+    "correct": "A",
+    "reason": "Under Export Competition, export subsidies were to be eliminated over three (3) years for developed countries and six (6) years for developing countries (Primer p.136)."
+  },
+  "461": {
+    "question": "Under the Domestic Support negotiating area of the Doha Round on Agriculture, for which group of countries was the de minimis provision to be retained?",
+    "choices": {
+      "A": "Developing countries only",
+      "B": "Developed countries only",
+      "C": "Both developing and developed countries equally",
+      "D": "Least developed countries were excluded entirely"
+    },
+    "correct": "A",
+    "reason": "Under Domestic Support, de minimis was to be retained for developing countries only (Primer p.136)."
+  },
+  "462": {
+    "question": "The Negotiating Group on Market Access for Non-Agricultural Market Access (NAMA) was created at the first meeting of which body, held in early 2002?",
+    "choices": {
+      "A": "The Trade Negotiating Committee (TNC)",
+      "B": "The General Council",
+      "C": "The Dispute Settlement Body",
+      "D": "The ITA Committee"
+    },
+    "correct": "A",
+    "reason": "The Negotiating Group on Market Access was created at the first meeting of the Trade Negotiating Committee, in early 2002 (Primer p.136)."
+  },
+  "463": {
+    "question": "Which tariff reduction technique, described as the oldest in GATT history, involves submission of request lists followed by offer lists, and is still used for bilateral negotiations and new WTO Member accessions?",
+    "choices": {
+      "A": "The bilateral item-by-item/country-by-country modality",
+      "B": "The Swiss Formula",
+      "C": "The linear reduction method",
+      "D": "The cocktail approach"
+    },
+    "correct": "A",
+    "reason": "The bilateral item-by-item/country-by-country modality is the oldest technique, involving submission of request lists followed by offer lists, used in GATT negotiations from 1947 until the 1960-61 Dillon Round, and is still used for bilateral negotiations and accessions (Primer p.136)."
+  },
+  "464": {
+    "question": "The linear reduction method, which reduces all tariffs regardless of their levels by an agreed percentage, was applied for industrial products during which GATT round?",
+    "choices": {
+      "A": "The Kennedy Round in the 1960s",
+      "B": "The Tokyo Round in the 1970s",
+      "C": "The Uruguay Round in the 1990s",
+      "D": "The Dillon Round in 1960-61"
+    },
+    "correct": "A",
+    "reason": "The linear reduction method, whereby all tariffs are reduced by an agreed percentage regardless of their levels, was applied for industrial products in the 1960s during the Kennedy Round (Primer p.136)."
+  },
+  "465": {
+    "question": "Which tariff reduction technique, used during the Tokyo Round in the 1970s, seeks to reduce high tariffs more than lower ones?",
+    "choices": {
+      "A": "The harmonization formula",
+      "B": "The linear reduction method",
+      "C": "The sector formula",
+      "D": "The cocktail approach"
+    },
+    "correct": "A",
+    "reason": "The harmonization formula, used during the Tokyo Round in the 1970s, seeks to reduce high tariffs more than lower ones (Primer p.136)."
+  },
+  "466": {
+    "question": "Which tariff reduction technique aims to complete the elimination or harmonization of tariffs in a given sector and was applied during the Uruguay Round and the 1997 ITA negotiations?",
+    "choices": {
+      "A": "The sector formula",
+      "B": "The linear reduction method",
+      "C": "The harmonization formula",
+      "D": "The bilateral item-by-item modality"
+    },
+    "correct": "A",
+    "reason": "The sector formula aims to complete the elimination or harmonization of tariffs in a given sector, and was applied during the Uruguay Round and the 1997 ITA negotiations (Primer p.136)."
+  },
+  "467": {
+    "question": "The cocktail approach, used during the Uruguay Round, combines which three tariff reduction techniques to achieve more meaningful tariff reductions?",
+    "choices": {
+      "A": "The linear reduction, harmonization formula, and sector formula",
+      "B": "The Swiss Formula, the bilateral item-by-item modality, and the sector formula",
+      "C": "Only the linear reduction and harmonization formula",
+      "D": "Only the sector formula and Swiss Formula"
+    },
+    "correct": "A",
+    "reason": "The cocktail approach combines the linear reduction, harmonization formula, and sector formula techniques to achieve more meaningful tariff reductions, and was used during the Uruguay Round (Primer p.136)."
+  },
+  "468": {
+    "question": "The Swiss Formula was proposed by Switzerland during which round of negotiations as a method to achieve tariff harmonization?",
+    "choices": {
+      "A": "The 1973-79 Tokyo Round",
+      "B": "The Uruguay Round",
+      "C": "The Doha Round",
+      "D": "The Kennedy Round"
+    },
+    "correct": "A",
+    "reason": "The Swiss Formula was proposed by Switzerland in the 1973-79 Tokyo Round negotiations as a method to achieve tariff harmonization (Primer p.137)."
+  },
+  "469": {
+    "question": "At which Ministerial Conference, held in Hong Kong, was it agreed that a Swiss Formula be applied for NAMA tariff reduction?",
+    "choices": {
+      "A": "The 6th Ministerial Conference, held 13-18 December 2005",
+      "B": "The 1st Ministerial Conference, held in Singapore in 1996",
+      "C": "The 4th Ministerial Conference, held in Doha in 2001",
+      "D": "The 8th Ministerial Conference, held in Geneva in 2011"
+    },
+    "correct": "A",
+    "reason": "At the 6th Ministerial Conference, held in Hong Kong on 13-18 December 2005, it was agreed that a Swiss Formula be applied (Primer p.137)."
+  },
+  "470": {
+    "question": "In the agreed Swiss Formula (t1 = a×t0/(a+t0)), what do the variables t1, a, and t0 represent, respectively?",
+    "choices": {
+      "A": "New bound rate, coefficient, and base rate",
+      "B": "Base rate, new bound rate, and coefficient",
+      "C": "Coefficient, base rate, and new bound rate",
+      "D": "Export price, normal value, and dumping margin"
+    },
+    "correct": "A",
+    "reason": "In the Swiss Formula, t1 represents the new bound rate, a represents the coefficient, and t0 represents the base rate (Primer p.137)."
+  },
+  "471": {
+    "question": "In the agreed Swiss Formula, the value of the coefficient is the unknown variable, with two values proposed. What would a lower coefficient value mean for developed Members?",
+    "choices": {
+      "A": "Higher tariff cuts for developed Members",
+      "B": "Lower tariff cuts for developed Members",
+      "C": "No change in tariff levels for developed Members",
+      "D": "Automatic tariff elimination with no further negotiation"
+    },
+    "correct": "A",
+    "reason": "A lower coefficient value has been proposed for developed Members, which would mean higher tariff cuts for them, while a higher value has been proposed for developing Members, meaning lower tariff reductions (Primer p.137)."
+  },
+  "472": {
+    "question": "If a single coefficient is used for all WTO Members in the Swiss Formula, what would be the resulting effect across tariff schedules?",
+    "choices": {
+      "A": "Harmonization across schedules would be achieved, but with higher average cuts for schedules with higher tariff rates",
+      "B": "No harmonization would occur across schedules at all",
+      "C": "Only developing countries would be affected by the formula",
+      "D": "All countries would end up with identical final tariff rates regardless of starting point"
+    },
+    "correct": "A",
+    "reason": "If a single coefficient is used for all Members, harmonization across schedules would be achieved, but this would mean higher average cuts for schedules with higher tariff rates, as countries with higher tariffs undertake substantially larger reductions (Primer p.137)."
+  },
+  "473": {
+    "question": "Under the Swiss Formula, what are bound tariff lines used as in the formula?",
+    "choices": {
+      "A": "The base rates in the Swiss Formula",
+      "B": "The coefficient values",
+      "C": "The new bound rates automatically",
+      "D": "The mark-up applied to unbound lines"
+    },
+    "correct": "A",
+    "reason": "For bound tariff lines, the bound rates are used as the base rates in the Swiss Formula, intended to reduce the 'binding overhang,' or the gap between the bound rate and the currently applied tariff rate (Primer p.137)."
+  },
+  "474": {
+    "question": "For unbound tariff lines, what would serve as the base rate for purposes of applying the Swiss Formula?",
+    "choices": {
+      "A": "Their 2001 MFN tariffs plus a mark-up, the value of which is being negotiated",
+      "B": "A flat rate of 10% regardless of the product",
+      "C": "The average of all ASEAN tariff rates",
+      "D": "The rate applied during the Uruguay Round"
+    },
+    "correct": "A",
+    "reason": "The base rate for unbound lines would be their 2001 MFN tariffs plus a mark-up, the appropriate value of which is being negotiated (Primer p.137)."
+  },
+  "475": {
+    "question": "According to the Primer, the Philippines' unbound tariff lines, which cover virtually all NAMA products, account for what percentage of total tariff lines based on the Harmonized System and the AHTN, respectively?",
+    "choices": {
+      "A": "41% based on the HS and 47% based on the AHTN",
+      "B": "47% based on the HS and 41% based on the AHTN",
+      "C": "50% based on both the HS and AHTN",
+      "D": "10% based on the HS and 20% based on the AHTN"
+    },
+    "correct": "A",
+    "reason": "The Philippines' unbound tariff lines (virtually all NAMA products) account for 41% of total tariff lines based on the HS and 47% based on the AHTN (Primer p.138)."
+  },
+  "476": {
+    "question": "According to Table 5.3 of the Primer, the United States' proposed tariff reduction approach for NAMA includes a two-step approach involving elimination of tariffs below what level, described as nuisance tariffs?",
+    "choices": {
+      "A": "5%",
+      "B": "10%",
+      "C": "2%",
+      "D": "15%"
+    },
+    "correct": "A",
+    "reason": "Table 5.3 shows the United States proposed a two-step approach involving the elimination of tariffs below 5% (nuisance tariffs), along with use of the Swiss formula using a coefficient of 8 (Primer p.139)."
+  },
+  "477": {
+    "question": "According to Table 5.3, Korea's proposed trade-weighted average tariff reduction for NAMA calls for a minimum reduction of what percentage per bound tariff line?",
+    "choices": {
+      "A": "20%",
+      "B": "40%",
+      "C": "10%",
+      "D": "33%"
+    },
+    "correct": "A",
+    "reason": "Table 5.3 shows Korea proposed a 40% average tariff reduction with a minimum reduction of 20% per bound tariff line (Primer p.139)."
+  },
+  "478": {
+    "question": "According to Table 5.3, India's proposed NAMA approach calls for developing countries' tariff reduction to be undertaken at what fraction of the level of reduction required of developed countries?",
+    "choices": {
+      "A": "Only 2/3 the level of tariff reduction undertaken by developed countries",
+      "B": "Exactly the same level as developed countries",
+      "C": "Only 1/3 the level of tariff reduction undertaken by developed countries",
+      "D": "Double the level of tariff reduction undertaken by developed countries"
+    },
+    "correct": "A",
+    "reason": "India proposed simple tariff cuts on bound tariffs, with the developing countries' tariff reduction undertaken at only 2/3 the level of tariff reduction to be undertaken by developed countries, as special and differential treatment (Primer p.139)."
+  },
+  "479": {
+    "question": "According to the Primer, what was the Philippines' overall average nominal tariff in the year 2000, compared to January 2003?",
+    "choices": {
+      "A": "16% in 2000 compared to only 6% in January 2003",
+      "B": "6% in 2000 compared to 16% in January 2003",
+      "C": "33% in 2000 compared to 10% in January 2003",
+      "D": "50% in 2000 compared to 25% in January 2003"
+    },
+    "correct": "A",
+    "reason": "The overall average nominal tariff in 2000 was 16% compared to only 6% in January 2003, cited as part of the Philippines' initial position on NAMA to keep tariff rates equal to year 2000 levels (Primer p.139)."
+  },
+  "480": {
+    "question": "Among the Philippines' initial positions on NAMA, what did the Philippines strongly espouse regarding tariffs in the context of developing countries with limited revenue bases?",
+    "choices": {
+      "A": "That tariffs serve to generate government revenues that finance developmental expenditures",
+      "B": "That all tariffs should be abolished immediately",
+      "C": "That only agricultural tariffs should be retained",
+      "D": "That tariffs should be replaced entirely by value-added tax"
+    },
+    "correct": "A",
+    "reason": "The Philippines strongly espoused that in the context of developing countries with limited revenue base, tariffs serve to generate government revenues that finance developmental expenditures (Primer p.140)."
+  },
+  "481": {
+    "question": "According to the Primer, what is cited as the current status of the Doha Development Agenda negotiations?",
+    "choices": {
+      "A": "Much remains to be done, with Members' attention diverted by bilateral and regional trade initiatives and a perception that the WTO process is too slow",
+      "B": "The negotiations have been fully concluded with all issues resolved",
+      "C": "The negotiations were formally terminated and replaced by the Trade Facilitation Agreement",
+      "D": "The negotiations are limited only to agriculture, with all other areas concluded"
+    },
+    "correct": "A",
+    "reason": "Much remains to be done on the DDA; Members' attention is also being diverted by bilateral and regional trade initiatives, and there is a perception that the WTO process is too slow (Primer p.140)."
+  },
+  "482": {
+    "question": "The WTO Trade Facilitation Agreement (TFA) holds what distinction in WTO history, according to the Primer?",
+    "choices": {
+      "A": "It is the first multilateral trade agreement to be concluded since the establishment of the WTO",
+      "B": "It is the last agreement concluded before the Uruguay Round",
+      "C": "It is the only agreement exclusively covering agricultural products",
+      "D": "It is the only WTO agreement that applies solely to developed countries"
+    },
+    "correct": "A",
+    "reason": "The WTO Trade Facilitation Agreement (TFA) is the first multilateral trade agreement to be concluded since the establishment of the WTO (Primer p.140)."
+  },
+  "483": {
+    "question": "When did the Trade Facilitation Agreement enter into force, and what triggered its entry into force?",
+    "choices": {
+      "A": "22 February 2017, after two-thirds of the WTO membership completed their domestic ratification processes",
+      "B": "1 January 1995, upon the establishment of the WTO",
+      "C": "9 November 2001, upon the launch of the Doha Round",
+      "D": "13 December 1996, upon conclusion of the ITA"
+    },
+    "correct": "A",
+    "reason": "The TFA entered into force on 22 February 2017 after two-thirds of the WTO membership completed their domestic ratification processes (Primer p.140)."
+  },
+  "484": {
+    "question": "According to estimates cited in the Primer, full implementation of the Trade Facilitation Agreement could reduce trade costs by an average of what percentage and boost global trade by up to how much per year?",
+    "choices": {
+      "A": "An average of 14%, boosting global trade by up to $1 trillion per year",
+      "B": "An average of 33%, boosting global trade by up to $500 billion per year",
+      "C": "An average of 5%, boosting global trade by up to $2 trillion per year",
+      "D": "An average of 50%, boosting global trade by up to $100 billion per year"
+    },
+    "correct": "A",
+    "reason": "Estimates show that full implementation of the TFA could reduce trade costs by an average of 14% per year and boost global trade by up to $1 trillion per year, with the biggest gains in the poorest countries (Primer p.140)."
+  },
+  "485": {
+    "question": "Which facility was created by the WTO to help ensure that developing and least-developed countries can obtain the needed assistance to reap the full benefits of the Trade Facilitation Agreement?",
+    "choices": {
+      "A": "The Trade Facilitation Agreement Facility (TFAF)",
+      "B": "The Agricultural Competitiveness Enhancement Fund",
+      "C": "The MAV Management Committee",
+      "D": "The Committee on Trade and Development"
+    },
+    "correct": "A",
+    "reason": "A Trade Facilitation Agreement Facility (TFAF) has been created by the WTO to help ensure that developing and least-developed countries can obtain the needed assistance to reap the full benefits of the TFA (Primer p.140)."
+  },
+  "511": {
+    "question": "Through which declaration was the Association of Southeast Asian Nations (ASEAN) established on 08 August 1967?",
+    "choices": {
+      "A": "Bali Concord II Declaration",
+      "B": "Cebu Declaration",
+      "C": "Kuala Lumpur Declaration",
+      "D": "Bangkok Declaration"
+    },
+    "correct": "D",
+    "reason": "ASEAN was established on 08 August 1967 through the Bangkok Declaration. (Primer p.156)"
+  },
+  "512": {
+    "question": "Which country joined ASEAN on 30 April 1999, completing the present ten Member States?",
+    "choices": {
+      "A": "Myanmar",
+      "B": "Cambodia",
+      "C": "Lao People's Democratic Republic",
+      "D": "Brunei Darussalam"
+    },
+    "correct": "B",
+    "reason": "Cambodia joined ASEAN on 30 April 1999, thus constituting the ten Member States of today. (Primer p.156)"
+  },
+  "513": {
+    "question": "Which of the following was NOT one of the founding members of ASEAN in 1967?",
+    "choices": {
+      "A": "Brunei Darussalam",
+      "B": "Indonesia",
+      "C": "Malaysia",
+      "D": "Thailand"
+    },
+    "correct": "A",
+    "reason": "The founding members were Indonesia, Malaysia, the Philippines, Singapore and Thailand; Brunei Darussalam joined on 07 January 1984. (Primer p.156)"
+  },
+  "514": {
+    "question": "On what date did the ASEAN Charter enter into force?",
+    "choices": {
+      "A": "20 November 2007",
+      "B": "08 August 1967",
+      "C": "15 December 2008",
+      "D": "22 November 2015"
+    },
+    "correct": "C",
+    "reason": "The ASEAN Charter was signed on 20 November 2007 and entered into force on 15 December 2008. (Primer p.157)"
+  },
+  "515": {
+    "question": "Which of the following is among the main declarations of the ASEAN Charter?",
+    "choices": {
+      "A": "To establish a customs union with a common external tariff",
+      "B": "To create a common currency for all Member States",
+      "C": "To maintain and enhance peace and security and preserve Southeast Asia as a nuclear weapon-free zone",
+      "D": "To establish a unified military command"
+    },
+    "correct": "C",
+    "reason": "The Charter declares the aim to maintain and enhance peace and security in the region and to preserve Southeast Asia as a nuclear weapon-free zone. (Primer p.157)"
+  },
+  "516": {
+    "question": "In the case of a serious breach of the ASEAN Charter or noncompliance, the matter is referred for consultation under which Article of the Charter?",
+    "choices": {
+      "A": "Article 20 (Consultation and Consensus)",
+      "B": "Article 26 (Settlement of Disputes)",
+      "C": "Article 12 (Chairmanship)",
+      "D": "Article 5 (Rights and Obligations)"
+    },
+    "correct": "A",
+    "reason": "Serious breach or noncompliance is referred for consultation under Article 20 (Consultation and Consensus) of the Charter. (Primer p.157)"
+  },
+  "517": {
+    "question": "Upon doing what shall an applicant State be admitted to ASEAN?",
+    "choices": {
+      "A": "Ratifying the Treaty of Amity and Cooperation in Southeast Asia of 1976",
+      "B": "Obtaining approval from the United Nations Security Council",
+      "C": "Hosting an ASEAN Summit",
+      "D": "Signing an Instrument of Accession to the Charter"
+    },
+    "correct": "D",
+    "reason": "An applicant State shall be admitted to ASEAN upon signing an Instrument of Accession to the Charter. (Primer p.158)"
+  },
+  "518": {
+    "question": "Which of the following is NOT a criterion for admission of a new Member to ASEAN?",
+    "choices": {
+      "A": "Recognition by all ASEAN Member States",
+      "B": "Prior membership in the World Trade Organization",
+      "C": "Agreement to be bound and to abide by the ASEAN Charter",
+      "D": "Location in the recognized geographical region of Southeast Asia"
+    },
+    "correct": "B",
+    "reason": "Admission criteria are geographical location, recognition by all AMSs, agreement to abide by the Charter, and ability and willingness to carry out membership obligations; WTO membership is not one. (Primer p.158)"
+  },
+  "519": {
+    "question": "Under the ASEAN Charter, to which body is a dispute referred for decision when it remains unresolved after the application of the preceding dispute settlement provisions?",
+    "choices": {
+      "A": "Committee of Permanent Representatives",
+      "B": "ASEAN Coordinating Council",
+      "C": "Secretary-General of ASEAN",
+      "D": "ASEAN Summit"
+    },
+    "correct": "D",
+    "reason": "An unresolved dispute shall be referred to the ASEAN Summit for its decision. (Primer p.158)"
+  },
+  "520": {
+    "question": "Which ASEAN body comprises the ASEAN Foreign Ministers and meets at least twice a year?",
+    "choices": {
+      "A": "ASEAN Coordinating Council",
+      "B": "ASEAN Political-Security Community Council",
+      "C": "ASEAN Economic Community Council",
+      "D": "ASEAN Socio-Cultural Community Council"
+    },
+    "correct": "A",
+    "reason": "The ASEAN Coordinating Council comprises the ASEAN Foreign Ministers and meets at least twice a year. (Primer p.159)"
+  },
+  "521": {
+    "question": "How many times annually are ASEAN Summit Meetings held?",
+    "choices": {
+      "A": "Once",
+      "B": "Twice",
+      "C": "Three times",
+      "D": "Four times"
+    },
+    "correct": "B",
+    "reason": "ASEAN Summit Meetings are held twice annually and are hosted by the Member State holding the ASEAN Chairmanship. (Primer p.159)"
+  },
+  "522": {
+    "question": "Which set correctly lists the three ASEAN Community Councils?",
+    "choices": {
+      "A": "Political-Security, Economic and Trade Councils",
+      "B": "Economic, Financial and Socio-Cultural Councils",
+      "C": "ASEAN Political-Security Community Council, ASEAN Economic Community Council, and ASEAN Socio-Cultural Community Council",
+      "D": "Security, Economic and Environmental Councils"
+    },
+    "correct": "C",
+    "reason": "The ASEAN Community Councils comprise the APSCC, the AECC and the ASCCC. (Primer p.159)"
+  },
+  "523": {
+    "question": "What is the term of office of the Secretary-General of ASEAN?",
+    "choices": {
+      "A": "Five years, non-renewable",
+      "B": "Three years, renewable once",
+      "C": "Four years, renewable",
+      "D": "Two years, renewable indefinitely"
+    },
+    "correct": "A",
+    "reason": "The Secretary-General is appointed for a non-renewable term of office of five (5) years. (Primer p.160)"
+  },
+  "524": {
+    "question": "On what basis does the Chairmanship of ASEAN rotate annually?",
+    "choices": {
+      "A": "Size of gross domestic product",
+      "B": "Date of accession to ASEAN",
+      "C": "Population size",
+      "D": "Alphabetical order of the English names of the Member States"
+    },
+    "correct": "D",
+    "reason": "The Chairmanship of ASEAN rotates annually based on the alphabetical order of the English names of the Member States. (Primer p.160)"
+  },
+  "525": {
+    "question": "The ASEAN Summit appoints the Secretary-General of ASEAN upon the recommendation of which body?",
+    "choices": {
+      "A": "ASEAN Secretariat",
+      "B": "Committee of Permanent Representatives",
+      "C": "ASEAN Economic Ministers Meeting",
+      "D": "ASEAN Foreign Ministers Meeting"
+    },
+    "correct": "D",
+    "reason": "The ASEAN Summit appoints the Secretary-General upon the recommendation of the ASEAN Foreign Ministers Meeting. (Primer p.160)"
+  },
+  "526": {
+    "question": "Which declaration did ASEAN Leaders sign at the 9th ASEAN Summit in October 2003, resolving that an ASEAN Community shall be established in 2020?",
+    "choices": {
+      "A": "Cebu Declaration",
+      "B": "Bali Concord II Declaration",
+      "C": "Bangkok Declaration",
+      "D": "Kuala Lumpur Declaration"
+    },
+    "correct": "B",
+    "reason": "At the 9th ASEAN Summit in October 2003, Leaders resolved to establish an ASEAN Community by 2020 and signed the Bali Concord II Declaration. (Primer p.161)"
+  },
+  "527": {
+    "question": "The Cebu Declaration signed at the 12th ASEAN Summit in January 2007 accelerated the establishment of the ASEAN Community to what year?",
+    "choices": {
+      "A": "2020",
+      "B": "2010",
+      "C": "2015",
+      "D": "2025"
+    },
+    "correct": "C",
+    "reason": "In January 2007 in Cebu, Leaders affirmed their commitment to accelerate the establishment of an ASEAN Community by 2015. (Primer p.161)"
+  },
+  "528": {
+    "question": "When and where did ASEAN Leaders agree on ASEAN Vision 2020 as a shared vision of ASEAN as a concert of Southeast Asian nations?",
+    "choices": {
+      "A": "December 1997 in Kuala Lumpur",
+      "B": "October 2003 in Bali",
+      "C": "January 2007 in Cebu",
+      "D": "November 2015 in Kuala Lumpur"
+    },
+    "correct": "A",
+    "reason": "ASEAN Leaders agreed on ASEAN Vision 2020 in December 1997 in Kuala Lumpur. (Primer p.161)"
+  },
+  "529": {
+    "question": "In what year was the AEC Blueprint, the master plan guiding the establishment of the ASEAN Economic Community, adopted?",
+    "choices": {
+      "A": "2003",
+      "B": "2007",
+      "C": "2015",
+      "D": "2025"
+    },
+    "correct": "B",
+    "reason": "The AEC Blueprint was adopted in 2007 as a coherent master plan guiding the establishment of the AEC. (Primer p.162)"
+  },
+  "530": {
+    "question": "Which document was adopted by ASEAN Leaders at the 27th ASEAN Summit on 22 November 2015 in Kuala Lumpur, Malaysia?",
+    "choices": {
+      "A": "AEC Blueprint 2015",
+      "B": "ASEAN Charter",
+      "C": "AEC Blueprint 2025",
+      "D": "Cebu Declaration"
+    },
+    "correct": "C",
+    "reason": "The AEC Blueprint 2025 was adopted at the 27th ASEAN Summit on 22 November 2015 in Kuala Lumpur and covers 2016 to 2025. (Primer p.162)"
+  },
+  "531": {
+    "question": "Which of the following is NOT one of the five key characteristics of the AEC 2025?",
+    "choices": {
+      "A": "Highly Integrated and Cohesive ASEAN Economy",
+      "B": "A Competitive, Innovative, and Dynamic ASEAN",
+      "C": "Enhanced Connectivity and Sectoral Cooperation",
+      "D": "A Protectionist ASEAN"
+    },
+    "correct": "D",
+    "reason": "The five characteristics are integrated and cohesive; competitive, innovative and dynamic; enhanced connectivity; resilient, inclusive and people-centered; and a global ASEAN. (Primer p.162)"
+  },
+  "532": {
+    "question": "Which of the following is an element of a competitive, innovative and dynamic ASEAN under the AEC 2025?",
+    "choices": {
+      "A": "Taxation cooperation",
+      "B": "Transport",
+      "C": "Enhanced public-private partnership",
+      "D": "Trade in services"
+    },
+    "correct": "A",
+    "reason": "Taxation cooperation is among the elements of an innovative and dynamic ASEAN; transport is connectivity, public-private partnership is resilient and inclusive, and trade in services is integration. (Primer p.163)"
+  },
+  "533": {
+    "question": "Which of the following is an element of enhanced connectivity and sectoral cooperation under the AEC 2025?",
+    "choices": {
+      "A": "Strengthened role of micro, small, and medium enterprises",
+      "B": "Healthcare",
+      "C": "Consumer protection",
+      "D": "Financial inclusion"
+    },
+    "correct": "B",
+    "reason": "Healthcare is listed with transport, ICT, e-commerce, energy, food agriculture and forestry, tourism, minerals, and sciences and technology as connectivity and sectoral cooperation elements. (Primer p.163)"
+  },
+  "534": {
+    "question": "Which of the following is an element of a resilient, inclusive, people-oriented, and people-centered ASEAN?",
+    "choices": {
+      "A": "Energy",
+      "B": "Good governance",
+      "C": "Narrowed development gap",
+      "D": "Trade in goods"
+    },
+    "correct": "C",
+    "reason": "Narrowed development gap is listed among the elements of a resilient, inclusive, people-oriented and people-centered ASEAN. (Primer p.163)"
+  },
+  "535": {
+    "question": "According to the Primer, with which economy is ASEAN making progress toward global integration through free trade agreements and comprehensive economic partnership agreements?",
+    "choices": {
+      "A": "United States",
+      "B": "Russia",
+      "C": "Canada",
+      "D": "India"
+    },
+    "correct": "D",
+    "reason": "ASEAN has comprehensive economic partnership agreements with Hong Kong, China, Japan, Republic of Korea, India, Australia and New Zealand. (Primer p.163)"
+  },
+  "536": {
+    "question": "Brunei Darussalam, Indonesia, Malaysia, the Philippines, Singapore and Thailand have eliminated intra-ASEAN import duties on what share of their tariff lines?",
+    "choices": {
+      "A": "90.86%",
+      "B": "99.65%",
+      "C": "98.86%",
+      "D": "100%"
+    },
+    "correct": "B",
+    "reason": "These six Member States have eliminated intra-ASEAN import duties on 99.65% of their tariff lines. (Primer p.164)"
+  },
+  "537": {
+    "question": "Cambodia, Lao PDR, Myanmar and Viet Nam have reduced their import duties to 0%-5% on what share of their tariff lines?",
+    "choices": {
+      "A": "99.65%",
+      "B": "90.8%",
+      "C": "98.86%",
+      "D": "72.6%"
+    },
+    "correct": "C",
+    "reason": "The CLMV countries have reduced import duties to 0%-5% on 98.86% of their tariff lines. (Primer p.164)"
+  },
+  "538": {
+    "question": "Where and when was the APSC Blueprint adopted by the ASEAN Leaders?",
+    "choices": {
+      "A": "14th ASEAN Summit on 01 March 2009 in Cha-am/Hua Hin, Thailand",
+      "B": "12th ASEAN Summit in January 2007 in Cebu, Philippines",
+      "C": "9th ASEAN Summit in October 2003 in Bali, Indonesia",
+      "D": "27th ASEAN Summit on 22 November 2015 in Kuala Lumpur, Malaysia"
+    },
+    "correct": "A",
+    "reason": "The APSC Blueprint was adopted at the 14th ASEAN Summit on 01 March 2009 in Cha-am/Hua Hin, Thailand. (Primer p.164)"
+  },
+  "539": {
+    "question": "Which pillar of the ASEAN Community is the ASEAN Socio-Cultural Community (ASCC)?",
+    "choices": {
+      "A": "First pillar",
+      "B": "Second pillar",
+      "C": "Fourth pillar",
+      "D": "Third pillar"
+    },
+    "correct": "D",
+    "reason": "The ASCC is described as the third pillar of the ASEAN. (Primer p.165)"
+  },
+  "540": {
+    "question": "Which of the following is NOT one of the characteristics of the ASEAN Socio-Cultural Community Blueprint?",
+    "choices": {
+      "A": "Competition policy and consumer protection",
+      "B": "Social Justice and Rights",
+      "C": "Building the ASEAN Identity",
+      "D": "Human Development"
+    },
+    "correct": "A",
+    "reason": "The ASCC Blueprint characteristics are human development, social welfare and protection, social justice and rights, environmental sustainability, building the ASEAN identity, and narrowing the development gap. (Primer p.165)"
+  },
+  "541": {
+    "question": "At the 4th ASEAN Summit in Singapore on 28 January 1992, the ASEAN Heads of Government agreed to the establishment of the ASEAN Free Trade Area (AFTA) by what year?",
+    "choices": {
+      "A": "2003",
+      "B": "2010",
+      "C": "2008",
+      "D": "2015"
+    },
+    "correct": "C",
+    "reason": "The Heads of Government agreed on the establishment of AFTA by the year 2008 at the 4th ASEAN Summit in Singapore. (Primer p.166)"
+  },
+  "542": {
+    "question": "In September 1994, the ASEAN Economic Ministers Meeting accelerated the target date of the CEPT Scheme to reduce tariffs on all manufactured goods to 0%-5% to what year?",
+    "choices": {
+      "A": "2005",
+      "B": "2000",
+      "C": "2010",
+      "D": "2003"
+    },
+    "correct": "D",
+    "reason": "The target date of 2008 was accelerated to 2003 for reducing tariffs on all manufactured goods to 0%-5%. (Primer p.166)"
+  },
+  "543": {
+    "question": "The Common Effective Preferential Tariff (CEPT) Scheme is a cooperative arrangement to reduce intra-regional tariffs over what period?",
+    "choices": {
+      "A": "A 10-year period commencing 01 January 1992",
+      "B": "A 15-year period commencing 01 January 1993",
+      "C": "A 15-year period commencing 01 January 1995",
+      "D": "A 20-year period commencing 01 January 1993"
+    },
+    "correct": "B",
+    "reason": "The CEPT Scheme is a cooperative arrangement among AMSs over a 15-year period commencing 01 January 1993. (Primer p.166)"
+  },
+  "544": {
+    "question": "Which Executive Order, issued on 26 July 2003, modified the rates of duty on sugar to implement preferential rates under the CEPT-AFTA?",
+    "choices": {
+      "A": "EO 484",
+      "B": "EO 230",
+      "C": "EO 163",
+      "D": "EO 316"
+    },
+    "correct": "B",
+    "reason": "EO 230 issued on 26 July 2003 modified the rates of duty on sugar to implement preferential rates under the CEPT-AFTA. (Primer p.167)"
+  },
+  "545": {
+    "question": "Which Executive Order, issued on 21 May 2004, temporarily granted a CEPT rate of 0% on certain articles to implement the agreement between the Philippines and Singapore on compensatory adjustment measures for the suspension of concessions on petrochemical products?",
+    "choices": {
+      "A": "EO 268",
+      "B": "EO 448",
+      "C": "EO 486",
+      "D": "EO 316"
+    },
+    "correct": "D",
+    "reason": "EO 316 dated 21 May 2004 granted the temporary CEPT rate of 0% in connection with the Philippines-Singapore compensatory adjustment agreement. (Primer p.167)"
+  },
+  "546": {
+    "question": "Which Executive Order, issued on 23 December 2009, implemented the commitment to eliminate tariff rates on the remaining products in the Inclusion List in 2010 under the CEPT-AFTA/ATIGA?",
+    "choices": {
+      "A": "EO 850",
+      "B": "EO 703",
+      "C": "EO 490",
+      "D": "EO 617"
+    },
+    "correct": "A",
+    "reason": "EO 850 dated 23 December 2009 eliminated the tariff rates on remaining Inclusion List products in 2010. (Primer p.168)"
+  },
+  "547": {
+    "question": "EO 703, issued on 22 January 2008, implemented the commitment to reduce the tariff rates on what percentage of the products in the Inclusion List to 0% under the CEPT-AFTA?",
+    "choices": {
+      "A": "40%",
+      "B": "60%",
+      "C": "80%",
+      "D": "100%"
+    },
+    "correct": "C",
+    "reason": "EO 703 implemented the commitment to reduce tariff rates on 80% of the products in the Inclusion List to 0%. (Primer p.168)"
+  },
+  "548": {
+    "question": "On what date did the ASEAN Trade in Goods Agreement (ATIGA) enter into force upon notification of ratification by all AMSs?",
+    "choices": {
+      "A": "01 January 2010",
+      "B": "17 June 2010",
+      "C": "27 February 2009",
+      "D": "17 May 2010"
+    },
+    "correct": "D",
+    "reason": "The ATIGA was signed in February 2009 and entered into force on 17 May 2010. (Primer p.169)"
+  },
+  "549": {
+    "question": "Which of the following is the objective of the ASEAN Trade in Goods Agreement (ATIGA)?",
+    "choices": {
+      "A": "To create a common external tariff on goods from non-ASEAN countries",
+      "B": "To achieve the free flow of goods in ASEAN as a principal means to a single market and production base",
+      "C": "To eliminate all agricultural subsidies in the region",
+      "D": "To establish a monetary union among AMSs"
+    },
+    "correct": "B",
+    "reason": "ATIGA seeks to achieve free flow of goods in ASEAN as one of the principal means to establish a single market and production base. (Primer p.169)"
+  },
+  "550": {
+    "question": "The ASEAN Trade Facilitation Work Programme developed after the ASEAN Framework on Trade Facilitation covers which period?",
+    "choices": {
+      "A": "2005-2010",
+      "B": "2007-2015",
+      "C": "2009-2015",
+      "D": "2010-2020"
+    },
+    "correct": "C",
+    "reason": "ASEAN developed the Trade Facilitation Work Programme for the period of 2009-2015. (Primer p.169)"
+  },
+  "551": {
+    "question": "Under the ATIGA, by what year shall Cambodia, Lao PDR, Myanmar and Viet Nam eliminate import duties on all products traded among AMSs, with flexibility up to 2018?",
+    "choices": {
+      "A": "2015",
+      "B": "2010",
+      "C": "2012",
+      "D": "2020"
+    },
+    "correct": "A",
+    "reason": "ATIGA requires elimination of import duties by 2010 for ASEAN-6 and by 2015, with flexibility to 2018, for CLMV. (Primer p.170)"
+  },
+  "552": {
+    "question": "Import duties on Information and Communications Technology products listed in Schedule B of CLMV shall be eliminated in three tranches by which years?",
+    "choices": {
+      "A": "2008, 2009 and 2010",
+      "B": "2010, 2012 and 2015",
+      "C": "2013, 2014 and 2015",
+      "D": "2010, 2011 and 2012"
+    },
+    "correct": "A",
+    "reason": "ICT products in Schedule B of CLMV are eliminated in three tranches, by 2008, 2009 and 2010. (Primer p.170)"
+  },
+  "553": {
+    "question": "Under the ATIGA, import duties on Priority Integration Sector products listed in which Schedule of CLMV shall be eliminated by 2012?",
+    "choices": {
+      "A": "Schedule A",
+      "B": "Schedule B",
+      "C": "Schedule D",
+      "D": "Schedule C"
+    },
+    "correct": "D",
+    "reason": "Import duties on Priority Integration Sector products listed in Schedule C of CLMV shall be eliminated by 2012. (Primer p.170)"
+  },
+  "554": {
+    "question": "What was the average ATIGA rate for all AMSs in 2014, compared with the Most Favoured Nation average of 6.90%?",
+    "choices": {
+      "A": "0.45%",
+      "B": "0.54%",
+      "C": "6.90%",
+      "D": "0.35%"
+    },
+    "correct": "B",
+    "reason": "The average ATIGA rate for all AMSs was only 0.54% in 2014. (Primer p.171)"
+  },
+  "555": {
+    "question": "In 2015, what was the share of ATIGA tariff lines with an ATIGA rate of 0% for Cambodia, Lao PDR, Myanmar and Viet Nam?",
+    "choices": {
+      "A": "72.6%",
+      "B": "99.2%",
+      "C": "90.8%",
+      "D": "98.86%"
+    },
+    "correct": "C",
+    "reason": "The share of 0% ATIGA tariff lines for CLMV was 72.6% in 2014 and 90.8% in 2015. (Primer p.171)"
+  },
+  "556": {
+    "question": "Which of the following is a General Exception that allows an ASEAN Member State to exclude a product under the ATIGA?",
+    "choices": {
+      "A": "Protection of infant industries",
+      "B": "Balance-of-payments difficulties",
+      "C": "Protection of national treasures of artistic, historic or archaeological value",
+      "D": "Revenue collection needs"
+    },
+    "correct": "C",
+    "reason": "The listed General Exceptions include protecting national treasures of artistic, historic or archaeological value. (Primer p.171)"
+  },
+  "557": {
+    "question": "The Philippines excludes from the ATIGA all products falling under which Harmonized System Chapter, except for certain goods under heading 93.07?",
+    "choices": {
+      "A": "Chapter 93 (Arms and Ammunition)",
+      "B": "Chapter 87 (Vehicles)",
+      "C": "Chapter 84 (Machinery)",
+      "D": "Chapter 97 (Works of Art)"
+    },
+    "correct": "A",
+    "reason": "The Philippines excludes all products under HS Chapter 93 (Arms and Ammunition; Parts and Accessories Thereof), except goods under heading 93.07. (Primer p.172)"
+  },
+  "558": {
+    "question": "Under the ATIGA, Viet Nam shall eliminate its existing Tariff Rate Quotas in three tranches by which dates, with flexibility up to 2018?",
+    "choices": {
+      "A": "01 January 2008, 2009 and 2010",
+      "B": "01 January 2010, 2011 and 2012",
+      "C": "01 January 2012, 2013 and 2014",
+      "D": "01 January 2013, 2014 and 2015"
+    },
+    "correct": "D",
+    "reason": "Viet Nam eliminates its TRQs by 01 January 2013, 2014 and 2015, with flexibility up to 2018, while Thailand does so by 2008, 2009 and 2010. (Primer p.172)"
+  },
+  "559": {
+    "question": "Which body maintains and updates the ASEAN Trade Repository (ATR) based on notifications submitted by AMSs?",
+    "choices": {
+      "A": "AFTA Council",
+      "B": "ASEAN Secretariat",
+      "C": "Senior Economic Officials Meeting",
+      "D": "Coordinating Committee on the Implementation of the ATIGA"
+    },
+    "correct": "B",
+    "reason": "The ASEAN Secretariat maintains and updates the ATR based on the notifications submitted by AMSs. (Primer p.173)"
+  },
+  "560": {
+    "question": "At least how many days before the effective date must an AMS notify the AFTA Council in writing of a temporary modification or suspension of concessions?",
+    "choices": {
+      "A": "30 days",
+      "B": "60 days",
+      "C": "90 days",
+      "D": "180 days"
+    },
+    "correct": "D",
+    "reason": "An AMS must notify the AFTA Council in writing at least 180 days prior to the date the temporary modification or suspension takes effect. (Primer p.173)"
+  },
+  "561": {
+    "question": "On what date was the ASEAN Protocol to Provide Special Consideration for Rice and Sugar signed?",
+    "choices": {
+      "A": "23 August 2007",
+      "B": "08 August 1967",
+      "C": "17 May 2010",
+      "D": "27 February 2009"
+    },
+    "correct": "A",
+    "reason": "The Protocol for Rice and Sugar was signed on 23 August 2007. (Primer p.174)"
+  },
+  "562": {
+    "question": "An AMS requesting a waiver under the Protocol for Rice and Sugar must make a written submission to the AFTA Council at least how many days before the waiver is to take effect?",
+    "choices": {
+      "A": "30 days",
+      "B": "60 days",
+      "C": "90 days",
+      "D": "180 days"
+    },
+    "correct": "C",
+    "reason": "The written submission must be made to the AFTA Council at least 90 days prior to the date the waiver is to take effect. (Primer p.174)"
+  },
+  "563": {
+    "question": "According to Table 6.4 on Philippine tariffs under ATIGA, how many AHTN 2017 tariff lines are under General Exclusion (GE) and excluded from any tariff concessions?",
+    "choices": {
+      "A": "19",
+      "B": "29",
+      "C": "79",
+      "D": "116"
+    },
+    "correct": "B",
+    "reason": "Table 6.4 shows 29 tariff lines classified as General Exclusion, equal to 0.26% of the total. (Primer p.174)"
+  },
+  "564": {
+    "question": "Unless otherwise directed by the AFTA Council, within how many days from receipt of a waiver request must the Coordinating Committee on the Implementation of the ATIGA submit its report to the Senior Economic Officials Meeting?",
+    "choices": {
+      "A": "90 days",
+      "B": "60 days",
+      "C": "15 days",
+      "D": "30 days"
+    },
+    "correct": "D",
+    "reason": "The CCA shall submit its report on the outcome of its discussions to SEOM within 30 days from receipt of the request. (Primer p.175)"
+  },
+  "565": {
+    "question": "Which body considers and decides on a request for a waiver under the Protocol for Rice and Sugar?",
+    "choices": {
+      "A": "Coordinating Committee on the Implementation of the ATIGA",
+      "B": "Senior Economic Officials Meeting",
+      "C": "ASEAN Secretariat",
+      "D": "AFTA Council"
+    },
+    "correct": "D",
+    "reason": "The AFTA Council considers and decides on the request for waiver within a period not exceeding 30 days from receipt of the SEOM report. (Primer p.175)"
+  },
+  "566": {
+    "question": "Based on its annual review of a waiver granted to a Member State, what decision may the AFTA Council render?",
+    "choices": {
+      "A": "Continue, extend or renew the waiver",
+      "B": "Continue, modify or terminate the waiver",
+      "C": "Approve, defer or reject the waiver",
+      "D": "Suspend, convert or compensate the waiver"
+    },
+    "correct": "B",
+    "reason": "Based on the annual review, the AFTA Council decides whether to continue, modify or terminate the waiver. (Primer p.175)"
+  },
+  "567": {
+    "question": "Which Executive Order, issued on 18 June 2010, modified the rates of import duty on rice products through the invocation of the Protocol to Provide Special Consideration for Rice and Sugar?",
+    "choices": {
+      "A": "EO 894",
+      "B": "EO 892",
+      "C": "EO 898",
+      "D": "EO 896"
+    },
+    "correct": "A",
+    "reason": "Table 6.5 lists EO 894 issued on 18 June 2010 for rice products, while EO 892 of 17 June 2010 covers sugar. (Primer p.176)"
+  },
+  "568": {
+    "question": "Which Protocol applies to any dispute arising from or any difference between AMSs concerning the interpretation or application of the Protocol for Rice and Sugar?",
+    "choices": {
+      "A": "Treaty of Amity and Cooperation in Southeast Asia",
+      "B": "Protocol on Notification Procedures",
+      "C": "Protocol on Enhanced Dispute Settlement Mechanism for ASEAN",
+      "D": "Protocol on Special Arrangement for Sensitive and Highly Sensitive Products"
+    },
+    "correct": "C",
+    "reason": "The Protocol on Enhanced Dispute Settlement Mechanism for ASEAN applies to such disputes or differences between AMSs. (Primer p.176)"
+  },
+  "569": {
+    "question": "On what date was the ASEAN-Australia-New Zealand Free Trade Area (AANZFTA) Agreement signed?",
+    "choices": {
+      "A": "29 November 2004",
+      "B": "27 February 2009",
+      "C": "01 January 2010",
+      "D": "17 May 2010"
+    },
+    "correct": "B",
+    "reason": "The AANZFTA Agreement was signed on 27 February 2009 and entered into force on 01 January 2010. (Primer p.177)"
+  },
+  "570": {
+    "question": "Which products are excluded from the coverage of the Trade in Goods Chapter of the AANZFTA among products under HS Chapters 1 to 97?",
+    "choices": {
+      "A": "Rice, sugar and selected articles of iron and steel",
+      "B": "Rice, corn and sugar only",
+      "C": "Petroleum products and arms",
+      "D": "Textiles and garments"
+    },
+    "correct": "A",
+    "reason": "Except for rice, sugar and selected articles of iron and steel, all products under HS Chapters 1 to 97 are covered. (Primer p.177)"
+  },
+  "571": {
+    "question": "What percentage of total tariff lines are included in the Normal Track under the AANZFTA Trade in Goods Chapter?",
+    "choices": {
+      "A": "70%",
+      "B": "80%",
+      "C": "90%",
+      "D": "95%"
+    },
+    "correct": "C",
+    "reason": "Products in the Normal Track comprise 90% of total tariff lines, with the Sensitive Track containing the remaining 10%. (Primer p.177)"
+  },
+  "572": {
+    "question": "Which Certificate of Origin form is required to claim preferential treatment under the AANZFTA?",
+    "choices": {
+      "A": "Form D",
+      "B": "Form E",
+      "C": "Form AK",
+      "D": "Form AANZ"
+    },
+    "correct": "D",
+    "reason": "Under the AANZFTA rules of origin, products must be supported by CO Form AANZ. (Primer p.178)"
+  },
+  "573": {
+    "question": "Which Executive Order, issued on 23 December 2009 and effective 01 January 2010, implements the Philippines' tariff commitments under the AANZFTA?",
+    "choices": {
+      "A": "EO 851",
+      "B": "EO 850",
+      "C": "EO 191",
+      "D": "EO 892"
+    },
+    "correct": "A",
+    "reason": "EO 851 was issued on 23 December 2009 and took effect on 01 January 2010, while EO 191 followed in November 2015. (Primer p.178)"
+  },
+  "574": {
+    "question": "On what date was the Framework Agreement on Comprehensive Economic Cooperation between ASEAN and China signed in Cambodia?",
+    "choices": {
+      "A": "29 November 2004",
+      "B": "04 November 2002",
+      "C": "01 January 2010",
+      "D": "27 February 2009"
+    },
+    "correct": "B",
+    "reason": "The Framework Agreement was signed in Cambodia on 04 November 2002. (Primer p.179)"
+  },
+  "575": {
+    "question": "Under the ACFTA Agreement on Trade in Goods signed on 29 November 2004, by what year is trade in goods to be established for Cambodia, Lao PDR, Myanmar and Viet Nam?",
+    "choices": {
+      "A": "2010",
+      "B": "2015",
+      "C": "2012",
+      "D": "2018"
+    },
+    "correct": "B",
+    "reason": "The ACFTA covering trade in goods is to be established by 2010 for ASEAN-6 and China and by 2015 for CLMV. (Primer p.179)"
+  },
+  "576": {
+    "question": "The ACFTA Early Harvest Programme covers all products falling under which HS Chapters?",
+    "choices": {
+      "A": "Chapters 1 to 24",
+      "B": "Chapters 1 to 97",
+      "C": "Chapters 25 to 97",
+      "D": "Chapters 1 to 8"
+    },
+    "correct": "D",
+    "reason": "The Early Harvest Programme covers HS Chapters 1 to 8, such as live animals, meat, fish, dairy, live trees, vegetables, and fruits and nuts. (Primer p.179)"
+  },
+  "577": {
+    "question": "Which Executive Order, issued on 29 December 2005, implements the Philippines' Early Harvest Programme under the ACFTA?",
+    "choices": {
+      "A": "EO 487",
+      "B": "EO 614",
+      "C": "EO 485",
+      "D": "EO 486"
+    },
+    "correct": "C",
+    "reason": "On 29 December 2005, the Philippines issued EO 485 to implement its Early Harvest Programme. (Primer p.180)"
+  },
+  "578": {
+    "question": "Under the Early Harvest Programme modality, what is the tariff rate not later than 01 January 2004 for products with applied MFN tariffs higher than 15%?",
+    "choices": {
+      "A": "10%",
+      "B": "5%",
+      "C": "15%",
+      "D": "0%"
+    },
+    "correct": "A",
+    "reason": "Products with applied MFN above 15% have an EHP rate of 10% by 2004, 5% by 2005 and 0% by 2006. (Primer p.180)"
+  },
+  "579": {
+    "question": "What is the timeframe for Normal Track tariff reduction to 0% for Cambodia, Lao PDR, Myanmar and Viet Nam under the ACFTA Trade in Goods Agreement?",
+    "choices": {
+      "A": "2005 to 2010, with flexibility up to 01 January 2012",
+      "B": "2007 to 2012, with no flexibility",
+      "C": "2005 to 2012, with flexibility up to 01 January 2015",
+      "D": "2005 to 2015, with flexibility up to 01 January 2018"
+    },
+    "correct": "D",
+    "reason": "For CLMV, the Normal Track runs from 2005 to 2015 with flexibility up to 01 January 2018. (Primer p.180)"
+  },
+  "580": {
+    "question": "Under the ACFTA Sensitive Track, by what date must ASEAN-6 and China reduce tariffs on Highly Sensitive List products to 50%?",
+    "choices": {
+      "A": "01 January 2012",
+      "B": "01 January 2018",
+      "C": "01 January 2015",
+      "D": "01 January 2010"
+    },
+    "correct": "C",
+    "reason": "For ASEAN-6 and China, Highly Sensitive List products are reduced to 50% by 01 January 2015. (Primer p.181)"
+  },
+  "581": {
+    "question": "For reciprocal tariff treatment under the ACFTA, the Sensitive Track rate of the exporting FTA partner should be at what level?",
+    "choices": {
+      "A": "Above 10%",
+      "B": "10% and below",
+      "C": "20% and below",
+      "D": "5% and below"
+    },
+    "correct": "B",
+    "reason": "One condition for reciprocal tariff treatment is that the ST rate of the exporting FTA partner should be 10% and below. (Primer p.181)"
+  },
+  "582": {
+    "question": "Which Certificate of Origin form is required to claim preferential treatment under the ASEAN-China Free Trade Area (ACFTA)?",
+    "choices": {
+      "A": "Form E",
+      "B": "Form D",
+      "C": "Form AANZ",
+      "D": "Form AK"
+    },
+    "correct": "A",
+    "reason": "Table 6.12 shows the ACFTA rule of origin general rule is RVC 40, with Certificate of Origin Form E. (Primer p.182)"
+  },
+  "583": {
+    "question": "According to Table 6.11, what is the applicable ACFTA rate for in-quota Thai Hom Mali Rice (HS 1006.20.10A) imported by the Philippines?",
+    "choices": {
+      "A": "35%",
+      "B": "65%",
+      "C": "50%",
+      "D": "0%"
+    },
+    "correct": "C",
+    "reason": "The table lists the applicable ACFTA rate for in-quota Thai Hom Mali Rice as 50%, with the Philippines category being HSL. (Primer p.182)"
+  },
+  "584": {
+    "question": "Which Executive Order, issued on 23 April 2007, covers the Philippine commitment to grant reciprocal tariff treatment on tariff lines included in the Sensitive Track under the ACFTA?",
+    "choices": {
+      "A": "EO 487",
+      "B": "EO 814",
+      "C": "EO 72",
+      "D": "EO 618"
+    },
+    "correct": "D",
+    "reason": "Table 6.13 lists EO 618 dated 23 April 2007 as covering the commitment to grant reciprocal tariff treatment on Sensitive Track lines. (Primer p.183)"
+  },
+  "585": {
+    "question": "Which Executive Order, issued on 30 June 2009, covers the 2009-2012 tariff reduction schedule under the ACFTA Normal Track and the transfer of certain lines from ST to NT?",
+    "choices": {
+      "A": "EO 613",
+      "B": "EO 814",
+      "C": "EO 487",
+      "D": "EO 71"
+    },
+    "correct": "B",
+    "reason": "EO 814 dated 30 June 2009 covers the 2009-2012 schedule and the transfer of certain ST lines to NT for elimination by 2010. (Primer p.183)"
+  },
+  "586": {
+    "question": "On what date was the Agreement establishing the ASEAN-Hong Kong, China Free Trade Area (AHKFTA) signed?",
+    "choices": {
+      "A": "29 November 2004",
+      "B": "27 February 2009",
+      "C": "12 November 2017",
+      "D": "10 January 2020"
+    },
+    "correct": "C",
+    "reason": "The AHKFTA Agreement was signed on 12 November 2017 at the sidelines of the 31st ASEAN Summit in Manila, Philippines. (Primer p.184)"
+  },
+  "587": {
+    "question": "Who signed the AHKFTA Agreement on behalf of Hong Kong, China, together with the Economic Ministers of ASEAN?",
+    "choices": {
+      "A": "The Secretary for Commerce and Economic Development",
+      "B": "The Chief Executive",
+      "C": "The Financial Secretary",
+      "D": "The Secretary for Justice"
+    },
+    "correct": "A",
+    "reason": "The Agreement was signed by the Economic Ministers of ASEAN and the Secretary for Commerce and Economic Development of Hong Kong, China. (Primer p.184)"
+  },
+  "588": {
+    "question": "On what date did implementation of the Trade in Goods Chapter of the AHKFTA begin, with tariff lines subject to reduction and/or elimination?",
+    "choices": {
+      "A": "01 January 2010",
+      "B": "12 November 2017",
+      "C": "10 February 2020",
+      "D": "01 January 2019"
+    },
+    "correct": "D",
+    "reason": "Implementation of the AHKFTA TIG Chapter began on 01 January 2019. (Primer p.185)"
+  },
+  "589": {
+    "question": "Which Certificate of Origin (CO) form is required to claim preferential tariff treatment under the AHKFTA?",
+    "choices": {
+      "A": "Form E",
+      "B": "Form AHK",
+      "C": "Form AK",
+      "D": "Form AJ"
+    },
+    "correct": "B",
+    "reason": "Table 6.16 shows the AHKFTA rules of origin use RVC 40 as the general rule and Certificate of Origin Form AHK. (Primer p.185)"
+  },
+  "590": {
+    "question": "Under the AHKFTA modality for tariff reduction and elimination, what is the end rate for products in the Highly Sensitive List?",
+    "choices": {
+      "A": "Not more than 50%",
+      "B": "0%-5%",
+      "C": "0%",
+      "D": "20%"
+    },
+    "correct": "A",
+    "reason": "Table 6.15 lists an end rate of not more than 50% for the Highly Sensitive List, versus 0%-5% for the Sensitive List. (Primer p.185)"
+  },
+  "591": {
+    "question": "Which Executive Order implemented the Philippine tariff commitments under the AHKFTA?",
+    "choices": {
+      "A": "EO 851",
+      "B": "EO 191",
+      "C": "EO 102",
+      "D": "EO 61"
+    },
+    "correct": "C",
+    "reason": "EO No. 102 was issued on 10 January 2020 to implement Philippine tariff commitments under the AHKFTA. (Primer p.186)"
+  },
+  "592": {
+    "question": "On what date did EO No. 102 implementing the Philippine commitments under the AHKFTA take effect, following its complete publication in the Official Gazette?",
+    "choices": {
+      "A": "10 January 2020",
+      "B": "01 January 2019",
+      "C": "12 November 2017",
+      "D": "10 February 2020"
+    },
+    "correct": "D",
+    "reason": "EO 102 was issued on 10 January 2020 and took effect on 10 February 2020 after complete publication in the Official Gazette. (Primer p.186)"
+  },
+  "593": {
+    "question": "On what date was the Framework Agreement on Comprehensive Economic Cooperation between ASEAN and India signed?",
+    "choices": {
+      "A": "04 November 2002",
+      "B": "08 October 2003",
+      "C": "29 November 2004",
+      "D": "23 August 2007"
+    },
+    "correct": "B",
+    "reason": "The Framework Agreement between ASEAN and India was signed on 08 October 2003. (Primer p.187)"
+  },
+  "594": {
+    "question": "On what date was the Agreement on Trade in Goods under the ASEAN-India Free Trade Area (AIFTA) implemented, after entering into force on 01 January 2010?",
+    "choices": {
+      "A": "01 January 2010",
+      "B": "10 April 2010",
+      "C": "17 May 2011",
+      "D": "17 May 2010"
+    },
+    "correct": "C",
+    "reason": "The AIFTA Agreement on Trade in Goods entered into force on 01 January 2010, was ratified on 10 April 2010 and implemented on 17 May 2011. (Primer p.187)"
+  },
+  "595": {
+    "question": "Except for about what percentage of tariff lines in AHTN 2012 nomenclature are all products under HS Chapters 1 to 97 covered by the AIFTA program of progressive tariff reduction or elimination?",
+    "choices": {
+      "A": "14%",
+      "B": "7%",
+      "C": "10%",
+      "D": "5%"
+    },
+    "correct": "A",
+    "reason": "All products in HS Chapters 1 to 97 are covered except for about 14% of tariff lines in AHTN 2012 nomenclature. (Primer p.188)"
+  },
+  "596": {
+    "question": "Under the AIFTA Normal Track 1 (NT1), what is the tariff reduction period for the Philippines?",
+    "choices": {
+      "A": "01 January 2010 to 31 December 2013",
+      "B": "01 January 2010 to 31 December 2016",
+      "C": "01 January 2010 to 31 December 2019",
+      "D": "01 January 2010 to 31 December 2018"
+    },
+    "correct": "D",
+    "reason": "NT1 runs from 01 January 2010 to 31 December 2018 for the Philippines. (Primer p.188)"
+  },
+  "597": {
+    "question": "Under the AIFTA Sensitive Track, base rates of 5% can be maintained for up to how many tariff lines?",
+    "choices": {
+      "A": "25",
+      "B": "50",
+      "C": "100",
+      "D": "144"
+    },
+    "correct": "B",
+    "reason": "Base rates of 5% can be maintained for up to 50 tariff lines. (Primer p.188)"
+  },
+  "598": {
+    "question": "The ASEAN-Japan Comprehensive Economic Partnership Agreement (AJCEPA) provides for the establishment of an FTA between ASEAN and Japan over what period?",
+    "choices": {
+      "A": "Ten years",
+      "B": "Five years",
+      "C": "Fifteen years",
+      "D": "Twenty years"
+    },
+    "correct": "A",
+    "reason": "AJCEPA provides for the establishment of an FTA between ASEAN and Japan over a period of ten (10) years. (Primer p.191)"
+  },
+  "599": {
+    "question": "On what date did the Philippines sign the ASEAN-Japan Comprehensive Economic Partnership Agreement?",
+    "choices": {
+      "A": "24 December 2008",
+      "B": "01 July 2010",
+      "C": "02 April 2008",
+      "D": "08 October 2003"
+    },
+    "correct": "C",
+    "reason": "The Philippines signed AJCEPA on 02 April 2008 and ratified it on 24 December 2008. (Primer p.191)"
+  },
+  "600": {
+    "question": "Which of the following is NOT one of the chapters covered by the AJCEPA between the ten AMSs and Japan?",
+    "choices": {
+      "A": "Sanitary and Phytosanitary Measures",
+      "B": "Technical Barriers to Trade",
+      "C": "Trade in Investment",
+      "D": "Government Procurement"
+    },
+    "correct": "D",
+    "reason": "AJCEPA covers Trade in Goods, SPS, TBT, Trade in Services, Trade in Investment, and Economic Cooperation and Trade Facilitation, not government procurement. (Primer p.191)"
+  },
+  "601": {
+    "question": "Under the AJCEPA, which area of trade facilitation and cooperation includes cooperation in oil stockpiling, natural gas utilization and promotion of energy efficiency?",
+    "choices": {
+      "A": "Transportation and logistics",
+      "B": "Energy",
+      "C": "Information and Communications Technology",
+      "D": "Tourism and hospitality"
+    },
+    "correct": "B",
+    "reason": "The Energy area covers cooperation in oil stockpiling, natural gas utilization and promotion of energy efficiency. (Primer p.192)"
+  },
+  "602": {
+    "question": "Under the AJCEPA cooperation on Intellectual Property Rights, which party will support AMSs in developing, improving, enhancing and implementing their intellectual property right capabilities?",
+    "choices": {
+      "A": "Japan",
+      "B": "Australia",
+      "C": "Korea",
+      "D": "China"
+    },
+    "correct": "A",
+    "reason": "Under the Intellectual Property Rights area, Japan will support AMSs in developing and implementing their IP right capabilities. (Primer p.192)"
+  },
+  "603": {
+    "question": "Which Certificate of Origin (CO) form is required to claim preferential tariff treatment under the AJCEPA?",
+    "choices": {
+      "A": "Form AK",
+      "B": "Form E",
+      "C": "Form D",
+      "D": "Form AJ"
+    },
+    "correct": "D",
+    "reason": "Table 6.21 shows AJCEPA rules of origin use RVC 40 or Change in Tariff Heading, with Certificate of Origin Form AJ. (Primer p.193)"
+  },
+  "604": {
+    "question": "The Philippines excluded motor vehicles of which Harmonized System Heading from its tariff commitments under the AJCEPA Trade in Goods Chapter?",
+    "choices": {
+      "A": "Heading 87.01",
+      "B": "Heading 87.02",
+      "C": "Heading 87.03",
+      "D": "Heading 87.11"
+    },
+    "correct": "C",
+    "reason": "The Philippines excluded rice, salt, certain chemical products, articles of iron and steel, and motor vehicles of Heading 87.03. (Primer p.193)"
+  },
+  "605": {
+    "question": "What is the schedule of tariff reduction for Category A products under the AJCEPA Trade in Goods Chapter?",
+    "choices": {
+      "A": "4 years grace period, zero in the fifth year",
+      "B": "Immediate tariff elimination",
+      "C": "5 years equal to 6 equal annual installments",
+      "D": "10 years equal to 11 equal annual installments"
+    },
+    "correct": "B",
+    "reason": "Table 6.20 lists Category A as immediate tariff elimination. (Primer p.193)"
+  },
+  "606": {
+    "question": "Which Executive Order, issued on 23 December 2009 and effective 01 July 2010, implements the Philippine tariff commitments under the AJCEPA Trade in Goods Chapter?",
+    "choices": {
+      "A": "EO 852",
+      "B": "EO 851",
+      "C": "EO 850",
+      "D": "EO 853"
+    },
+    "correct": "A",
+    "reason": "EO 852 was issued on 23 December 2009 and took effect on 01 July 2010. (Primer p.194)"
+  },
+  "607": {
+    "question": "In which city was the ASEAN-Korea Free Trade Area (AKFTA) Framework Agreement signed on 29 November 2004?",
+    "choices": {
+      "A": "Kuala Lumpur, Malaysia",
+      "B": "Manila, Philippines",
+      "C": "Vientiane, Lao PDR",
+      "D": "Phnom Penh, Cambodia"
+    },
+    "correct": "C",
+    "reason": "The AKFTA was signed on 29 November 2004 in Vientiane, Lao PDR. (Primer p.194)"
+  },
+  "608": {
+    "question": "On what date was the AKFTA Agreement on Trade in Goods signed in Kuala Lumpur, Malaysia?",
+    "choices": {
+      "A": "29 November 2004",
+      "B": "01 January 2010",
+      "C": "17 May 2010",
+      "D": "24 August 2006"
+    },
+    "correct": "D",
+    "reason": "The Agreement on Trade in Goods reflecting the Parties' commitment on goods was signed in Kuala Lumpur on 24 August 2006. (Primer p.194)"
+  },
+  "609": {
+    "question": "Which of the following is excluded from the product coverage of the AKFTA?",
+    "choices": {
+      "A": "Rice",
+      "B": "Specialized medicine for cancer, AIDS and other dreaded diseases",
+      "C": "Motor vehicles of Heading 87.03",
+      "D": "Salt"
+    },
+    "correct": "B",
+    "reason": "AKFTA covers all products except arms and ammunitions, clinical and municipal wastes, specialized medicine for cancer, AIDS and other dreaded diseases, and certain lines in HSL Group E. (Primer p.195)"
+  },
+  "610": {
+    "question": "Under the AKFTA Trade in Goods Agreement, parties commit to progressively reduce or eliminate tariffs on substantially all goods by what date for Viet Nam?",
+    "choices": {
+      "A": "01 January 2010, with flexibility until 2012",
+      "B": "01 January 2018, with flexibility until 01 January 2020",
+      "C": "01 January 2016, with flexibility until 2018",
+      "D": "01 January 2015, with flexibility until 2017"
+    },
+    "correct": "C",
+    "reason": "The timeline for Viet Nam is 01 January 2016 with flexibility until 2018. (Primer p.195)"
+  },
+  "611": {
+    "question": "Under the AKFTA modality for Cambodia, Lao PDR and Myanmar, Myanmar shall be allowed to maintain AKFTA preferential tariff rates at no more than 7.5% until what year?",
+    "choices": {
+      "A": "2008",
+      "B": "2012",
+      "C": "2015",
+      "D": "2010"
+    },
+    "correct": "D",
+    "reason": "Myanmar may maintain AKFTA preferential tariff rates at no more than 7.5% until 2010. (Primer p.196)"
+  },
+  "612": {
+    "question": "Under the AKFTA modality for Viet Nam (Table 6.24), what is the AKFTA preferential tariff rate not later than 01 January 2016 for all product categories?",
+    "choices": {
+      "A": "0%",
+      "B": "5%",
+      "C": "10%",
+      "D": "0%-5%"
+    },
+    "correct": "A",
+    "reason": "In Table 6.24 the 2016 column shows a preferential tariff rate of 0 for every category of products. (Primer p.196)"
+  },
+  "613": {
+    "question": "About what percentage of all tariff lines for 2004 were included in the Sensitive List under the AKFTA Sensitive Track?",
+    "choices": {
+      "A": "3%",
+      "B": "7%",
+      "C": "10%",
+      "D": "14%"
+    },
+    "correct": "B",
+    "reason": "About 7% of all tariff lines and 7% of total import value for 2004 are included in the SL, while the HSL covers some 200 tariff lines or 3%. (Primer p.197)"
+  },
+  "614": {
+    "question": "Under the AKFTA Sensitive Track, products in the Sensitive List are to be reduced to 20% by what date?",
+    "choices": {
+      "A": "01 January 2010",
+      "B": "01 January 2016",
+      "C": "01 January 2012",
+      "D": "01 January 2018"
+    },
+    "correct": "C",
+    "reason": "Table 6.26 requires reduction of the Sensitive List to 20% by 01 January 2012, then to 0%-5% by 01 January 2016. (Primer p.197)"
+  },
+  "615": {
+    "question": "Under the AKFTA Highly Sensitive List, Group E tariff lines are exempted from concessions up to a maximum of how many tariff lines at the HS 6-digit level?",
+    "choices": {
+      "A": "10",
+      "B": "20",
+      "C": "100",
+      "D": "40"
+    },
+    "correct": "D",
+    "reason": "Group E covers tariff lines exempted from concessions, with a maximum of 40 tariff lines at HS 6-digit level. (Primer p.197)"
+  },
+  "616": {
+    "question": "In applying reciprocal tariff rate treatment under the AKFTA, which option did the Philippines apply?",
+    "choices": {
+      "A": "Option b: the higher of the exporting party's ST rate and its own NT rate, not exceeding its MFN rate",
+      "B": "Option a: always applying its own NT rate",
+      "C": "Always applying its MFN rate",
+      "D": "No reciprocal treatment is applied"
+    },
+    "correct": "A",
+    "reason": "The Table 6.27 footnote states that the Philippines applied option b. (Primer p.198)"
+  },
+  "617": {
+    "question": "Under Table 6.27 on reciprocal tariff treatment under the AKFTA, an exporting party's ST rate is 7%, the importing party's NT rate is 15% and its MFN rate is 20%. What is the applicable AKFTA rate?",
+    "choices": {
+      "A": "7%",
+      "B": "20%",
+      "C": "15%",
+      "D": "5%"
+    },
+    "correct": "C",
+    "reason": "The applicable rate is 15%, the importing party's NT rate, which is higher than the exporting party's ST rate of 7% and does not exceed the MFN rate. (Primer p.198)"
+  },
+  "618": {
+    "question": "Under option b of Table 6.27, an exporting party's ST rate is 10%, the importing party's NT rate is 5% and its MFN rate is 7%. What is the applicable AKFTA rate?",
+    "choices": {
+      "A": "10%",
+      "B": "7%",
+      "C": "5%",
+      "D": "12%"
+    },
+    "correct": "B",
+    "reason": "Under option b the applicable rate is 7%, the importing party's MFN rate, because the exporting ST rate exceeds the importing party's MFN rate. (Primer p.198)"
+  },
+  "619": {
+    "question": "Which Certificate of Origin (CO) form is required to claim preferential tariff treatment under the AKFTA?",
+    "choices": {
+      "A": "Form E",
+      "B": "Form D",
+      "C": "Form AJ",
+      "D": "Form AK"
+    },
+    "correct": "D",
+    "reason": "Table 6.28 shows the AKFTA Certificate of Origin Form is Form AK. (Primer p.199)"
+  },
+  "620": {
+    "question": "Which Executive Order, effective 12 August 2011, provided compensation to Korea for delayed implementation of certain Philippine tariff commitments under the AKFTA?",
+    "choices": {
+      "A": "EO 52",
+      "B": "EO 73",
+      "C": "EO 74",
+      "D": "EO 895"
+    },
+    "correct": "A",
+    "reason": "Table 6.29 lists EO 52 as compensation to Korea for delayed implementation, effective 12 August 2011. (Primer p.199)"
+  },
+  "621": {
+    "question": "Which Executive Order, effective 26 April 2012, covers the Tariff Reduction Schedule for Highly Sensitive List (HSL) products under the AKFTA?",
+    "choices": {
+      "A": "EO 74",
+      "B": "EO 73",
+      "C": "EO 812",
+      "D": "EO 638"
+    },
+    "correct": "B",
+    "reason": "Table 6.29 lists EO 73 as the Tariff Reduction Schedule for HSL products, effective 26 April 2012. (Primer p.199)"
+  },
+  "622": {
+    "question": "The Regional Comprehensive Economic Partnership (RCEP) is a proposed free trade agreement between the ten AMSs and how many other countries with which ASEAN has existing free trade agreements?",
+    "choices": {
+      "A": "Four",
+      "B": "Five",
+      "C": "Six",
+      "D": "Eight"
+    },
+    "correct": "C",
+    "reason": "RCEP involves the ten AMSs and six countries: Australia, China, India, Japan, South Korea and New Zealand. (Primer p.200)"
+  },
+  "623": {
+    "question": "Which of the following is NOT one of the six non-ASEAN countries in the proposed Regional Comprehensive Economic Partnership?",
+    "choices": {
+      "A": "United States",
+      "B": "Japan",
+      "C": "India",
+      "D": "New Zealand"
+    },
+    "correct": "A",
+    "reason": "The six RCEP partner countries are Australia, China, India, Japan, South Korea and New Zealand; the United States is not among them. (Primer p.200)"
+  },
+  "624": {
+    "question": "Which of the following is a stated objective of the RCEP?",
+    "choices": {
+      "A": "To create a customs union with a common external tariff",
+      "B": "To replace the WTO Agreements",
+      "C": "To establish a common currency",
+      "D": "To achieve a modern, comprehensive, high-quality and mutually beneficial partnership with an open trade and investment environment"
+    },
+    "correct": "D",
+    "reason": "RCEP aims to achieve a modern, comprehensive, high-quality and mutually beneficial economic partnership establishing an open trade and investment environment in the region. (Primer p.200)"
+  },
+  "625": {
+    "question": "In which city did the ASEAN Leaders adopt the ASEAN Framework for RCEP in November 2011?",
+    "choices": {
+      "A": "Phnom Penh, Cambodia",
+      "B": "Bali, Indonesia",
+      "C": "Siem Reap, Cambodia",
+      "D": "Bandar Seri Begawan, Brunei Darussalam"
+    },
+    "correct": "B",
+    "reason": "In November 2011 the ASEAN Framework for RCEP was adopted by the ASEAN Leaders in Bali, Indonesia. (Primer p.201)"
+  },
+  "626": {
+    "question": "At the 21st ASEAN Summit on 20 November 2012 in Phnom Penh, the Leaders committed to commence RCEP negotiations in early 2013 to conclude by the end of which year?",
+    "choices": {
+      "A": "2013",
+      "B": "2014",
+      "C": "2015",
+      "D": "2016"
+    },
+    "correct": "C",
+    "reason": "Leaders committed to commence negotiations in early 2013 to conclude by the end of 2015. (Primer p.201)"
+  },
+  "627": {
+    "question": "Where was the 1st Round of RCEP negotiations held on 9-13 May 2013?",
+    "choices": {
+      "A": "Brunei Darussalam",
+      "B": "Brisbane, Australia",
+      "C": "Kuala Lumpur, Malaysia",
+      "D": "Singapore"
+    },
+    "correct": "A",
+    "reason": "The 1st Round of negotiations was held on 9-13 May 2013 in Brunei Darussalam. (Primer p.201)"
+  },
+  "628": {
+    "question": "Where was the 4th Round of RCEP negotiations, held 31 March to 04 April 2014, hosted?",
+    "choices": {
+      "A": "Singapore",
+      "B": "Kuala Lumpur, Malaysia",
+      "C": "Brisbane, Australia",
+      "D": "Nanning, China"
+    },
+    "correct": "D",
+    "reason": "The 4th Round was held on 31 March to 04 April 2014 in Nanning, China. (Primer p.202)"
+  },
+  "629": {
+    "question": "In which RCEP round were the sub-working groups on Rules of Origin and on Customs Procedures and Trade Facilitation created?",
+    "choices": {
+      "A": "1st Round in Brunei Darussalam",
+      "B": "2nd Round in Brisbane, Australia",
+      "C": "3rd Round in Kuala Lumpur, Malaysia",
+      "D": "5th Round in Singapore"
+    },
+    "correct": "B",
+    "reason": "The 2nd Round on 23-27 September 2013 in Brisbane created the SWGs on ROO and CPTF, reporting to the WG-TIG. (Primer p.202)"
+  },
+  "630": {
+    "question": "At the 9th RCEP Round in Nay Pyi Taw, Myanmar, agreement on the modality of tariff commitments was reached on how many paragraphs?",
+    "choices": {
+      "A": "10 out of 14",
+      "B": "8 out of 12",
+      "C": "12 out of 14",
+      "D": "14 out of 14"
+    },
+    "correct": "C",
+    "reason": "The meeting reached agreement on 12 out of 14 paragraphs of the modality of tariff commitments. (Primer p.203)"
+  },
+  "631": {
+    "question": "In which RCEP round were the first substantive meetings of the sub-working groups on Financial Services and Telecommunications convened?",
+    "choices": {
+      "A": "8th Round in Kyoto, Japan",
+      "B": "11th Round in Bandar Seri Begawan, Brunei Darussalam",
+      "C": "12th Round in Perth, Australia",
+      "D": "10th Round in Busan, South Korea"
+    },
+    "correct": "D",
+    "reason": "The first substantive SWG meetings on Financial Services and Telecommunications were convened at the 10th Round, 12-16 October 2015, in Busan. (Primer p.203)"
+  },
+  "632": {
+    "question": "How many business associations or industry groups participated in the joint session on non-tariff measures at the 7th RCEP Round in Bangkok, Thailand?",
+    "choices": {
+      "A": "Five",
+      "B": "Three",
+      "C": "Ten",
+      "D": "Twelve"
+    },
+    "correct": "A",
+    "reason": "Five (5) business associations or industry groups participated in the joint session on NTMs at the 7th Round. (Primer p.203)"
+  },
+  "633": {
+    "question": "Which chapter text was concluded at the 15th RCEP Round in Tianjin, China in October 2016?",
+    "choices": {
+      "A": "Small and Medium Enterprises",
+      "B": "Economic and Technical Cooperation",
+      "C": "Intellectual Property",
+      "D": "Electronic Commerce"
+    },
+    "correct": "B",
+    "reason": "The Chapter text on Economic and Technical Cooperation was concluded at the 15th Round. (Primer p.204)"
+  },
+  "634": {
+    "question": "Which chapter was welcomed as the second chapter concluded in the RCEP negotiations at the 16th Round in Tangerang, Indonesia?",
+    "choices": {
+      "A": "Competition",
+      "B": "Intellectual Property",
+      "C": "Small and Medium Enterprises",
+      "D": "Financial Services"
+    },
+    "correct": "C",
+    "reason": "The 16th Round welcomed the conclusion of the SME Chapter, the second chapter concluded after Economic and Technical Cooperation. (Primer p.204)"
+  },
+  "635": {
+    "question": "Where was the 2nd Intersessional RCEP Ministerial Meeting held on 3-4 November 2016?",
+    "choices": {
+      "A": "Manila, Philippines",
+      "B": "Bali, Indonesia",
+      "C": "Perth, Australia",
+      "D": "Cebu, Philippines"
+    },
+    "correct": "D",
+    "reason": "The 2nd Intersessional RCEP Ministerial Meeting was held on 3-4 November 2016 in Cebu, Philippines. (Primer p.204)"
+  },
+  "636": {
+    "question": "In which RCEP negotiating round did the newly established Working Group on Government Procurement and the Sub-Working Group on Trade Remedies meet for the first time?",
+    "choices": {
+      "A": "19th Round in Hyderabad, India",
+      "B": "18th Round in Manila, Philippines",
+      "C": "20th Round in Incheon, South Korea",
+      "D": "21st Round in Yogyakarta, Indonesia"
+    },
+    "correct": "A",
+    "reason": "The newly established WG on Government Procurement and SWG on Trade Remedies met for the first time at the 19th Round, 24-28 July 2017, in Hyderabad. (Primer p.205)"
+  },
+  "637": {
+    "question": "Where was the 20th Round of RCEP negotiations held on 17-28 October 2017?",
+    "choices": {
+      "A": "Hyderabad, India",
+      "B": "Yogyakarta, Indonesia",
+      "C": "Incheon, South Korea",
+      "D": "Singapore"
+    },
+    "correct": "C",
+    "reason": "The 20th Round was held on 17-28 October 2017 in Incheon, South Korea. (Primer p.205)"
+  },
+  "638": {
+    "question": "Which RCEP negotiating round was held in Singapore from 28 April to 08 May 2018?",
+    "choices": {
+      "A": "21st Round",
+      "B": "22nd Round",
+      "C": "23rd Round",
+      "D": "24th Round"
+    },
+    "correct": "B",
+    "reason": "The 22nd Round was held on 28 April to 08 May 2018 in Singapore. (Primer p.205)"
+  },
+  "639": {
+    "question": "At the 23rd RCEP Round in Bangkok, Thailand, the conclusion of the Chapters on Customs Procedures and Trade Facilitation and on Government Procurement brought the total number of concluded chapters to how many?",
+    "choices": {
+      "A": "Two",
+      "B": "Three",
+      "C": "Five",
+      "D": "Four"
+    },
+    "correct": "D",
+    "reason": "The 23rd Round brought the total of concluded chapters to four. (Primer p.206)"
+  },
+  "640": {
+    "question": "The technical conclusion of which chapter at the 24th RCEP Round in Auckland, New Zealand brought the total number of concluded chapters to five?",
+    "choices": {
+      "A": "Government Procurement",
+      "B": "Dispute Settlement",
+      "C": "Intellectual Property",
+      "D": "Customs Procedures and Trade Facilitation"
+    },
+    "correct": "B",
+    "reason": "The Chapter on Dispute Settlement was technically concluded at the 24th Round, bringing the total to five chapters. (Primer p.206)"
+  },
+  "641": {
+    "question": "At the 25th RCEP Round in Bali, negotiators worked toward the determination expressed by Leaders on 14 November 2018 in Singapore to conclude RCEP in what year?",
+    "choices": {
+      "A": "2019",
+      "B": "2018",
+      "C": "2020",
+      "D": "2021"
+    },
+    "correct": "A",
+    "reason": "The TNC agreed a work plan to meet the Leaders' determination of 14 November 2018 to conclude a modern, high-quality RCEP in 2019. (Primer p.206)"
+  },
+  "642": {
+    "question": "At the 26th RCEP Round in Melbourne, the conclusion of the Telecommunications annex brought the number of concluded chapters to 10 out of a total of how many?",
+    "choices": {
+      "A": "15",
+      "B": "20",
+      "C": "25",
+      "D": "30"
+    },
+    "correct": "C",
+    "reason": "The conclusion of the Telecommunications annex brought concluded chapters to 10 out of a total of 25. (Primer p.207)"
+  },
+  "643": {
+    "question": "At the 28th RCEP Round in Danang, Viet Nam, how many of the 25 chapters and annexes had been concluded or technically concluded?",
+    "choices": {
+      "A": "10",
+      "B": "14",
+      "C": "16",
+      "D": "19"
+    },
+    "correct": "D",
+    "reason": "Of the 25 chapters and annexes comprising the text, 19 had been concluded or technically concluded. (Primer p.207)"
+  },
+  "644": {
+    "question": "In which city was the 9th RCEP Intersessional Ministerial Meeting held on 12 October, as noted in the 28th Round highlights?",
+    "choices": {
+      "A": "Bangkok",
+      "B": "Beijing",
+      "C": "Danang",
+      "D": "Zhengzhou"
+    },
+    "correct": "A",
+    "reason": "The 9th RCEP Intersessional Ministerial Meeting was held on 12 October in Bangkok, while the 8th was held in Beijing. (Primer p.207)"
+  },
+  "645": {
+    "question": "In which city was the Philippines-Japan Economic Partnership Agreement (PJEPA) signed on 09 September 2006?",
+    "choices": {
+      "A": "Manila",
+      "B": "Tokyo",
+      "C": "Helsinki",
+      "D": "Bern"
+    },
+    "correct": "C",
+    "reason": "The PJEPA was signed on 09 September 2006 in Helsinki, Finland. (Primer p.210)"
+  },
+  "646": {
+    "question": "The PJEPA was ratified on 08 October 2008 pursuant to which Senate Resolution?",
+    "choices": {
+      "A": "Senate Resolution No. 93",
+      "B": "Senate Resolution No. 131",
+      "C": "Senate Resolution No. 459",
+      "D": "Senate Resolution No. 61"
+    },
+    "correct": "B",
+    "reason": "The PJEPA was ratified on 08 October 2008 pursuant to Senate Resolution No. 131 and implemented on 11 December 2008. (Primer p.210)"
+  },
+  "647": {
+    "question": "Which products are excluded from the PJEPA coverage of HS Chapters 1 to 97 at the HS 2002 nomenclature?",
+    "choices": {
+      "A": "Rice and sugar",
+      "B": "Salt and corn",
+      "C": "Rice and motor vehicles",
+      "D": "Rice and salt"
+    },
+    "correct": "D",
+    "reason": "Except for rice and salt, all products under HS Chapters 1 to 97 at HS 2002 are covered by the PJEPA. (Primer p.210)"
+  },
+  "648": {
+    "question": "What percentage of total tariff lines in the Philippine Offer List under the PJEPA falls under Category A, immediate tariff elimination?",
+    "choices": {
+      "A": "18.05%",
+      "B": "3.85%",
+      "C": "66.14%",
+      "D": "1.63%"
+    },
+    "correct": "C",
+    "reason": "Table 7.1 shows 3,947 HS 2002 tariff lines, or 66.14% of the total, under Category A with immediate tariff elimination. (Primer p.211)"
+  },
+  "649": {
+    "question": "Which Certificate of Origin (CO) form is required to claim preferential tariff treatment under the PJEPA?",
+    "choices": {
+      "A": "Form JP",
+      "B": "Form AJ",
+      "C": "Form AK",
+      "D": "Form D"
+    },
+    "correct": "A",
+    "reason": "Table 7.2 shows the PJEPA uses Certificate of Origin Form JP, with no general rule and no reciprocity rule. (Primer p.211)"
+  },
+  "650": {
+    "question": "The General Review of the PJEPA and its implementation commenced in 2011 and takes place how often thereafter, unless otherwise agreed by both Parties?",
+    "choices": {
+      "A": "Every three years",
+      "B": "Every five years",
+      "C": "Every ten years",
+      "D": "Annually"
+    },
+    "correct": "B",
+    "reason": "The General Review commenced in 2011 and takes place every five (5) years thereafter. (Primer p.212)"
+  },
+  "651": {
+    "question": "Which Executive Order, issued on 13 February 2014 and effective 20 February 2014, implements Philippine tariff commitments under the PJEPA?",
+    "choices": {
+      "A": "EO 905",
+      "B": "EO 157",
+      "C": "EO 767",
+      "D": "EO 852"
+    },
+    "correct": "B",
+    "reason": "EO 157 was issued on 13 February 2014 and took effect on 20 February 2014, while EO 905 was issued on 29 June 2010. (Primer p.212)"
+  },
+  "652": {
+    "question": "In which city was the Philippines-European Free Trade Association Free Trade Agreement (PH-EFTA FTA) signed on 28 April 2016?",
+    "choices": {
+      "A": "Geneva",
+      "B": "Reykjavik",
+      "C": "Oslo",
+      "D": "Bern"
+    },
+    "correct": "D",
+    "reason": "The Agreement with the EFTA States was signed in Bern, Switzerland on 28 April 2016. (Primer p.213)"
+  },
+  "653": {
+    "question": "Which of the following is NOT an EFTA State party to the PH-EFTA FTA?",
+    "choices": {
+      "A": "Sweden",
+      "B": "Iceland",
+      "C": "Norway",
+      "D": "Liechtenstein"
+    },
+    "correct": "A",
+    "reason": "The EFTA States are Iceland, Liechtenstein, Norway and Switzerland. (Primer p.213)"
+  },
+  "654": {
+    "question": "Where did the Philippines and the EFTA States sign the Joint Declaration on Cooperation on 23 June 2014?",
+    "choices": {
+      "A": "Geneva, Switzerland",
+      "B": "Bern, Switzerland",
+      "C": "Westman Islands, Iceland",
+      "D": "Manila, Philippines"
+    },
+    "correct": "C",
+    "reason": "The Joint Declaration on Cooperation was signed on 23 June 2014 in the Westman Islands, Iceland. (Primer p.213)"
+  },
+  "655": {
+    "question": "On what date did the PH-EFTA FTA enter into force?",
+    "choices": {
+      "A": "28 April 2016",
+      "B": "08 December 2017",
+      "C": "22 March 2018",
+      "D": "01 June 2018"
+    },
+    "correct": "D",
+    "reason": "The PH-EFTA FTA entered into force on 01 June 2018 under Article 14.5 of the Agreement. (Primer p.214)"
+  },
+  "656": {
+    "question": "The Philippine Senate concurred in the ratification of the PH-EFTA FTA on 05 March 2018 through which Senate Resolution?",
+    "choices": {
+      "A": "Senate Resolution No. 131",
+      "B": "Senate Resolution No. 93",
+      "C": "Senate Resolution No. 459",
+      "D": "Senate Resolution No. 61"
+    },
+    "correct": "B",
+    "reason": "The Senate concurred on 05 March 2018 as per Senate Resolution No. 93. (Primer p.214)"
+  },
+  "657": {
+    "question": "Which EFTA State acted as Depositary when the Philippines submitted its Instrument of Ratification for the PH-EFTA FTA on 22 March 2018?",
+    "choices": {
+      "A": "Norway",
+      "B": "Switzerland",
+      "C": "Iceland",
+      "D": "Liechtenstein"
+    },
+    "correct": "A",
+    "reason": "The Philippines submitted its Instrument of Ratification to Norway as Depositary on 22 March 2018. (Primer p.214)"
+  },
+  "658": {
+    "question": "Under the PH-EFTA FTA, instead of securing a certificate of origin from customs authorities, what can the exporter do?",
+    "choices": {
+      "A": "Present Form E issued by a chamber of commerce",
+      "B": "Present a Form PH-EFTA issued by the Bureau of Customs",
+      "C": "Issue an origin declaration stating compliance with the rules of origin",
+      "D": "Submit no origin documentation at all"
+    },
+    "correct": "C",
+    "reason": "The exporter does not need a certificate of origin from customs authorities and can instead issue an origin declaration. (Primer p.215)"
+  },
+  "659": {
+    "question": "What type of rules of origin apply under the PH-EFTA FTA?",
+    "choices": {
+      "A": "A general RVC 40 rule for all products",
+      "B": "Product Specific Rules",
+      "C": "A reciprocity rule only",
+      "D": "A Change in Chapter rule for all products"
+    },
+    "correct": "B",
+    "reason": "The PH-EFTA FTA rules of origin are Product Specific Rules (PSRs). (Primer p.215)"
+  },
+  "660": {
+    "question": "Table 7.6 of the Primer presents the Philippine schedule of tariff commitments on products originating from which EFTA State for 2018-2027?",
+    "choices": {
+      "A": "Iceland",
+      "B": "Norway",
+      "C": "Switzerland and Liechtenstein",
+      "D": "Denmark"
+    },
+    "correct": "A",
+    "reason": "Table 7.6 is the Philippine Schedule of Tariff Commitments on Products Originating from Iceland under the PH-EFTA FTA: 2018-2027. (Primer p.216)"
+  },
+  "661": {
+    "question": "Rules of Origin (ROO) are used to ascertain which of the following about a good?",
+    "choices": {
+      "A": "The country from which the good was shipped",
+      "B": "The port where the good entered",
+      "C": "The country where the good is deemed to have been produced or manufactured",
+      "D": "The country of final destination"
+    },
+    "correct": "C",
+    "reason": "ROO ascertain the origin of a good, meaning not where it was shipped from but where it has been deemed to have been produced or manufactured. (Primer p.218)"
+  },
+  "662": {
+    "question": "Which type of Rules of Origin is used to establish whether a product qualifies for preferential tariff treatment under regional or bilateral trading arrangements?",
+    "choices": {
+      "A": "Non-preferential ROO",
+      "B": "Harmonized ROO",
+      "C": "Supplementary ROO",
+      "D": "Preferential ROO"
+    },
+    "correct": "D",
+    "reason": "Preferential ROO are used to establish whether a product is qualified for preferential tariff treatment. (Primer p.218)"
+  },
+  "663": {
+    "question": "Which of the following is NOT listed as a use of Rules of Origin?",
+    "choices": {
+      "A": "Labeling and marking requirements",
+      "B": "Determining the HS classification of a good",
+      "C": "Public procurement",
+      "D": "Trade statistics and issuance of certificates of origin"
+    },
+    "correct": "B",
+    "reason": "ROO are used for commercial policy measures, MFN or preferential treatment, statistics, labeling, public procurement and process patents, but not for HS classification. (Primer p.218)"
+  },
+  "664": {
+    "question": "Which criterion for determining the country of origin requires that a good be transformed into a new and different article having a distinctive name, character or use?",
+    "choices": {
+      "A": "Wholly obtained",
+      "B": "Regional Value Content requirement",
+      "C": "Specific Process Rule",
+      "D": "Substantial transformation"
+    },
+    "correct": "D",
+    "reason": "Substantial transformation requires that a good be transformed into a new and different article having a distinctive name, character or use. (Primer p.219)"
+  },
+  "665": {
+    "question": "Which of the following is one of the three major rules applied in substantial transformation?",
+    "choices": {
+      "A": "Change in Tariff Classification Criteria",
+      "B": "Wholly Obtained Rule",
+      "C": "Reciprocity Rule",
+      "D": "Accumulation Rule"
+    },
+    "correct": "A",
+    "reason": "The three major rules are the Regional Value Content Requirement, the Change in Tariff Classification Criteria and the Specific Process Rule. (Primer p.219)"
+  },
+  "666": {
+    "question": "Change in Tariff Heading (CTH) requires the non-originating material to be classified outside the heading of the good at what digit level of the HS?",
+    "choices": {
+      "A": "2-digit",
+      "B": "6-digit",
+      "C": "4-digit",
+      "D": "8-digit"
+    },
+    "correct": "C",
+    "reason": "CTH connotes that the non-originating material should have been classified in a tariff heading at the 4-digit level outside the heading of the good. (Primer p.219)"
+  },
+  "667": {
+    "question": "Change in Tariff Subheading (CTSH) requires the non-originating material to come from a subheading other than that of the good, at what digit level of the HS?",
+    "choices": {
+      "A": "4-digit",
+      "B": "6-digit",
+      "C": "2-digit",
+      "D": "8-digit"
+    },
+    "correct": "B",
+    "reason": "CTSH suggests that the non-originating material must come from a subheading (6-digit level) other than the subheading of the good. (Primer p.220)"
+  },
+  "668": {
+    "question": "Under which method of determining Regional Value Content is the sum of originating materials, overhead cost and profit divided by the free-on-board value of the finished product?",
+    "choices": {
+      "A": "Indirect/Build-down Method",
+      "B": "Accumulation Method",
+      "C": "Specific Process Method",
+      "D": "Direct/Build-up Method"
+    },
+    "correct": "D",
+    "reason": "The Direct/Build-up Method divides the sum of originating materials, overhead cost and profit by the FOB value, which must equal or exceed the RVC requirement. (Primer p.220)"
+  },
+  "669": {
+    "question": "Which rule in ASEAN FTAs allows originating goods of one FTA Party, used as inputs in another FTA Party, to be counted towards the finished product's origin requirements?",
+    "choices": {
+      "A": "Accumulation rule",
+      "B": "De minimis rule",
+      "C": "Residual rule",
+      "D": "Alternative rule"
+    },
+    "correct": "A",
+    "reason": "Under the accumulation rule, originating goods used as inputs in another FTA Party count toward the finished product's origin requirements. (Primer p.220)"
+  },
+  "670": {
+    "question": "A de minimis provision in an FTA usually allows non-originating materials not exceeding what range of the free-on-board value of the final good?",
+    "choices": {
+      "A": "1% to 5%",
+      "B": "5% to 10%",
+      "C": "7% to 15%",
+      "D": "20% to 40%"
+    },
+    "correct": "C",
+    "reason": "The de minimis percentage usually ranges from 7% to 15% of the FOB value of the final good. (Primer p.221)"
+  },
+  "671": {
+    "question": "As an example of the Exception Rule under the PJEPA, the product specific rule for heading 48.16 is RVC (40) or CTH except from which heading?",
+    "choices": {
+      "A": "48.01",
+      "B": "48.16",
+      "C": "48.10",
+      "D": "48.09"
+    },
+    "correct": "D",
+    "reason": "For heading 48.16 the PSR is RVC (40) or CTH except from heading 48.09. (Primer p.221)"
+  },
+  "672": {
+    "question": "Which rule confers origin under two different circumstances, for example wholly obtained or change from youth to maturity of live horses?",
+    "choices": {
+      "A": "Exception Rule",
+      "B": "Alternative Rule",
+      "C": "Supplementary Rule",
+      "D": "Residual Rule"
+    },
+    "correct": "B",
+    "reason": "The Alternative Rule provides for conferment of origin under two different circumstances, such as the live horses example. (Primer p.221)"
+  },
+  "673": {
+    "question": "Which of the following is considered insufficient working or processing that does NOT confer originating status?",
+    "choices": {
+      "A": "Affixing of marks, labels or other like distinguishing signs on products or their packaging",
+      "B": "Manufacturing a product from non-originating materials that satisfy a change in tariff heading",
+      "C": "Producing a good entirely from originating materials",
+      "D": "Harvesting agricultural products in the exporting party"
+    },
+    "correct": "A",
+    "reason": "Affixing marks and labels is among the operations that do not confer origin, along with simple mixing, simple assembly and slaughter of animals. (Primer p.221)"
+  },
+  "674": {
+    "question": "If retail packaging is classified with the goods under HS General Interpretative Rule 5, what happens to the cost of the packaging materials when the RVC criterion is applied?",
+    "choices": {
+      "A": "The cost is disregarded entirely",
+      "B": "The cost is deducted from the value of the good",
+      "C": "The cost of these materials and containers is added",
+      "D": "The cost is treated as non-originating regardless of origin"
+    },
+    "correct": "C",
+    "reason": "Such packaging need not meet the change in tariff classification requirement, but its cost is added when the RVC is applied. (Primer p.221)"
+  },
+  "675": {
+    "question": "According to the Primer, which authority certifies the Certificate of Origin of a Philippine exporter?",
+    "choices": {
+      "A": "Tariff Commission",
+      "B": "Department of Trade and Industry",
+      "C": "Bureau of Customs",
+      "D": "Bureau of Internal Revenue"
+    },
+    "correct": "C",
+    "reason": "A CO is a declaration of the exporter certified by the issuing authority, the BOC in the case of a Philippine exporter. (Primer p.222)"
+  },
+  "676": {
+    "question": "Which Certificate of Origin form is used for preferential treatment under the ASEAN-India Free Trade Area (AIFTA)?",
+    "choices": {
+      "A": "Form AJ",
+      "B": "Form AI",
+      "C": "Form AK",
+      "D": "Form D"
+    },
+    "correct": "B",
+    "reason": "Table 8.1 lists Form AI for AIFTA, Form AJ for AJCEPA, Form AK for AKFTA and Form D for ATIGA. (Primer p.222)"
+  },
+  "677": {
+    "question": "Which CO form is used for non-preferential treatment of general merchandise?",
+    "choices": {
+      "A": "Form A",
+      "B": "Form D",
+      "C": "Form E",
+      "D": "White"
+    },
+    "correct": "D",
+    "reason": "Table 8.1 states the CO for non-preferential treatment of general merchandise is the White form. (Primer p.222)"
+  },
+  "678": {
+    "question": "The WTO Agreement on Rules of Origin aims at the harmonization of which type of rules of origin?",
+    "choices": {
+      "A": "Non-preferential rules of origin",
+      "B": "Preferential rules of origin",
+      "C": "Rules of origin of FTAs only",
+      "D": "Rules of origin of the ATIGA only"
+    },
+    "correct": "A",
+    "reason": "The WTO Agreement on ROO aims at harmonization of non-preferential rules of origin. (Primer p.223)"
+  },
+  "679": {
+    "question": "Why was the World Customs Organization chosen to carry out the harmonization of rules of origin?",
+    "choices": {
+      "A": "It administers the WTO dispute settlement system",
+      "B": "It is the author and drafter of the Harmonized System and familiar with its features",
+      "C": "It grants preferential tariff rates to its members",
+      "D": "It sets the tariff rates of all countries"
+    },
+    "correct": "B",
+    "reason": "The WCO was chosen as author and drafter of the HS, with familiarity on the system used by most countries. (Primer p.223)"
+  },
+  "680": {
+    "question": "How often does the Technical Committee on Rules of Origin (TCRO) meet?",
+    "choices": {
+      "A": "Twice a year",
+      "B": "Every two years",
+      "C": "Quarterly",
+      "D": "Once a year"
+    },
+    "correct": "D",
+    "reason": "The TCRO was created under the auspices of the WCO and meets once a year. (Primer p.223)"
+  },
+  "681": {
+    "question": "In what capacity may WCO Members that are not WTO Members be represented at TCRO meetings?",
+    "choices": {
+      "A": "Full voting members",
+      "B": "Chairing members",
+      "C": "Observer status",
+      "D": "Advisors to the WTO Secretariat only"
+    },
+    "correct": "C",
+    "reason": "WCO Members which are not WTO Members may be represented at TCRO meetings in an observer status. (Primer p.223)"
+  },
+  "682": {
+    "question": "The Harmonization Work Programme (HWP) was launched on 20 July 1995 and scheduled for completion by what date?",
+    "choices": {
+      "A": "20 July 1998",
+      "B": "20 July 1995",
+      "C": "01 January 1999",
+      "D": "November 1999"
+    },
+    "correct": "A",
+    "reason": "The HWP was officially launched on 20 July 1995 and scheduled for completion by 20 July 1998. (Primer p.224)"
+  },
+  "683": {
+    "question": "In July 1998, the WTO General Council approved a decision under which Members committed to make their best endeavors to complete the HWP by when?",
+    "choices": {
+      "A": "20 July 1998",
+      "B": "November 1999",
+      "C": "2007",
+      "D": "01 January 1995"
+    },
+    "correct": "B",
+    "reason": "The July 1998 decision committed Members to best endeavors to complete the Programme by November 1999. (Primer p.224)"
+  },
+  "684": {
+    "question": "In what year did negotiations under the Harmonization Work Programme come to a virtual halt due to divergences on core policy issues?",
+    "choices": {
+      "A": "1998",
+      "B": "1999",
+      "C": "2013",
+      "D": "2007"
+    },
+    "correct": "D",
+    "reason": "Negotiations came to a virtual halt in 2007 due to divergences on a number of core policy issues. (Primer p.224)"
+  },
+  "685": {
+    "question": "In which city does the WCO Technical Committee on Rules of Origin (WCO-TCRO) conduct its part of the Harmonization Work Programme?",
+    "choices": {
+      "A": "Geneva",
+      "B": "Paris",
+      "C": "Brussels",
+      "D": "Singapore"
+    },
+    "correct": "C",
+    "reason": "The HWP is conducted by the WTO-CRO in Geneva and the WCO-TCRO in Brussels, respectively. (Primer p.224)"
+  },
+  "686": {
+    "question": "Which of the following is NOT listed in the Primer as a goal of competition policy?",
+    "choices": {
+      "A": "Promote competitiveness in both domestic and foreign markets",
+      "B": "Correct market failure",
+      "C": "Maximize government revenue from import duties",
+      "D": "Enhance consumer welfare"
+    },
+    "correct": "C",
+    "reason": "The Primer lists economic efficiency, correcting market failure, consumer welfare, higher economic growth and competitiveness in domestic and foreign markets as goals; maximizing import-duty revenue is not among them. (Primer p.226)"
+  },
+  "687": {
+    "question": "Among the five basic market structures described in the Primer, which one is similar to perfect competition but has many firms competing by producing similar but slightly different products?",
+    "choices": {
+      "A": "Monopolistic competition",
+      "B": "Oligopoly",
+      "C": "Natural monopoly",
+      "D": "Perfect competition"
+    },
+    "correct": "A",
+    "reason": "Monopolistic competition is described as similar to perfect competition, except that many firms compete by producing similar but slightly different products. (Primer p.226)"
+  },
+  "688": {
+    "question": "Which market structure is characterized by a small number of firms whose choices on strategic variables such as prices, product design, research and development, advertising and sales locations are strongly influenced by other firms in the industry?",
+    "choices": {
+      "A": "Perfect competition",
+      "B": "Monopolistic competition",
+      "C": "Natural monopoly",
+      "D": "Oligopoly"
+    },
+    "correct": "D",
+    "reason": "The Primer defines oligopoly as a market with a small number of firms where the quantity sold by any one firm is influenced by its strategic choices, which are strongly influenced by other firms. (Primer p.226)"
+  },
+  "689": {
+    "question": "Which of the following is NOT listed in the Primer as a source of market failure?",
+    "choices": {
+      "A": "Externalities",
+      "B": "Tariff escalation",
+      "C": "Information asymmetries",
+      "D": "Public goods"
+    },
+    "correct": "B",
+    "reason": "The Primer lists public goods, income distribution, monopoly, externalities and information asymmetries as the sources of market failure; tariff escalation is not listed. (Primer p.227)"
+  },
+  "690": {
+    "question": "Under the Hilmer Report on National Competition Policy for Australia cited in the Primer, what are vertical agreements?",
+    "choices": {
+      "A": "Agreements by two manufacturers to fix the selling price of a product",
+      "B": "Agreements among competitors to share geographic markets",
+      "C": "Agreements among firms at the same level to bid jointly for a tender",
+      "D": "Collusion between firms at different stages of the production chain, such as suppliers and users of business inputs"
+    },
+    "correct": "D",
+    "reason": "Vertical agreements involve firms at different stages of the production chain colluding, e.g., through quotas or exclusive dealings, while horizontal agreements are between enterprises at the same level of the market. (Primer p.227)"
+  },
+  "691": {
+    "question": "According to the Primer, what is the effect of using 'recommended prices' in relation to price-fixing agreements among competitors?",
+    "choices": {
+      "A": "They are less obvious than direct price-fixing but in reality involve the fixing of prices by agreement",
+      "B": "They are always lawful because the prices are only suggestions",
+      "C": "They are treated as retail price maintenance only",
+      "D": "They are allowed only for goods covered by the Price Act"
+    },
+    "correct": "A",
+    "reason": "The Primer states that the use of recommended prices is less obvious than outright price-fixing but in reality involves the fixing of prices by agreement. (Primer p.228)"
+  },
+  "692": {
+    "question": "Which anti-competitive conduct is an agreement between competitors to limit dealings with a particular supplier or customer, such as a boycott, to prevent new firms from entering the market or to force existing firms out?",
+    "choices": {
+      "A": "Market sharing agreement",
+      "B": "Retail price maintenance",
+      "C": "Exclusionary provision",
+      "D": "Tie-in arrangement"
+    },
+    "correct": "C",
+    "reason": "An exclusionary provision limits dealings with a particular supplier, customer or class of customer (e.g., boycotts) to keep new firms out or push existing firms out of the market. (Primer p.228)"
+  },
+  "693": {
+    "question": "Which anti-competitive conduct refers to action by suppliers, manufacturers or wholesalers specifying a minimum price below which goods or services may not be resold or advertised for resale?",
+    "choices": {
+      "A": "Third line forcing",
+      "B": "Retail price maintenance",
+      "C": "Market sharing agreement",
+      "D": "Bid-rigging"
+    },
+    "correct": "B",
+    "reason": "Retail price maintenance is the specification of a minimum price below which goods or services may not be resold or advertised for resale. (Primer p.228)"
+  },
+  "694": {
+    "question": "Applying dissimilar pricing or conditions to equivalent transactions is an example of which type of anti-competitive behavior described in the Primer?",
+    "choices": {
+      "A": "Discriminatory behavior",
+      "B": "Exploitative behavior towards consumers",
+      "C": "Exclusionary behavior towards competitors",
+      "D": "Limiting production, markets or technical development"
+    },
+    "correct": "A",
+    "reason": "The Primer gives applying dissimilar pricing or conditions to equivalent transactions and vice-versa as the example of discriminatory behavior. (Primer p.229)"
+  },
+  "695": {
+    "question": "Which solution to anti-competitive conduct is described as the most direct form of anti-competitive measure that an authority can undertake, applying to activities detrimental to regular competitive behavior such as price fixing?",
+    "choices": {
+      "A": "Authorization",
+      "B": "Notification",
+      "C": "Rule of Reason",
+      "D": "Per se prohibition"
+    },
+    "correct": "D",
+    "reason": "Per se prohibition is the most direct measure, applying to activities detrimental to regular competitive behavior in a market, e.g., price fixing. (Primer p.229)"
+  },
+  "696": {
+    "question": "Which mechanism allows the public benefits from ostensibly anti-competitive conduct to be assessed as a counter-balancing consideration, and includes direct intervention or inquiry by a government commission?",
+    "choices": {
+      "A": "Per se prohibition",
+      "B": "Rule of Reason",
+      "C": "Authorization",
+      "D": "Notification"
+    },
+    "correct": "C",
+    "reason": "Authorization is the mechanism through which public benefits from ostensibly anti-competitive conduct are weighed as a counter-balancing consideration. (Primer p.229)"
+  },
+  "697": {
+    "question": "What is the distinguishing feature of a natural monopoly according to the Primer?",
+    "choices": {
+      "A": "A single firm holds exclusive government-granted rights to the product",
+      "B": "Two or more firms jointly set the market price",
+      "C": "A single facility can supply the entire market demand more efficiently than two or more smaller facilities",
+      "D": "Entry is blocked by a ban on foreign investment"
+    },
+    "correct": "C",
+    "reason": "The Primer states that a single facility being able to supply the entire market demand more efficiently than two or more smaller facilities is the distinguishing feature of a natural monopoly. (Primer p.230)"
+  },
+  "698": {
+    "question": "Which of the following is NOT listed in the Primer as a source of barriers to entry that results from regulation affecting competition?",
+    "choices": {
+      "A": "Economies of scale due to market share achieved by incumbents",
+      "B": "Subsidies granted to new entrants by the Tariff Commission",
+      "C": "Monopoly access to key infrastructure",
+      "D": "Capital requirements, including investment in brand development through advertising"
+    },
+    "correct": "B",
+    "reason": "The listed sources are economies of scale, capital requirements, cost savings from incumbents' experience, monopoly access to key infrastructure and monopoly of key industry knowledge; subsidies to new entrants are not listed. (Primer p.230)"
+  },
+  "699": {
+    "question": "Within the framework of competition policy, an essential facility is a major infrastructure exhibiting which two characteristics?",
+    "choices": {
+      "A": "It is essential to the effective operation of an economic organization and exhibits natural monopoly characteristics",
+      "B": "It is government-owned and exempt from competition law",
+      "C": "It is located within an economic zone and serves only exporters",
+      "D": "It is privately financed and open to all competitors free of charge"
+    },
+    "correct": "A",
+    "reason": "An essential facility is essential to the effective operation of an economic organization and has natural monopoly characteristics, e.g., electricity grids, rail infrastructure, roads, port facilities, pipelines and telecommunications networks. (Primer p.230)"
+  },
+  "700": {
+    "question": "According to the Primer, competition policy and law need to ensure that workable competition is maintained in which type of industries?",
+    "choices": {
+      "A": "Perfectly competitive industries",
+      "B": "Export-oriented industries",
+      "C": "Public utility industries",
+      "D": "Oligopolistic industries"
+    },
+    "correct": "D",
+    "reason": "One of the main concerns listed is ensuring that workable competition is maintained in oligopolistic industries. (Primer p.231)"
+  },
+  "701": {
+    "question": "Competition policy and law need to monitor mergers between independent enterprises because the merger may result in what?",
+    "choices": {
+      "A": "Higher tariff revenue and lower imports",
+      "B": "Market concentration and reduction in competition",
+      "C": "Greater price transparency in the industry",
+      "D": "Lower barriers to entry for new firms"
+    },
+    "correct": "B",
+    "reason": "The Primer lists monitoring of mergers where the effect may be market concentration and a reduction in competition as a main concern. (Primer p.231)"
+  },
+  "702": {
+    "question": "Which formal body was established by the ASEAN Economic Ministers (AEM) in August 2007 to discuss and coordinate competition policies of ASEAN Member States?",
+    "choices": {
+      "A": "ASEAN Competition Authority Network",
+      "B": "ASEAN Coordinating Committee on Competition",
+      "C": "ASEAN Competition Commission",
+      "D": "ASEAN Experts Group on Competition (AEGC)"
+    },
+    "correct": "D",
+    "reason": "The AEGC is a formal body established by the AEM in August 2007 to act as a regional forum on competition policies. (Primer p.232)"
+  },
+  "703": {
+    "question": "The ASEAN Experts Group on Competition (AEGC) is composed of representatives from the competition authorities of all ASEAN Member States nominated by whom?",
+    "choices": {
+      "A": "Their respective Senior Economic Officials",
+      "B": "The ASEAN Foreign Ministers",
+      "C": "The Directors-General of Customs",
+      "D": "The ASEAN Secretary-General"
+    },
+    "correct": "A",
+    "reason": "AEGC members are representatives of the AMSs' competition authorities nominated by their respective Senior Economic Officials. (Primer p.232)"
+  },
+  "704": {
+    "question": "Which strategic measure of the ASEAN Competition Action Plan 2016-2025 involves establishing platforms for regular exchange and engagement, encouraging competition compliance and creating an enhanced regional web portal for competition policy and law?",
+    "choices": {
+      "A": "Establish effective competition regimes by putting in place competition laws for AMSs that do not have them",
+      "B": "Strengthen capacities of competition-related agencies in AMSs",
+      "C": "Foster a 'competition-aware' region that supports fair competition",
+      "D": "Establish Regional Cooperation Arrangements on competition policy and law"
+    },
+    "correct": "C",
+    "reason": "The 'competition-aware' region measure covers platforms for exchange, compliance, an enhanced regional web portal, and outreach to stakeholders. (Primer p.232)"
+  },
+  "705": {
+    "question": "Which strategic measure of the ASEAN Competition Action Plan 2016-2025 calls for developing a regional strategy on convergence?",
+    "choices": {
+      "A": "Foster a 'competition-aware' region",
+      "B": "Achieve greater harmonization of competition policy and law in ASEAN",
+      "C": "Strengthen capacities of competition-related agencies",
+      "D": "Continue to enhance competition policy and law taking into account international best practices"
+    },
+    "correct": "B",
+    "reason": "Measure (e) seeks greater harmonization of competition policy and law in ASEAN by developing a regional strategy on convergence. (Primer p.233)"
+  },
+  "706": {
+    "question": "According to the Primer, cooperation in competition policy among ASEAN Member States improves the efficiency and effectiveness of national competition regulatory bodies through what?",
+    "choices": {
+      "A": "Sharing and exchange of non-confidential information, knowledge and resources",
+      "B": "Pooling of confidential case files of all ASEAN Member States",
+      "C": "Centralizing all enforcement in the ASEAN Secretariat",
+      "D": "Creating a single regional court for competition cases"
+    },
+    "correct": "A",
+    "reason": "The Primer lists the sharing and exchange of non-confidential information, knowledge and resources as how cooperation improves national regulatory bodies. (Primer p.233)"
+  },
+  "707": {
+    "question": "According to Table 9.1 of the Primer, which is the competition authority of Thailand?",
+    "choices": {
+      "A": "Thai Competition Commission",
+      "B": "Department of Internal Trade",
+      "C": "Competition and Consumer Commission of Thailand",
+      "D": "Office of Trade Competition Commission"
+    },
+    "correct": "D",
+    "reason": "Table 9.1 lists the Office of Trade Competition Commission as the competition authority of Thailand. (Primer p.234)"
+  },
+  "708": {
+    "question": "Article 186 of the Revised Penal Code of the Philippines, which punishes monopolization and combinations in restraint of trade, is described in the Primer as similar in nature to which US law provision?",
+    "choices": {
+      "A": "Section 7 of the Clayton Act",
+      "B": "Section 5 of the Federal Trade Commission Act",
+      "C": "Section 2 of the Sherman Act",
+      "D": "Section 2 of the Robinson-Patman Act"
+    },
+    "correct": "C",
+    "reason": "The Primer notes that Article 186 of the Revised Penal Code is similar in nature to Section 2 of the US Sherman Act. (Primer p.235)"
+  },
+  "709": {
+    "question": "Which Philippine law, known as an Act to Prohibit Monopolies and Combinations in Restraint of Trade, provides for treble damages for civil liabilities arising from anti-competitive behavior?",
+    "choices": {
+      "A": "RA No. 7581",
+      "B": "RA No. 3247",
+      "C": "RA No. 7394",
+      "D": "RA No. 386"
+    },
+    "correct": "B",
+    "reason": "RA No. 3247 provides for treble damages for civil liabilities arising from anti-competitive behavior. (Primer p.235)"
+  },
+  "710": {
+    "question": "Which Executive Order designates the Office for Competition (OFC) of the Department of Justice as the Competition Authority of the Philippines?",
+    "choices": {
+      "A": "EO No. 143",
+      "B": "EO No. 61",
+      "C": "EO No. 892",
+      "D": "EO No. 45"
+    },
+    "correct": "D",
+    "reason": "EO No. 45 designates the OFC of the Department of Justice as the Competition Authority. (Primer p.235)"
+  },
+  "711": {
+    "question": "On what date was Republic Act No. 10667, the Philippine Competition Act, signed?",
+    "choices": {
+      "A": "21 July 2015",
+      "B": "18 May 2012",
+      "C": "13 March 2013",
+      "D": "05 December 2015"
+    },
+    "correct": "A",
+    "reason": "The Primer states that RA No. 10667 was signed on 21 July 2015. (Primer p.236)"
+  },
+  "712": {
+    "question": "Of which functional unit or Working Group of the Office for Competition (OFC) was the Tariff Commission the Co-Chair?",
+    "choices": {
+      "A": "Enforcement and Legal",
+      "B": "Consumer Protection and Welfare",
+      "C": "Advocacy and Partnership",
+      "D": "Policy and Planning"
+    },
+    "correct": "C",
+    "reason": "The Tariff Commission was Co-Chair of the Working Group on Advocacy and Partnership. (Primer p.236)"
+  },
+  "713": {
+    "question": "On what date of every year does Proclamation No. 384 (s. 2012) declare National Competition Day?",
+    "choices": {
+      "A": "18 May",
+      "B": "21 July",
+      "C": "13 March",
+      "D": "05 December"
+    },
+    "correct": "D",
+    "reason": "Proclamation No. 384 declares 05 December of every year as National Competition Day. (Primer p.236)"
+  },
+  "714": {
+    "question": "Among the powers of the Philippine Competition Commission (PCC) listed in the Primer, a subpoena duces tecum is issued to require what?",
+    "choices": {
+      "A": "The personal appearance of witnesses before the PCC",
+      "B": "The production of books, records or other documents or data relating to a matter relevant to the investigation",
+      "C": "The inspection of business premises, offices, land and vehicles",
+      "D": "The deputization of enforcement agencies of the government"
+    },
+    "correct": "B",
+    "reason": "A subpoena duces tecum requires production of books, records or other documents or data, while a subpoena ad testificandum requires personal appearance. (Primer p.237)"
+  },
+  "715": {
+    "question": "Under the powers of the Philippine Competition Commission, inspections of business premises, offices, land and vehicles used by an entity may be undertaken upon whose order?",
+    "choices": {
+      "A": "Order of the court",
+      "B": "Order of the Secretary of Justice",
+      "C": "Order of the President",
+      "D": "Order of the Office for Competition"
+    },
+    "correct": "A",
+    "reason": "The PCC may undertake such inspections upon order of the court where it reasonably suspects that relevant records are kept there. (Primer p.237)"
+  },
+  "716": {
+    "question": "To which body does the Philippine Competition Commission submit annual and special reports, including proposed legislation for the regulation of commerce, trade or industry?",
+    "choices": {
+      "A": "Congress",
+      "B": "The Office of the President",
+      "C": "The Department of Justice",
+      "D": "The National Economic and Development Authority"
+    },
+    "correct": "A",
+    "reason": "Among its functions, the PCC issues advisory opinions and guidelines and submits annual and special reports to Congress, including proposed legislation. (Primer p.237)"
+  },
+  "717": {
+    "question": "In accordance with Section 31 of Chapter VI of the Philippine Competition Act, which body undertakes the preliminary investigation and prosecution of all criminal offenses arising under the Act and other competition-related laws?",
+    "choices": {
+      "A": "Philippine Competition Commission",
+      "B": "Tariff Commission",
+      "C": "Securities and Exchange Commission",
+      "D": "Office for Competition (OFC)"
+    },
+    "correct": "D",
+    "reason": "Under Section 31 of Chapter VI of the Philippine Competition Act, the OFC undertakes preliminary investigation and prosecution of criminal offenses arising under the Act and other competition-related laws. (Primer p.238)"
+  },
+  "718": {
+    "question": "In which chapter of the Philippines-Japan Economic Partnership Agreement (PJEPA) can the competition policy provisions be found, according to the Primer?",
+    "choices": {
+      "A": "Chapter 8",
+      "B": "Chapter 14",
+      "C": "Chapter 12",
+      "D": "Chapter 10"
+    },
+    "correct": "C",
+    "reason": "The Primer lists Chapter 12 of the PJEPA among the FTA chapters with competition-related provisions to which the Philippines is a party. (Primer p.238)"
+  },
+  "719": {
+    "question": "Which international organization, in 1998, defined e-commerce as the production, distribution, marketing, sale or delivery of goods and services by electronic means?",
+    "choices": {
+      "A": "Organization for Economic Co-operation and Development (OECD)",
+      "B": "World Trade Organization (WTO)",
+      "C": "United Nations Conference on Trade and Development (UNCTAD)",
+      "D": "World Customs Organization (WCO)"
+    },
+    "correct": "B",
+    "reason": "The Primer cites the WTO (1998) as defining e-commerce as the production, distribution, marketing, sale or delivery of goods and services by electronic means. (Primer p.240)"
+  },
+  "720": {
+    "question": "Which of the following is NOT among the essential elements of e-commerce enumerated by the World Customs Organization (WCO)?",
+    "choices": {
+      "A": "Online ordering, sale, communication and, if applicable, payment",
+      "B": "Domestic-only transactions between residents of the same country",
+      "C": "Physical (tangible) goods",
+      "D": "Destined to consumer or buyer (commercial and non-commercial)"
+    },
+    "correct": "B",
+    "reason": "The WCO elements are online ordering, sale, communication and payment; cross-border transactions or shipments; physical goods; and destination to a consumer or buyer. Domestic-only transactions are not an element. (Primer p.240)"
+  },
+  "721": {
+    "question": "In Figure 10.1 of the Primer (A Representation of the Digital Economy, UNCTAD), what is shown as the core of the digital economy?",
+    "choices": {
+      "A": "E-commerce",
+      "B": "Sharing economy",
+      "C": "Digital (IT/ICT) sector",
+      "D": "Platform economy"
+    },
+    "correct": "C",
+    "reason": "Figure 10.1 shows the digitalized economy as the broad scope, the digital economy as the narrow scope, and the digital (IT/ICT) sector as the core. (Primer p.240)"
+  },
+  "722": {
+    "question": "For purposes of collecting statistics, e-commerce is defined as the sale or purchase of goods and services conducted over computer-mediated networks by which Philippine agency, as cited in the Primer?",
+    "choices": {
+      "A": "Bangko Sentral ng Pilipinas",
+      "B": "Department of Trade and Industry",
+      "C": "Tariff Commission",
+      "D": "Philippine Statistics Authority"
+    },
+    "correct": "D",
+    "reason": "The Primer cites the Philippine Statistics Authority definition of e-commerce for statistical purposes, noting that payment and delivery may be conducted on or offline. (Primer p.241)"
+  },
+  "723": {
+    "question": "According to the Primer, what are the three main factors affecting the development of the e-marketplace?",
+    "choices": {
+      "A": "Economic factors and conditions; legal and institutional environment; social acceptance and awareness",
+      "B": "Tariff rates; transport costs; exchange rates",
+      "C": "Government subsidies; foreign investment; labor supply",
+      "D": "Internet speed; device prices; advertising spending"
+    },
+    "correct": "A",
+    "reason": "The three main factors are economic factors and conditions, the legal and institutional environment, and social acceptance and awareness (Table 10.1). (Primer p.241)"
+  },
+  "724": {
+    "question": "Which author's 2017 description defines digital trade as commerce involving more than one country for which the product itself is digital and/or advertising, ordering, delivering, payment or servicing is accomplished at least in part using the internet or similar digital technology?",
+    "choices": {
+      "A": "López González",
+      "B": "Serafica",
+      "C": "Deardorff",
+      "D": "Kshetri"
+    },
+    "correct": "C",
+    "reason": "The Primer cites Deardorff (2017) for this definition of digital trade. (Primer p.242)"
+  },
+  "725": {
+    "question": "Which of the following is listed as a cost of using e-commerce in Table 10.2 of the Primer (ADB, Embracing the E-Commerce Revolution in Asia and the Pacific)?",
+    "choices": {
+      "A": "Increased energy consumption and higher carbon emissions",
+      "B": "Reduced participation in global value chains",
+      "C": "Lower labor productivity",
+      "D": "Potential to distort competition"
+    },
+    "correct": "D",
+    "reason": "Table 10.2 lists costs such as required social and physical capital investments, transfer pricing and tax revenue erosion, widening economic disparity and potential distortion of competition. (Primer p.242)"
+  },
+  "726": {
+    "question": "According to the Primer, digital trade can be broken down into which three dimensions?",
+    "choices": {
+      "A": "Value, volume and destination",
+      "B": "Nature, type of flow and actors involved",
+      "C": "Platform, payment and delivery",
+      "D": "Origin, price and classification"
+    },
+    "correct": "B",
+    "reason": "The Primer states that digital trade has three dimensions: nature, type of flow, and the actors involved. (Primer p.242)"
+  },
+  "727": {
+    "question": "According to the Primer, apart from which country have few countries been successful at exporting both ICT goods and ICT services?",
+    "choices": {
+      "A": "Philippines",
+      "B": "Malaysia",
+      "C": "Viet Nam",
+      "D": "Republic of Korea"
+    },
+    "correct": "A",
+    "reason": "The Primer states that, apart from the Philippines, few countries have been successful at exporting both ICT goods and services. (Primer p.243)"
+  },
+  "728": {
+    "question": "According to the Primer, ICT goods account for what share of all merchandise exports of Hong Kong (China), which is linked to re-exports from mainland China?",
+    "choices": {
+      "A": "About one quarter",
+      "B": "About one third",
+      "C": "Less than 10 per cent",
+      "D": "More than half"
+    },
+    "correct": "D",
+    "reason": "The Primer states that in Hong Kong (China), ICT goods account for more than half of all merchandise exports. (Primer p.243)"
+  },
+  "729": {
+    "question": "What does the UNCTAD B2C E-commerce Index measure?",
+    "choices": {
+      "A": "The value of cross-border online sales of an economy",
+      "B": "The share of ICT goods in total merchandise trade",
+      "C": "An economy's preparedness to support online shopping",
+      "D": "The number of online shoppers per million people"
+    },
+    "correct": "C",
+    "reason": "The UNCTAD B2C E-commerce Index measures an economy's preparedness to support online shopping. (Primer p.244)"
+  },
+  "730": {
+    "question": "How many indicators make up the UNCTAD B2C E-commerce Index, according to the Primer?",
+    "choices": {
+      "A": "Three",
+      "B": "Four",
+      "C": "Five",
+      "D": "Six"
+    },
+    "correct": "B",
+    "reason": "The index consists of four indicators that are highly related to online shopping and have wide country coverage. (Primer p.244)"
+  },
+  "731": {
+    "question": "Which of the following is NOT one of the indicators of the UNCTAD B2C E-commerce Index listed in the Primer?",
+    "choices": {
+      "A": "Individuals using the Internet (percent of population)",
+      "B": "Postal Reliability Index",
+      "C": "Secure Internet servers (per 1 million people)",
+      "D": "Share of ICT goods in total merchandise exports"
+    },
+    "correct": "D",
+    "reason": "The four indicators are account ownership, individuals using the Internet, the Postal Reliability Index and secure Internet servers; ICT goods share is not one. (Primer p.244)"
+  },
+  "732": {
+    "question": "Which economy ranked first in the UNCTAD B2C E-commerce Index 2019, according to Table 10.3 of the Primer?",
+    "choices": {
+      "A": "Netherlands",
+      "B": "Switzerland",
+      "C": "Singapore",
+      "D": "Finland"
+    },
+    "correct": "A",
+    "reason": "Table 10.3 shows the Netherlands at the top of the B2C E-commerce Index 2019, followed by Switzerland and Singapore. (Primer p.245)"
+  },
+  "733": {
+    "question": "Among the nine ASEAN countries (excluding Brunei Darussalam), where did the Philippines rank in terms of B2C E-commerce Index value, according to the Primer?",
+    "choices": {
+      "A": "Third",
+      "B": "Fourth",
+      "C": "Sixth",
+      "D": "Ninth"
+    },
+    "correct": "C",
+    "reason": "The Primer states that among the nine ASEAN countries, excluding Brunei Darussalam, the Philippines ranked six in terms of index value. (Primer p.245)"
+  },
+  "734": {
+    "question": "The movement of the Philippines' B2C E-commerce Index value from 2015 to 2019 mirrors the trend of which ASEAN country, according to the Primer?",
+    "choices": {
+      "A": "Malaysia",
+      "B": "Indonesia",
+      "C": "Thailand",
+      "D": "Viet Nam"
+    },
+    "correct": "B",
+    "reason": "The Primer states that the Philippines' index value movement from 2015 to 2019 mirrors the trend of Indonesia (Figure 10.6). (Primer p.245)"
+  },
+  "735": {
+    "question": "Which economy ranked tenth in the Top 10 economies of the UNCTAD B2C E-commerce Index 2019 shown in Table 10.3 of the Primer?",
+    "choices": {
+      "A": "Australia",
+      "B": "Germany",
+      "C": "Ireland",
+      "D": "Norway"
+    },
+    "correct": "A",
+    "reason": "Table 10.3 lists Australia at rank 10 of the top 10 economies in the 2019 index. (Primer p.245)"
+  },
+  "736": {
+    "question": "Which law is described in the Primer as the primary law on e-commerce in the Philippines?",
+    "choices": {
+      "A": "Republic Act No. 7394 (Consumer Act of the Philippines)",
+      "B": "Republic Act No. 8792 (Electronic Commerce Act of 2000)",
+      "C": "Republic Act No. 10173 (Data Privacy Act of 2012)",
+      "D": "Republic Act No. 10175 (Cybercrime Prevention Act of 2012)"
+    },
+    "correct": "B",
+    "reason": "RA No. 8792 is the primary e-commerce law. It gives legal recognition to electronic data messages, documents, signatures and transactions, and penalizes access of data without consent, piracy and hacking. (Primer p.246)"
+  },
+  "737": {
+    "question": "According to the We Are Social (2020) survey cited in the Primer, how many internet users are there in the Philippines (67 percent of the population)?",
+    "choices": {
+      "A": "53 million",
+      "B": "61 million",
+      "C": "91 million",
+      "D": "73 million"
+    },
+    "correct": "D",
+    "reason": "The survey cited in the Primer reports 73 million internet users in the Philippines, equal to 67 percent of the population. (Primer p.246)"
+  },
+  "738": {
+    "question": "In 2019, which e-commerce consumer category topped Philippine consumer spending at approximately US$6.87 billion?",
+    "choices": {
+      "A": "Travel (including accommodation)",
+      "B": "Video games",
+      "C": "Electronics and physical media",
+      "D": "Fashion and beauty"
+    },
+    "correct": "A",
+    "reason": "Travel, including accommodation, was the top category at about US$6.87 billion. It was followed by video games, then electronics and physical media, then fashion and beauty. (Primer p.246)"
+  },
+  "739": {
+    "question": "According to the Primer, the COVID-19 pandemic's increase in business-to-consumer (B2C) e-commerce sales was particularly evident in online sales of which products?",
+    "choices": {
+      "A": "Luxury goods, jewelry and vehicles",
+      "B": "Industrial machinery and construction materials",
+      "C": "Medical supplies, household essentials and food products",
+      "D": "Travel packages and hotel bookings"
+    },
+    "correct": "C",
+    "reason": "The Primer states that the increase in B2C sales was particularly evident in online sales of medical supplies, household essentials and food products. (Primer p.248)"
+  },
+  "740": {
+    "question": "In the Primer's discussion of e-commerce challenges during the COVID-19 pandemic, what does 'price gouging' mean?",
+    "choices": {
+      "A": "Delivering goods later than promised",
+      "B": "Increasing prices to unreasonably high levels",
+      "C": "Cancelling customer orders outright",
+      "D": "Selling counterfeit versions of products"
+    },
+    "correct": "B",
+    "reason": "The Primer explains price gouging as increasing prices to unreasonably high levels, one of several e-commerce challenges amplified during the pandemic. (Primer p.248)"
+  },
+  "741": {
+    "question": "Which of the following is NOT among the recommendations of Serafica and Albert (2018) for the Philippines to take advantage of digital trade?",
+    "choices": {
+      "A": "Exploit the comparative advantage of the Philippines in digital trade",
+      "B": "Improve ICT and e-commerce measurement and reporting",
+      "C": "Address the policy gaps and regulatory constraints",
+      "D": "Impose import duties on all digitally delivered products"
+    },
+    "correct": "D",
+    "reason": "Serafica and Albert recommend exploiting comparative advantage, developing industry roadmaps and export strategies, improving ICT and e-commerce measurement and reporting, and addressing policy gaps and regulatory constraints. Imposing import duties on digital products is not among them. (Primer p.249)"
+  },
+  "742": {
+    "question": "According to Serafica and Albert (2018), what should the Philippines develop for digital products?",
+    "choices": {
+      "A": "Industry roadmaps and export strategies",
+      "B": "Price controls and minimum export prices",
+      "C": "Local-content requirements for digital platforms",
+      "D": "A separate customs valuation system"
+    },
+    "correct": "A",
+    "reason": "One of the four recommendations is to develop industry roadmaps and export strategies for digital products. (Primer p.249)"
+  },
+  "743": {
+    "question": "In Annex C of the Primer, on what date was Republic Act No. 8792 (Electronic Commerce Act of 2000) issued?",
+    "choices": {
+      "A": "05 July 2000",
+      "B": "12 July 2000",
+      "C": "14 June 2000",
+      "D": "13 July 2000"
+    },
+    "correct": "C",
+    "reason": "Annex C lists RA No. 8792, the Electronic Commerce Act of 2000, with a date of issuance of 14 June 2000. (Primer p.251)"
+  },
+  "744": {
+    "question": "Which Executive Order established the Information Technology and E-commerce Council (ITECC) from the merger of the National Information Technology Council (NITC) and the Electronic Commerce Promotion Council (ECPC)?",
+    "choices": {
+      "A": "Executive Order No. 262",
+      "B": "Executive Order No. 265",
+      "C": "Executive Order No. 322",
+      "D": "Executive Order No. 264"
+    },
+    "correct": "D",
+    "reason": "Executive Order No. 264, issued 12 July 2000, established the ITECC from the merger of the NITC and the ECPC. (Primer p.251)"
+  },
+  "745": {
+    "question": "Executive Order No. 265 (12 July 2000) approved and adopted which framework and guide for all computerization efforts in government?",
+    "choices": {
+      "A": "The Electronic Procurement System",
+      "B": "The Government Information Systems Plan (GISP)",
+      "C": "The Rules on Electronic Evidence",
+      "D": "The Electronic Payment and Collection System"
+    },
+    "correct": "B",
+    "reason": "Executive Order No. 265 approved and adopted the Government Information Systems Plan (GISP) as the framework and guide for all computerization efforts in government. (Primer p.251)"
+  },
+  "746": {
+    "question": "Which Executive Order, issued 10 January 2003, modified the rates of import duty of Information and Communications Technology (ICT) products under the Tariff and Customs Code of 1978 to implement the e-ASEAN Framework Agreement?",
+    "choices": {
+      "A": "Executive Order No. 163",
+      "B": "Executive Order No. 269",
+      "C": "Executive Order No. 334",
+      "D": "Executive Order No. 482"
+    },
+    "correct": "A",
+    "reason": "Annex C lists Executive Order No. 163 (10 January 2003) as modifying import duty rates on ICT products under the Tariff and Customs Code of 1978 (PD No. 1464, as amended) to implement the e-ASEAN Framework Agreement. (Primer p.252)"
+  },
+  "747": {
+    "question": "Executive Order No. 269 (12 January 2004) created which body?",
+    "choices": {
+      "A": "Information Technology and E-commerce Council",
+      "B": "National Information Technology Council",
+      "C": "Commission on Information and Communications Technology (CICT)",
+      "D": "National Telecommunications Commission"
+    },
+    "correct": "C",
+    "reason": "Executive Order No. 269 created the Commission on Information and Communications Technology (CICT). (Primer p.252)"
+  },
+  "748": {
+    "question": "What did Executive Order No. 334 (20 July 2004) do with respect to the Information Technology and Electronic Commerce Council (ITECC)?",
+    "choices": {
+      "A": "It created the ITECC from a merger of two councils",
+      "B": "It transferred the ITECC to the Department of Science and Technology",
+      "C": "It converted the ITECC into the National Single Window Task Force",
+      "D": "It abolished the ITECC and transferred its budget, assets, personnel, programs and projects to the CICT"
+    },
+    "correct": "D",
+    "reason": "Executive Order No. 334 abolished the ITECC and transferred its budget, assets, personnel, programs and projects to the Commission on Information and Communications Technology. (Primer p.252)"
+  },
+  "749": {
+    "question": "Executive Order No. 482 (27 December 2005) created which body?",
+    "choices": {
+      "A": "National Single Window Task Force for Cargo Clearance",
+      "B": "Electronic Procurement System Task Force",
+      "C": "Commission on Information and Communications Technology",
+      "D": "GEPCSET (the electronic payment and collection committee)"
+    },
+    "correct": "A",
+    "reason": "Annex C lists Executive Order No. 482, dated 27 December 2005, as creating the National Single Window Task Force for Cargo Clearance. (Primer p.253)"
+  },
+  "750": {
+    "question": "According to Annex C, on what date did the Philippines sign the UN Convention on the Use of Electronic Communications in International Contracts (2005)?",
+    "choices": {
+      "A": "08 June 2007",
+      "B": "25 September 2007",
+      "C": "18 July 2007",
+      "D": "20 October 2008"
+    },
+    "correct": "B",
+    "reason": "Annex C records the signing of the UN Convention on the Use of Electronic Communications in International Contracts (2005) on 25 September 2007. (Primer p.253)"
+  },
+  "751": {
+    "question": "Which body was created by Republic Act No. 10173 (Data Privacy Act of 2012)?",
+    "choices": {
+      "A": "Commission on Information and Communications Technology",
+      "B": "Tariff Commission",
+      "C": "National Privacy Commission",
+      "D": "Philippine Competition Commission"
+    },
+    "correct": "C",
+    "reason": "The Data Privacy Act of 2012 protects individual personal information in information and communications systems in government and the private sector and creates a National Privacy Commission. (Primer p.254)"
+  },
+  "752": {
+    "question": "In Annex C, on what date was Republic Act No. 10175 (Cybercrime Prevention Act of 2012) issued?",
+    "choices": {
+      "A": "12 September 2012",
+      "B": "15 August 2012",
+      "C": "23 June 2011",
+      "D": "05 August 2013"
+    },
+    "correct": "A",
+    "reason": "Annex C lists RA No. 10175, the Cybercrime Prevention Act of 2012, with a date of issuance of 12 September 2012. The Data Privacy Act is dated 15 August 2012. (Primer p.254)"
+  },
+  "753": {
+    "question": "Executive Order No. 810 (15 June 2009) institutionalized which scheme?",
+    "choices": {
+      "A": "The Electronic Payment and Collection System",
+      "B": "The Rules on Electronic Evidence",
+      "C": "The Government Procurement Reform Act",
+      "D": "The Certification Scheme for Digital Signatures"
+    },
+    "correct": "D",
+    "reason": "Executive Order No. 810 institutionalized the Certification Scheme for Digital Signatures and directed the application of digital signatures in e-government services. (Primer p.254)"
+  },
+  "754": {
+    "question": "What is the subject of Department of Justice (DOJ) Advisory Opinion No. 02-2015, dated 30 April 2015?",
+    "choices": {
+      "A": "Electronic commerce of insurance products",
+      "B": "Advisory on online shopping fraud",
+      "C": "Europay, Mastercard and Visa (EMV) implementation",
+      "D": "Taxpayers' obligations in relation to online business transactions"
+    },
+    "correct": "B",
+    "reason": "Annex C lists DOJ Advisory Opinion No. 02-2015, dated 30 April 2015, as an Advisory on Online Shopping Fraud. (Primer p.255)"
+  },
+  "755": {
+    "question": "BSP Circular No. 859 (24 November 2014) provides guidelines on what?",
+    "choices": {
+      "A": "Financial consumer protection",
+      "B": "Information technology risk management",
+      "C": "Europay, Mastercard and Visa (EMV) implementation",
+      "D": "Electronic money and electronic money issuers"
+    },
+    "correct": "C",
+    "reason": "BSP Circular No. 859 contains the Europay, Mastercard and Visa (EMV) Implementation Guidelines. Financial consumer protection is covered by BSP Circular No. 857. (Primer p.255)"
+  },
+  "756": {
+    "question": "Among the arguments for protectionism, which one does the Primer describe as the most important argument?",
+    "choices": {
+      "A": "Infant-industry protection",
+      "B": "Revenue and finance requirements",
+      "C": "Existence of market failures",
+      "D": "National security"
+    },
+    "correct": "D",
+    "reason": "The Primer says developing countries argue mostly for revenue purposes and infant industries, yet the most important argument is national security. (Primer p.256)"
+  },
+  "757": {
+    "question": "According to the Global Trade Alert Report for 2009-2020 cited in the Primer, in which year was the highest number of harmful interventions recorded?",
+    "choices": {
+      "A": "2018",
+      "B": "2019",
+      "C": "2016",
+      "D": "2020"
+    },
+    "correct": "A",
+    "reason": "The highest number of harmful interventions was recorded in 2018, with 2,204 harmful measures, and the number then decreased in 2019. (Primer p.256)"
+  },
+  "758": {
+    "question": "How many harmful interventions did ASEAN contribute, of which 27 came from the Philippines, according to the Primer?",
+    "choices": {
+      "A": "2,089",
+      "B": "895",
+      "C": "2,902",
+      "D": "5,657"
+    },
+    "correct": "B",
+    "reason": "ASEAN contributed 895 harmful interventions, 27 of them from the Philippines. Other FTA partners contributed 5,657, the USA 2,089 and the EU 2,902. (Primer p.256)"
+  },
+  "759": {
+    "question": "According to the Primer, what is the Philippines' average bound tariff on agricultural products, which includes sensitive products such as sugar and rice?",
+    "choices": {
+      "A": "12 percent",
+      "B": "25 percent",
+      "C": "47 percent",
+      "D": "35 percent"
+    },
+    "correct": "D",
+    "reason": "The Primer states that the Philippines' average bound tariffs on agricultural products are at 35 percent, including sensitive products such as sugar and rice. (Primer p.258)"
+  },
+  "760": {
+    "question": "Among the CLMV countries, which one has the highest average bound tariff on agricultural products, at 102.9 percent?",
+    "choices": {
+      "A": "Cambodia",
+      "B": "Viet Nam",
+      "C": "Myanmar",
+      "D": "Lao PDR"
+    },
+    "correct": "C",
+    "reason": "For CLMV, Myanmar has the highest average bound tariff on agricultural products at 102.9 percent. (Primer p.258)"
+  },
+  "761": {
+    "question": "According to the Primer, which ASEAN country has the lowest average bound tariffs for all products?",
+    "choices": {
+      "A": "Singapore",
+      "B": "Brunei Darussalam",
+      "C": "Malaysia",
+      "D": "Thailand"
+    },
+    "correct": "A",
+    "reason": "For all products, Singapore has the lowest average bound tariffs in ASEAN. Brunei Darussalam is cited for high bound rates despite imposing no duties on imported agricultural products. (Primer p.258)"
+  },
+  "762": {
+    "question": "Which ASEAN country ranked first in the number of non-tariff measures (NTMs) in place, with 2,096 measures of which 50 percent are technical barriers to trade (TBTs)?",
+    "choices": {
+      "A": "Indonesia",
+      "B": "Thailand",
+      "C": "Viet Nam",
+      "D": "Philippines"
+    },
+    "correct": "B",
+    "reason": "In ASEAN, Thailand ranked first with 2,096 NTMs, 50 percent of which are TBTs. (Primer p.259)"
+  },
+  "763": {
+    "question": "According to the UNCTAD TRAINS Database figures cited in the Primer, what is the total number of NTMs the Philippines currently has in place?",
+    "choices": {
+      "A": "589",
+      "B": "835",
+      "C": "2,096",
+      "D": "1,031"
+    },
+    "correct": "D",
+    "reason": "The Philippines currently has a total of 1,031 measures in place, of which 196 are export-related. (Primer p.259)"
+  },
+  "764": {
+    "question": "Among the Philippines' FTA partners, which country imposes the highest applied MFN tariffs on agricultural products, at 57 percent?",
+    "choices": {
+      "A": "Norway",
+      "B": "India",
+      "C": "South Korea",
+      "D": "Switzerland"
+    },
+    "correct": "C",
+    "reason": "South Korea imposes the highest applied MFN tariffs on agricultural products (57%), followed by Norway (44.9%), India (38.8%) and Switzerland (36.5%). (Primer p.259)"
+  },
+  "765": {
+    "question": "The two anti-dumping measures currently imposed by the Philippines, according to the Primer, are on imports of which products?",
+    "choices": {
+      "A": "Clear and bronze float glass from China and wheat flour from Turkey",
+      "B": "Cement from Viet Nam and rice from Thailand",
+      "C": "Testliner board and cement",
+      "D": "Motor vehicles and steel from China"
+    },
+    "correct": "A",
+    "reason": "The Philippines has two anti-dumping measures, on clear and bronze float glass from China and wheat flour from Turkey. The Tariff Commission is conducting an expiry review of the wheat flour measure. (Primer p.260)"
+  },
+  "766": {
+    "question": "The two safeguard measures in force in the Philippines, according to the Primer, are on imports of which products?",
+    "choices": {
+      "A": "Float glass and wheat flour",
+      "B": "Testliner board and cement",
+      "C": "Motor vehicles and cement",
+      "D": "Wheat flour and testliner board"
+    },
+    "correct": "B",
+    "reason": "The Primer states that the Philippines has two safeguard measures in force, on imported testliner board and cement. (Primer p.260)"
+  },
+  "767": {
+    "question": "The Philippines is the only ASEAN member country with special safeguards imposed on agricultural products. Which agency monitors these special safeguards?",
+    "choices": {
+      "A": "Department of Trade and Industry",
+      "B": "Tariff Commission",
+      "C": "Department of Agriculture",
+      "D": "Bureau of Customs"
+    },
+    "correct": "C",
+    "reason": "The Primer notes that the special safeguards on agricultural products are monitored by the Department of Agriculture (DA). (Primer p.260)"
+  },
+  "768": {
+    "question": "Which international organization recently warned that protectionism is increasing and poses a threat to global economic growth, as cited in the Primer?",
+    "choices": {
+      "A": "World Trade Organization",
+      "B": "United Nations Conference on Trade and Development",
+      "C": "World Customs Organization",
+      "D": "International Monetary Fund"
+    },
+    "correct": "D",
+    "reason": "The Primer cites a warning from the International Monetary Fund that protectionism is increasing and poses a threat to global economic growth. (Primer p.261)"
+  },
+  "769": {
+    "question": "According to the Primer, if the Philippines breaches its tariff commitments under the WTO and FTAs, one possible form of retaliation is removal of the Philippines from what?",
+    "choices": {
+      "A": "A Party's list of Generalized System of Preferences (GSP) beneficiaries",
+      "B": "The membership roster of the World Trade Organization",
+      "C": "The ASEAN Free Trade Area",
+      "D": "The list of members of the World Customs Organization"
+    },
+    "correct": "A",
+    "reason": "The Primer states that one possible form of retaliation is the removal of the Philippines from a Party's list of GSP beneficiaries, along with possible requests for compensation. (Primer p.261)"
+  },
+  "770": {
+    "question": "On what date was the Presidential Memorandum for the United States Trade Representative (USTR) issued that initiated the formal Section 301 investigation on Chinese laws, policies and practices related to intellectual property, innovation and technology?",
+    "choices": {
+      "A": "22 March 2018",
+      "B": "14 February 2020",
+      "C": "14 August 2017",
+      "D": "18 July 2017"
+    },
+    "correct": "C",
+    "reason": "The Primer states that the Presidential Memorandum for the USTR initiating the Section 301 investigation was issued on 14 August 2017. The 22 March 2018 memorandum announced the actions to be taken in response. (Primer p.263)"
+  },
+  "771": {
+    "question": "After the Section 301 investigation, President Trump asked the US Trade Representative to level tariffs on how much worth of Chinese imports?",
+    "choices": {
+      "A": "$34 billion",
+      "B": "$50 billion",
+      "C": "$200 billion",
+      "D": "$60 billion"
+    },
+    "correct": "B",
+    "reason": "The Primer states that President Trump asked the USTR to level tariffs on $50 billion worth of Chinese imports. (Primer p.263)"
+  },
+  "772": {
+    "question": "In retaliation, the Chinese government enacted its own tariffs on how many products from the United States, according to the Primer?",
+    "choices": {
+      "A": "28 products",
+      "B": "64 products",
+      "C": "218 products",
+      "D": "128 products"
+    },
+    "correct": "D",
+    "reason": "China retaliated with tariffs on 128 products from the United States, including aluminum scraps, pork products, fruit, nut products and steel piping. (Primer p.263)"
+  },
+  "773": {
+    "question": "On what date did the 'Economic and Trade Agreement between the United States of America and the People's Republic of China' take effect?",
+    "choices": {
+      "A": "14 February 2020",
+      "B": "15 January 2020",
+      "C": "22 March 2018",
+      "D": "14 August 2017"
+    },
+    "correct": "A",
+    "reason": "The agreement was signed in January 2020 and took effect on 14 February 2020. (Primer p.263)"
+  },
+  "774": {
+    "question": "From 2014 to 2018, China ranked first as a source of Philippine imports with what share of total Philippine imports?",
+    "choices": {
+      "A": "12 percent",
+      "B": "8 percent",
+      "C": "19 percent",
+      "D": "15 percent"
+    },
+    "correct": "C",
+    "reason": "China ranked first as a source of imports of Philippine products with a 19 percent share of total Philippine imports (PSA, 2020). (Primer p.264)"
+  },
+  "775": {
+    "question": "From 2014 to 2018, China ranked as which major export market of the Philippines, with a 12 percent share of total Philippine exports?",
+    "choices": {
+      "A": "First",
+      "B": "Third",
+      "C": "Second",
+      "D": "Fifth"
+    },
+    "correct": "B",
+    "reason": "China ranked as the Philippines' 3rd major export market with a 12 percent share of total Philippine exports. (Primer p.264)"
+  },
+  "776": {
+    "question": "According to the Philippine Statistics Authority, foreign direct investments in the Philippines sourced from China in the fourth quarter of 2019 amounted to P86.24 billion, accounting for what share of total FDI in the country?",
+    "choices": {
+      "A": "17 percent",
+      "B": "38 percent",
+      "C": "8 percent",
+      "D": "77 percent"
+    },
+    "correct": "D",
+    "reason": "The PSA reported that the P86.24 billion of FDI sourced from China accounted for 77 percent of total FDI in the fourth quarter of 2019. (Primer p.265)"
+  },
+  "777": {
+    "question": "According to the Philippine Trade Policy Review Secretariat Report of 2018, the United States was the Philippines' third largest investor, accounting for what share of total approved foreign direct investments over 2011 to 2016?",
+    "choices": {
+      "A": "17 percent",
+      "B": "77 percent",
+      "C": "15 percent",
+      "D": "8 percent"
+    },
+    "correct": "A",
+    "reason": "The US was cited as the country's 3rd largest investor, accounting for 17 percent of total approved FDI over the period 2011 to 2016. (Primer p.265)"
+  },
+  "778": {
+    "question": "According to the UNCTAD study cited in the Primer, what is one consequence of the bilateral tariffs imposed by both the US and China?",
+    "choices": {
+      "A": "A permanent end to bilateral trade between the two countries",
+      "B": "A fall in the imports of all third countries",
+      "C": "An increase of each country's imports from elsewhere",
+      "D": "Automatic removal of tariffs by third countries"
+    },
+    "correct": "C",
+    "reason": "The UNCTAD study shows that one consequence of the bilateral tariffs is an increase of each country's imports from elsewhere, i.e., trade diversion. (Primer p.266)"
+  },
+  "779": {
+    "question": "According to the Primer, why are third countries generally able to capture only part of the trade diverted by the US-China trade war?",
+    "choices": {
+      "A": "They may not have enough untapped supply capacity",
+      "B": "WTO rules cap the share of trade a third country may take over",
+      "C": "Customs valuation rules bar third countries from exporting to the US and China",
+      "D": "Bilateral tariffs automatically apply to all other countries"
+    },
+    "correct": "A",
+    "reason": "The Primer explains that other countries may not have enough untapped supply capacity, so trade diversion is generally not complete. (Primer p.266)"
+  },
+  "780": {
+    "question": "According to the Primer, how may exporters subject to tariffs retain trade despite the tariffs?",
+    "choices": {
+      "A": "By raising their export prices",
+      "B": "By imposing export taxes",
+      "C": "By shifting to import substitution",
+      "D": "By reducing their prices"
+    },
+    "correct": "D",
+    "reason": "The Primer states that exporters subject to tariffs may retain trade by reducing their prices. (Primer p.266)"
+  },
+  "781": {
+    "question": "Which sector does the Primer describe as the dominant source of the Philippines' exports, whose foreign trade is most visibly affected by the US-China trade face-off?",
+    "choices": {
+      "A": "Agriculture sector",
+      "B": "Manufacturing sector",
+      "C": "Mining sector",
+      "D": "Services sector"
+    },
+    "correct": "B",
+    "reason": "The Primer notes the implications are most visible in foreign trade and its impact on the manufacturing sector, the dominant source of the country's exports. (Primer p.266)"
+  },
+  "782": {
+    "question": "From 2014 to 2018, what was the average value of Philippine exports to the United States, according to the Primer?",
+    "choices": {
+      "A": "US$7.11 billion",
+      "B": "US$6.63 billion",
+      "C": "US$15.58 billion",
+      "D": "US$8.75 billion"
+    },
+    "correct": "D",
+    "reason": "Philippine exports to the US averaged US$8.75 billion, compared with US$7.11 billion for exports to China. (Primer p.267)"
+  },
+  "783": {
+    "question": "When the US-China trade war commenced in 2018, at what annual rate did Philippine exports to the United States grow, according to the Primer?",
+    "choices": {
+      "A": "8 percent",
+      "B": "19 percent",
+      "C": "0.83 percent",
+      "D": "7 percent"
+    },
+    "correct": "A",
+    "reason": "The Primer states that when the trade war commenced in 2018, Philippine exports to the US grew at an 8% annual rate. (Primer p.267)"
+  },
+  "784": {
+    "question": "What was the average value of Philippine imports from China from 2014 to 2018, according to the Primer?",
+    "choices": {
+      "A": "US$6.63 billion",
+      "B": "US$8.75 billion",
+      "C": "US$15.58 billion",
+      "D": "US$7.11 billion"
+    },
+    "correct": "C",
+    "reason": "Philippine imports from China were valued at US$15.58 billion on average from 2014 to 2018, against US$6.63 billion from the US. (Primer p.268)"
+  },
+  "785": {
+    "question": "During the last three years covered, at what rate did Philippine imports from China grow, according to the Primer?",
+    "choices": {
+      "A": "8 percent",
+      "B": "19 percent",
+      "C": "7 percent",
+      "D": "0.83 percent"
+    },
+    "correct": "B",
+    "reason": "Trends indicate an upward one at a 19 percent growth rate for Philippine imports from China during the last three years. (Primer p.268)"
+  },
+  "786": {
+    "question": "In Table 10.7 (Philippine Top Imports from China, by Chapter, 2014-2018), which product group ranked second?",
+    "choices": {
+      "A": "Iron and steel (HS Chapter 72)",
+      "B": "Plastics and articles thereof (HS Chapter 39)",
+      "C": "Mineral fuels and mineral oils (HS Chapter 27)",
+      "D": "Articles of iron or steel (HS Chapter 73)"
+    },
+    "correct": "A",
+    "reason": "Table 10.7 ranks Iron and steel (HS 72) second, valued at US$9,242.30 million or 11.87 percent. (Primer p.268)"
+  },
+  "787": {
+    "question": "In Table 10.7, which product group ranked fourth among Philippine imports from China?",
+    "choices": {
+      "A": "Plastics and articles thereof (HS Chapter 39)",
+      "B": "Furniture, bedding, mattresses and lamps (HS Chapter 94)",
+      "C": "Fertilizers (HS Chapter 31)",
+      "D": "Mineral fuels, mineral oils and products of their distillation (HS Chapter 27)"
+    },
+    "correct": "D",
+    "reason": "Table 10.7 shows HS Chapter 27 (mineral fuels, mineral oils) fourth, with US$7,319.66 million or 9.40 percent. (Primer p.268)"
+  },
+  "788": {
+    "question": "In Table 10.8 (Philippine Top Exports to China, by Chapter), which product group ranked third?",
+    "choices": {
+      "A": "Edible fruit and nuts (HS Chapter 08)",
+      "B": "Copper and articles thereof (HS Chapter 74)",
+      "C": "Ores, slag and ash (HS Chapter 26)",
+      "D": "Mineral fuels and mineral oils (HS Chapter 27)"
+    },
+    "correct": "C",
+    "reason": "Table 10.8 ranks Ores, slag and ash (HS 26) third, with US$4,374 million or 12.30 percent. (Primer p.269)"
+  },
+  "789": {
+    "question": "In Table 10.8, what percentage share of Philippine exports to China is accounted for by electrical machinery and equipment (HS Chapter 85)?",
+    "choices": {
+      "A": "23.60 percent",
+      "B": "34.64 percent",
+      "C": "37.59 percent",
+      "D": "20.18 percent"
+    },
+    "correct": "B",
+    "reason": "Table 10.8 shows HS Chapter 85 at US$12,322 million, a 34.64 percent share of Philippine exports to China. (Primer p.269)"
+  },
+  "790": {
+    "question": "According to the Primer, the top Philippine imports from and exports to China are products from which HS Chapter?",
+    "choices": {
+      "A": "HS Chapter 85 (electrical machinery and equipment and parts thereof)",
+      "B": "HS Chapter 84 (nuclear reactors, boilers, machinery and mechanical appliances)",
+      "C": "HS Chapter 72 (iron and steel)",
+      "D": "HS Chapter 27 (mineral fuels and mineral oils)"
+    },
+    "correct": "A",
+    "reason": "The Primer states that top Philippine imports from and exports to China are products from HS Chapter 85, classified as electrical machinery and equipment and parts thereof. (Primer p.270)"
+  },
+  "791": {
+    "question": "According to the Primer, why are Philippine exports and imports of HS Chapter 85 products likely to increase with the rising US-China trade conflict?",
+    "choices": {
+      "A": "Because the Philippines suspended its tariffs on electronics",
+      "B": "Because of a new FTA between the Philippines and China",
+      "C": "Because of the trade diversion effects of the trade war",
+      "D": "Because of lower freight rates in the region"
+    },
+    "correct": "C",
+    "reason": "The Primer says exports and imports of these products are likely to increase because of the trade diversion effects of the trade war. (Primer p.270)"
+  },
+  "792": {
+    "question": "In Table 10.9 (Philippine Top Imports from the US, by Chapter), which product group accounts for a 12.48 percent share, ranking second?",
+    "choices": {
+      "A": "Dairy produce; birds' eggs; natural honey",
+      "B": "Aircraft, spacecraft and parts thereof",
+      "C": "Cereals",
+      "D": "Residues and waste from the food industries; prepared animal fodder"
+    },
+    "correct": "D",
+    "reason": "Table 10.9 ranks HS Chapter 23 (residues and waste from the food industries; prepared animal fodder) second at US$4,135.98 million, a 12.48 percent share. (Primer p.270)"
+  },
+  "793": {
+    "question": "In Table 10.10 (Philippine Top Exports to the US, by Chapter), what percentage share is accounted for by electrical machinery and equipment (HS Chapter 85)?",
+    "choices": {
+      "A": "34.64 percent",
+      "B": "37.59 percent",
+      "C": "20.18 percent",
+      "D": "27.07 percent"
+    },
+    "correct": "B",
+    "reason": "Table 10.10 shows HS Chapter 85 at US$16,454 million, a 37.59 percent share of Philippine exports to the US. (Primer p.271)"
+  },
+  "794": {
+    "question": "In Table 10.10, which product group ranked third among Philippine exports to the US?",
+    "choices": {
+      "A": "Articles of apparel and clothing accessories, knitted or crocheted",
+      "B": "Optical, photographic, cinematographic and medical instruments",
+      "C": "Animal or vegetable fats and oils and their cleavage products",
+      "D": "Aircraft, spacecraft and parts thereof"
+    },
+    "correct": "C",
+    "reason": "Table 10.10 ranks HS Chapter 15 (animal or vegetable fats and oils) third, with US$2,998 million or 6.85 percent. (Primer p.271)"
+  },
+  "795": {
+    "question": "Which of the following is NOT one of the four European Free Trade Association (EFTA) States named in the Primer as FTA partners of the Philippines?",
+    "choices": {
+      "A": "Sweden",
+      "B": "Norway",
+      "C": "Iceland",
+      "D": "Liechtenstein"
+    },
+    "correct": "A",
+    "reason": "The Primer names the four EFTA States as Switzerland, Liechtenstein, Norway and Iceland. (Primer p.273)"
+  },
+  "796": {
+    "question": "In Table 10.11 (Philippine Trade Agreements and Tariff Commitments), what is the date of full implementation of WTO tariff commitments for developing countries?",
+    "choices": {
+      "A": "2000",
+      "B": "2010",
+      "C": "2015",
+      "D": "2005"
+    },
+    "correct": "D",
+    "reason": "Table 10.11 lists full implementation of WTO commitments in 2000 for developed countries and 2005 for developing countries. (Primer p.273)"
+  },
+  "797": {
+    "question": "In Table 10.11, approximately what share of tariff lines is eliminated (zero duty) under the ASEAN arrangement, with full implementation in 2015?",
+    "choices": {
+      "A": "90 percent",
+      "B": "99 percent",
+      "C": "85 percent",
+      "D": "95 percent"
+    },
+    "correct": "B",
+    "reason": "Table 10.11 shows ASEAN with about 99 percent of tariff lines at zero duty and about 1 percent under reduction, fully implemented in 2015. (Primer p.273)"
+  },
+  "798": {
+    "question": "According to the table of Philippine trade agreements and tariff commitments, what is the date of full implementation for the Philippine-EFTA agreement?",
+    "choices": {
+      "A": "2027",
+      "B": "2018",
+      "C": "2032",
+      "D": "2022"
+    },
+    "correct": "A",
+    "reason": "The table lists the Philippine-EFTA date of full implementation as 2027. (Primer p.274)"
+  },
+  "799": {
+    "question": "According to the Primer, under its trade agreements the Philippines gained duty free access to more than what share of imported goods from China, Korea and India?",
+    "choices": {
+      "A": "50 percent",
+      "B": "60 percent",
+      "C": "90 percent",
+      "D": "70 percent"
+    },
+    "correct": "D",
+    "reason": "The Primer says the Philippines gained duty free access to over 90% of tariff lines from ASEAN, Australia, New Zealand and Japan, and to more than 70% of imported goods from China, Korea and India. (Primer p.274)"
+  },
+  "800": {
+    "question": "According to the Primer, the average intra-ASEAN tariffs fell from 3.11 percent in 2005 to what rate in 2017?",
+    "choices": {
+      "A": "0.03 percent",
+      "B": "0.46 percent",
+      "C": "0.20 percent",
+      "D": "1.10 percent"
+    },
+    "correct": "C",
+    "reason": "The Primer states average intra-ASEAN tariffs fell from 3.11% in 2005 to just 0.20% in 2017. (Primer p.274)"
+  },
+  "801": {
+    "question": "According to the Primer, the average intra-ASEAN tariffs for Cambodia, Lao PDR, Myanmar and Viet Nam (CLMV) fell from 5.28 percent in 2005 to what rate in 2017?",
+    "choices": {
+      "A": "0.20 percent",
+      "B": "0.46 percent",
+      "C": "0.03 percent",
+      "D": "3.11 percent"
+    },
+    "correct": "B",
+    "reason": "CLMV average intra-ASEAN tariffs fell from 5.28% in 2005 to 0.46% in 2017, closer to the ASEAN-6 average of 0.03%. (Primer p.274)"
+  },
+  "802": {
+    "question": "Under Article 2.1 of the Anti-Dumping Agreement as quoted in the Primer, when is a product considered to be dumped?",
+    "choices": {
+      "A": "When its export price is below its cost of production",
+      "B": "When its export price is below the average world price",
+      "C": "When it is sold in the importing country below the domestic producers' price",
+      "D": "When its export price is less than the comparable price, in the ordinary course of trade, for the like product destined for consumption in the exporting country"
+    },
+    "correct": "D",
+    "reason": "Article 2.1 treats a product as dumped if its export price is less than the comparable price in the ordinary course of trade for the like product when destined for consumption in the exporting country. (Primer p.275)"
+  },
+  "803": {
+    "question": "From 1995 to June 2019, how many anti-dumping initiations do WTO records show in total, according to the Primer?",
+    "choices": {
+      "A": "5,883",
+      "B": "3,887",
+      "C": "1,008",
+      "D": "4,200"
+    },
+    "correct": "A",
+    "reason": "WTO records indicate a total of 5,883 anti-dumping initiations from 1995 to June 2019. (Primer p.275)"
+  },
+  "804": {
+    "question": "Among WTO anti-dumping initiations from 1995 to June 2019, China had the most at 23 percent. Which country followed at 8 percent?",
+    "choices": {
+      "A": "United States",
+      "B": "Republic of Korea",
+      "C": "India",
+      "D": "European Union"
+    },
+    "correct": "B",
+    "reason": "China had the most initiations at 23%, followed by Korea at 8% and the US at 5%. (Primer p.275)"
+  },
+  "805": {
+    "question": "From January 1995 to June 2019, how many of the total 3,887 anti-dumping measures (26 percent) were imposed on China, according to the Primer?",
+    "choices": {
+      "A": "283",
+      "B": "189",
+      "C": "1,008",
+      "D": "5,883"
+    },
+    "correct": "C",
+    "reason": "The Primer states that 26 percent, or 1,008, of the total 3,887 anti-dumping measures were imposed on China and several countries. (Primer p.275)"
+  },
+  "806": {
+    "question": "Amidst the COVID-19 situation, how many countries adopted trade measures and notified the same to the WTO, according to the Primer?",
+    "choices": {
+      "A": "143",
+      "B": "151",
+      "C": "116",
+      "D": "134"
+    },
+    "correct": "A",
+    "reason": "The Primer states that 143 countries adopted trade measures and notified the WTO (Table 10.12). (Primer p.275)"
+  },
+  "807": {
+    "question": "Of the total 151 restrictive measures affecting all countries during COVID-19, how many are already terminated, according to the Primer?",
+    "choices": {
+      "A": "116",
+      "B": "2",
+      "C": "151",
+      "D": "33"
+    },
+    "correct": "D",
+    "reason": "The Primer says 116 measures are still active until 2022, 33 are already terminated, and two are under investigation. (Primer p.275)"
+  },
+  "808": {
+    "question": "According to the Primer, three countries adopted tariff increases during COVID-19 on which products?",
+    "choices": {
+      "A": "Cereals, flour and sugar only",
+      "B": "Petroleum products, pork and poultry, and other agricultural products",
+      "C": "Medical supplies and personal protective equipment",
+      "D": "Cement and second hand clothes"
+    },
+    "correct": "B",
+    "reason": "The Primer states that three countries adopted tariff increases in petroleum products, pork and poultry, and other agricultural products. (Primer p.275)"
+  },
+  "809": {
+    "question": "According to Table 10.12 (Trade Measures Adopted by Countries Amidst COVID-19), what is the total number of liberalizing measures adopted?",
+    "choices": {
+      "A": "151",
+      "B": "107",
+      "C": "134",
+      "D": "23"
+    },
+    "correct": "C",
+    "reason": "Table 10.12 shows 134 liberalizing measures against 151 restrictive measures, based on Market Access Map (ITC) data as of 28 May 2020. (Primer p.276)"
+  },
+  "810": {
+    "question": "According to the Primer, Philippine trade policy has not undergone major changes since 2005. What remains the main policy instrument?",
+    "choices": {
+      "A": "Quantitative import restrictions",
+      "B": "Export subsidies",
+      "C": "Non-automatic licensing",
+      "D": "The tariff"
+    },
+    "correct": "D",
+    "reason": "The Primer states that Philippine trade policy has not undergone major changes since 2005 and the tariff remains the main policy instrument. (Primer p.276)"
+  },
+  "811": {
+    "question": "With how many partners does the Philippines have preferential trading agreements, according to the Primer?",
+    "choices": {
+      "A": "15",
+      "B": "9",
+      "C": "6",
+      "D": "21"
+    },
+    "correct": "A",
+    "reason": "The Philippines has preferential trading agreements with 15 partners: the other nine ASEAN parties and six countries that negotiated agreements with ASEAN. (Primer p.276)"
+  },
+  "812": {
+    "question": "The ASEAN-Hong Kong, China Free Trade Agreement is which numbered FTA of ASEAN with external partners, according to the Primer?",
+    "choices": {
+      "A": "Fourth",
+      "B": "Fifth",
+      "C": "Sixth",
+      "D": "Seventh"
+    },
+    "correct": "C",
+    "reason": "The Primer states that the FTA is ASEAN's sixth free trade agreement with external partners, after ACFTA, AKFTA, AJCEPA, AIFTA and ANZFTA. (Primer p.276)"
+  },
+  "813": {
+    "question": "According to the Primer, what is the status of the Philippines' FTA negotiations with the European Union?",
+    "choices": {
+      "A": "Signed and ratified",
+      "B": "Ongoing",
+      "C": "Not yet started",
+      "D": "Concluded but not yet signed"
+    },
+    "correct": "B",
+    "reason": "The Primer states that the agreement with EFTA members has been signed and ratified, while FTA negotiations with the European Union are ongoing. (Primer p.276)"
+  },
+  "814": {
+    "question": "In 2016, what rank did the Philippines hold as an EU trading partner, according to the Primer?",
+    "choices": {
+      "A": "4th",
+      "B": "15th",
+      "C": "28th",
+      "D": "39th"
+    },
+    "correct": "D",
+    "reason": "The Primer states that in 2016 the Philippines ranked as the 39th EU trading partner, with a 0.4% share of total EU imports and exports. (Primer p.277)"
+  },
+  "815": {
+    "question": "By mid-2017, the EU became the second largest export market for Philippine-made products at 15 percent of total exports, behind which country at 17 percent?",
+    "choices": {
+      "A": "Japan",
+      "B": "United States",
+      "C": "China",
+      "D": "Singapore"
+    },
+    "correct": "A",
+    "reason": "The Primer states that the EU accounted for 15% of Philippine exports, behind Japan (17%). (Primer p.277)"
+  },
+  "816": {
+    "question": "The Philippines has a parallel three-pronged strategy for the EU region. Besides inclusion in EU GSP-Plus and negotiating an FTA with the EU, what is the third strategy?",
+    "choices": {
+      "A": "Joining a customs union with the EU",
+      "B": "Negotiating an FTA with the European Free Trade Association",
+      "C": "Signing a bilateral investment treaty with each EU member",
+      "D": "Applying for observer status in the EU Council"
+    },
+    "correct": "B",
+    "reason": "The Primer identifies the third strategy as negotiating an FTA with the European Free Trade Association (EFTA). (Primer p.277)"
+  },
+  "817": {
+    "question": "In what year did the exploratory FTA scoping meetings between the Philippines and the EU start, according to the Primer?",
+    "choices": {
+      "A": "2011",
+      "B": "2015",
+      "C": "2013",
+      "D": "2016"
+    },
+    "correct": "C",
+    "reason": "The Primer states that exploratory FTA scoping meetings between the Philippines and the EU started in 2013. (Primer p.277)"
+  },
+  "818": {
+    "question": "On what date was the launch of the Philippines-EU FTA negotiations announced by both sides, according to the Primer?",
+    "choices": {
+      "A": "11 December 2015",
+      "B": "28 April 2016",
+      "C": "01 June 2018",
+      "D": "18 May 2012"
+    },
+    "correct": "A",
+    "reason": "The launch of the FTA negotiations was announced by both sides on 11 December 2015. (Primer p.277)"
+  },
+  "819": {
+    "question": "The EU GSP Plus preferences cover over how many tariff lines, according to the Primer?",
+    "choices": {
+      "A": "4,000",
+      "B": "5,200",
+      "C": "7,500",
+      "D": "6,200"
+    },
+    "correct": "D",
+    "reason": "The Primer states that the GSP Plus preferences cover over 6,200 tariff lines. (Primer p.277)"
+  },
+  "820": {
+    "question": "With regard to Philippine imports, what rank does the EU hold as a supplier to the Philippines, according to the Primer?",
+    "choices": {
+      "A": "2nd largest",
+      "B": "4th largest",
+      "C": "6th largest",
+      "D": "9th largest"
+    },
+    "correct": "B",
+    "reason": "The Primer states that, with regard to Philippine imports, the EU is the 4th largest supplier to the Philippines. (Primer p.277)"
+  },
+  "821": {
+    "question": "According to the Primer, bilateral trade in goods and services between the Philippines and the United States in 2017 totaled an estimated $29.6 billion, with a deficit of how much in favor of the Philippines?",
+    "choices": {
+      "A": "$2.7 billion",
+      "B": "$27 billion",
+      "C": "$6.7 billion",
+      "D": "$29.6 billion"
+    },
+    "correct": "C",
+    "reason": "The Primer states that bilateral trade in 2017 totaled an estimated $29.6 billion, with a $6.7 billion deficit in favor of the Philippines. (Primer p.278)"
+  },
+  "822": {
+    "question": "At present, which US trade preference scheme does the Philippines enjoy, according to the Primer?",
+    "choices": {
+      "A": "A bilateral free trade agreement with the US",
+      "B": "The Trans-Pacific Partnership",
+      "C": "The Caribbean Basin Initiative",
+      "D": "US GSP schemes"
+    },
+    "correct": "D",
+    "reason": "The Primer states that at present the Philippines enjoys US GSP schemes. (Primer p.278)"
+  },
+  "823": {
+    "question": "With the COVID-19 situation, which Philippine major trading partner implemented the most trade measures, a total of 13, according to the Primer?",
+    "choices": {
+      "A": "India",
+      "B": "European Union",
+      "C": "United States",
+      "D": "China"
+    },
+    "correct": "A",
+    "reason": "India implemented a total of 13 trade measures, while the EU implemented 9, the US 6 and China 3. (Primer p.278)"
+  },
+  "824": {
+    "question": "According to the Primer, most of the COVID-19 trade measures implemented by the Philippines' major trading partners cover the importation of what?",
+    "choices": {
+      "A": "Luxury goods and vehicles",
+      "B": "Medical supplies and other essential goods",
+      "C": "Agricultural machinery",
+      "D": "ICT hardware"
+    },
+    "correct": "B",
+    "reason": "The Primer states that most of these trade measures cover importation of medical supplies and other essential goods in response to the pandemic. (Primer p.278)"
+  },
+  "825": {
+    "question": "According to Table 10.13 (WTO Member Proposals on COVID-19), on what date in 2020 was the G20 Trade and Investment Ministerial Meeting's Ministerial Statement listed?",
+    "choices": {
+      "A": "29 May 2020",
+      "B": "26 May 2020",
+      "C": "14 May 2020",
+      "D": "12 May 2020"
+    },
+    "correct": "C",
+    "reason": "Table 10.13 lists the G20 Trade and Investment Ministerial meeting Ministerial Statement, issued by Members of G20, on 14 May 2020. (Primer p.279)"
+  },
+  "826": {
+    "question": "In Table 10.13, the revised document dated 26 May 2020 (earlier version dated 14 May 2020) is titled what?",
+    "choices": {
+      "A": "Statement on highlighting the importance of MSMEs in the time of COVID-19",
+      "B": "Securing LDCs emergency access to essential medical and food products",
+      "C": "ASEAN Declaration and statements on COVID-19",
+      "D": "Statement on COVID-19 by APEC Ministers Responsible for Trade"
+    },
+    "correct": "A",
+    "reason": "Table 10.13 lists the Statement on highlighting the importance of MSMEs in the time of COVID-19 on 14 May 2020, with a revision on 26 May 2020. (Primer p.279)"
+  },
+  "827": {
+    "question": "According to Table 10.13, on what date in 2020 did Members of APEC issue the Statement on COVID-19 by APEC Ministers Responsible for Trade?",
+    "choices": {
+      "A": "29 May 2020",
+      "B": "04 May 2020",
+      "C": "01 May 2020",
+      "D": "05 May 2020"
+    },
+    "correct": "D",
+    "reason": "Table 10.13 lists the Statement on COVID-19 by APEC Ministers Responsible for Trade, issued by Members of APEC, on 05/05/2020. (Primer p.280)"
+  },
+  "828": {
+    "question": "According to Table 10.13, on what date in 2020 was the ASEAN Declaration and statements on COVID-19 listed for Members of ASEAN?",
+    "choices": {
+      "A": "05 May 2020",
+      "B": "01 May 2020",
+      "C": "04 May 2020",
+      "D": "22 April 2020"
+    },
+    "correct": "B",
+    "reason": "Table 10.13 lists the ASEAN Declaration and statements on COVID-19 for Members of ASEAN on 01/05/2020. (Primer p.280)"
+  },
+  "829": {
+    "question": "According to the Primer, the Philippines has trade deficits in most of its FTA partner countries except which country?",
+    "choices": {
+      "A": "China",
+      "B": "Republic of Korea",
+      "C": "Australia",
+      "D": "Japan"
+    },
+    "correct": "D",
+    "reason": "The Primer states that except for Japan, the Philippines has trade deficits in most of its FTA partner countries. (Primer p.281)"
+  },
+  "830": {
+    "question": "The Primer says the Philippines should take advantage of the GSP schemes of the EU (GSP+) and the United States. With which partner may it consider pursuing an FTA?",
+    "choices": {
+      "A": "United States",
+      "B": "Japan",
+      "C": "China",
+      "D": "Canada"
+    },
+    "correct": "A",
+    "reason": "The Primer says the Philippines may consider pursuing an FTA with the United States, in addition to using the GSP schemes of the EU and the US. (Primer p.281)"
+  },
+  "831": {
+    "question": "According to the Primer, emphasis must be given to the support and further development of which group as the Philippines pursues trade cooperation strategies?",
+    "choices": {
+      "A": "State-owned enterprises",
+      "B": "Multinational corporations",
+      "C": "MSMEs",
+      "D": "Large exporters"
+    },
+    "correct": "C",
+    "reason": "The Primer states that emphasis must be given to the support and further development of MSMEs. (Primer p.281)"
+  },
+  "832": {
+    "question": "In Annex D, Australia's temporary tariff concession on face masks, gloves, gowns, COVID-19 test kits and similar goods is to be in place until what date, subject to possible extension?",
+    "choices": {
+      "A": "01 February 2020",
+      "B": "31 July 2020",
+      "C": "01 May 2020",
+      "D": "31 December 2022"
+    },
+    "correct": "B",
+    "reason": "Annex D states the measure will be in place until 31 July 2020, with refunds for duty paid on prescribed goods imported from 1 February 2020, and may be extended after a review. (Primer p.282)"
+  },
+  "833": {
+    "question": "In Annex D, from what date was China's MOFCOM notice on paperless application for import and export licenses effective?",
+    "choices": {
+      "A": "12 February 2020",
+      "B": "27 April 2020",
+      "C": "15 June 2020",
+      "D": "06 February 2020"
+    },
+    "correct": "D",
+    "reason": "Annex D lists the MOFCOM notice guiding enterprises to apply for import and export licenses in a paperless way as effective 6 February 2020. (Primer p.282)"
+  },
+  "834": {
+    "question": "In Annex D, China's Ministry of Agriculture and Rural Affairs circular implements nine facilitation measures regarding how many categories of agricultural administrative approval?",
+    "choices": {
+      "A": "Three",
+      "B": "Five",
+      "C": "Six",
+      "D": "Nine"
+    },
+    "correct": "A",
+    "reason": "The circular implements nine facilitation measures regarding three categories of agricultural administrative approval, effective 12 February 2020. (Primer p.282)"
+  },
+  "835": {
+    "question": "In Annex D, China's trade facilitation measure of holding the 127th Canton International Fair online was effective for what period?",
+    "choices": {
+      "A": "06 February to 12 February 2020",
+      "B": "15 March to 26 April 2020",
+      "C": "15 June to 24 June 2020",
+      "D": "30 January to 31 July 2020"
+    },
+    "correct": "C",
+    "reason": "Annex D lists the online holding of the 127th Canton International Fair, due to the COVID-19 pandemic, as effective 15 June 2020 to 24 June 2020. (Primer p.283)"
+  },
+  "836": {
+    "question": "In Annex D, the EU requirement of export authorization for personal protective equipment under Commission Implementing Regulation 2020/402 was effective from 15 March 2020 for how long?",
+    "choices": {
+      "A": "30 days",
+      "B": "6 weeks",
+      "C": "3 months",
+      "D": "1 year"
+    },
+    "correct": "B",
+    "reason": "The measure was effective 15 March 2020 for a period of 6 weeks and was then repealed by Regulation 2020/568. (Primer p.283)"
+  },
+  "837": {
+    "question": "In Annex D, the EU export authorization scheme under Commission Implementing Regulation (EU) 2020/568 took effect on 26 April 2020 for how long?",
+    "choices": {
+      "A": "6 weeks",
+      "B": "14 days",
+      "C": "3 months",
+      "D": "30 days"
+    },
+    "correct": "D",
+    "reason": "Annex D states the scheme under Regulation 2020/568 was effective 26 April 2020 for 30 days and terminated on 26 May 2020. (Primer p.283)"
+  },
+  "838": {
+    "question": "In Annex D, European Commission Decision 2020/491 granted relief from import duties and VAT exemption on goods needed to combat COVID-19, effective until what date?",
+    "choices": {
+      "A": "31 July 2020",
+      "B": "26 May 2020",
+      "C": "24 June 2020",
+      "D": "31 December 2022"
+    },
+    "correct": "A",
+    "reason": "Annex D lists the relief as effective 30 January 2020 to 31 July 2020. (Primer p.283)"
+  },
+  "839": {
+    "question": "According to Annex D, the new EU export authorization regulation of April 2020 was more targeted, covering how many product categories instead of the five in the original scheme?",
+    "choices": {
+      "A": "Two",
+      "B": "Four",
+      "C": "Three",
+      "D": "Six"
+    },
+    "correct": "C",
+    "reason": "The new regulation covers three product categories (protective masks, spectacles and garments), instead of the five in the original export authorization scheme. (Primer p.283)"
+  },
+  "840": {
+    "question": "In Annex D, European Commission Notice 2020/C 96 I/01 on the implementation of Green Lanes was issued on what date?",
+    "choices": {
+      "A": "16 March 2020",
+      "B": "24 March 2020",
+      "C": "01 April 2020",
+      "D": "08 April 2020"
+    },
+    "correct": "B",
+    "reason": "Annex D lists the Implementation of Green Lanes under European Commission Notice 2020/C 96 I/01 as dated 24 March 2020. (Primer p.284)"
+  },
+  "841": {
+    "question": "In Annex D, European Commission Communication 2020/C 108 I/01 of 1 April 2020 provides guidance on what?",
+    "choices": {
+      "A": "Optimal and rational supply of medicines",
+      "B": "Facilitating air cargo operations",
+      "C": "Implementation of Green Lanes at border crossings",
+      "D": "Using the public procurement framework in the emergency situation related to COVID-19"
+    },
+    "correct": "D",
+    "reason": "Communication 2020/C 108 I/01 (1 April 2020) is the guidance on using the public procurement framework in the COVID-19 emergency. (Primer p.284)"
+  },
+  "842": {
+    "question": "In Annex D, the European Commission Guidelines on Facilitating Air Cargo Operations during the COVID-19 outbreak, C(2020) 2010 final, are dated what?",
+    "choices": {
+      "A": "26 March 2020",
+      "B": "16 March 2020",
+      "C": "24 March 2020",
+      "D": "08 April 2020"
+    },
+    "correct": "A",
+    "reason": "Annex D lists the Guidelines on Facilitating Air Cargo Operations as C(2020) 2010 final (26 March 2020). (Primer p.284)"
+  },
+  "843": {
+    "question": "Which two points are outlined in the EU guidelines on the optimal and rational supply of medicines (Communication 2020/C 116 I/01, 8 April 2020)?",
+    "choices": {
+      "A": "Raising tariffs on active pharmaceutical ingredients and requisitioning medicines",
+      "B": "Encouraging national stockpiling and local export bans",
+      "C": "Lifting export bans and restrictions, and avoiding national stockpiling",
+      "D": "Imposing export quotas and licensing on medicines"
+    },
+    "correct": "C",
+    "reason": "The guidelines outline (i) lifting export bans and restrictions and (ii) avoiding national stockpiling of medicines. (Primer p.285)"
+  },
+  "844": {
+    "question": "According to Annex D, what was the effect of India's 4 April 2020 amendment to its export policy on hydroxychloroquine, which had earlier been restricted subject to some exceptions?",
+    "choices": {
+      "A": "Exports were made free of any restriction",
+      "B": "The exceptions were eliminated, resulting in an export prohibition",
+      "C": "An export quota was imposed",
+      "D": "An export duty was imposed"
+    },
+    "correct": "B",
+    "reason": "Annex D states that on 4 April 2020 the exceptions were eliminated, resulting in an export prohibition of hydroxychloroquine. (Primer p.286)"
+  },
+  "845": {
+    "question": "India amended its import policy on iron and steel (HS Chapters 72, 73 and 86) due to COVID-19. The validity of the automatic registration number under the Steel Import Monitoring System ('SIMS') was extended to how many days, until 31 March 2020?",
+    "choices": {
+      "A": "60 days",
+      "B": "90 days",
+      "C": "120 days",
+      "D": "135 days"
+    },
+    "correct": "D",
+    "reason": "Annex D records an extension of the validity of the automatic registration number under SIMS to 135 days, until 31 March 2020. (Primer p.286)"
+  },
+  "846": {
+    "question": "According to Annex D, imports of certain medical and surgical instruments and apparatus (HS 9018; 9019; 9020; 9021; 9022) into India were exempted from which charge?",
+    "choices": {
+      "A": "The 'health cess'",
+      "B": "The basic customs duty",
+      "C": "The social welfare surcharge",
+      "D": "The anti-dumping duty"
+    },
+    "correct": "A",
+    "reason": "Annex D states that imports of these medical and surgical instruments and apparatus were exempted from the 'health cess'. (Primer p.286)"
+  },
+  "847": {
+    "question": "Under India's amended export policy of sanitizers (COVID-19 measure), which items are prohibited for export?",
+    "choices": {
+      "A": "All sanitizers of any kind",
+      "B": "Only non-alcohol sanitizers",
+      "C": "Only 'alcohol-based hand sanitizers'",
+      "D": "Only sanitizers shipped in bulk containers"
+    },
+    "correct": "C",
+    "reason": "Only alcohol-based hand sanitizers are prohibited for export, and all other items under the listed HS codes are freely exportable. (Primer p.287)"
+  },
+  "848": {
+    "question": "India amended its export policy on formulations made from paracetamol (including FDCs) (HS 3004.90.99) due to COVID-19. The status of these formulations was changed from restricted to what?",
+    "choices": {
+      "A": "Prohibited",
+      "B": "Free",
+      "C": "Subject to an export quota",
+      "D": "Subject to an export tax"
+    },
+    "correct": "B",
+    "reason": "Annex D states that the export policy on formulations made from paracetamol was changed from restricted to free. (Primer p.287)"
+  },
+  "849": {
+    "question": "In India's temporary elimination of import tariffs due to COVID-19, face masks and surgical masks are classified under which HS Chapter?",
+    "choices": {
+      "A": "Chapter 30",
+      "B": "Chapter 38",
+      "C": "Chapter 62",
+      "D": "Chapter 63"
+    },
+    "correct": "D",
+    "reason": "Annex D lists face masks and surgical masks under HS Chapter 63, personal protection equipment under Chapter 62, and COVID-19 testing kits under Chapters 30 and 38. (Primer p.287)"
+  },
+  "850": {
+    "question": "Indonesia's temporary elimination of import certification requirements on onions and garlic (HS 0703) was effective from 18 March 2020 to when?",
+    "choices": {
+      "A": "31 May 2020",
+      "B": "30 April 2020",
+      "C": "30 June 2020",
+      "D": "31 December 2020"
+    },
+    "correct": "A",
+    "reason": "Annex D lists this Indonesian measure as effective 18 March 2020 to 31 May 2020. (Primer p.288)"
+  },
+  "851": {
+    "question": "Indonesia's temporary export ban on antiseptic, raw materials, personal protective equipment, ethyl alcohol and masks was effective from 18 March 2020 to when?",
+    "choices": {
+      "A": "31 May 2020",
+      "B": "17 April 2020",
+      "C": "30 June 2020",
+      "D": "31 December 2020"
+    },
+    "correct": "C",
+    "reason": "Annex D lists the export ban as effective 18 March 2020 to 30 June 2020. (Primer p.288)"
+  },
+  "852": {
+    "question": "Indonesia's temporary elimination of import tariffs on certain medical and pharmaceutical products used in the treatment of COVID-19 covers how many tariff lines at the 8-digit level?",
+    "choices": {
+      "A": "37",
+      "B": "73",
+      "C": "38",
+      "D": "90"
+    },
+    "correct": "B",
+    "reason": "Annex D states that the measure covers 73 tariff lines at 8-digit level, effective 17 April 2020, with imports also exempted from VAT and income taxes. (Primer p.288)"
+  },
+  "853": {
+    "question": "Which Indonesian COVID-19 measure listed in Annex D took effect on 9 April 2020?",
+    "choices": {
+      "A": "Elimination of import certification requirements on onions and garlic",
+      "B": "Export ban on masks",
+      "C": "Elimination of import tariffs on medical and pharmaceutical products",
+      "D": "Postponement of the payment of excise duties on imports of certain goods"
+    },
+    "correct": "D",
+    "reason": "Annex D lists the postponement of the payment of excise duties on imports of certain goods as effective 9 April 2020. (Primer p.288)"
+  },
+  "854": {
+    "question": "Japan's prioritization of customs clearance for relief goods relating to COVID-19 countermeasures took effect on what date, according to Annex D?",
+    "choices": {
+      "A": "03 March 2020",
+      "B": "11 May 2020",
+      "C": "18 March 2020",
+      "D": "06 February 2020"
+    },
+    "correct": "A",
+    "reason": "Annex D lists the prioritization of customs clearance for relief goods as effective 3 March 2020. (Primer p.288)"
+  },
+  "855": {
+    "question": "South Korea's temporary export ban on surgical and sanitary masks due to COVID-19 took effect on what date, according to Annex D?",
+    "choices": {
+      "A": "18 March 2020",
+      "B": "20 March 2020",
+      "C": "06 March 2020",
+      "D": "30 June 2020"
+    },
+    "correct": "C",
+    "reason": "Annex D lists the Korean export ban as effective 6 March 2020 to 30 June 2020. (Primer p.289)"
+  },
+  "856": {
+    "question": "Besides import tariffs, Malaysia's temporary elimination of import tariffs on face masks (effective 23 March 2020) also exempted imports from which charges?",
+    "choices": {
+      "A": "VAT and income taxes",
+      "B": "Sales taxes and excise duties",
+      "C": "Customs fees and port charges",
+      "D": "Licensing fees and quarantine charges"
+    },
+    "correct": "B",
+    "reason": "Annex D states that imports under the Malaysian measure were also exempted from sales taxes and excise duties. (Primer p.289)"
+  },
+  "857": {
+    "question": "Myanmar adjourned the issuance of new export licensing on rice from late March to the end of April 2020 to ensure food security. From what date did the issuance of new export licensing resume?",
+    "choices": {
+      "A": "1 April 2020",
+      "B": "1 June 2020",
+      "C": "18 March 2020",
+      "D": "1 May 2020"
+    },
+    "correct": "D",
+    "reason": "Annex D states that the issuance of new export licensing on rice resumed starting 1 May 2020. (Primer p.290)"
+  },
+  "858": {
+    "question": "Norway's temporary export licensing requirements on personal protective equipment (effective 6 March 2020) run until what date, according to Annex D?",
+    "choices": {
+      "A": "1 January 2021",
+      "B": "30 June 2020",
+      "C": "31 July 2020",
+      "D": "6 March 2021"
+    },
+    "correct": "A",
+    "reason": "Annex D lists the Norwegian measure as effective 6 March 2020 to 1 January 2021. (Primer p.290)"
+  },
+  "859": {
+    "question": "The Philippines' temporary elimination of import tariffs on medicines, medical equipment, PPE and other COVID-19 supplies (effective 24 March 2020 to 23 May 2020) was issued through which instrument?",
+    "choices": {
+      "A": "Executive Order No. 113",
+      "B": "BSP Circular No. 2020-02",
+      "C": "DOF-DTI Joint Memorandum Circular No. 2020-02",
+      "D": "DTI Department Administrative Order No. 2020-02"
+    },
+    "correct": "C",
+    "reason": "Annex D cites the Department of Finance - Department of Trade and Industry Joint Memorandum Circular No. 2020-02 for this measure. (Primer p.290)"
+  },
+  "860": {
+    "question": "Which issuance dated 2 May 2020 temporarily increased Philippine import tariffs from zero to 10% on crude petroleum and refined petroleum products (HS 2709; 2710; 2711)?",
+    "choices": {
+      "A": "Executive Order No. 163",
+      "B": "Executive Order No. 113",
+      "C": "Executive Order No. 482",
+      "D": "Executive Order No. 810"
+    },
+    "correct": "B",
+    "reason": "Annex D lists President Executive Order No. 113 (2 May 2020) as the basis for the temporary increase from zero to 10%. (Primer p.291)"
+  },
+  "861": {
+    "question": "Under Singapore's temporary relaxation of import licensing for hand sanitizers, masks, thermometers and protective gear (effective 31 January 2020), what must importers do instead of obtaining an importer's licence from the Health Science Authority (HSA)?",
+    "choices": {
+      "A": "Post a customs bond",
+      "B": "Obtain approval from the Minister of Trade",
+      "C": "Apply for a post-import permit within 30 days",
+      "D": "Notify the HSA of their intention to import and give the brand and quantity of the devices"
+    },
+    "correct": "D",
+    "reason": "Importers only need to notify the HSA of their intention to import and provide the brand and quantity of the devices to be imported. (Primer p.291)"
+  },
+  "862": {
+    "question": "Switzerland's temporary moratorium on default interest on late payments of customs duties was effective from 21 March 2020 to when?",
+    "choices": {
+      "A": "31 December 2020",
+      "B": "09 October 2020",
+      "C": "04 April 2020",
+      "D": "30 June 2020"
+    },
+    "correct": "A",
+    "reason": "Annex D lists the Swiss moratorium as effective 21 March 2020 to 31 December 2020. (Primer p.291)"
+  },
+  "863": {
+    "question": "Switzerland's temporary increase of the 2020 import quotas Nos. 7 and 9 (effective 2 April 2020) covers which products?",
+    "choices": {
+      "A": "Meat and edible offal",
+      "B": "Sugar and rice",
+      "C": "Birds' eggs, milk and cream, and butter",
+      "D": "Wheat and barley"
+    },
+    "correct": "C",
+    "reason": "Annex D states that the quotas Nos. 7 and 9 were increased for birds' eggs, milk and cream, and butter. (Primer p.292)"
+  },
+  "864": {
+    "question": "Thailand's temporary export ban on surgical masks and protective face-masks, effective 5 February 2020, was for how long?",
+    "choices": {
+      "A": "Six months",
+      "B": "One year",
+      "C": "Three months",
+      "D": "Two years"
+    },
+    "correct": "B",
+    "reason": "Annex D lists the Thai export ban as effective 5 February 2020 for 1 year. (Primer p.292)"
+  },
+  "865": {
+    "question": "Thailand's temporary export ban on bird eggs of the species Gallus Domesticus was originally effective from 26 March to 1 April 2020. Until when was it extended, starting 2 April 2020?",
+    "choices": {
+      "A": "15 April 2020",
+      "B": "31 May 2020",
+      "C": "30 June 2020",
+      "D": "30 April 2020"
+    },
+    "correct": "D",
+    "reason": "Annex D states the ban was extended from 2 April 2020 to 30 April 2020. (Primer p.292)"
+  },
+  "866": {
+    "question": "A United States Trade Representative notice published on 20 March 2020 excluded certain products from the additional 25% duty on products from China. From what date was it effective, retroactively?",
+    "choices": {
+      "A": "1 September 2019",
+      "B": "20 March 2020",
+      "C": "1 September 2020",
+      "D": "7 April 2020"
+    },
+    "correct": "A",
+    "reason": "Annex D states that the notice was published on 20 March 2020 but effective retroactively from 1 September 2019. (Primer p.292)"
+  },
+  "867": {
+    "question": "Which United States agency initiated Investigation No. 332-576 to identify imported goods related to the COVID-19 response, their tariff classifications and applicable duty rates?",
+    "choices": {
+      "A": "US Customs and Border Protection",
+      "B": "Federal Emergency Management Agency",
+      "C": "United States International Trade Commission",
+      "D": "Office of the United States Trade Representative"
+    },
+    "correct": "C",
+    "reason": "Annex D lists the initiation of an investigation by the United States International Trade Commission, Investigation No. 332-576 (COVID-19 Related Goods). (Primer p.293)"
+  },
+  "868": {
+    "question": "The US FEMA rule allocating certain scarce or threatened materials for domestic use (effective 7 April 2020 to 10 August 2020) covers how many types of personal protective equipment?",
+    "choices": {
+      "A": "Three",
+      "B": "Five",
+      "C": "Seven",
+      "D": "Nine"
+    },
+    "correct": "B",
+    "reason": "Annex D states that the rule covers five types of PPE, including N-95 filtering facepiece respirators, surgical masks, and gloves or surgical gloves. (Primer p.293)"
+  },
+  "869": {
+    "question": "Under the US Customs and Border Protection temporary postponement of the time to deposit certain estimated duties, taxes and fees during COVID-19, which duties and remedies are NOT included in the relief effort?",
+    "choices": {
+      "A": "Ordinary customs duties on goods imported in March and April 2020",
+      "B": "Fees on goods from developing countries",
+      "C": "Duties on goods imported by hospitals",
+      "D": "AD/CVD duties and Section 201, 232 and 301 trade remedies"
+    },
+    "correct": "D",
+    "reason": "Annex D states that imports subject to AD/CVD duties and Section 201, 232 and 301 trade remedies are not included in this relief effort. (Primer p.294)"
+  },
+  "870": {
+    "question": "Vietnam's temporary export licensing requirements on face masks (HS 6307.90.40; 6307.90.90), effective 11 March 2020, were terminated on what date?",
+    "choices": {
+      "A": "29 April 2020",
+      "B": "1 May 2020",
+      "C": "6 May 2020",
+      "D": "7 February 2020"
+    },
+    "correct": "A",
+    "reason": "Annex D states the Vietnamese export licensing on face masks was effective 11 March 2020 and terminated on 29 April 2020. (Primer p.294)"
+  },
+  "871": {
+    "question": "Vietnam's temporary export quotas, implemented from 10 April 2020 to 1 May 2020 for national food security, applied to which product?",
+    "choices": {
+      "A": "Wheat (HS 1001)",
+      "B": "Maize (HS 1005)",
+      "C": "Rice (HS 1006)",
+      "D": "Sugar (HS 1701)"
+    },
+    "correct": "C",
+    "reason": "Annex D lists temporary export quotas on rice (HS 1006) for national food security, effective 10 April 2020 to 1 May 2020. (Primer p.294)"
+  },
+  "872": {
+    "question": "On what date did UK Prime Minister David Cameron send a letter to then European Council President Donald Tusk containing four areas of negotiation on reforms of the UK's EU membership?",
+    "choices": {
+      "A": "23 June 2015",
+      "B": "10 November 2015",
+      "C": "29 March 2016",
+      "D": "20 November 2015"
+    },
+    "correct": "B",
+    "reason": "The Primer states that PM Cameron's letter to Donald Tusk was dated 10 November 2015. (Primer p.295)"
+  },
+  "873": {
+    "question": "Which of the following was NOT one of the four areas of negotiation in David Cameron's letter to the European Council President?",
+    "choices": {
+      "A": "Economic governance",
+      "B": "Competitiveness",
+      "C": "Sovereignty",
+      "D": "The EU common external tariff"
+    },
+    "correct": "D",
+    "reason": "The four areas were economic governance, competitiveness, sovereignty and immigration. (Primer p.295)"
+  },
+  "874": {
+    "question": "On what date did the UK hold a referendum on its membership in the European Union?",
+    "choices": {
+      "A": "23 June 2016",
+      "B": "29 March 2017",
+      "C": "10 November 2015",
+      "D": "31 January 2020"
+    },
+    "correct": "A",
+    "reason": "The Primer states that the UK held a referendum on its EU membership on 23 June 2016. (Primer p.295)"
+  },
+  "875": {
+    "question": "Which UK Prime Minister officially launched the Brexit process on 29 March 2017 by triggering Article 50 of the Treaty of Lisbon?",
+    "choices": {
+      "A": "David Cameron",
+      "B": "Boris Johnson",
+      "C": "Theresa May",
+      "D": "Gordon Brown"
+    },
+    "correct": "C",
+    "reason": "The Primer states that Theresa May officially launched the Brexit process on 29 March 2017, which triggered Article 50 of the Treaty of Lisbon. (Primer p.295)"
+  },
+  "876": {
+    "question": "On what date did the United Kingdom formally cease its membership in the European Union?",
+    "choices": {
+      "A": "29 March 2017",
+      "B": "31 January 2020",
+      "C": "31 December 2020",
+      "D": "01 January 2021"
+    },
+    "correct": "B",
+    "reason": "The UK formally ceased its EU membership on 31 January 2020 and entered a transition period lasting until the end of 2020. (Primer p.295)"
+  },
+  "877": {
+    "question": "During the transition period the UK continued to apply EU rules on trade, travel and business. On what date did the UK's own rules come into effect?",
+    "choices": {
+      "A": "31 December 2019",
+      "B": "29 March 2019",
+      "C": "31 January 2021",
+      "D": "01 January 2021"
+    },
+    "correct": "D",
+    "reason": "The UK's own rules were to come into effect on 01 January 2021. (Primer p.295)"
+  },
+  "878": {
+    "question": "According to Table 10.14, when the UK triggered Article 50 in 2017, what deadline did the formal exit process begin with?",
+    "choices": {
+      "A": "A two-year deadline",
+      "B": "A one-year deadline",
+      "C": "A three-year deadline",
+      "D": "A five-year deadline"
+    },
+    "correct": "A",
+    "reason": "Table 10.14 states that the UK triggered Article 50, formally beginning the exit process with a two-year deadline. (Primer p.295)"
+  },
+  "879": {
+    "question": "According to Table 10.14, what was the result of the 2017 general election called by PM Theresa May?",
+    "choices": {
+      "A": "A Labour Party majority",
+      "B": "A Conservative Party majority",
+      "C": "A hung Parliament, with the Conservatives winning the most seats but no majority",
+      "D": "A Liberal Democrat coalition government"
+    },
+    "correct": "C",
+    "reason": "Table 10.14 states the election resulted in a hung Parliament, with the Conservative Party winning the most seats but no majority. (Primer p.295)"
+  },
+  "880": {
+    "question": "In 2018 the British government issued guidance in case of a 'no-deal' Brexit. What rules would apply to trade between the UK and the EU in that case?",
+    "choices": {
+      "A": "Single Market rules",
+      "B": "Only WTO rules",
+      "C": "The UK's own customs rules only",
+      "D": "Existing EU free trade agreement rules"
+    },
+    "correct": "B",
+    "reason": "Table 10.14 states that in a no-deal Brexit no special arrangement is agreed and only WTO rules apply to trade between the UK and EU. (Primer p.295)"
+  },
+  "881": {
+    "question": "According to Table 10.14, who succeeded Theresa May as Prime Minister after she resigned in 2019?",
+    "choices": {
+      "A": "David Cameron",
+      "B": "Jeremy Corbyn",
+      "C": "Donald Tusk",
+      "D": "Boris Johnson"
+    },
+    "correct": "D",
+    "reason": "Table 10.14 states that Theresa May resigned and was succeeded by Boris Johnson as PM in 2019. (Primer p.296)"
+  },
+  "882": {
+    "question": "From 2016 to 2018, what was the average value of Philippine trade with the United Kingdom, according to the Primer?",
+    "choices": {
+      "A": "US$1.07 billion",
+      "B": "US$10.7 billion",
+      "C": "US$107 million",
+      "D": "US$5.9 billion"
+    },
+    "correct": "A",
+    "reason": "The Primer states that Philippine trade with the UK averaged US$1.07 billion from 2016 to 2018, less than one percent of total Philippine trade. (Primer p.296)"
+  },
+  "883": {
+    "question": "In 2018 Philippine exports to the United Kingdom amounted to US$470 million. How many tariff lines did these exports cover?",
+    "choices": {
+      "A": "596",
+      "B": "1,031",
+      "C": "966",
+      "D": "11,830"
+    },
+    "correct": "C",
+    "reason": "The Primer states that 2018 Philippine exports to the UK amounted to US$470 million or 966 tariff lines. (Primer p.297)"
+  },
+  "884": {
+    "question": "In Table 10.16, which product ranked first among the Philippines' top exports to the UK in 2018?",
+    "choices": {
+      "A": "Desiccated coconut",
+      "B": "Tunas in airtight containers for retail sale",
+      "C": "Bicycles designed to be ridden by children",
+      "D": "Other pulps of fibres obtained by a combination of mechanical and chemical processes"
+    },
+    "correct": "B",
+    "reason": "Table 10.16 lists tunas in airtight containers for retail sale (AHTN 1604.14.11) first, at US$78,070,423. (Primer p.297)"
+  },
+  "885": {
+    "question": "According to the PSA as cited in the Primer, how much did total approved foreign direct investments from the UK amount to in the fourth quarter of 2018?",
+    "choices": {
+      "A": "P400 million",
+      "B": "P20.5 billion",
+      "C": "P205 million",
+      "D": "P2.05 billion"
+    },
+    "correct": "D",
+    "reason": "The UK's approved investments amounted to P2.05 billion in Q4 of 2018, and dropped to just over P400 million in the same period in 2019. (Primer p.297)"
+  },
+  "886": {
+    "question": "The United Kingdom is the second most popular European destination for Filipino migrants after which country?",
+    "choices": {
+      "A": "Italy",
+      "B": "Germany",
+      "C": "Spain",
+      "D": "France"
+    },
+    "correct": "A",
+    "reason": "The Primer states that the UK is the second most popular European destination for Filipino migrants after Italy. (Primer p.298)"
+  },
+  "887": {
+    "question": "According to Bangko Sentral ng Pilipinas data cited in the Primer, what share of remittances from Europe in 2019 came from the UK?",
+    "choices": {
+      "A": "25 percent",
+      "B": "76 percent",
+      "C": "40 percent",
+      "D": "2.8 percent"
+    },
+    "correct": "C",
+    "reason": "The Primer states that forty percent (40%) of remittances from Europe in 2019 are from the UK. (Primer p.298)"
+  },
+  "888": {
+    "question": "The UK accounted for 2.8% of foreign tourists to the Philippines in 2018. What rank does this make the UK among the Philippines' foreign tourism markets in the world?",
+    "choices": {
+      "A": "Third largest",
+      "B": "Eighth largest",
+      "C": "Fifth largest",
+      "D": "Twelfth largest"
+    },
+    "correct": "B",
+    "reason": "The UK is the Philippines' eighth largest foreign tourism market in the world, and the largest in Europe. (Primer p.298)"
+  },
+  "889": {
+    "question": "In what year did the Philippines become a beneficiary of the EU's GSP+?",
+    "choices": {
+      "A": "2010",
+      "B": "2012",
+      "C": "2016",
+      "D": "2014"
+    },
+    "correct": "D",
+    "reason": "The Primer states that in 2014 the Philippines became a beneficiary of the EU's GSP+. (Primer p.299)"
+  },
+  "890": {
+    "question": "After the Brexit transition period, the Philippines will be placed under which framework, which replicates the EU GSP+ status?",
+    "choices": {
+      "A": "The UK GSP enhanced framework",
+      "B": "The UK Global Tariff",
+      "C": "The EU Common External Tariff",
+      "D": "A UK-ASEAN free trade agreement"
+    },
+    "correct": "A",
+    "reason": "The Primer states that the Philippines will be placed in the UK GSP enhanced framework, which replicates the EU GSP+ status. (Primer p.299)"
+  },
+  "891": {
+    "question": "The Philippines-EFTA FTA came into force in 2018 for the Philippines, Norway, Switzerland and Liechtenstein. In what year did it come into force for Iceland?",
+    "choices": {
+      "A": "2018",
+      "B": "2019",
+      "C": "2020",
+      "D": "2021"
+    },
+    "correct": "C",
+    "reason": "The Primer states the Agreement came into force in 2018 for the Philippines, Norway, Switzerland and Liechtenstein, and in 2020 for Iceland. (Primer p.300)"
+  },
+  "892": {
+    "question": "ASEAN-EU FTA (AEUFTA) negotiations were launched in 2007. In what year were they suspended?",
+    "choices": {
+      "A": "2008",
+      "B": "2009",
+      "C": "2013",
+      "D": "2015"
+    },
+    "correct": "B",
+    "reason": "The Primer states that AEUFTA negotiations were launched in 2007, suspended in 2009 and resumed in 2015. (Primer p.300)"
+  },
+  "893": {
+    "question": "The UK Global Tariff (UKGT) serves as the UK's Most Favoured Nation tariff schedule beginning on what date?",
+    "choices": {
+      "A": "31 January 2020",
+      "B": "01 January 2020",
+      "C": "31 December 2020",
+      "D": "01 January 2021"
+    },
+    "correct": "D",
+    "reason": "The Primer states that the UKGT serves as the UK's MFN tariff schedule beginning on 01 January 2021. (Primer p.300)"
+  },
+  "894": {
+    "question": "Talks on a Philippines-EU FTA began in 2013. Since what year have they been paused, citing political concerns about the current administration's policies?",
+    "choices": {
+      "A": "2018",
+      "B": "2015",
+      "C": "2009",
+      "D": "2020"
+    },
+    "correct": "A",
+    "reason": "The Primer states that talks on a PH-EU FTA began in 2013 and have been paused since 2018 citing political concerns. (Primer p.300)"
+  },
+  "895": {
+    "question": "The UK Global Tariff (UKGT) follows which coding system, according to the Primer?",
+    "choices": {
+      "A": "A six-digit coding system based on the HS 2017 version",
+      "B": "A ten-digit coding system based on the HS 2017 version",
+      "C": "An eight-digit coding system based on the HS 2017 version",
+      "D": "An eight-digit coding system based on the HS 2012 version"
+    },
+    "correct": "C",
+    "reason": "The UKGT follows an eight-digit coding system based on the Harmonized System (HS) 2017 version. (Primer p.300)"
+  },
+  "896": {
+    "question": "The UKGT has a total of 11,830 tariff lines. How many of them have zero tariffs, according to the Primer?",
+    "choices": {
+      "A": "2,608",
+      "B": "4,612",
+      "C": "5,800",
+      "D": "1,418"
+    },
+    "correct": "B",
+    "reason": "The Primer states that 39% or 4,612 tariff lines under the UKGT have zero tariffs. (Primer p.300)"
+  },
+  "897": {
+    "question": "According to Table 10.18, how many tariff lines had a zero tariff level under the EU Common External Tariff (CET) in 2020?",
+    "choices": {
+      "A": "4,612",
+      "B": "2,941",
+      "C": "3,611",
+      "D": "2,608"
+    },
+    "correct": "D",
+    "reason": "Table 10.18 shows 2,608 tariff lines (22.05%) at zero under the EU CET (2020), against 4,612 (38.99%) under the UKGT (2021). (Primer p.301)"
+  },
+  "898": {
+    "question": "Which of the following is NOT a party to the UK-Central America Trade Association Agreement as described in the Primer?",
+    "choices": {
+      "A": "Mexico",
+      "B": "Costa Rica",
+      "C": "Honduras",
+      "D": "Panama"
+    },
+    "correct": "A",
+    "reason": "The Primer names Costa Rica, El Salvador, Guatemala, Honduras, Nicaragua and Panama as the Central American parties. (Primer p.302)"
+  },
+  "899": {
+    "question": "According to the Primer, why did the UK negotiate bilateral FTAs with partners such as Lebanon and Jordan?",
+    "choices": {
+      "A": "To replace its WTO commitments",
+      "B": "To gain preferential access to ASEAN markets",
+      "C": "To ensure continuity, since these countries are also EU FTA partners",
+      "D": "To qualify for the GSP+ scheme"
+    },
+    "correct": "C",
+    "reason": "The Primer states that the UK negotiated these bilateral FTAs to ensure continuity since these countries are also EU FTA partners. (Primer p.302)"
+  },
+  "900": {
+    "question": "Compared with the EU, what do British bilateral FTAs seem less inclined to include in their coverage, according to the Primer?",
+    "choices": {
+      "A": "Trade in goods chapters",
+      "B": "Sensitive 'non-trade' or 'new' FTA issues",
+      "C": "Rules of origin",
+      "D": "Intellectual property"
+    },
+    "correct": "B",
+    "reason": "British bilateral FTAs seem less inclined to include sensitive 'non-trade' or 'new' FTA issues, preferring basic chapters such as trade in goods, rules of origin, SPS measures, investment and intellectual property. (Primer p.302)"
+  },
+  "901": {
+    "question": "What edition and date appear on the cover of the ASEAN Harmonized Tariff Nomenclature (AHTN) Supplementary Explanatory Notes reproduced in Part Eleven of the Primer?",
+    "choices": {
+      "A": "Edition 2012, January 2012",
+      "B": "Edition 2017, July 2017",
+      "C": "Edition 2007, January 2007",
+      "D": "Edition 2017, January 2017"
+    },
+    "correct": "D",
+    "reason": "The cover page reads ASEAN Harmonized Tariff Nomenclature Supplementary Explanatory Notes, Edition 2017, January 2017. (Primer p.307)"
+  },
+  "902": {
+    "question": "The EU GSP+ allows duty-free exportation of a greater range of products than the regular GSP, in exchange for continuing to uphold international conventions on which matters?",
+    "choices": {
+      "A": "Tariff bindings and customs valuation",
+      "B": "Intellectual property and competition",
+      "C": "Labor, human rights, sustainable development and good governance",
+      "D": "Cybersecurity and data privacy"
+    },
+    "correct": "C",
+    "reason": "The Primer states that GSP+ is given in exchange for continuing to uphold international conventions on labor, human rights, sustainable development and good governance. (Primer p.299)"
+  },
+  "903": {
+    "question": "According to the EU's GSP+ Assessment for the Philippines covering 2018-2019, by how much did the EU's importation from the Philippines grow from 2016 to 2018?",
+    "choices": {
+      "A": "Almost 20 percent",
+      "B": "Almost 5 percent",
+      "C": "Almost 40 percent",
+      "D": "Almost 73 percent"
+    },
+    "correct": "A",
+    "reason": "The assessment notes that the EU's importation from the Philippines grew by almost 20% from 2016 to 2018. (Primer p.299)"
+  },
+  "904": {
+    "question": "The Supplementary Explanatory Notes (SEN) of the ASEAN Harmonized Tariff Nomenclature (AHTN) form part of which instrument?",
+    "choices": {
+      "A": "The ASEAN Trade in Goods Agreement",
+      "B": "The Protocol governing the implementation of the AHTN (AHTN Protocol, August 2003, Manila)",
+      "C": "The ASEAN Framework Agreement on Customs",
+      "D": "The Harmonized System Convention"
+    },
+    "correct": "B",
+    "reason": "The Foreword states that the SEN form part of the Protocol governing the implementation of the AHTN (AHTN Protocol, August 2003, Manila). (Primer p.308)"
+  },
+  "905": {
+    "question": "In case of any conflict between the text of the HS and Explanatory Notes (EN) and the AHTN Supplementary Explanatory Notes (SEN) 2017, which prevails?",
+    "choices": {
+      "A": "The SEN 2017",
+      "B": "The definition set by the importing ASEAN Member State",
+      "C": "The definition of the ASEAN Secretariat",
+      "D": "The definitions provided in the HS and EN"
+    },
+    "correct": "D",
+    "reason": "The Foreword states that in the case of any conflict between the text of the HS and EN and the SEN, the definitions provided in the HS and EN shall prevail. (Primer p.308)"
+  },
+  "906": {
+    "question": "According to the Foreword of the AHTN Supplementary Explanatory Notes 2017, for what purpose have the pictures, graphs and diagrams of products been provided?",
+    "choices": {
+      "A": "Illustrative purposes only",
+      "B": "Binding classification references",
+      "C": "Customs valuation",
+      "D": "Rules of origin determination"
+    },
+    "correct": "A",
+    "reason": "The Foreword says pictures, graphs and diagrams in the SEN have only been provided for illustrative purposes. (Primer p.308)"
+  },
+  "907": {
+    "question": "SEN 2012 was amended to produce SEN 2017 in line with which changes?",
+    "choices": {
+      "A": "The 2012 amendments to the AHTN Protocol",
+      "B": "The ASEAN Trade in Goods Agreement revisions",
+      "C": "The HS 2017 amendments (including the amendments to the EN)",
+      "D": "The WTO Trade Facilitation Agreement"
+    },
+    "correct": "C",
+    "reason": "The Foreword states SEN 2012 has been amended in line with the HS 2017 amendments, including the amendments to the EN. (Primer p.308)"
+  },
+  "908": {
+    "question": "In the Abbreviations and Symbols list of the AHTN Supplementary Explanatory Notes, what does ASTM stand for?",
+    "choices": {
+      "A": "American Society for Testing Materials",
+      "B": "Association of Standard Trade Measures",
+      "C": "Asian Standards for Technical Materials",
+      "D": "American Standard Tariff Method"
+    },
+    "correct": "A",
+    "reason": "The list defines ASTM as the American Society for Testing Materials. (Primer p.309)"
+  },
+  "909": {
+    "question": "In the Abbreviations and Symbols list, what does g.v.w. stand for?",
+    "choices": {
+      "A": "Gross volume weight",
+      "B": "Gram per volume weight",
+      "C": "Gross vehicle weight",
+      "D": "General value weight"
+    },
+    "correct": "C",
+    "reason": "The list defines g.v.w. as gross vehicle weight. (Primer p.309)"
+  },
+  "910": {
+    "question": "In the Abbreviations and Symbols list, what does CAS stand for?",
+    "choices": {
+      "A": "Customs Appraisal System",
+      "B": "Classification and Standards",
+      "C": "Commodity Analysis Service",
+      "D": "Chemical Abstracts Service"
+    },
+    "correct": "D",
+    "reason": "The list defines CAS as Chemical Abstracts Service. (Primer p.309)"
+  },
+  "911": {
+    "question": "In the Abbreviations and Symbols list, what does RON stand for?",
+    "choices": {
+      "A": "Refined Oil Number",
+      "B": "Research Octane Number",
+      "C": "Rated Oxygen Number",
+      "D": "Regulated Octane Norm"
+    },
+    "correct": "B",
+    "reason": "The list defines RON as Research Octane Number. (Primer p.310)"
+  },
+  "912": {
+    "question": "In the Abbreviations and Symbols list, what does RSS stand for?",
+    "choices": {
+      "A": "Refined Sugar Standard",
+      "B": "Raw Synthetic Sheets",
+      "C": "Ribbed Smoked Sheets",
+      "D": "Rubber Standard Specification"
+    },
+    "correct": "C",
+    "reason": "The list defines RSS as Ribbed Smoked Sheets. (Primer p.310)"
+  },
+  "913": {
+    "question": "According to the examples in the Abbreviations and Symbols list, what does 1,500 g/m2 mean?",
+    "choices": {
+      "A": "One thousand five hundred grams per square metre",
+      "B": "One thousand five hundred grams per cubic metre",
+      "C": "One thousand five hundred kilograms per square metre",
+      "D": "One thousand five hundred grams per metre"
+    },
+    "correct": "A",
+    "reason": "The example states that 1,500 g/m2 means one thousand five hundred grams per square metre. (Primer p.310)"
+  },
+  "914": {
+    "question": "How does the SEN define oxen (subheading 0102.29.11)?",
+    "choices": {
+      "A": "Adult female bovine animals of the genus Bos used for milk",
+      "B": "Young bovine animals raised for slaughter",
+      "C": "Uncastrated adult male bovine animals used for breeding",
+      "D": "Castrated adult male bovine animals of the genus Bos of the species Bos Taurus"
+    },
+    "correct": "D",
+    "reason": "Oxen are castrated adult male bovine animals of the genus Bos of the species Bos Taurus, trained as draft animals. (Primer p.311)"
+  },
+  "915": {
+    "question": "For the ASEAN subheadings under heading 01.05, what does the term 'breeding' refer to?",
+    "choices": {
+      "A": "Poultry of any kind sold for slaughter",
+      "B": "Live poultry of a kind presented for raising as a breeding animal",
+      "C": "Fertilized eggs for hatching",
+      "D": "Poultry presented for sale in live-animal markets"
+    },
+    "correct": "B",
+    "reason": "For the ASEAN subheadings under heading 01.05, breeding refers to live poultry of a kind presented for raising as a breeding animal. (Primer p.311)"
+  },
+  "916": {
+    "question": "According to the SEN, breeding animals are accompanied by what?",
+    "choices": {
+      "A": "Certification from the competent authorities as provided for under the national law",
+      "B": "A Certificate of Origin Form D",
+      "C": "A veterinary import quota permit",
+      "D": "A bond posted with the customs authority"
+    },
+    "correct": "A",
+    "reason": "The SEN states that breeding animals are accompanied by certification from the competent authorities as provided for under the national law. (Primer p.311)"
+  },
+  "917": {
+    "question": "How is mechanically deboned or separated meat obtained, according to the SEN?",
+    "choices": {
+      "A": "By grinding meat with added water",
+      "B": "By boiling bones to extract the meat",
+      "C": "By freezing carcasses then cutting them",
+      "D": "By forcing turkey or chicken bones, with attached edible meat, under high pressure through a sieve or similar device"
+    },
+    "correct": "D",
+    "reason": "It is obtained by forcing turkey or chicken bones with attached edible meat under high pressure through a sieve or similar device to separate bones from the edible meat tissue. (Primer p.312)"
+  },
+  "918": {
+    "question": "For what is mechanically deboned or separated meat used, according to the SEN?",
+    "choices": {
+      "A": "Fresh table cuts sold in markets",
+      "B": "Pet food only",
+      "C": "Manufacture of sausages, nuggets and similar products",
+      "D": "Production of broth concentrates only"
+    },
+    "correct": "C",
+    "reason": "The SEN states it is used for the manufacture of sausages, nuggets and similar products. (Primer p.312)"
+  },
+  "919": {
+    "question": "What is the color of Botia (Chromobotia macracanthus), subheading 0301.11.11, according to the SEN?",
+    "choices": {
+      "A": "Silver with red fins",
+      "B": "Bright yellow with 3 wide black bands",
+      "C": "Green with white spots",
+      "D": "Orange with 5 thin black lines"
+    },
+    "correct": "B",
+    "reason": "The SEN describes the Botia as an ornamental freshwater fish with a bright yellow color and 3 wide black bands. (Primer p.313)"
+  },
+  "920": {
+    "question": "Arowanas Jardini (Scleropages jardini), subheading 0301.11.96, is described in the SEN as an ornamental freshwater fish endemic to where?",
+    "choices": {
+      "A": "Central Sulawesi",
+      "B": "The Philippines",
+      "C": "The Mekong River",
+      "D": "Papua"
+    },
+    "correct": "D",
+    "reason": "The SEN categorizes the Arowanas Jardini as an ornamental freshwater fish, endemic from Papua. (Primer p.313)"
+  },
+  "921": {
+    "question": "What size can the Napoleon Wrasse (Cheilinus undulatus), subheading 0301.19.92, reach, according to the SEN?",
+    "choices": {
+      "A": "2 m and up to 190 kg at 50 years old",
+      "B": "50 cm and up to 5 kg",
+      "C": "1 m and up to 90 kg at 10 years old",
+      "D": "6-8 cm"
+    },
+    "correct": "A",
+    "reason": "The SEN states the Napoleon Wrasse reaches 2 m and up to 190 kg at 50 years old. (Primer p.314)"
+  },
+  "922": {
+    "question": "To which family does the Napoleon Wrasse (Cheilinus undulatus) belong, according to the SEN?",
+    "choices": {
+      "A": "Serranidae",
+      "B": "Apogonidae",
+      "C": "Labridae",
+      "D": "Engraulididae"
+    },
+    "correct": "C",
+    "reason": "The classification given for the Napoleon Wrasse lists the family as Labridae. (Primer p.314)"
+  },
+  "923": {
+    "question": "What adult size does the Banggai Cardinal Fish reach, according to the SEN, and which sex is bigger?",
+    "choices": {
+      "A": "6-8 cm; the females are bigger",
+      "B": "6-8 cm; the males are bigger",
+      "C": "10-15 cm; the males are bigger",
+      "D": "2 m; the females are bigger"
+    },
+    "correct": "B",
+    "reason": "The SEN states the adult size reaches 6-8 cm and the males are bigger than the females. (Primer p.314)"
+  },
+  "924": {
+    "question": "Regarding activeness, how should breeding fish behave according to the SEN?",
+    "choices": {
+      "A": "Remain still at the bottom of the container",
+      "B": "Swim singly near the surface",
+      "C": "Be sorted by weight only",
+      "D": "Be active, swift, swimming under the water in groups"
+    },
+    "correct": "D",
+    "reason": "The SEN states that breeding fish should be active, swift, swimming under the water in groups. (Primer p.315)"
+  },
+  "925": {
+    "question": "According to the SEN, up to what size can the humpback hind (Cromileptes altivelis) grow?",
+    "choices": {
+      "A": "70 cm even more",
+      "B": "20-25 cm",
+      "C": "6-8 cm",
+      "D": "2 m"
+    },
+    "correct": "A",
+    "reason": "The SEN states that the size of the humpback hind is up to 70 cm even more. (Primer p.315)"
+  },
+  "926": {
+    "question": "According to the SEN, how long can the Greasy rockcod/estuary rockcod (Epinephelus tauvina) reach?",
+    "choices": {
+      "A": "60 cm",
+      "B": "20-25 cm",
+      "C": "75 cm",
+      "D": "50 cm"
+    },
+    "correct": "C",
+    "reason": "The SEN states the Greasy rockcod can reach 75 cm. (Primer p.316)"
+  },
+  "927": {
+    "question": "Tilapias (Oreochromis spp.), subheading 0301.99.41, are categorized in the SEN as what, and what size can they reach?",
+    "choices": {
+      "A": "Ornamental marine fish, up to 8 cm",
+      "B": "Freshwater fish for consumption, up to 60 cm",
+      "C": "Marine fish for consumption, up to 2 m",
+      "D": "Ornamental freshwater fish, up to 10 cm"
+    },
+    "correct": "B",
+    "reason": "Tilapias are categorized as freshwater fish for consumption, with a size of up to 60 cm. (Primer p.316)"
+  },
+  "928": {
+    "question": "What distinctive feature of the jaw does the SEN mention for the Blue-lined seabass (Cephalopholis boenack)?",
+    "choices": {
+      "A": "Three rows of teeth in the lower jaw",
+      "B": "A tasseled lower jaw",
+      "C": "Two soft barbels",
+      "D": "A pair of canine in the top of the jaw"
+    },
+    "correct": "D",
+    "reason": "The SEN describes the Blue-lined seabass as a marine fish with a large mouth, small teeth and a pair of canine in top of the jaw. (Primer p.316)"
+  },
+  "929": {
+    "question": "Which two species are covered under the heading for Mackerel (subheading 0303.54.10) in the SEN?",
+    "choices": {
+      "A": "Scomber scombrus and Scomber australasicus",
+      "B": "Scomber japonicus and Scomber scombrus",
+      "C": "Scomber japonicus and Scomber australasicus",
+      "D": "Engraulis spp and Scomber scombrus"
+    },
+    "correct": "A",
+    "reason": "The SEN heading for subheading 0303.54.10 is Mackerel (Scomber scombrus, Scomber australasicus). (Primer p.317)"
+  },
+  "930": {
+    "question": "In the SEN, the Blue Mackerel is identified by which scientific name?",
+    "choices": {
+      "A": "Scomber scombrus",
+      "B": "Scomber japonicus",
+      "C": "Scomber australasicus",
+      "D": "Stolephorus spp."
+    },
+    "correct": "C",
+    "reason": "The SEN identifies the Blue Mackerel as Scomber australasicus, and the Atlantic Mackerel as Scomber scombrus. (Primer p.317)"
+  },
+  "931": {
+    "question": "Which scientific name does the SEN give for the Pacific Mackerel (subheading 0303.54.20)?",
+    "choices": {
+      "A": "Scomber australasicus",
+      "B": "Scomber japonicus",
+      "C": "Scomber scombrus",
+      "D": "Engraulis japonicus"
+    },
+    "correct": "B",
+    "reason": "The SEN lists the Pacific Mackerel as Scomber japonicus under subheading 0303.54.20. (Primer p.318)"
+  },
+  "932": {
+    "question": "To which family do the anchovies (subheading 0305.59.21) belong, according to the SEN?",
+    "choices": {
+      "A": "Labridae",
+      "B": "Serranidae",
+      "C": "Apogonidae",
+      "D": "Engraulididae"
+    },
+    "correct": "D",
+    "reason": "The SEN gives Engraulididae as the family of the anchovies. (Primer p.318)"
+  },
+  "933": {
+    "question": "According to the SEN, which anchovy genera are mostly found in ASEAN waters?",
+    "choices": {
+      "A": "Stolephorus, Coilia, Setipinna, Lycothrissa and Thryssa, and Encrasicholina species",
+      "B": "Engraulis species only",
+      "C": "Anchoviella and Anchoa species",
+      "D": "Amazonsprattus and Papuengraulis species"
+    },
+    "correct": "A",
+    "reason": "The SEN states that Stolephorus, Coilia, Setipinna, Lycothrissa, Thryssa and Encrasicholina species are mostly found in ASEAN waters. (Primer p.318)"
+  },
+  "934": {
+    "question": "What function does the fish maw (swim bladder) serve, according to the SEN?",
+    "choices": {
+      "A": "It filters oxygen from water",
+      "B": "It stores fat for winter",
+      "C": "It contributes to the fish's ability to maintain buoyancy",
+      "D": "It produces eggs"
+    },
+    "correct": "C",
+    "reason": "The SEN states that the swim bladder is a gas-filled organ that contributes to the ability of a fish to maintain its buoyancy. (Primer p.319)"
+  },
+  "935": {
+    "question": "According to the SEN, what colour should quality fish maw have?",
+    "choices": {
+      "A": "Dark brown and opaque",
+      "B": "Amber and clear",
+      "C": "Pure white",
+      "D": "Pale grey with wrinkles"
+    },
+    "correct": "B",
+    "reason": "The SEN states quality fish maw should have an amber and clear colour, a smooth and delightful texture. (Primer p.319)"
+  },
+  "936": {
+    "question": "The medical benefit of fish maw works best after storage in a dry place for how long, according to the SEN?",
+    "choices": {
+      "A": "Less than 1 month",
+      "B": "6 months",
+      "C": "5 to 10 years",
+      "D": "1 to 3 years"
+    },
+    "correct": "D",
+    "reason": "The SEN says the medical benefit works best after storage in a dry place for 1 to 3 years, when the fishy smell and stickiness of gluten are reduced. (Primer p.319)"
+  },
+  "937": {
+    "question": "Which is one of the general requirements on appearance for breeding shrimps and prawns, according to the SEN?",
+    "choices": {
+      "A": "Well-proportioned body, no deformity, no damage to the crust and no sign of disease",
+      "B": "A uniform red colour",
+      "C": "A minimum length of 30 cm",
+      "D": "A weight of at least 1 kg"
+    },
+    "correct": "A",
+    "reason": "The general requirements are a well-proportioned body, no deformity, no damage to the crust and no sign of disease. (Primer p.321)"
+  },
+  "938": {
+    "question": "What does the SEN 2017 provide for Chapters 4 and 5?",
+    "choices": {
+      "A": "Notes on dairy produce only",
+      "B": "A list of prohibited goods",
+      "C": "No Supplementary Explanatory Notes for these Chapters",
+      "D": "Photographs of products without text"
+    },
+    "correct": "C",
+    "reason": "The SEN states that there are no Supplementary Explanatory Notes for Chapter 4 and Chapter 5. (Primer p.321)"
+  },
+  "939": {
+    "question": "In producing bare root budded stumps of the genus Hevea (subheading 0602.90.40), the rootstock is cut back about how far from the upper part of the bud patch?",
+    "choices": {
+      "A": "Ten cm",
+      "B": "Five cm",
+      "C": "One cm",
+      "D": "Thirty cm"
+    },
+    "correct": "B",
+    "reason": "The SEN states the rootstock is cut back about five cm from the upper part of the bud patch and the lateral roots are trimmed closest to the tap root. (Primer p.321)"
+  },
+  "940": {
+    "question": "Seedlings of the genus Hevea (subheading 0602.90.50) are germinated rubber tree seeds with a root length of about how much?",
+    "choices": {
+      "A": "10 to 20 cm",
+      "B": "30 cm",
+      "C": "5 cm",
+      "D": "1 to 2 cm"
+    },
+    "correct": "D",
+    "reason": "The SEN states that seedlings of the genus Hevea are germinated rubber tree seeds with a root length of about 1 to 2 cm. (Primer p.322)"
+  },
+  "941": {
+    "question": "What is the minimum length of green budwood of the genus Hevea (subheading 0602.90.60), and how many usable bud eyes must it have?",
+    "choices": {
+      "A": "30 cm with a minimum of two usable bud eyes",
+      "B": "60 cm with a minimum of three usable bud eyes",
+      "C": "15 cm with one usable bud eye",
+      "D": "50 cm with four usable bud eyes"
+    },
+    "correct": "A",
+    "reason": "The SEN states that green budwood has a minimum length of 30 cm with a minimum of two usable bud eyes each. (Primer p.322)"
+  },
+  "942": {
+    "question": "Good green budwood of the genus Hevea can be harvested from the nursery about how long after the first day of bud sprouting?",
+    "choices": {
+      "A": "One to two weeks",
+      "B": "Twelve months",
+      "C": "Three to four months",
+      "D": "Two years"
+    },
+    "correct": "C",
+    "reason": "The SEN states that good green budwood can be harvested about three to four months after the first day of bud sprouting. (Primer p.322)"
+  },
+  "943": {
+    "question": "Why can chipping potatoes (subheading 0701.90.10) fry up to a white to very light, slightly gold colour?",
+    "choices": {
+      "A": "Their thick skin",
+      "B": "Their low sugar levels",
+      "C": "Their high starch-free flesh",
+      "D": "Their large size"
+    },
+    "correct": "B",
+    "reason": "The SEN states that the low sugar levels of chipping potatoes allow them to fry up with a nice, white to very light, slightly gold colour. (Primer p.323)"
+  },
+  "944": {
+    "question": "According to the SEN, which appearance applies to bulbs for propagation (e.g., subheading 0703.10.11)?",
+    "choices": {
+      "A": "Sprouted and soft",
+      "B": "Peeled and dried",
+      "C": "Irregular in size and dull",
+      "D": "Proportional, no deformity, no scratches, in shell, similar size, big, shiny and tight"
+    },
+    "correct": "D",
+    "reason": "The SEN gives the appearance as proportional, no deformity, no scratches, in shell, and of similar size, big, shiny and tight. (Primer p.323)"
+  },
+  "945": {
+    "question": "In which two colours is round (drumhead) cabbage (subheading 0704.90.10) available, according to the SEN?",
+    "choices": {
+      "A": "Light green and purple/red",
+      "B": "Yellow and white",
+      "C": "Dark green and orange",
+      "D": "White and black"
+    },
+    "correct": "A",
+    "reason": "The SEN states round cabbage is available in two colours, light green (var. capitata) and purple/red (var. capitata f. rubra). (Primer p.323)"
+  },
+  "946": {
+    "question": "What is Chinese mustard (Brassica juncea), subheading 0704.90.20, called in Cantonese, according to the SEN?",
+    "choices": {
+      "A": "Pak Choi",
+      "B": "Choy Sum",
+      "C": "Kai Choi",
+      "D": "Wong Bok"
+    },
+    "correct": "C",
+    "reason": "The SEN states Chinese mustard is called Kai Choi in Cantonese, also known as green mustard cabbage. (Primer p.324)"
+  },
+  "947": {
+    "question": "Mature Brassica juncea plants grow to what height, according to the SEN?",
+    "choices": {
+      "A": "10 to 20 cm",
+      "B": "One to two meters",
+      "C": "Five to ten meters",
+      "D": "Three to four meters"
+    },
+    "correct": "B",
+    "reason": "The SEN states that mature Brassica juncea plants grow to a height of one to two meters. (Primer p.324)"
+  },
+  "948": {
+    "question": "Among the common horticultural forms of Brassica oleracea, which vegetable is given as the example where the stem is much expanded into a bulbous structure?",
+    "choices": {
+      "A": "Brussels sprouts",
+      "B": "Cauliflower",
+      "C": "Kale",
+      "D": "Kohlrabi"
+    },
+    "correct": "D",
+    "reason": "The SEN gives kohlrabi as the example of the form where the stem is much expanded to a bulbous structure. (Primer p.324)"
+  }
+}```
+
 ## File: ./frontend/src/data/defaultQuizzes/pc.json
 ```
 {

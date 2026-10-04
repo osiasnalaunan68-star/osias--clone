@@ -617,7 +617,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../authContext";
 import { PLANS, PAYMENT_METHODS, generateReferenceCode, submitPendingPurchase } from "../payments";
 
-const SUBJECT_LABELS = { TL: "Tariff Law", CDP: "Customs Documentation & Procedures", PC: "Practical Computations" };
+const SUBJECT_LABELS = { TL: "Tariff Law", CDP: "Customs Documentation & Procedures", PC: "Practical Computations", TCP: "Tariff Commission Primer" };
 
 function formatDate(ts) {
   try {
@@ -706,7 +706,7 @@ export default function AccountOverlay() {
     }
   };
 
-  const allSubscribed = Object.keys(SUBJECT_LABELS).every((code) => profile?.subscriptions?.[code]);
+  const allSubscribed = Object.keys(SUBJECT_LABELS).filter((c) => c !== "TCP").every((code) => profile?.subscriptions?.[code]);
   const activeMethod = PAYMENT_METHODS.find((m) => m.id === selectedMethod) || null;
 
   return (
@@ -1195,6 +1195,7 @@ export const SUBJECTS = [
   { id: "cdp", label: "CDP", kind: "flat" },
   { id: "tl", label: "TL", kind: "flat" },
   { id: "pc", label: "PC", kind: "flat" },
+  { id: "tcp", label: "TCP", kind: "flat" },
 ];
 
 export const FLAT_SUBJECTS = SUBJECTS.filter((s) => s.kind === "flat");
@@ -3365,7 +3366,7 @@ import {
 
 // First N items (by sorted order) na libre bawat subject — lahat ng lagpas dito
 // ay naka-lock hanggang mag-subscribe. Tugma sa pricing table sa handoff doc.
-const FREE_LIMITS = { cl: 10, cdp: 10, tl: 10, pc: 10 };
+const FREE_LIMITS = { cl: 10, cdp: 10, tl: 10, pc: 10, tcp: 10 };
 
 function isItemUnlocked(idx, subjectId, profile) {
   const freeLimit = FREE_LIMITS[subjectId] ?? Infinity;
@@ -3633,6 +3634,7 @@ const SUBJECT_LABELS = {
   tl: "Tariff Law",
   cdp: "Customs Documentation & Procedures",
   pc: "Practical Computations",
+  tcp: "Tariff Commission Primer",
 };
 
 function SubjectCard({ subjectId, expanded, onToggle, onPlay }) {
@@ -3748,7 +3750,7 @@ export default function QuizHub({ onExit }) {
               onContinue={handleContinueRA10863}
               onSelectTitle={() => setActiveView({ type: "ra10863-titles" })}
             />
-            {["tl", "cdp", "pc"].map((id) => (
+            {["tl", "cdp", "pc", "tcp"].map((id) => (
               <SubjectCard key={id} subjectId={id} expanded={expandedCard === id} onToggle={() => toggleCard(id)} onPlay={handlePlaySubject} />
             ))}
             <button
@@ -3980,7 +3982,7 @@ import { collection, getDocs, doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { PLANS, PAYMENT_METHODS } from "../payments";
 
-const SUBJECT_CODES = ["CL", "CDP", "TL", "PC"];
+const SUBJECT_CODES = ["CL", "CDP", "TL", "PC", "TCP"];
 const SUBJECT_LABELS = Object.fromEntries(
   PLANS.filter((p) => p.id !== "BUNDLE").map((p) => [p.id, p.label])
 );
@@ -5634,12 +5636,14 @@ import defaultCL from './data/defaultQuizzes/cl.json';
 import defaultCDP from './data/defaultQuizzes/cdp.json';
 import defaultTL from './data/defaultQuizzes/tl.json';
 import defaultPC from './data/defaultQuizzes/pc.json';
+import defaultTCP from './data/defaultQuizzes/tcp.json';
 
 const defaultDataMap = {
   cl: defaultCL,
   cdp: defaultCDP,
   tl: defaultTL,
   pc: defaultPC,
+  tcp: defaultTCP,
 };
 
 export function seedDefaultQuizzes() {
@@ -5751,7 +5755,7 @@ export function AuthProvider({ children }) {
         fullName: null,
         createdAt: serverTimestamp(),
         devices: [{ id: currentDeviceId, label: guessDeviceLabel(), lastActive: Date.now() }],
-        subscriptions: { CL: false, TL: false, CDP: false, PC: false },
+        subscriptions: { CL: false, TL: false, CDP: false, PC: false, TCP: false },
       };
       await setDoc(ref, fresh);
       setProfile(fresh);
@@ -5922,6 +5926,7 @@ export const PLANS = [
   { id: "TL", label: "Tariff Law", price: 39, subjects: ["TL"] },
   { id: "CDP", label: "Customs Documentation & Procedures", price: 39, subjects: ["CDP"] },
   { id: "PC", label: "Practical Computations", price: 29, subjects: ["PC"] },
+  { id: "TCP", label: "Tariff Commission Primer", price: 399, subjects: ["TCP"] },
   { id: "BUNDLE", label: "Bundle — Lahat ng 4 Subjects", price: 99, subjects: ["CL", "TL", "CDP", "PC"] },
 ];
 

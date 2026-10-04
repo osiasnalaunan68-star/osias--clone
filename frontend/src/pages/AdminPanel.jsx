@@ -4,9 +4,12 @@ import { db } from "../firebase";
 import { PLANS, PAYMENT_METHODS } from "../payments";
 
 const SUBJECT_CODES = ["CL", "CDP", "TL", "PC", "TCP"];
-const SUBJECT_LABELS = Object.fromEntries(
-  PLANS.filter((p) => p.id !== "BUNDLE").map((p) => [p.id, p.label])
-);
+const SUBJECT_LABELS = {
+  CL: "RA 10863 (Customs Law)",
+  ...Object.fromEntries(
+    PLANS.filter((p) => p.id !== "BUNDLE" && p.id !== "ALL").map((p) => [p.id, p.label])
+  ),
+};
 const METHOD_LABELS = Object.fromEntries(PAYMENT_METHODS.map((m) => [m.id, m.label]));
 
 const TRIAGE = {
