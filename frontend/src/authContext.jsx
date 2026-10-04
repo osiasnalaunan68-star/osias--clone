@@ -44,10 +44,12 @@ export function AuthProvider({ children }) {
   const [deviceLimitReached, setDeviceLimitReached] = useState(false);
   const [overlayOpen, setOverlayOpen] = useState(() => localStorage.getItem(PENDING_SIGNIN_KEY) === "1");
   const [authError, setAuthError] = useState(null);
+  const [profileError, setProfileError] = useState(null);
   const [signingIn, setSigningIn] = useState(() => localStorage.getItem(PENDING_SIGNIN_KEY) === "1");
   const currentDeviceId = getOrCreateDeviceId();
 
   const syncProfile = useCallback(async (fbUser) => {
+    setProfileError(null);
     try {
     const ref = doc(db, "users", fbUser.uid);
     const snap = await getDoc(ref);
@@ -93,11 +95,26 @@ export function AuthProvider({ children }) {
     }
     setNeedsFullName(!data.fullName);
     } catch (err) {
-      console.warn("syncProfile failed (offline?):", err);
+      console.warn("syncProfile failed:", err);
+      setProfileError((err && err.code ? err.code : "error") + (err && err.message ? " — " + err.message : ""));
+      let restored = false;
       try {
         const cached = localStorage.getItem(PROFILE_CACHE_KEY + fbUser.uid);
-        if (cached) setProfile(JSON.parse(cached));
+        if (cached) { setProfile(JSON.parse(cached)); restored = true; }
       } catch (_) {}
+      if (!restored) {
+        // Fallback: gamitin ang Google account info para hindi blangko ang profile.
+        setProfile({
+          email: fbUser.email || "",
+          displayName: fbUser.displayName || "",
+          photoURL: fbUser.photoURL || "",
+          fullName: fbUser.displayName || fbUser.email || "",
+          devices: [{ id: currentDeviceId, label: guessDeviceLabel(), lastActive: Date.now() }],
+          subscriptions: { CL: false, TL: false, CDP: false, PC: false, TCP: false },
+          _localOnly: true,
+        });
+        setNeedsFullName(false);
+      }
       setDeviceLimitReached(false);
     }
   }, [currentDeviceId]);
@@ -125,6 +142,7 @@ export function AuthProvider({ children }) {
         }
       } else {
         setProfile(null);
+        setProfileError(null);
         setNeedsFullName(false);
         setDeviceLimitReached(false);
         setLoading(false);
@@ -200,7 +218,7 @@ export function AuthProvider({ children }) {
 
   const value = {
     user, profile, loading, needsFullName, deviceLimitReached, currentDeviceId,
-    overlayOpen, setOverlayOpen, authError, signingIn,
+    overlayOpen, setOverlayOpen, authError, profileError, signingIn,
     signInWithGoogle, signOutUser, completeFullName, removeDevice,
   };
 

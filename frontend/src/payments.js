@@ -1,13 +1,11 @@
 // Payment plans, method list, reference-code generator, at ang Firestore
-// write para sa manual GCash/Maya/MariBank subscription flow (Phase 3).
-// Walang automated payment gateway — dev mismo ang nagko-confirm ng bayad
-// sa Firebase Console base sa reference code na tugma sa app amount niya.
+// write para sa manual GCash/Maya/MariBank subscription flow.
 
 import gcashQr from "./assets/payment/gcash-qr.png";
 import mayaQr from "./assets/payment/maya-qr.png";
 import maribankQr from "./assets/payment/maribank-qr.png";
-import { doc, updateDoc, arrayUnion } from "firebase/firestore";
-import { db } from "./firebase";
+import { doc, setDoc, arrayUnion } from "firebase/firestore";
+import { db, auth } from "./firebase";
 
 export const PLANS = [
   { id: "TL", label: "Tariff Law", price: 39, subjects: ["TL"] },
@@ -35,18 +33,27 @@ export function generateReferenceCode(planId) {
   return `${planId}-${suffix}`;
 }
 
-// Note: Firestore's serverTimestamp() is NOT allowed inside array elements
-// (arrayUnion), kaya client Date.now() na lang ang ginamit dito.
+// setDoc + merge: kung wala pang user doc, gagawa ito (kasama ang email/pangalan)
+// para lalabas pa rin sa Admin Panel. serverTimestamp() ay bawal sa arrayUnion,
+// kaya Date.now() ang gamit.
 export async function submitPendingPurchase(uid, { planId, subjects, price, method, referenceCode }) {
   const ref = doc(db, "users", uid);
-  await updateDoc(ref, {
-    pendingPurchases: arrayUnion({
-      plan: planId,
-      subjects,
-      price,
-      method,
-      referenceCode,
-      requestedAt: Date.now(),
-    }),
-  });
+  const u = auth.currentUser;
+  await setDoc(
+    ref,
+    {
+      email: (u && u.email) || "",
+      displayName: (u && u.displayName) || "",
+      photoURL: (u && u.photoURL) || "",
+      pendingPurchases: arrayUnion({
+        plan: planId,
+        subjects,
+        price,
+        method,
+        referenceCode,
+        requestedAt: Date.now(),
+      }),
+    },
+    { merge: true }
+  );
 }

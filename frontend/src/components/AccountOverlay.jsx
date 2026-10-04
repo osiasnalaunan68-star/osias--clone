@@ -18,6 +18,7 @@ export default function AccountOverlay() {
     user, profile, loading, needsFullName, deviceLimitReached, currentDeviceId,
     overlayOpen, setOverlayOpen, authError, signingIn,
     signInWithGoogle, signOutUser, completeFullName, removeDevice,
+    profileError,
   } = useAuth();
   const [nameInput, setNameInput] = useState("");
 
@@ -177,6 +178,11 @@ export default function AccountOverlay() {
 
         {!loading && user && !deviceLimitReached && !needsFullName && step === "profile" && (
           <div className="space-y-4 py-2">
+            {profileError && (
+              <div className="rounded-lg border border-red-200 bg-red-50 p-2.5 text-xs text-red-700 dark:border-red-800 dark:bg-red-950/30 dark:text-red-300">
+                ⚠️ Hindi ma-save ang account mo sa server. Error: {profileError}
+              </div>
+            )}
             <div className="flex items-center gap-3">
               {profile?.photoURL && (
                 <img src={profile.photoURL} alt="" className="h-14 w-14 rounded-full object-cover" />

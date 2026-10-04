@@ -707,6 +707,12 @@ export default function AccountOverlay() {
   };
 
   const allSubscribed = Object.keys(SUBJECT_LABELS).filter((c) => c !== "TCP").every((code) => profile?.subscriptions?.[code]);
+  const ownedSubs = profile?.subscriptions || {};
+  const bundlePlan = PLANS.find((p) => p.id === "BUNDLE");
+  const allInPlan = PLANS.find((p) => p.id === "ALL");
+  const bundleOwned = !!bundlePlan && bundlePlan.subjects.every((c) => ownedSubs[c]);
+  // All-in ay makatuwiran lang kung wala pang TCP at kulang pa ang 4-subject bundle.
+  const showAllIn = !!allInPlan && !ownedSubs.TCP && !bundleOwned;
   const activeMethod = PAYMENT_METHODS.find((m) => m.id === selectedMethod) || null;
 
   return (
@@ -819,12 +825,22 @@ export default function AccountOverlay() {
                   );
                 })}
               </div>
-              {!allSubscribed && (
+              {!bundleOwned && bundlePlan && (
                 <button
-                  onClick={() => startPurchase(PLANS.find((p) => p.id === "BUNDLE"))}
+                  onClick={() => startPurchase(bundlePlan)}
                   className="mt-2 w-full rounded-lg border-2 border-gold-500 bg-gold-50 px-3 py-2 text-xs font-semibold text-navy-900 active:bg-gold-100 dark:border-gold-400 dark:bg-slate-900/40 dark:text-gold-400"
                 >
-                  🎁 Bundle — Lahat ng 4 Subjects ₱99
+                  🎁 Bundle ₱{bundlePlan.price} — 4 Subjects
+                  <span className="mt-0.5 block text-[11px] font-normal opacity-80">RA10863 (CL) · CDP · TL · PC</span>
+                </button>
+              )}
+              {showAllIn && (
+                <button
+                  onClick={() => startPurchase(allInPlan)}
+                  className="mt-2 w-full rounded-lg border-2 border-gold-500 bg-navy-900 px-3 py-2 text-xs font-semibold text-white active:bg-navy-800 dark:bg-navy-700"
+                >
+                  👑 All-in Bundle ₱{allInPlan.price} — Lahat ng 5 Subjects
+                  <span className="mt-0.5 block text-[11px] font-normal opacity-80">RA10863 (CL) · CDP · TL · PC · TCP</span>
                 </button>
               )}
             </div>
@@ -3983,9 +3999,12 @@ import { db } from "../firebase";
 import { PLANS, PAYMENT_METHODS } from "../payments";
 
 const SUBJECT_CODES = ["CL", "CDP", "TL", "PC", "TCP"];
-const SUBJECT_LABELS = Object.fromEntries(
-  PLANS.filter((p) => p.id !== "BUNDLE").map((p) => [p.id, p.label])
-);
+const SUBJECT_LABELS = {
+  CL: "RA 10863 (Customs Law)",
+  ...Object.fromEntries(
+    PLANS.filter((p) => p.id !== "BUNDLE" && p.id !== "ALL").map((p) => [p.id, p.label])
+  ),
+};
 const METHOD_LABELS = Object.fromEntries(PAYMENT_METHODS.map((m) => [m.id, m.label]));
 
 const TRIAGE = {
@@ -5927,7 +5946,8 @@ export const PLANS = [
   { id: "CDP", label: "Customs Documentation & Procedures", price: 39, subjects: ["CDP"] },
   { id: "PC", label: "Practical Computations", price: 29, subjects: ["PC"] },
   { id: "TCP", label: "Tariff Commission Primer", price: 399, subjects: ["TCP"] },
-  { id: "BUNDLE", label: "Bundle — Lahat ng 4 Subjects", price: 99, subjects: ["CL", "TL", "CDP", "PC"] },
+  { id: "BUNDLE", label: "Bundle — RA10863 (CL), CDP, TL, PC", price: 99, subjects: ["CL", "TL", "CDP", "PC"] },
+  { id: "ALL", label: "All-in Bundle — Lahat ng 5 Subjects (kasama TCP)", price: 499, subjects: ["CL", "TL", "CDP", "PC", "TCP"] },
 ];
 
 export const PAYMENT_METHODS = [
