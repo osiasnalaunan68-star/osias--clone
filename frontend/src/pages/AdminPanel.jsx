@@ -4,7 +4,7 @@ import { db } from "../firebase";
 import { PLANS, PAYMENT_METHODS } from "../payments";
 import {
   ACCESS_PLANS, TRIAL_DAYS, DAY_MS, serverNow, getTrialInfo, getAppAccessInfo,
-  getAccess, addMonths, formatTimeLeft, formatDateShort,
+  getAccess, addMonths, formatTimeLeft, formatDateShort, getClTrialInfo, CL_TRIAL_DAYS, CL_LIFETIME_PRICE,
 } from "../access";
 
 const SUBJECT_CODES = ["CL", "CDP", "TL", "PC", "TCP"];
@@ -52,6 +52,14 @@ function accessKey(u) {
   return a.state;
 }
 
+// Parehong pattern para sa RA 10863 (CL): paid (lifetime) > trial > expired > none.
+function clAccessKey(u) {
+  if (u?.subscriptions?.CL) return "paid";
+  const t = getClTrialInfo(u);
+  if (!t.exists) return "none";
+  return t.active ? "trial" : "expired";
+}
+
 function StateChip({ u }) {
   const key = accessKey(u);
   const a = getAccess(u);
@@ -69,6 +77,7 @@ export default function AdminPanel() {
   const [busyKey, setBusyKey] = useState(null);
   const [tab, setTab] = useState("users");
   const [trialFilter, setTrialFilter] = useState("all");
+  const [clFilter, setClFilter] = useState("all");
 
   const loadUsers = async () => {
     setError(null);
@@ -220,6 +229,27 @@ export default function AdminPanel() {
     return writeTrial(u, 0);
   };
 
+  // ── RA 10863 (CL) Trial CRUD — kaparehong logic ng trial sa itaas ────
+  const writeClTrial = (u, days) => {
+    const startedAt = serverNow();
+    return run(u.uid + ":cltrial", u, { clTrial: { startedAt: Timestamp.fromMillis(startedAt), days } }, { clTrial: { startedAt, days } });
+  };
+
+  const grantClTrial = (u) => {
+    if (!window.confirm("Simulan ulit ang " + CL_TRIAL_DAYS + "-day CL trial ni " + (u.fullName || u.email) + " mula ngayon?")) return;
+    return writeClTrial(u, CL_TRIAL_DAYS);
+  };
+
+  const extendClTrial = (u, extraDays) => {
+    const left = getClTrialInfo(u).msLeft / DAY_MS;
+    return writeClTrial(u, left + extraDays);
+  };
+
+  const endClTrial = (u) => {
+    if (!window.confirm("Tapusin agad ang CL trial ni " + (u.fullName || u.email) + "?")) return;
+    return writeClTrial(u, 0);
+  };
+
   // ── Derived lists ───────────────────────────────────────────────────
   const practicePending = useMemo(() => {
     const rows = [];
@@ -253,6 +283,14 @@ export default function AdminPanel() {
     });
   }, [filtered, trialFilter, users]);
 
+  const clRows = useMemo(() => {
+    return filtered.filter((u) => {
+      const k = clAccessKey(u);
+      if (clFilter === "all") return true;
+      return k === clFilter;
+    });
+  }, [filtered, clFilter, users]);
+
   const rawPracticeCount = (users || []).reduce((n, u) => n + (u.pendingPurchases || []).length, 0);
   const rawAccessCount = (users || []).reduce((n, u) => n + (u.pendingAccess || []).length, 0);
 
@@ -261,6 +299,7 @@ export default function AdminPanel() {
     { id: "practice", label: "💳 Practice", count: rawPracticeCount },
     { id: "access", label: "⏱ Access", count: rawAccessCount },
     { id: "trial", label: "🎁 Trial" },
+    { id: "cl", label: "📜 CL" },
   ];
 
   const btn = "min-h-[34px] rounded-full px-3 py-1.5 text-xs font-semibold transition-colors disabled:opacity-50 ";
@@ -497,6 +536,51 @@ export default function AdminPanel() {
                   <button onClick={() => extendTrial(u, 1)} disabled={busyKey === u.uid + ":trial"} className={btnGhost}>+1 day</button>
                   <button onClick={() => extendTrial(u, 3)} disabled={busyKey === u.uid + ":trial"} className={btnGhost}>+3 days</button>
                   {tr.exists && tr.active && <button onClick={() => endTrial(u)} disabled={busyKey === u.uid + ":trial"} className={btnRed}>End</button>}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* ───────────── RA 10863 (CL) TRIAL + LIFETIME ───────────── */}
+      {tab === "cl" && users !== null && !error && (
+        <div className="space-y-3">
+          <p className="text-xs text-slate-500 dark:text-slate-400">7-day free trial, tapos naka-lock hanggang bumili ng lifetime (₱{CL_LIFETIME_PRICE}).</p>
+          <div className="flex flex-wrap gap-1.5">
+            {[["all", "All"], ["trial", "On trial"], ["expired", "Expired"], ["none", "No trial yet"], ["paid", "Lifetime (paid)"]].map(([id, label]) => (
+              <button key={id} onClick={() => setClFilter(id)} className={"rounded-full border px-3 py-1 text-xs font-semibold " + (clFilter === id ? "border-navy-900 bg-navy-900 text-white dark:border-slate-100 dark:bg-slate-100 dark:text-navy-900" : "border-slate-200 text-slate-500 dark:border-slate-700 dark:text-slate-400")}>
+                {label}
+              </button>
+            ))}
+          </div>
+          <p className="text-xs text-slate-400">{clRows.length} user(s)</p>
+
+          {clRows.map((u) => {
+            const ct = getClTrialInfo(u);
+            const paid = !!u.subscriptions?.CL;
+            return (
+              <div key={u.uid} className="rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-slate-800">
+                <div className="flex items-start justify-between gap-2">
+                  <div className="min-w-0">
+                    <p className="truncate text-sm font-semibold text-navy-900 dark:text-slate-100">{u.fullName || "(walang pangalan)"}</p>
+                    <p className="truncate text-xs text-slate-400">{u.email}</p>
+                  </div>
+                  <span className={"rounded-full px-2 py-0.5 text-[11px] font-semibold " + (paid ? "bg-purple-100 text-purple-700 dark:bg-purple-950/40 dark:text-purple-300" : ct.active ? "bg-sky-100 text-sky-700 dark:bg-sky-950/40 dark:text-sky-300" : "bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400")}>
+                    {paid ? "👑 Lifetime" : ct.exists ? (ct.active ? "🎁 Trial" : "⏳ Expired") : "No trial yet"}
+                  </span>
+                </div>
+                {ct.exists && !paid && (
+                  <p className="mt-1.5 text-xs text-slate-500 dark:text-slate-400">
+                    {ct.active ? "CL trial hanggang " : "CL trial nagtapos noong "}{formatDateTime(ct.endsAt)}
+                  </p>
+                )}
+                <div className="mt-2 flex flex-wrap gap-1.5">
+                  {!paid && <button onClick={() => grantClTrial(u)} disabled={busyKey === u.uid + ":cltrial"} className={btnGreen}>{ct.exists ? "↺ Restart " + CL_TRIAL_DAYS + "d" : "＋ Grant " + CL_TRIAL_DAYS + "d"}</button>}
+                  {!paid && <button onClick={() => extendClTrial(u, 1)} disabled={busyKey === u.uid + ":cltrial"} className={btnGhost}>+1 day</button>}
+                  {!paid && ct.exists && ct.active && <button onClick={() => endClTrial(u)} disabled={busyKey === u.uid + ":cltrial"} className={btnRed}>End</button>}
+                  {!paid && <button onClick={() => toggleSubject(u, "CL")} disabled={busyKey === u.uid + ":CL"} className={btnGhost + " border-purple-300 text-purple-700 dark:border-purple-700 dark:text-purple-300"}>👑 Mark Lifetime (₱{CL_LIFETIME_PRICE})</button>}
+                  {paid && <button onClick={() => toggleSubject(u, "CL")} disabled={busyKey === u.uid + ":CL"} className={btnRed}>Remove Lifetime</button>}
                 </div>
               </div>
             );

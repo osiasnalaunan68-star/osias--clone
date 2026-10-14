@@ -127,3 +127,26 @@ export function getAccess(profile, opts) {
   if (!trial.exists && !clockReady) return { state: "loading", trial, app, msLeft: 0 };
   return { state: "expired", trial, app, msLeft: 0 };
 }
+
+// ── RA 10863 (CL) time-based lock ──────────────────────────────────────
+// Hiwalay sa generic FREE_LIMITS ng ibang subjects: 7-day FULL access trial
+// (lahat ng item, hindi item-count based), tapos naka-lock LAHAT hanggang
+// bumili ng lifetime (₱99). clTrial = { startedAt: Timestamp(server), days }
+export const CL_TRIAL_DAYS = 7;
+export const CL_LIFETIME_PRICE = 99;
+
+export function getClTrialInfo(profile, now = serverNow()) {
+  const t = profile && profile.clTrial;
+  const start = toMs(t && t.startedAt);
+  if (!t || start == null) return { exists: false, active: false, endsAt: null, msLeft: 0 };
+  const endsAt = start + (Number(t.days) || 0) * DAY_MS;
+  const msLeft = Math.max(0, endsAt - now);
+  return { exists: true, active: msLeft > 0, endsAt, msLeft };
+}
+
+export function isClUnlocked(profile, now = serverNow()) {
+  if (!profile) return false;
+  if (profile.isAdmin) return true;
+  if (profile.subscriptions && profile.subscriptions.CL) return true;
+  return getClTrialInfo(profile, now).active;
+}

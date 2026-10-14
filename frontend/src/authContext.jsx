@@ -5,7 +5,7 @@ import {
 } from "firebase/auth";
 import { doc, getDoc, setDoc, updateDoc, serverTimestamp, onSnapshot, runTransaction, getDocFromServer } from "firebase/firestore";
 import { auth, db, googleProvider } from "./firebase";
-import { setServerClock, persistClock, getAccess, hasAnyPractice, TRIAL_DAYS } from "./access";
+import { setServerClock, persistClock, getAccess, hasAnyPractice, TRIAL_DAYS, CL_TRIAL_DAYS } from "./access";
 
 const DEVICE_ID_KEY = "cuble_deviceId";
 const PENDING_SIGNIN_KEY = "cuble_pendingSignIn";
@@ -86,6 +86,11 @@ export function AuthProvider({ children }) {
               if (!d.trial && !hasAnyPractice(d)) {
                 upd.trial = { startedAt: serverTimestamp(), days: TRIAL_DAYS };
               }
+              // Hiwalay na 7-day trial para sa RA 10863 (CL) — isang beses lang din,
+              // maliban kung bumili na ng lifetime access (subscriptions.CL).
+              if (!d.clTrial && !(d.subscriptions && d.subscriptions.CL)) {
+                upd.clTrial = { startedAt: serverTimestamp(), days: CL_TRIAL_DAYS };
+              }
               tx.update(ref, upd);
             });
             const fresh = await getDocFromServer(ref);
@@ -115,7 +120,7 @@ export function AuthProvider({ children }) {
   const mergedProfile = useMemo(() => {
     if (!profile || !serverData) return profile;
     const pick = {};
-    ["subscriptions", "subscriptionExpiry", "appAccess", "trial", "pendingPurchases", "pendingAccess", "isAdmin"].forEach((k) => {
+    ["subscriptions", "subscriptionExpiry", "appAccess", "trial", "clTrial", "pendingPurchases", "pendingAccess", "isAdmin"].forEach((k) => {
       pick[k] = serverData[k];
     });
     if (!pick.subscriptions) pick.subscriptions = profile.subscriptions;
