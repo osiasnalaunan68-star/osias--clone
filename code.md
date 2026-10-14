@@ -616,6 +616,7 @@ export function QuizPlayView({ title, entries, level, onBack, progressKey, backL
 import { useState, useEffect } from "react";
 import { useAuth } from "../authContext";
 import { PLANS, PAYMENT_METHODS, generateReferenceCode, submitPendingPurchase } from "../payments";
+import { ACCESS_PLANS, formatTimeLeft, formatDateShort } from "../access";
 
 const SUBJECT_LABELS = { TL: "Tariff Law", CDP: "Customs Documentation & Procedures", PC: "Practical Computations", TCP: "Tariff Commission Primer" };
 
@@ -633,7 +634,7 @@ export default function AccountOverlay() {
     user, profile, loading, needsFullName, deviceLimitReached, currentDeviceId,
     overlayOpen, setOverlayOpen, authError, signingIn,
     signInWithGoogle, signOutUser, completeFullName, removeDevice,
-    profileError,
+    profileError, access, intentPlanId, setIntentPlanId,
   } = useAuth();
   const [nameInput, setNameInput] = useState("");
 
@@ -658,6 +659,19 @@ export default function AccountOverlay() {
       setSubmitting(false);
     }
   }, [overlayOpen]);
+
+  // Galing sa Paywall: diretso sa payment method ng napiling plan.
+  useEffect(() => {
+    if (!overlayOpen || !intentPlanId || !user || !profile) return;
+    const plan = [...PLANS, ...ACCESS_PLANS].find((p) => p.id === intentPlanId);
+    setIntentPlanId(null);
+    if (!plan) return;
+    setSelectedPlan(plan);
+    setSelectedMethod(null);
+    setSubmitted(false);
+    setReferenceCode(generateReferenceCode(plan.id));
+    setStep("payment-method");
+  }, [overlayOpen, intentPlanId, user, profile]);
 
   if (!overlayOpen) return null;
 
@@ -730,7 +744,7 @@ export default function AccountOverlay() {
         {!loading && !user && (
           <div className="space-y-4 py-4 text-center">
             <p className="text-lg font-semibold text-navy-900 dark:text-slate-100">
-              Sign in para ma-unlock ang buong practice exam
+              Mag-sign in gamit ang Google para masimulan ang 3-day free trial
             </p>
             <button
               onClick={signInWithGoogle}
@@ -809,7 +823,7 @@ export default function AccountOverlay() {
             </div>
 
             <div>
-              <p className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-slate-400">Subscription</p>
+              <p className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-slate-400">Practice Questions</p>
               <div className="space-y-1.5">
                 {Object.keys(SUBJECT_LABELS).map((code) => {
                   const unlocked = !!profile?.subscriptions?.[code];
@@ -848,6 +862,36 @@ export default function AccountOverlay() {
                   👑 All-in Bundle ₱{allInPlan.price} — Lahat ng 5 Subjects
                   <span className="mt-0.5 block text-[11px] font-normal opacity-80">RA10863 (CL) · CDP · TL · PC · TCP</span>
                 </button>
+              )}
+            </div>
+
+            <div>
+              <p className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-slate-400">App Access</p>
+              <div className="mb-2 rounded-lg bg-slate-50 px-3 py-2 text-sm text-slate-600 dark:bg-slate-900/40 dark:text-slate-300">
+                {access?.state === "admin" && <span>👑 Admin</span>}
+                {access?.state === "member" && <span>✅ Lifetime access (practice subscriber)</span>}
+                {access?.state === "paid" && <span>✅ Active hanggang {formatDateShort(access.app.expiresAt)} ({formatTimeLeft(access.msLeft)} left)</span>}
+                {access?.state === "trial" && <span>🎁 Free trial: {formatTimeLeft(access.msLeft)} left</span>}
+                {(access?.state === "expired" || access?.state === "loading") && <span>⏳ Tapos na ang trial. Pumili ng plan sa baba.</span>}
+              </div>
+              {(profile?.pendingAccess || []).length > 0 && (
+                <p className="mb-2 rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-800 dark:bg-amber-950/20 dark:text-amber-300">
+                  ⏳ May pending App Access payment ({profile.pendingAccess[profile.pendingAccess.length - 1].referenceCode}) — hinihintay ang confirmation.
+                </p>
+              )}
+              {access && access.state !== "admin" && access.state !== "member" && (
+                <div className="grid grid-cols-3 gap-1.5">
+                  {ACCESS_PLANS.map((p) => (
+                    <button
+                      key={p.id}
+                      onClick={() => startPurchase(p)}
+                      className="rounded-lg border border-slate-200 px-2 py-2 text-center text-xs font-semibold text-navy-900 active:bg-slate-100 dark:border-slate-600 dark:text-slate-100 dark:active:bg-slate-700"
+                    >
+                      {p.months} {p.months === 1 ? "month" : "months"}
+                      <span className="block text-sm font-bold">₱{p.price}</span>
+                    </button>
+                  ))}
+                </div>
               )}
             </div>
 
@@ -975,6 +1019,221 @@ export default function AccountButton() {
         <span aria-hidden>👤</span>
       )}
     </button>
+  );
+}
+```
+
+## File: ./frontend/src/components/AccessGate.jsx
+```
+import { useState, useEffect, useRef } from "react";
+import { useAuth } from "../authContext";
+import ChapterBrowser from "../pages/ChapterBrowser";
+import { ACCESS_PLANS, TRIAL_DAYS, DAY_MS, formatTimeLeft } from "../access";
+
+const DEMO_SECONDS = 60;
+
+// Tutorial + About para sa hindi pa naka-login. May "demo" ang bawat feature:
+// pindutin ang Start at 1 minuto lang ang gamit, tapos balik dito.
+const STEPS = [
+  { icon: "⚖️", title: "Welcome to RA 10863", body: "Ang offline companion mo para sa Customs Modernization and Tariff Act (CMTA) — batas, notes, AI explanations, at practice questions para sa CuBLE." },
+  { icon: "📚", title: "Browse the Law", body: "Buksan ang menu (☰). Lahat ng Title, Chapter at Section ay nakaayos ayon sa tamang pagkakasunod.", demo: { view: "browse", mode: "study" } },
+  { icon: "📘", title: "Study Mode", body: "Isa-isang section para focused. May Expand All / Collapse All para mabilis sa buong chapter.", demo: { view: "browse", mode: "study" } },
+  { icon: "📖", title: "Reading Mode", body: "Book-style na view para sa mahabang pagbabasa. Pindutin ang 🎯 Focus para tago ang toolbar.", demo: { view: "browse", mode: "reading" } },
+  { icon: "🖍️", title: "Highlights", body: "I-select ang kahit anong text para i-highlight. Auto-save, gumagana kahit offline.", demo: { view: "browse", mode: "study" } },
+  { icon: "📝", title: "Notes", body: "Pindutin ang \"Add Note\" sa ilalim ng kahit anong section para isulat ang sarili mong paliwanag.", demo: { view: "browse", mode: "study" } },
+  { icon: "🤖", title: "Ask AI", body: "Instant offline explanation mula sa Osias 6.7 sa bawat section.", demo: { view: "browse", mode: "study" } },
+  { icon: "🔍", title: "Search", body: "Hanapin agad ang kahit ano. Subukan ang \"102\" o \"smuggling\".", demo: { view: "search", mode: null } },
+  { icon: "✍️", title: "Practice Quiz / Exam", body: "Subukan ang practice questions — 10 items bawat subject ang libre.", demo: { view: "quiz", mode: null } },
+  { icon: "🎁", title: TRIAL_DAYS + "-Day Free Trial", body: "Mag-login gamit ang Google para magsimula ang " + TRIAL_DAYS + " araw na libreng gamit ng buong app. Pagkatapos, pumili ng plan para magpatuloy." },
+];
+
+function Splash({ text }) {
+  return (
+    <div className="safe-top flex min-h-[100dvh] flex-col items-center justify-center gap-3 bg-slate-50 px-6 text-center dark:bg-slate-950">
+      <span className="text-4xl" aria-hidden>⚖️</span>
+      <p className="text-sm text-slate-500 dark:text-slate-400">{text}</p>
+    </div>
+  );
+}
+
+// ── Demo: 1 minuto bawat Start ───────────────────────────────────────
+function DemoShell({ feature, onEnd }) {
+  const { overlayOpen, setOverlayOpen } = useAuth();
+  const [left, setLeft] = useState(DEMO_SECONDS);
+  const endRef = useRef(onEnd);
+  endRef.current = onEnd;
+
+  useEffect(() => {
+    const endAt = Date.now() + DEMO_SECONDS * 1000;
+    const id = setInterval(() => {
+      const s = Math.max(0, Math.ceil((endAt - Date.now()) / 1000));
+      setLeft(s);
+      if (s <= 0) {
+        clearInterval(id);
+        endRef.current();
+      }
+    }, 500);
+    return () => clearInterval(id);
+  }, []);
+
+  const mm = Math.floor(left / 60);
+  const ss = String(left % 60).padStart(2, "0");
+
+  return (
+    <>
+      <ChapterBrowser initialView={feature.view} initialMode={feature.mode} demo />
+      {!overlayOpen && (
+        <div className="safe-bottom fixed bottom-3 left-1/2 z-[80] flex -translate-x-1/2 items-center gap-2 rounded-full bg-navy-900/95 px-4 py-2 text-xs font-semibold text-white shadow-lg backdrop-blur dark:bg-slate-100/95 dark:text-navy-900">
+          <span aria-hidden>⏱</span>
+          <span>Demo {mm}:{ss}</span>
+          <button onClick={() => setOverlayOpen(true)} className="rounded-full bg-gold-500 px-2.5 py-1 text-[11px] text-navy-900 active:bg-gold-600">Sign in</button>
+          <button onClick={onEnd} className="rounded-full border border-white/40 px-2.5 py-1 text-[11px] dark:border-navy-900/40">Exit</button>
+        </div>
+      )}
+    </>
+  );
+}
+
+// ── Guest: About + Tutorial + Login ──────────────────────────────────
+function GuestWelcome({ step, setStep, onStartDemo }) {
+  const { signInWithGoogle, signingIn, authError } = useAuth();
+  const total = STEPS.length;
+  const cur = STEPS[step];
+  const isLast = step === total - 1;
+
+  return (
+    <div className="safe-top safe-bottom flex min-h-[100dvh] flex-col bg-slate-50 dark:bg-slate-950">
+      <div className="px-5 pb-2 pt-4 text-center">
+        <p className="text-xs font-semibold uppercase tracking-widest text-gold-600 dark:text-gold-400">RA 10863 · CMTA</p>
+        <h1 className="text-xl font-bold text-navy-900 dark:text-slate-50">CuBLE Review App</h1>
+      </div>
+
+      <main className="flex flex-1 flex-col items-center justify-center px-5 py-4">
+        <div className="w-full max-w-md rounded-3xl border border-slate-200 bg-white p-6 text-center shadow-card dark:border-slate-700 dark:bg-slate-900">
+          <div className="mb-4 flex justify-center gap-1.5">
+            {STEPS.map((_, i) => (
+              <button key={i} onClick={() => setStep(i)} aria-label={"Step " + (i + 1)} className={"h-1.5 rounded-full transition-all duration-300 " + (i === step ? "w-6 bg-navy-900 dark:bg-slate-100" : "w-1.5 bg-slate-200 dark:bg-slate-700")} />
+            ))}
+          </div>
+          <span className="mb-3 block text-5xl" aria-hidden>{cur.icon}</span>
+          <h2 className="mb-2 text-xl font-bold text-slate-900 dark:text-slate-50">{cur.title}</h2>
+          <p className="mb-5 text-sm leading-relaxed text-slate-600 dark:text-slate-300">{cur.body}</p>
+
+          {cur.demo && (
+            <button onClick={() => onStartDemo(cur.demo)} className="mb-4 w-full rounded-xl border-2 border-gold-500 bg-gold-50 px-4 py-2.5 text-sm font-semibold text-navy-900 active:bg-gold-100 dark:border-gold-400 dark:bg-slate-800 dark:text-gold-400">
+              ▶ Start — subukan ng 1 minuto
+            </button>
+          )}
+
+          <div className="flex items-center gap-2">
+            {step > 0 && (
+              <button onClick={() => setStep(step - 1)} className="flex h-11 flex-1 items-center justify-center rounded-xl border border-slate-200 text-sm font-semibold text-slate-600 active:bg-slate-100 dark:border-slate-600 dark:text-slate-300 dark:active:bg-slate-800">Back</button>
+            )}
+            <button onClick={() => setStep(isLast ? 0 : step + 1)} className="flex h-11 flex-[2] items-center justify-center rounded-xl bg-navy-900 text-sm font-semibold text-white active:bg-navy-800 dark:bg-navy-700">
+              {isLast ? "🔄 Replay Tutorial" : "Next"}
+            </button>
+          </div>
+        </div>
+      </main>
+
+      <div className="border-t border-slate-200 bg-white/90 p-4 backdrop-blur dark:border-slate-800 dark:bg-slate-900/90">
+        {authError && <p className="mb-2 text-center text-xs text-red-600 dark:text-red-400">{authError}</p>}
+        <button onClick={signInWithGoogle} disabled={signingIn} className="mx-auto flex h-12 w-full max-w-md items-center justify-center rounded-xl bg-gold-500 text-sm font-bold text-navy-900 shadow-sm active:bg-gold-600 disabled:opacity-50">
+          {signingIn ? "Naghihintay sa Google..." : "🎁 Login with Google — simulan ang " + TRIAL_DAYS + "-day free trial"}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ── Paywall: tapos na ang trial, plans lang ang makikita ─────────────
+function Paywall() {
+  const { user, profile, signOutUser, setOverlayOpen, setIntentPlanId } = useAuth();
+  const pending = profile?.pendingAccess || [];
+
+  const choose = (plan) => {
+    setIntentPlanId(plan.id);
+    setOverlayOpen(true);
+  };
+
+  return (
+    <div className="safe-top safe-bottom flex min-h-[100dvh] flex-col items-center bg-slate-50 px-5 py-6 dark:bg-slate-950">
+      <div className="w-full max-w-md space-y-4">
+        <div className="text-center">
+          <span className="text-4xl" aria-hidden>⏳</span>
+          <h1 className="mt-2 text-xl font-bold text-navy-900 dark:text-slate-50">Tapos na ang free trial mo</h1>
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Pumili ng App Access plan para magpatuloy. {user?.email}</p>
+        </div>
+
+        {pending.length > 0 && (
+          <div className="rounded-xl border border-amber-300 bg-amber-50 p-3 text-center text-sm text-amber-800 dark:border-amber-700 dark:bg-amber-950/30 dark:text-amber-300">
+            ⏳ May pending payment ka ({pending[pending.length - 1].referenceCode}). Hintayin lang ang confirmation.
+          </div>
+        )}
+
+        <div className="space-y-2">
+          {ACCESS_PLANS.map((p) => {
+            const best = p.months === 8;
+            return (
+              <button key={p.id} onClick={() => choose(p)} className={"flex w-full items-center justify-between rounded-2xl border-2 px-4 py-3 text-left active:opacity-80 " + (best ? "border-gold-500 bg-gold-50 dark:border-gold-400 dark:bg-slate-900" : "border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-900")}>
+                <span>
+                  <span className="block text-base font-bold text-navy-900 dark:text-slate-100">{p.months} {p.months === 1 ? "Month" : "Months"}</span>
+                  <span className="block text-xs text-slate-500 dark:text-slate-400">₱{(p.price / p.months).toFixed(0)}/buwan{best ? " · Best value" : ""}</span>
+                </span>
+                <span className="text-2xl font-extrabold text-navy-900 dark:text-slate-50">₱{p.price}</span>
+              </button>
+            );
+          })}
+        </div>
+
+        <p className="text-center text-xs text-slate-400">Bayad via GCash · Maya · MariBank. Ico-confirm manually ng admin.</p>
+        <button onClick={signOutUser} className="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-medium text-slate-500 dark:border-slate-600 dark:text-slate-300">Sign out</button>
+      </div>
+    </div>
+  );
+}
+
+// ── Maliit na pill: natitirang oras ──────────────────────────────────
+function AccessPill({ access }) {
+  const { overlayOpen, setOverlayOpen } = useAuth();
+  if (overlayOpen) return null;
+  let label = null;
+  if (access.state === "trial") label = "🎁 Free trial · " + formatTimeLeft(access.msLeft) + " left";
+  else if (access.state === "paid" && access.msLeft < 3 * DAY_MS) label = "⏳ Access · " + formatTimeLeft(access.msLeft) + " left";
+  if (!label) return null;
+  return (
+    <button onClick={() => setOverlayOpen(true)} className="safe-bottom fixed bottom-3 left-3 z-40 rounded-full bg-navy-900/90 px-3 py-1.5 text-[11px] font-semibold text-white shadow-lg backdrop-blur active:bg-navy-800 dark:bg-slate-100/90 dark:text-navy-900">
+      {label}
+    </button>
+  );
+}
+
+export default function AccessGate() {
+  const { user, profile, loading, signingIn, needsFullName, deviceLimitReached, access, overlayOpen, setOverlayOpen } = useAuth();
+  const [demo, setDemo] = useState(null);
+  const [guestStep, setGuestStep] = useState(0);
+
+  // Kapag kulang ang setup (pangalan / device limit), buksan ang account overlay.
+  useEffect(() => {
+    if (user && (needsFullName || deviceLimitReached) && !overlayOpen) setOverlayOpen(true);
+  }, [user, needsFullName, deviceLimitReached, overlayOpen, setOverlayOpen]);
+
+  if (loading || signingIn) return <Splash text="Sandali lang..." />;
+
+  if (!user) {
+    if (demo) return <DemoShell key={demo.key} feature={demo.feature} onEnd={() => setDemo(null)} />;
+    return <GuestWelcome step={guestStep} setStep={setGuestStep} onStartDemo={(feature) => setDemo({ feature, key: Date.now() })} />;
+  }
+
+  if (!profile || needsFullName || deviceLimitReached) return <Splash text="Tinatapos ang setup ng account mo..." />;
+  if (access.state === "loading") return <Splash text="Sinusuri ang trial mo..." />;
+  if (access.state === "expired") return <Paywall />;
+
+  return (
+    <>
+      <ChapterBrowser />
+      <AccessPill access={access} />
+    </>
   );
 }
 ```
@@ -1708,7 +1967,7 @@ export const IS_DEV = import.meta.env.DEV;
 import "./index.css";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import ChapterBrowser from "./pages/ChapterBrowser";
+import AccessGate from "./components/AccessGate";
 import { seedDefaultQuizzes } from "./subjectQuizStore";
 import { AuthProvider } from "./authContext";
 import AccountOverlay from "./components/AccountOverlay";
@@ -1745,7 +2004,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ErrorBoundary>
       <AuthProvider>
-        <ChapterBrowser />
+        <AccessGate />
         <AccountOverlay />
       </AuthProvider>
     </ErrorBoundary>
@@ -2574,9 +2833,9 @@ function collectAllNodeIds(node, acc = []) {
   return acc;
 }
 
-export default function ChapterBrowser() {
+export default function ChapterBrowser({ initialView = "browse", initialMode = null, demo = false } = {}) {
   const { profile } = useAuth();
-  const [view, setView] = useState("browse");
+  const [view, setView] = useState(initialView);
   const [titles, setTitles] = useState([]);
   const [selectedChapter, setSelectedChapter] = useState(null);
   const [selectedTitleNumber, setSelectedTitleNumber] = useState(null);
@@ -2584,7 +2843,7 @@ export default function ChapterBrowser() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(() => window.innerWidth >= 768);
-  const [mode, setMode] = useState(() => localStorage.getItem(MODE_KEY) || "study");
+  const [mode, setMode] = useState(() => initialMode || localStorage.getItem(MODE_KEY) || "study");
   const [fontScale, setFontScale] = useState(() => { const saved = parseFloat(localStorage.getItem(FONT_KEY)); return isNaN(saved) ? 1 : saved; });
   const [darkMode, setDarkMode] = useState(() => localStorage.getItem(DARK_KEY) === "true");
   const [activeHighlightNodeId, setActiveHighlightNodeId] = useState(null);
@@ -2616,7 +2875,7 @@ export default function ChapterBrowser() {
       });
     const progress = getProgress();
     if (progress && progress.chapter_number) setResumeAvailable(progress);
-    if (!hasTutorialBeenSeen()) {
+    if (!demo && !hasTutorialBeenSeen()) {
       setShowTutorial(true);
     }
   }, []);
@@ -4000,9 +4259,13 @@ export default function SubjectQuizPanel({ subjectId, subjectLabel }) {
 ## File: ./frontend/src/pages/AdminPanel.jsx
 ```
 import { useState, useEffect, useMemo } from "react";
-import { collection, getDocs, doc, updateDoc } from "firebase/firestore";
+import { collection, getDocs, doc, updateDoc, arrayUnion, deleteField, Timestamp } from "firebase/firestore";
 import { db } from "../firebase";
 import { PLANS, PAYMENT_METHODS } from "../payments";
+import {
+  ACCESS_PLANS, TRIAL_DAYS, DAY_MS, serverNow, getTrialInfo, getAppAccessInfo,
+  getAccess, addMonths, formatTimeLeft, formatDateShort,
+} from "../access";
 
 const SUBJECT_CODES = ["CL", "CDP", "TL", "PC", "TCP"];
 const SUBJECT_LABELS = {
@@ -4012,11 +4275,21 @@ const SUBJECT_LABELS = {
   ),
 };
 const METHOD_LABELS = Object.fromEntries(PAYMENT_METHODS.map((m) => [m.id, m.label]));
+const ALL_PLAN_LABELS = Object.fromEntries([...PLANS, ...ACCESS_PLANS].map((p) => [p.id, p.label]));
 
 const TRIAGE = {
   pending: { label: "Pending", dot: "bg-amber-500", chip: "border-amber-300 text-amber-700 dark:border-amber-700 dark:text-amber-400" },
   none: { label: "None", dot: "bg-slate-400", chip: "border-slate-300 text-slate-500 dark:border-slate-600 dark:text-slate-400" },
   subscribed: { label: "Subscribed", dot: "bg-emerald-500", chip: "border-emerald-300 text-emerald-700 dark:border-emerald-700 dark:text-emerald-400" },
+};
+
+const STATE_UI = {
+  admin: { label: "Admin", cls: "bg-purple-100 text-purple-700 dark:bg-purple-950/40 dark:text-purple-300" },
+  paid: { label: "App Access", cls: "bg-emerald-100 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300" },
+  member: { label: "Practice buyer", cls: "bg-emerald-100 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300" },
+  trial: { label: "On trial", cls: "bg-sky-100 text-sky-700 dark:bg-sky-950/40 dark:text-sky-300" },
+  expired: { label: "Expired", cls: "bg-red-100 text-red-700 dark:bg-red-950/40 dark:text-red-300" },
+  none: { label: "No trial yet", cls: "bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400" },
 };
 
 function formatDateTime(ts) {
@@ -4032,11 +4305,30 @@ function defaultTriage(userData) {
   return (userData.pendingPurchases || []).length > 0 ? "pending" : "none";
 }
 
+// "none" = wala pang trial (hindi pa nagbubukas ng app mula nang ma-update).
+function accessKey(u) {
+  const a = getAccess(u);
+  if (a.state === "expired" && !a.trial.exists) return "none";
+  return a.state;
+}
+
+function StateChip({ u }) {
+  const key = accessKey(u);
+  const a = getAccess(u);
+  const ui = STATE_UI[key];
+  let extra = "";
+  if (key === "trial") extra = " · " + formatTimeLeft(a.msLeft);
+  if (key === "paid") extra = " · " + formatTimeLeft(a.msLeft);
+  return <span className={"rounded-full px-2 py-0.5 text-[11px] font-semibold " + ui.cls}>{ui.label}{extra}</span>;
+}
+
 export default function AdminPanel() {
   const [users, setUsers] = useState(null);
   const [error, setError] = useState(null);
   const [query, setQuery] = useState("");
   const [busyKey, setBusyKey] = useState(null);
+  const [tab, setTab] = useState("users");
+  const [trialFilter, setTrialFilter] = useState("all");
 
   const loadUsers = async () => {
     setError(null);
@@ -4067,53 +4359,210 @@ export default function AdminPanel() {
     setUsers((prev) => prev.map((u) => (u.uid === uid ? { ...u, ...patch } : u)));
   };
 
-  const toggleSubject = async (u, code) => {
-    const key = u.uid + ":" + code;
-    const nextValue = !u.subscriptions?.[code];
+  // Isang lugar para sa lahat ng write: busy state + error alert + local patch.
+  const run = async (key, u, payload, localPatch) => {
     setBusyKey(key);
     try {
-      const ref = doc(db, "users", u.uid);
-      const writePayload = { ["subscriptions." + code]: nextValue };
-      let remainingPending = u.pendingPurchases || [];
-      if (nextValue) {
-        remainingPending = remainingPending.filter((p) => !(p.subjects || []).includes(code));
-        writePayload.pendingPurchases = remainingPending;
-      }
-      await updateDoc(ref, writePayload);
-      patchUser(u.uid, {
-        subscriptions: { ...u.subscriptions, [code]: nextValue },
-        pendingPurchases: remainingPending,
-      });
+      await updateDoc(doc(db, "users", u.uid), payload);
+      patchUser(u.uid, localPatch);
     } catch (err) {
-      console.warn("toggleSubject failed:", err);
-      alert("May error sa pag-toggle. Subukan ulit:\n" + (err?.message || err));
+      console.warn("admin write failed:", err);
+      alert("May error. Subukan ulit:\n" + (err?.message || err));
     } finally {
       setBusyKey(null);
     }
   };
 
-  const setTriage = async (u, status) => {
-    const key = u.uid + ":triage";
-    setBusyKey(key);
-    try {
-      const ref = doc(db, "users", u.uid);
-      await updateDoc(ref, { triageStatus: status });
-      patchUser(u.uid, { triageStatus: status });
-    } catch (err) {
-      console.warn("setTriage failed:", err);
-      alert("May error sa pag-set ng status. Subukan ulit:\n" + (err?.message || err));
-    } finally {
-      setBusyKey(null);
+  // ── Practice questions ──────────────────────────────────────────────
+  const toggleSubject = async (u, code) => {
+    const nextValue = !u.subscriptions?.[code];
+    const payload = { ["subscriptions." + code]: nextValue };
+    const patch = { subscriptions: { ...u.subscriptions, [code]: nextValue } };
+    if (nextValue) {
+      const remaining = (u.pendingPurchases || []).filter((p) => !(p.subjects || []).includes(code));
+      payload.pendingPurchases = remaining;
+      patch.pendingPurchases = remaining;
     }
+    await run(u.uid + ":" + code, u, payload, patch);
   };
+
+  const setTriage = (u, status) =>
+    run(u.uid + ":triage", u, { triageStatus: status }, { triageStatus: status });
+
+  const approvePractice = async (u, p) => {
+    if (!window.confirm("I-approve ang " + (ALL_PLAN_LABELS[p.plan] || p.plan) + " ₱" + p.price + " para kay " + (u.fullName || u.email) + "?")) return;
+    const subjects = p.subjects || [];
+    const remaining = (u.pendingPurchases || []).filter((x) => x.referenceCode !== p.referenceCode);
+    const payload = {
+      pendingPurchases: remaining,
+      triageStatus: "subscribed",
+      paymentHistory: arrayUnion({ kind: "practice", plan: p.plan, price: p.price, method: p.method, referenceCode: p.referenceCode, approvedAt: Date.now() }),
+    };
+    const subsPatch = {};
+    subjects.forEach((c) => { payload["subscriptions." + c] = true; subsPatch[c] = true; });
+    await run(u.uid + ":pp:" + p.referenceCode, u, payload, {
+      pendingPurchases: remaining,
+      triageStatus: "subscribed",
+      subscriptions: { ...u.subscriptions, ...subsPatch },
+    });
+  };
+
+  const rejectPractice = async (u, p) => {
+    if (!window.confirm("Tanggalin ang pending na ito (ref " + p.referenceCode + ")?")) return;
+    const remaining = (u.pendingPurchases || []).filter((x) => x.referenceCode !== p.referenceCode);
+    await run(u.uid + ":pp:" + p.referenceCode, u, { pendingPurchases: remaining }, { pendingPurchases: remaining });
+  };
+
+  // ── App Access (buwanang plan) ──────────────────────────────────────
+  // Kapag may active pa, dinadagdag sa dulo ng natitirang oras (hindi nasasayang).
+  const grantAccess = async (u, plan, pendingItem) => {
+    const now = serverNow();
+    const cur = getAppAccessInfo(u, now);
+    const base = cur.active ? cur.expiresAt : now;
+    const expiresAt = addMonths(base, plan.months);
+    const appAccess = { plan: plan.id, expiresAt };
+    const payload = {
+      appAccess,
+      appAccessHistory: arrayUnion({ plan: plan.id, price: plan.price, referenceCode: pendingItem ? pendingItem.referenceCode : "MANUAL", method: pendingItem ? pendingItem.method : "manual", approvedAt: now, expiresAt }),
+    };
+    const patch = { appAccess };
+    if (pendingItem) {
+      const remaining = (u.pendingAccess || []).filter((x) => x.referenceCode !== pendingItem.referenceCode);
+      payload.pendingAccess = remaining;
+      patch.pendingAccess = remaining;
+    }
+    await run(u.uid + ":acc", u, payload, patch);
+  };
+
+  const approveAccess = async (u, p) => {
+    const plan = ACCESS_PLANS.find((x) => x.id === p.plan);
+    if (!plan) { alert("Hindi kilalang plan: " + p.plan); return; }
+    if (!window.confirm("I-approve ang " + plan.months + " buwan (₱" + plan.price + ") para kay " + (u.fullName || u.email) + "?")) return;
+    await grantAccess(u, plan, p);
+  };
+
+  const manualGrant = async (u, plan) => {
+    if (!window.confirm("Bigyan si " + (u.fullName || u.email) + " ng " + plan.months + " buwan na App Access?")) return;
+    await grantAccess(u, plan, null);
+  };
+
+  const removeAccess = async (u) => {
+    if (!window.confirm("Tanggalin ang App Access ni " + (u.fullName || u.email) + "?")) return;
+    await run(u.uid + ":acc", u, { appAccess: deleteField() }, { appAccess: undefined });
+  };
+
+  const rejectAccess = async (u, p) => {
+    if (!window.confirm("Tanggalin ang pending na ito (ref " + p.referenceCode + ")?")) return;
+    const remaining = (u.pendingAccess || []).filter((x) => x.referenceCode !== p.referenceCode);
+    await run(u.uid + ":acc:" + p.referenceCode, u, { pendingAccess: remaining }, { pendingAccess: remaining });
+  };
+
+  // ── Trial CRUD ──────────────────────────────────────────────────────
+  // Laging nire-reset ang startedAt sa "ngayon" at inaayos ang `days` para
+  // tama ang natitirang oras. Oras ng server (serverNow), hindi ng phone.
+  const writeTrial = (u, days) => {
+    const startedAt = serverNow();
+    return run(u.uid + ":trial", u, { trial: { startedAt: Timestamp.fromMillis(startedAt), days } }, { trial: { startedAt, days } });
+  };
+
+  const grantTrial = (u) => {
+    if (!window.confirm("Simulan ulit ang " + TRIAL_DAYS + "-day trial ni " + (u.fullName || u.email) + " mula ngayon?")) return;
+    return writeTrial(u, TRIAL_DAYS);
+  };
+
+  const extendTrial = (u, extraDays) => {
+    const left = getTrialInfo(u).msLeft / DAY_MS;
+    return writeTrial(u, left + extraDays);
+  };
+
+  const endTrial = (u) => {
+    if (!window.confirm("Tapusin agad ang trial ni " + (u.fullName || u.email) + "?")) return;
+    return writeTrial(u, 0);
+  };
+
+  // ── Derived lists ───────────────────────────────────────────────────
+  const practicePending = useMemo(() => {
+    const rows = [];
+    filtered.forEach((u) => (u.pendingPurchases || []).forEach((p) => rows.push({ u, p })));
+    return rows.sort((a, b) => (a.p.requestedAt || 0) - (b.p.requestedAt || 0));
+  }, [filtered]);
+
+  const accessPending = useMemo(() => {
+    const rows = [];
+    filtered.forEach((u) => (u.pendingAccess || []).forEach((p) => rows.push({ u, p })));
+    return rows.sort((a, b) => (a.p.requestedAt || 0) - (b.p.requestedAt || 0));
+  }, [filtered]);
+
+  const activeSubscribers = useMemo(
+    () =>
+      filtered
+        .filter((u) => getAppAccessInfo(u).exists)
+        .sort((a, b) => getAppAccessInfo(a).expiresAt - getAppAccessInfo(b).expiresAt),
+    [filtered, users]
+  );
+
+  const trialRows = useMemo(() => {
+    return filtered.filter((u) => {
+      const k = accessKey(u);
+      if (trialFilter === "all") return true;
+      if (trialFilter === "trial") return k === "trial";
+      if (trialFilter === "expired") return k === "expired";
+      if (trialFilter === "none") return k === "none";
+      if (trialFilter === "paid") return k === "paid" || k === "member" || k === "admin";
+      return true;
+    });
+  }, [filtered, trialFilter, users]);
+
+  const rawPracticeCount = (users || []).reduce((n, u) => n + (u.pendingPurchases || []).length, 0);
+  const rawAccessCount = (users || []).reduce((n, u) => n + (u.pendingAccess || []).length, 0);
+
+  const TABS = [
+    { id: "users", label: "👥 Users" },
+    { id: "practice", label: "💳 Practice", count: rawPracticeCount },
+    { id: "access", label: "⏱ Access", count: rawAccessCount },
+    { id: "trial", label: "🎁 Trial" },
+  ];
+
+  const btn = "min-h-[34px] rounded-full px-3 py-1.5 text-xs font-semibold transition-colors disabled:opacity-50 ";
+  const btnGhost = btn + "border border-slate-200 text-slate-600 active:bg-slate-100 dark:border-slate-600 dark:text-slate-300 dark:active:bg-slate-700";
+  const btnGreen = btn + "bg-emerald-600 text-white active:bg-emerald-700";
+  const btnRed = btn + "border border-red-200 text-red-600 active:bg-red-50 dark:border-red-800 dark:text-red-400";
+
+  const PendingCard = ({ u, p, onApprove, onReject, approveLabel }) => (
+    <div className="rounded-xl border border-amber-200 bg-amber-50 p-3 dark:border-amber-900 dark:bg-amber-950/20">
+      <p className="truncate font-semibold text-navy-900 dark:text-slate-100">{u.fullName || "(walang pangalan)"}</p>
+      <p className="truncate text-xs text-slate-400">{u.email}</p>
+      <p className="mt-2 text-sm font-semibold text-navy-900 dark:text-amber-300">
+        {ALL_PLAN_LABELS[p.plan] || p.plan} · ₱{p.price} · {METHOD_LABELS[p.method] || p.method}
+      </p>
+      <p className="text-xs text-slate-500 dark:text-slate-400">Ref: {p.referenceCode} · {formatDateTime(p.requestedAt)}</p>
+      <div className="mt-3 flex gap-2">
+        <button onClick={onApprove} disabled={!!busyKey} className={btnGreen}>{approveLabel}</button>
+        <button onClick={onReject} disabled={!!busyKey} className={btnRed}>✕ Reject</button>
+      </div>
+    </div>
+  );
 
   return (
     <div className="mx-auto max-w-2xl space-y-4 pb-10">
       <div>
         <h1 className="text-2xl font-bold text-navy-900 dark:text-slate-50">👑 Admin Panel</h1>
         <p className="text-sm text-slate-500 dark:text-slate-400">
-          I-manage ang subscriptions at payment status ng users dito na, hindi na kailangan pumunta sa Firebase Console.
+          Hiwalay ang pending ng Practice Questions at ng App Access, at may sariling Trial panel.
         </p>
+      </div>
+
+      <div className="flex gap-1.5 overflow-x-auto pb-1">
+        {TABS.map((t) => (
+          <button
+            key={t.id}
+            onClick={() => setTab(t.id)}
+            className={"flex-shrink-0 rounded-full border px-3.5 py-1.5 text-sm font-semibold transition-colors " + (tab === t.id ? "border-navy-900 bg-navy-900 text-white dark:border-slate-100 dark:bg-slate-100 dark:text-navy-900" : "border-slate-200 text-slate-600 dark:border-slate-700 dark:text-slate-300")}
+          >
+            {t.label}
+            {t.count > 0 && <span className="ml-1.5 rounded-full bg-amber-500 px-1.5 py-0.5 text-[10px] font-bold text-white">{t.count}</span>}
+          </button>
+        ))}
       </div>
 
       <div className="flex gap-2">
@@ -4141,80 +4590,179 @@ export default function AdminPanel() {
         </div>
       )}
 
-      {users !== null && !error && filtered.length === 0 && (
-        <p className="py-8 text-center text-slate-400">Walang nahanap na user.</p>
-      )}
-
-      <div className="space-y-3">
-        {filtered.map((u) => {
-          const triage = defaultTriage(u);
-          const t = TRIAGE[triage] || TRIAGE.none;
-          return (
-            <div key={u.uid} className="rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-700 dark:bg-slate-800">
-              <div className="flex items-start justify-between gap-2">
-                <div className="min-w-0">
-                  <p className="truncate font-semibold text-navy-900 dark:text-slate-100">{u.fullName || "(walang pangalan)"}</p>
-                  <p className="truncate text-xs text-slate-400">{u.email}</p>
+      {/* ───────────── USERS ───────────── */}
+      {tab === "users" && users !== null && !error && (
+        <div className="space-y-3">
+          {filtered.length === 0 && <p className="py-8 text-center text-slate-400">Walang nahanap na user.</p>}
+          {filtered.map((u) => {
+            const triage = defaultTriage(u);
+            const t = TRIAGE[triage] || TRIAGE.none;
+            const app = getAppAccessInfo(u);
+            return (
+              <div key={u.uid} className="rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-700 dark:bg-slate-800">
+                <div className="flex items-start justify-between gap-2">
+                  <div className="min-w-0">
+                    <p className="truncate font-semibold text-navy-900 dark:text-slate-100">{u.fullName || "(walang pangalan)"}</p>
+                    <p className="truncate text-xs text-slate-400">{u.email}</p>
+                  </div>
+                  <span className={"flex flex-shrink-0 items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-semibold " + t.chip}>
+                    <span className={"h-2 w-2 rounded-full " + t.dot} aria-hidden />
+                    {t.label}
+                  </span>
                 </div>
-                <span className={"flex flex-shrink-0 items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-semibold " + t.chip}>
-                  <span className={"h-2 w-2 rounded-full " + t.dot} aria-hidden />
-                  {t.label}
-                </span>
-              </div>
 
-              <div className="mt-3 flex flex-wrap gap-1.5">
-                {SUBJECT_CODES.map((code) => {
-                  const unlocked = !!u.subscriptions?.[code];
-                  const busy = busyKey === u.uid + ":" + code;
-                  return (
-                    <button
-                      key={code}
-                      onClick={() => toggleSubject(u, code)}
-                      disabled={busy}
-                      title={SUBJECT_LABELS[code]}
-                      className={"min-h-[34px] rounded-full px-3 py-1.5 text-xs font-semibold transition-colors disabled:opacity-50 " + (unlocked ? "bg-emerald-600 text-white active:bg-emerald-700" : "bg-slate-100 text-slate-600 active:bg-slate-200 dark:bg-slate-900/40 dark:text-slate-300")}
-                    >
-                      {code} {unlocked ? "✓" : "✕"}
-                    </button>
-                  );
-                })}
-              </div>
-
-              <div className="mt-3 flex gap-1.5">
-                {Object.entries(TRIAGE).map(([status, cfg]) => (
-                  <button
-                    key={status}
-                    onClick={() => setTriage(u, status)}
-                    disabled={busyKey === u.uid + ":triage"}
-                    className={"flex-1 rounded-lg border px-2 py-1 text-[11px] font-medium transition-colors disabled:opacity-50 " + (triage === status ? cfg.chip + " bg-slate-50 dark:bg-slate-900/40" : "border-slate-200 text-slate-400 dark:border-slate-700")}
-                  >
-                    {cfg.label}
-                  </button>
-                ))}
-              </div>
-
-              {(u.pendingPurchases || []).length > 0 && (
-                <div className="mt-3 space-y-1.5 border-t border-slate-100 pt-3 dark:border-slate-700">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">Pending Purchases</p>
-                  {u.pendingPurchases.map((p, i) => {
-                    const planLabel = PLANS.find((pl) => pl.id === p.plan)?.label || p.plan;
+                <div className="mt-3 flex flex-wrap gap-1.5">
+                  {SUBJECT_CODES.map((code) => {
+                    const unlocked = !!u.subscriptions?.[code];
+                    const busy = busyKey === u.uid + ":" + code;
                     return (
-                      <div key={i} className="rounded-lg bg-amber-50 px-3 py-2 text-xs dark:bg-amber-950/20">
-                        <p className="font-semibold text-navy-900 dark:text-amber-300">
-                          {planLabel} · ₱{p.price} · {METHOD_LABELS[p.method] || p.method}
-                        </p>
-                        <p className="text-slate-500 dark:text-slate-400">
-                          Ref: {p.referenceCode} · {formatDateTime(p.requestedAt)}
-                        </p>
-                      </div>
+                      <button
+                        key={code}
+                        onClick={() => toggleSubject(u, code)}
+                        disabled={busy}
+                        title={SUBJECT_LABELS[code]}
+                        className={btn + (unlocked ? "bg-emerald-600 text-white active:bg-emerald-700" : "bg-slate-100 text-slate-600 active:bg-slate-200 dark:bg-slate-900/40 dark:text-slate-300")}
+                      >
+                        {code} {unlocked ? "✓" : "✕"}
+                      </button>
                     );
                   })}
                 </div>
-              )}
-            </div>
-          );
-        })}
-      </div>
+
+                <div className="mt-3 flex gap-1.5">
+                  {Object.entries(TRIAGE).map(([status, cfg]) => (
+                    <button
+                      key={status}
+                      onClick={() => setTriage(u, status)}
+                      disabled={busyKey === u.uid + ":triage"}
+                      className={"flex-1 rounded-lg border px-2 py-1 text-[11px] font-medium transition-colors disabled:opacity-50 " + (triage === status ? cfg.chip + " bg-slate-50 dark:bg-slate-900/40" : "border-slate-200 text-slate-400 dark:border-slate-700")}
+                    >
+                      {cfg.label}
+                    </button>
+                  ))}
+                </div>
+
+                <div className="mt-3 border-t border-slate-100 pt-3 dark:border-slate-700">
+                  <div className="mb-2 flex items-center justify-between gap-2">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">App Access</p>
+                    <StateChip u={u} />
+                  </div>
+                  {app.exists && (
+                    <p className="mb-2 text-xs text-slate-500 dark:text-slate-400">
+                      {app.active ? "Hanggang " : "Nagtapos noong "}{formatDateShort(app.expiresAt)}
+                    </p>
+                  )}
+                  <div className="flex flex-wrap gap-1.5">
+                    {ACCESS_PLANS.map((p) => (
+                      <button key={p.id} onClick={() => manualGrant(u, p)} disabled={busyKey === u.uid + ":acc"} className={btnGhost}>+{p.months} mo</button>
+                    ))}
+                    {app.exists && <button onClick={() => removeAccess(u)} disabled={busyKey === u.uid + ":acc"} className={btnRed}>Remove</button>}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* ───────────── PRACTICE PENDING ───────────── */}
+      {tab === "practice" && users !== null && !error && (
+        <div className="space-y-3">
+          <p className="text-sm font-semibold text-navy-900 dark:text-slate-100">💳 Pending — Practice Questions ({practicePending.length})</p>
+          {practicePending.length === 0 && <p className="py-8 text-center text-slate-400">Walang pending na practice payment. 🎉</p>}
+          {practicePending.map(({ u, p }) => (
+            <PendingCard
+              key={u.uid + p.referenceCode}
+              u={u}
+              p={p}
+              approveLabel="✅ Approve"
+              onApprove={() => approvePractice(u, p)}
+              onReject={() => rejectPractice(u, p)}
+            />
+          ))}
+        </div>
+      )}
+
+      {/* ───────────── ACCESS PENDING ───────────── */}
+      {tab === "access" && users !== null && !error && (
+        <div className="space-y-3">
+          <p className="text-sm font-semibold text-navy-900 dark:text-slate-100">⏱ Pending — App Access ({accessPending.length})</p>
+          {accessPending.length === 0 && <p className="py-6 text-center text-slate-400">Walang pending na App Access payment. 🎉</p>}
+          {accessPending.map(({ u, p }) => {
+            const plan = ACCESS_PLANS.find((x) => x.id === p.plan);
+            return (
+              <PendingCard
+                key={u.uid + p.referenceCode}
+                u={u}
+                p={p}
+                approveLabel={"✅ Approve " + (plan ? plan.months + " mo" : "")}
+                onApprove={() => approveAccess(u, p)}
+                onReject={() => rejectAccess(u, p)}
+              />
+            );
+          })}
+
+          <p className="pt-3 text-sm font-semibold text-navy-900 dark:text-slate-100">Active App Access ({activeSubscribers.length})</p>
+          {activeSubscribers.length === 0 && <p className="py-4 text-center text-sm text-slate-400">Wala pang may App Access.</p>}
+          {activeSubscribers.map((u) => {
+            const app = getAppAccessInfo(u);
+            return (
+              <div key={u.uid} className="flex items-center justify-between gap-2 rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-slate-800">
+                <div className="min-w-0">
+                  <p className="truncate text-sm font-semibold text-navy-900 dark:text-slate-100">{u.fullName || u.email}</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">
+                    {app.active ? formatTimeLeft(app.msLeft) + " left · hanggang " : "Nagtapos noong "}{formatDateShort(app.expiresAt)}
+                  </p>
+                </div>
+                <div className="flex flex-shrink-0 gap-1.5">
+                  <button onClick={() => manualGrant(u, ACCESS_PLANS[0])} disabled={busyKey === u.uid + ":acc"} className={btnGhost}>+1 mo</button>
+                  <button onClick={() => removeAccess(u)} disabled={busyKey === u.uid + ":acc"} className={btnRed}>✕</button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* ───────────── TRIAL CRUD ───────────── */}
+      {tab === "trial" && users !== null && !error && (
+        <div className="space-y-3">
+          <div className="flex flex-wrap gap-1.5">
+            {[["all", "All"], ["trial", "On trial"], ["expired", "Expired"], ["none", "No trial yet"], ["paid", "Paid/Member"]].map(([id, label]) => (
+              <button key={id} onClick={() => setTrialFilter(id)} className={"rounded-full border px-3 py-1 text-xs font-semibold " + (trialFilter === id ? "border-navy-900 bg-navy-900 text-white dark:border-slate-100 dark:bg-slate-100 dark:text-navy-900" : "border-slate-200 text-slate-500 dark:border-slate-700 dark:text-slate-400")}>
+                {label}
+              </button>
+            ))}
+          </div>
+          <p className="text-xs text-slate-400">{trialRows.length} user(s)</p>
+
+          {trialRows.map((u) => {
+            const tr = getTrialInfo(u);
+            return (
+              <div key={u.uid} className="rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-slate-800">
+                <div className="flex items-start justify-between gap-2">
+                  <div className="min-w-0">
+                    <p className="truncate text-sm font-semibold text-navy-900 dark:text-slate-100">{u.fullName || "(walang pangalan)"}</p>
+                    <p className="truncate text-xs text-slate-400">{u.email}</p>
+                  </div>
+                  <StateChip u={u} />
+                </div>
+                {tr.exists && (
+                  <p className="mt-1.5 text-xs text-slate-500 dark:text-slate-400">
+                    {tr.active ? "Trial hanggang " : "Trial nagtapos noong "}{formatDateTime(tr.endsAt)}
+                  </p>
+                )}
+                <div className="mt-2 flex flex-wrap gap-1.5">
+                  <button onClick={() => grantTrial(u)} disabled={busyKey === u.uid + ":trial"} className={btnGreen}>{tr.exists ? "↺ Restart " + TRIAL_DAYS + "d" : "＋ Grant " + TRIAL_DAYS + "d"}</button>
+                  <button onClick={() => extendTrial(u, 1)} disabled={busyKey === u.uid + ":trial"} className={btnGhost}>+1 day</button>
+                  <button onClick={() => extendTrial(u, 3)} disabled={busyKey === u.uid + ":trial"} className={btnGhost}>+3 days</button>
+                  {tr.exists && tr.active && <button onClick={() => endTrial(u)} disabled={busyKey === u.uid + ":trial"} className={btnRed}>End</button>}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
@@ -5718,13 +6266,14 @@ enableIndexedDbPersistence(db).catch((err) => {
 
 ## File: ./frontend/src/authContext.jsx
 ```
-import { createContext, useContext, useEffect, useState, useCallback } from "react";
+import { createContext, useContext, useEffect, useState, useCallback, useMemo, useRef } from "react";
 import {
   signInWithRedirect, getRedirectResult, onAuthStateChanged, signOut,
   setPersistence, indexedDBLocalPersistence,
 } from "firebase/auth";
-import { doc, getDoc, setDoc, updateDoc, serverTimestamp } from "firebase/firestore";
+import { doc, getDoc, setDoc, updateDoc, serverTimestamp, onSnapshot, runTransaction, getDocFromServer } from "firebase/firestore";
 import { auth, db, googleProvider } from "./firebase";
+import { setServerClock, persistClock, getAccess, hasAnyPractice, TRIAL_DAYS } from "./access";
 
 const DEVICE_ID_KEY = "cuble_deviceId";
 const PENDING_SIGNIN_KEY = "cuble_pendingSignIn";
@@ -5767,6 +6316,81 @@ export function AuthProvider({ children }) {
   const [profileError, setProfileError] = useState(null);
   const [signingIn, setSigningIn] = useState(() => localStorage.getItem(PENDING_SIGNIN_KEY) === "1");
   const currentDeviceId = getOrCreateDeviceId();
+
+  // ── Trial / App Access (oras ng server, real-time) ──────────────────
+  const [serverData, setServerData] = useState(null);
+  const [clockReady, setClockReady] = useState(false);
+  const [tick, setTick] = useState(0);
+  const [intentPlanId, setIntentPlanId] = useState(null);
+  const initDoneFor = useRef(null);
+  const uid = user ? user.uid : null;
+
+  useEffect(() => {
+    if (!uid) {
+      setServerData(null);
+      setClockReady(false);
+      initDoneFor.current = null;
+      return;
+    }
+    const ref = doc(db, "users", uid);
+    const unsub = onSnapshot(
+      ref,
+      { includeMetadataChanges: true },
+      (snap) => {
+        if (!snap.exists()) return;
+        setServerData(snap.data());
+        // Hintayin ang totoong datos ng server (hindi cache) bago gumawa ng trial.
+        if (snap.metadata.fromCache || initDoneFor.current === uid) return;
+        initDoneFor.current = uid;
+        (async () => {
+          try {
+            await runTransaction(db, async (tx) => {
+              const s = await tx.get(ref);
+              if (!s.exists()) return;
+              const d = s.data();
+              const upd = { lastSeenAt: serverTimestamp() };
+              // Isang beses lang ang trial bawat account; hindi na ulit kapag meron na
+              // o kapag may bayad na practice subject na.
+              if (!d.trial && !hasAnyPractice(d)) {
+                upd.trial = { startedAt: serverTimestamp(), days: TRIAL_DAYS };
+              }
+              tx.update(ref, upd);
+            });
+            const fresh = await getDocFromServer(ref);
+            const ls = fresh.data() && fresh.data().lastSeenAt;
+            if (ls && ls.toMillis) setServerClock(ls.toMillis());
+          } catch (e) {
+            console.warn("trial/clock sync failed:", e);
+          }
+          setClockReady(true);
+        })();
+      },
+      (err) => {
+        console.warn("profile listener error:", err);
+        setClockReady(true);
+      }
+    );
+    const fallback = setTimeout(() => setClockReady(true), 6000);
+    return () => { unsub(); clearTimeout(fallback); };
+  }, [uid]);
+
+  useEffect(() => {
+    const id = setInterval(() => { setTick((t) => t + 1); persistClock(); }, 15000);
+    return () => clearInterval(id);
+  }, []);
+
+  // Ang server data ang masusunod para sa access fields (real-time kapag nag-approve si admin).
+  const mergedProfile = useMemo(() => {
+    if (!profile || !serverData) return profile;
+    const pick = {};
+    ["subscriptions", "subscriptionExpiry", "appAccess", "trial", "pendingPurchases", "pendingAccess", "isAdmin"].forEach((k) => {
+      pick[k] = serverData[k];
+    });
+    if (!pick.subscriptions) pick.subscriptions = profile.subscriptions;
+    return { ...profile, ...pick };
+  }, [profile, serverData]);
+
+  const access = getAccess(mergedProfile, { clockReady });
 
   const syncProfile = useCallback(async (fbUser) => {
     setProfileError(null);
@@ -5937,7 +6561,8 @@ export function AuthProvider({ children }) {
   }, [user, profile, currentDeviceId, deviceLimitReached, syncProfile]);
 
   const value = {
-    user, profile, loading, needsFullName, deviceLimitReached, currentDeviceId,
+    user, profile: mergedProfile, loading, needsFullName, deviceLimitReached, currentDeviceId,
+    access, clockReady, tick, intentPlanId, setIntentPlanId,
     overlayOpen, setOverlayOpen, authError, profileError, signingIn,
     signInWithGoogle, signOutUser, completeFullName, removeDevice,
   };
@@ -5962,14 +6587,15 @@ import mayaQr from "./assets/payment/maya-qr.png";
 import maribankQr from "./assets/payment/maribank-qr.png";
 import { doc, setDoc, arrayUnion } from "firebase/firestore";
 import { db, auth } from "./firebase";
+import { ACCESS_PLANS } from "./access";
 
 export const PLANS = [
   { id: "TL", label: "Tariff Law", price: 39, subjects: ["TL"] },
   { id: "CDP", label: "Customs Documentation & Procedures", price: 39, subjects: ["CDP"] },
   { id: "PC", label: "Practical Computations", price: 29, subjects: ["PC"] },
-  { id: "TCP", label: "Tariff Commission Primer", price: 399, subjects: ["TCP"] },
-  { id: "BUNDLE", label: "Bundle — RA10863 (CL), CDP, TL, PC", price: 99, subjects: ["CL", "TL", "CDP", "PC"] },
-  { id: "ALL", label: "All-in Bundle — Lahat ng 5 Subjects (kasama TCP)", price: 499, subjects: ["CL", "TL", "CDP", "PC", "TCP"] },
+  { id: "TCP", label: "Tariff Commission Primer", price: 299, subjects: ["TCP"] },
+  { id: "BUNDLE", label: "Bundle — RA10863 (CL), CDP, TL, PC", price: 199, subjects: ["CL", "TL", "CDP", "PC"] },
+  { id: "ALL", label: "All-in Bundle — Lahat ng 5 Subjects (kasama TCP)", price: 399, subjects: ["CL", "TL", "CDP", "PC", "TCP"] },
 ];
 
 export const PAYMENT_METHODS = [
@@ -5995,13 +6621,15 @@ export function generateReferenceCode(planId) {
 export async function submitPendingPurchase(uid, { planId, subjects, price, method, referenceCode }) {
   const ref = doc(db, "users", uid);
   const u = auth.currentUser;
+  // App Access plans (M1/M3/M8) ay may sariling pending list.
+  const field = ACCESS_PLANS.some((p) => p.id === planId) ? "pendingAccess" : "pendingPurchases";
   await setDoc(
     ref,
     {
       email: (u && u.email) || "",
       displayName: (u && u.displayName) || "",
       photoURL: (u && u.photoURL) || "",
-      pendingPurchases: arrayUnion({
+      [field]: arrayUnion({
         plan: planId,
         subjects,
         price,
@@ -6012,6 +6640,139 @@ export async function submitPendingPurchase(uid, { planId, subjects, price, meth
     },
     { merge: true }
   );
+}
+```
+
+## File: ./frontend/src/access.js
+```
+// access.js — oras ng server, 3-day trial, at App Access plans (1/3/8 buwan).
+// Pure functions lang (walang React) para magamit kahit saan.
+//
+// DALAWANG HIWALAY NA BAGAY:
+//  1) APP ACCESS  -> pwede bang buksan ang app (trial / buwanang bayad)
+//  2) PRACTICE QUESTIONS -> `subscriptions` (CL/TL/CDP/PC/TCP) — HINDI ito ginagalaw dito.
+
+export const TRIAL_DAYS = 3;
+export const DAY_MS = 24 * 60 * 60 * 1000;
+
+// true  = kahit sinong may bayad na practice subject (luma o bago) ay laging
+//         may access sa app (protektado ang mga "lifetime" na na-promise mo).
+// false = lahat ng user (maliban admin) kailangan ng trial / App Access.
+export const PRACTICE_BUYERS_KEEP_APP_ACCESS = true;
+
+export const ACCESS_PLANS = [
+  { id: "M1", kind: "access", months: 1, label: "App Access — 1 Month", price: 50, subjects: [] },
+  { id: "M3", kind: "access", months: 3, label: "App Access — 3 Months", price: 149, subjects: [] },
+  { id: "M8", kind: "access", months: 8, label: "App Access — 8 Months", price: 380, subjects: [] },
+];
+
+// ── Server clock ─────────────────────────────────────────────────────
+// Hindi tayo nagtitiwala sa oras ng phone. Kapag online, kinukuha ang oras
+// ng Firestore server at sine-save ang pagitan (offset). Hindi rin umaatras
+// ang oras (maxSeen) para hindi madaya ng pag-atras ng clock offline.
+const OFFSET_KEY = "cuble_clockOffset";
+const MAXSEEN_KEY = "cuble_clockMaxSeen";
+
+let offset = 0;
+let maxSeen = 0;
+try {
+  offset = Number(localStorage.getItem(OFFSET_KEY)) || 0;
+  maxSeen = Number(localStorage.getItem(MAXSEEN_KEY)) || 0;
+} catch (_) {}
+
+export function persistClock() {
+  try {
+    localStorage.setItem(OFFSET_KEY, String(offset));
+    localStorage.setItem(MAXSEEN_KEY, String(maxSeen));
+  } catch (_) {}
+}
+
+// Tawagin kapag nakuha na ang totoong oras ng server (ms).
+export function setServerClock(serverMs) {
+  offset = serverMs - Date.now();
+  maxSeen = serverMs; // server ang masusunod, i-reset ang maxSeen
+  persistClock();
+}
+
+export function serverNow() {
+  const est = Date.now() + offset;
+  if (est > maxSeen) maxSeen = est;
+  return maxSeen;
+}
+
+// ── Helpers ──────────────────────────────────────────────────────────
+// Tumatanggap ng ms number, Firestore Timestamp, o {seconds,nanoseconds}
+// (ganyan ang itsura ng Timestamp kapag galing sa localStorage cache).
+export function toMs(v) {
+  if (v == null) return null;
+  if (typeof v === "number") return v;
+  if (typeof v.toMillis === "function") return v.toMillis();
+  if (typeof v.seconds === "number") return v.seconds * 1000 + Math.floor((v.nanoseconds || 0) / 1e6);
+  if (v instanceof Date) return v.getTime();
+  return null;
+}
+
+export function hasAnyPractice(profile) {
+  return Object.values((profile && profile.subscriptions) || {}).some(Boolean);
+}
+
+export function addMonths(ms, months) {
+  const d = new Date(ms);
+  d.setMonth(d.getMonth() + months);
+  return d.getTime();
+}
+
+export function formatTimeLeft(ms) {
+  if (!ms || ms <= 0) return "tapos na";
+  const d = Math.floor(ms / DAY_MS);
+  const h = Math.floor((ms % DAY_MS) / 3600000);
+  const m = Math.floor((ms % 3600000) / 60000);
+  if (d > 0) return d + "d " + h + "h";
+  if (h > 0) return h + "h " + m + "m";
+  return Math.max(1, m) + "m";
+}
+
+export function formatDateShort(ms) {
+  try {
+    return new Date(ms).toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
+  } catch (_) {
+    return "";
+  }
+}
+
+// ── Trial / App Access info ──────────────────────────────────────────
+// trial = { startedAt: Timestamp(server), days: number }
+export function getTrialInfo(profile, now = serverNow()) {
+  const t = profile && profile.trial;
+  const start = toMs(t && t.startedAt);
+  if (!t || start == null) return { exists: false, active: false, endsAt: null, msLeft: 0 };
+  const endsAt = start + (Number(t.days) || 0) * DAY_MS;
+  const msLeft = Math.max(0, endsAt - now);
+  return { exists: true, active: msLeft > 0, endsAt, msLeft };
+}
+
+// appAccess = { plan: "M1"|"M3"|"M8", expiresAt: ms }
+export function getAppAccessInfo(profile, now = serverNow()) {
+  const a = profile && profile.appAccess;
+  const exp = toMs(a && a.expiresAt);
+  if (!a || exp == null) return { exists: false, active: false, plan: null, expiresAt: null, msLeft: 0 };
+  const msLeft = Math.max(0, exp - now);
+  return { exists: true, active: msLeft > 0, plan: a.plan || null, expiresAt: exp, msLeft };
+}
+
+// state: "none" | "loading" | "admin" | "paid" | "member" | "trial" | "expired"
+export function getAccess(profile, opts) {
+  const clockReady = !opts || opts.clockReady !== false;
+  const now = serverNow();
+  if (!profile) return { state: "none", trial: getTrialInfo(null, now), app: getAppAccessInfo(null, now), msLeft: 0 };
+  const trial = getTrialInfo(profile, now);
+  const app = getAppAccessInfo(profile, now);
+  if (profile.isAdmin) return { state: "admin", trial, app, msLeft: 0 };
+  if (app.active) return { state: "paid", trial, app, msLeft: app.msLeft };
+  if (PRACTICE_BUYERS_KEEP_APP_ACCESS && hasAnyPractice(profile)) return { state: "member", trial, app, msLeft: 0 };
+  if (trial.active) return { state: "trial", trial, app, msLeft: trial.msLeft };
+  if (!trial.exists && !clockReady) return { state: "loading", trial, app, msLeft: 0 };
+  return { state: "expired", trial, app, msLeft: 0 };
 }
 ```
 

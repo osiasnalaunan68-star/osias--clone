@@ -9,12 +9,12 @@ import { db, auth } from "./firebase";
 import { ACCESS_PLANS } from "./access";
 
 export const PLANS = [
-  { id: "TL", label: "Tariff Law", price: 99, subjects: ["TL"] },
-  { id: "CDP", label: "Customs Documentation & Procedures", price: 99, subjects: ["CDP"] },
-  { id: "PC", label: "Practical Computations", price: 99, subjects: ["PC"] },
-  { id: "TCP", label: "Tariff Commission Primer", price: 299, subjects: ["TCP"] },
-  { id: "BUNDLE", label: "Bundle — RA10863 (CL), CDP, TL, PC", price: 199, subjects: ["CL", "TL", "CDP", "PC"] },
-  { id: "ALL", label: "All-in Bundle — Lahat ng 5 Subjects (kasama TCP)", price: 399, subjects: ["CL", "TL", "CDP", "PC", "TCP"] },
+  { id: "TL", label: "Tariff Law", price: 168, subjects: ["TL"] },
+  { id: "CDP", label: "Customs Documentation & Procedures", price: 168, subjects: ["CDP"] },
+  { id: "PC", label: "Practical Computations", price: 168, subjects: ["PC"] },
+  { id: "TCP", label: "Tariff Commission Primer", price: 199, subjects: ["TCP"] },
+  { id: "BUNDLE", label: "Bundle — RA10863 (CL), CDP, TL, PC", price: 259, subjects: ["CL", "TL", "CDP", "PC"] },
+  { id: "ALL", label: "All-in Bundle — Lahat ng 5 Subjects (kasama TCP)", price: 400, subjects: ["CL", "TL", "CDP", "PC", "TCP"] },
 ];
 
 export const PAYMENT_METHODS = [
