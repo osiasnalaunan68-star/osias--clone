@@ -1,7 +1,7 @@
 import "./index.css";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import ChapterBrowser from "./pages/ChapterBrowser";
+import AccessGate from "./components/AccessGate";
 import { seedDefaultQuizzes } from "./subjectQuizStore";
 import { AuthProvider } from "./authContext";
 import AccountOverlay from "./components/AccountOverlay";
@@ -38,7 +38,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ErrorBoundary>
       <AuthProvider>
-        <ChapterBrowser />
+        <AccessGate />
         <AccountOverlay />
       </AuthProvider>
     </ErrorBoundary>

@@ -6,14 +6,15 @@ import mayaQr from "./assets/payment/maya-qr.png";
 import maribankQr from "./assets/payment/maribank-qr.png";
 import { doc, setDoc, arrayUnion } from "firebase/firestore";
 import { db, auth } from "./firebase";
+import { ACCESS_PLANS } from "./access";
 
 export const PLANS = [
   { id: "TL", label: "Tariff Law", price: 39, subjects: ["TL"] },
   { id: "CDP", label: "Customs Documentation & Procedures", price: 39, subjects: ["CDP"] },
   { id: "PC", label: "Practical Computations", price: 29, subjects: ["PC"] },
-  { id: "TCP", label: "Tariff Commission Primer", price: 399, subjects: ["TCP"] },
-  { id: "BUNDLE", label: "Bundle — RA10863 (CL), CDP, TL, PC", price: 99, subjects: ["CL", "TL", "CDP", "PC"] },
-  { id: "ALL", label: "All-in Bundle — Lahat ng 5 Subjects (kasama TCP)", price: 499, subjects: ["CL", "TL", "CDP", "PC", "TCP"] },
+  { id: "TCP", label: "Tariff Commission Primer", price: 299, subjects: ["TCP"] },
+  { id: "BUNDLE", label: "Bundle — RA10863 (CL), CDP, TL, PC", price: 199, subjects: ["CL", "TL", "CDP", "PC"] },
+  { id: "ALL", label: "All-in Bundle — Lahat ng 5 Subjects (kasama TCP)", price: 399, subjects: ["CL", "TL", "CDP", "PC", "TCP"] },
 ];
 
 export const PAYMENT_METHODS = [
@@ -39,13 +40,15 @@ export function generateReferenceCode(planId) {
 export async function submitPendingPurchase(uid, { planId, subjects, price, method, referenceCode }) {
   const ref = doc(db, "users", uid);
   const u = auth.currentUser;
+  // App Access plans (M1/M3/M8) ay may sariling pending list.
+  const field = ACCESS_PLANS.some((p) => p.id === planId) ? "pendingAccess" : "pendingPurchases";
   await setDoc(
     ref,
     {
       email: (u && u.email) || "",
       displayName: (u && u.displayName) || "",
       photoURL: (u && u.photoURL) || "",
-      pendingPurchases: arrayUnion({
+      [field]: arrayUnion({
         plan: planId,
         subjects,
         price,

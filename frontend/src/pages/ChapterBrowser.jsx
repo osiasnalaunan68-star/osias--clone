@@ -808,9 +808,9 @@ function collectAllNodeIds(node, acc = []) {
   return acc;
 }
 
-export default function ChapterBrowser() {
+export default function ChapterBrowser({ initialView = "browse", initialMode = null, demo = false } = {}) {
   const { profile } = useAuth();
-  const [view, setView] = useState("browse");
+  const [view, setView] = useState(initialView);
   const [titles, setTitles] = useState([]);
   const [selectedChapter, setSelectedChapter] = useState(null);
   const [selectedTitleNumber, setSelectedTitleNumber] = useState(null);
@@ -818,7 +818,7 @@ export default function ChapterBrowser() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(() => window.innerWidth >= 768);
-  const [mode, setMode] = useState(() => localStorage.getItem(MODE_KEY) || "study");
+  const [mode, setMode] = useState(() => initialMode || localStorage.getItem(MODE_KEY) || "study");
   const [fontScale, setFontScale] = useState(() => { const saved = parseFloat(localStorage.getItem(FONT_KEY)); return isNaN(saved) ? 1 : saved; });
   const [darkMode, setDarkMode] = useState(() => localStorage.getItem(DARK_KEY) === "true");
   const [activeHighlightNodeId, setActiveHighlightNodeId] = useState(null);
@@ -850,7 +850,7 @@ export default function ChapterBrowser() {
       });
     const progress = getProgress();
     if (progress && progress.chapter_number) setResumeAvailable(progress);
-    if (!hasTutorialBeenSeen()) {
+    if (!demo && !hasTutorialBeenSeen()) {
       setShowTutorial(true);
     }
   }, []);

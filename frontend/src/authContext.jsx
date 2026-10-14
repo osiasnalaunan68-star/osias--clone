@@ -1,10 +1,11 @@
-import { createContext, useContext, useEffect, useState, useCallback } from "react";
+import { createContext, useContext, useEffect, useState, useCallback, useMemo, useRef } from "react";
 import {
   signInWithRedirect, getRedirectResult, onAuthStateChanged, signOut,
   setPersistence, indexedDBLocalPersistence,
 } from "firebase/auth";
-import { doc, getDoc, setDoc, updateDoc, serverTimestamp } from "firebase/firestore";
+import { doc, getDoc, setDoc, updateDoc, serverTimestamp, onSnapshot, runTransaction, getDocFromServer } from "firebase/firestore";
 import { auth, db, googleProvider } from "./firebase";
+import { setServerClock, persistClock, getAccess, hasAnyPractice, TRIAL_DAYS } from "./access";
 
 const DEVICE_ID_KEY = "cuble_deviceId";
 const PENDING_SIGNIN_KEY = "cuble_pendingSignIn";
@@ -47,6 +48,81 @@ export function AuthProvider({ children }) {
   const [profileError, setProfileError] = useState(null);
   const [signingIn, setSigningIn] = useState(() => localStorage.getItem(PENDING_SIGNIN_KEY) === "1");
   const currentDeviceId = getOrCreateDeviceId();
+
+  // ── Trial / App Access (oras ng server, real-time) ──────────────────
+  const [serverData, setServerData] = useState(null);
+  const [clockReady, setClockReady] = useState(false);
+  const [tick, setTick] = useState(0);
+  const [intentPlanId, setIntentPlanId] = useState(null);
+  const initDoneFor = useRef(null);
+  const uid = user ? user.uid : null;
+
+  useEffect(() => {
+    if (!uid) {
+      setServerData(null);
+      setClockReady(false);
+      initDoneFor.current = null;
+      return;
+    }
+    const ref = doc(db, "users", uid);
+    const unsub = onSnapshot(
+      ref,
+      { includeMetadataChanges: true },
+      (snap) => {
+        if (!snap.exists()) return;
+        setServerData(snap.data());
+        // Hintayin ang totoong datos ng server (hindi cache) bago gumawa ng trial.
+        if (snap.metadata.fromCache || initDoneFor.current === uid) return;
+        initDoneFor.current = uid;
+        (async () => {
+          try {
+            await runTransaction(db, async (tx) => {
+              const s = await tx.get(ref);
+              if (!s.exists()) return;
+              const d = s.data();
+              const upd = { lastSeenAt: serverTimestamp() };
+              // Isang beses lang ang trial bawat account; hindi na ulit kapag meron na
+              // o kapag may bayad na practice subject na.
+              if (!d.trial && !hasAnyPractice(d)) {
+                upd.trial = { startedAt: serverTimestamp(), days: TRIAL_DAYS };
+              }
+              tx.update(ref, upd);
+            });
+            const fresh = await getDocFromServer(ref);
+            const ls = fresh.data() && fresh.data().lastSeenAt;
+            if (ls && ls.toMillis) setServerClock(ls.toMillis());
+          } catch (e) {
+            console.warn("trial/clock sync failed:", e);
+          }
+          setClockReady(true);
+        })();
+      },
+      (err) => {
+        console.warn("profile listener error:", err);
+        setClockReady(true);
+      }
+    );
+    const fallback = setTimeout(() => setClockReady(true), 6000);
+    return () => { unsub(); clearTimeout(fallback); };
+  }, [uid]);
+
+  useEffect(() => {
+    const id = setInterval(() => { setTick((t) => t + 1); persistClock(); }, 15000);
+    return () => clearInterval(id);
+  }, []);
+
+  // Ang server data ang masusunod para sa access fields (real-time kapag nag-approve si admin).
+  const mergedProfile = useMemo(() => {
+    if (!profile || !serverData) return profile;
+    const pick = {};
+    ["subscriptions", "subscriptionExpiry", "appAccess", "trial", "pendingPurchases", "pendingAccess", "isAdmin"].forEach((k) => {
+      pick[k] = serverData[k];
+    });
+    if (!pick.subscriptions) pick.subscriptions = profile.subscriptions;
+    return { ...profile, ...pick };
+  }, [profile, serverData]);
+
+  const access = getAccess(mergedProfile, { clockReady });
 
   const syncProfile = useCallback(async (fbUser) => {
     setProfileError(null);
@@ -217,7 +293,8 @@ export function AuthProvider({ children }) {
   }, [user, profile, currentDeviceId, deviceLimitReached, syncProfile]);
 
   const value = {
-    user, profile, loading, needsFullName, deviceLimitReached, currentDeviceId,
+    user, profile: mergedProfile, loading, needsFullName, deviceLimitReached, currentDeviceId,
+    access, clockReady, tick, intentPlanId, setIntentPlanId,
     overlayOpen, setOverlayOpen, authError, profileError, signingIn,
     signInWithGoogle, signOutUser, completeFullName, removeDevice,
   };
