@@ -3644,12 +3644,16 @@ import {
   getAllEntries, getSortedItemIds, getSubjectStats,
   getSubjectProgress, saveSubjectProgress, resetSubjectProgress,
 } from "../subjectQuizStore";
+import { isClUnlocked } from "../access";
 
 // First N items (by sorted order) na libre bawat subject — lahat ng lagpas dito
 // ay naka-lock hanggang mag-subscribe. Tugma sa pricing table sa handoff doc.
-const FREE_LIMITS = { cl: 10, cdp: 10, tl: 10, pc: 10, tcp: 10 };
+// CL ang eksepsyon: 7-day FULL access trial (hindi item-count based) tapos
+// naka-lock LAHAT ng item hanggang mag-lifetime ₱99 — tingnan ang isClUnlocked().
+const FREE_LIMITS = { cdp: 10, tl: 10, pc: 10, tcp: 10 };
 
 function isItemUnlocked(idx, subjectId, profile) {
+  if (subjectId === "cl") return isClUnlocked(profile);
   const freeLimit = FREE_LIMITS[subjectId] ?? Infinity;
   if (idx < freeLimit) return true;
   return !!profile?.subscriptions?.[subjectId.toUpperCase()];
@@ -4264,7 +4268,7 @@ import { db } from "../firebase";
 import { PLANS, PAYMENT_METHODS } from "../payments";
 import {
   ACCESS_PLANS, TRIAL_DAYS, DAY_MS, serverNow, getTrialInfo, getAppAccessInfo,
-  getAccess, addMonths, formatTimeLeft, formatDateShort,
+  getAccess, addMonths, formatTimeLeft, formatDateShort, getClTrialInfo, CL_TRIAL_DAYS, CL_LIFETIME_PRICE,
 } from "../access";
 
 const SUBJECT_CODES = ["CL", "CDP", "TL", "PC", "TCP"];
@@ -4312,6 +4316,14 @@ function accessKey(u) {
   return a.state;
 }
 
+// Parehong pattern para sa RA 10863 (CL): paid (lifetime) > trial > expired > none.
+function clAccessKey(u) {
+  if (u?.subscriptions?.CL) return "paid";
+  const t = getClTrialInfo(u);
+  if (!t.exists) return "none";
+  return t.active ? "trial" : "expired";
+}
+
 function StateChip({ u }) {
   const key = accessKey(u);
   const a = getAccess(u);
@@ -4329,6 +4341,7 @@ export default function AdminPanel() {
   const [busyKey, setBusyKey] = useState(null);
   const [tab, setTab] = useState("users");
   const [trialFilter, setTrialFilter] = useState("all");
+  const [clFilter, setClFilter] = useState("all");
 
   const loadUsers = async () => {
     setError(null);
@@ -4480,6 +4493,27 @@ export default function AdminPanel() {
     return writeTrial(u, 0);
   };
 
+  // ── RA 10863 (CL) Trial CRUD — kaparehong logic ng trial sa itaas ────
+  const writeClTrial = (u, days) => {
+    const startedAt = serverNow();
+    return run(u.uid + ":cltrial", u, { clTrial: { startedAt: Timestamp.fromMillis(startedAt), days } }, { clTrial: { startedAt, days } });
+  };
+
+  const grantClTrial = (u) => {
+    if (!window.confirm("Simulan ulit ang " + CL_TRIAL_DAYS + "-day CL trial ni " + (u.fullName || u.email) + " mula ngayon?")) return;
+    return writeClTrial(u, CL_TRIAL_DAYS);
+  };
+
+  const extendClTrial = (u, extraDays) => {
+    const left = getClTrialInfo(u).msLeft / DAY_MS;
+    return writeClTrial(u, left + extraDays);
+  };
+
+  const endClTrial = (u) => {
+    if (!window.confirm("Tapusin agad ang CL trial ni " + (u.fullName || u.email) + "?")) return;
+    return writeClTrial(u, 0);
+  };
+
   // ── Derived lists ───────────────────────────────────────────────────
   const practicePending = useMemo(() => {
     const rows = [];
@@ -4513,6 +4547,14 @@ export default function AdminPanel() {
     });
   }, [filtered, trialFilter, users]);
 
+  const clRows = useMemo(() => {
+    return filtered.filter((u) => {
+      const k = clAccessKey(u);
+      if (clFilter === "all") return true;
+      return k === clFilter;
+    });
+  }, [filtered, clFilter, users]);
+
   const rawPracticeCount = (users || []).reduce((n, u) => n + (u.pendingPurchases || []).length, 0);
   const rawAccessCount = (users || []).reduce((n, u) => n + (u.pendingAccess || []).length, 0);
 
@@ -4521,6 +4563,7 @@ export default function AdminPanel() {
     { id: "practice", label: "💳 Practice", count: rawPracticeCount },
     { id: "access", label: "⏱ Access", count: rawAccessCount },
     { id: "trial", label: "🎁 Trial" },
+    { id: "cl", label: "📜 CL" },
   ];
 
   const btn = "min-h-[34px] rounded-full px-3 py-1.5 text-xs font-semibold transition-colors disabled:opacity-50 ";
@@ -4757,6 +4800,51 @@ export default function AdminPanel() {
                   <button onClick={() => extendTrial(u, 1)} disabled={busyKey === u.uid + ":trial"} className={btnGhost}>+1 day</button>
                   <button onClick={() => extendTrial(u, 3)} disabled={busyKey === u.uid + ":trial"} className={btnGhost}>+3 days</button>
                   {tr.exists && tr.active && <button onClick={() => endTrial(u)} disabled={busyKey === u.uid + ":trial"} className={btnRed}>End</button>}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* ───────────── RA 10863 (CL) TRIAL + LIFETIME ───────────── */}
+      {tab === "cl" && users !== null && !error && (
+        <div className="space-y-3">
+          <p className="text-xs text-slate-500 dark:text-slate-400">7-day free trial, tapos naka-lock hanggang bumili ng lifetime (₱{CL_LIFETIME_PRICE}).</p>
+          <div className="flex flex-wrap gap-1.5">
+            {[["all", "All"], ["trial", "On trial"], ["expired", "Expired"], ["none", "No trial yet"], ["paid", "Lifetime (paid)"]].map(([id, label]) => (
+              <button key={id} onClick={() => setClFilter(id)} className={"rounded-full border px-3 py-1 text-xs font-semibold " + (clFilter === id ? "border-navy-900 bg-navy-900 text-white dark:border-slate-100 dark:bg-slate-100 dark:text-navy-900" : "border-slate-200 text-slate-500 dark:border-slate-700 dark:text-slate-400")}>
+                {label}
+              </button>
+            ))}
+          </div>
+          <p className="text-xs text-slate-400">{clRows.length} user(s)</p>
+
+          {clRows.map((u) => {
+            const ct = getClTrialInfo(u);
+            const paid = !!u.subscriptions?.CL;
+            return (
+              <div key={u.uid} className="rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-slate-800">
+                <div className="flex items-start justify-between gap-2">
+                  <div className="min-w-0">
+                    <p className="truncate text-sm font-semibold text-navy-900 dark:text-slate-100">{u.fullName || "(walang pangalan)"}</p>
+                    <p className="truncate text-xs text-slate-400">{u.email}</p>
+                  </div>
+                  <span className={"rounded-full px-2 py-0.5 text-[11px] font-semibold " + (paid ? "bg-purple-100 text-purple-700 dark:bg-purple-950/40 dark:text-purple-300" : ct.active ? "bg-sky-100 text-sky-700 dark:bg-sky-950/40 dark:text-sky-300" : "bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400")}>
+                    {paid ? "👑 Lifetime" : ct.exists ? (ct.active ? "🎁 Trial" : "⏳ Expired") : "No trial yet"}
+                  </span>
+                </div>
+                {ct.exists && !paid && (
+                  <p className="mt-1.5 text-xs text-slate-500 dark:text-slate-400">
+                    {ct.active ? "CL trial hanggang " : "CL trial nagtapos noong "}{formatDateTime(ct.endsAt)}
+                  </p>
+                )}
+                <div className="mt-2 flex flex-wrap gap-1.5">
+                  {!paid && <button onClick={() => grantClTrial(u)} disabled={busyKey === u.uid + ":cltrial"} className={btnGreen}>{ct.exists ? "↺ Restart " + CL_TRIAL_DAYS + "d" : "＋ Grant " + CL_TRIAL_DAYS + "d"}</button>}
+                  {!paid && <button onClick={() => extendClTrial(u, 1)} disabled={busyKey === u.uid + ":cltrial"} className={btnGhost}>+1 day</button>}
+                  {!paid && ct.exists && ct.active && <button onClick={() => endClTrial(u)} disabled={busyKey === u.uid + ":cltrial"} className={btnRed}>End</button>}
+                  {!paid && <button onClick={() => toggleSubject(u, "CL")} disabled={busyKey === u.uid + ":CL"} className={btnGhost + " border-purple-300 text-purple-700 dark:border-purple-700 dark:text-purple-300"}>👑 Mark Lifetime (₱{CL_LIFETIME_PRICE})</button>}
+                  {paid && <button onClick={() => toggleSubject(u, "CL")} disabled={busyKey === u.uid + ":CL"} className={btnRed}>Remove Lifetime</button>}
                 </div>
               </div>
             );
@@ -6273,7 +6361,7 @@ import {
 } from "firebase/auth";
 import { doc, getDoc, setDoc, updateDoc, serverTimestamp, onSnapshot, runTransaction, getDocFromServer } from "firebase/firestore";
 import { auth, db, googleProvider } from "./firebase";
-import { setServerClock, persistClock, getAccess, hasAnyPractice, TRIAL_DAYS } from "./access";
+import { setServerClock, persistClock, getAccess, hasAnyPractice, TRIAL_DAYS, CL_TRIAL_DAYS } from "./access";
 
 const DEVICE_ID_KEY = "cuble_deviceId";
 const PENDING_SIGNIN_KEY = "cuble_pendingSignIn";
@@ -6354,6 +6442,11 @@ export function AuthProvider({ children }) {
               if (!d.trial && !hasAnyPractice(d)) {
                 upd.trial = { startedAt: serverTimestamp(), days: TRIAL_DAYS };
               }
+              // Hiwalay na 7-day trial para sa RA 10863 (CL) — isang beses lang din,
+              // maliban kung bumili na ng lifetime access (subscriptions.CL).
+              if (!d.clTrial && !(d.subscriptions && d.subscriptions.CL)) {
+                upd.clTrial = { startedAt: serverTimestamp(), days: CL_TRIAL_DAYS };
+              }
               tx.update(ref, upd);
             });
             const fresh = await getDocFromServer(ref);
@@ -6383,7 +6476,7 @@ export function AuthProvider({ children }) {
   const mergedProfile = useMemo(() => {
     if (!profile || !serverData) return profile;
     const pick = {};
-    ["subscriptions", "subscriptionExpiry", "appAccess", "trial", "pendingPurchases", "pendingAccess", "isAdmin"].forEach((k) => {
+    ["subscriptions", "subscriptionExpiry", "appAccess", "trial", "clTrial", "pendingPurchases", "pendingAccess", "isAdmin"].forEach((k) => {
       pick[k] = serverData[k];
     });
     if (!pick.subscriptions) pick.subscriptions = profile.subscriptions;
@@ -6590,12 +6683,13 @@ import { db, auth } from "./firebase";
 import { ACCESS_PLANS } from "./access";
 
 export const PLANS = [
-  { id: "TL", label: "Tariff Law", price: 39, subjects: ["TL"] },
-  { id: "CDP", label: "Customs Documentation & Procedures", price: 39, subjects: ["CDP"] },
-  { id: "PC", label: "Practical Computations", price: 29, subjects: ["PC"] },
-  { id: "TCP", label: "Tariff Commission Primer", price: 299, subjects: ["TCP"] },
-  { id: "BUNDLE", label: "Bundle — RA10863 (CL), CDP, TL, PC", price: 199, subjects: ["CL", "TL", "CDP", "PC"] },
-  { id: "ALL", label: "All-in Bundle — Lahat ng 5 Subjects (kasama TCP)", price: 399, subjects: ["CL", "TL", "CDP", "PC", "TCP"] },
+  { id: "CL", label: "RA 10863 (Customs Law)", price: 99, subjects: ["CL"] },
+  { id: "TL", label: "Tariff Law", price: 179, subjects: ["TL"] },
+  { id: "CDP", label: "Customs Documentation & Procedures", price: 179, subjects: ["CDP"] },
+  { id: "PC", label: "Practical Computations", price: 179, subjects: ["PC"] },
+  { id: "TCP", label: "Tariff Commission Primer", price: 229, subjects: ["TCP"] },
+  { id: "BUNDLE", label: "Bundle — RA10863 (CL), CDP, TL, PC", price: 299, subjects: ["CL", "TL", "CDP", "PC"] },
+  { id: "ALL", label: "All-in Bundle — Lahat ng 5 Subjects (kasama TCP)", price: 449, subjects: ["CL", "TL", "CDP", "PC", "TCP"] },
 ];
 
 export const PAYMENT_METHODS = [
@@ -6773,6 +6867,29 @@ export function getAccess(profile, opts) {
   if (trial.active) return { state: "trial", trial, app, msLeft: trial.msLeft };
   if (!trial.exists && !clockReady) return { state: "loading", trial, app, msLeft: 0 };
   return { state: "expired", trial, app, msLeft: 0 };
+}
+
+// ── RA 10863 (CL) time-based lock ──────────────────────────────────────
+// Hiwalay sa generic FREE_LIMITS ng ibang subjects: 7-day FULL access trial
+// (lahat ng item, hindi item-count based), tapos naka-lock LAHAT hanggang
+// bumili ng lifetime (₱99). clTrial = { startedAt: Timestamp(server), days }
+export const CL_TRIAL_DAYS = 7;
+export const CL_LIFETIME_PRICE = 99;
+
+export function getClTrialInfo(profile, now = serverNow()) {
+  const t = profile && profile.clTrial;
+  const start = toMs(t && t.startedAt);
+  if (!t || start == null) return { exists: false, active: false, endsAt: null, msLeft: 0 };
+  const endsAt = start + (Number(t.days) || 0) * DAY_MS;
+  const msLeft = Math.max(0, endsAt - now);
+  return { exists: true, active: msLeft > 0, endsAt, msLeft };
+}
+
+export function isClUnlocked(profile, now = serverNow()) {
+  if (!profile) return false;
+  if (profile.isAdmin) return true;
+  if (profile.subscriptions && profile.subscriptions.CL) return true;
+  return getClTrialInfo(profile, now).active;
 }
 ```
 
