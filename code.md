@@ -633,6 +633,7 @@ export default function AccountOverlay() {
     user, profile, loading, needsFullName, deviceLimitReached, currentDeviceId,
     overlayOpen, setOverlayOpen, authError, signingIn,
     signInWithGoogle, signOutUser, completeFullName, removeDevice,
+    profileError,
   } = useAuth();
   const [nameInput, setNameInput] = useState("");
 
@@ -792,6 +793,11 @@ export default function AccountOverlay() {
 
         {!loading && user && !deviceLimitReached && !needsFullName && step === "profile" && (
           <div className="space-y-4 py-2">
+            {profileError && (
+              <div className="rounded-lg border border-red-200 bg-red-50 p-2.5 text-xs text-red-700 dark:border-red-800 dark:bg-red-950/30 dark:text-red-300">
+                ⚠️ Hindi ma-save ang account mo sa server. Error: {profileError}
+              </div>
+            )}
             <div className="flex items-center gap-3">
               {profile?.photoURL && (
                 <img src={profile.photoURL} alt="" className="h-14 w-14 rounded-full object-cover" />
@@ -5758,10 +5764,12 @@ export function AuthProvider({ children }) {
   const [deviceLimitReached, setDeviceLimitReached] = useState(false);
   const [overlayOpen, setOverlayOpen] = useState(() => localStorage.getItem(PENDING_SIGNIN_KEY) === "1");
   const [authError, setAuthError] = useState(null);
+  const [profileError, setProfileError] = useState(null);
   const [signingIn, setSigningIn] = useState(() => localStorage.getItem(PENDING_SIGNIN_KEY) === "1");
   const currentDeviceId = getOrCreateDeviceId();
 
   const syncProfile = useCallback(async (fbUser) => {
+    setProfileError(null);
     try {
     const ref = doc(db, "users", fbUser.uid);
     const snap = await getDoc(ref);
@@ -5807,11 +5815,26 @@ export function AuthProvider({ children }) {
     }
     setNeedsFullName(!data.fullName);
     } catch (err) {
-      console.warn("syncProfile failed (offline?):", err);
+      console.warn("syncProfile failed:", err);
+      setProfileError((err && err.code ? err.code : "error") + (err && err.message ? " — " + err.message : ""));
+      let restored = false;
       try {
         const cached = localStorage.getItem(PROFILE_CACHE_KEY + fbUser.uid);
-        if (cached) setProfile(JSON.parse(cached));
+        if (cached) { setProfile(JSON.parse(cached)); restored = true; }
       } catch (_) {}
+      if (!restored) {
+        // Fallback: gamitin ang Google account info para hindi blangko ang profile.
+        setProfile({
+          email: fbUser.email || "",
+          displayName: fbUser.displayName || "",
+          photoURL: fbUser.photoURL || "",
+          fullName: fbUser.displayName || fbUser.email || "",
+          devices: [{ id: currentDeviceId, label: guessDeviceLabel(), lastActive: Date.now() }],
+          subscriptions: { CL: false, TL: false, CDP: false, PC: false, TCP: false },
+          _localOnly: true,
+        });
+        setNeedsFullName(false);
+      }
       setDeviceLimitReached(false);
     }
   }, [currentDeviceId]);
@@ -5839,6 +5862,7 @@ export function AuthProvider({ children }) {
         }
       } else {
         setProfile(null);
+        setProfileError(null);
         setNeedsFullName(false);
         setDeviceLimitReached(false);
         setLoading(false);
@@ -5914,7 +5938,7 @@ export function AuthProvider({ children }) {
 
   const value = {
     user, profile, loading, needsFullName, deviceLimitReached, currentDeviceId,
-    overlayOpen, setOverlayOpen, authError, signingIn,
+    overlayOpen, setOverlayOpen, authError, profileError, signingIn,
     signInWithGoogle, signOutUser, completeFullName, removeDevice,
   };
 
@@ -5931,15 +5955,13 @@ export function useAuth() {
 ## File: ./frontend/src/payments.js
 ```
 // Payment plans, method list, reference-code generator, at ang Firestore
-// write para sa manual GCash/Maya/MariBank subscription flow (Phase 3).
-// Walang automated payment gateway — dev mismo ang nagko-confirm ng bayad
-// sa Firebase Console base sa reference code na tugma sa app amount niya.
+// write para sa manual GCash/Maya/MariBank subscription flow.
 
 import gcashQr from "./assets/payment/gcash-qr.png";
 import mayaQr from "./assets/payment/maya-qr.png";
 import maribankQr from "./assets/payment/maribank-qr.png";
-import { doc, updateDoc, arrayUnion } from "firebase/firestore";
-import { db } from "./firebase";
+import { doc, setDoc, arrayUnion } from "firebase/firestore";
+import { db, auth } from "./firebase";
 
 export const PLANS = [
   { id: "TL", label: "Tariff Law", price: 39, subjects: ["TL"] },
@@ -5967,20 +5989,29 @@ export function generateReferenceCode(planId) {
   return `${planId}-${suffix}`;
 }
 
-// Note: Firestore's serverTimestamp() is NOT allowed inside array elements
-// (arrayUnion), kaya client Date.now() na lang ang ginamit dito.
+// setDoc + merge: kung wala pang user doc, gagawa ito (kasama ang email/pangalan)
+// para lalabas pa rin sa Admin Panel. serverTimestamp() ay bawal sa arrayUnion,
+// kaya Date.now() ang gamit.
 export async function submitPendingPurchase(uid, { planId, subjects, price, method, referenceCode }) {
   const ref = doc(db, "users", uid);
-  await updateDoc(ref, {
-    pendingPurchases: arrayUnion({
-      plan: planId,
-      subjects,
-      price,
-      method,
-      referenceCode,
-      requestedAt: Date.now(),
-    }),
-  });
+  const u = auth.currentUser;
+  await setDoc(
+    ref,
+    {
+      email: (u && u.email) || "",
+      displayName: (u && u.displayName) || "",
+      photoURL: (u && u.photoURL) || "",
+      pendingPurchases: arrayUnion({
+        plan: planId,
+        subjects,
+        price,
+        method,
+        referenceCode,
+        requestedAt: Date.now(),
+      }),
+    },
+    { merge: true }
+  );
 }
 ```
 

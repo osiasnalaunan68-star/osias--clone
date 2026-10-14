@@ -58143,7 +58143,9 @@
       "**/.*",
       "**/node_modules/**"
     ]
+  },
+  "firestore": {
+    "rules": "firestore.rules"
   }
-}
-```
+}```
 
