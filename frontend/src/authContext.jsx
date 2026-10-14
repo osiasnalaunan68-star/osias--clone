@@ -122,7 +122,7 @@ export function AuthProvider({ children }) {
   const mergedProfile = useMemo(() => {
     if (!profile || !serverData) return profile;
     const pick = {};
-    ["subscriptions", "subscriptionExpiry", "appAccess", "trial", "clTrial", "pendingPurchases", "pendingAccess", "isAdmin"].forEach((k) => {
+    ["subscriptions", "subscriptionExpiry", "appAccess", "trial", "clTrial", "createdAt", "pendingPurchases", "pendingAccess", "isAdmin"].forEach((k) => {
       pick[k] = serverData[k];
     });
     if (!pick.subscriptions) pick.subscriptions = profile.subscriptions;

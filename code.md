@@ -6428,13 +6428,14 @@ export function AuthProvider({ children }) {
         if (!snap.exists()) return;
         setServerData(snap.data());
         // Hintayin ang totoong datos ng server (hindi cache) bago gumawa ng trial.
-        if (snap.metadata.fromCache || initDoneFor.current === uid) return;
+        if (snap.metadata.fromCache || snap.metadata.hasPendingWrites || initDoneFor.current === uid) return;
         initDoneFor.current = uid;
         (async () => {
+          let applied = true;
           try {
             await runTransaction(db, async (tx) => {
               const s = await tx.get(ref);
-              if (!s.exists()) return;
+              if (!s.exists()) { applied = false; return; }
               const d = s.data();
               const upd = { lastSeenAt: serverTimestamp() };
               // Isang beses lang ang trial bawat account; hindi na ulit kapag meron na
@@ -6449,6 +6450,7 @@ export function AuthProvider({ children }) {
               }
               tx.update(ref, upd);
             });
+            if (!applied) { initDoneFor.current = null; return; }
             const fresh = await getDocFromServer(ref);
             const ls = fresh.data() && fresh.data().lastSeenAt;
             if (ls && ls.toMillis) setServerClock(ls.toMillis());
