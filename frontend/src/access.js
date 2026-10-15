@@ -12,7 +12,7 @@ export const DAY_MS = 24 * 60 * 60 * 1000;
 //         may access sa app (protektado ang mga "lifetime" na na-promise mo).
 // false = lahat ng user (maliban admin) kailangan ng trial / App Access.
 // TRANSITION: true hanggang matapos ang migration sa AdminPanel, tapos i-set sa false (patch-flip.cjs).
-export const PRACTICE_BUYERS_KEEP_APP_ACCESS = true;
+export const PRACTICE_BUYERS_KEEP_APP_ACCESS = false;
 
 export const ACCESS_PLANS = [
   { id: "M1", kind: "access", months: 1, label: "App Access — 1 Month", price: 50, subjects: [] },
