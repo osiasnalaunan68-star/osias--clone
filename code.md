@@ -6478,7 +6478,7 @@ export function AuthProvider({ children }) {
   const mergedProfile = useMemo(() => {
     if (!profile || !serverData) return profile;
     const pick = {};
-    ["subscriptions", "subscriptionExpiry", "appAccess", "trial", "clTrial", "pendingPurchases", "pendingAccess", "isAdmin"].forEach((k) => {
+    ["subscriptions", "subscriptionExpiry", "appAccess", "trial", "clTrial", "createdAt", "pendingPurchases", "pendingAccess", "isAdmin"].forEach((k) => {
       pick[k] = serverData[k];
     });
     if (!pick.subscriptions) pick.subscriptions = profile.subscriptions;
@@ -6840,9 +6840,14 @@ export function formatDateShort(ms) {
 // trial = { startedAt: Timestamp(server), days: number }
 export function getTrialInfo(profile, now = serverNow()) {
   const t = profile && profile.trial;
-  const start = toMs(t && t.startedAt);
-  if (!t || start == null) return { exists: false, active: false, endsAt: null, msLeft: 0 };
-  const endsAt = start + (Number(t.days) || 0) * DAY_MS;
+  let start = t ? toMs(t.startedAt) : null;
+  let days = t ? (Number(t.days) || 0) : 0;
+  let fromCreated = false;
+  // Fallback: kung walang trial field, ang createdAt ng account ang simula ng trial.
+  if (start == null) { start = toMs(profile && profile.createdAt); days = TRIAL_DAYS; fromCreated = true; }
+  if (start == null) return { exists: false, active: false, endsAt: null, msLeft: 0 };
+  const endsAt = start + days * DAY_MS;
+  if (fromCreated && endsAt <= now) return { exists: false, active: false, endsAt: null, msLeft: 0 };
   const msLeft = Math.max(0, endsAt - now);
   return { exists: true, active: msLeft > 0, endsAt, msLeft };
 }
@@ -6880,9 +6885,13 @@ export const CL_LIFETIME_PRICE = 99;
 
 export function getClTrialInfo(profile, now = serverNow()) {
   const t = profile && profile.clTrial;
-  const start = toMs(t && t.startedAt);
-  if (!t || start == null) return { exists: false, active: false, endsAt: null, msLeft: 0 };
-  const endsAt = start + (Number(t.days) || 0) * DAY_MS;
+  let start = t ? toMs(t.startedAt) : null;
+  let days = t ? (Number(t.days) || 0) : 0;
+  let fromCreated = false;
+  if (start == null) { start = toMs(profile && profile.createdAt); days = CL_TRIAL_DAYS; fromCreated = true; }
+  if (start == null) return { exists: false, active: false, endsAt: null, msLeft: 0 };
+  const endsAt = start + days * DAY_MS;
+  if (fromCreated && endsAt <= now) return { exists: false, active: false, endsAt: null, msLeft: 0 };
   const msLeft = Math.max(0, endsAt - now);
   return { exists: true, active: msLeft > 0, endsAt, msLeft };
 }

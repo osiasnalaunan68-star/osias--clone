@@ -87,8 +87,8 @@ export function AuthProvider({ children }) {
               if (!d.trial && !hasAnyPractice(d)) {
                 upd.trial = { startedAt: serverTimestamp(), days: TRIAL_DAYS };
               }
-              // Hiwalay na 7-day trial para sa RA 10863 (CL) — isang beses lang din,
-              // maliban kung bumili na ng lifetime access (subscriptions.CL).
+              // Hiwalay na CL trial (CL_TRIAL_DAYS) para sa RA 10863 (CL) — isang beses lang din,
+              // maliban kung bumili na ng CL (subscriptions.CL).
               if (!d.clTrial && !(d.subscriptions && d.subscriptions.CL)) {
                 upd.clTrial = { startedAt: serverTimestamp(), days: CL_TRIAL_DAYS };
               }
@@ -122,7 +122,7 @@ export function AuthProvider({ children }) {
   const mergedProfile = useMemo(() => {
     if (!profile || !serverData) return profile;
     const pick = {};
-    ["subscriptions", "subscriptionExpiry", "appAccess", "trial", "clTrial", "createdAt", "pendingPurchases", "pendingAccess", "isAdmin"].forEach((k) => {
+    ["subscriptions", "subscriptionExpiry", "appAccess", "trial", "clTrial", "createdAt", "pendingPurchases", "pendingAccess", "isAdmin", "bonuses"].forEach((k) => {
       pick[k] = serverData[k];
     });
     if (!pick.subscriptions) pick.subscriptions = profile.subscriptions;

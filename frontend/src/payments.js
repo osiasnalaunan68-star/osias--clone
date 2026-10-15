@@ -9,14 +9,17 @@ import { db, auth } from "./firebase";
 import { ACCESS_PLANS } from "./access";
 
 export const PLANS = [
-  { id: "CL", label: "RA 10863 (Customs Law)", price: 99, subjects: ["CL"] },
-  { id: "TL", label: "Tariff Law", price: 179, subjects: ["TL"] },
-  { id: "CDP", label: "Customs Documentation & Procedures", price: 179, subjects: ["CDP"] },
-  { id: "PC", label: "Practical Computations", price: 179, subjects: ["PC"] },
+  { id: "CL", label: "RA 10863 (Customs Law)", price: 120, subjects: ["CL"] },
+  { id: "TL", label: "Tariff Law", price: 120, subjects: ["TL"] },
+  { id: "CDP", label: "Customs Documentation & Procedures", price: 120, subjects: ["CDP"] },
+  { id: "PC", label: "Practical Computations", price: 120, subjects: ["PC"] },
   { id: "TCP", label: "Tariff Commission Primer", price: 229, subjects: ["TCP"] },
-  { id: "BUNDLE", label: "Bundle — RA10863 (CL), CDP, TL, PC", price: 299, subjects: ["CL", "TL", "CDP", "PC"] },
-  { id: "ALL", label: "All-in Bundle — Lahat ng 5 Subjects (kasama TCP)", price: 449, subjects: ["CL", "TL", "CDP", "PC", "TCP"] },
+  { id: "BUNDLE", label: "Normal Bundle", price: 460, subjects: ["CL", "TL", "CDP", "PC"], bonusMonths: 8 },
+  { id: "ALL", label: "Sulit Bundle", price: 669, subjects: ["CL", "TL", "CDP", "PC", "TCP"], bonusMonths: 10 },
 ];
+
+// Presyo ng CL (practice subject, walang expiry) — galing sa PLANS.
+export const CL_LIFETIME_PRICE = PLANS.find((p) => p.id === "CL").price;
 
 export const PAYMENT_METHODS = [
   { id: "gcash", label: "GCash", qr: gcashQr },

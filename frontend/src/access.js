@@ -11,11 +11,12 @@ export const DAY_MS = 24 * 60 * 60 * 1000;
 // true  = kahit sinong may bayad na practice subject (luma o bago) ay laging
 //         may access sa app (protektado ang mga "lifetime" na na-promise mo).
 // false = lahat ng user (maliban admin) kailangan ng trial / App Access.
+// TRANSITION: true hanggang matapos ang migration sa AdminPanel, tapos i-set sa false (patch-flip.cjs).
 export const PRACTICE_BUYERS_KEEP_APP_ACCESS = true;
 
 export const ACCESS_PLANS = [
   { id: "M1", kind: "access", months: 1, label: "App Access — 1 Month", price: 50, subjects: [] },
-  { id: "M3", kind: "access", months: 3, label: "App Access — 3 Months", price: 149, subjects: [] },
+  { id: "M3", kind: "access", months: 3, label: "App Access — 3 Months", price: 139, subjects: [] },
   { id: "M8", kind: "access", months: 8, label: "App Access — 8 Months", price: 380, subjects: [] },
 ];
 
@@ -134,11 +135,11 @@ export function getAccess(profile, opts) {
 }
 
 // ── RA 10863 (CL) time-based lock ──────────────────────────────────────
-// Hiwalay sa generic FREE_LIMITS ng ibang subjects: 7-day FULL access trial
+// Hiwalay sa generic FREE_LIMITS ng ibang subjects: CL_TRIAL_DAYS na FULL access trial
 // (lahat ng item, hindi item-count based), tapos naka-lock LAHAT hanggang
-// bumili ng lifetime (₱99). clTrial = { startedAt: Timestamp(server), days }
-export const CL_TRIAL_DAYS = 7;
-export const CL_LIFETIME_PRICE = 99;
+// bumili ng CL (presyo: PLANS sa payments.js). clTrial = { startedAt: Timestamp(server), days }
+export const CL_TRIAL_DAYS = 3;
+// Ang presyo ng CL ay galing sa PLANS: tingnan ang CL_LIFETIME_PRICE sa payments.js.
 
 export function getClTrialInfo(profile, now = serverNow()) {
   const t = profile && profile.clTrial;
@@ -151,6 +152,36 @@ export function getClTrialInfo(profile, now = serverNow()) {
   if (fromCreated && endsAt <= now) return { exists: false, active: false, endsAt: null, msLeft: 0 };
   const msLeft = Math.max(0, endsAt - now);
   return { exists: true, active: msLeft > 0, endsAt, msLeft };
+}
+
+// ── Bonus / stacking (shared ng approve, manual grant at migration) ──
+export const THREE_SUBJECT_BONUS = { count: 3, months: 3 };
+// Isang beses na migration ng lumang users: 3+ subjects = 3 buwan, 1-2 = 2 buwan, wala = trial.
+export const MIGRATION = { months3: 3, months12: 2, trialDays: TRIAL_DAYS };
+
+export function countSubjects(subs) {
+  return Object.values(subs || {}).filter(Boolean).length;
+}
+
+// Idagdag sa dulo ng natitirang oras kung active pa; kung hindi, mula ngayon.
+export function stackAccess(profile, months, now = serverNow()) {
+  const cur = getAppAccessInfo(profile, now);
+  return addMonths(cur.active ? cur.expiresAt : now, months);
+}
+
+// plan = { subjects: [...], bonusMonths?: number }
+// months = buwan ng bundle, o +3 kapag SINGLE-subject purchase ang unang nagpaabot sa 3 subjects.
+// flag = true kapag dapat markahang consumed ang bonuses.threeSubjects.
+export function planAward(profile, plan) {
+  const owned = (profile && profile.subscriptions) || {};
+  const next = { ...owned };
+  (plan.subjects || []).forEach((c) => { next[c] = true; });
+  const reached = countSubjects(owned) < THREE_SUBJECT_BONUS.count && countSubjects(next) >= THREE_SUBJECT_BONUS.count;
+  const consumed = !!(profile && profile.bonuses && profile.bonuses.threeSubjects);
+  const flag = reached && !consumed;
+  let months = plan.bonusMonths || 0;
+  if (flag && !plan.bonusMonths && (plan.subjects || []).length === 1) months += THREE_SUBJECT_BONUS.months;
+  return { months, flag };
 }
 
 export function isClUnlocked(profile, now = serverNow()) {

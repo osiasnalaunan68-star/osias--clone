@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../authContext";
 import { PLANS, PAYMENT_METHODS, generateReferenceCode, submitPendingPurchase } from "../payments";
-import { ACCESS_PLANS, formatTimeLeft, formatDateShort } from "../access";
+import { ACCESS_PLANS, TRIAL_DAYS, THREE_SUBJECT_BONUS, countSubjects, getClTrialInfo, formatTimeLeft, formatDateShort } from "../access";
 
-const SUBJECT_LABELS = { TL: "Tariff Law", CDP: "Customs Documentation & Procedures", PC: "Practical Computations", TCP: "Tariff Commission Primer" };
+const SUBJECT_LABELS = { CL: "RA 10863 (Customs Law)", TL: "Tariff Law", CDP: "Customs Documentation & Procedures", PC: "Practical Computations", TCP: "Tariff Commission Primer" };
 
 function formatDate(ts) {
   try {
@@ -106,7 +106,9 @@ export default function AccountOverlay() {
     }
   };
 
-  const allSubscribed = Object.keys(SUBJECT_LABELS).filter((c) => c !== "TCP").every((code) => profile?.subscriptions?.[code]);
+  const ownedCount = countSubjects(profile?.subscriptions);
+  const bonusDone = !!profile?.bonuses?.threeSubjects;
+  const clTrial = getClTrialInfo(profile);
   const ownedSubs = profile?.subscriptions || {};
   const bundlePlan = PLANS.find((p) => p.id === "BUNDLE");
   const allInPlan = PLANS.find((p) => p.id === "ALL");
@@ -129,7 +131,7 @@ export default function AccountOverlay() {
         {!loading && !user && (
           <div className="space-y-4 py-4 text-center">
             <p className="text-lg font-semibold text-navy-900 dark:text-slate-100">
-              Mag-sign in gamit ang Google para masimulan ang 3-day free trial
+              Mag-sign in gamit ang Google para masimulan ang {TRIAL_DAYS}-day free trial
             </p>
             <button
               onClick={signInWithGoogle}
@@ -215,7 +217,10 @@ export default function AccountOverlay() {
                   const plan = PLANS.find((p) => p.id === code);
                   return (
                     <div key={code} className="flex items-center justify-between rounded-lg bg-slate-50 px-3 py-2 text-sm dark:bg-slate-900/40">
-                      <span className="text-slate-600 dark:text-slate-300">{SUBJECT_LABELS[code]}</span>
+                      <span className="min-w-0 pr-2">
+                        <span className="block text-slate-600 dark:text-slate-300">{SUBJECT_LABELS[code]}</span>
+                        {!unlocked && <span className="block text-[11px] text-slate-400">{code === "CL" ? (clTrial.active ? "🎁 Trial: " + formatTimeLeft(clTrial.msLeft) + " left" : "🔒 Naka-lock") : "10 items libre"}</span>}
+                      </span>
                       {unlocked ? (
                         <span className="font-medium text-emerald-600 dark:text-emerald-400">Unlocked</span>
                       ) : (
@@ -230,12 +235,15 @@ export default function AccountOverlay() {
                   );
                 })}
               </div>
+              <p className="mt-2 rounded-lg bg-slate-50 px-3 py-2 text-xs text-slate-500 dark:bg-slate-900/40 dark:text-slate-400">
+                🎯 {THREE_SUBJECT_BONUS.count} subjects = +{THREE_SUBJECT_BONUS.months} months App Access ({Math.min(ownedCount, THREE_SUBJECT_BONUS.count)}/{THREE_SUBJECT_BONUS.count}){bonusDone ? " · ✅ na-claim na" : ""}
+              </p>
               {!bundleOwned && bundlePlan && (
                 <button
                   onClick={() => startPurchase(bundlePlan)}
                   className="mt-2 w-full rounded-lg border-2 border-gold-500 bg-gold-50 px-3 py-2 text-xs font-semibold text-navy-900 active:bg-gold-100 dark:border-gold-400 dark:bg-slate-900/40 dark:text-gold-400"
                 >
-                  🎁 Bundle ₱{bundlePlan.price} — 4 Subjects
+                  🎁 {bundlePlan.label} ₱{bundlePlan.price} + {bundlePlan.bonusMonths} months App Access
                   <span className="mt-0.5 block text-[11px] font-normal opacity-80">RA10863 (CL) · CDP · TL · PC</span>
                 </button>
               )}
@@ -244,7 +252,7 @@ export default function AccountOverlay() {
                   onClick={() => startPurchase(allInPlan)}
                   className="mt-2 w-full rounded-lg border-2 border-gold-500 bg-navy-900 px-3 py-2 text-xs font-semibold text-white active:bg-navy-800 dark:bg-navy-700"
                 >
-                  👑 All-in Bundle ₱{allInPlan.price} — Lahat ng 5 Subjects
+                  👑 {allInPlan.label} ₱{allInPlan.price} + {allInPlan.bonusMonths} months App Access
                   <span className="mt-0.5 block text-[11px] font-normal opacity-80">RA10863 (CL) · CDP · TL · PC · TCP</span>
                 </button>
               )}
@@ -254,7 +262,7 @@ export default function AccountOverlay() {
               <p className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-slate-400">App Access</p>
               <div className="mb-2 rounded-lg bg-slate-50 px-3 py-2 text-sm text-slate-600 dark:bg-slate-900/40 dark:text-slate-300">
                 {access?.state === "admin" && <span>👑 Admin</span>}
-                {access?.state === "member" && <span>✅ Lifetime access (practice subscriber)</span>}
+                {access?.state === "member" && <span>✅ Access active (practice subscriber)</span>}
                 {access?.state === "paid" && <span>✅ Active hanggang {formatDateShort(access.app.expiresAt)} ({formatTimeLeft(access.msLeft)} left)</span>}
                 {access?.state === "trial" && <span>🎁 Free trial: {formatTimeLeft(access.msLeft)} left</span>}
                 {(access?.state === "expired" || access?.state === "loading") && <span>⏳ Tapos na ang trial. Pumili ng plan sa baba.</span>}

@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useAuth } from "../authContext";
 import ChapterBrowser from "../pages/ChapterBrowser";
 import { ACCESS_PLANS, TRIAL_DAYS, DAY_MS, formatTimeLeft } from "../access";
+import { PLANS } from "../payments";
 
 const DEMO_SECONDS = 60;
 
@@ -157,6 +158,19 @@ function Paywall() {
               </button>
             );
           })}
+        </div>
+
+        <div className="space-y-2">
+          <p className="px-1 text-xs font-semibold uppercase tracking-wide text-slate-400">Bundle — practice questions + App Access</p>
+          {PLANS.filter((p) => p.bonusMonths).map((p) => (
+            <button key={p.id} onClick={() => choose(p)} className="flex w-full items-center justify-between rounded-2xl border-2 border-gold-500 bg-gold-50 px-4 py-3 text-left active:opacity-80 dark:border-gold-400 dark:bg-slate-900">
+              <span>
+                <span className="block text-base font-bold text-navy-900 dark:text-slate-100">{p.label}</span>
+                <span className="block text-xs text-slate-500 dark:text-slate-400">{p.subjects.join(" · ")} + {p.bonusMonths} months App Access</span>
+              </span>
+              <span className="text-2xl font-extrabold text-navy-900 dark:text-slate-50">₱{p.price}</span>
+            </button>
+          ))}
         </div>
 
         <p className="text-center text-xs text-slate-400">Bayad via GCash · Maya · MariBank. Ico-confirm manually ng admin.</p>

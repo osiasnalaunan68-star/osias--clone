@@ -9,8 +9,8 @@ import { isClUnlocked } from "../access";
 
 // First N items (by sorted order) na libre bawat subject — lahat ng lagpas dito
 // ay naka-lock hanggang mag-subscribe. Tugma sa pricing table sa handoff doc.
-// CL ang eksepsyon: 7-day FULL access trial (hindi item-count based) tapos
-// naka-lock LAHAT ng item hanggang mag-lifetime ₱99 — tingnan ang isClUnlocked().
+// CL ang eksepsyon: CL_TRIAL_DAYS na FULL access trial (hindi item-count based) tapos
+// naka-lock LAHAT ng item hanggang bumili ng CL (presyo sa PLANS) — tingnan ang isClUnlocked().
 const FREE_LIMITS = { cdp: 10, tl: 10, pc: 10, tcp: 10 };
 
 function isItemUnlocked(idx, subjectId, profile) {

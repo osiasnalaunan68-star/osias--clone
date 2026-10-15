@@ -2,7 +2,8 @@ rules_version = '2';
 
 // Firestore rules para sa CuBLE app.
 // Ang user ay hindi pwedeng mag-edit ng sarili niyang subscriptions, appAccess,
-// isAdmin, o i-reset ang trial. Admin lang (isAdmin == true) ang pwede.
+// appAccessHistory, paymentHistory, bonuses, isAdmin, o i-reset ang trial.
+// Admin lang (isAdmin == true) ang pwede.
 service cloud.firestore {
   match /databases/{database}/documents {
 
@@ -26,14 +27,15 @@ service cloud.firestore {
             && request.resource.data.trial.days == 3);
     }
 
-    // RA 10863 (CL) trial: isang beses lang, oras ng server, 7 days lang
-    // (dapat tugma sa CL_TRIAL_DAYS sa src/access.js).
+    // RA 10863 (CL) trial: isang beses lang, oras ng server, 3 days lang
+    // (dapat tugma sa CL_TRIAL_DAYS sa src/access.js). Ang mga lumang user na
+    // may 7-day clTrial na ay hindi apektado (existing field, hindi na nire-write).
     function clTrialOk() {
       let changed = request.resource.data.diff(resource.data).affectedKeys();
       return !('clTrial' in changed)
         || (!('clTrial' in resource.data)
             && request.resource.data.clTrial.startedAt == request.time
-            && request.resource.data.clTrial.days == 7);
+            && request.resource.data.clTrial.days == 3);
     }
 
     match /users/{uid} {
@@ -42,11 +44,17 @@ service cloud.firestore {
       allow create: if signedIn() && request.auth.uid == uid
         && request.resource.data.get('isAdmin', false) == false
         && !('appAccess' in request.resource.data)
+        && !('appAccessHistory' in request.resource.data)
+        && !('paymentHistory' in request.resource.data)
+        && !('bonuses' in request.resource.data)
         && !('trial' in request.resource.data)
         && !('clTrial' in request.resource.data)
         && (!('subscriptions' in request.resource.data)
             || request.resource.data.subscriptions.values().hasOnly([false]));
 
+      // Allowlist: ang user ay makaka-update LANG ng mga field sa baba.
+      // Hindi kasama ang subscriptions, appAccess, appAccessHistory,
+      // paymentHistory, bonuses, isAdmin — admin lang ang pwede doon.
       allow update: if isAdmin()
         || (signedIn() && request.auth.uid == uid
             && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
