@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { collection, getDocs, doc, updateDoc, arrayUnion, deleteField, Timestamp, runTransaction } from "firebase/firestore";
 import { db } from "../firebase";
+import AdminOverview from "./AdminOverview";
 import { PLANS, PAYMENT_METHODS, CL_LIFETIME_PRICE } from "../payments";
 import {
   ACCESS_PLANS, TRIAL_DAYS, DAY_MS, serverNow, getTrialInfo, getAppAccessInfo,
@@ -76,7 +77,7 @@ export default function AdminPanel() {
   const [error, setError] = useState(null);
   const [query, setQuery] = useState("");
   const [busyKey, setBusyKey] = useState(null);
-  const [tab, setTab] = useState("users");
+  const [tab, setTab] = useState("overview");
   const [trialFilter, setTrialFilter] = useState("all");
   const [clFilter, setClFilter] = useState("all");
   const [migMsg, setMigMsg] = useState("");
@@ -383,6 +384,7 @@ export default function AdminPanel() {
   const rawAccessCount = (users || []).reduce((n, u) => n + (u.pendingAccess || []).length, 0);
 
   const TABS = [
+    { id: "overview", label: "📊 Overview" },
     { id: "users", label: "👥 Users" },
     { id: "practice", label: "💳 Practice", count: rawPracticeCount },
     { id: "access", label: "⏱ Access", count: rawAccessCount },
@@ -449,6 +451,8 @@ export default function AdminPanel() {
       </div>
 
       {users === null && <p className="py-8 text-center text-slate-400">Loading users...</p>}
+
+      {tab === "overview" && users !== null && !error && <AdminOverview users={users} />}
 
       {error && (
         <div className="rounded-xl border border-red-200 bg-red-50 p-4 text-red-800 dark:border-red-800 dark:bg-red-950/30 dark:text-red-200">
