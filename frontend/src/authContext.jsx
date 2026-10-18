@@ -1,10 +1,11 @@
 import { createContext, useContext, useEffect, useState, useCallback, useMemo, useRef } from "react";
 import {
   signInWithRedirect, getRedirectResult, onAuthStateChanged, signOut,
-  setPersistence, indexedDBLocalPersistence,
+  setPersistence, indexedDBLocalPersistence, signInWithCredential, GoogleAuthProvider,
 } from "firebase/auth";
 import { doc, getDoc, setDoc, updateDoc, serverTimestamp, onSnapshot, runTransaction, getDocFromServer } from "firebase/firestore";
 import { auth, db, googleProvider } from "./firebase";
+import { FirebaseAuthentication } from "@capacitor-firebase/authentication";
 import { setServerClock, persistClock, getAccess, hasAnyPractice, TRIAL_DAYS } from "./access";
 
 const DEVICE_ID_KEY = "cuble_deviceId";
@@ -257,9 +258,21 @@ export function AuthProvider({ children }) {
     } catch (persistErr) {
       console.warn("setPersistence failed:", persistErr);
     }
+    const isNative = window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform();
     try {
-      await signInWithRedirect(auth, googleProvider);
-      // Page navigates away here — code after this line generally won't run.
+      if (isNative) {
+        // APK: native Google Sign-In — pareho pa rin ang Firebase project + Google account,
+        // kaya pareho rin ang uid; hindi maaapektuhan ang subscriptions/trial ng existing users.
+        const result = await FirebaseAuthentication.signInWithGoogle();
+        const idToken = result.credential && result.credential.idToken;
+        if (!idToken) throw new Error("No idToken from native Google Sign-In.");
+        await signInWithCredential(auth, GoogleAuthProvider.credential(idToken));
+        localStorage.removeItem(PENDING_SIGNIN_KEY);
+        setSigningIn(false);
+      } else {
+        await signInWithRedirect(auth, googleProvider);
+        // Page navigates away here — code after this line generally won't run.
+      }
     } catch (err) {
       console.warn("Google sign-in error:", err);
       const code = err?.code || "unknown-error";

@@ -107,7 +107,11 @@ export default {
 
 ## File: ./frontend/public/sw.js
 ```
-const CACHE_NAME = "cmta-app-cache-v2";
+// Service worker — network-first, with a short timeout for this app's own files.
+// On a weak or "connected but not really" network, a normal fetch can hang forever and the app
+// freezes on the loading screen. Now, if a cached copy exists, it is used after NETWORK_TIMEOUT_MS.
+const CACHE_NAME = "cmta-app-cache-v3";
+const NETWORK_TIMEOUT_MS = 4000;
 
 self.addEventListener("install", () => {
   self.skipWaiting();
@@ -122,26 +126,48 @@ self.addEventListener("activate", (event) => {
   self.clients.claim();
 });
 
+function fetchAndCache(request) {
+  return fetch(request).then((response) => {
+    if (response && (response.ok || response.type === "opaque")) {
+      const copy = response.clone();
+      caches.open(CACHE_NAME).then((cache) => cache.put(request, copy)).catch(() => {});
+    }
+    return response;
+  });
+}
+
+async function offlineFallback(request) {
+  const cached = await caches.match(request);
+  if (cached) return cached;
+  if (request.mode === "navigate") {
+    const shell = await caches.match(self.registration.scope);
+    if (shell) return shell;
+  }
+  return Response.error();
+}
+
 self.addEventListener("fetch", (event) => {
   const { request } = event;
   if (request.method !== "GET") return;
+  const sameOrigin = new URL(request.url).origin === self.location.origin;
 
   event.respondWith(
-    fetch(request)
-      .then((response) => {
-        const copy = response.clone();
-        caches.open(CACHE_NAME).then((cache) => cache.put(request, copy)).catch(() => {});
-        return response;
-      })
-      .catch(async () => {
-        const cached = await caches.match(request);
-        if (cached) return cached;
-        if (request.mode === "navigate") {
-          const shell = await caches.match(self.registration.scope);
-          if (shell) return shell;
-        }
-        return Response.error();
-      })
+    (async () => {
+      // Cross-origin (fonts, Firebase): old behavior, no timeout, so stale API data is never served.
+      if (!sameOrigin) return fetchAndCache(request).catch(() => offlineFallback(request));
+
+      const network = fetchAndCache(request);
+      network.catch(() => {}); // avoid an unhandled rejection if the timeout wins the race
+      const cached = await caches.match(request);
+      if (!cached) return network.catch(() => offlineFallback(request));
+
+      const timeout = new Promise((resolve) => setTimeout(() => resolve(null), NETWORK_TIMEOUT_MS));
+      try {
+        const fresh = await Promise.race([network, timeout]);
+        if (fresh) return fresh;
+      } catch (_) {}
+      return cached;
+    })()
   );
 });
 ```
@@ -335,17 +361,20 @@ export async function copyPromptAndOpen(prompt, appUrl) {
 ```
 import { useState, useEffect } from "react";
 import { saveLastQuizPosition } from "../quizStore";
+import { useAuth } from "../authContext";
+import { isRaLevelUnlocked } from "../access";
 
 export function answersMatch(a, b) {
   return String(a ?? "").trim().toLowerCase() === String(b ?? "").trim().toLowerCase();
 }
 
+// lang = language of the questions: Level 1 is Filipino, Levels 2-5 are English.
 export const LEVELS = [
-  { id: "level1", label: "🟢 Level 1 — Easy", tagalog: "Madali", color: "green" },
-  { id: "level2", label: "🔵 Level 2 — Normal", tagalog: "Katamtaman", color: "blue" },
-  { id: "level3", label: "🟠 Level 3 — Medium", tagalog: "Gitna", color: "orange" },
-  { id: "level4", label: "🟣 Level 4 — Medium Pro", tagalog: "Gitnang Pro", color: "purple" },
-  { id: "level5", label: "🔴 Level 5 — Will Done", tagalog: "Dalubhasa", color: "red" },
+  { id: "level1", label: "🟢 Level 1 — Easy", lang: "Filipino version", color: "green" },
+  { id: "level2", label: "🔵 Level 2 — Normal", lang: "English version", color: "blue" },
+  { id: "level3", label: "🟠 Level 3 — Medium", lang: "English version", color: "orange" },
+  { id: "level4", label: "🟣 Level 4 — Medium Pro", lang: "English version", color: "purple" },
+  { id: "level5", label: "🔴 Level 5 — Will Done", lang: "English version", color: "red" },
 ];
 
 const LEVEL_STROKE = { green: "#22c55e", blue: "#3b82f6", orange: "#f97316", purple: "#a855f7", red: "#ef4444" };
@@ -377,22 +406,30 @@ export function ProgressCircle({ progress, size = 60, strokeWidth = 6, color = "
 // button so the user can wipe just THIS level's saved answers without
 // touching the other levels or the quiz questions themselves. Callers that
 // don't pass onReset (e.g. the Dev Panel quiz preview) keep the old look.
-export function QuizLevelButton({ level, progress, onClick, onReset }) {
-  const colorClass = LEVEL_BORDER[level.color] || LEVEL_BORDER.green;
+export function QuizLevelButton({ level, progress, onClick, onReset, locked }) {
+  const colorClass = locked
+    ? "border-slate-300 bg-slate-50 dark:border-slate-600 dark:bg-slate-800/60"
+    : LEVEL_BORDER[level.color] || LEVEL_BORDER.green;
   return (
     <div className={`flex items-center gap-2 rounded-xl border-2 p-4 w-full transition-all ${colorClass}`}>
       <button onClick={onClick} className="flex min-w-0 flex-1 items-center gap-4 text-left">
-        <ProgressCircle progress={progress} color={LEVEL_STROKE[level.color] || LEVEL_STROKE.green} />
+        {locked ? (
+          <span className="flex h-[60px] w-[60px] flex-shrink-0 items-center justify-center text-3xl" aria-hidden>🔒</span>
+        ) : (
+          <ProgressCircle progress={progress} color={LEVEL_STROKE[level.color] || LEVEL_STROKE.green} />
+        )}
         <div className="min-w-0 flex-1">
           <p className="font-semibold text-slate-800 dark:text-slate-100">{level.label}</p>
-          <p className="text-sm text-slate-500 dark:text-slate-400">{level.tagalog} · {progress > 0 ? `${Math.round(progress)}% completed` : "Not started"}</p>
+          <p className="text-sm text-slate-500 dark:text-slate-400">
+            {level.lang} · {locked ? "Locked — unlock RA 10863" : progress > 0 ? `${Math.round(progress)}% completed` : "Not started"}
+          </p>
         </div>
       </button>
-      {onReset && progress > 0 && (
+      {onReset && progress > 0 && !locked && (
         <button
           type="button"
           onClick={(e) => { e.stopPropagation(); onReset(); }}
-          title="I-reset ang progress ng level na ito"
+          title="Reset the progress of this level"
           aria-label={`Reset progress — ${level.label}`}
           className="flex-shrink-0 whitespace-nowrap rounded-lg border border-slate-200 px-2.5 py-2 text-xs font-medium text-slate-500 active:bg-slate-100 dark:border-slate-600 dark:text-slate-400 dark:active:bg-slate-700"
         >
@@ -489,7 +526,32 @@ export function resetLevelProgress(progressKey, level) {
 // progressKey identifies WHERE to save/read progress (localStorage key
 // `quiz_progress_${progressKey}`). Pass a stable id — a batch id while
 // testing in Dev Panel, or the title string once baked into quizData.json.
-export function QuizPlayView({ title, entries, level, onBack, progressKey, backLabel = "← Back" }) {
+// Guard: Level 1 is free for everyone; Levels 2-5 need RA 10863 (CL).
+// This also blocks the "Continue" shortcut from reopening a locked level.
+export function QuizPlayView(props) {
+  const { profile, setOverlayOpen, setIntentPlanId } = useAuth();
+  if (!isRaLevelUnlocked(profile, props.level)) {
+    return (
+      <div className="flex flex-col items-center gap-3 py-10 text-center">
+        <span className="text-4xl" aria-hidden>🔒</span>
+        <p className="text-lg font-semibold text-slate-800 dark:text-slate-100">This level is locked</p>
+        <p className="max-w-xs text-sm text-slate-500 dark:text-slate-400">
+          Levels 2–5 are in English and unlock with RA 10863 (CMTA). Level 1 (Filipino version) stays free.
+        </p>
+        <button
+          onClick={() => { setIntentPlanId("CL"); setOverlayOpen(true); }}
+          className="rounded-xl bg-navy-900 px-5 py-2.5 text-sm font-semibold text-white active:bg-navy-800 dark:bg-navy-700"
+        >
+          Unlock RA 10863
+        </button>
+        <button onClick={props.onBack} className="text-sm text-slate-400">{props.backLabel || "← Back"}</button>
+      </div>
+    );
+  }
+  return <QuizPlayViewInner {...props} />;
+}
+
+function QuizPlayViewInner({ title, entries, level, onBack, progressKey, backLabel = "← Back" }) {
   const answerStorageKey = progressKey ? `quiz_answers_${progressKey}_${level}` : null;
   const [currentIndex, setCurrentIndex] = useState(() => {
     if (!answerStorageKey) return 0;
@@ -616,9 +678,9 @@ export function QuizPlayView({ title, entries, level, onBack, progressKey, backL
 import { useState, useEffect } from "react";
 import { useAuth } from "../authContext";
 import { PLANS, PAYMENT_METHODS, generateReferenceCode, submitPendingPurchase } from "../payments";
-import { ACCESS_PLANS, TRIAL_DAYS, THREE_SUBJECT_BONUS, countSubjects, getClTrialInfo, formatTimeLeft, formatDateShort } from "../access";
+import { ACCESS_PLANS, TRIAL_DAYS, DAY_MS, THREE_SUBJECT_BONUS, countActiveSubjects, getSubjectInfo, getClTrialInfo, formatTimeLeft, formatDateShort } from "../access";
 
-const SUBJECT_LABELS = { CL: "RA 10863 (Customs Law)", TL: "Tariff Law", CDP: "Customs Documentation & Procedures", PC: "Practical Computations", TCP: "Tariff Commission Primer" };
+const SUBJECT_LABELS = { CL: "RA 10863 (CMTA)", TL: "Tariff Law", CDP: "Customs Documentation & Procedures", PC: "Practical Computations", TCP: "Tariff Commission Primer" };
 
 function formatDate(ts) {
   try {
@@ -715,22 +777,26 @@ export default function AccountOverlay() {
       setSubmitted(true);
     } catch (err) {
       console.warn("submitPendingPurchase failed:", err);
-      alert("May error sa pag-submit. Subukan ulit:\n" + (err?.message || err));
+      alert("Could not submit. Please try again:\n" + (err?.message || err));
     } finally {
       setSubmitting(false);
     }
   };
 
-  const ownedCount = countSubjects(profile?.subscriptions);
+  const ownedCount = countActiveSubjects(profile);
   const bonusDone = !!profile?.bonuses?.threeSubjects;
   const clTrial = getClTrialInfo(profile);
-  const ownedSubs = profile?.subscriptions || {};
   const bundlePlan = PLANS.find((p) => p.id === "BUNDLE");
   const allInPlan = PLANS.find((p) => p.id === "ALL");
-  const bundleOwned = !!bundlePlan && bundlePlan.subjects.every((c) => ownedSubs[c]);
-  // All-in ay makatuwiran lang kung wala pang TCP at kulang pa ang 4-subject bundle.
-  const showAllIn = !!allInPlan && !ownedSubs.TCP && !bundleOwned;
+  const bundleOwned = !!bundlePlan && bundlePlan.subjects.every((c) => getSubjectInfo(profile, c).active);
+  // The all-in bundle only makes sense if TCP is not active and the 4-subject bundle is not fully owned.
+  const showAllIn = !!allInPlan && !getSubjectInfo(profile, "TCP").active && !bundleOwned;
   const activeMethod = PAYMENT_METHODS.find((m) => m.id === selectedMethod) || null;
+  const planNote = selectedPlan
+    ? selectedPlan.kind === "access"
+      ? selectedPlan.months + (selectedPlan.months === 1 ? " month" : " months") + " of App Access"
+      : "Valid for " + selectedPlan.months + " months · includes " + selectedPlan.months + " months of App Access"
+    : "";
 
   return (
     <div
@@ -746,14 +812,14 @@ export default function AccountOverlay() {
         {!loading && !user && (
           <div className="space-y-4 py-4 text-center">
             <p className="text-lg font-semibold text-navy-900 dark:text-slate-100">
-              Mag-sign in gamit ang Google para masimulan ang {TRIAL_DAYS}-day free trial
+              Sign in with Google to start your {TRIAL_DAYS}-day free trial
             </p>
             <button
               onClick={signInWithGoogle}
               disabled={signingIn}
               className="w-full rounded-xl bg-navy-900 px-4 py-3 font-medium text-white disabled:opacity-50 dark:bg-navy-700"
             >
-              {signingIn ? "Naghihintay sa Google..." : "Sign in with Google"}
+              {signingIn ? "Waiting for Google..." : "Sign in with Google"}
             </button>
             {authError && <p className="text-sm text-red-600 dark:text-red-400">{authError}</p>}
             <button onClick={() => setOverlayOpen(false)} className="text-sm text-slate-400">Cancel</button>
@@ -763,10 +829,10 @@ export default function AccountOverlay() {
         {!loading && user && deviceLimitReached && (
           <div className="space-y-3 py-2">
             <p className="text-lg font-semibold text-navy-900 dark:text-slate-100">
-              Naka-login na ang Google account mong ito sa 2 device
+              This Google account is already signed in on 2 devices
             </p>
             <p className="text-sm text-slate-500 dark:text-slate-400">
-              Mag-remove muna ng isang device sa baba para magamit dito.
+              Remove one device below to use it here.
             </p>
             <div className="space-y-2">
               {(profile?.devices || []).map((d) => (
@@ -790,7 +856,7 @@ export default function AccountOverlay() {
 
         {!loading && user && !deviceLimitReached && needsFullName && (
           <div className="space-y-3 py-2">
-            <p className="text-lg font-semibold text-navy-900 dark:text-slate-100">Ano ang buong pangalan mo?</p>
+            <p className="text-lg font-semibold text-navy-900 dark:text-slate-100">What is your full name?</p>
             <input
               value={nameInput}
               onChange={(e) => setNameInput(e.target.value)}
@@ -811,7 +877,7 @@ export default function AccountOverlay() {
           <div className="space-y-4 py-2">
             {profileError && (
               <div className="rounded-lg border border-red-200 bg-red-50 p-2.5 text-xs text-red-700 dark:border-red-800 dark:bg-red-950/30 dark:text-red-300">
-                ⚠️ Hindi ma-save ang account mo sa server. Error: {profileError}
+                ⚠️ Your account could not be saved to the server. Error: {profileError}
               </div>
             )}
             <div className="flex items-center gap-3">
@@ -828,38 +894,47 @@ export default function AccountOverlay() {
               <p className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-slate-400">Practice Questions</p>
               <div className="space-y-1.5">
                 {Object.keys(SUBJECT_LABELS).map((code) => {
-                  const unlocked = !!profile?.subscriptions?.[code];
                   const plan = PLANS.find((p) => p.id === code);
+                  const info = getSubjectInfo(profile, code);
+                  let status;
+                  if (info.active) status = info.lifetime ? "♾️ Lifetime access" : "Active until " + formatDateShort(info.expiresAt) + " · " + formatTimeLeft(info.msLeft) + " left";
+                  else if (info.owned) status = "⏳ Expired on " + formatDateShort(info.expiresAt);
+                  else if (code === "CL") status = clTrial.active ? "🎁 Trial: " + formatTimeLeft(clTrial.msLeft) + " left" : "Level 1 free · Levels 2–5 locked";
+                  else status = "First 10 items free";
+                  const canRenew = !info.active || (!info.lifetime && info.msLeft < 14 * DAY_MS);
                   return (
                     <div key={code} className="flex items-center justify-between rounded-lg bg-slate-50 px-3 py-2 text-sm dark:bg-slate-900/40">
                       <span className="min-w-0 pr-2">
                         <span className="block text-slate-600 dark:text-slate-300">{SUBJECT_LABELS[code]}</span>
-                        {!unlocked && <span className="block text-[11px] text-slate-400">{code === "CL" ? (clTrial.active ? "🎁 Trial: " + formatTimeLeft(clTrial.msLeft) + " left" : "🔒 Naka-lock") : "10 items libre"}</span>}
+                        <span className={"block text-[11px] " + (info.active ? "text-emerald-600 dark:text-emerald-400" : "text-slate-400")}>{status}</span>
                       </span>
-                      {unlocked ? (
-                        <span className="font-medium text-emerald-600 dark:text-emerald-400">Unlocked</span>
-                      ) : (
+                      {canRenew ? (
                         <button
                           onClick={() => startPurchase(plan)}
-                          className="rounded-lg bg-navy-900 px-3 py-1.5 text-xs font-semibold text-white active:bg-navy-800 dark:bg-navy-700"
+                          className="flex-shrink-0 rounded-lg bg-navy-900 px-3 py-1.5 text-xs font-semibold text-white active:bg-navy-800 dark:bg-navy-700"
                         >
-                          Mag-subscribe ₱{plan.price}
+                          {info.owned ? "Renew" : "Subscribe"} ₱{plan.price}
+                          <span className="block text-[10px] font-normal opacity-80">{plan.months} months</span>
                         </button>
+                      ) : (
+                        <span className="flex-shrink-0 font-medium text-emerald-600 dark:text-emerald-400">Unlocked</span>
                       )}
                     </div>
                   );
                 })}
               </div>
               <p className="mt-2 rounded-lg bg-slate-50 px-3 py-2 text-xs text-slate-500 dark:bg-slate-900/40 dark:text-slate-400">
-                🎯 {THREE_SUBJECT_BONUS.count} subjects = +{THREE_SUBJECT_BONUS.months} months App Access ({Math.min(ownedCount, THREE_SUBJECT_BONUS.count)}/{THREE_SUBJECT_BONUS.count}){bonusDone ? " · ✅ na-claim na" : ""}
+                🎯 Own {THREE_SUBJECT_BONUS.count} active subjects = +{THREE_SUBJECT_BONUS.months} months App Access ({Math.min(ownedCount, THREE_SUBJECT_BONUS.count)}/{THREE_SUBJECT_BONUS.count}){bonusDone ? " · ✅ claimed" : ""}
+                <br />
+                Each subject lasts 3 months (RA 10863: 4 months) with the same length of App Access. Renew early and your remaining days are kept.
               </p>
               {!bundleOwned && bundlePlan && (
                 <button
                   onClick={() => startPurchase(bundlePlan)}
                   className="mt-2 w-full rounded-lg border-2 border-gold-500 bg-gold-50 px-3 py-2 text-xs font-semibold text-navy-900 active:bg-gold-100 dark:border-gold-400 dark:bg-slate-900/40 dark:text-gold-400"
                 >
-                  🎁 {bundlePlan.label} ₱{bundlePlan.price} + {bundlePlan.bonusMonths} months App Access
-                  <span className="mt-0.5 block text-[11px] font-normal opacity-80">RA10863 (CL) · CDP · TL · PC</span>
+                  🎁 {bundlePlan.label} ₱{bundlePlan.price} · {bundlePlan.months} months
+                  <span className="mt-0.5 block text-[11px] font-normal opacity-80">RA 10863 · CDP · TL · PC · includes {bundlePlan.bonusMonths} months App Access</span>
                 </button>
               )}
               {showAllIn && (
@@ -867,8 +942,8 @@ export default function AccountOverlay() {
                   onClick={() => startPurchase(allInPlan)}
                   className="mt-2 w-full rounded-lg border-2 border-gold-500 bg-navy-900 px-3 py-2 text-xs font-semibold text-white active:bg-navy-800 dark:bg-navy-700"
                 >
-                  👑 {allInPlan.label} ₱{allInPlan.price} + {allInPlan.bonusMonths} months App Access
-                  <span className="mt-0.5 block text-[11px] font-normal opacity-80">RA10863 (CL) · CDP · TL · PC · TCP</span>
+                  👑 {allInPlan.label} ₱{allInPlan.price} · {allInPlan.months} months
+                  <span className="mt-0.5 block text-[11px] font-normal opacity-80">RA 10863 · CDP · TL · PC · TCP · includes {allInPlan.bonusMonths} months App Access</span>
                 </button>
               )}
             </div>
@@ -878,13 +953,18 @@ export default function AccountOverlay() {
               <div className="mb-2 rounded-lg bg-slate-50 px-3 py-2 text-sm text-slate-600 dark:bg-slate-900/40 dark:text-slate-300">
                 {access?.state === "admin" && <span>👑 Admin</span>}
                 {access?.state === "member" && <span>✅ Access active (practice subscriber)</span>}
-                {access?.state === "paid" && <span>✅ Active hanggang {formatDateShort(access.app.expiresAt)} ({formatTimeLeft(access.msLeft)} left)</span>}
+                {access?.state === "paid" && <span>✅ Active until {formatDateShort(access.app.expiresAt)} ({formatTimeLeft(access.msLeft)} left)</span>}
                 {access?.state === "trial" && <span>🎁 Free trial: {formatTimeLeft(access.msLeft)} left</span>}
-                {(access?.state === "expired" || access?.state === "loading") && <span>⏳ Tapos na ang trial. Pumili ng plan sa baba.</span>}
+                {(access?.state === "expired" || access?.state === "loading") && <span>⏳ Your trial has ended. Choose a plan below.</span>}
               </div>
               {(profile?.pendingAccess || []).length > 0 && (
                 <p className="mb-2 rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-800 dark:bg-amber-950/20 dark:text-amber-300">
-                  ⏳ May pending App Access payment ({profile.pendingAccess[profile.pendingAccess.length - 1].referenceCode}) — hinihintay ang confirmation.
+                  ⏳ App Access payment pending ({profile.pendingAccess[profile.pendingAccess.length - 1].referenceCode}) — waiting for confirmation.
+                </p>
+              )}
+              {(profile?.pendingPurchases || []).length > 0 && (
+                <p className="mb-2 rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-800 dark:bg-amber-950/20 dark:text-amber-300">
+                  ⏳ Practice payment pending ({profile.pendingPurchases[profile.pendingPurchases.length - 1].referenceCode}) — waiting for confirmation.
                 </p>
               )}
               {access && access.state !== "admin" && access.state !== "member" && (
@@ -912,7 +992,7 @@ export default function AccountOverlay() {
                   <div key={d.id} className="flex items-center justify-between rounded-lg bg-slate-50 px-3 py-2 dark:bg-slate-900/40">
                     <div>
                       <p className="text-sm text-slate-600 dark:text-slate-300">
-                        {d.label} {d.id === currentDeviceId && <span className="text-emerald-600 dark:text-emerald-400">(ito)</span>}
+                        {d.label} {d.id === currentDeviceId && <span className="text-emerald-600 dark:text-emerald-400">(this device)</span>}
                       </p>
                       <p className="text-xs text-slate-400">{formatDate(d.lastActive)}</p>
                     </div>
@@ -939,12 +1019,13 @@ export default function AccountOverlay() {
 
         {!loading && user && !deviceLimitReached && !needsFullName && step === "payment-method" && selectedPlan && (
           <div className="space-y-4 py-2">
-            <button onClick={backToProfile} className="text-sm text-slate-400">← Bumalik</button>
+            <button onClick={backToProfile} className="text-sm text-slate-400">← Back</button>
             <div className="rounded-xl bg-slate-50 p-4 text-center dark:bg-slate-900/40">
               <p className="text-sm text-slate-500 dark:text-slate-400">{selectedPlan.label}</p>
               <p className="text-2xl font-bold text-navy-900 dark:text-slate-100">₱{selectedPlan.price}</p>
+              <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">{planNote}</p>
             </div>
-            <p className="text-sm font-medium text-slate-600 dark:text-slate-300">Piliin ang paraan ng pagbabayad:</p>
+            <p className="text-sm font-medium text-slate-600 dark:text-slate-300">Choose a payment method:</p>
             <div className="space-y-2">
               {PAYMENT_METHODS.map((m) => (
                 <button
@@ -963,41 +1044,41 @@ export default function AccountOverlay() {
           <div className="space-y-4 py-2">
             {!submitted ? (
               <>
-                <button onClick={backToMethods} className="text-sm text-slate-400">← Bumalik</button>
+                <button onClick={backToMethods} className="text-sm text-slate-400">← Back</button>
                 <img
                   src={activeMethod.qr}
                   alt={`${activeMethod.label} QR code`}
                   className="mx-auto w-full max-w-[280px] rounded-xl border border-slate-100 dark:border-slate-700"
                 />
                 <div className="rounded-xl bg-amber-50 p-3 text-center dark:bg-amber-950/30">
-                  <p className="text-xs text-slate-500 dark:text-slate-400">Reference Code — isulat sa payment note</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">Reference Code — write it in the payment note</p>
                   <p className="text-xl font-bold tracking-widest text-navy-900 dark:text-amber-400">{referenceCode}</p>
                 </div>
                 <p className="text-center text-xs leading-relaxed text-slate-500 dark:text-slate-400">
-                  1. I-scan ang QR gamit ang {activeMethod.label} app mo.<br />
-                  2. Bayaran ang ₱{selectedPlan.price}, ilagay ang reference code sa note/message.<br />
-                  3. Pindutin ang "Nabayaran ko na" sa baba.
+                  1. Scan the QR code with your {activeMethod.label} app.<br />
+                  2. Pay ₱{selectedPlan.price} and write the reference code in the note/message.<br />
+                  3. Tap "I've paid" below.
                 </p>
                 <button
                   onClick={confirmPaid}
                   disabled={submitting}
                   className="w-full rounded-xl bg-navy-900 px-4 py-3 text-sm font-semibold text-white disabled:opacity-50 dark:bg-navy-700"
                 >
-                  {submitting ? "Sinusubmit..." : "✅ Nabayaran ko na"}
+                  {submitting ? "Submitting..." : "✅ I've paid"}
                 </button>
               </>
             ) : (
               <div className="space-y-3 py-4 text-center">
                 <span className="text-4xl" aria-hidden>⏳</span>
-                <p className="font-semibold text-navy-900 dark:text-slate-100">Naka-pending na ang purchase mo</p>
+                <p className="font-semibold text-navy-900 dark:text-slate-100">Your purchase is pending</p>
                 <p className="text-sm text-slate-500 dark:text-slate-400">
-                  Ico-confirm ito manually sa loob ng ilang oras. Reference code: <span className="font-semibold">{referenceCode}</span>
+                  It will be confirmed manually within a few hours. Reference code: <span className="font-semibold">{referenceCode}</span>
                 </p>
                 <button
                   onClick={backToProfile}
                   className="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-medium text-slate-500 dark:border-slate-600 dark:text-slate-300"
                 >
-                  Bumalik sa Profile
+                  Back to Profile
                 </button>
               </div>
             )}
@@ -1011,21 +1092,33 @@ export default function AccountOverlay() {
 
 ## File: ./frontend/src/components/AccountButton.jsx
 ```
+import { useState } from "react";
 import { useAuth } from "../authContext";
 
+// Framed "Profile" button: the avatar and the word "Profile" sit inside one bordered box,
+// so users can tell at a glance that it is tappable (a bare Google photo looks like decoration).
 export default function AccountButton() {
-  const { user, profile, setOverlayOpen } = useAuth();
+  const { profile, setOverlayOpen } = useAuth();
+  const [imgFailed, setImgFailed] = useState(false);
+  const showPhoto = !!profile?.photoURL && !imgFailed;
   return (
     <button
       onClick={() => setOverlayOpen(true)}
-      aria-label="Account"
-      className="flex h-9 w-9 flex-shrink-0 touch-manipulation items-center justify-center overflow-hidden rounded-full border border-slate-200 bg-white text-base active:bg-slate-100 dark:border-slate-600 dark:bg-slate-800 dark:active:bg-slate-700"
+      aria-label="Open profile"
+      className="flex h-11 w-11 flex-shrink-0 touch-manipulation flex-col items-center justify-center gap-0.5 rounded-xl border border-slate-300 bg-white shadow-sm active:bg-slate-100 dark:border-slate-600 dark:bg-slate-800 dark:active:bg-slate-700"
     >
-      {profile?.photoURL ? (
-        <img src={profile.photoURL} alt="" className="h-full w-full object-cover" />
+      {showPhoto ? (
+        <img
+          src={profile.photoURL}
+          alt=""
+          referrerPolicy="no-referrer"
+          onError={() => setImgFailed(true)}
+          className="h-5 w-5 rounded-full object-cover"
+        />
       ) : (
-        <span aria-hidden>👤</span>
+        <span className="text-sm leading-5" aria-hidden>👤</span>
       )}
+      <span className="text-[9px] font-semibold leading-none text-slate-600 dark:text-slate-300">Profile</span>
     </button>
   );
 }
@@ -1041,26 +1134,34 @@ import { PLANS } from "../payments";
 
 const DEMO_SECONDS = 60;
 
-// Tutorial + About para sa hindi pa naka-login. May "demo" ang bawat feature:
-// pindutin ang Start at 1 minuto lang ang gamit, tapos balik dito.
+// Tutorial + About for signed-out users. Each feature has a demo:
+// tap Start to try it for 1 minute, then return here.
 const STEPS = [
-  { icon: "⚖️", title: "Welcome to RA 10863", body: "Ang offline companion mo para sa Customs Modernization and Tariff Act (CMTA) — batas, notes, AI explanations, at practice questions para sa CuBLE." },
-  { icon: "📚", title: "Browse the Law", body: "Buksan ang menu (☰). Lahat ng Title, Chapter at Section ay nakaayos ayon sa tamang pagkakasunod.", demo: { view: "browse", mode: "study" } },
-  { icon: "📘", title: "Study Mode", body: "Isa-isang section para focused. May Expand All / Collapse All para mabilis sa buong chapter.", demo: { view: "browse", mode: "study" } },
-  { icon: "📖", title: "Reading Mode", body: "Book-style na view para sa mahabang pagbabasa. Pindutin ang 🎯 Focus para tago ang toolbar.", demo: { view: "browse", mode: "reading" } },
-  { icon: "🖍️", title: "Highlights", body: "I-select ang kahit anong text para i-highlight. Auto-save, gumagana kahit offline.", demo: { view: "browse", mode: "study" } },
-  { icon: "📝", title: "Notes", body: "Pindutin ang \"Add Note\" sa ilalim ng kahit anong section para isulat ang sarili mong paliwanag.", demo: { view: "browse", mode: "study" } },
-  { icon: "🤖", title: "Ask AI", body: "Instant offline explanation mula sa Osias 6.7 sa bawat section.", demo: { view: "browse", mode: "study" } },
-  { icon: "🔍", title: "Search", body: "Hanapin agad ang kahit ano. Subukan ang \"102\" o \"smuggling\".", demo: { view: "search", mode: null } },
-  { icon: "✍️", title: "Practice Quiz / Exam", body: "Subukan ang practice questions — 10 items bawat subject ang libre.", demo: { view: "quiz", mode: null } },
-  { icon: "🎁", title: TRIAL_DAYS + "-Day Free Trial", body: "Mag-login gamit ang Google para magsimula ang " + TRIAL_DAYS + " araw na libreng gamit ng buong app. Pagkatapos, pumili ng plan para magpatuloy." },
+  { icon: "⚖️", title: "Welcome to RA 10863", body: "Your offline companion for the Customs Modernization and Tariff Act (CMTA) — the law, notes, AI explanations, and practice questions for the CuBLE." },
+  { icon: "📚", title: "Browse the Law", body: "Open the menu (☰). Every Title, Chapter, and Section is arranged in the correct order.", demo: { view: "browse", mode: "study" } },
+  { icon: "📘", title: "Study Mode", body: "One section at a time, so you can stay focused. Use Expand All / Collapse All to move through a whole chapter quickly.", demo: { view: "browse", mode: "study" } },
+  { icon: "📖", title: "Reading Mode", body: "A book-style view for long reading sessions. Tap 🎯 Focus to hide the toolbar.", demo: { view: "browse", mode: "reading" } },
+  { icon: "🖍️", title: "Highlights", body: "Select any text to highlight it. Highlights save automatically and work offline.", demo: { view: "browse", mode: "study" } },
+  { icon: "📝", title: "Notes", body: "Tap \"Add Note\" under any section to write your own explanation.", demo: { view: "browse", mode: "study" } },
+  { icon: "🤖", title: "Ask AI", body: "Instant offline explanations from Osias 6.7 for every section.", demo: { view: "browse", mode: "study" } },
+  { icon: "🔍", title: "Search", body: "Find anything fast. Try \"102\" or \"smuggling\".", demo: { view: "search", mode: null } },
+  { icon: "✍️", title: "Practice Quiz / Exam", body: "Try the practice questions. RA 10863 Level 1 (Filipino version) is free, and so are the first 10 items of each other subject. Levels 2–5 are in English.", demo: { view: "quiz", mode: null } },
+  { icon: "🎁", title: TRIAL_DAYS + "-Day Free Trial", body: "Sign in with Google to start " + TRIAL_DAYS + " days of free access to the whole app. After that, choose a plan to continue." },
 ];
 
 function Splash({ text }) {
   return (
-    <div className="safe-top flex min-h-[100dvh] flex-col items-center justify-center gap-3 bg-slate-50 px-6 text-center dark:bg-slate-950">
+    <div className="safe-top flex min-h-[100dvh] flex-col items-center justify-center gap-4 bg-slate-50 px-6 text-center dark:bg-slate-950">
       <span className="text-4xl" aria-hidden>⚖️</span>
-      <p className="text-sm text-slate-500 dark:text-slate-400">{text}</p>
+      <div
+        className="h-9 w-9 animate-spin rounded-full border-4 border-slate-200 border-t-navy-900 dark:border-slate-700 dark:border-t-gold-400"
+        role="status"
+        aria-label="Loading"
+      />
+      <p className="text-sm font-medium text-slate-600 dark:text-slate-300">{text}</p>
+      <p className="max-w-xs rounded-xl bg-white/80 px-4 py-3 text-xs leading-relaxed text-slate-500 shadow-sm dark:bg-slate-900/70 dark:text-slate-400">
+        💡 Tip: If loading takes too long, turn Airplane Mode on, then off, and reopen the app for a faster reload.
+      </p>
     </div>
   );
 }
@@ -1130,7 +1231,7 @@ function GuestWelcome({ step, setStep, onStartDemo }) {
 
           {cur.demo && (
             <button onClick={() => onStartDemo(cur.demo)} className="mb-4 w-full rounded-xl border-2 border-gold-500 bg-gold-50 px-4 py-2.5 text-sm font-semibold text-navy-900 active:bg-gold-100 dark:border-gold-400 dark:bg-slate-800 dark:text-gold-400">
-              ▶ Start — subukan ng 1 minuto
+              ▶ Start — try it for 1 minute
             </button>
           )}
 
@@ -1148,7 +1249,7 @@ function GuestWelcome({ step, setStep, onStartDemo }) {
       <div className="border-t border-slate-200 bg-white/90 p-4 backdrop-blur dark:border-slate-800 dark:bg-slate-900/90">
         {authError && <p className="mb-2 text-center text-xs text-red-600 dark:text-red-400">{authError}</p>}
         <button onClick={signInWithGoogle} disabled={signingIn} className="mx-auto flex h-12 w-full max-w-md items-center justify-center rounded-xl bg-gold-500 text-sm font-bold text-navy-900 shadow-sm active:bg-gold-600 disabled:opacity-50">
-          {signingIn ? "Naghihintay sa Google..." : "🎁 Login with Google — simulan ang " + TRIAL_DAYS + "-day free trial"}
+          {signingIn ? "Waiting for Google..." : "🎁 Login with Google — start your " + TRIAL_DAYS + "-day free trial"}
         </button>
       </div>
     </div>
@@ -1170,13 +1271,13 @@ function Paywall() {
       <div className="w-full max-w-md space-y-4">
         <div className="text-center">
           <span className="text-4xl" aria-hidden>⏳</span>
-          <h1 className="mt-2 text-xl font-bold text-navy-900 dark:text-slate-50">Tapos na ang free trial mo</h1>
-          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Pumili ng App Access plan para magpatuloy. {user?.email}</p>
+          <h1 className="mt-2 text-xl font-bold text-navy-900 dark:text-slate-50">Your free trial has ended</h1>
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Choose an App Access plan to continue. {user?.email}</p>
         </div>
 
         {pending.length > 0 && (
           <div className="rounded-xl border border-amber-300 bg-amber-50 p-3 text-center text-sm text-amber-800 dark:border-amber-700 dark:bg-amber-950/30 dark:text-amber-300">
-            ⏳ May pending payment ka ({pending[pending.length - 1].referenceCode}). Hintayin lang ang confirmation.
+            ⏳ You have a pending payment ({pending[pending.length - 1].referenceCode}). Please wait for confirmation.
           </div>
         )}
 
@@ -1187,7 +1288,7 @@ function Paywall() {
               <button key={p.id} onClick={() => choose(p)} className={"flex w-full items-center justify-between rounded-2xl border-2 px-4 py-3 text-left active:opacity-80 " + (best ? "border-gold-500 bg-gold-50 dark:border-gold-400 dark:bg-slate-900" : "border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-900")}>
                 <span>
                   <span className="block text-base font-bold text-navy-900 dark:text-slate-100">{p.months} {p.months === 1 ? "Month" : "Months"}</span>
-                  <span className="block text-xs text-slate-500 dark:text-slate-400">₱{(p.price / p.months).toFixed(0)}/buwan{best ? " · Best value" : ""}</span>
+                  <span className="block text-xs text-slate-500 dark:text-slate-400">₱{(p.price / p.months).toFixed(0)}/month{best ? " · Best value" : ""}</span>
                 </span>
                 <span className="text-2xl font-extrabold text-navy-900 dark:text-slate-50">₱{p.price}</span>
               </button>
@@ -1201,14 +1302,14 @@ function Paywall() {
             <button key={p.id} onClick={() => choose(p)} className="flex w-full items-center justify-between rounded-2xl border-2 border-gold-500 bg-gold-50 px-4 py-3 text-left active:opacity-80 dark:border-gold-400 dark:bg-slate-900">
               <span>
                 <span className="block text-base font-bold text-navy-900 dark:text-slate-100">{p.label}</span>
-                <span className="block text-xs text-slate-500 dark:text-slate-400">{p.subjects.join(" · ")} + {p.bonusMonths} months App Access</span>
+                <span className="block text-xs text-slate-500 dark:text-slate-400">{p.subjects.map((c) => (c === "CL" ? "RA 10863" : c)).join(" · ")} · {p.months} months + {p.bonusMonths} months App Access</span>
               </span>
               <span className="text-2xl font-extrabold text-navy-900 dark:text-slate-50">₱{p.price}</span>
             </button>
           ))}
         </div>
 
-        <p className="text-center text-xs text-slate-400">Bayad via GCash · Maya · MariBank. Ico-confirm manually ng admin.</p>
+        <p className="text-center text-xs text-slate-400">Pay via GCash · Maya · MariBank. Payments are confirmed manually by the admin.</p>
         <button onClick={signOutUser} className="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-medium text-slate-500 dark:border-slate-600 dark:text-slate-300">Sign out</button>
       </div>
     </div>
@@ -1221,7 +1322,7 @@ function AccessPill({ access }) {
   if (overlayOpen) return null;
   let label = null;
   if (access.state === "trial") label = "🎁 Free trial · " + formatTimeLeft(access.msLeft) + " left";
-  else if (access.state === "paid" && access.msLeft < 3 * DAY_MS) label = "⏳ Access · " + formatTimeLeft(access.msLeft) + " left";
+  else if (access.state === "paid" && access.msLeft < 7 * DAY_MS) label = "⏳ Access · " + formatTimeLeft(access.msLeft) + " left";
   if (!label) return null;
   return (
     <button onClick={() => setOverlayOpen(true)} className="safe-bottom fixed bottom-3 left-3 z-40 rounded-full bg-navy-900/90 px-3 py-1.5 text-[11px] font-semibold text-white shadow-lg backdrop-blur active:bg-navy-800 dark:bg-slate-100/90 dark:text-navy-900">
@@ -1240,15 +1341,15 @@ export default function AccessGate() {
     if (user && (needsFullName || deviceLimitReached) && !overlayOpen) setOverlayOpen(true);
   }, [user, needsFullName, deviceLimitReached, overlayOpen, setOverlayOpen]);
 
-  if (loading || signingIn) return <Splash text="Sandali lang..." />;
+  if (loading || signingIn) return <Splash text="Loading…" />;
 
   if (!user) {
     if (demo) return <DemoShell key={demo.key} feature={demo.feature} onEnd={() => setDemo(null)} />;
     return <GuestWelcome step={guestStep} setStep={setGuestStep} onStartDemo={(feature) => setDemo({ feature, key: Date.now() })} />;
   }
 
-  if (!profile || needsFullName || deviceLimitReached) return <Splash text="Tinatapos ang setup ng account mo..." />;
-  if (access.state === "loading") return <Splash text="Sinusuri ang trial mo..." />;
+  if (!profile || needsFullName || deviceLimitReached) return <Splash text="Finishing your account setup…" />;
+  if (access.state === "loading") return <Splash text="Checking your trial…" />;
   if (access.state === "expired") return <Paywall />;
 
   return (
@@ -1331,7 +1432,7 @@ export function IconPicker({ value, onChange }) {
         value={value}
         maxLength={4}
         onChange={(e) => onChange(e.target.value || "📘")}
-        placeholder="O mag-type ng sarili mong emoji"
+        placeholder="Or type your own emoji"
         className="mt-2 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-navy-900 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:focus:ring-navy-500"
       />
     </div>
@@ -1413,13 +1514,13 @@ export function TimerPickerModal({ theme, onPick, onCancel }) {
     <div className="fixed inset-0 z-[80] flex flex-col justify-end bg-slate-900/60 backdrop-blur-sm">
       <div className={`w-full rounded-t-3xl border-t p-5 shadow-2xl ${theme.card}`}>
         <p className={`mb-1 text-lg font-bold ${theme.text}`}>⏱️ Timer</p>
-        <p className={`mb-4 text-sm ${theme.subtext}`}>Piliin kung paano tatakbo ang oras para sa quiz na ito.</p>
+        <p className={`mb-4 text-sm ${theme.subtext}`}>Choose how the timer runs for this quiz.</p>
         <button
           type="button"
           onClick={() => onPick({ mode: "perQuestion", seconds: 25 })}
           className={`mb-2 w-full rounded-xl border-2 px-4 py-3 text-left text-sm font-semibold transition-colors ${theme.outlineBtn}`}
         >
-          🔂 Bawat tanong — 25s kada tanong
+          🔂 Per question — 25s each
         </button>
         <div className="mb-2 grid grid-cols-3 gap-2">
           {TOTAL_TIMER_MINUTES.map((min) => (
@@ -3019,7 +3120,7 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
       // Ipakita ang confirmation message
-      alert(`✅ Na-download ang quiz-generation prompt para sa Title ${titleNumber} bilang .txt file.
+      alert(`✅ The quiz-generation prompt for Title ${titleNumber} was downloaded as a .txt file.
 
 📝 INSTRUCTIONS FOR AI:
 1. Act like a professor designing a CuBLE exam.
@@ -3097,20 +3198,20 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
                 </button>
               )}
               <div className="flex flex-shrink-0 rounded-full bg-slate-100 p-1 text-sm dark:bg-slate-800">
-                <button onClick={() => setView("browse")} aria-label="Browse" className={`min-h-[34px] rounded-full px-2.5 py-1 font-medium transition-colors ${view === "browse" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
+                <button onClick={() => setView("browse")} aria-label="Browse" className={`min-h-[34px] rounded-full px-2 py-1 font-medium transition-colors ${view === "browse" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
                   <span aria-hidden>📚</span><span className="hidden sm:inline ml-1">Browse</span>
                 </button>
-                <button onClick={() => setView("search")} aria-label="Search" className={`min-h-[34px] rounded-full px-2.5 py-1 font-medium transition-colors ${view === "search" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
+                <button onClick={() => setView("search")} aria-label="Search" className={`min-h-[34px] rounded-full px-2 py-1 font-medium transition-colors ${view === "search" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
                   <span aria-hidden>🔍</span><span className="hidden sm:inline ml-1">Search</span>
                 </button>
-                <button onClick={() => setView("quiz")} aria-label="Quiz/Exam" className={`min-h-[34px] rounded-full px-2.5 py-1 font-medium transition-colors ${view === "quiz" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
+                <button onClick={() => setView("quiz")} aria-label="Quiz/Exam" className={`min-h-[34px] rounded-full px-2 py-1 font-medium transition-colors ${view === "quiz" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
                   <span aria-hidden>📝</span><span className="hidden sm:inline ml-1">Quiz/Exam</span>
                 </button>
-                <button onClick={() => setView("settings")} aria-label="Settings" className={`min-h-[34px] rounded-full px-2.5 py-1 font-medium transition-colors ${view === "settings" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
+                <button onClick={() => setView("settings")} aria-label="Settings" className={`min-h-[34px] rounded-full px-2 py-1 font-medium transition-colors ${view === "settings" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
                   ⚙️
                 </button>
                 {IS_DEV && (
-                  <button onClick={() => setView("dev")} aria-label="Dev Panel" className={`min-h-[34px] rounded-full px-2.5 py-1 font-medium transition-colors ${view === "dev" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
+                  <button onClick={() => setView("dev")} aria-label="Dev Panel" className={`min-h-[34px] rounded-full px-2 py-1 font-medium transition-colors ${view === "dev" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
                     🛠
                   </button>
                 )}
@@ -3269,6 +3370,8 @@ import { useState, useEffect } from "react";
 import staticQuizData from "../data/quizData.json";
 import { getFlattenedEntries } from "../quizStore";
 import { LEVELS, QuizLevelButton, QuizPlayView, resetLevelProgress } from "../components/QuizShared";
+import { useAuth } from "../authContext";
+import { isRaLevelUnlocked } from "../access";
 
 // Helper to extract Roman numeral from title string like "Title I – ..."
 function extractTitleNumber(title) {
@@ -3322,6 +3425,7 @@ function QuizTitleCard({ title, data, onSelectLevel }) {
   const [open, setOpen] = useState(false);
   const [progress, setProgress] = useState({});
   const [totalQuestions, setTotalQuestions] = useState({});
+  const { profile, setOverlayOpen, setIntentPlanId } = useAuth();
 
   useEffect(() => {
     const ids = Object.keys(data);
@@ -3342,6 +3446,11 @@ function QuizTitleCard({ title, data, onSelectLevel }) {
   }, [title]);
 
   const handleLevelSelect = (levelId) => {
+    if (!isRaLevelUnlocked(profile, levelId)) {
+      setIntentPlanId("CL");
+      setOverlayOpen(true);
+      return;
+    }
     const ids = Object.keys(data).filter((id) => data[id] && data[id][levelId]);
     if (ids.length === 0) {
       alert(`No questions available for ${LEVELS.find((l) => l.id === levelId)?.label}.`);
@@ -3354,7 +3463,7 @@ function QuizTitleCard({ title, data, onSelectLevel }) {
   // ang mga tanong (data) o ang progress ng ibang levels/titles.
   const handleResetLevel = (levelId) => {
     const levelLabel = LEVELS.find((l) => l.id === levelId)?.label || levelId;
-    const ok = confirm(`I-reset ang progress mo sa "${levelLabel}" ng ${title}?\n\nMagsisimula ulit ito sa Tanong 1 — hindi madedelete ang mga tanong, mga sagot mo lang dito ang mabubura.`);
+    const ok = confirm(`Reset your progress for "${levelLabel}" in ${title}?\n\nIt will start again from Question 1. The questions are kept — only your answers here will be cleared.`);
     if (!ok) return;
     resetLevelProgress(title, levelId);
     setProgress((prev) => {
@@ -3383,6 +3492,7 @@ function QuizTitleCard({ title, data, onSelectLevel }) {
                 key={level.id}
                 level={level}
                 progress={progress[level.id] || 0}
+                locked={!isRaLevelUnlocked(profile, level.id)}
                 onClick={() => handleLevelSelect(level.id)}
                 onReset={() => handleResetLevel(level.id)}
               />
@@ -3430,6 +3540,7 @@ export default function QuizPage() {
         <div>
           <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-50">📝 Quiz / Exam</h1>
           <p className="text-sm text-slate-500 dark:text-slate-400">Test your knowledge with 5 levels of difficulty — from Easy to Will Done.</p>
+          <p className="mt-1 text-xs font-medium text-amber-700 dark:text-amber-400">Note: Level 1 is the Filipino version (free). Levels 2–5 are the English version.</p>
         </div>
         <button onClick={() => setRefreshKey((prev) => prev + 1)} className="rounded-lg border border-slate-200 px-3 py-1.5 text-sm text-slate-600 hover:bg-slate-50 dark:border-slate-600 dark:text-slate-300 dark:hover:bg-slate-800" title="Refresh quiz data from imported files">🔄 Refresh</button>
       </div>
@@ -3628,9 +3739,9 @@ export default function QuizPanel() {
         <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-50">📝 Quiz Panel</h1>
         <p className="text-sm text-slate-500 dark:text-slate-400">Import, manage, and test-drive quizzes generated from CMTA provisions.</p>
         <p className="mt-1 text-xs text-slate-400 dark:text-slate-500">
-          Kapag tapos ka na sa isang batch, gamitin ang <strong>Export All</strong> tapos i-merge yung JSON sa
+          When a batch is finished, use <strong>Export All</strong> and merge the JSON into
           <code className="mx-1 rounded bg-slate-100 px-1 dark:bg-slate-700">frontend/src/data/quizData.json</code>
-          para ma-bundle na siya sa app at gumana offline para sa lahat ng users — kagaya ng ginawa mo na sa AI explanations.
+          so it ships with the app and works offline for all users — the same way the AI explanations work.
         </p>
       </div>
 
@@ -3666,7 +3777,7 @@ import {
   getAllEntries, getSortedItemIds, getSubjectStats,
   getSubjectProgress, saveSubjectProgress, resetSubjectProgress,
 } from "../subjectQuizStore";
-import { isClUnlocked } from "../access";
+import { isClUnlocked, isSubjectUnlocked } from "../access";
 
 // First N items (by sorted order) na libre bawat subject — lahat ng lagpas dito
 // ay naka-lock hanggang mag-subscribe. Tugma sa pricing table sa handoff doc.
@@ -3678,22 +3789,23 @@ function isItemUnlocked(idx, subjectId, profile) {
   if (subjectId === "cl") return isClUnlocked(profile);
   const freeLimit = FREE_LIMITS[subjectId] ?? Infinity;
   if (idx < freeLimit) return true;
-  return !!profile?.subscriptions?.[subjectId.toUpperCase()];
+  // Subscriptions can expire; legacy lifetime subjects (no expiry) stay unlocked.
+  return isSubjectUnlocked(profile, subjectId.toUpperCase());
 }
 
 function LockedPrompt({ subjectLabel, onUnlock }) {
   return (
     <div className="flex flex-col items-center gap-3 py-10 text-center">
       <span className="text-4xl" aria-hidden>🔒</span>
-      <p className="text-lg font-semibold text-slate-800 dark:text-slate-100">Naka-lock ang item na ito</p>
+      <p className="text-lg font-semibold text-slate-800 dark:text-slate-100">This item is locked</p>
       <p className="max-w-xs text-sm text-slate-500 dark:text-slate-400">
-        Mag-subscribe para ma-unlock ang natitirang {subjectLabel} items.
+        Subscribe to unlock the remaining {subjectLabel} items.
       </p>
       <button
         onClick={onUnlock}
         className="mt-2 rounded-xl bg-navy-900 px-5 py-2.5 text-sm font-semibold text-white shadow-sm active:bg-navy-800 dark:bg-navy-700 dark:active:bg-navy-600"
       >
-        Tingnan ang Subscription
+        View Subscription
       </button>
     </div>
   );
@@ -3871,7 +3983,7 @@ export default function SubjectDashboard({ subjectId, subjectLabel }) {
   };
 
   const handleReset = () => {
-    if (confirm(`Reset progress mo para sa ${subjectLabel}? Hindi mabubura ang mga imported questions, mga sagot mo lang.`)) {
+    if (confirm(`Reset your progress for ${subjectLabel}? Imported questions are kept — only your answers are cleared.`)) {
       resetSubjectProgress(subjectId);
       setRefreshKey((k) => k + 1);
     }
@@ -3892,7 +4004,7 @@ export default function SubjectDashboard({ subjectId, subjectLabel }) {
       <div className="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-card dark:border-slate-700 dark:bg-slate-800">
         <h2 className="mb-1 text-xl font-bold text-slate-900 dark:text-slate-50">{subjectLabel}</h2>
         <p className="mb-6 text-sm text-slate-500 dark:text-slate-400">
-          {stats.total > 0 ? `${stats.total} question${stats.total !== 1 ? "s" : ""} available` : "Wala pang naiimport na tanong"}
+          {stats.total > 0 ? `${stats.total} question${stats.total !== 1 ? "s" : ""} available` : "No questions imported yet"}
         </p>
 
         <div className="mb-6 flex items-center justify-center gap-8">
@@ -3907,7 +4019,7 @@ export default function SubjectDashboard({ subjectId, subjectLabel }) {
         </div>
 
         {stats.total === 0 ? (
-          <p className="rounded-lg bg-slate-50 p-3 text-sm text-slate-400 dark:bg-slate-900/40 dark:text-slate-500">Mag-import muna ng {subjectLabel} questions sa Dev Panel.</p>
+          <p className="rounded-lg bg-slate-50 p-3 text-sm text-slate-400 dark:bg-slate-900/40 dark:text-slate-500">Import {subjectLabel} questions in the Dev Panel first.</p>
         ) : (
           <div className="space-y-2">
             <button onClick={() => setPlaying(true)} className="w-full rounded-xl bg-navy-900 px-4 py-3 text-sm font-semibold text-white shadow-sm active:bg-navy-800 dark:bg-navy-700 dark:active:bg-navy-600">
@@ -3933,6 +4045,8 @@ import QuizPage, { loadQuizData } from "./QuizPage";
 import { SubjectQuizPlay } from "./SubjectDashboard";
 import CustomQuizHub from "./CustomQuizHub";
 import { ProgressCircle, QuizPlayView } from "../components/QuizShared";
+import { useAuth } from "../authContext";
+import { isRaLevelUnlocked } from "../access";
 import { getSubjectStats, resetSubjectProgress } from "../subjectQuizStore";
 import { getLastQuizPosition } from "../quizStore";
 
@@ -3951,7 +4065,7 @@ function SubjectCard({ subjectId, expanded, onToggle, onPlay }) {
   const hasProgress = stats.answeredCount > 0;
 
   const handleRestart = () => {
-    if (confirm(`Reset progress mo para sa ${label}? Hindi mabubura ang mga tanong, mga sagot mo lang.`)) {
+    if (confirm(`Reset your progress for ${label}? Questions are kept — only your answers are cleared.`)) {
       resetSubjectProgress(subjectId);
       setRefreshKey((k) => k + 1);
     }
@@ -3964,7 +4078,7 @@ function SubjectCard({ subjectId, expanded, onToggle, onPlay }) {
         <div className="min-w-0 flex-1">
           <p className="truncate font-bold text-navy-900 dark:text-slate-100">{label}</p>
           <p className="truncate text-xs text-slate-400 dark:text-slate-500">
-            {stats.total > 0 ? `${stats.answeredCount}/${stats.total} sagot na` : "Walang tanong"}
+            {stats.total > 0 ? `${stats.answeredCount}/${stats.total} answered` : "No questions"}
           </p>
         </div>
         <span className={`flex-shrink-0 text-slate-300 transition-transform dark:text-slate-600 ${expanded ? "rotate-180" : ""}`} aria-hidden>▾</span>
@@ -3996,7 +4110,7 @@ function RA10863Card({ expanded, onToggle, onContinue, onSelectTitle }) {
         <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-amber-400 to-navy-700 text-lg" aria-hidden>⚖️</span>
         <div className="min-w-0 flex-1">
           <p className="truncate font-bold text-navy-900 dark:text-slate-100">RA 10863</p>
-          <p className="truncate text-xs text-slate-400 dark:text-slate-500">5 levels · lahat ng titles</p>
+          <p className="truncate text-xs text-slate-400 dark:text-slate-500">5 levels · Level 1 Filipino · Levels 2–5 English</p>
         </div>
         <span className={`flex-shrink-0 text-slate-300 transition-transform dark:text-slate-600 ${expanded ? "rotate-180" : ""}`} aria-hidden>▾</span>
       </button>
@@ -4017,6 +4131,7 @@ function RA10863Card({ expanded, onToggle, onContinue, onSelectTitle }) {
 export default function QuizHub({ onExit }) {
   const [expandedCard, setExpandedCard] = useState(null);
   const [activeView, setActiveView] = useState(null);
+  const { profile } = useAuth();
 
   const toggleCard = (id) => setExpandedCard((prev) => (prev === id ? null : id));
   const backToHub = () => setActiveView(null);
@@ -4027,7 +4142,8 @@ export default function QuizHub({ onExit }) {
 
   const handleContinueRA10863 = () => {
     const last = getLastQuizPosition();
-    if (last?.title && last?.level) {
+    // "Continue" must not reopen a locked level (Levels 2-5 need RA 10863).
+    if (last?.title && last?.level && isRaLevelUnlocked(profile, last.level)) {
       const titles = loadQuizData();
       const match = titles.find((t) => t.title === last.title);
       if (match) {
@@ -4067,7 +4183,7 @@ export default function QuizHub({ onExit }) {
               <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-violet-400 to-fuchsia-600 text-lg" aria-hidden>🧩</span>
               <div className="min-w-0 flex-1">
                 <p className="truncate font-bold text-navy-900 dark:text-slate-100">Your Own Quiz</p>
-                <p className="truncate text-xs text-slate-400 dark:text-slate-500">Gumawa ng sarili mong subject at tanong</p>
+                <p className="truncate text-xs text-slate-400 dark:text-slate-500">Create your own subjects and questions</p>
               </div>
               <span className="flex-shrink-0 text-slate-300 dark:text-slate-600" aria-hidden>→</span>
             </button>
@@ -4164,7 +4280,7 @@ function ImportForm({ subjectId, subjectLabel, onImported }) {
     setError(null); setSuccess(null);
     try {
       const { count, label } = importSubjectQuizJson(subjectId, json);
-      setSuccess(`✓ Imported. "${label}" batch saved — ${count} total items ngayon para sa ${subjectLabel}.`);
+      setSuccess(`✓ Imported. "${label}" batch saved — ${count} total items now for ${subjectLabel}.`);
       setJson("");
       onImported();
     } catch (e) {
@@ -4176,8 +4292,8 @@ function ImportForm({ subjectId, subjectLabel, onImported }) {
     <div className="rounded-xl border border-navy-200 bg-white p-3 shadow-card dark:border-navy-700 dark:bg-slate-800">
       <p className="mb-1 text-sm font-semibold text-navy-900 dark:text-slate-100">📥 Import {subjectLabel} Quiz JSON</p>
       <p className="mb-2 text-xs text-slate-400 dark:text-slate-500">
-        Flat format, walang levels — isang entry per item number. Optional "_batch" label para
-        ma-group ang import na ito (same "_batch" name = mag-me-merge, hindi mag-duduplicate).
+        Flat format, no levels — one entry per item number. Optional "_batch" label to
+        group this import (same "_batch" name = merges, no duplicates).
       </p>
       <textarea
         value={json}
@@ -4213,7 +4329,7 @@ function RawEditor({ subjectId, onChanged }) {
   return (
     <div className="rounded-xl border border-slate-200 bg-white p-3 shadow-card dark:border-slate-700 dark:bg-slate-800">
       <button onClick={() => (open ? setOpen(false) : openEditor())} className="text-sm font-semibold text-slate-800 dark:text-slate-100">
-        🔧 {open ? "Hide" : "Edit"} Raw Quiz JSON (advanced, lahat ng imported items)
+        🔧 {open ? "Hide" : "Edit"} Raw Quiz JSON (advanced, all imported items)
       </button>
       {open && (
         <div className="mt-2">
@@ -4251,7 +4367,7 @@ export default function SubjectQuizPanel({ subjectId, subjectLabel }) {
   };
 
   const handleClearAll = () => {
-    if (confirm(`Delete ALL ${getImportedCount(subjectId)} imported ${subjectLabel} items? Hindi na mababawi ito.`)) {
+    if (confirm(`Delete ALL ${getImportedCount(subjectId)} imported ${subjectLabel} items? This cannot be undone.`)) {
       clearAllImports(subjectId);
       refresh();
     }
@@ -4274,7 +4390,7 @@ export default function SubjectQuizPanel({ subjectId, subjectLabel }) {
 
       <div className="space-y-2">
         <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">Imported Batches</p>
-        {batches.length === 0 && <p className="text-sm italic text-slate-400 dark:text-slate-600">Wala pang imported na batch para sa {subjectLabel}.</p>}
+        {batches.length === 0 && <p className="text-sm italic text-slate-400 dark:text-slate-600">No imported batches yet for {subjectLabel}.</p>}
         {batches.map((b) => <BatchCard key={b.id} subjectId={subjectId} batch={b} onChanged={refresh} />)}
       </div>
     </div>
@@ -4288,16 +4404,16 @@ import { useState, useEffect, useMemo } from "react";
 import { collection, getDocs, doc, updateDoc, arrayUnion, deleteField, Timestamp, runTransaction } from "firebase/firestore";
 import { db } from "../firebase";
 import AdminOverview from "./AdminOverview";
-import { PLANS, PAYMENT_METHODS, CL_LIFETIME_PRICE } from "../payments";
+import { PLANS, PAYMENT_METHODS, CL_PRICE } from "../payments";
 import {
   ACCESS_PLANS, TRIAL_DAYS, DAY_MS, serverNow, getTrialInfo, getAppAccessInfo,
-  getAccess, addMonths, formatTimeLeft, formatDateShort, getClTrialInfo, CL_TRIAL_DAYS,
-  stackAccess, planAward, countSubjects, MIGRATION,
+  getAccess, addMonths, formatTimeLeft, formatDateShort,
+  stackAccess, computeGrant, getSubjectInfo, SUBJECT_TERM_MONTHS,
 } from "../access";
 
 const SUBJECT_CODES = ["CL", "CDP", "TL", "PC", "TCP"];
 const SUBJECT_LABELS = {
-  CL: "RA 10863 (Customs Law)",
+  CL: "RA 10863 (CMTA)",
   ...Object.fromEntries(
     PLANS.filter((p) => p.id !== "BUNDLE" && p.id !== "ALL").map((p) => [p.id, p.label])
   ),
@@ -4340,12 +4456,11 @@ function accessKey(u) {
   return a.state;
 }
 
-// Parehong pattern para sa RA 10863 (CL): paid (lifetime) > trial > expired > none.
+// RA 10863 (CL) status: "paid" = active (lifetime or not expired), "expired", or "none".
 function clAccessKey(u) {
-  if (u?.subscriptions?.CL) return "paid";
-  const t = getClTrialInfo(u);
-  if (!t.exists) return "none";
-  return t.active ? "trial" : "expired";
+  const s = getSubjectInfo(u, "CL");
+  if (!s.owned) return "none";
+  return s.active ? "paid" : "expired";
 }
 
 function StateChip({ u }) {
@@ -4405,23 +4520,50 @@ export default function AdminPanel() {
       patchUser(u.uid, localPatch);
     } catch (err) {
       console.warn("admin write failed:", err);
-      alert("May error. Subukan ulit:\n" + (err?.message || err));
+      alert("Something went wrong. Please try again:\n" + (err?.message || err));
     } finally {
       setBusyKey(null);
     }
   };
 
   // ── Practice questions ──────────────────────────────────────────────
+  // Manual unlock/remove. Unlocking grants the standard term (3 months, 4 for CL) from now;
+  // removing clears the subject flag and its expiry.
   const toggleSubject = async (u, code) => {
-    const nextValue = !u.subscriptions?.[code];
-    const payload = { ["subscriptions." + code]: nextValue };
-    const patch = { subscriptions: { ...u.subscriptions, [code]: nextValue } };
-    if (nextValue) {
-      const remaining = (u.pendingPurchases || []).filter((p) => !(p.subjects || []).includes(code));
-      payload.pendingPurchases = remaining;
-      patch.pendingPurchases = remaining;
+    const owned = !!u.subscriptions?.[code];
+    const key = u.uid + ":" + code;
+    if (owned) {
+      if (!window.confirm("Remove " + code + " from " + (u.fullName || u.email) + "?")) return;
+      const exp = { ...(u.subscriptionExpiry || {}) };
+      delete exp[code];
+      await run(
+        key, u,
+        { ["subscriptions." + code]: false, ["subscriptionExpiry." + code]: deleteField() },
+        { subscriptions: { ...u.subscriptions, [code]: false }, subscriptionExpiry: exp }
+      );
+      return;
     }
-    await run(u.uid + ":" + code, u, payload, patch);
+    const months = SUBJECT_TERM_MONTHS[code] || 3;
+    if (!window.confirm("Unlock " + code + " for " + months + " months for " + (u.fullName || u.email) + "?")) return;
+    const expiresAt = addMonths(serverNow(), months);
+    const remaining = (u.pendingPurchases || []).filter((p) => !(p.subjects || []).includes(code));
+    await run(
+      key, u,
+      { ["subscriptions." + code]: true, ["subscriptionExpiry." + code]: expiresAt, pendingPurchases: remaining },
+      { subscriptions: { ...u.subscriptions, [code]: true }, subscriptionExpiry: { ...(u.subscriptionExpiry || {}), [code]: expiresAt }, pendingPurchases: remaining }
+    );
+  };
+
+  // Admin extension: +N months on an expiring subject. Lifetime subjects are never touched.
+  const extendSubject = async (u, code, months) => {
+    const s = getSubjectInfo(u, code);
+    if (!s.owned || s.lifetime) return;
+    const expiresAt = addMonths(s.active ? s.expiresAt : serverNow(), months);
+    await run(
+      u.uid + ":" + code, u,
+      { ["subscriptionExpiry." + code]: expiresAt },
+      { subscriptionExpiry: { ...(u.subscriptionExpiry || {}), [code]: expiresAt } }
+    );
   };
 
   const setTriage = (u, status) =>
@@ -4429,39 +4571,48 @@ export default function AdminPanel() {
 
   const approvePractice = async (u, p) => {
     const plan = PLANS.find((x) => x.id === p.plan);
-    const diff = plan && plan.price !== p.price ? "⚠️ Iba ang presyo: ₱" + p.price + " ang binayaran, ₱" + plan.price + " na ang plan ngayon (lumang app version). " : "";
-    if (!window.confirm(diff + "I-approve ang " + (ALL_PLAN_LABELS[p.plan] || p.plan) + " ₱" + p.price + " para kay " + (u.fullName || u.email) + "?")) return;
+    const diff = plan && plan.price !== p.price ? "⚠️ Price mismatch: the user paid ₱" + p.price + " but the plan is now ₱" + plan.price + " (older app version). " : "";
+    if (!window.confirm(diff + "Approve " + (ALL_PLAN_LABELS[p.plan] || p.plan) + " ₱" + p.price + " for " + (u.fullName || u.email) + "?")) return;
     const ref = doc(db, "users", u.uid);
     setBusyKey(u.uid + ":pp:" + p.referenceCode);
     try {
-      // Isang atomic transaction: binabasa ang pinakabagong doc, kaya hindi madodoble ang grant.
+      // One atomic transaction: it reads the latest doc, so a grant can never be doubled.
       const res = await runTransaction(db, async (tx) => {
         const snap = await tx.get(ref);
-        if (!snap.exists()) throw new Error("Wala nang user doc.");
+        if (!snap.exists()) throw new Error("User document no longer exists.");
         const d = snap.data();
         const done = (d.paymentHistory || []).some((h) => h.referenceCode === p.referenceCode);
         const pending = (d.pendingPurchases || []).some((x) => x.referenceCode === p.referenceCode);
         if (done || !pending) return null;
         const now = serverNow();
         const subjects = p.subjects || (plan ? plan.subjects : []);
-        const award = planAward(d, { subjects, bonusMonths: plan ? plan.bonusMonths : 0 });
+        const term = plan ? plan.months : (subjects.length === 1 ? (SUBJECT_TERM_MONTHS[subjects[0]] || 3) : 6);
+        const g = computeGrant(d, { subjects, months: term }, now);
         const remaining = (d.pendingPurchases || []).filter((x) => x.referenceCode !== p.referenceCode);
         const upd = {
           pendingPurchases: remaining,
           triageStatus: "subscribed",
-          paymentHistory: arrayUnion({ kind: "practice", plan: p.plan, price: p.price, method: p.method, referenceCode: p.referenceCode, approvedAt: now }),
+          paymentHistory: arrayUnion({ kind: "practice", plan: p.plan, price: p.price, method: p.method, referenceCode: p.referenceCode, approvedAt: now, months: term }),
         };
         const subsPatch = {};
+        const expPatch = { ...(d.subscriptionExpiry || {}) };
         subjects.forEach((c) => { upd["subscriptions." + c] = true; subsPatch[c] = true; });
-        const patch = { pendingPurchases: remaining, triageStatus: "subscribed", subscriptions: { ...(d.subscriptions || {}), ...subsPatch } };
-        if (award.months > 0) {
-          const expiresAt = stackAccess(d, award.months, now);
-          const src = plan && plan.bonusMonths ? p.plan : "BONUS3";
-          upd.appAccess = { plan: src, expiresAt };
-          upd.appAccessHistory = arrayUnion({ plan: src, price: 0, referenceCode: p.referenceCode, method: "practice-purchase", approvedAt: now, expiresAt, months: award.months });
+        Object.keys(g.subjectExpiry).forEach((c) => {
+          upd["subscriptionExpiry." + c] = g.subjectExpiry[c];
+          expPatch[c] = g.subjectExpiry[c];
+        });
+        const patch = {
+          pendingPurchases: remaining,
+          triageStatus: "subscribed",
+          subscriptions: { ...(d.subscriptions || {}), ...subsPatch },
+          subscriptionExpiry: expPatch,
+        };
+        if (g.appExpiresAt) {
+          upd.appAccess = { plan: p.plan, expiresAt: g.appExpiresAt };
+          upd.appAccessHistory = arrayUnion({ plan: p.plan, price: 0, referenceCode: p.referenceCode, method: "practice-purchase", approvedAt: now, expiresAt: g.appExpiresAt, months: term + g.bonusMonths });
           patch.appAccess = upd.appAccess;
         }
-        if (award.flag) {
+        if (g.bonusFlag) {
           upd["bonuses.threeSubjects"] = now;
           patch.bonuses = { ...(d.bonuses || {}), threeSubjects: now };
         }
@@ -4469,71 +4620,17 @@ export default function AdminPanel() {
         return patch;
       });
       if (res) patchUser(u.uid, res);
-      else { alert("Na-approve na ito dati o wala na sa pending (ref " + p.referenceCode + "). Walang binago."); await loadUsers(); }
+      else { alert("Already approved or no longer pending (ref " + p.referenceCode + "). Nothing was changed."); await loadUsers(); }
     } catch (err) {
       console.warn("approvePractice failed:", err);
-      alert("May error. Subukan ulit:\n" + (err?.message || err));
+      alert("Something went wrong. Please try again:\n" + (err?.message || err));
     } finally {
       setBusyKey(null);
     }
   };
 
-  // ── One-time migration ng lumang users (idempotent: bonuses.migrated) ──
-  const runMigration = async () => {
-    if (!users) return;
-    const todo = users.filter((x) => !x.isAdmin && !(x.bonuses && x.bonuses.migrated));
-    if (todo.length === 0) { alert("Tapos na ang migration sa lahat ng user."); return; }
-    const withSubs = todo.filter((x) => countSubjects(x.subscriptions) > 0);
-    const n3 = withSubs.filter((x) => countSubjects(x.subscriptions) >= 3).length;
-    const n12 = withSubs.length - n3;
-    const nTrial = todo.length - withSubs.length;
-    if (!window.confirm("Migration: " + n3 + " user (3+ subjects) +" + MIGRATION.months3 + " buwan, " + n12 + " user (1-2 subjects) +" + MIGRATION.months12 + " buwan, " + nTrial + " user (walang subject) " + MIGRATION.trialDays + "-day trial mula ngayon. Isang beses lang bawat user. Ituloy?")) return;
-    setBusyKey("migration");
-    let ok = 0, skipped = 0, fail = 0;
-    for (let i = 0; i < todo.length; i++) {
-      setMigMsg("Nagpoproseso " + (i + 1) + "/" + todo.length + "...");
-      const ref = doc(db, "users", todo[i].uid);
-      try {
-        const r = await runTransaction(db, async (tx) => {
-          const s = await tx.get(ref);
-          const d = s.data();
-          if (!d || d.isAdmin || (d.bonuses && d.bonuses.migrated)) return "skip";
-          const n = countSubjects(d.subscriptions);
-          const t = serverNow();
-          const upd = { "bonuses.migrated": t };
-          if (n > 0) {
-            const months = n >= 3 ? MIGRATION.months3 : MIGRATION.months12;
-            const expiresAt = stackAccess(d, months, t);
-            upd.appAccess = { plan: "MIGRATION", expiresAt };
-            upd.appAccessHistory = arrayUnion({ plan: "MIGRATION", price: 0, referenceCode: "MIGRATION", method: "migration", approvedAt: t, expiresAt, months });
-            if (n >= 3) upd["bonuses.threeSubjects"] = t;
-          } else {
-            upd.trial = { startedAt: Timestamp.fromMillis(t), days: MIGRATION.trialDays };
-            // May active App Access na (hal. 1 month) pero walang subject: dagdag na 3 araw sa dulo.
-            const cur = getAppAccessInfo(d, t);
-            if (cur.active) {
-              const expiresAt = cur.expiresAt + MIGRATION.trialDays * DAY_MS;
-              upd.appAccess = { plan: cur.plan || "MIGRATION", expiresAt };
-              upd.appAccessHistory = arrayUnion({ plan: "MIGRATION", price: 0, referenceCode: "MIGRATION", method: "migration", approvedAt: t, expiresAt, days: MIGRATION.trialDays });
-            }
-          }
-          tx.update(ref, upd);
-          return "ok";
-        });
-        if (r === "ok") ok++; else skipped++;
-      } catch (err) {
-        console.warn("migration failed:", todo[i].uid, err);
-        fail++;
-      }
-    }
-    setMigMsg("");
-    setBusyKey(null);
-    await loadUsers();
-    alert("Tapos: " + ok + " na-update, " + skipped + " nilaktawan, " + fail + " nag-error.");
-  };
-
   const rejectPractice = async (u, p) => {
-    if (!window.confirm("Tanggalin ang pending na ito (ref " + p.referenceCode + ")?")) return;
+    if (!window.confirm("Remove this pending request (ref " + p.referenceCode + ")?")) return;
     const remaining = (u.pendingPurchases || []).filter((x) => x.referenceCode !== p.referenceCode);
     await run(u.uid + ":pp:" + p.referenceCode, u, { pendingPurchases: remaining }, { pendingPurchases: remaining });
   };
@@ -4559,24 +4656,24 @@ export default function AdminPanel() {
 
   const approveAccess = async (u, p) => {
     const plan = ACCESS_PLANS.find((x) => x.id === p.plan);
-    if (!plan) { alert("Hindi kilalang plan: " + p.plan); return; }
-    const diff = plan.price !== p.price ? "⚠️ Iba ang presyo: ₱" + p.price + " ang binayaran, ₱" + plan.price + " na ang plan ngayon. " : "";
-    if (!window.confirm(diff + "I-approve ang " + plan.months + " buwan (₱" + plan.price + ") para kay " + (u.fullName || u.email) + "?")) return;
+    if (!plan) { alert("Unknown plan: " + p.plan); return; }
+    const diff = plan.price !== p.price ? "⚠️ Price mismatch: the user paid ₱" + p.price + " but the plan is now ₱" + plan.price + ". " : "";
+    if (!window.confirm(diff + "Approve " + plan.months + " month(s) (₱" + plan.price + ") for " + (u.fullName || u.email) + "?")) return;
     await grantAccess(u, plan, p);
   };
 
   const manualGrant = async (u, plan) => {
-    if (!window.confirm("Bigyan si " + (u.fullName || u.email) + " ng " + plan.months + " buwan na App Access?")) return;
+    if (!window.confirm("Give " + (u.fullName || u.email) + " " + plan.months + " month(s) of App Access?")) return;
     await grantAccess(u, plan, null);
   };
 
   const removeAccess = async (u) => {
-    if (!window.confirm("Tanggalin ang App Access ni " + (u.fullName || u.email) + "?")) return;
+    if (!window.confirm("Remove App Access for " + (u.fullName || u.email) + "?")) return;
     await run(u.uid + ":acc", u, { appAccess: deleteField() }, { appAccess: undefined });
   };
 
   const rejectAccess = async (u, p) => {
-    if (!window.confirm("Tanggalin ang pending na ito (ref " + p.referenceCode + ")?")) return;
+    if (!window.confirm("Remove this pending request (ref " + p.referenceCode + ")?")) return;
     const remaining = (u.pendingAccess || []).filter((x) => x.referenceCode !== p.referenceCode);
     await run(u.uid + ":acc:" + p.referenceCode, u, { pendingAccess: remaining }, { pendingAccess: remaining });
   };
@@ -4590,7 +4687,7 @@ export default function AdminPanel() {
   };
 
   const grantTrial = (u) => {
-    if (!window.confirm("Simulan ulit ang " + TRIAL_DAYS + "-day trial ni " + (u.fullName || u.email) + " mula ngayon?")) return;
+    if (!window.confirm("Restart the " + TRIAL_DAYS + "-day trial for " + (u.fullName || u.email) + " from now?")) return;
     return writeTrial(u, TRIAL_DAYS);
   };
 
@@ -4600,30 +4697,11 @@ export default function AdminPanel() {
   };
 
   const endTrial = (u) => {
-    if (!window.confirm("Tapusin agad ang trial ni " + (u.fullName || u.email) + "?")) return;
+    if (!window.confirm("End the trial for " + (u.fullName || u.email) + " now?")) return;
     return writeTrial(u, 0);
   };
 
-  // ── RA 10863 (CL) Trial CRUD — kaparehong logic ng trial sa itaas ────
-  const writeClTrial = (u, days) => {
-    const startedAt = serverNow();
-    return run(u.uid + ":cltrial", u, { clTrial: { startedAt: Timestamp.fromMillis(startedAt), days } }, { clTrial: { startedAt, days } });
-  };
-
-  const grantClTrial = (u) => {
-    if (!window.confirm("Simulan ulit ang " + CL_TRIAL_DAYS + "-day CL trial ni " + (u.fullName || u.email) + " mula ngayon?")) return;
-    return writeClTrial(u, CL_TRIAL_DAYS);
-  };
-
-  const extendClTrial = (u, extraDays) => {
-    const left = getClTrialInfo(u).msLeft / DAY_MS;
-    return writeClTrial(u, left + extraDays);
-  };
-
-  const endClTrial = (u) => {
-    if (!window.confirm("Tapusin agad ang CL trial ni " + (u.fullName || u.email) + "?")) return;
-    return writeClTrial(u, 0);
-  };
+  // (The RA 10863 free trial is retired. Level 1 is free for everyone instead.)
 
   // ── Derived lists ───────────────────────────────────────────────────
   const practicePending = useMemo(() => {
@@ -4669,13 +4747,45 @@ export default function AdminPanel() {
   const rawPracticeCount = (users || []).reduce((n, u) => n + (u.pendingPurchases || []).length, 0);
   const rawAccessCount = (users || []).reduce((n, u) => n + (u.pendingAccess || []).length, 0);
 
+  // Users whose App Access or any subject ends within 7 days.
+  // Computed from the users already loaded, so it costs no extra Firestore reads.
+  const expiringRows = useMemo(() => {
+    const now = serverNow();
+    const rows = [];
+    filtered.forEach((u) => {
+      if (u.isAdmin) return;
+      const items = [];
+      const app = getAppAccessInfo(u, now);
+      if (app.active && app.msLeft <= 7 * DAY_MS) items.push({ label: "App Access", endsAt: app.expiresAt });
+      SUBJECT_CODES.forEach((c) => {
+        const s = getSubjectInfo(u, c, now);
+        if (s.active && !s.lifetime && s.msLeft <= 7 * DAY_MS) items.push({ label: c, endsAt: s.expiresAt });
+      });
+      if (items.length) rows.push({ u, items, soonest: Math.min(...items.map((i) => i.endsAt)) });
+    });
+    return rows.sort((a, b) => a.soonest - b.soonest);
+  }, [filtered, users]);
+
+  const copyReminder = async (u, items) => {
+    const first = (u.fullName || "there").split(" ")[0];
+    const parts = items.map((i) => i.label + " (" + formatDateShort(i.endsAt) + ")").join(", ");
+    const text = "Hi " + first + "! Your CuBLE access is ending soon: " + parts + ". You can renew anytime from your Profile. If you renew early, your remaining days are kept. Thank you!";
+    try {
+      await navigator.clipboard.writeText(text);
+      alert("Reminder copied. Paste it into Messenger or SMS.");
+    } catch (_) {
+      window.prompt("Copy this message:", text);
+    }
+  };
+
   const TABS = [
     { id: "overview", label: "📊 Overview" },
     { id: "users", label: "👥 Users" },
     { id: "practice", label: "💳 Practice", count: rawPracticeCount },
     { id: "access", label: "⏱ Access", count: rawAccessCount },
+    { id: "expiring", label: "⏳ Expiring", count: expiringRows.length },
     { id: "trial", label: "🎁 Trial" },
-    { id: "cl", label: "📜 CL" },
+    { id: "cl", label: "📜 RA 10863" },
   ];
 
   const btn = "min-h-[34px] rounded-full px-3 py-1.5 text-xs font-semibold transition-colors disabled:opacity-50 ";
@@ -4685,7 +4795,7 @@ export default function AdminPanel() {
 
   const PendingCard = ({ u, p, onApprove, onReject, approveLabel }) => (
     <div className="rounded-xl border border-amber-200 bg-amber-50 p-3 dark:border-amber-900 dark:bg-amber-950/20">
-      <p className="truncate font-semibold text-navy-900 dark:text-slate-100">{u.fullName || "(walang pangalan)"}</p>
+      <p className="truncate font-semibold text-navy-900 dark:text-slate-100">{u.fullName || "(no name)"}</p>
       <p className="truncate text-xs text-slate-400">{u.email}</p>
       <p className="mt-2 text-sm font-semibold text-navy-900 dark:text-amber-300">
         {ALL_PLAN_LABELS[p.plan] || p.plan} · ₱{p.price} · {METHOD_LABELS[p.method] || p.method}
@@ -4703,7 +4813,7 @@ export default function AdminPanel() {
       <div>
         <h1 className="text-2xl font-bold text-navy-900 dark:text-slate-50">👑 Admin Panel</h1>
         <p className="text-sm text-slate-500 dark:text-slate-400">
-          Hiwalay ang pending ng Practice Questions at ng App Access, at may sariling Trial panel.
+          Practice Questions and App Access have separate pending lists, and Trial has its own panel.
         </p>
       </div>
 
@@ -4724,7 +4834,7 @@ export default function AdminPanel() {
         <input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Maghanap ng pangalan o email..."
+          placeholder="Search name or email..."
           className="flex-1 rounded-xl border border-slate-200 px-4 py-2.5 text-sm dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100"
         />
         <button
@@ -4742,25 +4852,17 @@ export default function AdminPanel() {
 
       {error && (
         <div className="rounded-xl border border-red-200 bg-red-50 p-4 text-red-800 dark:border-red-800 dark:bg-red-950/30 dark:text-red-200">
-          <p className="font-bold">⚠️ Hindi ma-load ang users</p>
+          <p className="font-bold">⚠️ Unable to load users</p>
           <p className="text-sm">{error}</p>
         </div>
       )}
 
       {/* ───────────── USERS ───────────── */}
-      {tab === "users" && users !== null && !error && (
-        <div className="rounded-xl border border-amber-300 bg-amber-50 p-3 dark:border-amber-900 dark:bg-amber-950/20">
-          <p className="text-sm font-semibold text-navy-900 dark:text-amber-300">🛠 One-time migration (lumang users)</p>
-          <p className="mt-1 text-xs text-slate-600 dark:text-slate-400">
-            3+ subjects → +{MIGRATION.months3} buwan · 1-2 subjects → +{MIGRATION.months12} buwan · walang subject → {MIGRATION.trialDays}-day trial mula ngayon (+{MIGRATION.trialDays} araw sa App Access kung active pa). Isang beses lang bawat user.
-          </p>
-          <button onClick={runMigration} disabled={!!busyKey} className={btnGreen + " mt-2"}>{migMsg || "▶ Run migration"}</button>
-        </div>
-      )}
+
 
       {tab === "users" && users !== null && !error && (
         <div className="space-y-3">
-          {filtered.length === 0 && <p className="py-8 text-center text-slate-400">Walang nahanap na user.</p>}
+          {filtered.length === 0 && <p className="py-8 text-center text-slate-400">No users found.</p>}
           {filtered.map((u) => {
             const triage = defaultTriage(u);
             const t = TRIAGE[triage] || TRIAGE.none;
@@ -4769,7 +4871,7 @@ export default function AdminPanel() {
               <div key={u.uid} className="rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-700 dark:bg-slate-800">
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0">
-                    <p className="truncate font-semibold text-navy-900 dark:text-slate-100">{u.fullName || "(walang pangalan)"}</p>
+                    <p className="truncate font-semibold text-navy-900 dark:text-slate-100">{u.fullName || "(no name)"}</p>
                     <p className="truncate text-xs text-slate-400">{u.email}</p>
                   </div>
                   <span className={"flex flex-shrink-0 items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-semibold " + t.chip}>
@@ -4780,21 +4882,42 @@ export default function AdminPanel() {
 
                 <div className="mt-3 flex flex-wrap gap-1.5">
                   {SUBJECT_CODES.map((code) => {
-                    const unlocked = !!u.subscriptions?.[code];
+                    const si = getSubjectInfo(u, code);
                     const busy = busyKey === u.uid + ":" + code;
+                    const tone = si.active
+                      ? "bg-emerald-600 text-white active:bg-emerald-700 "
+                      : si.owned
+                        ? "bg-amber-100 text-amber-800 active:bg-amber-200 dark:bg-amber-950/40 dark:text-amber-300 "
+                        : "bg-slate-100 text-slate-600 active:bg-slate-200 dark:bg-slate-900/40 dark:text-slate-300 ";
                     return (
                       <button
                         key={code}
                         onClick={() => toggleSubject(u, code)}
                         disabled={busy}
                         title={SUBJECT_LABELS[code]}
-                        className={btn + (unlocked ? "bg-emerald-600 text-white active:bg-emerald-700" : "bg-slate-100 text-slate-600 active:bg-slate-200 dark:bg-slate-900/40 dark:text-slate-300")}
+                        className={btn + tone}
                       >
-                        {code} {unlocked ? "✓" : "✕"}
+                        {code} {si.active ? (si.lifetime ? "∞" : "✓") : si.owned ? "⏳" : "✕"}
                       </button>
                     );
                   })}
                 </div>
+
+                {SUBJECT_CODES.some((c) => u.subscriptions?.[c]) && (
+                  <div className="mt-2 space-y-1">
+                    {SUBJECT_CODES.filter((c) => u.subscriptions?.[c]).map((c) => {
+                      const si = getSubjectInfo(u, c);
+                      return (
+                        <div key={c} className="flex items-center justify-between gap-2 text-xs text-slate-500 dark:text-slate-400">
+                          <span>{c} · {si.lifetime ? "Lifetime" : (si.active ? "until " : "expired ") + formatDateShort(si.expiresAt)}</span>
+                          {!si.lifetime && (
+                            <button onClick={() => extendSubject(u, c, 1)} disabled={busyKey === u.uid + ":" + c} className={btnGhost}>+1 mo</button>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
 
                 <div className="mt-3 flex gap-1.5">
                   {Object.entries(TRIAGE).map(([status, cfg]) => (
@@ -4816,7 +4939,7 @@ export default function AdminPanel() {
                   </div>
                   {app.exists && (
                     <p className="mb-2 text-xs text-slate-500 dark:text-slate-400">
-                      {app.active ? "Hanggang " : "Nagtapos noong "}{formatDateShort(app.expiresAt)}
+                      {app.active ? "Until " : "Ended on "}{formatDateShort(app.expiresAt)}
                     </p>
                   )}
                   <div className="flex flex-wrap gap-1.5">
@@ -4836,7 +4959,7 @@ export default function AdminPanel() {
       {tab === "practice" && users !== null && !error && (
         <div className="space-y-3">
           <p className="text-sm font-semibold text-navy-900 dark:text-slate-100">💳 Pending — Practice Questions ({practicePending.length})</p>
-          {practicePending.length === 0 && <p className="py-8 text-center text-slate-400">Walang pending na practice payment. 🎉</p>}
+          {practicePending.length === 0 && <p className="py-8 text-center text-slate-400">No pending practice payments. 🎉</p>}
           {practicePending.map(({ u, p }) => (
             <PendingCard
               key={u.uid + p.referenceCode}
@@ -4854,7 +4977,7 @@ export default function AdminPanel() {
       {tab === "access" && users !== null && !error && (
         <div className="space-y-3">
           <p className="text-sm font-semibold text-navy-900 dark:text-slate-100">⏱ Pending — App Access ({accessPending.length})</p>
-          {accessPending.length === 0 && <p className="py-6 text-center text-slate-400">Walang pending na App Access payment. 🎉</p>}
+          {accessPending.length === 0 && <p className="py-6 text-center text-slate-400">No pending App Access payments. 🎉</p>}
           {accessPending.map(({ u, p }) => {
             const plan = ACCESS_PLANS.find((x) => x.id === p.plan);
             return (
@@ -4870,7 +4993,7 @@ export default function AdminPanel() {
           })}
 
           <p className="pt-3 text-sm font-semibold text-navy-900 dark:text-slate-100">Active App Access ({activeSubscribers.length})</p>
-          {activeSubscribers.length === 0 && <p className="py-4 text-center text-sm text-slate-400">Wala pang may App Access.</p>}
+          {activeSubscribers.length === 0 && <p className="py-4 text-center text-sm text-slate-400">No one has App Access yet.</p>}
           {activeSubscribers.map((u) => {
             const app = getAppAccessInfo(u);
             return (
@@ -4878,7 +5001,7 @@ export default function AdminPanel() {
                 <div className="min-w-0">
                   <p className="truncate text-sm font-semibold text-navy-900 dark:text-slate-100">{u.fullName || u.email}</p>
                   <p className="text-xs text-slate-500 dark:text-slate-400">
-                    {app.active ? formatTimeLeft(app.msLeft) + " left · hanggang " : "Nagtapos noong "}{formatDateShort(app.expiresAt)}
+                    {app.active ? formatTimeLeft(app.msLeft) + " left · until " : "Ended on "}{formatDateShort(app.expiresAt)}
                   </p>
                 </div>
                 <div className="flex flex-shrink-0 gap-1.5">
@@ -4909,14 +5032,14 @@ export default function AdminPanel() {
               <div key={u.uid} className="rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-slate-800">
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0">
-                    <p className="truncate text-sm font-semibold text-navy-900 dark:text-slate-100">{u.fullName || "(walang pangalan)"}</p>
+                    <p className="truncate text-sm font-semibold text-navy-900 dark:text-slate-100">{u.fullName || "(no name)"}</p>
                     <p className="truncate text-xs text-slate-400">{u.email}</p>
                   </div>
                   <StateChip u={u} />
                 </div>
                 {tr.exists && (
                   <p className="mt-1.5 text-xs text-slate-500 dark:text-slate-400">
-                    {tr.active ? "Trial hanggang " : "Trial nagtapos noong "}{formatDateTime(tr.endsAt)}
+                    {tr.active ? "Trial until " : "Trial ended on "}{formatDateTime(tr.endsAt)}
                   </p>
                 )}
                 <div className="mt-2 flex flex-wrap gap-1.5">
@@ -4931,12 +5054,14 @@ export default function AdminPanel() {
         </div>
       )}
 
-      {/* ───────────── RA 10863 (CL) TRIAL + LIFETIME ───────────── */}
+      {/* ───────────── RA 10863 (CL) + EXPIRING ───────────── */}
       {tab === "cl" && users !== null && !error && (
         <div className="space-y-3">
-          <p className="text-xs text-slate-500 dark:text-slate-400">{CL_TRIAL_DAYS}-day free trial, tapos naka-lock hanggang bumili ng CL (₱{CL_LIFETIME_PRICE}).</p>
+          <p className="text-xs text-slate-500 dark:text-slate-400">
+            Level 1 is free for everyone. Levels 2–5 unlock with RA 10863 (₱{CL_PRICE}, 4 months). Old lifetime owners stay unlocked.
+          </p>
           <div className="flex flex-wrap gap-1.5">
-            {[["all", "All"], ["trial", "On trial"], ["expired", "Expired"], ["none", "No trial yet"], ["paid", "Unlocked (paid)"]].map(([id, label]) => (
+            {[["all", "All"], ["paid", "Unlocked"], ["expired", "Expired"], ["none", "Not purchased"]].map(([id, label]) => (
               <button key={id} onClick={() => setClFilter(id)} className={"rounded-full border px-3 py-1 text-xs font-semibold " + (clFilter === id ? "border-navy-900 bg-navy-900 text-white dark:border-slate-100 dark:bg-slate-100 dark:text-navy-900" : "border-slate-200 text-slate-500 dark:border-slate-700 dark:text-slate-400")}>
                 {label}
               </button>
@@ -4945,34 +5070,53 @@ export default function AdminPanel() {
           <p className="text-xs text-slate-400">{clRows.length} user(s)</p>
 
           {clRows.map((u) => {
-            const ct = getClTrialInfo(u);
-            const paid = !!u.subscriptions?.CL;
+            const cs = getSubjectInfo(u, "CL");
             return (
               <div key={u.uid} className="rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-slate-800">
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0">
-                    <p className="truncate text-sm font-semibold text-navy-900 dark:text-slate-100">{u.fullName || "(walang pangalan)"}</p>
+                    <p className="truncate text-sm font-semibold text-navy-900 dark:text-slate-100">{u.fullName || "(no name)"}</p>
                     <p className="truncate text-xs text-slate-400">{u.email}</p>
                   </div>
-                  <span className={"rounded-full px-2 py-0.5 text-[11px] font-semibold " + (paid ? "bg-purple-100 text-purple-700 dark:bg-purple-950/40 dark:text-purple-300" : ct.active ? "bg-sky-100 text-sky-700 dark:bg-sky-950/40 dark:text-sky-300" : "bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400")}>
-                    {paid ? "👑 Unlocked" : ct.exists ? (ct.active ? "🎁 Trial" : "⏳ Expired") : "No trial yet"}
+                  <span className={"rounded-full px-2 py-0.5 text-[11px] font-semibold " + (cs.active ? "bg-purple-100 text-purple-700 dark:bg-purple-950/40 dark:text-purple-300" : cs.owned ? "bg-amber-100 text-amber-800 dark:bg-amber-950/40 dark:text-amber-300" : "bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400")}>
+                    {cs.active ? (cs.lifetime ? "♾️ Lifetime" : "👑 Active") : cs.owned ? "⏳ Expired" : "Not purchased"}
                   </span>
                 </div>
-                {ct.exists && !paid && (
+                {cs.owned && !cs.lifetime && (
                   <p className="mt-1.5 text-xs text-slate-500 dark:text-slate-400">
-                    {ct.active ? "CL trial hanggang " : "CL trial nagtapos noong "}{formatDateTime(ct.endsAt)}
+                    {cs.active ? "Active until " : "Expired on "}{formatDateTime(cs.expiresAt)}
                   </p>
                 )}
                 <div className="mt-2 flex flex-wrap gap-1.5">
-                  {!paid && <button onClick={() => grantClTrial(u)} disabled={busyKey === u.uid + ":cltrial"} className={btnGreen}>{ct.exists ? "↺ Restart " + CL_TRIAL_DAYS + "d" : "＋ Grant " + CL_TRIAL_DAYS + "d"}</button>}
-                  {!paid && <button onClick={() => extendClTrial(u, 1)} disabled={busyKey === u.uid + ":cltrial"} className={btnGhost}>+1 day</button>}
-                  {!paid && ct.exists && ct.active && <button onClick={() => endClTrial(u)} disabled={busyKey === u.uid + ":cltrial"} className={btnRed}>End</button>}
-                  {!paid && <button onClick={() => toggleSubject(u, "CL")} disabled={busyKey === u.uid + ":CL"} className={btnGhost + " border-purple-300 text-purple-700 dark:border-purple-700 dark:text-purple-300"}>👑 Mark Unlocked (₱{CL_LIFETIME_PRICE})</button>}
-                  {paid && <button onClick={() => toggleSubject(u, "CL")} disabled={busyKey === u.uid + ":CL"} className={btnRed}>Remove Unlock</button>}
+                  {!cs.owned && <button onClick={() => toggleSubject(u, "CL")} disabled={busyKey === u.uid + ":CL"} className={btnGhost + " border-purple-300 text-purple-700 dark:border-purple-700 dark:text-purple-300"}>👑 Unlock CL (4 mo)</button>}
+                  {cs.owned && !cs.lifetime && <button onClick={() => extendSubject(u, "CL", 1)} disabled={busyKey === u.uid + ":CL"} className={btnGhost}>+1 mo</button>}
+                  {cs.owned && <button onClick={() => toggleSubject(u, "CL")} disabled={busyKey === u.uid + ":CL"} className={btnRed}>Remove</button>}
                 </div>
               </div>
             );
           })}
+        </div>
+      )}
+
+      {/* ───────────── EXPIRING SOON ───────────── */}
+      {tab === "expiring" && users !== null && !error && (
+        <div className="space-y-3">
+          <p className="text-xs text-slate-500 dark:text-slate-400">
+            App Access or subjects ending within 7 days. Tap “Copy reminder” and paste it into Messenger or SMS.
+          </p>
+          {expiringRows.length === 0 && <p className="py-8 text-center text-slate-400">Nobody is expiring in the next 7 days. 🎉</p>}
+          {expiringRows.map(({ u, items }) => (
+            <div key={u.uid} className="rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-slate-800">
+              <p className="truncate text-sm font-semibold text-navy-900 dark:text-slate-100">{u.fullName || "(no name)"}</p>
+              <p className="truncate text-xs text-slate-400">{u.email}</p>
+              <ul className="mt-2 space-y-0.5 text-xs text-slate-500 dark:text-slate-400">
+                {items.map((i) => (
+                  <li key={i.label}>{i.label} · ends {formatDateShort(i.endsAt)} ({formatTimeLeft(i.endsAt - serverNow())} left)</li>
+                ))}
+              </ul>
+              <button onClick={() => copyReminder(u, items)} className={btnGreen + " mt-2"}>📋 Copy reminder</button>
+            </div>
+          ))}
         </div>
       )}
     </div>
@@ -4984,7 +5128,7 @@ export default function AdminPanel() {
 ```
 import { useMemo, useState } from "react";
 import { PLANS } from "../payments";
-import { getAccess, serverNow, toMs, DAY_MS } from "../access";
+import { getAccess, serverNow, toMs, DAY_MS, getSubjectInfo } from "../access";
 
 // Admin Overview — read-only dashboard. Walang bagong Firestore read/write:
 // kino-compute lang mula sa `users` array na na-load na ng AdminPanel.
@@ -5067,7 +5211,8 @@ function compute(users) {
     else if (key === "expired") status.expired++;
     else status.none++;
 
-    SUBJECT_CODES.forEach((c) => { if (u.subscriptions && u.subscriptions[c]) subjects[c]++; });
+    // Count only ACTIVE subjects (expired ones no longer count as subscribed).
+    SUBJECT_CODES.forEach((c) => { if (getSubjectInfo(u, c, now).active) subjects[c]++; });
 
     // Revenue: bayad lang (price > 0). Hindi kasama ang manual grant / migration.
     let spent = 0;
@@ -5148,8 +5293,8 @@ export default function AdminOverview({ users }) {
             <p className="text-sm font-semibold text-navy-900 dark:text-slate-100">Share mode</p>
             <p className="text-xs text-slate-500 dark:text-slate-400">
               {share
-                ? "Naka-mask ang email, nakatago ang pending. Screenshot-in ang card sa ibaba."
-                : "Off: buong pangalan, email, at pending ang makikita (para sa'yo lang)."}
+                ? "Emails are masked and pending items are hidden. Screenshot the card below."
+                : "Off: full names, emails, and pending items are visible (for you only)."}
             </p>
           </div>
           <button onClick={() => setShare(!share)} className={switchBtn(share)} role="switch" aria-checked={share} aria-label="Share mode">
@@ -5158,7 +5303,7 @@ export default function AdminOverview({ users }) {
         </div>
         {share && (
           <div className="flex items-center justify-between gap-3 border-t border-slate-100 pt-2 dark:border-slate-700">
-            <p className="text-sm text-slate-600 dark:text-slate-300">Ipakita ang revenue</p>
+            <p className="text-sm text-slate-600 dark:text-slate-300">Show revenue</p>
             <button onClick={() => setShowRevenue(!showRevenue)} className={switchBtn(showRevenue)} role="switch" aria-checked={showRevenue} aria-label="Show revenue">
               <span className={switchKnob(showRevenue)} />
             </button>
@@ -5267,7 +5412,7 @@ export default function AdminOverview({ users }) {
                 {s.recent.map(({ u, created }) => (
                   <li key={u.uid} className="flex items-center justify-between gap-3 py-2">
                     <div className="min-w-0">
-                      <p className="truncate text-sm font-medium">{u.fullName || "(walang pangalan)"}</p>
+                      <p className="truncate text-sm font-medium">{u.fullName || "(no name)"}</p>
                       <p className={"truncate text-xs " + muted}>{share ? maskEmail(u.email) : u.email}</p>
                     </div>
                     <span className={"flex-shrink-0 text-xs " + muted}>{shortDate(created)}</span>
@@ -5285,7 +5430,7 @@ export default function AdminOverview({ users }) {
           )}
 
           <p className={"border-t pt-3 text-[11px] " + t("border-slate-100 text-slate-400", "dark:border-slate-700 dark:text-slate-500")}>
-            Bilang mula sa aktwal na user records ng app. Hindi kasama ang admin account.
+            Counts come from the app's actual user records. Admin accounts are excluded.
           </p>
         </div>
       </div>
@@ -5364,13 +5509,13 @@ function AddSubjectView({ theme, onSave, onCancel }) {
           disabled={!name.trim()}
           className={`w-full rounded-xl px-4 py-2.5 text-sm font-semibold transition-colors disabled:opacity-40 ${theme.accentBtn}`}
         >
-          ➕ Idagdag sa listahan
+          ➕ Add to list
         </button>
       </div>
 
       {pending.length > 0 && (
         <div className="mt-4">
-          <p className={`mb-2 text-xs font-semibold uppercase tracking-wide ${theme.subtext}`}>Ihahanda ({pending.length})</p>
+          <p className={`mb-2 text-xs font-semibold uppercase tracking-wide ${theme.subtext}`}>Ready to save ({pending.length})</p>
           <div className="space-y-2">
             {pending.map((s, idx) => (
               <div key={idx} className={`flex items-center gap-3 rounded-xl border p-3 ${theme.card}`}>
@@ -5385,7 +5530,7 @@ function AddSubjectView({ theme, onSave, onCancel }) {
             onClick={saveAll}
             className={`mt-3 w-full rounded-xl px-4 py-3 text-sm font-bold shadow-sm transition-colors ${theme.accentBtn}`}
           >
-            💾 I-save Lahat ({pending.length})
+            💾 Save All ({pending.length})
           </button>
         </div>
       )}
@@ -5401,7 +5546,7 @@ function CustomSubjectCard({ subject, expanded, onToggle, onPlay, onManage, onDe
 
   const handleRestart = (e) => {
     e.stopPropagation();
-    if (confirm(`Reset progress mo para sa ${subject.name}? Hindi mabubura ang mga tanong, mga sagot mo lang.`)) {
+    if (confirm(`Reset your progress for ${subject.name}? Questions are kept — only your answers are cleared.`)) {
       resetCustomProgress(subject.id);
       onRefresh();
     }
@@ -5409,7 +5554,7 @@ function CustomSubjectCard({ subject, expanded, onToggle, onPlay, onManage, onDe
 
   const handleDelete = (e) => {
     e.stopPropagation();
-    if (confirm(`Burahin ang subject na "${subject.name}"? Mabubura rin lahat ng tanong dito. Hindi na ito mababawi.`)) {
+    if (confirm(`Delete the subject "${subject.name}"? All its questions will be deleted too. This cannot be undone.`)) {
       onDelete(subject.id);
     }
   };
@@ -5421,7 +5566,7 @@ function CustomSubjectCard({ subject, expanded, onToggle, onPlay, onManage, onDe
         <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full text-lg" style={{ backgroundColor: subject.color }}>{subject.icon}</span>
         <div className="min-w-0 flex-1">
           <p className={`truncate font-bold ${theme.text}`}>{subject.name}</p>
-          <p className={`truncate text-xs ${theme.subtext}`}>{stats.total > 0 ? `${stats.answeredCount}/${stats.total} sagot na` : "Walang tanong pa"}</p>
+          <p className={`truncate text-xs ${theme.subtext}`}>{stats.total > 0 ? `${stats.answeredCount}/${stats.total} answered` : "No questions yet"}</p>
         </div>
         <span className={`flex-shrink-0 transition-transform ${theme.subtext} ${expanded ? "rotate-180" : ""}`} aria-hidden>▾</span>
       </button>
@@ -5548,24 +5693,24 @@ export default function CustomQuizHub({ onBack }) {
         </div>
 
         <h1 className={`mb-1 text-xl font-bold ${theme.text}`}>🧩 Your Own Quiz</h1>
-        <p className={`mb-4 text-sm ${theme.subtext}`}>Gumawa ng sarili mong subject at tanong — laging naka-save sa device mo.</p>
+        <p className={`mb-4 text-sm ${theme.subtext}`}>Create your own subjects and questions — always saved on your device.</p>
 
         <div className="mb-4 space-y-2">
           <OnOffToggle
             label="🎲 Random Choices"
-            description="Random ang letra ng sagot at pagkakasunod ng tanong tuwing mag-quiz"
+            description="Randomizes the answer letters and question order every time you take the quiz"
             checked={settings.randomChoices}
             onChange={(v) => updateSetting("randomChoices", v)}
           />
           <OnOffToggle
             label="⏱️ Timer"
-            description="Magtatanong ng oras (per question o total) bago magsimula"
+            description="Asks for a time limit (per question or total) before you start"
             checked={settings.timerEnabled}
             onChange={(v) => updateSetting("timerEnabled", v)}
           />
           <OnOffToggle
             label="🌸 Blossom Mode"
-            description="Alternatibong light/floral na theme (default: dark)"
+            description="Alternative light/floral theme (default: dark)"
             checked={settings.blossomMode}
             onChange={(v) => updateSetting("blossomMode", v)}
           />
@@ -5574,7 +5719,7 @@ export default function CustomQuizHub({ onBack }) {
         {subjects.length === 0 ? (
           <div className={`flex flex-col items-center gap-3 rounded-2xl border border-dashed p-8 text-center ${theme.card}`}>
             <span className="text-4xl" aria-hidden>🧩</span>
-            <p className={`text-sm font-medium ${theme.text}`}>Wala ka pang sariling subject.</p>
+            <p className={`text-sm font-medium ${theme.text}`}>You don't have any subjects yet.</p>
             <button onClick={() => setSubView("add-subject")} className={`mt-1 w-full rounded-xl px-4 py-3 text-sm font-semibold transition-colors ${theme.accentBtn}`}>
               ➕ Add Subject
             </button>
@@ -5651,18 +5796,18 @@ function QuestionForm({ theme, initial, onSave, onCancel }) {
         value={form.question}
         onChange={(e) => setField("question", e.target.value)}
         rows={2}
-        placeholder="I-type ang tanong dito…"
+        placeholder="Type the question here…"
         className="mb-3 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-navy-900 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:focus:ring-navy-500"
       />
 
-      <label className={`mb-1 block text-xs font-semibold uppercase tracking-wide ${theme.subtext}`}>Choices (A at B required, C/D optional)</label>
+      <label className={`mb-1 block text-xs font-semibold uppercase tracking-wide ${theme.subtext}`}>Choices (A and B required, C/D optional)</label>
       <div className="mb-3 space-y-2">
         {["A", "B", "C", "D"].map((k) => (
           <div key={k} className="flex items-center gap-2">
             <button
               type="button"
               onClick={() => form[k].trim() && setField("correct", k)}
-              title={form[k].trim() ? "Markahan bilang tamang sagot" : ""}
+              title={form[k].trim() ? "Mark as the correct answer" : ""}
               className={`flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg text-sm font-bold transition-colors ${
                 form.correct === k && form[k].trim()
                   ? "bg-emerald-500 text-white"
@@ -5681,14 +5826,14 @@ function QuestionForm({ theme, initial, onSave, onCancel }) {
           </div>
         ))}
       </div>
-      <p className={`mb-3 text-xs ${theme.subtext}`}>👆 I-tap ang letra para markahan bilang tamang sagot. Kasalukuyang tama: <strong>{form.correct}</strong></p>
+      <p className={`mb-3 text-xs ${theme.subtext}`}>👆 Tap a letter to mark it as the correct answer. Currently correct: <strong>{form.correct}</strong></p>
 
-      <label className={`mb-1 block text-xs font-semibold uppercase tracking-wide ${theme.subtext}`}>Reason (bakit tama ang sagot)</label>
+      <label className={`mb-1 block text-xs font-semibold uppercase tracking-wide ${theme.subtext}`}>Reason (why the answer is correct)</label>
       <textarea
         value={form.reason}
         onChange={(e) => setField("reason", e.target.value)}
         rows={2}
-        placeholder={`Kasi ang ${form.correct} ay…`}
+        placeholder={`Because ${form.correct} is…`}
         className="mb-4 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-navy-900 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:focus:ring-navy-500"
       />
 
@@ -5747,7 +5892,7 @@ export default function CustomQuizManage({ subject, theme, onBack }) {
   };
 
   const handleDelete = (id) => {
-    if (!confirm(`Burahin ang tanong #${id}? Hindi na ito mababawi.`)) return;
+    if (!confirm(`Delete question #${id}? This cannot be undone.`)) return;
     deleteCustomQuestion(subject.id, id);
     setRefreshKey((k) => k + 1);
   };
@@ -5771,14 +5916,14 @@ export default function CustomQuizManage({ subject, theme, onBack }) {
 
       {!formOpen && (
         <button onClick={openAdd} className={`mb-4 w-full rounded-xl px-4 py-3 text-sm font-semibold transition-colors ${theme.accentBtn}`}>
-          ➕ Magdagdag ng Tanong
+          ➕ Add Question
         </button>
       )}
 
       {formOpen && <QuestionForm key={editingId || "new"} theme={theme} initial={editingInitial} onSave={handleSave} onCancel={closeForm} />}
 
       {ids.length === 0 ? (
-        <p className={`rounded-xl border border-dashed p-6 text-center text-sm ${theme.card} ${theme.subtext}`}>Wala pang tanong. Simulan sa "➕ Magdagdag ng Tanong" sa itaas.</p>
+        <p className={`rounded-xl border border-dashed p-6 text-center text-sm ${theme.card} ${theme.subtext}`}>No questions yet. Start with "➕ Add Question" above.</p>
       ) : (
         <div className="space-y-3">
           {ids.map((id) => (
@@ -5859,13 +6004,13 @@ function ResultsView({ theme, entries, order, answers, subjectName, onRetry, onB
     <div className="mx-auto max-w-md p-4">
       <div className={`rounded-2xl border p-6 text-center shadow-md ${theme.card}`}>
         <span className="text-4xl" aria-hidden>🎉</span>
-        <h2 className={`mt-2 text-xl font-bold ${theme.text}`}>Tapos na — {subjectName}</h2>
-        <p className={`mt-1 text-sm ${theme.subtext}`}>{answeredCount}/{total} sinagutan</p>
+        <h2 className={`mt-2 text-xl font-bold ${theme.text}`}>Finished — {subjectName}</h2>
+        <p className={`mt-1 text-sm ${theme.subtext}`}>{answeredCount}/{total} answered</p>
         <p className={`mt-4 text-4xl font-black ${theme.text}`}>{pct}%</p>
-        <p className={`mb-6 text-sm ${theme.subtext}`}>{correctCount} sa {total} tama</p>
+        <p className={`mb-6 text-sm ${theme.subtext}`}>{correctCount} of {total} correct</p>
         <div className="space-y-2">
-          <button onClick={onRetry} className={`w-full rounded-xl px-4 py-3 text-sm font-semibold transition-colors ${theme.accentBtn}`}>🔁 Ulitin</button>
-          <button onClick={onBack} className={`w-full rounded-xl border px-4 py-2.5 text-sm font-medium transition-colors ${theme.outlineBtn}`}>← Bumalik sa Your Own Quiz</button>
+          <button onClick={onRetry} className={`w-full rounded-xl px-4 py-3 text-sm font-semibold transition-colors ${theme.accentBtn}`}>🔁 Retry</button>
+          <button onClick={onBack} className={`w-full rounded-xl border px-4 py-2.5 text-sm font-medium transition-colors ${theme.outlineBtn}`}>← Back to Your Own Quiz</button>
         </div>
       </div>
     </div>
@@ -5964,7 +6109,7 @@ export default function CustomQuizPlay({ subject, theme, randomChoices, timerCho
   if (total === 0) {
     return (
       <div className="mx-auto max-w-2xl p-4 text-center">
-        <p className={`text-sm ${theme.subtext}`}>Wala pang tanong sa subject na ito.</p>
+        <p className={`text-sm ${theme.subtext}`}>No questions in this subject yet.</p>
         <button onClick={onBack} className={`mt-3 rounded-lg border px-4 py-2 text-sm ${theme.outlineBtn}`}>← Back</button>
       </div>
     );
@@ -5991,7 +6136,7 @@ export default function CustomQuizPlay({ subject, theme, randomChoices, timerCho
 
       {timer && !isResolved && (
         <div className={`mb-3 flex items-center justify-center gap-2 rounded-xl px-3 py-2 text-sm font-bold ${remainingLow ? "bg-red-500 text-white animate-pulse" : theme.chip}`}>
-          ⏱️ {formatSeconds(remainingMs / 1000)} {timer.mode === "perQuestion" ? "· tanong na ito" : "· buong quiz"}
+          ⏱️ {formatSeconds(remainingMs / 1000)} {timer.mode === "perQuestion" ? "· this question" : "· whole quiz"}
         </div>
       )}
 
@@ -6009,7 +6154,7 @@ export default function CustomQuizPlay({ subject, theme, randomChoices, timerCho
           const correctDot = answeredDot && String(a).trim().toLowerCase() === String(entries[id]?.correct).trim().toLowerCase();
           const lockedDot = lockedIds.includes(id) && !answeredDot;
           const dotColor = answeredDot ? (correctDot ? "bg-emerald-400" : "bg-red-400") : lockedDot ? "bg-amber-400" : "bg-slate-300 dark:bg-slate-600";
-          return <button key={id} onClick={() => goTo(idx)} className={`h-3 w-3 rounded-full transition-all ${idx === currentIndex ? "scale-125" : ""} ${dotColor}`} title={`Tanong ${idx + 1}`} />;
+          return <button key={id} onClick={() => goTo(idx)} className={`h-3 w-3 rounded-full transition-all ${idx === currentIndex ? "scale-125" : ""} ${dotColor}`} title={`Question ${idx + 1}`} />;
         })}
       </div>
 
@@ -6038,7 +6183,7 @@ export default function CustomQuizPlay({ subject, theme, randomChoices, timerCho
         {isResolved && (
           <div className={`mt-4 rounded-lg p-4 ${isAnswered && !isWrongAnswer(currentAnswer, currentItem.correct) ? "bg-emerald-50 dark:bg-emerald-950/30" : "bg-red-50 dark:bg-red-950/30"}`}>
             <p className={`font-medium ${theme.text}`}>
-              {!isAnswered ? "⏰ Oras na — walang nasagot." : isWrongAnswer(currentAnswer, currentItem.correct) ? `❌ Mali. Ang tamang sagot ay: ${currentItem.correct}` : "✅ Tama!"}
+              {!isAnswered ? "⏰ Time's up — no answer." : isWrongAnswer(currentAnswer, currentItem.correct) ? `❌ Incorrect. The correct answer is: ${currentItem.correct}` : "✅ Correct!"}
             </p>
             {currentItem.reason && <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{currentItem.reason}</p>}
           </div>
@@ -6590,8 +6735,8 @@ export function importSubjectQuizJson(subjectId, jsonText) {
   if (!ids.length) {
     throw new Error(
       skipped.length
-        ? `Walang na-import: lahat ng ${skipped.length} item ay may kulang na "question" o "correct" answer (IDs: ${skipped.slice(0, 10).join(", ")}${skipped.length > 10 ? "…" : ""}).`
-        : "Walang laman ang pinaste mong JSON."
+        ? `Nothing imported: all ${skipped.length} items are missing a "question" or "correct" answer (IDs: ${skipped.slice(0, 10).join(", ")}${skipped.length > 10 ? "…" : ""}).`
+        : "The pasted JSON is empty."
     );
   }
 
@@ -6799,7 +6944,7 @@ import {
 } from "firebase/auth";
 import { doc, getDoc, setDoc, updateDoc, serverTimestamp, onSnapshot, runTransaction, getDocFromServer } from "firebase/firestore";
 import { auth, db, googleProvider } from "./firebase";
-import { setServerClock, persistClock, getAccess, hasAnyPractice, TRIAL_DAYS, CL_TRIAL_DAYS } from "./access";
+import { setServerClock, persistClock, getAccess, hasAnyPractice, TRIAL_DAYS } from "./access";
 
 const DEVICE_ID_KEY = "cuble_deviceId";
 const PENDING_SIGNIN_KEY = "cuble_pendingSignIn";
@@ -6881,11 +7026,7 @@ export function AuthProvider({ children }) {
               if (!d.trial && !hasAnyPractice(d)) {
                 upd.trial = { startedAt: serverTimestamp(), days: TRIAL_DAYS };
               }
-              // Hiwalay na CL trial (CL_TRIAL_DAYS) para sa RA 10863 (CL) — isang beses lang din,
-              // maliban kung bumili na ng CL (subscriptions.CL).
-              if (!d.clTrial && !(d.subscriptions && d.subscriptions.CL)) {
-                upd.clTrial = { startedAt: serverTimestamp(), days: CL_TRIAL_DAYS };
-              }
+              // The separate RA 10863 (CL) trial is retired: Level 1 is free for everyone now.
               tx.update(ref, upd);
             });
             if (!applied) { initDoneFor.current = null; return; }
@@ -7036,7 +7177,7 @@ export function AuthProvider({ children }) {
         console.warn("getRedirectResult error:", err);
         const code = err?.code || "unknown-error";
         const msg = err?.message || "";
-        setAuthError(`[${code}] ${msg || "Hindi na-process ang sign-in. Subukan ulit."}`);
+        setAuthError(`[${code}] ${msg || "Sign-in could not be completed. Please try again."}`);
       })
       .finally(() => {
         if (wasPending) {
@@ -7062,7 +7203,7 @@ export function AuthProvider({ children }) {
       console.warn("Google sign-in error:", err);
       const code = err?.code || "unknown-error";
       const msg = err?.message || "";
-      setAuthError(`[${code}] ${msg || "Hindi na-process ang sign-in. Subukan ulit."}`);
+      setAuthError(`[${code}] ${msg || "Sign-in could not be completed. Please try again."}`);
       setSigningIn(false);
       localStorage.removeItem(PENDING_SIGNIN_KEY);
     }
@@ -7112,8 +7253,12 @@ export function useAuth() {
 
 ## File: ./frontend/src/payments.js
 ```
-// Payment plans, method list, reference-code generator, at ang Firestore
-// write para sa manual GCash/Maya/MariBank subscription flow.
+// Payment plans, payment method list, reference-code generator, and the Firestore
+// write for the manual GCash / Maya / MariBank subscription flow.
+//
+// `months`      = how long the subject(s) stay unlocked after approval.
+// `bonusMonths` = bundles only (shown in the UI as "+ N months App Access").
+//                 App Access for every plan is granted by computeGrant() in access.js.
 
 import gcashQr from "./assets/payment/gcash-qr.png";
 import mayaQr from "./assets/payment/maya-qr.png";
@@ -7123,17 +7268,19 @@ import { db, auth } from "./firebase";
 import { ACCESS_PLANS } from "./access";
 
 export const PLANS = [
-  { id: "CL", label: "RA 10863 (Customs Law)", price: 120, subjects: ["CL"] },
-  { id: "TL", label: "Tariff Law", price: 120, subjects: ["TL"] },
-  { id: "CDP", label: "Customs Documentation & Procedures", price: 120, subjects: ["CDP"] },
-  { id: "PC", label: "Practical Computations", price: 120, subjects: ["PC"] },
-  { id: "TCP", label: "Tariff Commission Primer", price: 229, subjects: ["TCP"] },
-  { id: "BUNDLE", label: "Normal Bundle", price: 460, subjects: ["CL", "TL", "CDP", "PC"], bonusMonths: 8 },
-  { id: "ALL", label: "Sulit Bundle", price: 669, subjects: ["CL", "TL", "CDP", "PC", "TCP"], bonusMonths: 10 },
+  { id: "CL", label: "RA 10863 (CMTA)", price: 199, months: 4, subjects: ["CL"] },
+  { id: "TL", label: "Tariff Law", price: 120, months: 3, subjects: ["TL"] },
+  { id: "CDP", label: "Customs Documentation & Procedures", price: 120, months: 3, subjects: ["CDP"] },
+  { id: "PC", label: "Practical Computations", price: 120, months: 3, subjects: ["PC"] },
+  { id: "TCP", label: "Tariff Commission Primer", price: 229, months: 3, subjects: ["TCP"] },
+  { id: "BUNDLE", label: "Normal Bundle", price: 380, months: 6, subjects: ["CL", "TL", "CDP", "PC"], bonusMonths: 6 },
+  { id: "ALL", label: "Sulit Bundle", price: 450, months: 6, subjects: ["CL", "TL", "CDP", "PC", "TCP"], bonusMonths: 6 },
 ];
 
-// Presyo ng CL (practice subject, walang expiry) — galing sa PLANS.
+// Price of RA 10863 (CL). The name is kept so existing imports keep working,
+// but CL is no longer lifetime — it now expires after 4 months.
 export const CL_LIFETIME_PRICE = PLANS.find((p) => p.id === "CL").price;
+export const CL_PRICE = CL_LIFETIME_PRICE;
 
 export const PAYMENT_METHODS = [
   { id: "gcash", label: "GCash", qr: gcashQr },
@@ -7141,7 +7288,7 @@ export const PAYMENT_METHODS = [
   { id: "maribank", label: "MariBank", qr: maribankQr },
 ];
 
-// Walang 0/O/1/I para di malito kapag isinusulat sa payment note.
+// No 0/O/1/I so codes are not confused when written in the payment note.
 const REF_CHARS = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 
 export function generateReferenceCode(planId) {
@@ -7152,13 +7299,13 @@ export function generateReferenceCode(planId) {
   return `${planId}-${suffix}`;
 }
 
-// setDoc + merge: kung wala pang user doc, gagawa ito (kasama ang email/pangalan)
-// para lalabas pa rin sa Admin Panel. serverTimestamp() ay bawal sa arrayUnion,
-// kaya Date.now() ang gamit.
+// setDoc + merge: if the user doc does not exist yet this creates it (with
+// email/name) so the purchase still shows up in the Admin Panel.
+// serverTimestamp() is not allowed inside arrayUnion, so Date.now() is used.
 export async function submitPendingPurchase(uid, { planId, subjects, price, method, referenceCode }) {
   const ref = doc(db, "users", uid);
   const u = auth.currentUser;
-  // App Access plans (M1/M3/M8) ay may sariling pending list.
+  // App Access plans (M1/M3/M8) have their own pending list.
   const field = ACCESS_PLANS.some((p) => p.id === planId) ? "pendingAccess" : "pendingPurchases";
   await setDoc(
     ref,
@@ -7182,20 +7329,19 @@ export async function submitPendingPurchase(uid, { planId, subjects, price, meth
 
 ## File: ./frontend/src/access.js
 ```
-// access.js — oras ng server, 3-day trial, at App Access plans (1/3/8 buwan).
-// Pure functions lang (walang React) para magamit kahit saan.
+// access.js — server clock, 3-day trial, App Access plans, and per-subject expiry.
+// Pure functions only (no React) so they can be used anywhere.
 //
-// DALAWANG HIWALAY NA BAGAY:
-//  1) APP ACCESS  -> pwede bang buksan ang app (trial / buwanang bayad)
-//  2) PRACTICE QUESTIONS -> `subscriptions` (CL/TL/CDP/PC/TCP) — HINDI ito ginagalaw dito.
+// TWO SEPARATE THINGS:
+//  1) APP ACCESS      -> can the user open the app (trial / paid months)
+//  2) PRACTICE ACCESS -> `subscriptions` (CL/TL/CDP/PC/TCP) + `subscriptionExpiry`.
+//     A subject flag with NO expiry is a legacy "lifetime" subscription and never expires.
 
 export const TRIAL_DAYS = 3;
 export const DAY_MS = 24 * 60 * 60 * 1000;
 
-// true  = kahit sinong may bayad na practice subject (luma o bago) ay laging
-//         may access sa app (protektado ang mga "lifetime" na na-promise mo).
-// false = lahat ng user (maliban admin) kailangan ng trial / App Access.
-// TRANSITION: true hanggang matapos ang migration sa AdminPanel, tapos i-set sa false (patch-flip.cjs).
+// true  = anyone with a paid practice subject always has app access.
+// false = everyone (except admin) needs a trial / App Access.
 export const PRACTICE_BUYERS_KEEP_APP_ACCESS = false;
 
 export const ACCESS_PLANS = [
@@ -7205,9 +7351,9 @@ export const ACCESS_PLANS = [
 ];
 
 // ── Server clock ─────────────────────────────────────────────────────
-// Hindi tayo nagtitiwala sa oras ng phone. Kapag online, kinukuha ang oras
-// ng Firestore server at sine-save ang pagitan (offset). Hindi rin umaatras
-// ang oras (maxSeen) para hindi madaya ng pag-atras ng clock offline.
+// We do not trust the phone's clock. When online we read the Firestore server
+// time and save the offset. Time never goes backwards (maxSeen), so rolling the
+// phone clock back while offline cannot extend access.
 const OFFSET_KEY = "cuble_clockOffset";
 const MAXSEEN_KEY = "cuble_clockMaxSeen";
 
@@ -7225,10 +7371,10 @@ export function persistClock() {
   } catch (_) {}
 }
 
-// Tawagin kapag nakuha na ang totoong oras ng server (ms).
+// Call this once the real server time (ms) is known.
 export function setServerClock(serverMs) {
   offset = serverMs - Date.now();
-  maxSeen = serverMs; // server ang masusunod, i-reset ang maxSeen
+  maxSeen = serverMs;
   persistClock();
 }
 
@@ -7239,8 +7385,8 @@ export function serverNow() {
 }
 
 // ── Helpers ──────────────────────────────────────────────────────────
-// Tumatanggap ng ms number, Firestore Timestamp, o {seconds,nanoseconds}
-// (ganyan ang itsura ng Timestamp kapag galing sa localStorage cache).
+// Accepts ms number, Firestore Timestamp, or {seconds,nanoseconds}
+// (the shape a Timestamp has after coming back from the localStorage cache).
 export function toMs(v) {
   if (v == null) return null;
   if (typeof v === "number") return v;
@@ -7261,7 +7407,7 @@ export function addMonths(ms, months) {
 }
 
 export function formatTimeLeft(ms) {
-  if (!ms || ms <= 0) return "tapos na";
+  if (!ms || ms <= 0) return "Expired";
   const d = Math.floor(ms / DAY_MS);
   const h = Math.floor((ms % DAY_MS) / 3600000);
   const m = Math.floor((ms % 3600000) / 60000);
@@ -7285,7 +7431,7 @@ export function getTrialInfo(profile, now = serverNow()) {
   let start = t ? toMs(t.startedAt) : null;
   let days = t ? (Number(t.days) || 0) : 0;
   let fromCreated = false;
-  // Fallback: kung walang trial field, ang createdAt ng account ang simula ng trial.
+  // Fallback: no trial field -> the account's createdAt starts the trial.
   if (start == null) { start = toMs(profile && profile.createdAt); days = TRIAL_DAYS; fromCreated = true; }
   if (start == null) return { exists: false, active: false, endsAt: null, msLeft: 0 };
   const endsAt = start + days * DAY_MS;
@@ -7294,7 +7440,7 @@ export function getTrialInfo(profile, now = serverNow()) {
   return { exists: true, active: msLeft > 0, endsAt, msLeft };
 }
 
-// appAccess = { plan: "M1"|"M3"|"M8", expiresAt: ms }
+// appAccess = { plan: "M1"|"M3"|"M8"|..., expiresAt: ms }
 export function getAppAccessInfo(profile, now = serverNow()) {
   const a = profile && profile.appAccess;
   const exp = toMs(a && a.expiresAt);
@@ -7318,44 +7464,84 @@ export function getAccess(profile, opts) {
   return { state: "expired", trial, app, msLeft: 0 };
 }
 
-// ── RA 10863 (CL) time-based lock ──────────────────────────────────────
-// Hiwalay sa generic FREE_LIMITS ng ibang subjects: CL_TRIAL_DAYS na FULL access trial
-// (lahat ng item, hindi item-count based), tapos naka-lock LAHAT hanggang
-// bumili ng CL (presyo: PLANS sa payments.js). clTrial = { startedAt: Timestamp(server), days }
+// ── Legacy RA 10863 (CL) free trial ───────────────────────────────────
+// The CL trial is retired: new signups get Level 1 for free instead.
+// Only trials that STARTED BEFORE the cutoff below are still honored, so users
+// who are mid-trial when this update ships do not lose it. Older app versions
+// may still create a clTrial for new signups — those are ignored.
+// >>> Set the cutoff to the day you deploy this update. <<<
 export const CL_TRIAL_DAYS = 3;
-// Ang presyo ng CL ay galing sa PLANS: tingnan ang CL_LIFETIME_PRICE sa payments.js.
+export const CL_TRIAL_HONOR_BEFORE_MS = Date.UTC(2026, 9, 21); // 2026-10-21 00:00 UTC (covers an Oct 20 deploy)
 
 export function getClTrialInfo(profile, now = serverNow()) {
+  const none = { exists: false, active: false, endsAt: null, msLeft: 0 };
   const t = profile && profile.clTrial;
-  let start = t ? toMs(t.startedAt) : null;
-  let days = t ? (Number(t.days) || 0) : 0;
-  let fromCreated = false;
-  if (start == null) { start = toMs(profile && profile.createdAt); days = CL_TRIAL_DAYS; fromCreated = true; }
-  if (start == null) return { exists: false, active: false, endsAt: null, msLeft: 0 };
+  const start = t ? toMs(t.startedAt) : null;
+  if (start == null || start >= CL_TRIAL_HONOR_BEFORE_MS) return none;
+  const days = Number(t.days) || 0;
   const endsAt = start + days * DAY_MS;
-  if (fromCreated && endsAt <= now) return { exists: false, active: false, endsAt: null, msLeft: 0 };
   const msLeft = Math.max(0, endsAt - now);
   return { exists: true, active: msLeft > 0, endsAt, msLeft };
 }
 
-// ── Bonus / stacking (shared ng approve, manual grant at migration) ──
+// ── Per-subject expiry ────────────────────────────────────────────────
+// subscriptions       = { CL: true, ... }
+// subscriptionExpiry  = { CL: ms, ... }
+// Flag true + NO expiry entry = legacy lifetime (grandfathered, never expires).
+export const SUBJECT_CODES = ["CL", "TL", "CDP", "PC", "TCP"];
+export const SUBJECT_TERM_MONTHS = { CL: 4, TL: 3, CDP: 3, PC: 3, TCP: 3 };
+
+// lifetime: true -> expiresAt is null and msLeft is 0 (ignore msLeft, check `lifetime` first).
+export function getSubjectInfo(profile, code, now = serverNow()) {
+  const owned = !!(profile && profile.subscriptions && profile.subscriptions[code]);
+  if (!owned) return { owned: false, active: false, lifetime: false, expiresAt: null, msLeft: 0 };
+  const exp = toMs(profile.subscriptionExpiry && profile.subscriptionExpiry[code]);
+  if (exp == null) return { owned: true, active: true, lifetime: true, expiresAt: null, msLeft: 0 };
+  const msLeft = Math.max(0, exp - now);
+  return { owned: true, active: msLeft > 0, lifetime: false, expiresAt: exp, msLeft };
+}
+
+export function isSubjectUnlocked(profile, code, now = serverNow()) {
+  if (!profile) return false;
+  if (profile.isAdmin) return true;
+  return getSubjectInfo(profile, code, now).active;
+}
+
+export function countActiveSubjects(profile, now = serverNow()) {
+  return SUBJECT_CODES.filter((c) => getSubjectInfo(profile, c, now).active).length;
+}
+
+// RA 10863 5-level quiz: Level 1 is free for everyone; Levels 2-5 need CL.
+export function isClUnlocked(profile, now = serverNow()) {
+  if (!profile) return false;
+  if (profile.isAdmin) return true;
+  if (getSubjectInfo(profile, "CL", now).active) return true;
+  return getClTrialInfo(profile, now).active;
+}
+
+export function isRaLevelUnlocked(profile, levelId, now = serverNow()) {
+  if (levelId === "level1") return true;
+  return isClUnlocked(profile, now);
+}
+
+// ── Bonus / stacking ─────────────────────────────────────────────────
 export const THREE_SUBJECT_BONUS = { count: 3, months: 3 };
-// Isang beses na migration ng lumang users: 3+ subjects = 3 buwan, 1-2 = 2 buwan, wala = trial.
+// Old one-time migration (already ran). Kept only so existing imports keep working.
 export const MIGRATION = { months3: 3, months12: 2, trialDays: TRIAL_DAYS };
 
 export function countSubjects(subs) {
   return Object.values(subs || {}).filter(Boolean).length;
 }
 
-// Idagdag sa dulo ng natitirang oras kung active pa; kung hindi, mula ngayon.
+// Used by App Access plans (M1/M3/M8) and manual grants: adds to the end of the
+// remaining time if still active, otherwise from now.
 export function stackAccess(profile, months, now = serverNow()) {
   const cur = getAppAccessInfo(profile, now);
   return addMonths(cur.active ? cur.expiresAt : now, months);
 }
 
-// plan = { subjects: [...], bonusMonths?: number }
-// months = buwan ng bundle, o +3 kapag SINGLE-subject purchase ang unang nagpaabot sa 3 subjects.
-// flag = true kapag dapat markahang consumed ang bonuses.threeSubjects.
+// LEGACY (old lifetime flow). Kept so the current AdminPanel still compiles
+// until it is switched to computeGrant().
 export function planAward(profile, plan) {
   const owned = (profile && profile.subscriptions) || {};
   const next = { ...owned };
@@ -7368,11 +7554,49 @@ export function planAward(profile, plan) {
   return { months, flag };
 }
 
-export function isClUnlocked(profile, now = serverNow()) {
-  if (!profile) return false;
-  if (profile.isAdmin) return true;
-  if (profile.subscriptions && profile.subscriptions.CL) return true;
-  return getClTrialInfo(profile, now).active;
+// NEW purchase flow (expiring subjects).
+// plan = { subjects: [...], months: term in months, ... }
+// Rules:
+//  - Each purchased subject expires `months` after now, or after its current expiry
+//    if still active (renewing early never loses days).
+//  - Legacy lifetime subjects are never converted or shortened.
+//  - App Access does NOT stack across subjects: it runs to the latest of
+//    (current App Access end, latest purchased subject end).
+//  - 3-subject bonus: counts ACTIVE subjects only, once per account, +3 months of
+//    App Access only when a SINGLE-subject purchase is what reaches 3.
+// Returns { termMonths, subjectExpiry: {CODE: ms}, appExpiresAt: ms|null, bonusFlag, bonusMonths }
+export function computeGrant(profile, plan, now = serverNow()) {
+  const term = plan.months || 0;
+  const subjects = plan.subjects || [];
+  const subjectExpiry = {};
+  let latest = 0;
+
+  subjects.forEach((code) => {
+    const info = getSubjectInfo(profile, code, now);
+    const base = info.active && !info.lifetime ? info.expiresAt : now;
+    const end = addMonths(base, term);
+    if (end > latest) latest = end;
+    if (info.lifetime) return;
+    subjectExpiry[code] = end;
+  });
+
+  const activeBefore = SUBJECT_CODES.filter((c) => getSubjectInfo(profile, c, now).active);
+  const activeAfter = new Set(activeBefore.concat(subjects));
+  const reached = activeBefore.length < THREE_SUBJECT_BONUS.count && activeAfter.size >= THREE_SUBJECT_BONUS.count;
+  const consumed = !!(profile && profile.bonuses && profile.bonuses.threeSubjects);
+  const bonusFlag = reached && !consumed;
+  const bonusMonths = bonusFlag && subjects.length === 1 ? THREE_SUBJECT_BONUS.months : 0;
+
+  if (subjects.length === 0 || term <= 0) {
+    return { termMonths: term, subjectExpiry, appExpiresAt: null, bonusFlag: false, bonusMonths: 0 };
+  }
+
+  const cur = getAppAccessInfo(profile, now);
+  let appEnd = Math.max(cur.active ? cur.expiresAt : 0, latest);
+  if (bonusMonths > 0) appEnd = addMonths(appEnd, bonusMonths);
+  const changed = !cur.active || appEnd > cur.expiresAt;
+
+  return { termMonths: term, subjectExpiry, appExpiresAt: changed ? appEnd : null, bonusFlag, bonusMonths };
 }
 ```
 

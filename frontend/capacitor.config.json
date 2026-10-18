@@ -1,5 +1,11 @@
 {
   "appId": "com.osias.ra10863",
   "appName": "RA10863",
-  "webDir": "../docs"
+  "webDir": "../docs",
+  "plugins": {
+    "FirebaseAuthentication": {
+      "skipNativeAuth": false,
+      "providers": ["google.com"]
+    }
+  }
 }
