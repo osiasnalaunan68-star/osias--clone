@@ -5,6 +5,8 @@ workflows:
     environment:
       node: 22
       java: 21
+      android_signing:
+        - ra10863_keystore
     scripts:
       - name: Install dependencies
         script: |
@@ -33,11 +35,11 @@ workflows:
           cd frontend
           npm install @capacitor/assets --save-dev
           npx capacitor-assets generate --android
-      - name: Build debug APK
+      - name: Build release APK
         script: |
           cd frontend/android
           chmod +x gradlew
-          ./gradlew assembleDebug
+          ./gradlew assembleRelease
           echo "--- Searching for build output ---"
           find app/build/outputs -type f 2>/dev/null || echo "outputs dir missing"
     artifacts:
