@@ -34,11 +34,14 @@ workflows:
         script: |
           cd frontend
           npm install
-          npm run build
-          ls -l ../docs/index.html ../docs/customs_law.db
+          rm -rf ../dist
+          npx vite build --outDir ../dist --emptyOutDir
+          ls -l ../dist ../dist/assets
+          ls -l ../dist/customs_law.db
       - name: Sync Capacitor
         script: |
           npx cap sync android
+          ls -l android/app/src/main/assets/public/assets
       - name: Build Android APK
         script: |
           cd android
@@ -48,10 +51,10 @@ workflows:
       - name: Verify database inside APK
         script: |
           APK=$(find android/app/build/outputs -name "*.apk" | head -1)
-          unzip -l "$APK" | grep customs_law || { echo "WALA ang DB sa APK"; exit 1; }
+          unzip -l "$APK" | grep -E "customs_law|assets/index-"
           A=$(unzip -p "$APK" assets/public/customs_law.db | sha256sum | cut -d' ' -f1)
-          B=$(sha256sum docs/customs_law.db | cut -d' ' -f1)
-          echo "APK:  $A"; echo "DOCS: $B"
+          B=$(sha256sum dist/customs_law.db | cut -d' ' -f1)
+          echo "APK:  $A"; echo "DIST: $B"
           [ "$A" = "$B" ] || { echo "MAGKAIBA ang DB"; exit 1; }
     artifacts:
       - android/app/build/outputs/**/*.apk
