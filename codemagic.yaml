@@ -8,6 +8,31 @@ workflows:
       android_signing:
         - ra10863_keystore
     scripts:
+      - name: Verify and normalize database
+        script: |
+          cd frontend
+          DB=public/customs_law.db
+          ls -l $DB
+          echo "Header: $(head -c 15 $DB)"
+          if head -c 200 $DB | grep -q "git-lfs"; then
+            echo "ERROR: LFS pointer lang ito, hindi totoong DB"; exit 1
+          fi
+          python3 - <<'EOF'
+          import sqlite3, sys
+          p = "public/customs_law.db"
+          c = sqlite3.connect(p)
+          ok = c.execute("PRAGMA integrity_check").fetchone()[0]
+          print("integrity:", ok)
+          if ok != "ok":
+              print("ERROR: sira ang DB sa repo"); sys.exit(1)
+          print("journal before:", c.execute("PRAGMA journal_mode").fetchone()[0])
+          c.execute("PRAGMA journal_mode=DELETE")
+          c.execute("VACUUM")
+          print("journal after:", c.execute("PRAGMA journal_mode").fetchone()[0])
+          print("titles:", c.execute("select count(*) from legal_nodes where node_type='title'").fetchone()[0])
+          c.close()
+          EOF
+          sha256sum $DB
       - name: Install dependencies
         script: |
           cd frontend
@@ -16,6 +41,7 @@ workflows:
         script: |
           cd frontend
           npm run build
+          ls -l ../docs/customs_law.db
       - name: Add Capacitor Android platform (if missing)
         script: |
           cd frontend
@@ -42,6 +68,16 @@ workflows:
           ./gradlew assembleRelease
           echo "--- Searching for build output ---"
           find app/build/outputs -type f 2>/dev/null || echo "outputs dir missing"
+      - name: Verify database inside APK
+        script: |
+          APK=$(find frontend/android/app/build/outputs -name "*.apk" | head -1)
+          echo "APK: $APK"
+          unzip -l "$APK" | grep customs_law || { echo "WALA ang DB sa APK"; exit 1; }
+          A=$(unzip -p "$APK" assets/public/customs_law.db | sha256sum | cut -d' ' -f1)
+          B=$(sha256sum frontend/public/customs_law.db | cut -d' ' -f1)
+          echo "APK:  $A"
+          echo "REPO: $B"
+          [ "$A" = "$B" ] || { echo "MAGKAIBA ang DB sa APK at repo"; exit 1; }
     artifacts:
       - frontend/android/app/build/outputs/**/*.apk
       - frontend/android/app/build/outputs/**/output-metadata.json
