@@ -3,7 +3,13 @@
 {
   "appId": "com.osias.ra10863",
   "appName": "RA10863",
-  "webDir": "../docs"
+  "webDir": "../docs",
+  "plugins": {
+    "FirebaseAuthentication": {
+      "skipNativeAuth": false,
+      "providers": ["google.com"]
+    }
+  }
 }
 ```
 
@@ -20,6 +26,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@capacitor-firebase/authentication": "^8.5.2",
     "@capacitor/android": "^8.4.2",
     "@capacitor/core": "^8.4.2",
     "firebase": "^12.17.1",
@@ -37201,6 +37208,48 @@
     },
     "correct": "D"
   }
+}```
+
+## File: ./frontend/google-services.json
+```
+{
+  "project_info": {
+    "project_number": "160101866737",
+    "project_id": "ra10863",
+    "storage_bucket": "ra10863.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:160101866737:android:fe610c7f4cf507bb211d50",
+        "android_client_info": {
+          "package_name": "com.osias.ra10863"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "160101866737-nf6s0ram7fd59f4rlj85v5sdegpfohdi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNxkbPv60mO7CrxeeML7VpYE4jO5esOnk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "160101866737-nf6s0ram7fd59f4rlj85v5sdegpfohdi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
 }```
 
 ## File: ./ra10863_full.json
