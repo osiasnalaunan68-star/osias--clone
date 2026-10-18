@@ -972,7 +972,7 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
       // Ipakita ang confirmation message
-      alert(`✅ Na-download ang quiz-generation prompt para sa Title ${titleNumber} bilang .txt file.
+      alert(`✅ The quiz-generation prompt for Title ${titleNumber} was downloaded as a .txt file.
 
 📝 INSTRUCTIONS FOR AI:
 1. Act like a professor designing a CuBLE exam.
@@ -1050,20 +1050,20 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
                 </button>
               )}
               <div className="flex flex-shrink-0 rounded-full bg-slate-100 p-1 text-sm dark:bg-slate-800">
-                <button onClick={() => setView("browse")} aria-label="Browse" className={`min-h-[34px] rounded-full px-2.5 py-1 font-medium transition-colors ${view === "browse" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
+                <button onClick={() => setView("browse")} aria-label="Browse" className={`min-h-[34px] rounded-full px-2 py-1 font-medium transition-colors ${view === "browse" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
                   <span aria-hidden>📚</span><span className="hidden sm:inline ml-1">Browse</span>
                 </button>
-                <button onClick={() => setView("search")} aria-label="Search" className={`min-h-[34px] rounded-full px-2.5 py-1 font-medium transition-colors ${view === "search" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
+                <button onClick={() => setView("search")} aria-label="Search" className={`min-h-[34px] rounded-full px-2 py-1 font-medium transition-colors ${view === "search" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
                   <span aria-hidden>🔍</span><span className="hidden sm:inline ml-1">Search</span>
                 </button>
-                <button onClick={() => setView("quiz")} aria-label="Quiz/Exam" className={`min-h-[34px] rounded-full px-2.5 py-1 font-medium transition-colors ${view === "quiz" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
+                <button onClick={() => setView("quiz")} aria-label="Quiz/Exam" className={`min-h-[34px] rounded-full px-2 py-1 font-medium transition-colors ${view === "quiz" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
                   <span aria-hidden>📝</span><span className="hidden sm:inline ml-1">Quiz/Exam</span>
                 </button>
-                <button onClick={() => setView("settings")} aria-label="Settings" className={`min-h-[34px] rounded-full px-2.5 py-1 font-medium transition-colors ${view === "settings" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
+                <button onClick={() => setView("settings")} aria-label="Settings" className={`min-h-[34px] rounded-full px-2 py-1 font-medium transition-colors ${view === "settings" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
                   ⚙️
                 </button>
                 {IS_DEV && (
-                  <button onClick={() => setView("dev")} aria-label="Dev Panel" className={`min-h-[34px] rounded-full px-2.5 py-1 font-medium transition-colors ${view === "dev" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
+                  <button onClick={() => setView("dev")} aria-label="Dev Panel" className={`min-h-[34px] rounded-full px-2 py-1 font-medium transition-colors ${view === "dev" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
                     🛠
                   </button>
                 )}

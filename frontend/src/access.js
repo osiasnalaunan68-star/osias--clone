@@ -1,17 +1,16 @@
-// access.js — oras ng server, 3-day trial, at App Access plans (1/3/8 buwan).
-// Pure functions lang (walang React) para magamit kahit saan.
+// access.js — server clock, 3-day trial, App Access plans, and per-subject expiry.
+// Pure functions only (no React) so they can be used anywhere.
 //
-// DALAWANG HIWALAY NA BAGAY:
-//  1) APP ACCESS  -> pwede bang buksan ang app (trial / buwanang bayad)
-//  2) PRACTICE QUESTIONS -> `subscriptions` (CL/TL/CDP/PC/TCP) — HINDI ito ginagalaw dito.
+// TWO SEPARATE THINGS:
+//  1) APP ACCESS      -> can the user open the app (trial / paid months)
+//  2) PRACTICE ACCESS -> `subscriptions` (CL/TL/CDP/PC/TCP) + `subscriptionExpiry`.
+//     A subject flag with NO expiry is a legacy "lifetime" subscription and never expires.
 
 export const TRIAL_DAYS = 3;
 export const DAY_MS = 24 * 60 * 60 * 1000;
 
-// true  = kahit sinong may bayad na practice subject (luma o bago) ay laging
-//         may access sa app (protektado ang mga "lifetime" na na-promise mo).
-// false = lahat ng user (maliban admin) kailangan ng trial / App Access.
-// TRANSITION: true hanggang matapos ang migration sa AdminPanel, tapos i-set sa false (patch-flip.cjs).
+// true  = anyone with a paid practice subject always has app access.
+// false = everyone (except admin) needs a trial / App Access.
 export const PRACTICE_BUYERS_KEEP_APP_ACCESS = false;
 
 export const ACCESS_PLANS = [
@@ -21,9 +20,9 @@ export const ACCESS_PLANS = [
 ];
 
 // ── Server clock ─────────────────────────────────────────────────────
-// Hindi tayo nagtitiwala sa oras ng phone. Kapag online, kinukuha ang oras
-// ng Firestore server at sine-save ang pagitan (offset). Hindi rin umaatras
-// ang oras (maxSeen) para hindi madaya ng pag-atras ng clock offline.
+// We do not trust the phone's clock. When online we read the Firestore server
+// time and save the offset. Time never goes backwards (maxSeen), so rolling the
+// phone clock back while offline cannot extend access.
 const OFFSET_KEY = "cuble_clockOffset";
 const MAXSEEN_KEY = "cuble_clockMaxSeen";
 
@@ -41,10 +40,10 @@ export function persistClock() {
   } catch (_) {}
 }
 
-// Tawagin kapag nakuha na ang totoong oras ng server (ms).
+// Call this once the real server time (ms) is known.
 export function setServerClock(serverMs) {
   offset = serverMs - Date.now();
-  maxSeen = serverMs; // server ang masusunod, i-reset ang maxSeen
+  maxSeen = serverMs;
   persistClock();
 }
 
@@ -55,8 +54,8 @@ export function serverNow() {
 }
 
 // ── Helpers ──────────────────────────────────────────────────────────
-// Tumatanggap ng ms number, Firestore Timestamp, o {seconds,nanoseconds}
-// (ganyan ang itsura ng Timestamp kapag galing sa localStorage cache).
+// Accepts ms number, Firestore Timestamp, or {seconds,nanoseconds}
+// (the shape a Timestamp has after coming back from the localStorage cache).
 export function toMs(v) {
   if (v == null) return null;
   if (typeof v === "number") return v;
@@ -77,7 +76,7 @@ export function addMonths(ms, months) {
 }
 
 export function formatTimeLeft(ms) {
-  if (!ms || ms <= 0) return "tapos na";
+  if (!ms || ms <= 0) return "Expired";
   const d = Math.floor(ms / DAY_MS);
   const h = Math.floor((ms % DAY_MS) / 3600000);
   const m = Math.floor((ms % 3600000) / 60000);
@@ -101,7 +100,7 @@ export function getTrialInfo(profile, now = serverNow()) {
   let start = t ? toMs(t.startedAt) : null;
   let days = t ? (Number(t.days) || 0) : 0;
   let fromCreated = false;
-  // Fallback: kung walang trial field, ang createdAt ng account ang simula ng trial.
+  // Fallback: no trial field -> the account's createdAt starts the trial.
   if (start == null) { start = toMs(profile && profile.createdAt); days = TRIAL_DAYS; fromCreated = true; }
   if (start == null) return { exists: false, active: false, endsAt: null, msLeft: 0 };
   const endsAt = start + days * DAY_MS;
@@ -110,7 +109,7 @@ export function getTrialInfo(profile, now = serverNow()) {
   return { exists: true, active: msLeft > 0, endsAt, msLeft };
 }
 
-// appAccess = { plan: "M1"|"M3"|"M8", expiresAt: ms }
+// appAccess = { plan: "M1"|"M3"|"M8"|..., expiresAt: ms }
 export function getAppAccessInfo(profile, now = serverNow()) {
   const a = profile && profile.appAccess;
   const exp = toMs(a && a.expiresAt);
@@ -134,44 +133,84 @@ export function getAccess(profile, opts) {
   return { state: "expired", trial, app, msLeft: 0 };
 }
 
-// ── RA 10863 (CL) time-based lock ──────────────────────────────────────
-// Hiwalay sa generic FREE_LIMITS ng ibang subjects: CL_TRIAL_DAYS na FULL access trial
-// (lahat ng item, hindi item-count based), tapos naka-lock LAHAT hanggang
-// bumili ng CL (presyo: PLANS sa payments.js). clTrial = { startedAt: Timestamp(server), days }
+// ── Legacy RA 10863 (CL) free trial ───────────────────────────────────
+// The CL trial is retired: new signups get Level 1 for free instead.
+// Only trials that STARTED BEFORE the cutoff below are still honored, so users
+// who are mid-trial when this update ships do not lose it. Older app versions
+// may still create a clTrial for new signups — those are ignored.
+// >>> Set the cutoff to the day you deploy this update. <<<
 export const CL_TRIAL_DAYS = 3;
-// Ang presyo ng CL ay galing sa PLANS: tingnan ang CL_LIFETIME_PRICE sa payments.js.
+export const CL_TRIAL_HONOR_BEFORE_MS = Date.UTC(2026, 9, 21); // 2026-10-21 00:00 UTC (covers an Oct 20 deploy)
 
 export function getClTrialInfo(profile, now = serverNow()) {
+  const none = { exists: false, active: false, endsAt: null, msLeft: 0 };
   const t = profile && profile.clTrial;
-  let start = t ? toMs(t.startedAt) : null;
-  let days = t ? (Number(t.days) || 0) : 0;
-  let fromCreated = false;
-  if (start == null) { start = toMs(profile && profile.createdAt); days = CL_TRIAL_DAYS; fromCreated = true; }
-  if (start == null) return { exists: false, active: false, endsAt: null, msLeft: 0 };
+  const start = t ? toMs(t.startedAt) : null;
+  if (start == null || start >= CL_TRIAL_HONOR_BEFORE_MS) return none;
+  const days = Number(t.days) || 0;
   const endsAt = start + days * DAY_MS;
-  if (fromCreated && endsAt <= now) return { exists: false, active: false, endsAt: null, msLeft: 0 };
   const msLeft = Math.max(0, endsAt - now);
   return { exists: true, active: msLeft > 0, endsAt, msLeft };
 }
 
-// ── Bonus / stacking (shared ng approve, manual grant at migration) ──
+// ── Per-subject expiry ────────────────────────────────────────────────
+// subscriptions       = { CL: true, ... }
+// subscriptionExpiry  = { CL: ms, ... }
+// Flag true + NO expiry entry = legacy lifetime (grandfathered, never expires).
+export const SUBJECT_CODES = ["CL", "TL", "CDP", "PC", "TCP"];
+export const SUBJECT_TERM_MONTHS = { CL: 4, TL: 3, CDP: 3, PC: 3, TCP: 3 };
+
+// lifetime: true -> expiresAt is null and msLeft is 0 (ignore msLeft, check `lifetime` first).
+export function getSubjectInfo(profile, code, now = serverNow()) {
+  const owned = !!(profile && profile.subscriptions && profile.subscriptions[code]);
+  if (!owned) return { owned: false, active: false, lifetime: false, expiresAt: null, msLeft: 0 };
+  const exp = toMs(profile.subscriptionExpiry && profile.subscriptionExpiry[code]);
+  if (exp == null) return { owned: true, active: true, lifetime: true, expiresAt: null, msLeft: 0 };
+  const msLeft = Math.max(0, exp - now);
+  return { owned: true, active: msLeft > 0, lifetime: false, expiresAt: exp, msLeft };
+}
+
+export function isSubjectUnlocked(profile, code, now = serverNow()) {
+  if (!profile) return false;
+  if (profile.isAdmin) return true;
+  return getSubjectInfo(profile, code, now).active;
+}
+
+export function countActiveSubjects(profile, now = serverNow()) {
+  return SUBJECT_CODES.filter((c) => getSubjectInfo(profile, c, now).active).length;
+}
+
+// RA 10863 5-level quiz: Level 1 is free for everyone; Levels 2-5 need CL.
+export function isClUnlocked(profile, now = serverNow()) {
+  if (!profile) return false;
+  if (profile.isAdmin) return true;
+  if (getSubjectInfo(profile, "CL", now).active) return true;
+  return getClTrialInfo(profile, now).active;
+}
+
+export function isRaLevelUnlocked(profile, levelId, now = serverNow()) {
+  if (levelId === "level1") return true;
+  return isClUnlocked(profile, now);
+}
+
+// ── Bonus / stacking ─────────────────────────────────────────────────
 export const THREE_SUBJECT_BONUS = { count: 3, months: 3 };
-// Isang beses na migration ng lumang users: 3+ subjects = 3 buwan, 1-2 = 2 buwan, wala = trial.
+// Old one-time migration (already ran). Kept only so existing imports keep working.
 export const MIGRATION = { months3: 3, months12: 2, trialDays: TRIAL_DAYS };
 
 export function countSubjects(subs) {
   return Object.values(subs || {}).filter(Boolean).length;
 }
 
-// Idagdag sa dulo ng natitirang oras kung active pa; kung hindi, mula ngayon.
+// Used by App Access plans (M1/M3/M8) and manual grants: adds to the end of the
+// remaining time if still active, otherwise from now.
 export function stackAccess(profile, months, now = serverNow()) {
   const cur = getAppAccessInfo(profile, now);
   return addMonths(cur.active ? cur.expiresAt : now, months);
 }
 
-// plan = { subjects: [...], bonusMonths?: number }
-// months = buwan ng bundle, o +3 kapag SINGLE-subject purchase ang unang nagpaabot sa 3 subjects.
-// flag = true kapag dapat markahang consumed ang bonuses.threeSubjects.
+// LEGACY (old lifetime flow). Kept so the current AdminPanel still compiles
+// until it is switched to computeGrant().
 export function planAward(profile, plan) {
   const owned = (profile && profile.subscriptions) || {};
   const next = { ...owned };
@@ -184,9 +223,47 @@ export function planAward(profile, plan) {
   return { months, flag };
 }
 
-export function isClUnlocked(profile, now = serverNow()) {
-  if (!profile) return false;
-  if (profile.isAdmin) return true;
-  if (profile.subscriptions && profile.subscriptions.CL) return true;
-  return getClTrialInfo(profile, now).active;
+// NEW purchase flow (expiring subjects).
+// plan = { subjects: [...], months: term in months, ... }
+// Rules:
+//  - Each purchased subject expires `months` after now, or after its current expiry
+//    if still active (renewing early never loses days).
+//  - Legacy lifetime subjects are never converted or shortened.
+//  - App Access does NOT stack across subjects: it runs to the latest of
+//    (current App Access end, latest purchased subject end).
+//  - 3-subject bonus: counts ACTIVE subjects only, once per account, +3 months of
+//    App Access only when a SINGLE-subject purchase is what reaches 3.
+// Returns { termMonths, subjectExpiry: {CODE: ms}, appExpiresAt: ms|null, bonusFlag, bonusMonths }
+export function computeGrant(profile, plan, now = serverNow()) {
+  const term = plan.months || 0;
+  const subjects = plan.subjects || [];
+  const subjectExpiry = {};
+  let latest = 0;
+
+  subjects.forEach((code) => {
+    const info = getSubjectInfo(profile, code, now);
+    const base = info.active && !info.lifetime ? info.expiresAt : now;
+    const end = addMonths(base, term);
+    if (end > latest) latest = end;
+    if (info.lifetime) return;
+    subjectExpiry[code] = end;
+  });
+
+  const activeBefore = SUBJECT_CODES.filter((c) => getSubjectInfo(profile, c, now).active);
+  const activeAfter = new Set(activeBefore.concat(subjects));
+  const reached = activeBefore.length < THREE_SUBJECT_BONUS.count && activeAfter.size >= THREE_SUBJECT_BONUS.count;
+  const consumed = !!(profile && profile.bonuses && profile.bonuses.threeSubjects);
+  const bonusFlag = reached && !consumed;
+  const bonusMonths = bonusFlag && subjects.length === 1 ? THREE_SUBJECT_BONUS.months : 0;
+
+  if (subjects.length === 0 || term <= 0) {
+    return { termMonths: term, subjectExpiry, appExpiresAt: null, bonusFlag: false, bonusMonths: 0 };
+  }
+
+  const cur = getAppAccessInfo(profile, now);
+  let appEnd = Math.max(cur.active ? cur.expiresAt : 0, latest);
+  if (bonusMonths > 0) appEnd = addMonths(appEnd, bonusMonths);
+  const changed = !cur.active || appEnd > cur.expiresAt;
+
+  return { termMonths: term, subjectExpiry, appExpiresAt: changed ? appEnd : null, bonusFlag, bonusMonths };
 }

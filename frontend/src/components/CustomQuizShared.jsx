@@ -67,7 +67,7 @@ export function IconPicker({ value, onChange }) {
         value={value}
         maxLength={4}
         onChange={(e) => onChange(e.target.value || "📘")}
-        placeholder="O mag-type ng sarili mong emoji"
+        placeholder="Or type your own emoji"
         className="mt-2 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-navy-900 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:focus:ring-navy-500"
       />
     </div>
@@ -149,13 +149,13 @@ export function TimerPickerModal({ theme, onPick, onCancel }) {
     <div className="fixed inset-0 z-[80] flex flex-col justify-end bg-slate-900/60 backdrop-blur-sm">
       <div className={`w-full rounded-t-3xl border-t p-5 shadow-2xl ${theme.card}`}>
         <p className={`mb-1 text-lg font-bold ${theme.text}`}>⏱️ Timer</p>
-        <p className={`mb-4 text-sm ${theme.subtext}`}>Piliin kung paano tatakbo ang oras para sa quiz na ito.</p>
+        <p className={`mb-4 text-sm ${theme.subtext}`}>Choose how the timer runs for this quiz.</p>
         <button
           type="button"
           onClick={() => onPick({ mode: "perQuestion", seconds: 25 })}
           className={`mb-2 w-full rounded-xl border-2 px-4 py-3 text-left text-sm font-semibold transition-colors ${theme.outlineBtn}`}
         >
-          🔂 Bawat tanong — 25s kada tanong
+          🔂 Per question — 25s each
         </button>
         <div className="mb-2 grid grid-cols-3 gap-2">
           {TOTAL_TIMER_MINUTES.map((min) => (

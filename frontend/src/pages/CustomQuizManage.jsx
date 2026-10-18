@@ -28,18 +28,18 @@ function QuestionForm({ theme, initial, onSave, onCancel }) {
         value={form.question}
         onChange={(e) => setField("question", e.target.value)}
         rows={2}
-        placeholder="I-type ang tanong dito…"
+        placeholder="Type the question here…"
         className="mb-3 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-navy-900 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:focus:ring-navy-500"
       />
 
-      <label className={`mb-1 block text-xs font-semibold uppercase tracking-wide ${theme.subtext}`}>Choices (A at B required, C/D optional)</label>
+      <label className={`mb-1 block text-xs font-semibold uppercase tracking-wide ${theme.subtext}`}>Choices (A and B required, C/D optional)</label>
       <div className="mb-3 space-y-2">
         {["A", "B", "C", "D"].map((k) => (
           <div key={k} className="flex items-center gap-2">
             <button
               type="button"
               onClick={() => form[k].trim() && setField("correct", k)}
-              title={form[k].trim() ? "Markahan bilang tamang sagot" : ""}
+              title={form[k].trim() ? "Mark as the correct answer" : ""}
               className={`flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg text-sm font-bold transition-colors ${
                 form.correct === k && form[k].trim()
                   ? "bg-emerald-500 text-white"
@@ -58,14 +58,14 @@ function QuestionForm({ theme, initial, onSave, onCancel }) {
           </div>
         ))}
       </div>
-      <p className={`mb-3 text-xs ${theme.subtext}`}>👆 I-tap ang letra para markahan bilang tamang sagot. Kasalukuyang tama: <strong>{form.correct}</strong></p>
+      <p className={`mb-3 text-xs ${theme.subtext}`}>👆 Tap a letter to mark it as the correct answer. Currently correct: <strong>{form.correct}</strong></p>
 
-      <label className={`mb-1 block text-xs font-semibold uppercase tracking-wide ${theme.subtext}`}>Reason (bakit tama ang sagot)</label>
+      <label className={`mb-1 block text-xs font-semibold uppercase tracking-wide ${theme.subtext}`}>Reason (why the answer is correct)</label>
       <textarea
         value={form.reason}
         onChange={(e) => setField("reason", e.target.value)}
         rows={2}
-        placeholder={`Kasi ang ${form.correct} ay…`}
+        placeholder={`Because ${form.correct} is…`}
         className="mb-4 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-navy-900 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:focus:ring-navy-500"
       />
 
@@ -124,7 +124,7 @@ export default function CustomQuizManage({ subject, theme, onBack }) {
   };
 
   const handleDelete = (id) => {
-    if (!confirm(`Burahin ang tanong #${id}? Hindi na ito mababawi.`)) return;
+    if (!confirm(`Delete question #${id}? This cannot be undone.`)) return;
     deleteCustomQuestion(subject.id, id);
     setRefreshKey((k) => k + 1);
   };
@@ -148,14 +148,14 @@ export default function CustomQuizManage({ subject, theme, onBack }) {
 
       {!formOpen && (
         <button onClick={openAdd} className={`mb-4 w-full rounded-xl px-4 py-3 text-sm font-semibold transition-colors ${theme.accentBtn}`}>
-          ➕ Magdagdag ng Tanong
+          ➕ Add Question
         </button>
       )}
 
       {formOpen && <QuestionForm key={editingId || "new"} theme={theme} initial={editingInitial} onSave={handleSave} onCancel={closeForm} />}
 
       {ids.length === 0 ? (
-        <p className={`rounded-xl border border-dashed p-6 text-center text-sm ${theme.card} ${theme.subtext}`}>Wala pang tanong. Simulan sa "➕ Magdagdag ng Tanong" sa itaas.</p>
+        <p className={`rounded-xl border border-dashed p-6 text-center text-sm ${theme.card} ${theme.subtext}`}>No questions yet. Start with "➕ Add Question" above.</p>
       ) : (
         <div className="space-y-3">
           {ids.map((id) => (

@@ -66,13 +66,13 @@ function AddSubjectView({ theme, onSave, onCancel }) {
           disabled={!name.trim()}
           className={`w-full rounded-xl px-4 py-2.5 text-sm font-semibold transition-colors disabled:opacity-40 ${theme.accentBtn}`}
         >
-          ➕ Idagdag sa listahan
+          ➕ Add to list
         </button>
       </div>
 
       {pending.length > 0 && (
         <div className="mt-4">
-          <p className={`mb-2 text-xs font-semibold uppercase tracking-wide ${theme.subtext}`}>Ihahanda ({pending.length})</p>
+          <p className={`mb-2 text-xs font-semibold uppercase tracking-wide ${theme.subtext}`}>Ready to save ({pending.length})</p>
           <div className="space-y-2">
             {pending.map((s, idx) => (
               <div key={idx} className={`flex items-center gap-3 rounded-xl border p-3 ${theme.card}`}>
@@ -87,7 +87,7 @@ function AddSubjectView({ theme, onSave, onCancel }) {
             onClick={saveAll}
             className={`mt-3 w-full rounded-xl px-4 py-3 text-sm font-bold shadow-sm transition-colors ${theme.accentBtn}`}
           >
-            💾 I-save Lahat ({pending.length})
+            💾 Save All ({pending.length})
           </button>
         </div>
       )}
@@ -103,7 +103,7 @@ function CustomSubjectCard({ subject, expanded, onToggle, onPlay, onManage, onDe
 
   const handleRestart = (e) => {
     e.stopPropagation();
-    if (confirm(`Reset progress mo para sa ${subject.name}? Hindi mabubura ang mga tanong, mga sagot mo lang.`)) {
+    if (confirm(`Reset your progress for ${subject.name}? Questions are kept — only your answers are cleared.`)) {
       resetCustomProgress(subject.id);
       onRefresh();
     }
@@ -111,7 +111,7 @@ function CustomSubjectCard({ subject, expanded, onToggle, onPlay, onManage, onDe
 
   const handleDelete = (e) => {
     e.stopPropagation();
-    if (confirm(`Burahin ang subject na "${subject.name}"? Mabubura rin lahat ng tanong dito. Hindi na ito mababawi.`)) {
+    if (confirm(`Delete the subject "${subject.name}"? All its questions will be deleted too. This cannot be undone.`)) {
       onDelete(subject.id);
     }
   };
@@ -123,7 +123,7 @@ function CustomSubjectCard({ subject, expanded, onToggle, onPlay, onManage, onDe
         <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full text-lg" style={{ backgroundColor: subject.color }}>{subject.icon}</span>
         <div className="min-w-0 flex-1">
           <p className={`truncate font-bold ${theme.text}`}>{subject.name}</p>
-          <p className={`truncate text-xs ${theme.subtext}`}>{stats.total > 0 ? `${stats.answeredCount}/${stats.total} sagot na` : "Walang tanong pa"}</p>
+          <p className={`truncate text-xs ${theme.subtext}`}>{stats.total > 0 ? `${stats.answeredCount}/${stats.total} answered` : "No questions yet"}</p>
         </div>
         <span className={`flex-shrink-0 transition-transform ${theme.subtext} ${expanded ? "rotate-180" : ""}`} aria-hidden>▾</span>
       </button>
@@ -250,24 +250,24 @@ export default function CustomQuizHub({ onBack }) {
         </div>
 
         <h1 className={`mb-1 text-xl font-bold ${theme.text}`}>🧩 Your Own Quiz</h1>
-        <p className={`mb-4 text-sm ${theme.subtext}`}>Gumawa ng sarili mong subject at tanong — laging naka-save sa device mo.</p>
+        <p className={`mb-4 text-sm ${theme.subtext}`}>Create your own subjects and questions — always saved on your device.</p>
 
         <div className="mb-4 space-y-2">
           <OnOffToggle
             label="🎲 Random Choices"
-            description="Random ang letra ng sagot at pagkakasunod ng tanong tuwing mag-quiz"
+            description="Randomizes the answer letters and question order every time you take the quiz"
             checked={settings.randomChoices}
             onChange={(v) => updateSetting("randomChoices", v)}
           />
           <OnOffToggle
             label="⏱️ Timer"
-            description="Magtatanong ng oras (per question o total) bago magsimula"
+            description="Asks for a time limit (per question or total) before you start"
             checked={settings.timerEnabled}
             onChange={(v) => updateSetting("timerEnabled", v)}
           />
           <OnOffToggle
             label="🌸 Blossom Mode"
-            description="Alternatibong light/floral na theme (default: dark)"
+            description="Alternative light/floral theme (default: dark)"
             checked={settings.blossomMode}
             onChange={(v) => updateSetting("blossomMode", v)}
           />
@@ -276,7 +276,7 @@ export default function CustomQuizHub({ onBack }) {
         {subjects.length === 0 ? (
           <div className={`flex flex-col items-center gap-3 rounded-2xl border border-dashed p-8 text-center ${theme.card}`}>
             <span className="text-4xl" aria-hidden>🧩</span>
-            <p className={`text-sm font-medium ${theme.text}`}>Wala ka pang sariling subject.</p>
+            <p className={`text-sm font-medium ${theme.text}`}>You don't have any subjects yet.</p>
             <button onClick={() => setSubView("add-subject")} className={`mt-1 w-full rounded-xl px-4 py-3 text-sm font-semibold transition-colors ${theme.accentBtn}`}>
               ➕ Add Subject
             </button>

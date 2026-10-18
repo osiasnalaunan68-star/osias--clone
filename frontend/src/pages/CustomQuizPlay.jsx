@@ -64,13 +64,13 @@ function ResultsView({ theme, entries, order, answers, subjectName, onRetry, onB
     <div className="mx-auto max-w-md p-4">
       <div className={`rounded-2xl border p-6 text-center shadow-md ${theme.card}`}>
         <span className="text-4xl" aria-hidden>🎉</span>
-        <h2 className={`mt-2 text-xl font-bold ${theme.text}`}>Tapos na — {subjectName}</h2>
-        <p className={`mt-1 text-sm ${theme.subtext}`}>{answeredCount}/{total} sinagutan</p>
+        <h2 className={`mt-2 text-xl font-bold ${theme.text}`}>Finished — {subjectName}</h2>
+        <p className={`mt-1 text-sm ${theme.subtext}`}>{answeredCount}/{total} answered</p>
         <p className={`mt-4 text-4xl font-black ${theme.text}`}>{pct}%</p>
-        <p className={`mb-6 text-sm ${theme.subtext}`}>{correctCount} sa {total} tama</p>
+        <p className={`mb-6 text-sm ${theme.subtext}`}>{correctCount} of {total} correct</p>
         <div className="space-y-2">
-          <button onClick={onRetry} className={`w-full rounded-xl px-4 py-3 text-sm font-semibold transition-colors ${theme.accentBtn}`}>🔁 Ulitin</button>
-          <button onClick={onBack} className={`w-full rounded-xl border px-4 py-2.5 text-sm font-medium transition-colors ${theme.outlineBtn}`}>← Bumalik sa Your Own Quiz</button>
+          <button onClick={onRetry} className={`w-full rounded-xl px-4 py-3 text-sm font-semibold transition-colors ${theme.accentBtn}`}>🔁 Retry</button>
+          <button onClick={onBack} className={`w-full rounded-xl border px-4 py-2.5 text-sm font-medium transition-colors ${theme.outlineBtn}`}>← Back to Your Own Quiz</button>
         </div>
       </div>
     </div>
@@ -169,7 +169,7 @@ export default function CustomQuizPlay({ subject, theme, randomChoices, timerCho
   if (total === 0) {
     return (
       <div className="mx-auto max-w-2xl p-4 text-center">
-        <p className={`text-sm ${theme.subtext}`}>Wala pang tanong sa subject na ito.</p>
+        <p className={`text-sm ${theme.subtext}`}>No questions in this subject yet.</p>
         <button onClick={onBack} className={`mt-3 rounded-lg border px-4 py-2 text-sm ${theme.outlineBtn}`}>← Back</button>
       </div>
     );
@@ -196,7 +196,7 @@ export default function CustomQuizPlay({ subject, theme, randomChoices, timerCho
 
       {timer && !isResolved && (
         <div className={`mb-3 flex items-center justify-center gap-2 rounded-xl px-3 py-2 text-sm font-bold ${remainingLow ? "bg-red-500 text-white animate-pulse" : theme.chip}`}>
-          ⏱️ {formatSeconds(remainingMs / 1000)} {timer.mode === "perQuestion" ? "· tanong na ito" : "· buong quiz"}
+          ⏱️ {formatSeconds(remainingMs / 1000)} {timer.mode === "perQuestion" ? "· this question" : "· whole quiz"}
         </div>
       )}
 
@@ -214,7 +214,7 @@ export default function CustomQuizPlay({ subject, theme, randomChoices, timerCho
           const correctDot = answeredDot && String(a).trim().toLowerCase() === String(entries[id]?.correct).trim().toLowerCase();
           const lockedDot = lockedIds.includes(id) && !answeredDot;
           const dotColor = answeredDot ? (correctDot ? "bg-emerald-400" : "bg-red-400") : lockedDot ? "bg-amber-400" : "bg-slate-300 dark:bg-slate-600";
-          return <button key={id} onClick={() => goTo(idx)} className={`h-3 w-3 rounded-full transition-all ${idx === currentIndex ? "scale-125" : ""} ${dotColor}`} title={`Tanong ${idx + 1}`} />;
+          return <button key={id} onClick={() => goTo(idx)} className={`h-3 w-3 rounded-full transition-all ${idx === currentIndex ? "scale-125" : ""} ${dotColor}`} title={`Question ${idx + 1}`} />;
         })}
       </div>
 
@@ -243,7 +243,7 @@ export default function CustomQuizPlay({ subject, theme, randomChoices, timerCho
         {isResolved && (
           <div className={`mt-4 rounded-lg p-4 ${isAnswered && !isWrongAnswer(currentAnswer, currentItem.correct) ? "bg-emerald-50 dark:bg-emerald-950/30" : "bg-red-50 dark:bg-red-950/30"}`}>
             <p className={`font-medium ${theme.text}`}>
-              {!isAnswered ? "⏰ Oras na — walang nasagot." : isWrongAnswer(currentAnswer, currentItem.correct) ? `❌ Mali. Ang tamang sagot ay: ${currentItem.correct}` : "✅ Tama!"}
+              {!isAnswered ? "⏰ Time's up — no answer." : isWrongAnswer(currentAnswer, currentItem.correct) ? `❌ Incorrect. The correct answer is: ${currentItem.correct}` : "✅ Correct!"}
             </p>
             {currentItem.reason && <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{currentItem.reason}</p>}
           </div>

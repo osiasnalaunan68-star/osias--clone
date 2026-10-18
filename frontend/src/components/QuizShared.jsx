@@ -1,16 +1,19 @@
 import { useState, useEffect } from "react";
 import { saveLastQuizPosition } from "../quizStore";
+import { useAuth } from "../authContext";
+import { isRaLevelUnlocked } from "../access";
 
 export function answersMatch(a, b) {
   return String(a ?? "").trim().toLowerCase() === String(b ?? "").trim().toLowerCase();
 }
 
+// lang = language of the questions: Level 1 is Filipino, Levels 2-5 are English.
 export const LEVELS = [
-  { id: "level1", label: "🟢 Level 1 — Easy", tagalog: "Madali", color: "green" },
-  { id: "level2", label: "🔵 Level 2 — Normal", tagalog: "Katamtaman", color: "blue" },
-  { id: "level3", label: "🟠 Level 3 — Medium", tagalog: "Gitna", color: "orange" },
-  { id: "level4", label: "🟣 Level 4 — Medium Pro", tagalog: "Gitnang Pro", color: "purple" },
-  { id: "level5", label: "🔴 Level 5 — Will Done", tagalog: "Dalubhasa", color: "red" },
+  { id: "level1", label: "🟢 Level 1 — Easy", lang: "Filipino version", color: "green" },
+  { id: "level2", label: "🔵 Level 2 — Normal", lang: "English version", color: "blue" },
+  { id: "level3", label: "🟠 Level 3 — Medium", lang: "English version", color: "orange" },
+  { id: "level4", label: "🟣 Level 4 — Medium Pro", lang: "English version", color: "purple" },
+  { id: "level5", label: "🔴 Level 5 — Will Done", lang: "English version", color: "red" },
 ];
 
 const LEVEL_STROKE = { green: "#22c55e", blue: "#3b82f6", orange: "#f97316", purple: "#a855f7", red: "#ef4444" };
@@ -42,22 +45,30 @@ export function ProgressCircle({ progress, size = 60, strokeWidth = 6, color = "
 // button so the user can wipe just THIS level's saved answers without
 // touching the other levels or the quiz questions themselves. Callers that
 // don't pass onReset (e.g. the Dev Panel quiz preview) keep the old look.
-export function QuizLevelButton({ level, progress, onClick, onReset }) {
-  const colorClass = LEVEL_BORDER[level.color] || LEVEL_BORDER.green;
+export function QuizLevelButton({ level, progress, onClick, onReset, locked }) {
+  const colorClass = locked
+    ? "border-slate-300 bg-slate-50 dark:border-slate-600 dark:bg-slate-800/60"
+    : LEVEL_BORDER[level.color] || LEVEL_BORDER.green;
   return (
     <div className={`flex items-center gap-2 rounded-xl border-2 p-4 w-full transition-all ${colorClass}`}>
       <button onClick={onClick} className="flex min-w-0 flex-1 items-center gap-4 text-left">
-        <ProgressCircle progress={progress} color={LEVEL_STROKE[level.color] || LEVEL_STROKE.green} />
+        {locked ? (
+          <span className="flex h-[60px] w-[60px] flex-shrink-0 items-center justify-center text-3xl" aria-hidden>🔒</span>
+        ) : (
+          <ProgressCircle progress={progress} color={LEVEL_STROKE[level.color] || LEVEL_STROKE.green} />
+        )}
         <div className="min-w-0 flex-1">
           <p className="font-semibold text-slate-800 dark:text-slate-100">{level.label}</p>
-          <p className="text-sm text-slate-500 dark:text-slate-400">{level.tagalog} · {progress > 0 ? `${Math.round(progress)}% completed` : "Not started"}</p>
+          <p className="text-sm text-slate-500 dark:text-slate-400">
+            {level.lang} · {locked ? "Locked — unlock RA 10863" : progress > 0 ? `${Math.round(progress)}% completed` : "Not started"}
+          </p>
         </div>
       </button>
-      {onReset && progress > 0 && (
+      {onReset && progress > 0 && !locked && (
         <button
           type="button"
           onClick={(e) => { e.stopPropagation(); onReset(); }}
-          title="I-reset ang progress ng level na ito"
+          title="Reset the progress of this level"
           aria-label={`Reset progress — ${level.label}`}
           className="flex-shrink-0 whitespace-nowrap rounded-lg border border-slate-200 px-2.5 py-2 text-xs font-medium text-slate-500 active:bg-slate-100 dark:border-slate-600 dark:text-slate-400 dark:active:bg-slate-700"
         >
@@ -154,7 +165,32 @@ export function resetLevelProgress(progressKey, level) {
 // progressKey identifies WHERE to save/read progress (localStorage key
 // `quiz_progress_${progressKey}`). Pass a stable id — a batch id while
 // testing in Dev Panel, or the title string once baked into quizData.json.
-export function QuizPlayView({ title, entries, level, onBack, progressKey, backLabel = "← Back" }) {
+// Guard: Level 1 is free for everyone; Levels 2-5 need RA 10863 (CL).
+// This also blocks the "Continue" shortcut from reopening a locked level.
+export function QuizPlayView(props) {
+  const { profile, setOverlayOpen, setIntentPlanId } = useAuth();
+  if (!isRaLevelUnlocked(profile, props.level)) {
+    return (
+      <div className="flex flex-col items-center gap-3 py-10 text-center">
+        <span className="text-4xl" aria-hidden>🔒</span>
+        <p className="text-lg font-semibold text-slate-800 dark:text-slate-100">This level is locked</p>
+        <p className="max-w-xs text-sm text-slate-500 dark:text-slate-400">
+          Levels 2–5 are in English and unlock with RA 10863 (CMTA). Level 1 (Filipino version) stays free.
+        </p>
+        <button
+          onClick={() => { setIntentPlanId("CL"); setOverlayOpen(true); }}
+          className="rounded-xl bg-navy-900 px-5 py-2.5 text-sm font-semibold text-white active:bg-navy-800 dark:bg-navy-700"
+        >
+          Unlock RA 10863
+        </button>
+        <button onClick={props.onBack} className="text-sm text-slate-400">{props.backLabel || "← Back"}</button>
+      </div>
+    );
+  }
+  return <QuizPlayViewInner {...props} />;
+}
+
+function QuizPlayViewInner({ title, entries, level, onBack, progressKey, backLabel = "← Back" }) {
   const answerStorageKey = progressKey ? `quiz_answers_${progressKey}_${level}` : null;
   const [currentIndex, setCurrentIndex] = useState(() => {
     if (!answerStorageKey) return 0;

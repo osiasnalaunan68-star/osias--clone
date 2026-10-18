@@ -62,7 +62,7 @@ function ImportForm({ subjectId, subjectLabel, onImported }) {
     setError(null); setSuccess(null);
     try {
       const { count, label } = importSubjectQuizJson(subjectId, json);
-      setSuccess(`✓ Imported. "${label}" batch saved — ${count} total items ngayon para sa ${subjectLabel}.`);
+      setSuccess(`✓ Imported. "${label}" batch saved — ${count} total items now for ${subjectLabel}.`);
       setJson("");
       onImported();
     } catch (e) {
@@ -74,8 +74,8 @@ function ImportForm({ subjectId, subjectLabel, onImported }) {
     <div className="rounded-xl border border-navy-200 bg-white p-3 shadow-card dark:border-navy-700 dark:bg-slate-800">
       <p className="mb-1 text-sm font-semibold text-navy-900 dark:text-slate-100">📥 Import {subjectLabel} Quiz JSON</p>
       <p className="mb-2 text-xs text-slate-400 dark:text-slate-500">
-        Flat format, walang levels — isang entry per item number. Optional "_batch" label para
-        ma-group ang import na ito (same "_batch" name = mag-me-merge, hindi mag-duduplicate).
+        Flat format, no levels — one entry per item number. Optional "_batch" label to
+        group this import (same "_batch" name = merges, no duplicates).
       </p>
       <textarea
         value={json}
@@ -111,7 +111,7 @@ function RawEditor({ subjectId, onChanged }) {
   return (
     <div className="rounded-xl border border-slate-200 bg-white p-3 shadow-card dark:border-slate-700 dark:bg-slate-800">
       <button onClick={() => (open ? setOpen(false) : openEditor())} className="text-sm font-semibold text-slate-800 dark:text-slate-100">
-        🔧 {open ? "Hide" : "Edit"} Raw Quiz JSON (advanced, lahat ng imported items)
+        🔧 {open ? "Hide" : "Edit"} Raw Quiz JSON (advanced, all imported items)
       </button>
       {open && (
         <div className="mt-2">
@@ -149,7 +149,7 @@ export default function SubjectQuizPanel({ subjectId, subjectLabel }) {
   };
 
   const handleClearAll = () => {
-    if (confirm(`Delete ALL ${getImportedCount(subjectId)} imported ${subjectLabel} items? Hindi na mababawi ito.`)) {
+    if (confirm(`Delete ALL ${getImportedCount(subjectId)} imported ${subjectLabel} items? This cannot be undone.`)) {
       clearAllImports(subjectId);
       refresh();
     }
@@ -172,7 +172,7 @@ export default function SubjectQuizPanel({ subjectId, subjectLabel }) {
 
       <div className="space-y-2">
         <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">Imported Batches</p>
-        {batches.length === 0 && <p className="text-sm italic text-slate-400 dark:text-slate-600">Wala pang imported na batch para sa {subjectLabel}.</p>}
+        {batches.length === 0 && <p className="text-sm italic text-slate-400 dark:text-slate-600">No imported batches yet for {subjectLabel}.</p>}
         {batches.map((b) => <BatchCard key={b.id} subjectId={subjectId} batch={b} onChanged={refresh} />)}
       </div>
     </div>

@@ -100,8 +100,8 @@ export function importSubjectQuizJson(subjectId, jsonText) {
   if (!ids.length) {
     throw new Error(
       skipped.length
-        ? `Walang na-import: lahat ng ${skipped.length} item ay may kulang na "question" o "correct" answer (IDs: ${skipped.slice(0, 10).join(", ")}${skipped.length > 10 ? "…" : ""}).`
-        : "Walang laman ang pinaste mong JSON."
+        ? `Nothing imported: all ${skipped.length} items are missing a "question" or "correct" answer (IDs: ${skipped.slice(0, 10).join(", ")}${skipped.length > 10 ? "…" : ""}).`
+        : "The pasted JSON is empty."
     );
   }
 

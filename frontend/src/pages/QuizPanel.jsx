@@ -174,9 +174,9 @@ export default function QuizPanel() {
         <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-50">📝 Quiz Panel</h1>
         <p className="text-sm text-slate-500 dark:text-slate-400">Import, manage, and test-drive quizzes generated from CMTA provisions.</p>
         <p className="mt-1 text-xs text-slate-400 dark:text-slate-500">
-          Kapag tapos ka na sa isang batch, gamitin ang <strong>Export All</strong> tapos i-merge yung JSON sa
+          When a batch is finished, use <strong>Export All</strong> and merge the JSON into
           <code className="mx-1 rounded bg-slate-100 px-1 dark:bg-slate-700">frontend/src/data/quizData.json</code>
-          para ma-bundle na siya sa app at gumana offline para sa lahat ng users — kagaya ng ginawa mo na sa AI explanations.
+          so it ships with the app and works offline for all users — the same way the AI explanations work.
         </p>
       </div>
 

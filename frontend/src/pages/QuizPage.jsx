@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import staticQuizData from "../data/quizData.json";
 import { getFlattenedEntries } from "../quizStore";
 import { LEVELS, QuizLevelButton, QuizPlayView, resetLevelProgress } from "../components/QuizShared";
+import { useAuth } from "../authContext";
+import { isRaLevelUnlocked } from "../access";
 
 // Helper to extract Roman numeral from title string like "Title I – ..."
 function extractTitleNumber(title) {
@@ -55,6 +57,7 @@ function QuizTitleCard({ title, data, onSelectLevel }) {
   const [open, setOpen] = useState(false);
   const [progress, setProgress] = useState({});
   const [totalQuestions, setTotalQuestions] = useState({});
+  const { profile, setOverlayOpen, setIntentPlanId } = useAuth();
 
   useEffect(() => {
     const ids = Object.keys(data);
@@ -75,6 +78,11 @@ function QuizTitleCard({ title, data, onSelectLevel }) {
   }, [title]);
 
   const handleLevelSelect = (levelId) => {
+    if (!isRaLevelUnlocked(profile, levelId)) {
+      setIntentPlanId("CL");
+      setOverlayOpen(true);
+      return;
+    }
     const ids = Object.keys(data).filter((id) => data[id] && data[id][levelId]);
     if (ids.length === 0) {
       alert(`No questions available for ${LEVELS.find((l) => l.id === levelId)?.label}.`);
@@ -87,7 +95,7 @@ function QuizTitleCard({ title, data, onSelectLevel }) {
   // ang mga tanong (data) o ang progress ng ibang levels/titles.
   const handleResetLevel = (levelId) => {
     const levelLabel = LEVELS.find((l) => l.id === levelId)?.label || levelId;
-    const ok = confirm(`I-reset ang progress mo sa "${levelLabel}" ng ${title}?\n\nMagsisimula ulit ito sa Tanong 1 — hindi madedelete ang mga tanong, mga sagot mo lang dito ang mabubura.`);
+    const ok = confirm(`Reset your progress for "${levelLabel}" in ${title}?\n\nIt will start again from Question 1. The questions are kept — only your answers here will be cleared.`);
     if (!ok) return;
     resetLevelProgress(title, levelId);
     setProgress((prev) => {
@@ -116,6 +124,7 @@ function QuizTitleCard({ title, data, onSelectLevel }) {
                 key={level.id}
                 level={level}
                 progress={progress[level.id] || 0}
+                locked={!isRaLevelUnlocked(profile, level.id)}
                 onClick={() => handleLevelSelect(level.id)}
                 onReset={() => handleResetLevel(level.id)}
               />
@@ -163,6 +172,7 @@ export default function QuizPage() {
         <div>
           <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-50">📝 Quiz / Exam</h1>
           <p className="text-sm text-slate-500 dark:text-slate-400">Test your knowledge with 5 levels of difficulty — from Easy to Will Done.</p>
+          <p className="mt-1 text-xs font-medium text-amber-700 dark:text-amber-400">Note: Level 1 is the Filipino version (free). Levels 2–5 are the English version.</p>
         </div>
         <button onClick={() => setRefreshKey((prev) => prev + 1)} className="rounded-lg border border-slate-200 px-3 py-1.5 text-sm text-slate-600 hover:bg-slate-50 dark:border-slate-600 dark:text-slate-300 dark:hover:bg-slate-800" title="Refresh quiz data from imported files">🔄 Refresh</button>
       </div>

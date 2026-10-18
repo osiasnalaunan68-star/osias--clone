@@ -5,7 +5,7 @@ import {
   getAllEntries, getSortedItemIds, getSubjectStats,
   getSubjectProgress, saveSubjectProgress, resetSubjectProgress,
 } from "../subjectQuizStore";
-import { isClUnlocked } from "../access";
+import { isClUnlocked, isSubjectUnlocked } from "../access";
 
 // First N items (by sorted order) na libre bawat subject — lahat ng lagpas dito
 // ay naka-lock hanggang mag-subscribe. Tugma sa pricing table sa handoff doc.
@@ -17,22 +17,23 @@ function isItemUnlocked(idx, subjectId, profile) {
   if (subjectId === "cl") return isClUnlocked(profile);
   const freeLimit = FREE_LIMITS[subjectId] ?? Infinity;
   if (idx < freeLimit) return true;
-  return !!profile?.subscriptions?.[subjectId.toUpperCase()];
+  // Subscriptions can expire; legacy lifetime subjects (no expiry) stay unlocked.
+  return isSubjectUnlocked(profile, subjectId.toUpperCase());
 }
 
 function LockedPrompt({ subjectLabel, onUnlock }) {
   return (
     <div className="flex flex-col items-center gap-3 py-10 text-center">
       <span className="text-4xl" aria-hidden>🔒</span>
-      <p className="text-lg font-semibold text-slate-800 dark:text-slate-100">Naka-lock ang item na ito</p>
+      <p className="text-lg font-semibold text-slate-800 dark:text-slate-100">This item is locked</p>
       <p className="max-w-xs text-sm text-slate-500 dark:text-slate-400">
-        Mag-subscribe para ma-unlock ang natitirang {subjectLabel} items.
+        Subscribe to unlock the remaining {subjectLabel} items.
       </p>
       <button
         onClick={onUnlock}
         className="mt-2 rounded-xl bg-navy-900 px-5 py-2.5 text-sm font-semibold text-white shadow-sm active:bg-navy-800 dark:bg-navy-700 dark:active:bg-navy-600"
       >
-        Tingnan ang Subscription
+        View Subscription
       </button>
     </div>
   );
@@ -210,7 +211,7 @@ export default function SubjectDashboard({ subjectId, subjectLabel }) {
   };
 
   const handleReset = () => {
-    if (confirm(`Reset progress mo para sa ${subjectLabel}? Hindi mabubura ang mga imported questions, mga sagot mo lang.`)) {
+    if (confirm(`Reset your progress for ${subjectLabel}? Imported questions are kept — only your answers are cleared.`)) {
       resetSubjectProgress(subjectId);
       setRefreshKey((k) => k + 1);
     }
@@ -231,7 +232,7 @@ export default function SubjectDashboard({ subjectId, subjectLabel }) {
       <div className="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-card dark:border-slate-700 dark:bg-slate-800">
         <h2 className="mb-1 text-xl font-bold text-slate-900 dark:text-slate-50">{subjectLabel}</h2>
         <p className="mb-6 text-sm text-slate-500 dark:text-slate-400">
-          {stats.total > 0 ? `${stats.total} question${stats.total !== 1 ? "s" : ""} available` : "Wala pang naiimport na tanong"}
+          {stats.total > 0 ? `${stats.total} question${stats.total !== 1 ? "s" : ""} available` : "No questions imported yet"}
         </p>
 
         <div className="mb-6 flex items-center justify-center gap-8">
@@ -246,7 +247,7 @@ export default function SubjectDashboard({ subjectId, subjectLabel }) {
         </div>
 
         {stats.total === 0 ? (
-          <p className="rounded-lg bg-slate-50 p-3 text-sm text-slate-400 dark:bg-slate-900/40 dark:text-slate-500">Mag-import muna ng {subjectLabel} questions sa Dev Panel.</p>
+          <p className="rounded-lg bg-slate-50 p-3 text-sm text-slate-400 dark:bg-slate-900/40 dark:text-slate-500">Import {subjectLabel} questions in the Dev Panel first.</p>
         ) : (
           <div className="space-y-2">
             <button onClick={() => setPlaying(true)} className="w-full rounded-xl bg-navy-900 px-4 py-3 text-sm font-semibold text-white shadow-sm active:bg-navy-800 dark:bg-navy-700 dark:active:bg-navy-600">

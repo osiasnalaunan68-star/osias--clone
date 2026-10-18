@@ -2,16 +2,16 @@ import { useState, useEffect, useMemo } from "react";
 import { collection, getDocs, doc, updateDoc, arrayUnion, deleteField, Timestamp, runTransaction } from "firebase/firestore";
 import { db } from "../firebase";
 import AdminOverview from "./AdminOverview";
-import { PLANS, PAYMENT_METHODS, CL_LIFETIME_PRICE } from "../payments";
+import { PLANS, PAYMENT_METHODS, CL_PRICE } from "../payments";
 import {
   ACCESS_PLANS, TRIAL_DAYS, DAY_MS, serverNow, getTrialInfo, getAppAccessInfo,
-  getAccess, addMonths, formatTimeLeft, formatDateShort, getClTrialInfo, CL_TRIAL_DAYS,
-  stackAccess, planAward, countSubjects, MIGRATION,
+  getAccess, addMonths, formatTimeLeft, formatDateShort,
+  stackAccess, computeGrant, getSubjectInfo, SUBJECT_TERM_MONTHS,
 } from "../access";
 
 const SUBJECT_CODES = ["CL", "CDP", "TL", "PC", "TCP"];
 const SUBJECT_LABELS = {
-  CL: "RA 10863 (Customs Law)",
+  CL: "RA 10863 (CMTA)",
   ...Object.fromEntries(
     PLANS.filter((p) => p.id !== "BUNDLE" && p.id !== "ALL").map((p) => [p.id, p.label])
   ),
@@ -54,12 +54,11 @@ function accessKey(u) {
   return a.state;
 }
 
-// Parehong pattern para sa RA 10863 (CL): paid (lifetime) > trial > expired > none.
+// RA 10863 (CL) status: "paid" = active (lifetime or not expired), "expired", or "none".
 function clAccessKey(u) {
-  if (u?.subscriptions?.CL) return "paid";
-  const t = getClTrialInfo(u);
-  if (!t.exists) return "none";
-  return t.active ? "trial" : "expired";
+  const s = getSubjectInfo(u, "CL");
+  if (!s.owned) return "none";
+  return s.active ? "paid" : "expired";
 }
 
 function StateChip({ u }) {
@@ -119,23 +118,50 @@ export default function AdminPanel() {
       patchUser(u.uid, localPatch);
     } catch (err) {
       console.warn("admin write failed:", err);
-      alert("May error. Subukan ulit:\n" + (err?.message || err));
+      alert("Something went wrong. Please try again:\n" + (err?.message || err));
     } finally {
       setBusyKey(null);
     }
   };
 
   // ── Practice questions ──────────────────────────────────────────────
+  // Manual unlock/remove. Unlocking grants the standard term (3 months, 4 for CL) from now;
+  // removing clears the subject flag and its expiry.
   const toggleSubject = async (u, code) => {
-    const nextValue = !u.subscriptions?.[code];
-    const payload = { ["subscriptions." + code]: nextValue };
-    const patch = { subscriptions: { ...u.subscriptions, [code]: nextValue } };
-    if (nextValue) {
-      const remaining = (u.pendingPurchases || []).filter((p) => !(p.subjects || []).includes(code));
-      payload.pendingPurchases = remaining;
-      patch.pendingPurchases = remaining;
+    const owned = !!u.subscriptions?.[code];
+    const key = u.uid + ":" + code;
+    if (owned) {
+      if (!window.confirm("Remove " + code + " from " + (u.fullName || u.email) + "?")) return;
+      const exp = { ...(u.subscriptionExpiry || {}) };
+      delete exp[code];
+      await run(
+        key, u,
+        { ["subscriptions." + code]: false, ["subscriptionExpiry." + code]: deleteField() },
+        { subscriptions: { ...u.subscriptions, [code]: false }, subscriptionExpiry: exp }
+      );
+      return;
     }
-    await run(u.uid + ":" + code, u, payload, patch);
+    const months = SUBJECT_TERM_MONTHS[code] || 3;
+    if (!window.confirm("Unlock " + code + " for " + months + " months for " + (u.fullName || u.email) + "?")) return;
+    const expiresAt = addMonths(serverNow(), months);
+    const remaining = (u.pendingPurchases || []).filter((p) => !(p.subjects || []).includes(code));
+    await run(
+      key, u,
+      { ["subscriptions." + code]: true, ["subscriptionExpiry." + code]: expiresAt, pendingPurchases: remaining },
+      { subscriptions: { ...u.subscriptions, [code]: true }, subscriptionExpiry: { ...(u.subscriptionExpiry || {}), [code]: expiresAt }, pendingPurchases: remaining }
+    );
+  };
+
+  // Admin extension: +N months on an expiring subject. Lifetime subjects are never touched.
+  const extendSubject = async (u, code, months) => {
+    const s = getSubjectInfo(u, code);
+    if (!s.owned || s.lifetime) return;
+    const expiresAt = addMonths(s.active ? s.expiresAt : serverNow(), months);
+    await run(
+      u.uid + ":" + code, u,
+      { ["subscriptionExpiry." + code]: expiresAt },
+      { subscriptionExpiry: { ...(u.subscriptionExpiry || {}), [code]: expiresAt } }
+    );
   };
 
   const setTriage = (u, status) =>
@@ -143,39 +169,48 @@ export default function AdminPanel() {
 
   const approvePractice = async (u, p) => {
     const plan = PLANS.find((x) => x.id === p.plan);
-    const diff = plan && plan.price !== p.price ? "⚠️ Iba ang presyo: ₱" + p.price + " ang binayaran, ₱" + plan.price + " na ang plan ngayon (lumang app version). " : "";
-    if (!window.confirm(diff + "I-approve ang " + (ALL_PLAN_LABELS[p.plan] || p.plan) + " ₱" + p.price + " para kay " + (u.fullName || u.email) + "?")) return;
+    const diff = plan && plan.price !== p.price ? "⚠️ Price mismatch: the user paid ₱" + p.price + " but the plan is now ₱" + plan.price + " (older app version). " : "";
+    if (!window.confirm(diff + "Approve " + (ALL_PLAN_LABELS[p.plan] || p.plan) + " ₱" + p.price + " for " + (u.fullName || u.email) + "?")) return;
     const ref = doc(db, "users", u.uid);
     setBusyKey(u.uid + ":pp:" + p.referenceCode);
     try {
-      // Isang atomic transaction: binabasa ang pinakabagong doc, kaya hindi madodoble ang grant.
+      // One atomic transaction: it reads the latest doc, so a grant can never be doubled.
       const res = await runTransaction(db, async (tx) => {
         const snap = await tx.get(ref);
-        if (!snap.exists()) throw new Error("Wala nang user doc.");
+        if (!snap.exists()) throw new Error("User document no longer exists.");
         const d = snap.data();
         const done = (d.paymentHistory || []).some((h) => h.referenceCode === p.referenceCode);
         const pending = (d.pendingPurchases || []).some((x) => x.referenceCode === p.referenceCode);
         if (done || !pending) return null;
         const now = serverNow();
         const subjects = p.subjects || (plan ? plan.subjects : []);
-        const award = planAward(d, { subjects, bonusMonths: plan ? plan.bonusMonths : 0 });
+        const term = plan ? plan.months : (subjects.length === 1 ? (SUBJECT_TERM_MONTHS[subjects[0]] || 3) : 6);
+        const g = computeGrant(d, { subjects, months: term }, now);
         const remaining = (d.pendingPurchases || []).filter((x) => x.referenceCode !== p.referenceCode);
         const upd = {
           pendingPurchases: remaining,
           triageStatus: "subscribed",
-          paymentHistory: arrayUnion({ kind: "practice", plan: p.plan, price: p.price, method: p.method, referenceCode: p.referenceCode, approvedAt: now }),
+          paymentHistory: arrayUnion({ kind: "practice", plan: p.plan, price: p.price, method: p.method, referenceCode: p.referenceCode, approvedAt: now, months: term }),
         };
         const subsPatch = {};
+        const expPatch = { ...(d.subscriptionExpiry || {}) };
         subjects.forEach((c) => { upd["subscriptions." + c] = true; subsPatch[c] = true; });
-        const patch = { pendingPurchases: remaining, triageStatus: "subscribed", subscriptions: { ...(d.subscriptions || {}), ...subsPatch } };
-        if (award.months > 0) {
-          const expiresAt = stackAccess(d, award.months, now);
-          const src = plan && plan.bonusMonths ? p.plan : "BONUS3";
-          upd.appAccess = { plan: src, expiresAt };
-          upd.appAccessHistory = arrayUnion({ plan: src, price: 0, referenceCode: p.referenceCode, method: "practice-purchase", approvedAt: now, expiresAt, months: award.months });
+        Object.keys(g.subjectExpiry).forEach((c) => {
+          upd["subscriptionExpiry." + c] = g.subjectExpiry[c];
+          expPatch[c] = g.subjectExpiry[c];
+        });
+        const patch = {
+          pendingPurchases: remaining,
+          triageStatus: "subscribed",
+          subscriptions: { ...(d.subscriptions || {}), ...subsPatch },
+          subscriptionExpiry: expPatch,
+        };
+        if (g.appExpiresAt) {
+          upd.appAccess = { plan: p.plan, expiresAt: g.appExpiresAt };
+          upd.appAccessHistory = arrayUnion({ plan: p.plan, price: 0, referenceCode: p.referenceCode, method: "practice-purchase", approvedAt: now, expiresAt: g.appExpiresAt, months: term + g.bonusMonths });
           patch.appAccess = upd.appAccess;
         }
-        if (award.flag) {
+        if (g.bonusFlag) {
           upd["bonuses.threeSubjects"] = now;
           patch.bonuses = { ...(d.bonuses || {}), threeSubjects: now };
         }
@@ -183,71 +218,17 @@ export default function AdminPanel() {
         return patch;
       });
       if (res) patchUser(u.uid, res);
-      else { alert("Na-approve na ito dati o wala na sa pending (ref " + p.referenceCode + "). Walang binago."); await loadUsers(); }
+      else { alert("Already approved or no longer pending (ref " + p.referenceCode + "). Nothing was changed."); await loadUsers(); }
     } catch (err) {
       console.warn("approvePractice failed:", err);
-      alert("May error. Subukan ulit:\n" + (err?.message || err));
+      alert("Something went wrong. Please try again:\n" + (err?.message || err));
     } finally {
       setBusyKey(null);
     }
   };
 
-  // ── One-time migration ng lumang users (idempotent: bonuses.migrated) ──
-  const runMigration = async () => {
-    if (!users) return;
-    const todo = users.filter((x) => !x.isAdmin && !(x.bonuses && x.bonuses.migrated));
-    if (todo.length === 0) { alert("Tapos na ang migration sa lahat ng user."); return; }
-    const withSubs = todo.filter((x) => countSubjects(x.subscriptions) > 0);
-    const n3 = withSubs.filter((x) => countSubjects(x.subscriptions) >= 3).length;
-    const n12 = withSubs.length - n3;
-    const nTrial = todo.length - withSubs.length;
-    if (!window.confirm("Migration: " + n3 + " user (3+ subjects) +" + MIGRATION.months3 + " buwan, " + n12 + " user (1-2 subjects) +" + MIGRATION.months12 + " buwan, " + nTrial + " user (walang subject) " + MIGRATION.trialDays + "-day trial mula ngayon. Isang beses lang bawat user. Ituloy?")) return;
-    setBusyKey("migration");
-    let ok = 0, skipped = 0, fail = 0;
-    for (let i = 0; i < todo.length; i++) {
-      setMigMsg("Nagpoproseso " + (i + 1) + "/" + todo.length + "...");
-      const ref = doc(db, "users", todo[i].uid);
-      try {
-        const r = await runTransaction(db, async (tx) => {
-          const s = await tx.get(ref);
-          const d = s.data();
-          if (!d || d.isAdmin || (d.bonuses && d.bonuses.migrated)) return "skip";
-          const n = countSubjects(d.subscriptions);
-          const t = serverNow();
-          const upd = { "bonuses.migrated": t };
-          if (n > 0) {
-            const months = n >= 3 ? MIGRATION.months3 : MIGRATION.months12;
-            const expiresAt = stackAccess(d, months, t);
-            upd.appAccess = { plan: "MIGRATION", expiresAt };
-            upd.appAccessHistory = arrayUnion({ plan: "MIGRATION", price: 0, referenceCode: "MIGRATION", method: "migration", approvedAt: t, expiresAt, months });
-            if (n >= 3) upd["bonuses.threeSubjects"] = t;
-          } else {
-            upd.trial = { startedAt: Timestamp.fromMillis(t), days: MIGRATION.trialDays };
-            // May active App Access na (hal. 1 month) pero walang subject: dagdag na 3 araw sa dulo.
-            const cur = getAppAccessInfo(d, t);
-            if (cur.active) {
-              const expiresAt = cur.expiresAt + MIGRATION.trialDays * DAY_MS;
-              upd.appAccess = { plan: cur.plan || "MIGRATION", expiresAt };
-              upd.appAccessHistory = arrayUnion({ plan: "MIGRATION", price: 0, referenceCode: "MIGRATION", method: "migration", approvedAt: t, expiresAt, days: MIGRATION.trialDays });
-            }
-          }
-          tx.update(ref, upd);
-          return "ok";
-        });
-        if (r === "ok") ok++; else skipped++;
-      } catch (err) {
-        console.warn("migration failed:", todo[i].uid, err);
-        fail++;
-      }
-    }
-    setMigMsg("");
-    setBusyKey(null);
-    await loadUsers();
-    alert("Tapos: " + ok + " na-update, " + skipped + " nilaktawan, " + fail + " nag-error.");
-  };
-
   const rejectPractice = async (u, p) => {
-    if (!window.confirm("Tanggalin ang pending na ito (ref " + p.referenceCode + ")?")) return;
+    if (!window.confirm("Remove this pending request (ref " + p.referenceCode + ")?")) return;
     const remaining = (u.pendingPurchases || []).filter((x) => x.referenceCode !== p.referenceCode);
     await run(u.uid + ":pp:" + p.referenceCode, u, { pendingPurchases: remaining }, { pendingPurchases: remaining });
   };
@@ -273,24 +254,24 @@ export default function AdminPanel() {
 
   const approveAccess = async (u, p) => {
     const plan = ACCESS_PLANS.find((x) => x.id === p.plan);
-    if (!plan) { alert("Hindi kilalang plan: " + p.plan); return; }
-    const diff = plan.price !== p.price ? "⚠️ Iba ang presyo: ₱" + p.price + " ang binayaran, ₱" + plan.price + " na ang plan ngayon. " : "";
-    if (!window.confirm(diff + "I-approve ang " + plan.months + " buwan (₱" + plan.price + ") para kay " + (u.fullName || u.email) + "?")) return;
+    if (!plan) { alert("Unknown plan: " + p.plan); return; }
+    const diff = plan.price !== p.price ? "⚠️ Price mismatch: the user paid ₱" + p.price + " but the plan is now ₱" + plan.price + ". " : "";
+    if (!window.confirm(diff + "Approve " + plan.months + " month(s) (₱" + plan.price + ") for " + (u.fullName || u.email) + "?")) return;
     await grantAccess(u, plan, p);
   };
 
   const manualGrant = async (u, plan) => {
-    if (!window.confirm("Bigyan si " + (u.fullName || u.email) + " ng " + plan.months + " buwan na App Access?")) return;
+    if (!window.confirm("Give " + (u.fullName || u.email) + " " + plan.months + " month(s) of App Access?")) return;
     await grantAccess(u, plan, null);
   };
 
   const removeAccess = async (u) => {
-    if (!window.confirm("Tanggalin ang App Access ni " + (u.fullName || u.email) + "?")) return;
+    if (!window.confirm("Remove App Access for " + (u.fullName || u.email) + "?")) return;
     await run(u.uid + ":acc", u, { appAccess: deleteField() }, { appAccess: undefined });
   };
 
   const rejectAccess = async (u, p) => {
-    if (!window.confirm("Tanggalin ang pending na ito (ref " + p.referenceCode + ")?")) return;
+    if (!window.confirm("Remove this pending request (ref " + p.referenceCode + ")?")) return;
     const remaining = (u.pendingAccess || []).filter((x) => x.referenceCode !== p.referenceCode);
     await run(u.uid + ":acc:" + p.referenceCode, u, { pendingAccess: remaining }, { pendingAccess: remaining });
   };
@@ -304,7 +285,7 @@ export default function AdminPanel() {
   };
 
   const grantTrial = (u) => {
-    if (!window.confirm("Simulan ulit ang " + TRIAL_DAYS + "-day trial ni " + (u.fullName || u.email) + " mula ngayon?")) return;
+    if (!window.confirm("Restart the " + TRIAL_DAYS + "-day trial for " + (u.fullName || u.email) + " from now?")) return;
     return writeTrial(u, TRIAL_DAYS);
   };
 
@@ -314,30 +295,11 @@ export default function AdminPanel() {
   };
 
   const endTrial = (u) => {
-    if (!window.confirm("Tapusin agad ang trial ni " + (u.fullName || u.email) + "?")) return;
+    if (!window.confirm("End the trial for " + (u.fullName || u.email) + " now?")) return;
     return writeTrial(u, 0);
   };
 
-  // ── RA 10863 (CL) Trial CRUD — kaparehong logic ng trial sa itaas ────
-  const writeClTrial = (u, days) => {
-    const startedAt = serverNow();
-    return run(u.uid + ":cltrial", u, { clTrial: { startedAt: Timestamp.fromMillis(startedAt), days } }, { clTrial: { startedAt, days } });
-  };
-
-  const grantClTrial = (u) => {
-    if (!window.confirm("Simulan ulit ang " + CL_TRIAL_DAYS + "-day CL trial ni " + (u.fullName || u.email) + " mula ngayon?")) return;
-    return writeClTrial(u, CL_TRIAL_DAYS);
-  };
-
-  const extendClTrial = (u, extraDays) => {
-    const left = getClTrialInfo(u).msLeft / DAY_MS;
-    return writeClTrial(u, left + extraDays);
-  };
-
-  const endClTrial = (u) => {
-    if (!window.confirm("Tapusin agad ang CL trial ni " + (u.fullName || u.email) + "?")) return;
-    return writeClTrial(u, 0);
-  };
+  // (The RA 10863 free trial is retired. Level 1 is free for everyone instead.)
 
   // ── Derived lists ───────────────────────────────────────────────────
   const practicePending = useMemo(() => {
@@ -383,13 +345,45 @@ export default function AdminPanel() {
   const rawPracticeCount = (users || []).reduce((n, u) => n + (u.pendingPurchases || []).length, 0);
   const rawAccessCount = (users || []).reduce((n, u) => n + (u.pendingAccess || []).length, 0);
 
+  // Users whose App Access or any subject ends within 7 days.
+  // Computed from the users already loaded, so it costs no extra Firestore reads.
+  const expiringRows = useMemo(() => {
+    const now = serverNow();
+    const rows = [];
+    filtered.forEach((u) => {
+      if (u.isAdmin) return;
+      const items = [];
+      const app = getAppAccessInfo(u, now);
+      if (app.active && app.msLeft <= 7 * DAY_MS) items.push({ label: "App Access", endsAt: app.expiresAt });
+      SUBJECT_CODES.forEach((c) => {
+        const s = getSubjectInfo(u, c, now);
+        if (s.active && !s.lifetime && s.msLeft <= 7 * DAY_MS) items.push({ label: c, endsAt: s.expiresAt });
+      });
+      if (items.length) rows.push({ u, items, soonest: Math.min(...items.map((i) => i.endsAt)) });
+    });
+    return rows.sort((a, b) => a.soonest - b.soonest);
+  }, [filtered, users]);
+
+  const copyReminder = async (u, items) => {
+    const first = (u.fullName || "there").split(" ")[0];
+    const parts = items.map((i) => i.label + " (" + formatDateShort(i.endsAt) + ")").join(", ");
+    const text = "Hi " + first + "! Your CuBLE access is ending soon: " + parts + ". You can renew anytime from your Profile. If you renew early, your remaining days are kept. Thank you!";
+    try {
+      await navigator.clipboard.writeText(text);
+      alert("Reminder copied. Paste it into Messenger or SMS.");
+    } catch (_) {
+      window.prompt("Copy this message:", text);
+    }
+  };
+
   const TABS = [
     { id: "overview", label: "📊 Overview" },
     { id: "users", label: "👥 Users" },
     { id: "practice", label: "💳 Practice", count: rawPracticeCount },
     { id: "access", label: "⏱ Access", count: rawAccessCount },
+    { id: "expiring", label: "⏳ Expiring", count: expiringRows.length },
     { id: "trial", label: "🎁 Trial" },
-    { id: "cl", label: "📜 CL" },
+    { id: "cl", label: "📜 RA 10863" },
   ];
 
   const btn = "min-h-[34px] rounded-full px-3 py-1.5 text-xs font-semibold transition-colors disabled:opacity-50 ";
@@ -399,7 +393,7 @@ export default function AdminPanel() {
 
   const PendingCard = ({ u, p, onApprove, onReject, approveLabel }) => (
     <div className="rounded-xl border border-amber-200 bg-amber-50 p-3 dark:border-amber-900 dark:bg-amber-950/20">
-      <p className="truncate font-semibold text-navy-900 dark:text-slate-100">{u.fullName || "(walang pangalan)"}</p>
+      <p className="truncate font-semibold text-navy-900 dark:text-slate-100">{u.fullName || "(no name)"}</p>
       <p className="truncate text-xs text-slate-400">{u.email}</p>
       <p className="mt-2 text-sm font-semibold text-navy-900 dark:text-amber-300">
         {ALL_PLAN_LABELS[p.plan] || p.plan} · ₱{p.price} · {METHOD_LABELS[p.method] || p.method}
@@ -417,7 +411,7 @@ export default function AdminPanel() {
       <div>
         <h1 className="text-2xl font-bold text-navy-900 dark:text-slate-50">👑 Admin Panel</h1>
         <p className="text-sm text-slate-500 dark:text-slate-400">
-          Hiwalay ang pending ng Practice Questions at ng App Access, at may sariling Trial panel.
+          Practice Questions and App Access have separate pending lists, and Trial has its own panel.
         </p>
       </div>
 
@@ -438,7 +432,7 @@ export default function AdminPanel() {
         <input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Maghanap ng pangalan o email..."
+          placeholder="Search name or email..."
           className="flex-1 rounded-xl border border-slate-200 px-4 py-2.5 text-sm dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100"
         />
         <button
@@ -456,25 +450,17 @@ export default function AdminPanel() {
 
       {error && (
         <div className="rounded-xl border border-red-200 bg-red-50 p-4 text-red-800 dark:border-red-800 dark:bg-red-950/30 dark:text-red-200">
-          <p className="font-bold">⚠️ Hindi ma-load ang users</p>
+          <p className="font-bold">⚠️ Unable to load users</p>
           <p className="text-sm">{error}</p>
         </div>
       )}
 
       {/* ───────────── USERS ───────────── */}
-      {tab === "users" && users !== null && !error && (
-        <div className="rounded-xl border border-amber-300 bg-amber-50 p-3 dark:border-amber-900 dark:bg-amber-950/20">
-          <p className="text-sm font-semibold text-navy-900 dark:text-amber-300">🛠 One-time migration (lumang users)</p>
-          <p className="mt-1 text-xs text-slate-600 dark:text-slate-400">
-            3+ subjects → +{MIGRATION.months3} buwan · 1-2 subjects → +{MIGRATION.months12} buwan · walang subject → {MIGRATION.trialDays}-day trial mula ngayon (+{MIGRATION.trialDays} araw sa App Access kung active pa). Isang beses lang bawat user.
-          </p>
-          <button onClick={runMigration} disabled={!!busyKey} className={btnGreen + " mt-2"}>{migMsg || "▶ Run migration"}</button>
-        </div>
-      )}
+
 
       {tab === "users" && users !== null && !error && (
         <div className="space-y-3">
-          {filtered.length === 0 && <p className="py-8 text-center text-slate-400">Walang nahanap na user.</p>}
+          {filtered.length === 0 && <p className="py-8 text-center text-slate-400">No users found.</p>}
           {filtered.map((u) => {
             const triage = defaultTriage(u);
             const t = TRIAGE[triage] || TRIAGE.none;
@@ -483,7 +469,7 @@ export default function AdminPanel() {
               <div key={u.uid} className="rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-700 dark:bg-slate-800">
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0">
-                    <p className="truncate font-semibold text-navy-900 dark:text-slate-100">{u.fullName || "(walang pangalan)"}</p>
+                    <p className="truncate font-semibold text-navy-900 dark:text-slate-100">{u.fullName || "(no name)"}</p>
                     <p className="truncate text-xs text-slate-400">{u.email}</p>
                   </div>
                   <span className={"flex flex-shrink-0 items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-semibold " + t.chip}>
@@ -494,21 +480,42 @@ export default function AdminPanel() {
 
                 <div className="mt-3 flex flex-wrap gap-1.5">
                   {SUBJECT_CODES.map((code) => {
-                    const unlocked = !!u.subscriptions?.[code];
+                    const si = getSubjectInfo(u, code);
                     const busy = busyKey === u.uid + ":" + code;
+                    const tone = si.active
+                      ? "bg-emerald-600 text-white active:bg-emerald-700 "
+                      : si.owned
+                        ? "bg-amber-100 text-amber-800 active:bg-amber-200 dark:bg-amber-950/40 dark:text-amber-300 "
+                        : "bg-slate-100 text-slate-600 active:bg-slate-200 dark:bg-slate-900/40 dark:text-slate-300 ";
                     return (
                       <button
                         key={code}
                         onClick={() => toggleSubject(u, code)}
                         disabled={busy}
                         title={SUBJECT_LABELS[code]}
-                        className={btn + (unlocked ? "bg-emerald-600 text-white active:bg-emerald-700" : "bg-slate-100 text-slate-600 active:bg-slate-200 dark:bg-slate-900/40 dark:text-slate-300")}
+                        className={btn + tone}
                       >
-                        {code} {unlocked ? "✓" : "✕"}
+                        {code} {si.active ? (si.lifetime ? "∞" : "✓") : si.owned ? "⏳" : "✕"}
                       </button>
                     );
                   })}
                 </div>
+
+                {SUBJECT_CODES.some((c) => u.subscriptions?.[c]) && (
+                  <div className="mt-2 space-y-1">
+                    {SUBJECT_CODES.filter((c) => u.subscriptions?.[c]).map((c) => {
+                      const si = getSubjectInfo(u, c);
+                      return (
+                        <div key={c} className="flex items-center justify-between gap-2 text-xs text-slate-500 dark:text-slate-400">
+                          <span>{c} · {si.lifetime ? "Lifetime" : (si.active ? "until " : "expired ") + formatDateShort(si.expiresAt)}</span>
+                          {!si.lifetime && (
+                            <button onClick={() => extendSubject(u, c, 1)} disabled={busyKey === u.uid + ":" + c} className={btnGhost}>+1 mo</button>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
 
                 <div className="mt-3 flex gap-1.5">
                   {Object.entries(TRIAGE).map(([status, cfg]) => (
@@ -530,7 +537,7 @@ export default function AdminPanel() {
                   </div>
                   {app.exists && (
                     <p className="mb-2 text-xs text-slate-500 dark:text-slate-400">
-                      {app.active ? "Hanggang " : "Nagtapos noong "}{formatDateShort(app.expiresAt)}
+                      {app.active ? "Until " : "Ended on "}{formatDateShort(app.expiresAt)}
                     </p>
                   )}
                   <div className="flex flex-wrap gap-1.5">
@@ -550,7 +557,7 @@ export default function AdminPanel() {
       {tab === "practice" && users !== null && !error && (
         <div className="space-y-3">
           <p className="text-sm font-semibold text-navy-900 dark:text-slate-100">💳 Pending — Practice Questions ({practicePending.length})</p>
-          {practicePending.length === 0 && <p className="py-8 text-center text-slate-400">Walang pending na practice payment. 🎉</p>}
+          {practicePending.length === 0 && <p className="py-8 text-center text-slate-400">No pending practice payments. 🎉</p>}
           {practicePending.map(({ u, p }) => (
             <PendingCard
               key={u.uid + p.referenceCode}
@@ -568,7 +575,7 @@ export default function AdminPanel() {
       {tab === "access" && users !== null && !error && (
         <div className="space-y-3">
           <p className="text-sm font-semibold text-navy-900 dark:text-slate-100">⏱ Pending — App Access ({accessPending.length})</p>
-          {accessPending.length === 0 && <p className="py-6 text-center text-slate-400">Walang pending na App Access payment. 🎉</p>}
+          {accessPending.length === 0 && <p className="py-6 text-center text-slate-400">No pending App Access payments. 🎉</p>}
           {accessPending.map(({ u, p }) => {
             const plan = ACCESS_PLANS.find((x) => x.id === p.plan);
             return (
@@ -584,7 +591,7 @@ export default function AdminPanel() {
           })}
 
           <p className="pt-3 text-sm font-semibold text-navy-900 dark:text-slate-100">Active App Access ({activeSubscribers.length})</p>
-          {activeSubscribers.length === 0 && <p className="py-4 text-center text-sm text-slate-400">Wala pang may App Access.</p>}
+          {activeSubscribers.length === 0 && <p className="py-4 text-center text-sm text-slate-400">No one has App Access yet.</p>}
           {activeSubscribers.map((u) => {
             const app = getAppAccessInfo(u);
             return (
@@ -592,7 +599,7 @@ export default function AdminPanel() {
                 <div className="min-w-0">
                   <p className="truncate text-sm font-semibold text-navy-900 dark:text-slate-100">{u.fullName || u.email}</p>
                   <p className="text-xs text-slate-500 dark:text-slate-400">
-                    {app.active ? formatTimeLeft(app.msLeft) + " left · hanggang " : "Nagtapos noong "}{formatDateShort(app.expiresAt)}
+                    {app.active ? formatTimeLeft(app.msLeft) + " left · until " : "Ended on "}{formatDateShort(app.expiresAt)}
                   </p>
                 </div>
                 <div className="flex flex-shrink-0 gap-1.5">
@@ -623,14 +630,14 @@ export default function AdminPanel() {
               <div key={u.uid} className="rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-slate-800">
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0">
-                    <p className="truncate text-sm font-semibold text-navy-900 dark:text-slate-100">{u.fullName || "(walang pangalan)"}</p>
+                    <p className="truncate text-sm font-semibold text-navy-900 dark:text-slate-100">{u.fullName || "(no name)"}</p>
                     <p className="truncate text-xs text-slate-400">{u.email}</p>
                   </div>
                   <StateChip u={u} />
                 </div>
                 {tr.exists && (
                   <p className="mt-1.5 text-xs text-slate-500 dark:text-slate-400">
-                    {tr.active ? "Trial hanggang " : "Trial nagtapos noong "}{formatDateTime(tr.endsAt)}
+                    {tr.active ? "Trial until " : "Trial ended on "}{formatDateTime(tr.endsAt)}
                   </p>
                 )}
                 <div className="mt-2 flex flex-wrap gap-1.5">
@@ -645,12 +652,14 @@ export default function AdminPanel() {
         </div>
       )}
 
-      {/* ───────────── RA 10863 (CL) TRIAL + LIFETIME ───────────── */}
+      {/* ───────────── RA 10863 (CL) + EXPIRING ───────────── */}
       {tab === "cl" && users !== null && !error && (
         <div className="space-y-3">
-          <p className="text-xs text-slate-500 dark:text-slate-400">{CL_TRIAL_DAYS}-day free trial, tapos naka-lock hanggang bumili ng CL (₱{CL_LIFETIME_PRICE}).</p>
+          <p className="text-xs text-slate-500 dark:text-slate-400">
+            Level 1 is free for everyone. Levels 2–5 unlock with RA 10863 (₱{CL_PRICE}, 4 months). Old lifetime owners stay unlocked.
+          </p>
           <div className="flex flex-wrap gap-1.5">
-            {[["all", "All"], ["trial", "On trial"], ["expired", "Expired"], ["none", "No trial yet"], ["paid", "Unlocked (paid)"]].map(([id, label]) => (
+            {[["all", "All"], ["paid", "Unlocked"], ["expired", "Expired"], ["none", "Not purchased"]].map(([id, label]) => (
               <button key={id} onClick={() => setClFilter(id)} className={"rounded-full border px-3 py-1 text-xs font-semibold " + (clFilter === id ? "border-navy-900 bg-navy-900 text-white dark:border-slate-100 dark:bg-slate-100 dark:text-navy-900" : "border-slate-200 text-slate-500 dark:border-slate-700 dark:text-slate-400")}>
                 {label}
               </button>
@@ -659,34 +668,53 @@ export default function AdminPanel() {
           <p className="text-xs text-slate-400">{clRows.length} user(s)</p>
 
           {clRows.map((u) => {
-            const ct = getClTrialInfo(u);
-            const paid = !!u.subscriptions?.CL;
+            const cs = getSubjectInfo(u, "CL");
             return (
               <div key={u.uid} className="rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-slate-800">
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0">
-                    <p className="truncate text-sm font-semibold text-navy-900 dark:text-slate-100">{u.fullName || "(walang pangalan)"}</p>
+                    <p className="truncate text-sm font-semibold text-navy-900 dark:text-slate-100">{u.fullName || "(no name)"}</p>
                     <p className="truncate text-xs text-slate-400">{u.email}</p>
                   </div>
-                  <span className={"rounded-full px-2 py-0.5 text-[11px] font-semibold " + (paid ? "bg-purple-100 text-purple-700 dark:bg-purple-950/40 dark:text-purple-300" : ct.active ? "bg-sky-100 text-sky-700 dark:bg-sky-950/40 dark:text-sky-300" : "bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400")}>
-                    {paid ? "👑 Unlocked" : ct.exists ? (ct.active ? "🎁 Trial" : "⏳ Expired") : "No trial yet"}
+                  <span className={"rounded-full px-2 py-0.5 text-[11px] font-semibold " + (cs.active ? "bg-purple-100 text-purple-700 dark:bg-purple-950/40 dark:text-purple-300" : cs.owned ? "bg-amber-100 text-amber-800 dark:bg-amber-950/40 dark:text-amber-300" : "bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400")}>
+                    {cs.active ? (cs.lifetime ? "♾️ Lifetime" : "👑 Active") : cs.owned ? "⏳ Expired" : "Not purchased"}
                   </span>
                 </div>
-                {ct.exists && !paid && (
+                {cs.owned && !cs.lifetime && (
                   <p className="mt-1.5 text-xs text-slate-500 dark:text-slate-400">
-                    {ct.active ? "CL trial hanggang " : "CL trial nagtapos noong "}{formatDateTime(ct.endsAt)}
+                    {cs.active ? "Active until " : "Expired on "}{formatDateTime(cs.expiresAt)}
                   </p>
                 )}
                 <div className="mt-2 flex flex-wrap gap-1.5">
-                  {!paid && <button onClick={() => grantClTrial(u)} disabled={busyKey === u.uid + ":cltrial"} className={btnGreen}>{ct.exists ? "↺ Restart " + CL_TRIAL_DAYS + "d" : "＋ Grant " + CL_TRIAL_DAYS + "d"}</button>}
-                  {!paid && <button onClick={() => extendClTrial(u, 1)} disabled={busyKey === u.uid + ":cltrial"} className={btnGhost}>+1 day</button>}
-                  {!paid && ct.exists && ct.active && <button onClick={() => endClTrial(u)} disabled={busyKey === u.uid + ":cltrial"} className={btnRed}>End</button>}
-                  {!paid && <button onClick={() => toggleSubject(u, "CL")} disabled={busyKey === u.uid + ":CL"} className={btnGhost + " border-purple-300 text-purple-700 dark:border-purple-700 dark:text-purple-300"}>👑 Mark Unlocked (₱{CL_LIFETIME_PRICE})</button>}
-                  {paid && <button onClick={() => toggleSubject(u, "CL")} disabled={busyKey === u.uid + ":CL"} className={btnRed}>Remove Unlock</button>}
+                  {!cs.owned && <button onClick={() => toggleSubject(u, "CL")} disabled={busyKey === u.uid + ":CL"} className={btnGhost + " border-purple-300 text-purple-700 dark:border-purple-700 dark:text-purple-300"}>👑 Unlock CL (4 mo)</button>}
+                  {cs.owned && !cs.lifetime && <button onClick={() => extendSubject(u, "CL", 1)} disabled={busyKey === u.uid + ":CL"} className={btnGhost}>+1 mo</button>}
+                  {cs.owned && <button onClick={() => toggleSubject(u, "CL")} disabled={busyKey === u.uid + ":CL"} className={btnRed}>Remove</button>}
                 </div>
               </div>
             );
           })}
+        </div>
+      )}
+
+      {/* ───────────── EXPIRING SOON ───────────── */}
+      {tab === "expiring" && users !== null && !error && (
+        <div className="space-y-3">
+          <p className="text-xs text-slate-500 dark:text-slate-400">
+            App Access or subjects ending within 7 days. Tap “Copy reminder” and paste it into Messenger or SMS.
+          </p>
+          {expiringRows.length === 0 && <p className="py-8 text-center text-slate-400">Nobody is expiring in the next 7 days. 🎉</p>}
+          {expiringRows.map(({ u, items }) => (
+            <div key={u.uid} className="rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-slate-800">
+              <p className="truncate text-sm font-semibold text-navy-900 dark:text-slate-100">{u.fullName || "(no name)"}</p>
+              <p className="truncate text-xs text-slate-400">{u.email}</p>
+              <ul className="mt-2 space-y-0.5 text-xs text-slate-500 dark:text-slate-400">
+                {items.map((i) => (
+                  <li key={i.label}>{i.label} · ends {formatDateShort(i.endsAt)} ({formatTimeLeft(i.endsAt - serverNow())} left)</li>
+                ))}
+              </ul>
+              <button onClick={() => copyReminder(u, items)} className={btnGreen + " mt-2"}>📋 Copy reminder</button>
+            </div>
+          ))}
         </div>
       )}
     </div>

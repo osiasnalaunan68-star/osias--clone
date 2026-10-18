@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { PLANS } from "../payments";
-import { getAccess, serverNow, toMs, DAY_MS } from "../access";
+import { getAccess, serverNow, toMs, DAY_MS, getSubjectInfo } from "../access";
 
 // Admin Overview — read-only dashboard. Walang bagong Firestore read/write:
 // kino-compute lang mula sa `users` array na na-load na ng AdminPanel.
@@ -83,7 +83,8 @@ function compute(users) {
     else if (key === "expired") status.expired++;
     else status.none++;
 
-    SUBJECT_CODES.forEach((c) => { if (u.subscriptions && u.subscriptions[c]) subjects[c]++; });
+    // Count only ACTIVE subjects (expired ones no longer count as subscribed).
+    SUBJECT_CODES.forEach((c) => { if (getSubjectInfo(u, c, now).active) subjects[c]++; });
 
     // Revenue: bayad lang (price > 0). Hindi kasama ang manual grant / migration.
     let spent = 0;
@@ -164,8 +165,8 @@ export default function AdminOverview({ users }) {
             <p className="text-sm font-semibold text-navy-900 dark:text-slate-100">Share mode</p>
             <p className="text-xs text-slate-500 dark:text-slate-400">
               {share
-                ? "Naka-mask ang email, nakatago ang pending. Screenshot-in ang card sa ibaba."
-                : "Off: buong pangalan, email, at pending ang makikita (para sa'yo lang)."}
+                ? "Emails are masked and pending items are hidden. Screenshot the card below."
+                : "Off: full names, emails, and pending items are visible (for you only)."}
             </p>
           </div>
           <button onClick={() => setShare(!share)} className={switchBtn(share)} role="switch" aria-checked={share} aria-label="Share mode">
@@ -174,7 +175,7 @@ export default function AdminOverview({ users }) {
         </div>
         {share && (
           <div className="flex items-center justify-between gap-3 border-t border-slate-100 pt-2 dark:border-slate-700">
-            <p className="text-sm text-slate-600 dark:text-slate-300">Ipakita ang revenue</p>
+            <p className="text-sm text-slate-600 dark:text-slate-300">Show revenue</p>
             <button onClick={() => setShowRevenue(!showRevenue)} className={switchBtn(showRevenue)} role="switch" aria-checked={showRevenue} aria-label="Show revenue">
               <span className={switchKnob(showRevenue)} />
             </button>
@@ -283,7 +284,7 @@ export default function AdminOverview({ users }) {
                 {s.recent.map(({ u, created }) => (
                   <li key={u.uid} className="flex items-center justify-between gap-3 py-2">
                     <div className="min-w-0">
-                      <p className="truncate text-sm font-medium">{u.fullName || "(walang pangalan)"}</p>
+                      <p className="truncate text-sm font-medium">{u.fullName || "(no name)"}</p>
                       <p className={"truncate text-xs " + muted}>{share ? maskEmail(u.email) : u.email}</p>
                     </div>
                     <span className={"flex-shrink-0 text-xs " + muted}>{shortDate(created)}</span>
@@ -301,7 +302,7 @@ export default function AdminOverview({ users }) {
           )}
 
           <p className={"border-t pt-3 text-[11px] " + t("border-slate-100 text-slate-400", "dark:border-slate-700 dark:text-slate-500")}>
-            Bilang mula sa aktwal na user records ng app. Hindi kasama ang admin account.
+            Counts come from the app's actual user records. Admin accounts are excluded.
           </p>
         </div>
       </div>

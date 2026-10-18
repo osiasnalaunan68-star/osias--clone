@@ -1,5 +1,9 @@
-// Payment plans, method list, reference-code generator, at ang Firestore
-// write para sa manual GCash/Maya/MariBank subscription flow.
+// Payment plans, payment method list, reference-code generator, and the Firestore
+// write for the manual GCash / Maya / MariBank subscription flow.
+//
+// `months`      = how long the subject(s) stay unlocked after approval.
+// `bonusMonths` = bundles only (shown in the UI as "+ N months App Access").
+//                 App Access for every plan is granted by computeGrant() in access.js.
 
 import gcashQr from "./assets/payment/gcash-qr.png";
 import mayaQr from "./assets/payment/maya-qr.png";
@@ -9,17 +13,19 @@ import { db, auth } from "./firebase";
 import { ACCESS_PLANS } from "./access";
 
 export const PLANS = [
-  { id: "CL", label: "RA 10863 (Customs Law)", price: 120, subjects: ["CL"] },
-  { id: "TL", label: "Tariff Law", price: 120, subjects: ["TL"] },
-  { id: "CDP", label: "Customs Documentation & Procedures", price: 120, subjects: ["CDP"] },
-  { id: "PC", label: "Practical Computations", price: 120, subjects: ["PC"] },
-  { id: "TCP", label: "Tariff Commission Primer", price: 229, subjects: ["TCP"] },
-  { id: "BUNDLE", label: "Normal Bundle", price: 460, subjects: ["CL", "TL", "CDP", "PC"], bonusMonths: 8 },
-  { id: "ALL", label: "Sulit Bundle", price: 669, subjects: ["CL", "TL", "CDP", "PC", "TCP"], bonusMonths: 10 },
+  { id: "CL", label: "RA 10863 (CMTA)", price: 199, months: 4, subjects: ["CL"] },
+  { id: "TL", label: "Tariff Law", price: 120, months: 3, subjects: ["TL"] },
+  { id: "CDP", label: "Customs Documentation & Procedures", price: 120, months: 3, subjects: ["CDP"] },
+  { id: "PC", label: "Practical Computations", price: 120, months: 3, subjects: ["PC"] },
+  { id: "TCP", label: "Tariff Commission Primer", price: 229, months: 3, subjects: ["TCP"] },
+  { id: "BUNDLE", label: "Normal Bundle", price: 380, months: 6, subjects: ["CL", "TL", "CDP", "PC"], bonusMonths: 6 },
+  { id: "ALL", label: "Sulit Bundle", price: 450, months: 6, subjects: ["CL", "TL", "CDP", "PC", "TCP"], bonusMonths: 6 },
 ];
 
-// Presyo ng CL (practice subject, walang expiry) — galing sa PLANS.
+// Price of RA 10863 (CL). The name is kept so existing imports keep working,
+// but CL is no longer lifetime — it now expires after 4 months.
 export const CL_LIFETIME_PRICE = PLANS.find((p) => p.id === "CL").price;
+export const CL_PRICE = CL_LIFETIME_PRICE;
 
 export const PAYMENT_METHODS = [
   { id: "gcash", label: "GCash", qr: gcashQr },
@@ -27,7 +33,7 @@ export const PAYMENT_METHODS = [
   { id: "maribank", label: "MariBank", qr: maribankQr },
 ];
 
-// Walang 0/O/1/I para di malito kapag isinusulat sa payment note.
+// No 0/O/1/I so codes are not confused when written in the payment note.
 const REF_CHARS = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 
 export function generateReferenceCode(planId) {
@@ -38,13 +44,13 @@ export function generateReferenceCode(planId) {
   return `${planId}-${suffix}`;
 }
 
-// setDoc + merge: kung wala pang user doc, gagawa ito (kasama ang email/pangalan)
-// para lalabas pa rin sa Admin Panel. serverTimestamp() ay bawal sa arrayUnion,
-// kaya Date.now() ang gamit.
+// setDoc + merge: if the user doc does not exist yet this creates it (with
+// email/name) so the purchase still shows up in the Admin Panel.
+// serverTimestamp() is not allowed inside arrayUnion, so Date.now() is used.
 export async function submitPendingPurchase(uid, { planId, subjects, price, method, referenceCode }) {
   const ref = doc(db, "users", uid);
   const u = auth.currentUser;
-  // App Access plans (M1/M3/M8) ay may sariling pending list.
+  // App Access plans (M1/M3/M8) have their own pending list.
   const field = ACCESS_PLANS.some((p) => p.id === planId) ? "pendingAccess" : "pendingPurchases";
   await setDoc(
     ref,

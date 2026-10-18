@@ -47,6 +47,7 @@ service cloud.firestore {
         && !('appAccessHistory' in request.resource.data)
         && !('paymentHistory' in request.resource.data)
         && !('bonuses' in request.resource.data)
+        && !('subscriptionExpiry' in request.resource.data)
         && !('trial' in request.resource.data)
         && !('clTrial' in request.resource.data)
         && (!('subscriptions' in request.resource.data)

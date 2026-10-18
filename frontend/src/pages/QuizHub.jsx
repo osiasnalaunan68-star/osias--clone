@@ -3,6 +3,8 @@ import QuizPage, { loadQuizData } from "./QuizPage";
 import { SubjectQuizPlay } from "./SubjectDashboard";
 import CustomQuizHub from "./CustomQuizHub";
 import { ProgressCircle, QuizPlayView } from "../components/QuizShared";
+import { useAuth } from "../authContext";
+import { isRaLevelUnlocked } from "../access";
 import { getSubjectStats, resetSubjectProgress } from "../subjectQuizStore";
 import { getLastQuizPosition } from "../quizStore";
 
@@ -21,7 +23,7 @@ function SubjectCard({ subjectId, expanded, onToggle, onPlay }) {
   const hasProgress = stats.answeredCount > 0;
 
   const handleRestart = () => {
-    if (confirm(`Reset progress mo para sa ${label}? Hindi mabubura ang mga tanong, mga sagot mo lang.`)) {
+    if (confirm(`Reset your progress for ${label}? Questions are kept — only your answers are cleared.`)) {
       resetSubjectProgress(subjectId);
       setRefreshKey((k) => k + 1);
     }
@@ -34,7 +36,7 @@ function SubjectCard({ subjectId, expanded, onToggle, onPlay }) {
         <div className="min-w-0 flex-1">
           <p className="truncate font-bold text-navy-900 dark:text-slate-100">{label}</p>
           <p className="truncate text-xs text-slate-400 dark:text-slate-500">
-            {stats.total > 0 ? `${stats.answeredCount}/${stats.total} sagot na` : "Walang tanong"}
+            {stats.total > 0 ? `${stats.answeredCount}/${stats.total} answered` : "No questions"}
           </p>
         </div>
         <span className={`flex-shrink-0 text-slate-300 transition-transform dark:text-slate-600 ${expanded ? "rotate-180" : ""}`} aria-hidden>▾</span>
@@ -66,7 +68,7 @@ function RA10863Card({ expanded, onToggle, onContinue, onSelectTitle }) {
         <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-amber-400 to-navy-700 text-lg" aria-hidden>⚖️</span>
         <div className="min-w-0 flex-1">
           <p className="truncate font-bold text-navy-900 dark:text-slate-100">RA 10863</p>
-          <p className="truncate text-xs text-slate-400 dark:text-slate-500">5 levels · lahat ng titles</p>
+          <p className="truncate text-xs text-slate-400 dark:text-slate-500">5 levels · Level 1 Filipino · Levels 2–5 English</p>
         </div>
         <span className={`flex-shrink-0 text-slate-300 transition-transform dark:text-slate-600 ${expanded ? "rotate-180" : ""}`} aria-hidden>▾</span>
       </button>
@@ -87,6 +89,7 @@ function RA10863Card({ expanded, onToggle, onContinue, onSelectTitle }) {
 export default function QuizHub({ onExit }) {
   const [expandedCard, setExpandedCard] = useState(null);
   const [activeView, setActiveView] = useState(null);
+  const { profile } = useAuth();
 
   const toggleCard = (id) => setExpandedCard((prev) => (prev === id ? null : id));
   const backToHub = () => setActiveView(null);
@@ -97,7 +100,8 @@ export default function QuizHub({ onExit }) {
 
   const handleContinueRA10863 = () => {
     const last = getLastQuizPosition();
-    if (last?.title && last?.level) {
+    // "Continue" must not reopen a locked level (Levels 2-5 need RA 10863).
+    if (last?.title && last?.level && isRaLevelUnlocked(profile, last.level)) {
       const titles = loadQuizData();
       const match = titles.find((t) => t.title === last.title);
       if (match) {
@@ -137,7 +141,7 @@ export default function QuizHub({ onExit }) {
               <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-violet-400 to-fuchsia-600 text-lg" aria-hidden>🧩</span>
               <div className="min-w-0 flex-1">
                 <p className="truncate font-bold text-navy-900 dark:text-slate-100">Your Own Quiz</p>
-                <p className="truncate text-xs text-slate-400 dark:text-slate-500">Gumawa ng sarili mong subject at tanong</p>
+                <p className="truncate text-xs text-slate-400 dark:text-slate-500">Create your own subjects and questions</p>
               </div>
               <span className="flex-shrink-0 text-slate-300 dark:text-slate-600" aria-hidden>→</span>
             </button>

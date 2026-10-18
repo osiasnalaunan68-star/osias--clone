@@ -5,7 +5,7 @@ import {
 } from "firebase/auth";
 import { doc, getDoc, setDoc, updateDoc, serverTimestamp, onSnapshot, runTransaction, getDocFromServer } from "firebase/firestore";
 import { auth, db, googleProvider } from "./firebase";
-import { setServerClock, persistClock, getAccess, hasAnyPractice, TRIAL_DAYS, CL_TRIAL_DAYS } from "./access";
+import { setServerClock, persistClock, getAccess, hasAnyPractice, TRIAL_DAYS } from "./access";
 
 const DEVICE_ID_KEY = "cuble_deviceId";
 const PENDING_SIGNIN_KEY = "cuble_pendingSignIn";
@@ -87,11 +87,7 @@ export function AuthProvider({ children }) {
               if (!d.trial && !hasAnyPractice(d)) {
                 upd.trial = { startedAt: serverTimestamp(), days: TRIAL_DAYS };
               }
-              // Hiwalay na CL trial (CL_TRIAL_DAYS) para sa RA 10863 (CL) — isang beses lang din,
-              // maliban kung bumili na ng CL (subscriptions.CL).
-              if (!d.clTrial && !(d.subscriptions && d.subscriptions.CL)) {
-                upd.clTrial = { startedAt: serverTimestamp(), days: CL_TRIAL_DAYS };
-              }
+              // The separate RA 10863 (CL) trial is retired: Level 1 is free for everyone now.
               tx.update(ref, upd);
             });
             if (!applied) { initDoneFor.current = null; return; }
@@ -242,7 +238,7 @@ export function AuthProvider({ children }) {
         console.warn("getRedirectResult error:", err);
         const code = err?.code || "unknown-error";
         const msg = err?.message || "";
-        setAuthError(`[${code}] ${msg || "Hindi na-process ang sign-in. Subukan ulit."}`);
+        setAuthError(`[${code}] ${msg || "Sign-in could not be completed. Please try again."}`);
       })
       .finally(() => {
         if (wasPending) {
@@ -268,7 +264,7 @@ export function AuthProvider({ children }) {
       console.warn("Google sign-in error:", err);
       const code = err?.code || "unknown-error";
       const msg = err?.message || "";
-      setAuthError(`[${code}] ${msg || "Hindi na-process ang sign-in. Subukan ulit."}`);
+      setAuthError(`[${code}] ${msg || "Sign-in could not be completed. Please try again."}`);
       setSigningIn(false);
       localStorage.removeItem(PENDING_SIGNIN_KEY);
     }

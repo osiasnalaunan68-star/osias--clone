@@ -6,26 +6,34 @@ import { PLANS } from "../payments";
 
 const DEMO_SECONDS = 60;
 
-// Tutorial + About para sa hindi pa naka-login. May "demo" ang bawat feature:
-// pindutin ang Start at 1 minuto lang ang gamit, tapos balik dito.
+// Tutorial + About for signed-out users. Each feature has a demo:
+// tap Start to try it for 1 minute, then return here.
 const STEPS = [
-  { icon: "⚖️", title: "Welcome to RA 10863", body: "Ang offline companion mo para sa Customs Modernization and Tariff Act (CMTA) — batas, notes, AI explanations, at practice questions para sa CuBLE." },
-  { icon: "📚", title: "Browse the Law", body: "Buksan ang menu (☰). Lahat ng Title, Chapter at Section ay nakaayos ayon sa tamang pagkakasunod.", demo: { view: "browse", mode: "study" } },
-  { icon: "📘", title: "Study Mode", body: "Isa-isang section para focused. May Expand All / Collapse All para mabilis sa buong chapter.", demo: { view: "browse", mode: "study" } },
-  { icon: "📖", title: "Reading Mode", body: "Book-style na view para sa mahabang pagbabasa. Pindutin ang 🎯 Focus para tago ang toolbar.", demo: { view: "browse", mode: "reading" } },
-  { icon: "🖍️", title: "Highlights", body: "I-select ang kahit anong text para i-highlight. Auto-save, gumagana kahit offline.", demo: { view: "browse", mode: "study" } },
-  { icon: "📝", title: "Notes", body: "Pindutin ang \"Add Note\" sa ilalim ng kahit anong section para isulat ang sarili mong paliwanag.", demo: { view: "browse", mode: "study" } },
-  { icon: "🤖", title: "Ask AI", body: "Instant offline explanation mula sa Osias 6.7 sa bawat section.", demo: { view: "browse", mode: "study" } },
-  { icon: "🔍", title: "Search", body: "Hanapin agad ang kahit ano. Subukan ang \"102\" o \"smuggling\".", demo: { view: "search", mode: null } },
-  { icon: "✍️", title: "Practice Quiz / Exam", body: "Subukan ang practice questions — 10 items bawat subject ang libre.", demo: { view: "quiz", mode: null } },
-  { icon: "🎁", title: TRIAL_DAYS + "-Day Free Trial", body: "Mag-login gamit ang Google para magsimula ang " + TRIAL_DAYS + " araw na libreng gamit ng buong app. Pagkatapos, pumili ng plan para magpatuloy." },
+  { icon: "⚖️", title: "Welcome to RA 10863", body: "Your offline companion for the Customs Modernization and Tariff Act (CMTA) — the law, notes, AI explanations, and practice questions for the CuBLE." },
+  { icon: "📚", title: "Browse the Law", body: "Open the menu (☰). Every Title, Chapter, and Section is arranged in the correct order.", demo: { view: "browse", mode: "study" } },
+  { icon: "📘", title: "Study Mode", body: "One section at a time, so you can stay focused. Use Expand All / Collapse All to move through a whole chapter quickly.", demo: { view: "browse", mode: "study" } },
+  { icon: "📖", title: "Reading Mode", body: "A book-style view for long reading sessions. Tap 🎯 Focus to hide the toolbar.", demo: { view: "browse", mode: "reading" } },
+  { icon: "🖍️", title: "Highlights", body: "Select any text to highlight it. Highlights save automatically and work offline.", demo: { view: "browse", mode: "study" } },
+  { icon: "📝", title: "Notes", body: "Tap \"Add Note\" under any section to write your own explanation.", demo: { view: "browse", mode: "study" } },
+  { icon: "🤖", title: "Ask AI", body: "Instant offline explanations from Osias 6.7 for every section.", demo: { view: "browse", mode: "study" } },
+  { icon: "🔍", title: "Search", body: "Find anything fast. Try \"102\" or \"smuggling\".", demo: { view: "search", mode: null } },
+  { icon: "✍️", title: "Practice Quiz / Exam", body: "Try the practice questions. RA 10863 Level 1 (Filipino version) is free, and so are the first 10 items of each other subject. Levels 2–5 are in English.", demo: { view: "quiz", mode: null } },
+  { icon: "🎁", title: TRIAL_DAYS + "-Day Free Trial", body: "Sign in with Google to start " + TRIAL_DAYS + " days of free access to the whole app. After that, choose a plan to continue." },
 ];
 
 function Splash({ text }) {
   return (
-    <div className="safe-top flex min-h-[100dvh] flex-col items-center justify-center gap-3 bg-slate-50 px-6 text-center dark:bg-slate-950">
+    <div className="safe-top flex min-h-[100dvh] flex-col items-center justify-center gap-4 bg-slate-50 px-6 text-center dark:bg-slate-950">
       <span className="text-4xl" aria-hidden>⚖️</span>
-      <p className="text-sm text-slate-500 dark:text-slate-400">{text}</p>
+      <div
+        className="h-9 w-9 animate-spin rounded-full border-4 border-slate-200 border-t-navy-900 dark:border-slate-700 dark:border-t-gold-400"
+        role="status"
+        aria-label="Loading"
+      />
+      <p className="text-sm font-medium text-slate-600 dark:text-slate-300">{text}</p>
+      <p className="max-w-xs rounded-xl bg-white/80 px-4 py-3 text-xs leading-relaxed text-slate-500 shadow-sm dark:bg-slate-900/70 dark:text-slate-400">
+        💡 Tip: If loading takes too long, turn Airplane Mode on, then off, and reopen the app for a faster reload.
+      </p>
     </div>
   );
 }
@@ -95,7 +103,7 @@ function GuestWelcome({ step, setStep, onStartDemo }) {
 
           {cur.demo && (
             <button onClick={() => onStartDemo(cur.demo)} className="mb-4 w-full rounded-xl border-2 border-gold-500 bg-gold-50 px-4 py-2.5 text-sm font-semibold text-navy-900 active:bg-gold-100 dark:border-gold-400 dark:bg-slate-800 dark:text-gold-400">
-              ▶ Start — subukan ng 1 minuto
+              ▶ Start — try it for 1 minute
             </button>
           )}
 
@@ -113,7 +121,7 @@ function GuestWelcome({ step, setStep, onStartDemo }) {
       <div className="border-t border-slate-200 bg-white/90 p-4 backdrop-blur dark:border-slate-800 dark:bg-slate-900/90">
         {authError && <p className="mb-2 text-center text-xs text-red-600 dark:text-red-400">{authError}</p>}
         <button onClick={signInWithGoogle} disabled={signingIn} className="mx-auto flex h-12 w-full max-w-md items-center justify-center rounded-xl bg-gold-500 text-sm font-bold text-navy-900 shadow-sm active:bg-gold-600 disabled:opacity-50">
-          {signingIn ? "Naghihintay sa Google..." : "🎁 Login with Google — simulan ang " + TRIAL_DAYS + "-day free trial"}
+          {signingIn ? "Waiting for Google..." : "🎁 Login with Google — start your " + TRIAL_DAYS + "-day free trial"}
         </button>
       </div>
     </div>
@@ -135,13 +143,13 @@ function Paywall() {
       <div className="w-full max-w-md space-y-4">
         <div className="text-center">
           <span className="text-4xl" aria-hidden>⏳</span>
-          <h1 className="mt-2 text-xl font-bold text-navy-900 dark:text-slate-50">Tapos na ang free trial mo</h1>
-          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Pumili ng App Access plan para magpatuloy. {user?.email}</p>
+          <h1 className="mt-2 text-xl font-bold text-navy-900 dark:text-slate-50">Your free trial has ended</h1>
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Choose an App Access plan to continue. {user?.email}</p>
         </div>
 
         {pending.length > 0 && (
           <div className="rounded-xl border border-amber-300 bg-amber-50 p-3 text-center text-sm text-amber-800 dark:border-amber-700 dark:bg-amber-950/30 dark:text-amber-300">
-            ⏳ May pending payment ka ({pending[pending.length - 1].referenceCode}). Hintayin lang ang confirmation.
+            ⏳ You have a pending payment ({pending[pending.length - 1].referenceCode}). Please wait for confirmation.
           </div>
         )}
 
@@ -152,7 +160,7 @@ function Paywall() {
               <button key={p.id} onClick={() => choose(p)} className={"flex w-full items-center justify-between rounded-2xl border-2 px-4 py-3 text-left active:opacity-80 " + (best ? "border-gold-500 bg-gold-50 dark:border-gold-400 dark:bg-slate-900" : "border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-900")}>
                 <span>
                   <span className="block text-base font-bold text-navy-900 dark:text-slate-100">{p.months} {p.months === 1 ? "Month" : "Months"}</span>
-                  <span className="block text-xs text-slate-500 dark:text-slate-400">₱{(p.price / p.months).toFixed(0)}/buwan{best ? " · Best value" : ""}</span>
+                  <span className="block text-xs text-slate-500 dark:text-slate-400">₱{(p.price / p.months).toFixed(0)}/month{best ? " · Best value" : ""}</span>
                 </span>
                 <span className="text-2xl font-extrabold text-navy-900 dark:text-slate-50">₱{p.price}</span>
               </button>
@@ -166,14 +174,14 @@ function Paywall() {
             <button key={p.id} onClick={() => choose(p)} className="flex w-full items-center justify-between rounded-2xl border-2 border-gold-500 bg-gold-50 px-4 py-3 text-left active:opacity-80 dark:border-gold-400 dark:bg-slate-900">
               <span>
                 <span className="block text-base font-bold text-navy-900 dark:text-slate-100">{p.label}</span>
-                <span className="block text-xs text-slate-500 dark:text-slate-400">{p.subjects.join(" · ")} + {p.bonusMonths} months App Access</span>
+                <span className="block text-xs text-slate-500 dark:text-slate-400">{p.subjects.map((c) => (c === "CL" ? "RA 10863" : c)).join(" · ")} · {p.months} months + {p.bonusMonths} months App Access</span>
               </span>
               <span className="text-2xl font-extrabold text-navy-900 dark:text-slate-50">₱{p.price}</span>
             </button>
           ))}
         </div>
 
-        <p className="text-center text-xs text-slate-400">Bayad via GCash · Maya · MariBank. Ico-confirm manually ng admin.</p>
+        <p className="text-center text-xs text-slate-400">Pay via GCash · Maya · MariBank. Payments are confirmed manually by the admin.</p>
         <button onClick={signOutUser} className="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-medium text-slate-500 dark:border-slate-600 dark:text-slate-300">Sign out</button>
       </div>
     </div>
@@ -186,7 +194,7 @@ function AccessPill({ access }) {
   if (overlayOpen) return null;
   let label = null;
   if (access.state === "trial") label = "🎁 Free trial · " + formatTimeLeft(access.msLeft) + " left";
-  else if (access.state === "paid" && access.msLeft < 3 * DAY_MS) label = "⏳ Access · " + formatTimeLeft(access.msLeft) + " left";
+  else if (access.state === "paid" && access.msLeft < 7 * DAY_MS) label = "⏳ Access · " + formatTimeLeft(access.msLeft) + " left";
   if (!label) return null;
   return (
     <button onClick={() => setOverlayOpen(true)} className="safe-bottom fixed bottom-3 left-3 z-40 rounded-full bg-navy-900/90 px-3 py-1.5 text-[11px] font-semibold text-white shadow-lg backdrop-blur active:bg-navy-800 dark:bg-slate-100/90 dark:text-navy-900">
@@ -205,15 +213,15 @@ export default function AccessGate() {
     if (user && (needsFullName || deviceLimitReached) && !overlayOpen) setOverlayOpen(true);
   }, [user, needsFullName, deviceLimitReached, overlayOpen, setOverlayOpen]);
 
-  if (loading || signingIn) return <Splash text="Sandali lang..." />;
+  if (loading || signingIn) return <Splash text="Loading…" />;
 
   if (!user) {
     if (demo) return <DemoShell key={demo.key} feature={demo.feature} onEnd={() => setDemo(null)} />;
     return <GuestWelcome step={guestStep} setStep={setGuestStep} onStartDemo={(feature) => setDemo({ feature, key: Date.now() })} />;
   }
 
-  if (!profile || needsFullName || deviceLimitReached) return <Splash text="Tinatapos ang setup ng account mo..." />;
-  if (access.state === "loading") return <Splash text="Sinusuri ang trial mo..." />;
+  if (!profile || needsFullName || deviceLimitReached) return <Splash text="Finishing your account setup…" />;
+  if (access.state === "loading") return <Splash text="Checking your trial…" />;
   if (access.state === "expired") return <Paywall />;
 
   return (
