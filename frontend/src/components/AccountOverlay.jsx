@@ -117,7 +117,7 @@ export default function AccountOverlay() {
   const activeMethod = PAYMENT_METHODS.find((m) => m.id === selectedMethod) || null;
   const planNote = selectedPlan
     ? selectedPlan.kind === "promo"
-      ? "All Access · unlock lahat ng may bayad · " + selectedPlan.days + " days lang"
+      ? "All Access · everything unlocked · valid for " + selectedPlan.days + " days"
       : selectedPlan.kind === "access"
       ? selectedPlan.months + (selectedPlan.months === 1 ? " month" : " months") + " of App Access"
       : "Valid for " + selectedPlan.months + " months · includes " + selectedPlan.months + " months of App Access"
@@ -264,8 +264,8 @@ export default function AccountOverlay() {
                 >
                   <span className="block text-sm font-extrabold">🔥 {PROMO_PLAN.label} — ₱{PROMO_PLAN.price}</span>
                   <span className="mt-1 block text-[11px] font-normal opacity-90">{PROMO_PLAN.tagline}</span>
-                  <span className="mt-1 block text-[11px] font-normal opacity-90">All Access: unlock lahat ng may bayad (RA 10863 · CDP · TL · PC · TCP) + App Access</span>
-                  <span className="mt-1 block text-[11px] font-semibold text-gold-400">⏳ {PROMO_PLAN.days} days lang</span>
+                  <span className="mt-1 block text-[11px] font-normal opacity-90">Unlocks EVERYTHING: RA 10863 (all 5 levels) · CDP · TL · PC · TCP + full App Access</span>
+                  <span className="mt-1 block text-[11px] font-semibold text-gold-400">⏳ Valid for {PROMO_PLAN.days} days only</span>
                 </button>
               )}
               {!PROMO_MODE && !bundleOwned && bundlePlan && (

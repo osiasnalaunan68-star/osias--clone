@@ -688,7 +688,7 @@ function QuizPlayViewInner({ title, entries, level, onBack, progressKey, backLab
 ```
 import { useState, useEffect } from "react";
 import { useAuth } from "../authContext";
-import { PLANS, PAYMENT_METHODS, generateReferenceCode, submitPendingPurchase } from "../payments";
+import { PLANS, PAYMENT_METHODS, PROMO_MODE, PROMO_PLAN, generateReferenceCode, submitPendingPurchase } from "../payments";
 import { ACCESS_PLANS, TRIAL_DAYS, DAY_MS, THREE_SUBJECT_BONUS, countActiveSubjects, getSubjectInfo, getClTrialInfo, formatTimeLeft, formatDateShort } from "../access";
 
 const SUBJECT_LABELS = { CL: "RA 10863 (CMTA)", TL: "Tariff Law", CDP: "Customs Documentation & Procedures", PC: "Practical Computations", TCP: "Tariff Commission Primer" };
@@ -736,7 +736,7 @@ export default function AccountOverlay() {
   // Galing sa Paywall: diretso sa payment method ng napiling plan.
   useEffect(() => {
     if (!overlayOpen || !intentPlanId || !user || !profile) return;
-    const plan = [...PLANS, ...ACCESS_PLANS].find((p) => p.id === intentPlanId);
+    const plan = [...PLANS, ...ACCESS_PLANS, PROMO_PLAN].find((p) => p.id === intentPlanId);
     setIntentPlanId(null);
     if (!plan) return;
     setSelectedPlan(plan);
@@ -804,7 +804,9 @@ export default function AccountOverlay() {
   const showAllIn = !!allInPlan && !getSubjectInfo(profile, "TCP").active && !bundleOwned;
   const activeMethod = PAYMENT_METHODS.find((m) => m.id === selectedMethod) || null;
   const planNote = selectedPlan
-    ? selectedPlan.kind === "access"
+    ? selectedPlan.kind === "promo"
+      ? "All Access · unlock lahat ng may bayad · " + selectedPlan.days + " days lang"
+      : selectedPlan.kind === "access"
       ? selectedPlan.months + (selectedPlan.months === 1 ? " month" : " months") + " of App Access"
       : "Valid for " + selectedPlan.months + " months · includes " + selectedPlan.months + " months of App Access"
     : "";
@@ -912,7 +914,7 @@ export default function AccountOverlay() {
                   else if (info.owned) status = "⏳ Expired on " + formatDateShort(info.expiresAt);
                   else if (code === "CL") status = clTrial.active ? "🎁 Trial: " + formatTimeLeft(clTrial.msLeft) + " left" : "Level 1 free · Levels 2–5 locked";
                   else status = "First 10 items free";
-                  const canRenew = !info.active || (!info.lifetime && info.msLeft < 14 * DAY_MS);
+                  const canRenew = !PROMO_MODE && (!info.active || (!info.lifetime && info.msLeft < 14 * DAY_MS));
                   return (
                     <div key={code} className="flex items-center justify-between rounded-lg bg-slate-50 px-3 py-2 text-sm dark:bg-slate-900/40">
                       <span className="min-w-0 pr-2">
@@ -928,18 +930,33 @@ export default function AccountOverlay() {
                           <span className="block text-[10px] font-normal opacity-80">{plan.months} months</span>
                         </button>
                       ) : (
-                        <span className="flex-shrink-0 font-medium text-emerald-600 dark:text-emerald-400">Unlocked</span>
+                        info.active ? (
+                          <span className="flex-shrink-0 font-medium text-emerald-600 dark:text-emerald-400">Unlocked</span>
+                        ) : (
+                          <span className="flex-shrink-0 text-xs font-medium text-slate-400">🔒 Locked</span>
+                        )
                       )}
                     </div>
                   );
                 })}
               </div>
-              <p className="mt-2 rounded-lg bg-slate-50 px-3 py-2 text-xs text-slate-500 dark:bg-slate-900/40 dark:text-slate-400">
+              <p className={(PROMO_MODE ? "hidden " : "") + "mt-2 rounded-lg bg-slate-50 px-3 py-2 text-xs text-slate-500 dark:bg-slate-900/40 dark:text-slate-400"}>
                 🎯 Own {THREE_SUBJECT_BONUS.count} active subjects = +{THREE_SUBJECT_BONUS.months} months App Access ({Math.min(ownedCount, THREE_SUBJECT_BONUS.count)}/{THREE_SUBJECT_BONUS.count}){bonusDone ? " · ✅ claimed" : ""}
                 <br />
                 Each subject lasts 3 months (RA 10863: 4 months) with the same length of App Access. Renew early and your remaining days are kept.
               </p>
-              {!bundleOwned && bundlePlan && (
+              {PROMO_MODE && (
+                <button
+                  onClick={() => startPurchase(PROMO_PLAN)}
+                  className="mt-2 w-full rounded-xl border-2 border-gold-500 bg-navy-900 px-3 py-3 text-center text-white active:bg-navy-800 dark:bg-navy-700"
+                >
+                  <span className="block text-sm font-extrabold">🔥 {PROMO_PLAN.label} — ₱{PROMO_PLAN.price}</span>
+                  <span className="mt-1 block text-[11px] font-normal opacity-90">{PROMO_PLAN.tagline}</span>
+                  <span className="mt-1 block text-[11px] font-normal opacity-90">All Access: unlock lahat ng may bayad (RA 10863 · CDP · TL · PC · TCP) + App Access</span>
+                  <span className="mt-1 block text-[11px] font-semibold text-gold-400">⏳ {PROMO_PLAN.days} days lang</span>
+                </button>
+              )}
+              {!PROMO_MODE && !bundleOwned && bundlePlan && (
                 <button
                   onClick={() => startPurchase(bundlePlan)}
                   className="mt-2 w-full rounded-lg border-2 border-gold-500 bg-gold-50 px-3 py-2 text-xs font-semibold text-navy-900 active:bg-gold-100 dark:border-gold-400 dark:bg-slate-900/40 dark:text-gold-400"
@@ -948,7 +965,7 @@ export default function AccountOverlay() {
                   <span className="mt-0.5 block text-[11px] font-normal opacity-80">RA 10863 · CDP · TL · PC · includes {bundlePlan.bonusMonths} months App Access</span>
                 </button>
               )}
-              {showAllIn && (
+              {!PROMO_MODE && showAllIn && (
                 <button
                   onClick={() => startPurchase(allInPlan)}
                   className="mt-2 w-full rounded-lg border-2 border-gold-500 bg-navy-900 px-3 py-2 text-xs font-semibold text-white active:bg-navy-800 dark:bg-navy-700"
@@ -966,7 +983,7 @@ export default function AccountOverlay() {
                 {access?.state === "member" && <span>✅ Access active (practice subscriber)</span>}
                 {access?.state === "paid" && <span>✅ Active until {formatDateShort(access.app.expiresAt)} ({formatTimeLeft(access.msLeft)} left)</span>}
                 {access?.state === "trial" && <span>🎁 Free trial: {formatTimeLeft(access.msLeft)} left</span>}
-                {(access?.state === "expired" || access?.state === "loading") && <span>⏳ Your trial has ended. Choose a plan below.</span>}
+                {(access?.state === "expired" || access?.state === "loading") && <span>⏳ Your trial has ended. {PROMO_MODE ? "Get the Promo bundle above." : "Choose a plan below."}</span>}
               </div>
               {(profile?.pendingAccess || []).length > 0 && (
                 <p className="mb-2 rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-800 dark:bg-amber-950/20 dark:text-amber-300">
@@ -978,7 +995,7 @@ export default function AccountOverlay() {
                   ⏳ Practice payment pending ({profile.pendingPurchases[profile.pendingPurchases.length - 1].referenceCode}) — waiting for confirmation.
                 </p>
               )}
-              {access && access.state !== "admin" && access.state !== "member" && (
+              {!PROMO_MODE && access && access.state !== "admin" && access.state !== "member" && (
                 <div className="grid grid-cols-3 gap-1.5">
                   {ACCESS_PLANS.map((p) => (
                     <button
@@ -1056,6 +1073,14 @@ export default function AccountOverlay() {
             {!submitted ? (
               <>
                 <button onClick={backToMethods} className="text-sm text-slate-400">← Back</button>
+                <div className="rounded-xl border-2 border-red-500 bg-red-50 p-3 text-center dark:border-red-400 dark:bg-red-950/30">
+                  <p className="text-sm font-bold leading-snug text-red-700 dark:text-red-300">
+                    ⚠️ Ilagay sa note ang iyong email address para makita namin na ikaw talaga ang nag-avail, and wait for our confirmation.
+                  </p>
+                  {profile?.email && (
+                    <p className="mt-1 break-all text-xs font-semibold text-slate-700 dark:text-slate-200">📧 {profile.email}</p>
+                  )}
+                </div>
                 <img
                   src={activeMethod.qr}
                   alt={`${activeMethod.label} QR code`}
@@ -1067,7 +1092,7 @@ export default function AccountOverlay() {
                 </div>
                 <p className="text-center text-xs leading-relaxed text-slate-500 dark:text-slate-400">
                   1. Scan the QR code with your {activeMethod.label} app.<br />
-                  2. Pay ₱{selectedPlan.price} and write the reference code in the note/message.<br />
+                  2. Pay ₱{selectedPlan.price} and write your email address + the reference code in the note/message.<br />
                   3. Tap "I've paid" below.
                 </p>
                 <button
@@ -1141,7 +1166,7 @@ import { useState, useEffect, useRef } from "react";
 import { useAuth } from "../authContext";
 import ChapterBrowser from "../pages/ChapterBrowser";
 import { ACCESS_PLANS, TRIAL_DAYS, DAY_MS, formatTimeLeft } from "../access";
-import { PLANS } from "../payments";
+import { PLANS, PROMO_MODE, PROMO_PLAN } from "../payments";
 
 const DEMO_SECONDS = 60;
 
@@ -1293,7 +1318,20 @@ function Paywall() {
         )}
 
         <div className="space-y-2">
-          {ACCESS_PLANS.map((p) => {
+          {PROMO_MODE && (
+            <button onClick={() => choose(PROMO_PLAN)} className="w-full rounded-2xl border-2 border-gold-500 bg-gold-50 px-4 py-4 text-left active:opacity-80 dark:border-gold-400 dark:bg-slate-900">
+              <span className="flex items-center justify-between gap-3">
+                <span>
+                  <span className="block text-base font-extrabold text-navy-900 dark:text-slate-100">🔥 {PROMO_PLAN.label}</span>
+                  <span className="mt-1 block text-xs text-slate-600 dark:text-slate-300">{PROMO_PLAN.tagline}</span>
+                  <span className="mt-1 block text-xs text-slate-600 dark:text-slate-300">All Access: unlock lahat ng may bayad sa app</span>
+                  <span className="mt-1 block text-xs font-semibold text-gold-600 dark:text-gold-400">⏳ {PROMO_PLAN.days} days lang</span>
+                </span>
+                <span className="text-3xl font-extrabold text-navy-900 dark:text-slate-50">₱{PROMO_PLAN.price}</span>
+              </span>
+            </button>
+          )}
+          {(PROMO_MODE ? [] : ACCESS_PLANS).map((p) => {
             const best = p.months === 8;
             return (
               <button key={p.id} onClick={() => choose(p)} className={"flex w-full items-center justify-between rounded-2xl border-2 px-4 py-3 text-left active:opacity-80 " + (best ? "border-gold-500 bg-gold-50 dark:border-gold-400 dark:bg-slate-900" : "border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-900")}>
@@ -1308,8 +1346,8 @@ function Paywall() {
         </div>
 
         <div className="space-y-2">
-          <p className="px-1 text-xs font-semibold uppercase tracking-wide text-slate-400">Bundle — practice questions + App Access</p>
-          {PLANS.filter((p) => p.bonusMonths).map((p) => (
+          <p className={(PROMO_MODE ? "hidden " : "") + "px-1 text-xs font-semibold uppercase tracking-wide text-slate-400"}>Bundle — practice questions + App Access</p>
+          {(PROMO_MODE ? [] : PLANS.filter((p) => p.bonusMonths)).map((p) => (
             <button key={p.id} onClick={() => choose(p)} className="flex w-full items-center justify-between rounded-2xl border-2 border-gold-500 bg-gold-50 px-4 py-3 text-left active:opacity-80 dark:border-gold-400 dark:bg-slate-900">
               <span>
                 <span className="block text-base font-bold text-navy-900 dark:text-slate-100">{p.label}</span>
@@ -4415,11 +4453,11 @@ import { useState, useEffect, useMemo } from "react";
 import { collection, getDocs, doc, updateDoc, arrayUnion, deleteField, Timestamp, runTransaction } from "firebase/firestore";
 import { db } from "../firebase";
 import AdminOverview from "./AdminOverview";
-import { PLANS, PAYMENT_METHODS, CL_PRICE } from "../payments";
+import { PLANS, PAYMENT_METHODS, CL_PRICE, PROMO_PLAN } from "../payments";
 import {
   ACCESS_PLANS, TRIAL_DAYS, DAY_MS, serverNow, getTrialInfo, getAppAccessInfo,
   getAccess, addMonths, formatTimeLeft, formatDateShort,
-  stackAccess, computeGrant, getSubjectInfo, SUBJECT_TERM_MONTHS,
+  stackAccess, computeGrant, computePromoGrant, getSubjectInfo, SUBJECT_TERM_MONTHS,
 } from "../access";
 
 const SUBJECT_CODES = ["CL", "CDP", "TL", "PC", "TCP"];
@@ -4430,7 +4468,7 @@ const SUBJECT_LABELS = {
   ),
 };
 const METHOD_LABELS = Object.fromEntries(PAYMENT_METHODS.map((m) => [m.id, m.label]));
-const ALL_PLAN_LABELS = Object.fromEntries([...PLANS, ...ACCESS_PLANS].map((p) => [p.id, p.label]));
+const ALL_PLAN_LABELS = Object.fromEntries([...PLANS, ...ACCESS_PLANS, PROMO_PLAN].map((p) => [p.id, p.label]));
 
 const TRIAGE = {
   pending: { label: "Pending", dot: "bg-amber-500", chip: "border-amber-300 text-amber-700 dark:border-amber-700 dark:text-amber-400" },
@@ -4581,7 +4619,7 @@ export default function AdminPanel() {
     run(u.uid + ":triage", u, { triageStatus: status }, { triageStatus: status });
 
   const approvePractice = async (u, p) => {
-    const plan = PLANS.find((x) => x.id === p.plan);
+    const plan = PLANS.find((x) => x.id === p.plan) || (p.plan === PROMO_PLAN.id ? PROMO_PLAN : undefined);
     const diff = plan && plan.price !== p.price ? "⚠️ Price mismatch: the user paid ₱" + p.price + " but the plan is now ₱" + plan.price + " (older app version). " : "";
     if (!window.confirm(diff + "Approve " + (ALL_PLAN_LABELS[p.plan] || p.plan) + " ₱" + p.price + " for " + (u.fullName || u.email) + "?")) return;
     const ref = doc(db, "users", u.uid);
@@ -4598,12 +4636,13 @@ export default function AdminPanel() {
         const now = serverNow();
         const subjects = p.subjects || (plan ? plan.subjects : []);
         const term = plan ? plan.months : (subjects.length === 1 ? (SUBJECT_TERM_MONTHS[subjects[0]] || 3) : 6);
-        const g = computeGrant(d, { subjects, months: term }, now);
+        const isPromo = !!plan && plan.kind === "promo";
+        const g = isPromo ? computePromoGrant(d, plan, now) : computeGrant(d, { subjects, months: term }, now);
         const remaining = (d.pendingPurchases || []).filter((x) => x.referenceCode !== p.referenceCode);
         const upd = {
           pendingPurchases: remaining,
           triageStatus: "subscribed",
-          paymentHistory: arrayUnion({ kind: "practice", plan: p.plan, price: p.price, method: p.method, referenceCode: p.referenceCode, approvedAt: now, months: term }),
+          paymentHistory: arrayUnion({ kind: "practice", plan: p.plan, price: p.price, method: p.method, referenceCode: p.referenceCode, approvedAt: now, months: term, ...(isPromo ? { days: plan.days } : {}) }),
         };
         const subsPatch = {};
         const expPatch = { ...(d.subscriptionExpiry || {}) };
@@ -4620,7 +4659,7 @@ export default function AdminPanel() {
         };
         if (g.appExpiresAt) {
           upd.appAccess = { plan: p.plan, expiresAt: g.appExpiresAt };
-          upd.appAccessHistory = arrayUnion({ plan: p.plan, price: 0, referenceCode: p.referenceCode, method: "practice-purchase", approvedAt: now, expiresAt: g.appExpiresAt, months: term + g.bonusMonths });
+          upd.appAccessHistory = arrayUnion({ plan: p.plan, price: 0, referenceCode: p.referenceCode, method: "practice-purchase", approvedAt: now, expiresAt: g.appExpiresAt, months: term + g.bonusMonths, ...(isPromo ? { days: plan.days } : {}) });
           patch.appAccess = upd.appAccess;
         }
         if (g.bonusFlag) {
@@ -7301,6 +7340,25 @@ export const PLANS = [
   { id: "ALL", label: "Sulit Bundle", price: 450, months: 6, subjects: ["CL", "TL", "CDP", "PC", "TCP"], bonusMonths: 6 },
 ];
 
+// ── PROMO MODE ───────────────────────────────────────────────────────
+// true  = ang makikita lang ng user ay ang PROMO bundle (lahat ng lumang plan = "ghost":
+//         buo pa ang logic, pero hindi na ma-avail ng bagong bibili).
+// false = bumalik sa dating subscription plans.
+// Hindi naaapektuhan ang kasalukuyang subscribers (walang binabago sa data nila).
+export const PROMO_MODE = true;
+export const PROMO_PRICE = 120;
+export const PROMO_DAYS = 30;
+export const PROMO_PLAN = {
+  id: "PROMO",
+  kind: "promo",
+  label: "Pinaka ka-sulit Bundle",
+  tagline: "Pinaka Sulit na Bundle sa Earth!! Magagamit mo na lahat sa Customs Law app!",
+  price: PROMO_PRICE,
+  days: PROMO_DAYS,
+  months: 0,
+  subjects: ["CL", "TL", "CDP", "PC", "TCP"],
+};
+
 // Price of RA 10863 (CL). The name is kept so existing imports keep working,
 // but CL is no longer lifetime — it now expires after 4 months.
 export const CL_LIFETIME_PRICE = PLANS.find((p) => p.id === "CL").price;
@@ -7621,6 +7679,27 @@ export function computeGrant(profile, plan, now = serverNow()) {
   const changed = !cur.active || appEnd > cur.expiresAt;
 
   return { termMonths: term, subjectExpiry, appExpiresAt: changed ? appEnd : null, bonusFlag, bonusMonths };
+}
+
+
+// ── PROMO "All Access" (days-based, hindi months) ─────────────────────
+// - Bawat subject: +days. Kung active pa, idinadagdag sa dulo ng natitirang oras (walang nasasayang).
+// - Legacy lifetime subjects: hindi ginagalaw.
+// - App Access: idinadagdag din sa dulo kung active pa, kung hindi, mula ngayon.
+// - Walang 3-subject bonus dito.
+export function computePromoGrant(profile, plan, now = serverNow()) {
+  const days = plan.days || 30;
+  const span = days * DAY_MS;
+  const subjectExpiry = {};
+  (plan.subjects || []).forEach((code) => {
+    const info = getSubjectInfo(profile, code, now);
+    if (info.lifetime) return;
+    const base = info.active ? info.expiresAt : now;
+    subjectExpiry[code] = base + span;
+  });
+  const cur = getAppAccessInfo(profile, now);
+  const appBase = cur.active ? cur.expiresAt : now;
+  return { days, subjectExpiry, appExpiresAt: appBase + span, bonusFlag: false, bonusMonths: 0 };
 }
 ```
 

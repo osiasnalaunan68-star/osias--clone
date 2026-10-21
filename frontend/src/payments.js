@@ -33,8 +33,8 @@ export const PROMO_DAYS = 30;
 export const PROMO_PLAN = {
   id: "PROMO",
   kind: "promo",
-  label: "Pinaka ka-sulit Bundle",
-  tagline: "Pinaka Sulit na Bundle sa Earth!! Magagamit mo na lahat sa Customs Law app!",
+  label: "All Access Promo",
+  tagline: "One promo, everything unlocked. This is the only plan available right now.",
   price: PROMO_PRICE,
   days: PROMO_DAYS,
   months: 0,

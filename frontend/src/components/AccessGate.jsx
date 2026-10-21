@@ -144,7 +144,7 @@ function Paywall() {
         <div className="text-center">
           <span className="text-4xl" aria-hidden>⏳</span>
           <h1 className="mt-2 text-xl font-bold text-navy-900 dark:text-slate-50">Your free trial has ended</h1>
-          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Choose an App Access plan to continue. {user?.email}</p>
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{PROMO_MODE ? "Get the All Access promo to continue. It is the only plan available right now." : "Choose an App Access plan to continue."} {user?.email}</p>
         </div>
 
         {pending.length > 0 && (
@@ -160,8 +160,8 @@ function Paywall() {
                 <span>
                   <span className="block text-base font-extrabold text-navy-900 dark:text-slate-100">🔥 {PROMO_PLAN.label}</span>
                   <span className="mt-1 block text-xs text-slate-600 dark:text-slate-300">{PROMO_PLAN.tagline}</span>
-                  <span className="mt-1 block text-xs text-slate-600 dark:text-slate-300">All Access: unlock lahat ng may bayad sa app</span>
-                  <span className="mt-1 block text-xs font-semibold text-gold-600 dark:text-gold-400">⏳ {PROMO_PLAN.days} days lang</span>
+                  <span className="mt-1 block text-xs text-slate-600 dark:text-slate-300">Unlocks everything: RA 10863 (all levels) · CDP · TL · PC · TCP + full App Access</span>
+                  <span className="mt-1 block text-xs font-semibold text-gold-600 dark:text-gold-400">⏳ Valid for {PROMO_PLAN.days} days only</span>
                 </span>
                 <span className="text-3xl font-extrabold text-navy-900 dark:text-slate-50">₱{PROMO_PLAN.price}</span>
               </span>
