@@ -267,3 +267,24 @@ export function computeGrant(profile, plan, now = serverNow()) {
 
   return { termMonths: term, subjectExpiry, appExpiresAt: changed ? appEnd : null, bonusFlag, bonusMonths };
 }
+
+
+// ── PROMO "All Access" (days-based, hindi months) ─────────────────────
+// - Bawat subject: +days. Kung active pa, idinadagdag sa dulo ng natitirang oras (walang nasasayang).
+// - Legacy lifetime subjects: hindi ginagalaw.
+// - App Access: idinadagdag din sa dulo kung active pa, kung hindi, mula ngayon.
+// - Walang 3-subject bonus dito.
+export function computePromoGrant(profile, plan, now = serverNow()) {
+  const days = plan.days || 30;
+  const span = days * DAY_MS;
+  const subjectExpiry = {};
+  (plan.subjects || []).forEach((code) => {
+    const info = getSubjectInfo(profile, code, now);
+    if (info.lifetime) return;
+    const base = info.active ? info.expiresAt : now;
+    subjectExpiry[code] = base + span;
+  });
+  const cur = getAppAccessInfo(profile, now);
+  const appBase = cur.active ? cur.expiresAt : now;
+  return { days, subjectExpiry, appExpiresAt: appBase + span, bonusFlag: false, bonusMonths: 0 };
+}

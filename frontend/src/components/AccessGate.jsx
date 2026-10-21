@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useAuth } from "../authContext";
 import ChapterBrowser from "../pages/ChapterBrowser";
 import { ACCESS_PLANS, TRIAL_DAYS, DAY_MS, formatTimeLeft } from "../access";
-import { PLANS } from "../payments";
+import { PLANS, PROMO_MODE, PROMO_PLAN } from "../payments";
 
 const DEMO_SECONDS = 60;
 
@@ -154,7 +154,20 @@ function Paywall() {
         )}
 
         <div className="space-y-2">
-          {ACCESS_PLANS.map((p) => {
+          {PROMO_MODE && (
+            <button onClick={() => choose(PROMO_PLAN)} className="w-full rounded-2xl border-2 border-gold-500 bg-gold-50 px-4 py-4 text-left active:opacity-80 dark:border-gold-400 dark:bg-slate-900">
+              <span className="flex items-center justify-between gap-3">
+                <span>
+                  <span className="block text-base font-extrabold text-navy-900 dark:text-slate-100">🔥 {PROMO_PLAN.label}</span>
+                  <span className="mt-1 block text-xs text-slate-600 dark:text-slate-300">{PROMO_PLAN.tagline}</span>
+                  <span className="mt-1 block text-xs text-slate-600 dark:text-slate-300">All Access: unlock lahat ng may bayad sa app</span>
+                  <span className="mt-1 block text-xs font-semibold text-gold-600 dark:text-gold-400">⏳ {PROMO_PLAN.days} days lang</span>
+                </span>
+                <span className="text-3xl font-extrabold text-navy-900 dark:text-slate-50">₱{PROMO_PLAN.price}</span>
+              </span>
+            </button>
+          )}
+          {(PROMO_MODE ? [] : ACCESS_PLANS).map((p) => {
             const best = p.months === 8;
             return (
               <button key={p.id} onClick={() => choose(p)} className={"flex w-full items-center justify-between rounded-2xl border-2 px-4 py-3 text-left active:opacity-80 " + (best ? "border-gold-500 bg-gold-50 dark:border-gold-400 dark:bg-slate-900" : "border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-900")}>
@@ -169,8 +182,8 @@ function Paywall() {
         </div>
 
         <div className="space-y-2">
-          <p className="px-1 text-xs font-semibold uppercase tracking-wide text-slate-400">Bundle — practice questions + App Access</p>
-          {PLANS.filter((p) => p.bonusMonths).map((p) => (
+          <p className={(PROMO_MODE ? "hidden " : "") + "px-1 text-xs font-semibold uppercase tracking-wide text-slate-400"}>Bundle — practice questions + App Access</p>
+          {(PROMO_MODE ? [] : PLANS.filter((p) => p.bonusMonths)).map((p) => (
             <button key={p.id} onClick={() => choose(p)} className="flex w-full items-center justify-between rounded-2xl border-2 border-gold-500 bg-gold-50 px-4 py-3 text-left active:opacity-80 dark:border-gold-400 dark:bg-slate-900">
               <span>
                 <span className="block text-base font-bold text-navy-900 dark:text-slate-100">{p.label}</span>

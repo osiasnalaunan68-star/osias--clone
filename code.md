@@ -44,6 +44,11 @@ workflows:
           ./gradlew assembleRelease
           echo "--- Searching for build output ---"
           find app/build/outputs -type f 2>/dev/null || echo "outputs dir missing"
+      - name: Print APK signing SHA-1
+        script: |
+          APK=$(find frontend/android/app/build/outputs -name "*.apk" | head -1)
+          APKSIGNER=$(find "$ANDROID_HOME/build-tools" -name apksigner | sort | tail -1)
+          "$APKSIGNER" verify --print-certs "$APK" | grep -E "SHA-1|SHA-256" || true
     artifacts:
       - frontend/android/app/build/outputs/**/*.apk
       - frontend/android/app/build/outputs/**/output-metadata.json

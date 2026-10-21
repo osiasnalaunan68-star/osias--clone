@@ -22,6 +22,25 @@ export const PLANS = [
   { id: "ALL", label: "Sulit Bundle", price: 450, months: 6, subjects: ["CL", "TL", "CDP", "PC", "TCP"], bonusMonths: 6 },
 ];
 
+// ── PROMO MODE ───────────────────────────────────────────────────────
+// true  = ang makikita lang ng user ay ang PROMO bundle (lahat ng lumang plan = "ghost":
+//         buo pa ang logic, pero hindi na ma-avail ng bagong bibili).
+// false = bumalik sa dating subscription plans.
+// Hindi naaapektuhan ang kasalukuyang subscribers (walang binabago sa data nila).
+export const PROMO_MODE = true;
+export const PROMO_PRICE = 120;
+export const PROMO_DAYS = 30;
+export const PROMO_PLAN = {
+  id: "PROMO",
+  kind: "promo",
+  label: "Pinaka ka-sulit Bundle",
+  tagline: "Pinaka Sulit na Bundle sa Earth!! Magagamit mo na lahat sa Customs Law app!",
+  price: PROMO_PRICE,
+  days: PROMO_DAYS,
+  months: 0,
+  subjects: ["CL", "TL", "CDP", "PC", "TCP"],
+};
+
 // Price of RA 10863 (CL). The name is kept so existing imports keep working,
 // but CL is no longer lifetime — it now expires after 4 months.
 export const CL_LIFETIME_PRICE = PLANS.find((p) => p.id === "CL").price;

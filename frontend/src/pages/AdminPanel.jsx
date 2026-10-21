@@ -2,11 +2,11 @@ import { useState, useEffect, useMemo } from "react";
 import { collection, getDocs, doc, updateDoc, arrayUnion, deleteField, Timestamp, runTransaction } from "firebase/firestore";
 import { db } from "../firebase";
 import AdminOverview from "./AdminOverview";
-import { PLANS, PAYMENT_METHODS, CL_PRICE } from "../payments";
+import { PLANS, PAYMENT_METHODS, CL_PRICE, PROMO_PLAN } from "../payments";
 import {
   ACCESS_PLANS, TRIAL_DAYS, DAY_MS, serverNow, getTrialInfo, getAppAccessInfo,
   getAccess, addMonths, formatTimeLeft, formatDateShort,
-  stackAccess, computeGrant, getSubjectInfo, SUBJECT_TERM_MONTHS,
+  stackAccess, computeGrant, computePromoGrant, getSubjectInfo, SUBJECT_TERM_MONTHS,
 } from "../access";
 
 const SUBJECT_CODES = ["CL", "CDP", "TL", "PC", "TCP"];
@@ -17,7 +17,7 @@ const SUBJECT_LABELS = {
   ),
 };
 const METHOD_LABELS = Object.fromEntries(PAYMENT_METHODS.map((m) => [m.id, m.label]));
-const ALL_PLAN_LABELS = Object.fromEntries([...PLANS, ...ACCESS_PLANS].map((p) => [p.id, p.label]));
+const ALL_PLAN_LABELS = Object.fromEntries([...PLANS, ...ACCESS_PLANS, PROMO_PLAN].map((p) => [p.id, p.label]));
 
 const TRIAGE = {
   pending: { label: "Pending", dot: "bg-amber-500", chip: "border-amber-300 text-amber-700 dark:border-amber-700 dark:text-amber-400" },
@@ -168,7 +168,7 @@ export default function AdminPanel() {
     run(u.uid + ":triage", u, { triageStatus: status }, { triageStatus: status });
 
   const approvePractice = async (u, p) => {
-    const plan = PLANS.find((x) => x.id === p.plan);
+    const plan = PLANS.find((x) => x.id === p.plan) || (p.plan === PROMO_PLAN.id ? PROMO_PLAN : undefined);
     const diff = plan && plan.price !== p.price ? "⚠️ Price mismatch: the user paid ₱" + p.price + " but the plan is now ₱" + plan.price + " (older app version). " : "";
     if (!window.confirm(diff + "Approve " + (ALL_PLAN_LABELS[p.plan] || p.plan) + " ₱" + p.price + " for " + (u.fullName || u.email) + "?")) return;
     const ref = doc(db, "users", u.uid);
@@ -185,12 +185,13 @@ export default function AdminPanel() {
         const now = serverNow();
         const subjects = p.subjects || (plan ? plan.subjects : []);
         const term = plan ? plan.months : (subjects.length === 1 ? (SUBJECT_TERM_MONTHS[subjects[0]] || 3) : 6);
-        const g = computeGrant(d, { subjects, months: term }, now);
+        const isPromo = !!plan && plan.kind === "promo";
+        const g = isPromo ? computePromoGrant(d, plan, now) : computeGrant(d, { subjects, months: term }, now);
         const remaining = (d.pendingPurchases || []).filter((x) => x.referenceCode !== p.referenceCode);
         const upd = {
           pendingPurchases: remaining,
           triageStatus: "subscribed",
-          paymentHistory: arrayUnion({ kind: "practice", plan: p.plan, price: p.price, method: p.method, referenceCode: p.referenceCode, approvedAt: now, months: term }),
+          paymentHistory: arrayUnion({ kind: "practice", plan: p.plan, price: p.price, method: p.method, referenceCode: p.referenceCode, approvedAt: now, months: term, ...(isPromo ? { days: plan.days } : {}) }),
         };
         const subsPatch = {};
         const expPatch = { ...(d.subscriptionExpiry || {}) };
@@ -207,7 +208,7 @@ export default function AdminPanel() {
         };
         if (g.appExpiresAt) {
           upd.appAccess = { plan: p.plan, expiresAt: g.appExpiresAt };
-          upd.appAccessHistory = arrayUnion({ plan: p.plan, price: 0, referenceCode: p.referenceCode, method: "practice-purchase", approvedAt: now, expiresAt: g.appExpiresAt, months: term + g.bonusMonths });
+          upd.appAccessHistory = arrayUnion({ plan: p.plan, price: 0, referenceCode: p.referenceCode, method: "practice-purchase", approvedAt: now, expiresAt: g.appExpiresAt, months: term + g.bonusMonths, ...(isPromo ? { days: plan.days } : {}) });
           patch.appAccess = upd.appAccess;
         }
         if (g.bonusFlag) {

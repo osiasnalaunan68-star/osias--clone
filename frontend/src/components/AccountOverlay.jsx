@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../authContext";
-import { PLANS, PAYMENT_METHODS, generateReferenceCode, submitPendingPurchase } from "../payments";
+import { PLANS, PAYMENT_METHODS, PROMO_MODE, PROMO_PLAN, generateReferenceCode, submitPendingPurchase } from "../payments";
 import { ACCESS_PLANS, TRIAL_DAYS, DAY_MS, THREE_SUBJECT_BONUS, countActiveSubjects, getSubjectInfo, getClTrialInfo, formatTimeLeft, formatDateShort } from "../access";
 
 const SUBJECT_LABELS = { CL: "RA 10863 (CMTA)", TL: "Tariff Law", CDP: "Customs Documentation & Procedures", PC: "Practical Computations", TCP: "Tariff Commission Primer" };
@@ -48,7 +48,7 @@ export default function AccountOverlay() {
   // Galing sa Paywall: diretso sa payment method ng napiling plan.
   useEffect(() => {
     if (!overlayOpen || !intentPlanId || !user || !profile) return;
-    const plan = [...PLANS, ...ACCESS_PLANS].find((p) => p.id === intentPlanId);
+    const plan = [...PLANS, ...ACCESS_PLANS, PROMO_PLAN].find((p) => p.id === intentPlanId);
     setIntentPlanId(null);
     if (!plan) return;
     setSelectedPlan(plan);
@@ -116,7 +116,9 @@ export default function AccountOverlay() {
   const showAllIn = !!allInPlan && !getSubjectInfo(profile, "TCP").active && !bundleOwned;
   const activeMethod = PAYMENT_METHODS.find((m) => m.id === selectedMethod) || null;
   const planNote = selectedPlan
-    ? selectedPlan.kind === "access"
+    ? selectedPlan.kind === "promo"
+      ? "All Access · unlock lahat ng may bayad · " + selectedPlan.days + " days lang"
+      : selectedPlan.kind === "access"
       ? selectedPlan.months + (selectedPlan.months === 1 ? " month" : " months") + " of App Access"
       : "Valid for " + selectedPlan.months + " months · includes " + selectedPlan.months + " months of App Access"
     : "";
@@ -224,7 +226,7 @@ export default function AccountOverlay() {
                   else if (info.owned) status = "⏳ Expired on " + formatDateShort(info.expiresAt);
                   else if (code === "CL") status = clTrial.active ? "🎁 Trial: " + formatTimeLeft(clTrial.msLeft) + " left" : "Level 1 free · Levels 2–5 locked";
                   else status = "First 10 items free";
-                  const canRenew = !info.active || (!info.lifetime && info.msLeft < 14 * DAY_MS);
+                  const canRenew = !PROMO_MODE && (!info.active || (!info.lifetime && info.msLeft < 14 * DAY_MS));
                   return (
                     <div key={code} className="flex items-center justify-between rounded-lg bg-slate-50 px-3 py-2 text-sm dark:bg-slate-900/40">
                       <span className="min-w-0 pr-2">
@@ -240,18 +242,33 @@ export default function AccountOverlay() {
                           <span className="block text-[10px] font-normal opacity-80">{plan.months} months</span>
                         </button>
                       ) : (
-                        <span className="flex-shrink-0 font-medium text-emerald-600 dark:text-emerald-400">Unlocked</span>
+                        info.active ? (
+                          <span className="flex-shrink-0 font-medium text-emerald-600 dark:text-emerald-400">Unlocked</span>
+                        ) : (
+                          <span className="flex-shrink-0 text-xs font-medium text-slate-400">🔒 Locked</span>
+                        )
                       )}
                     </div>
                   );
                 })}
               </div>
-              <p className="mt-2 rounded-lg bg-slate-50 px-3 py-2 text-xs text-slate-500 dark:bg-slate-900/40 dark:text-slate-400">
+              <p className={(PROMO_MODE ? "hidden " : "") + "mt-2 rounded-lg bg-slate-50 px-3 py-2 text-xs text-slate-500 dark:bg-slate-900/40 dark:text-slate-400"}>
                 🎯 Own {THREE_SUBJECT_BONUS.count} active subjects = +{THREE_SUBJECT_BONUS.months} months App Access ({Math.min(ownedCount, THREE_SUBJECT_BONUS.count)}/{THREE_SUBJECT_BONUS.count}){bonusDone ? " · ✅ claimed" : ""}
                 <br />
                 Each subject lasts 3 months (RA 10863: 4 months) with the same length of App Access. Renew early and your remaining days are kept.
               </p>
-              {!bundleOwned && bundlePlan && (
+              {PROMO_MODE && (
+                <button
+                  onClick={() => startPurchase(PROMO_PLAN)}
+                  className="mt-2 w-full rounded-xl border-2 border-gold-500 bg-navy-900 px-3 py-3 text-center text-white active:bg-navy-800 dark:bg-navy-700"
+                >
+                  <span className="block text-sm font-extrabold">🔥 {PROMO_PLAN.label} — ₱{PROMO_PLAN.price}</span>
+                  <span className="mt-1 block text-[11px] font-normal opacity-90">{PROMO_PLAN.tagline}</span>
+                  <span className="mt-1 block text-[11px] font-normal opacity-90">All Access: unlock lahat ng may bayad (RA 10863 · CDP · TL · PC · TCP) + App Access</span>
+                  <span className="mt-1 block text-[11px] font-semibold text-gold-400">⏳ {PROMO_PLAN.days} days lang</span>
+                </button>
+              )}
+              {!PROMO_MODE && !bundleOwned && bundlePlan && (
                 <button
                   onClick={() => startPurchase(bundlePlan)}
                   className="mt-2 w-full rounded-lg border-2 border-gold-500 bg-gold-50 px-3 py-2 text-xs font-semibold text-navy-900 active:bg-gold-100 dark:border-gold-400 dark:bg-slate-900/40 dark:text-gold-400"
@@ -260,7 +277,7 @@ export default function AccountOverlay() {
                   <span className="mt-0.5 block text-[11px] font-normal opacity-80">RA 10863 · CDP · TL · PC · includes {bundlePlan.bonusMonths} months App Access</span>
                 </button>
               )}
-              {showAllIn && (
+              {!PROMO_MODE && showAllIn && (
                 <button
                   onClick={() => startPurchase(allInPlan)}
                   className="mt-2 w-full rounded-lg border-2 border-gold-500 bg-navy-900 px-3 py-2 text-xs font-semibold text-white active:bg-navy-800 dark:bg-navy-700"
@@ -278,7 +295,7 @@ export default function AccountOverlay() {
                 {access?.state === "member" && <span>✅ Access active (practice subscriber)</span>}
                 {access?.state === "paid" && <span>✅ Active until {formatDateShort(access.app.expiresAt)} ({formatTimeLeft(access.msLeft)} left)</span>}
                 {access?.state === "trial" && <span>🎁 Free trial: {formatTimeLeft(access.msLeft)} left</span>}
-                {(access?.state === "expired" || access?.state === "loading") && <span>⏳ Your trial has ended. Choose a plan below.</span>}
+                {(access?.state === "expired" || access?.state === "loading") && <span>⏳ Your trial has ended. {PROMO_MODE ? "Get the Promo bundle above." : "Choose a plan below."}</span>}
               </div>
               {(profile?.pendingAccess || []).length > 0 && (
                 <p className="mb-2 rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-800 dark:bg-amber-950/20 dark:text-amber-300">
@@ -290,7 +307,7 @@ export default function AccountOverlay() {
                   ⏳ Practice payment pending ({profile.pendingPurchases[profile.pendingPurchases.length - 1].referenceCode}) — waiting for confirmation.
                 </p>
               )}
-              {access && access.state !== "admin" && access.state !== "member" && (
+              {!PROMO_MODE && access && access.state !== "admin" && access.state !== "member" && (
                 <div className="grid grid-cols-3 gap-1.5">
                   {ACCESS_PLANS.map((p) => (
                     <button
@@ -368,6 +385,14 @@ export default function AccountOverlay() {
             {!submitted ? (
               <>
                 <button onClick={backToMethods} className="text-sm text-slate-400">← Back</button>
+                <div className="rounded-xl border-2 border-red-500 bg-red-50 p-3 text-center dark:border-red-400 dark:bg-red-950/30">
+                  <p className="text-sm font-bold leading-snug text-red-700 dark:text-red-300">
+                    ⚠️ Ilagay sa note ang iyong email address para makita namin na ikaw talaga ang nag-avail, and wait for our confirmation.
+                  </p>
+                  {profile?.email && (
+                    <p className="mt-1 break-all text-xs font-semibold text-slate-700 dark:text-slate-200">📧 {profile.email}</p>
+                  )}
+                </div>
                 <img
                   src={activeMethod.qr}
                   alt={`${activeMethod.label} QR code`}
@@ -379,7 +404,7 @@ export default function AccountOverlay() {
                 </div>
                 <p className="text-center text-xs leading-relaxed text-slate-500 dark:text-slate-400">
                   1. Scan the QR code with your {activeMethod.label} app.<br />
-                  2. Pay ₱{selectedPlan.price} and write the reference code in the note/message.<br />
+                  2. Pay ₱{selectedPlan.price} and write your email address + the reference code in the note/message.<br />
                   3. Tap "I've paid" below.
                 </p>
                 <button
