@@ -28,7 +28,7 @@ export const PLANS = [
 // false = bumalik sa dating subscription plans.
 // Hindi naaapektuhan ang kasalukuyang subscribers (walang binabago sa data nila).
 export const PROMO_MODE = true;
-export const PROMO_PRICE = 120;
+export const PROMO_PRICE = 100;
 export const PROMO_DAYS = 30;
 export const PROMO_PLAN = {
   id: "PROMO",
