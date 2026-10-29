@@ -1,0 +1,2054 @@
+[
+  {
+    "type": "CAO",
+    "number": "01-2025",
+    "level1": [
+      {
+        "question": "Magkano ang De Minimis Threshold na FOB o FCA value, kung saan walang duty o tax na kinokolekta sa imported goods, maliban kung ma-adjust sa ilalim ng Section 423 ng CMTA?",
+        "choices": {
+          "A": "Php5,000.00",
+          "B": "Php10,000.00",
+          "C": "Php20,000.00",
+          "D": "Php50,000.00"
+        },
+        "correct": "B",
+        "reason": "Sec. 3.16: ang De Minimis Threshold ay FOB o FCA value na hindi lalampas sa Php10,000.00, o as may be adjusted under Section 423 ng CMTA, kung saan walang duty o tax na kinokolekta."
+      },
+      {
+        "question": "Ano ang tawag sa goods of a commercial nature na may FOB o FCA value na Php50,000.00 o higit pa?",
+        "choices": {
+          "A": "Category 2",
+          "B": "Category 3",
+          "C": "Category 4 (High-Value Goods)",
+          "D": "Category 1 (Correspondence and Documents)"
+        },
+        "correct": "C",
+        "reason": "Sec. 3.23: ang High-Value Goods (Category 4) ay goods of a commercial nature na may FOB o FCA value na Php50,000.00 o over. Ang Category 3 ay mas mataas sa De Minimis Threshold pero mas mababa sa Php50,000.00."
+      },
+      {
+        "question": "Ano ang tawag sa Freight Forwarders at Customs Brokers na itinalaga ng digital platform providers para i-proseso ang clearance at release ng e-Commerce goods?",
+        "choices": {
+          "A": "Clearance Agent",
+          "B": "Value Added Service Provider",
+          "C": "Consolidator",
+          "D": "Ultimate Consignee"
+        },
+        "correct": "A",
+        "reason": "Sec. 3.8: ang Clearance Agent ay tumutukoy sa Freight Forwarders at Customs Brokers na itinalaga ng digital platform providers para sa clearance at release ng e-Commerce goods."
+      },
+      {
+        "question": "Sa loob ng ilang oras mula sa pagdating ng carrying aircraft o vessel dapat isumite ang supplemental manifest para sa cargoes na hindi nakalista sa e-CIFCM?",
+        "choices": {
+          "A": "Dalawampu't apat (24) na oras",
+          "B": "Labindalawang (12) oras",
+          "C": "Tatlong (3) oras",
+          "D": "Anim (6) na oras"
+        },
+        "correct": "D",
+        "reason": "Sec. 7.3: ang cargoes na hindi nakalista sa e-CIFCM ay dapat saklawin ng supplemental manifest na isusumite within six (6) hours upon arrival ng carrying aircraft o vessel."
+      },
+      {
+        "question": "Sino ang kinakailangang magbukas at magmantini ng Prepayment Account sa Bureau para ma-guarantee ang agarang bayad ng duties, taxes, at other charges sa e-Commerce Goods?",
+        "choices": {
+          "A": "Digital Platform Providers",
+          "B": "Freight Forwarders na accredited ng Bureau",
+          "C": "E-retailers",
+          "D": "Ultimate Consignees"
+        },
+        "correct": "B",
+        "reason": "Section 12: ang Freight Forwarders na accredited ng Bureau para mag-proseso at mag-release ng e-Commerce Goods ang magbubukas at magmamantini ng Prepayment Accounts sa in-house bank/Cashier ng Bureau."
+      },
+      {
+        "question": "Hanggang ilang porsiyento lamang ng Import Processing Fee na ipinapataw ng Bureau ang maaaring singilin ng EPS Service Provider bilang processing fee para sa cross-border e-Commerce goods?",
+        "choices": {
+          "A": "Limang porsiyento (5%)",
+          "B": "Dalawampung porsiyento (20%)",
+          "C": "Sampung porsiyento (10%)",
+          "D": "Labinlimang porsiyento (15%)"
+        },
+        "correct": "C",
+        "reason": "Sec. 5.6: ang EPS Service Provider ay maaari lamang mag-charge ng processing fee na hindi lalampas sa sampung porsiyento (10%) ng Import Processing Fee na ipinataw ng Bureau para sa cross-border e-Commerce goods."
+      },
+      {
+        "question": "Alin sa mga sumusunod ang hindi ipoproseso bilang e-Commerce goods ayon sa Section 10?",
+        "choices": {
+          "A": "Importations na classified bilang Consumer-to-Consumer (C2C) transactions",
+          "B": "Low-Value, Dutiable Goods (Category 3)",
+          "C": "High-Value Goods (Category 4)",
+          "D": "Low-Value, Non-Dutiable Goods (Category 2)"
+        },
+        "correct": "A",
+        "reason": "Sec. 10.3: hindi ipoproseso bilang e-Commerce goods ang importations na classified sa ilalim ng Consumer-to-Consumer (C2C) transactions. Ayon sa Sec. 5.1, ang Category 2, 3, at 4 ay maaaring i-proseso sa e-Commerce Processing System."
+      },
+      {
+        "question": "Gaano kadalas dapat i-review ang CAO 01-2025, maliban kung may ibang nakasaad?",
+        "choices": {
+          "A": "Bawat taon",
+          "B": "Bawat dalawang (2) taon",
+          "C": "Bawat limang (5) taon",
+          "D": "Bawat tatlong (3) taon"
+        },
+        "correct": "D",
+        "reason": "Section 16: maliban kung may ibang nakasaad, ang CAO ay ire-review bawat tatlong (3) taon at aamyendahan o rerepasuhin kung kinakailangan. Ang Commissioner ay nagre-review ng fee structure ng EPS Service Providers kada taon (Sec. 5.8), na ibang provision."
+      },
+      {
+        "question": "Sino lamang ang pinapayagang gumamit ng dedicated e-Commerce Processing System para sa clearance at release ng e-Commerce goods?",
+        "choices": {
+          "A": "Lahat ng importers",
+          "B": "Mga registered Customs Brokers lamang",
+          "C": "Accredited e-Commerce stakeholders lamang",
+          "D": "Digital Platform Providers lamang"
+        },
+        "correct": "C",
+        "reason": "Sec. 6.2: only accredited e-Commerce stakeholders ang pinapayagang gumamit ng dedicated e-Commerce Processing System. Ayon sa Sec. 6.1, kasama sa kailangang ma-accredit ang e-Commerce operators, digital platform providers, e-retailers, VASPs, freight forwarders, at brokers."
+      },
+      {
+        "question": "Ano ang tawag sa actual price o value ng isang goods for sale, sa Philippine currency, ayon sa posted sa digital platform sa petsa ng sale, hindi kasama ang transport at insurance costs maliban kung kasama na sa presyo?",
+        "choices": {
+          "A": "Intrinsic Value",
+          "B": "FOB Value",
+          "C": "FCA Value",
+          "D": "De Minimis Threshold"
+        },
+        "correct": "A",
+        "reason": "Sec. 3.27: ang Intrinsic Value ay ang actual price o value ng goods for sale, sa Philippine currency, ayon sa posted sa digital platform sa date of sale, excluding transport at insurance costs, at iba pang taxes at charges, unless kasama na sa price at hindi hiwalay na nakasaad sa invoice."
+      }
+    ],
+    "level2": [
+      {
+        "question": "Lorna bought a pair of shoes from an e-marketplace. The FOB value is Php8,500.00, and the shipment is cleared through an accredited freight forwarder. Under CAO 01-2025, how is the shipment classified and what charge applies?",
+        "choices": {
+          "A": "Category 2; no duty or tax is collected, but an Import Processing Charge is imposed",
+          "B": "Category 3; duties and taxes are collected in addition to the Import Processing Charge",
+          "C": "Category 2; no duty, tax, or Import Processing Charge is collected on the shipment",
+          "D": "Category 1; the shipment is treated as correspondence and no charge is imposed"
+        },
+        "correct": "A",
+        "reason": "Under Sec. 3.29, goods with an FOB or FCA value not exceeding the De Minimis Threshold are Low-Value, Non-Dutiable Goods (Category 2), and Sec. 3.16 sets the threshold at Php10,000.00, below which no duty or tax is collected. Php8,500.00 does not exceed it. Section 9 provides that the Bureau shall impose import processing charges on e-Commerce goods within the De Minimis threshold, so the charge still applies."
+      },
+      {
+        "question": "A freight forwarder is processing two e-Commerce parcels of a commercial nature. Parcel X has an FOB value of Php10,000.00, and Parcel Y has an FOB value of Php50,000.00. How are the parcels classified?",
+        "choices": {
+          "A": "Parcel X is Category 3, and Parcel Y is Category 3",
+          "B": "Parcel X is Category 2, and Parcel Y is Category 3",
+          "C": "Parcel X is Category 2, and Parcel Y is Category 4",
+          "D": "Parcel X is Category 3, and Parcel Y is Category 4"
+        },
+        "correct": "C",
+        "reason": "Under Sec. 3.29, Category 2 covers an FOB or FCA value not exceeding the De Minimis Threshold of Php10,000.00 (Sec. 3.16), so Parcel X at exactly Php10,000.00 is Category 2. Under Sec. 3.23, Category 4 covers an FOB or FCA value of Php50,000.00 or over, so Parcel Y at exactly Php50,000.00 is Category 4. Category 3 (Sec. 3.28) is only for values above the threshold but less than Php50,000.00."
+      },
+      {
+        "question": "Ramon, a private individual abroad, sold his personal used camera to his friend Carla in Manila through a social media page. The sale was for personal purposes and was not made in the ordinary course of business. The camera was shipped to Carla. How will the Bureau treat the importation under CAO 01-2025?",
+        "choices": {
+          "A": "It is processed as Category 2 e-Commerce goods through the dedicated e-Commerce Processing System",
+          "B": "It is not processed as e-Commerce goods because it is a Consumer-to-Consumer transaction",
+          "C": "It is processed as Category 3 e-Commerce goods because it was sold through a social media platform",
+          "D": "It is not processed as e-Commerce goods because social media pages are not Digital Platforms"
+        },
+        "correct": "B",
+        "reason": "Sec. 3.11 defines a Consumer-to-Consumer (C2C) transaction as one between end-users for personal, family, or household purposes, not done in the ordinary course of business, regardless of the platform used. Sec. 10.3 excludes C2C importations from e-Commerce goods processing. Social media platforms are even listed as examples of Digital Platforms in Sec. 3.14, so option D is wrong."
+      },
+      {
+        "question": "A freight forwarder declared a parcel of commercial goods as \"without commercial value\" on its documents. The parcel is not Correspondence and Documents (Category 1). What is the result under CAO 01-2025?",
+        "choices": {
+          "A": "The parcel is processed as Category 2 goods because its declared value is zero",
+          "B": "The parcel is processed as e-Commerce goods, with the Bureau fixing its value",
+          "C": "The parcel is processed as Category 1 goods exempt from any value declaration",
+          "D": "The parcel is excluded from e-Commerce processing, and the forwarder must declare its specific value with supporting documents, if any"
+        },
+        "correct": "D",
+        "reason": "Sec. 10.1 excludes importations declared as without commercial value, or of no commercial value, from e-Commerce goods processing. The freight forwarder, NVOCC, consolidator, or Clearance Agent must then declare the specific value of the goods, supported by an available invoice, receipt, or equivalent document. The only exception is Correspondence and Documents under Category 1, which the parcel is not."
+      },
+      {
+        "question": "An aircraft carrying e-Commerce shipments arrived at 2:00 PM. After arrival, the freight forwarder found that one parcel was not listed in the e-CIFCM it had submitted. By what time must a supplemental manifest covering the parcel be submitted?",
+        "choices": {
+          "A": "8:00 PM on the same day",
+          "B": "2:00 PM on the following day",
+          "C": "4:00 PM on the same day",
+          "D": "10:00 PM on the same day"
+        },
+        "correct": "A",
+        "reason": "Sec. 7.3 requires cargoes not listed in the e-CIFCM to be covered by a supplemental manifest submitted within six (6) hours upon arrival of the carrying aircraft or vessel. Six hours after 2:00 PM is 8:00 PM on the same day. Under Sec. 7.4, unmanifested goods are subject to fines and penalties under the CMTA."
+      },
+      {
+        "question": "A misrouted e-Commerce shipment handled by an accredited freight forwarder arrived at a port. It was not re-exported within twenty-four (24) hours from arrival. Which of the following answers for the duties, taxes, and other charges that should have been collected?",
+        "choices": {
+          "A": "The Digital Platform Provider's data-sharing guarantee",
+          "B": "The ultimate consignee, as the buyer of the goods",
+          "C": "The freight forwarder's Prepayment Account with the Bureau",
+          "D": "The Value Added Service Provider's accreditation bond"
+        },
+        "correct": "C",
+        "reason": "Section 12 requires accredited Freight Forwarders to open and maintain Prepayment Accounts. The account also answers for the duties, taxes, and other charges that should have been collected when mis-sorted or misrouted shipments were not re-exported within twenty-four (24) hours from arrival, or when, having been exported, no proof of landing was presented."
+      },
+      {
+        "question": "The Bureau imposed an Import Processing Fee of Php600.00 on a cross-border e-Commerce shipment cleared through an EPS Service Provider. The provider's fees collected from users of the System, at the published rate, totaled Php300,000.00. What is the maximum processing fee the provider may charge on that shipment, and what service fee does the Bureau collect from the provider?",
+        "choices": {
+          "A": "Php60.00 per shipment; Php3,000.00 service fee",
+          "B": "Php60.00 per shipment; Php30,000.00 service fee",
+          "C": "Php30.00 per shipment; Php30,000.00 service fee",
+          "D": "Php600.00 per shipment; Php30,000.00 service fee"
+        },
+        "correct": "B",
+        "reason": "Sec. 5.6 caps the EPS Service Provider's processing fee at ten percent (10%) of the Import Processing Fee, so 10% x Php600 = Php60.00. Sec. 5.7 provides that the Bureau collects from the provider a service fee for monitoring and supervision equivalent to ten percent (10%) of the fees collected, so 10% x Php300,000 = Php30,000.00."
+      },
+      {
+        "question": "Delta Customs Brokerage, a customs broker designated by a digital platform provider as Clearance Agent for e-Commerce goods, has not been accredited with the Bureau for e-Commerce transactions. May it lodge e-Commerce goods declarations through the dedicated e-Commerce Processing System?",
+        "choices": {
+          "A": "Yes, because customs brokers are already licensed by the Professional Regulation Commission",
+          "B": "Yes, if the digital platform provider that designated it is accredited",
+          "C": "No, because only digital platform providers may use the system",
+          "D": "No, because only accredited e-Commerce stakeholders may use the system"
+        },
+        "correct": "D",
+        "reason": "Sec. 6.1 requires all e-Commerce stakeholders, including brokers and freight forwarders, to be accredited with the Bureau for e-Commerce transactions. Sec. 6.2 allows only accredited e-Commerce stakeholders to use the dedicated e-Commerce Processing System. A broker's PRC license (Sec. 3.13) or its principal's accreditation does not substitute for its own accreditation."
+      },
+      {
+        "question": "An accredited platform ships two parcels to consumers in the Philippines. Parcel 1 contains goods classified as prohibited under the CMTA. Parcel 2 contains regulated goods that need a permit from a concerned regulatory agency. How does CAO 01-2025 treat the two parcels?",
+        "choices": {
+          "A": "Parcel 1 is not allowed even for e-Commerce purposes, while Parcel 2 is subject to the existing laws and regulations of the regulatory agency",
+          "B": "Both parcels are allowed because they were bought through an accredited platform and e-Commerce rules govern them",
+          "C": "Parcel 1 is allowed if its value is within the De Minimis Threshold, while Parcel 2 is not allowed at all",
+          "D": "Both parcels are not allowed because regulated goods are treated in the same way as prohibited goods"
+        },
+        "correct": "A",
+        "reason": "Section 11 provides that goods classified as prohibited under the CMTA and other laws shall not be allowed even for e-Commerce purposes. Regulated and restricted goods are subject to the existing laws and regulations of the concerned regulatory agencies, which is why Parcel 2 is not banned outright. Sec. 6.3.2 likewise bars the sale of regulated goods unless the necessary permits are submitted."
+      },
+      {
+        "question": "A Bureau officer obtained shipment data that a digital platform provider had submitted to the Bureau and gave it to a private marketing firm for a fee. How does CAO 01-2025 treat this act?",
+        "choices": {
+          "A": "It is allowed because the data is already in the Bureau's possession",
+          "B": "It is covered only by a written reprimand under Section 13",
+          "C": "It is a violation, and the officer shall be proceeded against under Section 15",
+          "D": "It is allowed if the marketing firm agrees to keep the data confidential"
+        },
+        "correct": "C",
+        "reason": "Section 13 requires the Bureau to treat information from digital platform providers and e-retailers with utmost confidentiality and for official purposes only. Personnel who use it for other than official or legal purposes shall be proceeded against under Section 15, which provides penalties and sanctions as may be provided by law."
+      }
+    ]
+  },
+  {
+    "type": "CAO",
+    "number": "02-2025",
+    "level1": [
+      {
+        "question": "Ayon sa amended Sec. 4.1, ano ang basehan ng singil na Php1,087.00 para sa Entrance and Clearance ng Vessel?",
+        "choices": {
+          "A": "Per day",
+          "B": "Per vessel",
+          "C": "Per cargo",
+          "D": "Per container"
+        },
+        "correct": "B",
+        "reason": "Section 2 ng CAO 02-2025 (amending Sec. 4.1): Php1,087.00 ang Entrance and Clearance per vessel. Ang Loading and Unloading ay per day naman (Php4,500.00)."
+      },
+      {
+        "question": "Ano ang basehan ng pagbabayad ng Import Processing Charge para sa Cross-Border De Minimis Goods na personal o direktang pino-proseso ng claimant?",
+        "choices": {
+          "A": "Per ultimate consignee",
+          "B": "Per goods declaration",
+          "C": "Per consignment note",
+          "D": "Per container"
+        },
+        "correct": "C",
+        "reason": "Sec. 5.5.a (Section 4 ng CAO): ang bayad para sa personal na pino-proseso ng claimant ay per consignment note basis. Ang De Minimis Goods na cleared through a third party ay per ultimate consignee basis (Sec. 5.5.b)."
+      },
+      {
+        "question": "Magkano ang Import Processing Charge para sa De Minimis Goods na cleared through a third party, tulad ng Customs Broker o Freight Forwarder, kung ang FOB/FCA value ay mahigit Php2,000.00 hanggang Php10,000.00?",
+        "choices": {
+          "A": "2.5% Ad Valorem",
+          "B": "Php125.00",
+          "C": "Php250.00",
+          "D": "5% Ad Valorem"
+        },
+        "correct": "A",
+        "reason": "Sec. 5.5.b: 2.5% Ad Valorem ang rate para sa FOB/FCA value na mahigit Php2,000.00 hanggang Php10,000.00. Php50.00 naman ang rate kung hanggang Php2,000.00 lamang."
+      },
+      {
+        "question": "Magkano ang AEO Application Charge ng isang Authorized Economic Operator na nasa Small na DTI-based category?",
+        "choices": {
+          "A": "Php5,000.00",
+          "B": "Php10,000.00",
+          "C": "Php2,500.00",
+          "D": "Php0.00"
+        },
+        "correct": "D",
+        "reason": "Amended Sec. 5.12 (Section 5 ng CAO): Php0.00 ang application charge ng Micro at Small. Php5,000.00 ang Medium at Php10,000.00 ang Large."
+      },
+      {
+        "question": "Magkano ang Legal Research Fund (LRF) na kinokolekta sa bawat document na inilalabas ng Bureau ayon sa amended Section 6?",
+        "choices": {
+          "A": "Php10.00 o 1% ng filing fee, alinman ang mas mababa",
+          "B": "Php10.00 o 1% ng filing fee, alinman ang mas mataas",
+          "C": "Php30.00 o 1% ng filing fee, alinman ang mas mataas",
+          "D": "Php10.00 o 5% ng filing fee, alinman ang mas mataas"
+        },
+        "correct": "B",
+        "reason": "Section 7 ng CAO 02-2025 (amending Section 6): ang LRF ay Php10.00 o 1% ng filing fee na ipinataw, whichever is higher. Ang CDS ay Php100.00 at ang DST ay Php30.00."
+      },
+      {
+        "question": "Alin sa mga sumusunod ang hindi sakop ng Import Processing Charge ayon sa amended Sec. 5.5?",
+        "choices": {
+          "A": "De Minimis Goods na cleared through a Customs Broker",
+          "B": "Dutiable Shipments na filed under Consumption procedure",
+          "C": "De Minimis Goods na dala ng Travelers, accompanied man o unaccompanied baggage",
+          "D": "De Minimis Goods na personal na pino-proseso ng claimant na lampas Php5,000.00"
+        },
+        "correct": "C",
+        "reason": "Sec. 5.5.d: ang De Minimis Goods na dala ng Travelers, accompanied o unaccompanied baggage, ay hindi subject sa Import Processing Charge. Ang tatlo pang pagpipilian ay may kaukulang rate sa Sec. 5.5.a, 5.5.b, at 5.5.c."
+      },
+      {
+        "question": "Magkano ang meal allowance per meal na babayaran kung ang travel time ng Customs officer ay sumasakop sa alinmang bahagi ng itinakdang oras ng breakfast, lunch, o supper?",
+        "choices": {
+          "A": "Php200.00",
+          "B": "Php150.00",
+          "C": "Php250.00",
+          "D": "Php300.00"
+        },
+        "correct": "A",
+        "reason": "Sec. 8.6.2: Php200.00 per meal ang meal allowance, at babayaran lamang kung ang travel time ay sumasakop sa anumang bahagi ng breakfast (6:00-8:00 AM), lunch (12:00 Noon-1:00 PM), o supper (6:00-8:00 PM)."
+      },
+      {
+        "question": "Kailan magsisimula ang pagpapataw ng Aircraft Supervision Fee na dinefer ng CAO 02-2025?",
+        "choices": {
+          "A": "January 1, 2025",
+          "B": "March 1, 2025",
+          "C": "June 1, 2025",
+          "D": "May 1, 2025"
+        },
+        "correct": "D",
+        "reason": "Section 9 ng CAO 02-2025: ang imposition ng Aircraft Supervision Fee (Section 4.2 ng CAO 02-2024) ay dinefer at magsisimula sa May 1, 2025."
+      },
+      {
+        "question": "Hanggang kailan pansamantalang sinuspinde ang pagpapataw ng Certificate of Origin Processing Charge ayon sa Section 10?",
+        "choices": {
+          "A": "Hanggang magsimula ang Aircraft Supervision Fee sa May 1, 2025",
+          "B": "Hanggang matapos ang unang taon ng pagpapatupad ng CAO 02-2025",
+          "C": "Hanggang alisin ng Commissioner, na aprubado ng Secretary of Finance",
+          "D": "Hanggang mag-isyu ang Bureau ng bagong CMO tungkol dito"
+        },
+        "correct": "C",
+        "reason": "Section 10: temporarily suspended ang Certificate of Origin Processing Charge (Sec. 5.29 ng CAO 02-2024) until lifted by the Commissioner, as approved by the Secretary of Finance. Walang nakasaad na fixed na petsa."
+      },
+      {
+        "question": "Anong Section ng CMTA ang binanggit bilang batayan ng special nature of operations ng Air Express Cargo Operators (AECO), kaya hindi sila sakop ng ilang fees?",
+        "choices": {
+          "A": "Section 439",
+          "B": "Section 1211",
+          "C": "Section 1508",
+          "D": "Section 1301"
+        },
+        "correct": "A",
+        "reason": "Section 11: hindi sakop ang AECO sa Aircraft Supervision Fee, Underguarding Fee for Transfers, Off-Hours Fee, at CFW Fee dahil sa special nature ng operations nila ayon sa Section 439 ng CMTA."
+      }
+    ],
+    "level2": [
+      {
+        "question": "Cebu Star, a vessel engaged in foreign commerce, entered and cleared at a Port of Entry where Customs Services were rendered. Boarding formalities were conducted once. Entrance and clearance services were rendered over 2 days, and loading and unloading were supervised for 3 days. No bunkering or emergency services were requested. Under the amended Section 4.1, what total Vessel Supervision Fee is due?",
+        "choices": {
+          "A": "Php17,924.00",
+          "B": "Php14,587.00",
+          "C": "Php16,837.00",
+          "D": "Php7,837.00"
+        },
+        "correct": "C",
+        "reason": "Under amended Sec. 4.1, boarding formalities cost Php2,250.00 per vessel, entrance and clearance cost Php1,087.00 per vessel (not per day), and loading and unloading cost Php4,500.00 per day. The computation is Php2,250 + Php1,087 + (3 x Php4,500 = Php13,500) = Php16,837.00. The 2 days of entrance and clearance services do not multiply the fee."
+      },
+      {
+        "question": "A customs broker cleared two de minimis consignments under a Special Power of Attorney for two different ultimate consignees. The goods of the first consignee have an FOB value of Php1,800.00, and those of the second have an FOB value of Php8,000.00. Under Section 5.5.b, what total Import Processing Charge is due?",
+        "choices": {
+          "A": "Php250.00",
+          "B": "Php175.00",
+          "C": "Php245.00",
+          "D": "Php300.00"
+        },
+        "correct": "A",
+        "reason": "Sec. 5.5.b applies to de minimis goods cleared through a third party and is charged per ultimate consignee. The first consignee (up to Php2,000.00) pays Php50.00. The second (above Php2,000.00 up to Php10,000.00) pays 2.5% ad valorem, or 2.5% x Php8,000 = Php200.00. The total is Php50 + Php200 = Php250.00."
+      },
+      {
+        "question": "Juan personally processed, as claimant, two separate cross-border de minimis consignment notes. The first has an FOB value of Php4,800.00, and the second has an FOB value of Php9,500.00. What total Import Processing Charge must he pay?",
+        "choices": {
+          "A": "Php0.00",
+          "B": "Php125.00",
+          "C": "Php250.00",
+          "D": "Php237.50"
+        },
+        "correct": "B",
+        "reason": "Sec. 5.5.a charges personally processed de minimis goods per consignment note. A value of Php5,000.00 and below pays Php0.00, while a value above Php5,000.00 but not more than Php10,000.00 pays Php125.00. The first note pays nothing and the second pays Php125.00, for a total of Php125.00. The 2.5% ad valorem rate applies only to goods cleared through a third party."
+      },
+      {
+        "question": "An importer filed a goods declaration under the Consumption clearance procedure for goods with a dutiable value of Php620,000.00. The FOB value of the goods is above Php10,000.00. Excluding the LRF, what total Import Processing Charge, CDS, and DST must be paid for this declaration?",
+        "choices": {
+          "A": "Php1,500.00",
+          "B": "Php1,130.00",
+          "C": "Php2,130.00",
+          "D": "Php1,630.00"
+        },
+        "correct": "D",
+        "reason": "Under Sec. 5.5.c, a dutiable value above Php500,000.00 up to Php750,000.00 pays Php1,500.00, in addition to the CDS of Php100.00 and the BIR DST of Php30.00. The total is Php1,500 + Php100 + Php30 = Php1,630.00."
+      },
+      {
+        "question": "Customs Officer Reyes used his own private vehicle to travel from his permanent official station to a port of assignment to render Customs Services. He now claims reimbursement for the cost of gasoline. How will his claim be treated?",
+        "choices": {
+          "A": "Gasoline is reimbursed in full because it is a transportation expense of the trip",
+          "B": "He may not claim gasoline but may claim the equivalent cost of customary transportation",
+          "C": "He may not claim any transportation reimbursement because a private vehicle was used for the trip",
+          "D": "Gasoline is reimbursed only up to the cost of the customary mode of transportation"
+        },
+        "correct": "B",
+        "reason": "Sec. 8.2 states that if a private vehicle is used, no reimbursement of the cost of gasoline and fuel is allowed. The official is, however, entitled to the equivalent cost of the customary mode of transportation."
+      },
+      {
+        "question": "A Customs officer's transportation and daily travel expenses are furnished by a shipping line for an assignment. The officer leaves the official station at 11:00 AM and arrives at the vessel boarding point at 7:30 PM. Under Section 8.6.2, what total meal allowance is payable?",
+        "choices": {
+          "A": "Php200.00",
+          "B": "Php600.00",
+          "C": "Php400.00",
+          "D": "Php800.00"
+        },
+        "correct": "C",
+        "reason": "Sec. 8.6.2 pays Php200.00 per meal only if the travel time embraces any part of breakfast (6:00-8:00 AM), lunch (12:00 Noon-1:00 PM), or supper (6:00-8:00 PM). Travel from 11:00 AM to 7:30 PM covers lunch and part of supper, but not breakfast. That is 2 meals x Php200 = Php400.00."
+      },
+      {
+        "question": "A Customs officer is assigned to a vessel at a pier 40 km from the Customs station, and the shipping line is the requesting party. Under Section 8.6.3, how much land transportation allowance is payable for traveling to the pier and back?",
+        "choices": {
+          "A": "Php2,000.00",
+          "B": "Php1,000.00",
+          "C": "Php2,500.00",
+          "D": "Php4,000.00"
+        },
+        "correct": "A",
+        "reason": "Sec. 8.6.3 provides for a land transportation allowance of Php25.00 per km from the Customs station to its destination, and vice-versa, payable by the shipping line or requesting party. The round trip is 40 km x 2 = 80 km, and 80 x Php25 = Php2,000.00."
+      },
+      {
+        "question": "A Customs officer paid his own daily travel expenses and travel expenses in advance for an assignment to a vessel. The shipping line has already reimbursed him for the same expenses. May he still claim reimbursement from the Bureau?",
+        "choices": {
+          "A": "Yes, because the Bureau must pay these expenses regardless of the source",
+          "B": "Yes, but only for the transportation expenses",
+          "C": "Yes, if he returns the shipping line's reimbursement to the Bureau",
+          "D": "No, because he can no longer claim reimbursement from the Bureau"
+        },
+        "correct": "D",
+        "reason": "Sec. 8.6.5 provides that when the DTE and travel expenses were paid in advance by the Customs officer and already reimbursed by the shipping line, the officer can no longer claim reimbursement from the Bureau. This prevents double payment (see also Sec. 8.5)."
+      },
+      {
+        "question": "An Air Express Cargo Operator (AECO) transferred express shipments from a discharging aircraft to an Off-Terminal CFW covered by a Transfer Note. Will the Php500.00 per Transfer Note Underguarding Fee for Transfers be imposed on the AECO?",
+        "choices": {
+          "A": "Yes, Php500.00 per Transfer Note applies to every party that transfers goods",
+          "B": "Yes, but only when the AECO transfers goods to a CBW",
+          "C": "No, because AECOs are not subject to the Underguarding Fee for Transfers",
+          "D": "No, because the fee is payable only by Customs Brokers"
+        },
+        "correct": "C",
+        "reason": "Section 11 provides that AECOs are not subject to the Aircraft Supervision Fee, Underguarding Fee for Transfers (Sec. 4.5), Off-Hours Fee, and CFW Fee, due to the special nature of their operations under Section 439 of the CMTA. Their supervision fee is governed by CAO No. 5-2020 as implemented by CMO No. 9-2021."
+      },
+      {
+        "question": "Pacific Air, a regular airline and not an AECO, had one aircraft engaged in foreign commerce land and depart at an international airport on April 25, 2025, and another aircraft do the same on May 6, 2025. Customs Services were rendered for both. For which aircraft may the Aircraft Supervision Fee be imposed?",
+        "choices": {
+          "A": "Only the aircraft that landed and departed on May 6, 2025",
+          "B": "Only the aircraft that landed and departed on April 25, 2025",
+          "C": "Both aircraft",
+          "D": "Neither aircraft, because the fee is suspended until lifted by the Commissioner"
+        },
+        "correct": "A",
+        "reason": "Section 9 states that the imposition of the Aircraft Supervision Fee is deferred and shall commence on May 1, 2025. Only the May 6, 2025 aircraft falls on or after that date. The suspension until lifted by the Commissioner in Section 10 applies to the Certificate of Origin Processing Charge, not to this fee."
+      }
+    ]
+  },
+  {
+    "type": "CAO",
+    "number": "02-2024",
+    "level1": [
+      {
+        "question": "Saang pondo mapupunta ang mga Customs Service Fee sa Section 4, na maaaring gamitin sa allowances at overtime services ng Customs personnel?",
+        "choices": {
+          "A": "General Fund",
+          "B": "Trust Fund",
+          "C": "Modernization Fund",
+          "D": "Regulatory Fund"
+        },
+        "correct": "B",
+        "reason": "Sec. 4: ang mga Fees sa Section 4 ay kokolektahin at mapupunta sa Trust Fund na maaaring gamitin sa allowances at overtime services. Ang Dues and Charges sa Section 5 naman ay mapupunta sa General Fund."
+      },
+      {
+        "question": "Magkano ang Aircraft Supervision Fee na binabayaran ng Airline o ng agent nito para sa bawat Aircraft na engaged in foreign commerce na lumapag at umalis sa international airport of entry?",
+        "choices": {
+          "A": "Php2,250.00",
+          "B": "Php1,087.00",
+          "C": "Php4,500.00",
+          "D": "Php9,000.00"
+        },
+        "correct": "C",
+        "reason": "Sec. 4.2: Php4,500.00 ang Aircraft Supervision Fee para sa bawat Aircraft na engaged in foreign commerce na lumapag at umalis sa international airport of entry kung saan may Customs Services na ibinigay."
+      },
+      {
+        "question": "Magkano ang AEO Annual Supervision Fee ng isang Authorized Economic Operator na nasa Small na DTI-based category?",
+        "choices": {
+          "A": "Php9,000.00",
+          "B": "Php24,000.00",
+          "C": "Php36,000.00",
+          "D": "Php0.00"
+        },
+        "correct": "A",
+        "reason": "Sec. 4.4: Php9,000.00 ang fee ng Small (total assets na Php3,000,001.00 hanggang Php15,000,000.00). Php0.00 ang Micro, Php24,000.00 ang Medium, at Php36,000.00 ang Large."
+      },
+      {
+        "question": "Magkano ang Customs Documentary Stamp (CDS), Documentary Stamp Tax (DST), at Legal Research Fee (LRF) na kinokolekta sa bawat document na inilalabas ng Bureau?",
+        "choices": {
+          "A": "CDS Php30.00, DST Php100.00, LRF Php10.00",
+          "B": "CDS Php100.00, DST Php10.00, LRF Php30.00",
+          "C": "CDS Php10.00, DST Php30.00, LRF Php100.00",
+          "D": "CDS Php100.00, DST Php30.00, LRF Php10.00"
+        },
+        "correct": "D",
+        "reason": "Sec. 6: sa bawat document na inilalabas ng Bureau, kokolektahin ang CDS na Php100.00, DST na Php30.00, at LRF na Php10.00."
+      },
+      {
+        "question": "Magkano ang Monitoring and Supervision Fee na kinokolekta ng Bureau sa accredited third party Service Providers, maliban kung may ibang nakasaad sa Terms of Reference (TOR)?",
+        "choices": {
+          "A": "Limang porsiyento (5%) ng fees na nakolekta",
+          "B": "Sampung porsiyento (10%) ng fees na nakolekta",
+          "C": "Labinlimang porsiyento (15%) ng fees na nakolekta",
+          "D": "Dalawampung porsiyento (20%) ng fees na nakolekta"
+        },
+        "correct": "B",
+        "reason": "Sec. 4.12: maliban kung iba ang nakasaad sa TOR, katumbas ito ng sampung porsiyento (10%) ng fees na nakolekta ayon sa published rate."
+      },
+      {
+        "question": "Magkano ang dapat bayaran ng private stakeholders para sa bawat request for legal opinion?",
+        "choices": {
+          "A": "Php1,000.00",
+          "B": "Php2,000.00",
+          "C": "Php3,000.00",
+          "D": "Php5,000.00"
+        },
+        "correct": "D",
+        "reason": "Sec. 5.9: ang private stakeholders na humihingi ng legal opinion ay magbabayad ng Php5,000.00 para sa bawat request."
+      },
+      {
+        "question": "Magkano ang Container Security Charge na kinokolekta sa lahat ng containerized importations para sa bawat Twenty Equivalent Unit (TEU)?",
+        "choices": {
+          "A": "USD 5 (peso equivalent)",
+          "B": "USD 10 (peso equivalent)",
+          "C": "USD 20 (peso equivalent)",
+          "D": "USD 50 (peso equivalent)"
+        },
+        "correct": "A",
+        "reason": "Sec. 5.34: USD 5 para sa bawat TEU, sa peso equivalent, ang kokolektahin sa lahat ng containerized importations alinsunod sa Executive Order No. 635, series of 2007."
+      },
+      {
+        "question": "Magkano ang Export Processing Charge para sa CDS at BIR DST na binabayaran ng Exporter sa bawat Export Declaration, maliban kung exempted sa ilalim ng umiiral na batas?",
+        "choices": {
+          "A": "Php100.00",
+          "B": "Php30.00",
+          "C": "Php130.00",
+          "D": "Php250.00"
+        },
+        "correct": "C",
+        "reason": "Sec. 5.6: Php130.00 ang charge para sa CDS at BIR DST na binabayaran ng Exporter sa bawat Export Declaration. Ito ay ang kabuuan ng CDS na Php100.00 at DST na Php30.00."
+      },
+      {
+        "question": "Magkano ang processing charge para sa Cross Border E-Commerce Goods na personal o direktang pino-proseso ng claimant, kung ang FOB/FCA value ng goods ay Php5,000.00 pababa?",
+        "choices": {
+          "A": "Free",
+          "B": "Php100.00",
+          "C": "Php150.00",
+          "D": "Php250.00"
+        },
+        "correct": "A",
+        "reason": "Sec. 5.5.c: libre ang processing ng Cross Border E-Commerce Goods na personal o direktang pino-proseso ng claimant kung ang FOB/FCA value ay Php5,000.00 pababa. Php150.00 ang rate kung mahigit Php5,000.00 hanggang Php10,000.00."
+      },
+      {
+        "question": "Ano ang tawag sa trabahong ginagawa ng customs personnel sa labas ng kanyang Official Work Station, o sa overtime work para sa benepisyo ng concerned stakeholders, tulad ng boarding formalities sa Vessels at Aircrafts?",
+        "choices": {
+          "A": "Customs Facilities and Warehouses",
+          "B": "Third Party Service Provider",
+          "C": "Customs Services",
+          "D": "Official Work Station"
+        },
+        "correct": "C",
+        "reason": "Sec. 3.9: ang Customs Services ay trabahong ginagawa ng customs personnel sa labas ng Official Work Station o ang Overtime Work para sa benepisyo ng concerned stakeholders. Ayon sa Sec. 3.19, ang Official Work Station ay ang lugar kung saan regular na nagtatrabaho ang empleyado."
+      }
+    ],
+    "level2": [
+      {
+        "question": "Pacific Dawn, a vessel engaged in foreign commerce, entered and cleared at a Port of Entry where Customs Services were rendered. The Bureau conducted boarding formalities once, rendered entrance and clearance services for 2 days, and supervised loading and unloading for 3 days. No bunkering or emergency services were requested. What total Vessel Supervision Fee is due?",
+        "choices": {
+          "A": "Php8,924.00",
+          "B": "Php15,674.00",
+          "C": "Php16,837.00",
+          "D": "Php17,924.00"
+        },
+        "correct": "D",
+        "reason": "Under Sec. 4.1, the fees are Php2,250.00 for boarding formalities per vessel, Php1,087.00 for entrance and clearance per day, and Php4,500.00 for loading and unloading per day. The computation is Php2,250 + (2 x Php1,087 = Php2,174) + (3 x Php4,500 = Php13,500) = Php17,924.00. The shipping line or its agent pays this fee."
+      },
+      {
+        "question": "Kiwi Exports Co. filed an application for tax credit and refund of Php380,000.00, and the Bureau issued a Tax Credit Certificate (TCC) for the claim. Excluding CDS, DST, and LRF, what total Refund Processing Charge and TCC charge must Kiwi pay?",
+        "choices": {
+          "A": "Php1,500.00",
+          "B": "Php1,800.00",
+          "C": "Php1,600.00",
+          "D": "Php2,600.00"
+        },
+        "correct": "B",
+        "reason": "Under Sec. 5.7, a claim over Php300,000.00 to Php400,000.00 pays a Refund Processing Charge of Php1,500.00. Sec. 5.30 adds Php300.00 for every TCC issued, outside of the refund processing charge. The total is Php1,500 + Php300 = Php1,800.00."
+      },
+      {
+        "question": "The District Collector issued a decision on a protest case filed by Lumen Imports Corp., involving duties and taxes of Php450,000.00. Lumen wishes to appeal the decision. Excluding CDS, DST, and LRF, what appeal fee must it pay?",
+        "choices": {
+          "A": "Php3,500.00",
+          "B": "Php3,000.00",
+          "C": "Php4,000.00",
+          "D": "Php5,000.00"
+        },
+        "correct": "A",
+        "reason": "Sec. 5.8(a) sets the appeal fee for decisions of the District Collector on protest cases according to the amount of duties and taxes. Over Php400,000.00 to Php500,000.00 is Php3,500.00. The flat Php5,000.00 in Sec. 5.8(b) applies only to decisions not related to seizure, abandonment, protest, or dispute settlement cases."
+      },
+      {
+        "question": "Ana bought goods online with an FOB value of Php6,500.00, and her shipment was cleared through a consolidator. Ben bought goods online with the same FOB value and processed the clearance personally as claimant. Under Section 5.5, what is the combined Import Processing Charge for both shipments, excluding CDS, DST, and LRF?",
+        "choices": {
+          "A": "Php300.00",
+          "B": "Php600.00",
+          "C": "Php450.00",
+          "D": "Php150.00"
+        },
+        "correct": "C",
+        "reason": "Under Sec. 5.5.b, goods cleared through a consolidator or freight forwarder with an FOB/FCA value above Php5,000.00 but not more than Php7,000.00 pay Php300.00 (Ana). Under Sec. 5.5.c, goods processed personally by the claimant above Php5,000.00 but not more than Php10,000.00 pay Php150.00 (Ben). The combined charge is Php300 + Php150 = Php450.00."
+      },
+      {
+        "question": "Bayanihan Logistics, classified as Medium under the DTI-based category with total assets of Php60,000,000.00, applied for accreditation as an Authorized Economic Operator (AEO) and was accredited. What AEO Application Charge and AEO Annual Supervision Fee apply to it?",
+        "choices": {
+          "A": "Php2,500.00 application charge and Php9,000.00 annual supervision fee",
+          "B": "Php5,000.00 application charge and Php24,000.00 annual supervision fee",
+          "C": "Php10,000.00 application charge and Php36,000.00 annual supervision fee",
+          "D": "Php5,000.00 application charge and Php9,000.00 annual supervision fee"
+        },
+        "correct": "B",
+        "reason": "Sec. 5.12 sets the AEO Application Charge for a Medium AEO at Php5,000.00. Sec. 4.4 sets the AEO Annual Supervision Fee for a Medium AEO (total assets above Php15,000,000.00 up to Php100,000,000.00) at Php24,000.00. Php60,000,000.00 falls within the Medium range."
+      },
+      {
+        "question": "Orion Imports has previously paid charges for two cancellations or modifications of its goods declarations. It must now cancel a third goods declaration, and the Bureau confirms that the reason for the cancellation is a system error. What charge applies to this cancellation?",
+        "choices": {
+          "A": "Php1,000.00, charged as a first offense",
+          "B": "Php3,000.00, charged as a second offense",
+          "C": "Php5,000.00, as a third offense or more",
+          "D": "No charge, as it is due to a system error"
+        },
+        "correct": "D",
+        "reason": "Sec. 5.14 imposes Php1,000.00, Php3,000.00, and Php5,000.00 for the first, second, and third or more offense of cancellation or modification of a goods declaration, except when the reason for cancellation is a system error. Because the cancellation is due to a system error, no charge applies despite Orion's earlier cancellations."
+      },
+      {
+        "question": "Pioneer Common Bonded Warehouse is a CCBW with three accredited members. Their total assets (excluding real estate) are Php2,500,000.00, Php12,000,000.00, and Php80,000,000.00. The operator has one extension warehouse, and one of the members also has one extension warehouse. What total annual supervision charge must be paid?",
+        "choices": {
+          "A": "Php375,000.00",
+          "B": "Php425,000.00",
+          "C": "Php475,000.00",
+          "D": "Php525,000.00"
+        },
+        "correct": "C",
+        "reason": "Under Sec. 5.31.3, the CCBW operator pays Php250,000.00. Members pay according to total assets: Php2.5 million is exempted, Php12 million (above Php3 million to Php15 million) pays Php25,000.00, and Php80 million (above Php50 million) pays Php100,000.00. Each extension warehouse of the operator or an accredited member pays Php50,000.00, so two extensions add Php100,000.00. The total is Php250,000 + Php0 + Php25,000 + Php100,000 + Php100,000 = Php475,000.00."
+      },
+      {
+        "question": "Skyline Air will operate a chartered flight that will arrive in Manila and later depart from Manila. Its ground handler received the notice of the intended flight covering both the arrival and the departure. Under the Special Flight Supervision Fee, how much must be paid in total, and when?",
+        "choices": {
+          "A": "USD 350 in total, paid upon receipt of the flight notice",
+          "B": "USD 175 in total, paid upon landing of the aircraft in Manila",
+          "C": "USD 350 in total, paid after the flight departs from Manila",
+          "D": "USD 175 in total, because only the arrival is chargeable"
+        },
+        "correct": "A",
+        "reason": "Sec. 4.7 imposes USD 175 for every arrival or departure of chartered or special flights, to be paid by the ground handler or airline representative upon receipt of the notice of the intended flight. One arrival and one departure make two chargeable events, so the total is 2 x USD 175 = USD 350."
+      },
+      {
+        "question": "Meridian Steel is an accredited Super Green Lane (SGL) importer. It lodged two goods declarations through the SGL facility, with FOB values of USD 150,000.00 and USD 250,000.00, and was issued one List of Importables (LOI). Excluding CDS, DST, and LRF, what total SGL Service Charge and LOI Processing Fee must it pay?",
+        "choices": {
+          "A": "Php5,000.00",
+          "B": "Php5,500.00",
+          "C": "Php6,500.00",
+          "D": "Php7,000.00"
+        },
+        "correct": "C",
+        "reason": "Sec. 5.33 charges Php2,500.00 per goods declaration with an FOB value of USD 200,000.00 and below (the USD 150,000 declaration) and Php3,000.00 for an FOB value above USD 200,000.00 (the USD 250,000 declaration). Sec. 4.9 charges Php1,000.00 for every LOI issued to an SGL accredited company. The total is Php2,500 + Php3,000 + Php1,000 = Php6,500.00."
+      },
+      {
+        "question": "Zone Logistics Inc., a Free Zone Locator, requested underguarding services for 3 containers moving from a seaport to a Free Zone 18 km away, and for 2 containers moving from a Free Zone to the Port of Loading for export 45 km away. No E-TRACC, GTSB, or other means of physically securing the goods were availed of or required. What total Free Zone Locator Supervision Fee is due?",
+        "choices": {
+          "A": "Php3,500.00",
+          "B": "Php2,500.00",
+          "C": "Php5,000.00",
+          "D": "Php2,000.00"
+        },
+        "correct": "A",
+        "reason": "Under Sec. 4.3, movement from a seaport to a Free Zone pays Php500.00 per container if not exceeding 30 km, and movement from a Free Zone to the Port of Loading pays Php1,000.00 per container if exceeding 30 km. The computation is (3 x Php500 = Php1,500) + (2 x Php1,000 = Php2,000) = Php3,500.00. The fee would not apply only if other physical security means were availed of or required."
+      }
+    ]
+  },
+  {
+    "type": "CAO",
+    "number": "01-2022",
+    "level1": [
+      {
+        "question": "Gaano katagal ang bisa ng Authority to Operate a CBW, na binibilang mula sa date ng approval ng application for establishment?",
+        "choices": {
+          "A": "Dalawang (2) taon",
+          "B": "Tatlong (3) taon",
+          "C": "Limang (5) taon",
+          "D": "Isang (1) taon"
+        },
+        "correct": "B",
+        "reason": "Sec. 5.3: valid ang Authority to Operate ng tatlong (3) taon mula sa date ng approval ng application for establishment, ayon sa nakasaad sa Certificate of Authority to Operate."
+      },
+      {
+        "question": "Ilan ang pinapayagang bilang ng members ng isang Customs Common Bonded Warehouse (CCBW)?",
+        "choices": {
+          "A": "Hindi bababa sa lima (5) at hindi hihigit sa limampu (50)",
+          "B": "Hindi bababa sa dalawa (2) at hindi hihigit sa dalawampu (20)",
+          "C": "Hindi bababa sa sampu (10) at hindi hihigit sa tatlumpu (30)",
+          "D": "Hindi bababa sa tatlo (3) at hindi hihigit sa tatlumpu (30)"
+        },
+        "correct": "D",
+        "reason": "Sec. 6.2: ang CCBW ay dapat may at least three (3) pero hindi hihigit sa thirty (30) members."
+      },
+      {
+        "question": "Anong dokumento ang inilalabas ng District Collector na nagpapahintulot sa transfer o sale ng imported raw materials, semi-finished products, o finished products sa ibang CBW, Client-Exporter, Client/End-User, o Free Zone locator para sa subsequent export?",
+        "choices": {
+          "A": "Authority to Transfer or Sell (ATS)",
+          "B": "Transfer Note",
+          "C": "Certificate of Identification (CI)",
+          "D": "Certificate of Inspection and Loading (CIL)"
+        },
+        "correct": "A",
+        "reason": "Sec. 3.8: ang Authority to Transfer or Sell (ATS) ay ang document na inilalabas ng District Collector para sa transfer o sale sa mga nabanggit. Ang Transfer Note (Sec. 3.46) ay ang kasamang document ng transfer o transit na nagsisilbing proof of delivery."
+      },
+      {
+        "question": "Sa isang MCBW, hanggang ilang porsiyento ng volume ng raw materials na entered for warehousing ang maaaring entered for consumption?",
+        "choices": {
+          "A": "Sampung porsiyento (10%)",
+          "B": "Dalawampung porsiyento (20%)",
+          "C": "Tatlumpung porsiyento (30%)",
+          "D": "Limampung porsiyento (50%)"
+        },
+        "correct": "C",
+        "reason": "Sec. 4.3.1: ang raw materials na entered for consumption ay hindi dapat lumampas sa thirty percent (30%) ng volume ng raw materials entered for warehousing. Ang higit dito ay puwede lamang sa meritorious circumstances, gaya ng cancelled orders o closure ng CBW."
+      },
+      {
+        "question": "Sino ang namumuno sa Customs Bonded Warehouse Committee (CBWC)?",
+        "choices": {
+          "A": "Commissioner ng Customs",
+          "B": "Deputy Commissioner for AOCG",
+          "C": "District Collector ng port concerned",
+          "D": "Assistant Commissioner ng PCAG"
+        },
+        "correct": "B",
+        "reason": "Sec. 5.1.7: ang CBWC ay binubuo ng Commissioner at pinamumunuan ng Deputy Commissioner for AOCG. Ang Commissioner ang bumubuo (constitutes) nito, pero hindi siya ang head."
+      },
+      {
+        "question": "Saan dapat i-file ang application para sa Authority to Operate a CBW, kasama ang application para maging member, subcontractor, Client-Exporter, o Client/End-User ng existing warehouse?",
+        "choices": {
+          "A": "Sa Commissioner of Customs",
+          "B": "Sa Customs Bonded Warehouse Committee",
+          "C": "Sa Warehousing Coordinating Division (WCD)",
+          "D": "Sa District Collector kung nasaan ang CBW"
+        },
+        "correct": "D",
+        "reason": "Sec. 5.1.1: ang application ay ifa-file sa District Collector kung saan matatagpuan ang CBW, na naglalarawan ng premises, location, capacity, at purpose ng establishment."
+      },
+      {
+        "question": "Sa loob ng ilang araw dapat kumilos ang Commissioner sa application para sa Authority to Operate mula nang matanggap ang recommendation ng CBWC?",
+        "choices": {
+          "A": "Dalawampung (20) working days",
+          "B": "Dalawampung (20) calendar days",
+          "C": "Limang (5) working days",
+          "D": "Tatlumpung (30) working days"
+        },
+        "correct": "A",
+        "reason": "Sec. 5.1.8: kikilos ang Commissioner sa application within twenty (20) working days from receipt ng recommendation ng CBWC. Ang twenty (20) days ng CBWC sa Sec. 5.1.7 ay ibang period, para sa pagpapadala nito ng recommendation sa Commissioner."
+      },
+      {
+        "question": "Alin ang tamang katangian ng Authority to Operate a CBW ayon sa CAO?",
+        "choices": {
+          "A": "Maaaring ilipat sa ibang operator kung aprubado ng Commissioner",
+          "B": "Maaaring i-assign sa isang accredited member ng CCBW",
+          "C": "Personal sa operator at hindi maaaring ilipat o i-assign",
+          "D": "Maaaring ilipat sa bagong may-ari kapag naibenta ang CBW"
+        },
+        "correct": "C",
+        "reason": "Sec. 4.6: ang Authority to Operate a CBW ay personal sa warehouse operator at hindi maaaring ilipat o i-assign for whatever reason."
+      },
+      {
+        "question": "Ano ang tawag sa paglabag kung saan ang imported material na pumasok sa warehousing scheme at papunta sa isang CBW, Free Zone locator/enterprise, o mula sa CBW papunta sa port o airport para sa exportation ay dinala sa ibang lugar na hindi nito intended destination?",
+        "choices": {
+          "A": "Unauthorized Withdrawal",
+          "B": "Diversion",
+          "C": "Unauthorized Repacking",
+          "D": "Transit"
+        },
+        "correct": "B",
+        "reason": "Sec. 3.23: ang Diversion ay violation ng customs law kung saan ang material na entered through warehousing ay dinala sa lugar maliban sa intended destination. Ayon sa Sec. 15.1, Closure of the CBW ang penalty nito."
+      },
+      {
+        "question": "Ano ang tawag sa formula of conversion na inilalabas ng Industrial Technology Development Institute (ITDI) sa CBW operator at members para matukoy ang raw material usage at wastages ng isang finished product para sa export at liquidation?",
+        "choices": {
+          "A": "Formula of Manufacture (FOM)",
+          "B": "Wastage Valuation Data Base (WVDB)",
+          "C": "Certificate of Identification (CI)",
+          "D": "Statement of Monthly Raw Materials Importation Requirements (SMRMIR)"
+        },
+        "correct": "A",
+        "reason": "Sec. 3.29: ang Formula of Manufacture (FOM) ay ang formula of conversion na inilalabas ng ITDI sa CBW operator at members para sa raw material usage at wastages ng finished product para sa export at liquidation."
+      }
+    ],
+    "level2": [
+      {
+        "question": "Tahanan Common Bonded Warehouse is a Customs Common Bonded Warehouse with twelve (12) accredited members and one (1) extension warehouse. Using the schedule of annual supervision fees, how much total annual supervision fee must it pay?",
+        "choices": {
+          "A": "Php1,200,000.00",
+          "B": "Php1,450,000.00",
+          "C": "Php1,500,000.00",
+          "D": "Php1,750,000.00"
+        },
+        "correct": "C",
+        "reason": "Sec. 14.3 sets the annual supervision fee for a CCBW at Php250,000.00, plus Php100,000.00 for every member and Php50,000.00 for every extension warehouse. The computation is Php250,000 + (12 x Php100,000 = Php1,200,000) + Php50,000 = Php1,500,000.00."
+      },
+      {
+        "question": "Cebu Garments Inc., a CBW operator, had two warehousing entries whose storage periods expired. Before the storage periods lapsed, it requested to export the finished goods late. The finished goods from Entry 1 were exported 12 days after the storage period expired, and those from Entry 2 were exported 36 days after. What total penalty for late exportation applies?",
+        "choices": {
+          "A": "Php20,000.00",
+          "B": "Php30,000.00",
+          "C": "Php40,000.00",
+          "D": "Php50,000.00"
+        },
+        "correct": "B",
+        "reason": "Sec. 15.7 imposes Php10,000.00 per entry for exportation 1-30 days after expiration of the storage period, and Php20,000.00 per entry for 31-45 days. Entry 1 (12 days) is Php10,000 and Entry 2 (36 days) is Php20,000, for a total of Php30,000.00. Sec. 8.11.3 allows late exportation when requested before the storage period lapses, subject to the applicable penalties."
+      },
+      {
+        "question": "Mabini Plastics, a CBW operator, withdrew bonded resin from its warehouse without a duly processed withdrawal slip. This is its second offense, and no fraud is involved. The duties and taxes due on the withdrawn goods are Php800,000.00, all unpaid. What is its total monetary liability and other sanction under Section 15?",
+        "choices": {
+          "A": "Php1,200,000.00, plus suspension of warehousing privileges for six (6) months",
+          "B": "Php1,200,000.00, plus closure of the CBW as the second-offense penalty",
+          "C": "Php800,000.00, plus suspension of warehousing privileges for six (6) months",
+          "D": "Php1,600,000.00, plus closure of the CBW as the second-offense penalty"
+        },
+        "correct": "A",
+        "reason": "Withdrawal without a duly processed withdrawal slip is an unauthorized withdrawal (Sec. 3.49). Sec. 15.2.2 provides for the duties and taxes due plus a surcharge of fifty percent (50%) and suspension of warehousing privileges for six (6) months for a second offense. The computation is Php800,000 + (50% x Php800,000 = Php400,000) = Php1,200,000. Closure applies only to a third offense or one attended with fraud."
+      },
+      {
+        "question": "Delta Foods obtained an Authority to Operate a CBW. The lease contract it submitted during the application had a term of only two (2) years, so the Authority was made co-terminus with that lease. Later, Delta Foods submitted a new lease contract with a ten (10)-year term. What is the validity of its Authority to Operate after the new lease is submitted?",
+        "choices": {
+          "A": "Three (3) years counted from the date the new lease contract is submitted",
+          "B": "Three (3) years counted from the original issuance date",
+          "C": "Ten (10) years, matching the term of the new lease contract",
+          "D": "It remains co-terminus with the original two (2)-year lease contract"
+        },
+        "correct": "B",
+        "reason": "Under Sec. 5.3, if the submitted lease is shorter than three (3) years, the Authority is co-terminus with the lease unless a new Contract of Lease with a longer period is submitted. In that case, the Authority is amended to its maximum period of three (3) years counted from its date of original issuance, not from the new lease."
+      },
+      {
+        "question": "Unity Common Bonded Warehouse already has thirty (30) accredited members. Kapitan Garments, whose projected duties and taxes for bonded goods importations are Php120,000,000.00 for one (1) year, applies to become a member. May the CCBW accept it as a member?",
+        "choices": {
+          "A": "No, because admitting it would bring the membership above the thirty (30)-member maximum",
+          "B": "Yes, because its projected duties and taxes do not exceed Php300,000,000.00",
+          "C": "No, because projected duties and taxes must be at least Php300,000,000.00 to qualify",
+          "D": "Yes, because the thirty (30)-member maximum applies only when a CCBW is first established"
+        },
+        "correct": "A",
+        "reason": "Sec. 6.1 allows a company to apply as a member if its projected duties and taxes do not exceed Php300,000,000.00 per year, which Kapitan Garments satisfies. However, Sec. 6.2 limits a CCBW to at least three (3) but not more than thirty (30) members. With thirty (30) members already, admitting another would exceed the maximum."
+      },
+      {
+        "question": "The Commissioner denied the application of Sampaguita Textiles Corp. to renew its Authority to Operate a CBW. Sampaguita received the Notice of Denial and believes the grounds are unfounded. What may it do?",
+        "choices": {
+          "A": "Request reconsideration from the District Collector once the lacking documents are completed",
+          "B": "File a Motion for Reconsideration with the Commissioner within ten (10) days from receipt",
+          "C": "File a new application right away, since a denial by the Commissioner is final",
+          "D": "File a Motion for Reconsideration with the Commissioner within fifteen (15) days from receipt"
+        },
+        "correct": "D",
+        "reason": "Sec. 7.1 allows an applicant whose application to establish or renew was denied by the Commissioner to file a Motion for Reconsideration with the Commissioner within fifteen (15) days from receipt of the Notice of Denial, copy furnished the CBWC and the District Collector, stating the grounds for approval. The Commissioner then resolves it within twenty (20) days (Sec. 7.2)."
+      },
+      {
+        "question": "Pearl Electronics operates an MCBW whose main warehouse is under the District Collector of the Port of Cebu. It wants an extension warehouse located within the territorial jurisdiction of the District Collector of the Port of Davao. How will the application be treated?",
+        "choices": {
+          "A": "As an application for extension filed with the Cebu District Collector, who will coordinate with the Davao District Collector",
+          "B": "As an amendment of the Certificate of Authority to Operate filed with the Commissioner",
+          "C": "As a new application filed with the Davao District Collector, supported by the Section 5.1.2 documents",
+          "D": "As an application for relocation approved by the Cebu District Collector"
+        },
+        "correct": "C",
+        "reason": "Sec. 5.6.1 requires an extension warehouse to be within the territorial jurisdiction of the District Collector controlling the main warehouse. Under Sec. 5.6.4, an extension warehouse located outside that jurisdiction is treated as a new application filed with the District Collector having jurisdiction over the new site, supported by the same documents as in Sec. 5.1.2."
+      },
+      {
+        "question": "Mango Nectar Inc., a CBW operator, received bonded flavorings, which are perishable goods, on March 1. Before the initial storage period ended, it submitted a written request for extension citing valid reasons, and the request was granted. Without express abandonment, what is the longest storage period from arrival before the goods are deemed abandoned?",
+        "choices": {
+          "A": "One (1) year from arrival",
+          "B": "Three (3) months from arrival",
+          "C": "Nine (9) months from arrival",
+          "D": "Six (6) months from arrival"
+        },
+        "correct": "D",
+        "reason": "Sec. 3.39 includes flavorings among perishable goods. Under Sec. 8.11.2, the storage period for perishable goods is three (3) months from arrival, extendible for valid reasons upon written request for another three (3) months, for a total of six (6) months. Goods not withdrawn after the period are deemed abandoned unless expressly abandoned earlier."
+      },
+      {
+        "question": "A fire destroyed imported fabrics stored in the bonded warehouse of Rizal Garments, a CBW operator, while the fabrics awaited production. The investigation found that the fire resulted from the operator's gross negligence in maintaining its electrical wiring. Who bears the duties and other charges on the destroyed goods?",
+        "choices": {
+          "A": "Rizal Garments, which must indemnify the Bureau for the duties and charges",
+          "B": "The Bureau, because CBWs are considered extensions of the customs premises",
+          "C": "The District Collector, because CBWs are under his supervision and control",
+          "D": "The Bureau and Rizal Garments, shared equally between them"
+        },
+        "correct": "A",
+        "reason": "Sec. 9.4 requires the CBW operator to indemnify the Bureau for the duties and other charges on goods lost or destroyed in storage due to the operator's gross negligence or wilful misconduct. The same Section and Sec. 4.2 state that the government assumes no responsibility for the safekeeping of goods stored in a CBW."
+      },
+      {
+        "question": "A member of a Customs Common Bonded Warehouse withdrew bonded goods without a duly processed requisition slip. The Bureau seeks to hold the CCBW operator responsible, but the operator argues that only the member should answer because the operator took no part in the violation. How should this be resolved under CAO 01-2022?",
+        "choices": {
+          "A": "The operator is not liable, because members are separate accredited entities",
+          "B": "The operator is liable only if the Bureau proves its gross negligence",
+          "C": "The operator is jointly and severally liable with its accredited member",
+          "D": "The operator is liable for half of the penalty, and the member for the other half"
+        },
+        "correct": "C",
+        "reason": "Sec. 10 provides that the CBW operator is jointly and severally liable with its accredited member and/or subcontractor for any violation committed. The operator's non-participation is not a defense, and the gross negligence standard in Sec. 9.4 applies only to indemnity for lost or damaged goods."
+      }
+    ]
+  },
+  {
+    "type": "CAO",
+    "number": "07-2022",
+    "level1": [
+      {
+        "question": "Gaano katagal ang bisa (validity) ng customs accreditation ng Importer, maliban kung ito ay ma-suspend, ma-revoke, o ma-cancel?",
+        "choices": {
+          "A": "Isang (1) taon mula sa petsa ng pag-file ng application",
+          "B": "Isang (1) taon mula sa petsa ng approval",
+          "C": "Dalawang (2) taon mula sa petsa ng approval",
+          "D": "Tatlong (3) taon mula sa petsa ng approval"
+        },
+        "correct": "B",
+        "reason": "Ayon sa Sec. 4.2, valid ang accreditation ng isang (1) taon mula sa date ng approval nito, unless suspended, revoked o cancelled. Hindi ito nagsisimula sa pag-file ng application."
+      },
+      {
+        "question": "Magkano ang Processing Fee na kailangang bayaran para sa new application o renewal ng accreditation?",
+        "choices": {
+          "A": "Php1,000.00 para sa new application at renewal",
+          "B": "Php5,000.00 para sa new application at renewal",
+          "C": "Php2,000.00 para sa new application lamang; walang bayad ang renewal",
+          "D": "Php2,000.00 para sa new application at renewal"
+        },
+        "correct": "D",
+        "reason": "Sec. 4.5: Php2,000.00 ang Processing Fee para sa new application OR renewal ng accreditation, kaya parehong may bayad. Ang Php1,000.00 ay ang appeal fee, hindi ang Processing Fee."
+      },
+      {
+        "question": "Ilang Importer lamang ang maaaring pagsilbihan ng isang Declarant of the Importer na hindi registered at licensed customs broker?",
+        "choices": {
+          "A": "Isang (1) Importer lamang",
+          "B": "Dalawang (2) Importers",
+          "C": "Hanggang limang (5) Importers",
+          "D": "Walang limit, basta registered siya sa CPRS"
+        },
+        "correct": "A",
+        "reason": "Sec. 4.6, ikalawang talata: ang Declarant na hindi registered at licensed customs broker ay dapat naka-register sa CPRS at authorized na kumilos para sa isang Importer lamang."
+      },
+      {
+        "question": "Ano ang tawag sa taong, kapalit ng compensation, ay nagsisilbing middleman sa pagbili at pagbebenta ng goods sa pagitan ng foreign supplier at local purchaser?",
+        "choices": {
+          "A": "Declarant of the Importer",
+          "B": "Responsible Officer",
+          "C": "Indentor",
+          "D": "Non-regular Importer"
+        },
+        "correct": "C",
+        "reason": "Sec. 3.6: ang Indentor ay ang taong, para sa compensation, ay middleman sa purchase and sale ng goods ng foreign supplier at local purchaser, at kapareho ng klase ng commercial broker o commission merchant."
+      },
+      {
+        "question": "Ang Non-regular Importer ay nakikipag-transact sa Bureau nang isang beses lamang, saklaw ng iisang bill of lading o air waybill, sa loob ng ilang araw mula sa approval ng application for registration bilang non-regular importer?",
+        "choices": {
+          "A": "180 araw",
+          "B": "365 araw",
+          "C": "90 araw",
+          "D": "30 araw"
+        },
+        "correct": "B",
+        "reason": "Sec. 3.9: ang Non-regular Importer ay ang nag-i-import at nakikipag-transact sa Bureau nang isang beses lamang, sa iisang bill of lading o air waybill, within 365 days mula sa approval ng registration."
+      },
+      {
+        "question": "Gaano kaaga pinakamaaga maaaring mag-file ang Importer ng renewal application with complete supporting documents bago mag-expire ang accreditation?",
+        "choices": {
+          "A": "Hindi mas maaga sa tatlumpung (30) calendar days bago ang expiration",
+          "B": "Hindi mas maaga sa animnapung (60) calendar days bago ang expiration",
+          "C": "Hindi mas maaga sa labinlimang (15) calendar days bago ang expiration",
+          "D": "Hindi mas maaga sa pitong (7) working days bago ang expiration"
+        },
+        "correct": "A",
+        "reason": "Sec. 6.3: puwedeng mag-file ng renewal not earlier than thirty (30) calendar days prior to expiration. Ang pag-file na mas mababa sa pitong (7) working days bago mag-expire ay late renewal na, kaya hindi iyon ang pinakamaagang petsa."
+      },
+      {
+        "question": "Sa loob ng ilang araw dapat kumilos (acted upon) ang Bureau sa isang application mula nang matanggap ang complete documentary requirements?",
+        "choices": {
+          "A": "Pitong (7) calendar days",
+          "B": "Sampung (10) working days",
+          "C": "Labinlimang (15) calendar days",
+          "D": "Pitong (7) working days"
+        },
+        "correct": "D",
+        "reason": "Sec. 7.3: dapat acted upon ang application within seven (7) working days from receipt of complete documentary requirements. Ang pitong (7) calendar days sa parehong Section ay para sa applicant na sasagot sa notice ng discrepancy."
+      },
+      {
+        "question": "Sa loob ng ilang araw mula nang mangyari ang pagbabago sa business information dapat i-report at isumite ng Importer ang kaugnay na dokumento sa Bureau?",
+        "choices": {
+          "A": "Pitong (7) working days",
+          "B": "Labinlimang (15) calendar days",
+          "C": "Sampung (10) calendar days",
+          "D": "Tatlumpung (30) calendar days"
+        },
+        "correct": "C",
+        "reason": "Sec. 8.4.2: sa anumang change sa information, dapat mag-report at magsumite ng related document ang Importer within ten (10) calendar days mula sa occurrence nito."
+      },
+      {
+        "question": "Alin ang minimum na impormasyon na dapat makita sa Geotagged Photos ng office at warehouse/storage area na isinusumite ng bagong applicant?",
+        "choices": {
+          "A": "Location address, latitude, longitude, at date and time",
+          "B": "Location address, latitude, longitude, at pangalan ng photographer",
+          "C": "Business name, latitude, longitude, at date and time",
+          "D": "Location address, TIN, latitude, at longitude"
+        },
+        "correct": "A",
+        "reason": "Sec. 5.3(p): dapat ipakita ng Geotagged Photos, at the minimum, ang location address (p.1), latitude (p.2), longitude (p.3), at date and time (p.4)."
+      },
+      {
+        "question": "Gaano katagal dapat itago ng accredited Importer sa principal place of business nito ang mga related records para sa post clearance audit, mula sa date ng final payment ng duties and taxes o customs clearance?",
+        "choices": {
+          "A": "Isang (1) taon",
+          "B": "Dalawang (2) taon",
+          "C": "Limang (5) taon",
+          "D": "Tatlong (3) taon"
+        },
+        "correct": "D",
+        "reason": "Sec. 11.1: kailangang itago ang records sa principal place of business for a period of three (3) years mula sa date ng final payment ng duties and taxes o customs clearance, as the case may be."
+      }
+    ],
+    "level2": [
+      {
+        "question": "A Bureau official to whom the Commissioner had delegated the authority to act on applications disapproved the new accreditation application of Apex Trading Corp. The disapproval was not based on misrepresentation of Material Information or on false documents. Apex received the notice of disapproval and wants to contest it. What must Apex do to perfect its remedy?",
+        "choices": {
+          "A": "File a Motion for Reconsideration within ten (10) days from receipt, to be resolved within ten (10) days",
+          "B": "Appeal to the Commissioner within ten (10) calendar days from receipt and pay the Php1,000.00 appeal fee within that period",
+          "C": "Appeal to the Commissioner within fifteen (15) calendar days from receipt and pay the Php1,000.00 appeal fee within that period",
+          "D": "Appeal to the Commissioner within fifteen (15) calendar days from receipt, with no appeal fee required"
+        },
+        "correct": "C",
+        "reason": "Under Sec. 19.1.2, when the disapproval was issued by an authorized Bureau official (not directly by the Commissioner), the applicant may appeal to the Commissioner within fifteen (15) calendar days from receipt of the notice. The Php1,000.00 appeal fee must be paid within the period of appeal, and no appeal is perfected without it. The ten-day Motion for Reconsideration in Sec. 19.1.1 applies only when the Commissioner directly exercised the disapproval."
+      },
+      {
+        "question": "The accreditation of Luzon Fresh Foods Corp., a private corporation, expired on March 31. It filed its renewal application with complete documents on April 10. Its accreditation had never been suspended. The renewal was approved on April 14, within the period prescribed for acting on the application. Under CAO 07-2022, what late-renewal fine applies and from when is the renewed one-year validity reckoned?",
+        "choices": {
+          "A": "A Php2,000.00 fine applies, and the one-year validity is reckoned from April 14",
+          "B": "A Php1,000.00 fine applies, and the one-year validity is reckoned from April 14",
+          "C": "A Php2,000.00 fine applies, and the one-year validity is reckoned from April 1",
+          "D": "No fine applies, and the one-year validity is reckoned from April 1"
+        },
+        "correct": "A",
+        "reason": "Under Sec. 6.4, filing after the expiration of the accreditation carries a Php2,000.00 fine; the Php1,000.00 fine is for filing less than seven (7) working days before expiration. Neither exception in Sec. 6.4.1 applies, since the accreditation was not suspended and Luzon Fresh is not a government agency or privileged entity. Under Sec. 6.4.3, the validity period for late applications is reckoned from the date of approval, which is April 14."
+      },
+      {
+        "question": "Harbor Link Imports received a system password after its accreditation was approved. A former staff member used the password to lodge a goods declaration, and the shipment was released. Two weeks later, Harbor Link emailed the Bureau that the lodgement was unauthorized and denied responsibility. Under CAO 07-2022, how will the lodgement be treated?",
+        "choices": {
+          "A": "The lodgement is set aside because Harbor Link may invoke good faith in reporting the misuse",
+          "B": "The lodgement is attributed to the former staff member because passwords are personal to the user",
+          "C": "The lodgement is held in suspense until the Bureau rules on Harbor Link's belated report",
+          "D": "The lodgement is conclusively attributable to Harbor Link because no report was made before release"
+        },
+        "correct": "D",
+        "reason": "Sec. 8.3 makes the password personal and exclusive to the Importer, who cannot claim good faith or allege unauthorized use. Use of the password is deemed conclusive and attributable to the Importer unless the unauthorized use is reported by email or the Bureau's official hotline before the release of the shipment. Harbor Link reported only after release, so the lodgement is attributed to it."
+      },
+      {
+        "question": "Metro Sourcing Inc., an accredited Third Party Importer, lodged a goods declaration for goods bought by its client, Kalayaan Retail. Metro Sourcing keeps a record of its contract with Kalayaan. However, the bill of lading, invoice, and packing list name only Metro Sourcing and do not indicate that the importation is for the account of another party. How does CAO 07-2022 treat the importation?",
+        "choices": {
+          "A": "It is deemed for the account of Kalayaan Retail because Metro Sourcing is a Third Party Importer",
+          "B": "It is deemed for the own account and benefit of Metro Sourcing because the documents do not indicate otherwise",
+          "C": "It is deemed for the account of Kalayaan Retail because Metro Sourcing keeps a record of the contract",
+          "D": "It is deemed a Non-regular Importer transaction of Kalayaan Retail pending submission of corrected documents"
+        },
+        "correct": "B",
+        "reason": "Sec. 8.5 requires a Third Party Importer to keep a record of its contract with the ultimate consignee and also requires the supporting documents, such as the bill of lading, invoice, or packing list, to clearly indicate that the importation is for the account of another party. Otherwise, the importation is deemed for the own account and benefit of the Importer. Keeping the contract record alone is not enough."
+      },
+      {
+        "question": "The accreditation of Sunrise Electronics was suspended on June 3. Two of its containers arrived at the port on May 28, and a third is still in transit. Sunrise wants all three shipments processed despite the suspension. What should Sunrise do?",
+        "choices": {
+          "A": "Lodge the goods declarations in the automated system because the shipments arrived or departed before the suspension",
+          "B": "Pay the Php2,000.00 Processing Fee to the AMO so the accreditation is reactivated for these shipments",
+          "C": "Request the Commissioner, Attention: Legal Service, for continuous processing, accepting 100% physical examination of the goods",
+          "D": "Request the District Collector for continuous processing, with examination under the selectivity screen"
+        },
+        "correct": "C",
+        "reason": "Under Sec. 16.1, an Importer with suspended accreditation cannot lodge or process goods declarations. Sec. 17.1 allows it to request the Commissioner, Attn: Legal Service, for continuous processing of shipments in transit or arrived on or prior to the suspension. Sec. 17.2 requires the request to state that 100% physical examination will be conducted regardless of the selectivity screen, on the Importer's own account."
+      },
+      {
+        "question": "A Warrant of Seizure and Detention was issued against a shipment of restricted goods imported by Pacific Gears Inc., and a thirty (30)-day preliminary suspension of its accreditation was imposed. The thirty days have lapsed, the Commissioner has not extended the suspension, and forfeiture proceedings on the shipment are still pending. What is the status of the suspension?",
+        "choices": {
+          "A": "It is lifted only after the forfeiture proceedings are resolved",
+          "B": "It is automatically lifted because the thirty-day period has lapsed",
+          "C": "It is automatically lifted because the Commissioner did not extend it for fifteen (15) days",
+          "D": "It continues for fifteen (15) more days and is then automatically lifted"
+        },
+        "correct": "A",
+        "reason": "Sec. 9.1 provides that the thirty-day preliminary suspension is automatically lifted upon lapse of the period, unless extended by the Commissioner for fifteen (15) days on meritorious grounds. The proviso states that where the violation involves prohibited or restricted goods, the lifting, if applicable, is done only after the resolution of the forfeiture proceedings. Since restricted goods are involved and the proceedings are pending, the suspension is not lifted yet."
+      },
+      {
+        "question": "Oriental Cargo Corp. was warned by the Bureau for failing to keep and maintain a signage of its business name at its declared place of business. Months later, a verification again finds no signage. Under Section 13 of CAO 07-2022, what penalty applies to this second violation?",
+        "choices": {
+          "A": "Warning to suspension of up to thirty (30) days",
+          "B": "Suspension from six (6) months and one (1) day to one (1) year",
+          "C": "Revocation of accreditation",
+          "D": "Suspension from one (1) month and one (1) day to six (6) months"
+        },
+        "correct": "D",
+        "reason": "Failure to keep and maintain a business name signage (Sec. 8.7) is listed under Light Infractions in Sec. 13. The penalty for a second violation is suspension from one (1) month and one (1) day to six (6) months. Warning to suspension up to thirty (30) days is for the first violation, and revocation is for the third."
+      },
+      {
+        "question": "During evaluation of the new application of Greenfield Foods Corp., an AMO evaluator found that the business address in the CPRS differs from the address in the submitted proof of lawful occupancy. The evaluator posted a notice on the BOC portal requiring justification. Seven calendar days after the posting, Greenfield had neither responded nor requested additional time. What is the result?",
+        "choices": {
+          "A": "The application is deferred until Greenfield settles any outstanding obligation with the Bureau",
+          "B": "The application is disapproved, without prejudice to a new application and payment of the corresponding fees",
+          "C": "The application is disapproved, and Greenfield is barred from transacting with the Bureau",
+          "D": "The application is returned as incomplete and is not processed until the lacking documents are submitted"
+        },
+        "correct": "B",
+        "reason": "Under Sec. 7.3, if evaluation shows discrepancies requiring justification, the applicant must submit it within seven (7) calendar days from posting of the notice. Otherwise the application is disapproved, without prejudice to filing a new application and paying the corresponding fees. The bar from transacting with the Bureau in Sec. 7.4.4 applies to misrepresentation or false documents, which is not the case here."
+      },
+      {
+        "question": "Bayside Imports is applying for automatic renewal of its accreditation and needs clearances from several Bureau offices. It must show that no Warrant of Seizure and Detention has been issued against its shipments, or that any such warrant was resolved in its favor. Which office issues this clearance?",
+        "choices": {
+          "A": "Collection Service, Revenue Collection Monitoring Group",
+          "B": "Legal Service, Revenue Collection Monitoring Group",
+          "C": "Intelligence Group",
+          "D": "Accounts Management Office"
+        },
+        "correct": "C",
+        "reason": "Under Sec. 6.5.4(b), the clearance showing no WSD issued against the Importer's shipments, or that any WSD was resolved in its favor, comes from the Intelligence Group (IG). The Collection Service, RCMG certifies no outstanding liability, and the Legal Service, RCMG certifies no pending case or investigation."
+      },
+      {
+        "question": "Alon Builders Inc. and Dagat Marine Corp. formed a Joint Venture to import equipment and will apply for accreditation as a JV, with Alon Builders as the nominated partner. Which requirement applies to the application under CAO 07-2022?",
+        "choices": {
+          "A": "The nominated partner is accredited under its own name without any suffix",
+          "B": "The accredited name carries the JV acronym as a suffix, and a certified true copy of the JV agreement is attached",
+          "C": "Only Alon Builders submits the Section 5.3 documents, while Dagat Marine submits none",
+          "D": "Any employee of either partner may sign the application form without authority from the Principal Officers"
+        },
+        "correct": "B",
+        "reason": "Sec. 5.4 requires a certified true copy of the Joint Venture agreement to be attached to the application. Whether the Importer is in the name of the JV entities or the nominated partner, the acronym JV must be suffixed to the registered name. Each partner must also submit the Section 5.3 documents unless already secured for the JV agreement, and the form must be signed by a Responsible Officer authorized by the Principal Officers of the respective partners."
+      }
+    ]
+  },
+  {
+    "type": "CAO",
+    "number": "02-2021",
+    "level1": [
+      {
+        "question": "Ano ang FOB o FCA value ng Goods of Commercial Nature na dumadaan sa Informal Entry Process?",
+        "choices": {
+          "A": "Php10,000.00 o mas mababa",
+          "B": "Php50,000.00 o higit pa",
+          "C": "Hindi hihigit sa Php150,000.00",
+          "D": "Mas mababa sa Php50,000.00"
+        },
+        "correct": "D",
+        "reason": "Sa Sec. 3.16 at 4.1.1, ang Goods of Commercial Nature ay dumadaan sa Informal Entry Process kapag ang FOB o FCA value ay less than Fifty Thousand Pesos (Php50,000.00). Hindi pasok ang value na Php50,000.00 o higit pa, dahil 'less than' ang batayan. Ang Php150,000.00 ay para lang sa coffins o urns sa Sec. 4.1.3(g)."
+      },
+      {
+        "question": "Alin sa mga sumusunod ang hindi sakop ng CAO 02-2021 ayon sa Section 1?",
+        "choices": {
+          "A": "Goods of commercial nature na may FOB value na mas mababa sa Php50,000.00",
+          "B": "Personal at household effects na hindi commercial quantity",
+          "C": "Relief consignments",
+          "D": "Balikbayan boxes na conditionally tax and/or duty-exempt"
+        },
+        "correct": "C",
+        "reason": "Ayon sa Sec. 1, ang CAO ay applicable sa lahat ng importations na dinadaan sa Informal Entry Process, may duty at tax man o wala, maliban sa accompanied baggage, De Minimis importations at relief consignments na may sariling regulations. Ang balikbayan boxes ay sakop sa Sec. 4.1.3(b)."
+      },
+      {
+        "question": "Anong proseso ang dapat sundin sa importation ng motor vehicles, motorcycles at motor scooters, kahit pa sakop ito ng Section 800 ng CMTA?",
+        "choices": {
+          "A": "Informal Entry Process, basta mas mababa sa Php50,000.00 ang FOB value",
+          "B": "Formal Entry Process, anuman ang consignee",
+          "C": "Informal Entry Process, basta Section 800 ng CMTA ang saklaw nito",
+          "D": "Informal Entry Process, basta personal use ang motor vehicle"
+        },
+        "correct": "B",
+        "reason": "Sa Sec. 4.2, ang importation ng motor vehicles, motorcycles at motor scooters ay laging sa Formal Entry Process, regardless of the consignees, kasama ang mga sakop ng Section 800 ng CMTA."
+      },
+      {
+        "question": "Sa loob ng ilang calendar days mula sa discharge ng huling package mula sa vessel o aircraft dapat i-lodge ang goods declaration?",
+        "choices": {
+          "A": "Labinlimang (15) calendar days",
+          "B": "Tatlumpung (30) calendar days",
+          "C": "Apatnapu't lima (45) calendar days",
+          "D": "Tatlong (3) working days"
+        },
+        "correct": "A",
+        "reason": "Ayon sa Sec. 5.3, ang goods declaration ay dapat i-lodge within fifteen (15) calendar days mula sa discharge ng last package. Puwedeng i-extend ng another 15 calendar days sa valid grounds kung may written request bago mag-expire ang original period, at walang further extension."
+      },
+      {
+        "question": "Anong form ang ginagamit ng declarant sa pag-file ng goods declaration habang hindi pa implemented ang Informal Entry System?",
+        "choices": {
+          "A": "Gate Pass BC Form No. 201",
+          "B": "Informal Import Declaration and Entry (IIDE) BC Form No. 177",
+          "C": "Bureau of Customs Official Receipt (BCOR)",
+          "D": "Provisional Goods Declaration"
+        },
+        "correct": "B",
+        "reason": "Sa Sec. 5.1, habang hindi pa implemented ang Informal Entry System, ang declarant ay gagamit ng Informal Import Declaration and Entry (IIDE) BC Form No. 177. Ang BC Form No. 201 ay Gate Pass (Sec. 5.2.4), at ang BCOR ay ebidensya ng payment (Sec. 5.9)."
+      },
+      {
+        "question": "Sa loob ng ilang working days dapat aksyunan ang request for extension sa paglo-lodge ng goods declaration, bago ito ituring na deemed approved?",
+        "choices": {
+          "A": "Isang (1) working day",
+          "B": "Limang (5) working days",
+          "C": "Labinlimang (15) working days",
+          "D": "Tatlong (3) working days"
+        },
+        "correct": "D",
+        "reason": "Sa Sec. 5.3, ang request for extension ay dapat aksyunan within three (3) working days, kung hindi ay deemed approved ang request."
+      },
+      {
+        "question": "Sa loob ng ilang calendar days mula lodgement ng Provisional Goods Declaration dapat isumite ang other supporting documents ayon sa notarized undertaking ng declarant?",
+        "choices": {
+          "A": "Apatnapu't limang (45) calendar days",
+          "B": "Labinlimang (15) calendar days",
+          "C": "Tatlumpung (30) calendar days",
+          "D": "Siyamnapung (90) calendar days"
+        },
+        "correct": "A",
+        "reason": "Ayon sa Sec. 5.4.2(d), ang notarized undertaking ng declarant ay nagsasabing isusumite ang other supporting documents within forty-five (45) calendar days mula lodgement ng Provisional Goods Declaration. Puwede itong i-extend ng another 45 days sa valid reasons at approved written request na ginawa bago mag-lapse ang original period."
+      },
+      {
+        "question": "Alin ang mandatory para sa lahat ng containerized cargo sa ilalim ng Informal Entry Process bago ang assessment at payment ng duties at taxes?",
+        "choices": {
+          "A": "Physical examination ng lahat ng packages",
+          "B": "Documentary check lamang",
+          "C": "X-ray inspection",
+          "D": "Alert Order mula sa competent authority"
+        },
+        "correct": "C",
+        "reason": "Ayon sa Sec. 5.6.2(b), mandatory ang x-ray inspection para sa lahat ng containerized cargo sa ilalim ng Informal Entry Process bago ang assessment at payment ng duties at taxes. Physical examination ay isasagawa lang kapag may suspicion of irregularity ang x-ray image."
+      },
+      {
+        "question": "Para sa air shipments, sino ang nag-i-issue ng Bureau of Customs Official Receipt (BCOR) bilang ebidensya ng payment?",
+        "choices": {
+          "A": "Ang BOC cashier",
+          "B": "Ang in-house bank",
+          "C": "Ang Chief, Informal Entry Division",
+          "D": "Ang Customs Operations Officer V"
+        },
+        "correct": "A",
+        "reason": "Sa Sec. 5.9.2, sa air shipments, ang order of payment ay ipinapakita sa BOC cashier na nag-i-issue ng BCOR. Sa sea shipments naman, ang in-house bank ang nag-i-issue ng BCOR (Sec. 5.9.1)."
+      },
+      {
+        "question": "Sino ang puwedeng mag-recommend ng pagtaas o pagbaba ng threshold value ng Goods of Commercial Nature sa Informal Entry Process, at kaninong approval ito nakasalalay?",
+        "choices": {
+          "A": "Ang District Collector, subject sa approval ng Commissioner",
+          "B": "Ang Commissioner, subject sa approval ng Secretary of Finance",
+          "C": "Ang Secretary of Finance, subject sa approval ng Commissioner",
+          "D": "Ang Chief, Informal Entry Division, subject sa approval ng District Collector"
+        },
+        "correct": "B",
+        "reason": "Ayon sa Sec. 7, ang Commissioner ang puwedeng mag-recommend ng pagtaas o pagbaba ng threshold value ng Goods of Commercial Nature, at kailangan ito ng approval ng Secretary of Finance."
+      }
+    ],
+    "level2": [
+      {
+        "question": "Alba Trading brings in two shipments. Shipment 1 is commercial goods with an FOB value of Php47,500.00. Shipment 2 is a motorcycle imported by a returning resident under Section 800 of the CMTA, with an FOB value of Php40,000.00. Which clearance process applies to each shipment under CAO 02-2021?",
+        "choices": {
+          "A": "Both shipments are cleared through the Informal Entry Process",
+          "B": "Both shipments are cleared through the Formal Entry Process",
+          "C": "Shipment 1 through the Informal Entry Process and Shipment 2 through the Formal Entry Process",
+          "D": "Shipment 1 through the Formal Entry Process and Shipment 2 through the Informal Entry Process"
+        },
+        "correct": "C",
+        "reason": "Under Sec. 4.1.1, commercial goods with FOB or FCA value of less than Php50,000.00 are cleared through the Informal Entry Process, so Shipment 1 (Php47,500.00) qualifies. Sec. 4.2 provides that motor vehicles, motorcycles and motor scooters are processed under the Formal Entry Process regardless of the consignee, including importations under Section 800 of the CMTA. Shipment 2 is therefore Formal Entry even though its value is below Php50,000.00 and it comes from a returning resident."
+      },
+      {
+        "question": "The last package of Orion's shipment was discharged from the vessel on June 5. On June 18, Orion submitted a written request to extend the period to lodge its goods declaration, citing an accident that delayed its documents. The Collector of Customs did not act on the request within three working days. Assume calendar days are counted starting the day after the triggering date. What is the last day Orion may lodge its goods declaration?",
+        "choices": {
+          "A": "July 5, the end of the 15-day extension",
+          "B": "June 20, the end of the original period",
+          "C": "July 20, after a second 15-day extension",
+          "D": "August 4, 45 days from the end of the original period"
+        },
+        "correct": "A",
+        "reason": "Sec. 5.3 requires lodgement within 15 calendar days from discharge of the last package, so the original period ended June 20 (June 5 + 15). The request on June 18 was made before expiration and cited a valid ground (accident, Sec. 5.3.2). A request not acted upon within three working days is deemed approved, and the 15-day extension runs from the day after the original period expired: June 21 to July 5. No further extension is allowed."
+      },
+      {
+        "question": "A customs broker is manually filing a goods declaration at the Informal Entry Division for an air shipment. The declaration is signed by the broker and notarized, and the broker attaches the AWB, the commercial invoice and the packing list. None of the other documents listed in Section 5.2.5 applies to these goods. Which required supporting document is still missing?",
+        "choices": {
+          "A": "Tax Exemption Indorsement",
+          "B": "Authority to Release Imported Goods (ATRIG)",
+          "C": "Gate Pass BC Form No. 201",
+          "D": "Sanitary and Phytosanitary (SPS) certificate"
+        },
+        "correct": "C",
+        "reason": "Sec. 5.2 lists the supporting documents: BL/HBL or AWB/HAWB, commercial invoice, packing list, and the Gate Pass BC Form No. 201 for the airport in case of manual filing (Sec. 5.2.4). The broker has the AWB, invoice and packing list and is filing manually for an air shipment, so the Gate Pass is missing. The TEI, ATRIG and SPS certificate are required only as other documents when applicable (Sec. 5.2.5), and none applies here."
+      },
+      {
+        "question": "Kestrel Foods will import regulated goods and filed its application for the required permit with the regulatory agency before the goods arrived, but the permit has not yet been issued. Kestrel wants to lodge a Provisional Goods Declaration. Which set of documents must it present under the CAO?",
+        "choices": {
+          "A": "A commercial invoice, a packing list, a Gate Pass BC Form No. 201, and the import permit",
+          "B": "Only the permit application and a notarized undertaking to submit the remaining documents",
+          "C": "A Tax Exemption Indorsement, a pro forma invoice, and a written order of the Commissioner",
+          "D": "A pro forma invoice, a duly endorsed BL or AWB, advance copies of the Certificate of Origin if applicable, and a notarized undertaking"
+        },
+        "correct": "D",
+        "reason": "Sec. 5.4.1(a) allows a Provisional Goods Declaration when no regulatory permit has been presented, provided the application was filed before departure or arrival as required. Under Sec. 5.4.2, the documents to present are a pro forma invoice, a duly endorsed BL or AWB (or the carrier's written order if none), advance copies of the Certificate of Origin if applicable, and a duly notarized undertaking to submit the other documents within 45 calendar days. The permit itself is not required at this stage."
+      },
+      {
+        "question": "Meridian Pharma, an importer enrolled in a Bureau trade facilitation program, lodged a Provisional Goods Declaration for regulated goods because its permit has not yet been issued. The concerned regulatory agency allows conditional release of the goods. Which conditions apply to the release?",
+        "choices": {
+          "A": "The goods may be sold once duties are paid, and no security is required because Meridian is enrolled",
+          "B": "The goods are stored at Meridian's premises and not disposed of until the permit is submitted, and a general security or undertaking may replace a specific security",
+          "C": "The goods are held at the Off-dock CFW until the permit is submitted, and a specific security is required in every case",
+          "D": "The goods are released only after the declaration is converted to a formal entry, with a general security posted"
+        },
+        "correct": "B",
+        "reason": "Sec. 5.4.4(a) governs conditional release of regulated shipments under a Provisional Goods Declaration: the regulatory agency must allow the release; the goods are delivered to the importer's premises for storage and may not be disposed of until the permit, clearance or license is issued and submitted within the prescribed period; and a specific and sufficient security is required, except that for importers enrolled in a trade facilitation program a general security or an undertaking may be required instead. Meridian is enrolled, so a general security or undertaking may replace the specific security."
+      },
+      {
+        "question": "Pinnacle Imports obtained conditional release of its goods under a Provisional Goods Declaration because it lacked an invoice needed to assess the correct duties, and it posted a security covering the possible duties and taxes. Pinnacle did not submit the invoice within the prescribed period and requested no extension. The Bureau gave Pinnacle due notice. What is the consequence for the security?",
+        "choices": {
+          "A": "The security is automatically returned because the goods were already released",
+          "B": "The security is held until Pinnacle lodges a new Provisional Goods Declaration",
+          "C": "The security is subject to forfeiture, without prejudice to other legal remedies to recover duties and taxes due",
+          "D": "The security is cancelled and the goods are seized instead, as with missing regulatory permits"
+        },
+        "correct": "C",
+        "reason": "Sec. 5.4.5(b) provides that when goods are released under a Provisional Goods Declaration because of lacking import documents needed to assess the correct duties, any security posted or undertaking submitted is subject to forfeiture if the required documents are not submitted within the prescribed period, provided due notice is given and without prejudice to other legal remedies. Seizure under Sec. 5.4.5(a) applies to regulated goods lacking the required permit, not to this case."
+      },
+      {
+        "question": "Lumen Corp lodged a Provisional Goods Declaration on August 1 with a notarized undertaking to submit the missing documents within 45 calendar days. Before the 45-day period lapsed, Lumen filed a written request for extension based on the same ground as the Provisional Goods Declaration, and the Collector of Customs approved it. Assume days are counted starting the day after the lodgement or lapse date. What is the last day Lumen may submit the missing documents?",
+        "choices": {
+          "A": "October 30, which is 90 days from lodgement",
+          "B": "September 15, which is 45 days from lodgement",
+          "C": "September 30, which is 15 days after the original period lapsed",
+          "D": "November 14, which is 105 days from lodgement"
+        },
+        "correct": "A",
+        "reason": "Under Sec. 5.4.2(d), the undertaking is to submit the other documents within 45 calendar days from lodgement, extendable for another 45 days for valid reasons upon approved written request made before the original period lapses. Lodgement on August 1: August 1 + 45 days = September 15; September 15 + 45 days = October 30, which is also 90 days from lodgement. The 15-day extension in Sec. 5.3 concerns lodging the goods declaration, not this period."
+      },
+      {
+        "question": "A diplomatic agent's personal shipment arrives, and a Customs Officer proposes to physically examine it. There are no serious grounds to believe that the shipment contains articles outside the exemptions under Article 36, paragraph 1 of the Vienna Convention on Diplomatic Relations, and its importation is neither prohibited by law nor controlled by Philippine quarantine regulations. How should the Bureau treat the shipment?",
+        "choices": {
+          "A": "It must be physically examined, since all informal entry shipments are subject to inspection",
+          "B": "It is exempt from inspection because there are no serious grounds to justify examining it",
+          "C": "It may be physically examined without notice if the diplomatic agent is not available",
+          "D": "It may be x-rayed only, without the presence of the diplomatic agent or representative"
+        },
+        "correct": "B",
+        "reason": "Under Sec. 5.6.2(d), the personal baggage or shipments of a diplomatic agent are exempt from inspection unless there are serious grounds to believe they contain articles outside the Article 36(1) exemptions of the Vienna Convention, or the articles are prohibited by law or controlled by quarantine regulations. No such grounds exist here, so the shipment is exempt. Any permitted inspection must be done in the presence of the diplomatic agent or an authorized representative."
+      },
+      {
+        "question": "Pending full automation, the Customs Operations Officer V (COO V) of the port verified the BCOR presented by a customs broker in the electronic payment system and confirmed that payment was made. The COO V stamped Payment Verified on the white and green copies of the BCOR. What happens next so the goods can be released?",
+        "choices": {
+          "A": "The COO V electronically transmits the release instruction directly to the terminal facility operator",
+          "B": "The broker presents the stamped copies directly to the terminal facility operator for release",
+          "C": "The Chief, Informal Entry Division issues a new goods declaration that triggers the release instruction",
+          "D": "The COO V forwards the stamped copies to the Chief, Informal Entry Division, who performs the Manual Discharge that triggers the release instruction"
+        },
+        "correct": "D",
+        "reason": "Under Sec. 5.10, pending full automation the COO V verifies the BCOR, stamps Payment Verified on the white and green copies, and forwards them to the Chief, Informal Entry Division or equivalent unit. The Chief then performs the Manual Discharge in the e-manifest, which triggers the electronic release instruction to the terminal facility operator or Off-dock CFW. The COO V does not transmit the release instruction directly."
+      },
+      {
+        "question": "A customs broker lodges an informal entry for goods using a falsified commercial invoice that understates the value of the goods. The Bureau discovers the false statement. Under CAO 02-2021, which provisions govern the sanctions?",
+        "choices": {
+          "A": "Sanctions and penalties under Section 1401, Chapter 1, Title XIV of the CMTA and other applicable penal provisions",
+          "B": "Only the forfeiture of any security posted under the Provisional Goods Declaration rules",
+          "C": "Only the review of the broker's lodgement privileges by the Informal Entry Division",
+          "D": "The abandonment rules under Chapter 6, Title XI of the CMTA"
+        },
+        "correct": "A",
+        "reason": "Sec. 9 provides that any person who makes or attempts to lodge, process and clear imported goods by false or fraudulent statements is subject to the sanctions and penalties under Section 1401, Chapter 1, Title XIV of the CMTA and other applicable penal provisions. A falsified invoice that understates value is a false statement in lodging an informal entry. Forfeiture of Provisional Goods Declaration security (Sec. 5.4.5) and abandonment (Sec. 5.5) address different situations."
+      }
+    ]
+  },
+  {
+    "type": "CAO",
+    "number": "02-2020",
+    "level1": [
+      {
+        "question": "Ano ang sakop ng CAO 02-2020 ayon sa Section 1?",
+        "choices": {
+          "A": "Ang proseso ng seizure at forfeiture ng goods na sadyang na-misdeclare",
+          "B": "Ang administrative remedies ng aggrieved importer o exporter sa dispute settlement o protest tungkol sa valuation, rules of origin, tariff classification at iba pang customs issues",
+          "C": "Ang pag-apela ng customs broker laban sa pagkansela ng kanyang accreditation",
+          "D": "Ang pag-issue ng Advance Ruling ng Bureau at ng Tariff Commission bago ang importation"
+        },
+        "correct": "B",
+        "reason": "Ayon sa Sec. 1 (Scope), sakop ng CAO ang right to administrative remedies ng aggrieved importer o exporter sa dispute settlement o protest na galing sa customs valuation, rules of origin, tariff classification at other customs issues. Hindi nito sakop ang seizure at forfeiture proceedings, accreditation appeals, o ang pag-issue ng Advance Ruling."
+      },
+      {
+        "question": "Sa loob ng ilang araw dapat mag-file ng protest sa Commissioner ang aggrieved importer mula sa pagtanggap ng adverse ruling ng District Collector?",
+        "choices": {
+          "A": "Pitong (7) araw",
+          "B": "Sampung (10) araw",
+          "C": "Labinlimang (15) araw",
+          "D": "Tatlumpung (30) araw"
+        },
+        "correct": "C",
+        "reason": "Sa Sec. 10.1, ang protest ay dapat i-file in writing sa Commissioner within fifteen (15) days mula pagtanggap ng adverse ruling ng District Collector (o mula sa payment kung may binayaran dahil sa ruling). Kapag lumampas, final and conclusive na ang action ng District Collector."
+      },
+      {
+        "question": "Ano ang epekto kapag hindi kumilos ang Commissioner sa isang protest na proper ang form sa loob ng tatlumpung (30) araw mula pagtanggap nito?",
+        "choices": {
+          "A": "Ituturing na affirmed ang ruling ng Collector",
+          "B": "Ituturing na reversed ang ruling ng Collector at pabor ito sa importer",
+          "C": "Awtomatikong ililipat ang protest sa Tariff Commission",
+          "D": "Awtomatikong ire-release ang goods nang walang Security"
+        },
+        "correct": "A",
+        "reason": "Ayon sa Sec. 10.3, kapag proper ang form ng protest, dapat mag-rule ang Commissioner within thirty (30) days mula pagtanggap. Kapag hindi siya kumilos, ang ruling ng Collector ay deemed affirmed."
+      },
+      {
+        "question": "Alin sa mga sumusunod ang hindi itinuturing na Protestable Case ayon sa Section 3.8?",
+        "choices": {
+          "A": "Adverse ruling ng District Collector sa tariff classification",
+          "B": "Adverse ruling ng District Collector sa customs valuation",
+          "C": "Adverse ruling ng District Collector sa rules of origin",
+          "D": "Pagtatakda ng District Collector ng fines sa seizure cases"
+        },
+        "correct": "D",
+        "reason": "Sa Sec. 3.8, ang Protestable Case ay anumang ruling o decision ng District Collector na adverse sa importer, consignee o exporter, maliban sa fixing of fines in seizure cases. Kaya protestable ang adverse rulings sa classification, valuation at rules of origin (Sec. 10.1), pero hindi ang pagtatakda ng fines sa seizure cases."
+      },
+      {
+        "question": "Ano ang kailangang gawin ng importer para ma-release ang goods under Tentative Assessment sa isang difficult o highly technical na tariff classification issue?",
+        "choices": {
+          "A": "Mag-post lamang ng Security at hindi na kailangang bayaran ang duties at taxes na declared",
+          "B": "Bayaran ang duties at taxes ayon sa goods declaration at mag-post ng sufficient Security para sa disputed amount",
+          "C": "Bayaran ang buong duties at taxes ayon sa reclassification ng Customs Officer at mag-file agad ng protest",
+          "D": "Bayaran ang kalahati ng disputed amount at mag-post ng Security para sa natitirang kalahati"
+        },
+        "correct": "B",
+        "reason": "Ayon sa Sec. 5.4.3, ang importer ay puwedeng humiling ng release under Tentative Assessment kapag binayaran niya ang duties at taxes as declared sa goods declaration at nag-post ng sufficient Security para sa disputed amount, bukod sa pagsunod sa iba pang applicable rules. Ang pagbabayad ayon sa reclassification ng Customs Officer ay ang directive sa Sec. 5.5, hindi ang tentative release."
+      },
+      {
+        "question": "Kapag hindi sang-ayon ang importer sa reclassification ng Customs Officer, sino ang susunod na pagdadalhan ng usapin pagkatapos ng principal appraiser?",
+        "choices": {
+          "A": "Ang Chief, Formal Entry Division o equivalent unit",
+          "B": "Ang Deputy Collector for Assessment",
+          "C": "Ang District Collector",
+          "D": "Ang Tariff Commission"
+        },
+        "correct": "A",
+        "reason": "Sa Sec. 5.1, ang pagkakasunod-sunod ng elevation ay Customs Officer, principal appraiser, Chief, Formal Entry Division o equivalent unit, Deputy Collector for Assessment, at huli ang District Collector. Kaya ang Chief, Formal Entry Division ang kasunod ng principal appraiser."
+      },
+      {
+        "question": "Kailan itinuturing na difficult o highly technical ang Tariff Classification Issue ayon sa Section 5.3?",
+        "choices": {
+          "A": "Kapag hindi sumasang-ayon ang importer sa reclassification ng Customs Officer",
+          "B": "Kapag may pending Advance Ruling application ang goods sa Tariff Commission",
+          "C": "Kapag classifiable ang goods sa higit sa isang AHTN chapter, heading o subheading",
+          "D": "Kapag may spurious document na isinumite kasama ng goods declaration"
+        },
+        "correct": "C",
+        "reason": "Ayon sa Sec. 5.3.1, difficult o highly technical ang tariff classification issue kapag classifiable ang goods sa higit sa isang AHTN chapter, heading o subheading. Ang Sec. 5.3.2 ay nagdadagdag ng kasong hindi specifically provided ang product description sa anumang AHTN heading o subheading. Ang simpleng hindi pagsang-ayon sa reclassification ay hindi sapat."
+      },
+      {
+        "question": "Sa valuation dispute na difficult o highly technical, sa loob ng ilang araw mula pagtanggap ng notice dapat magsumite ng position papers ang importer at ang Customs Officer?",
+        "choices": {
+          "A": "Dalawang (2) araw",
+          "B": "Tatlong (3) araw",
+          "C": "Labinlimang (15) araw",
+          "D": "Limang (5) araw"
+        },
+        "correct": "D",
+        "reason": "Sa Sec. 6.2.2, sa valuation issue na difficult o highly technical, ipinag-uutos ng District Collector na magsumite ng position papers ang importer at ang Customs Officer within five (5) days mula pagtanggap ng notice."
+      },
+      {
+        "question": "Saan ipinapasa ng District Collector ang Certificate of Origin para sa verification mula sa issuing country?",
+        "choices": {
+          "A": "Sa Tariff Commission",
+          "B": "Sa Technical Committee ng Bureau",
+          "C": "Sa Assessment and Operations Coordinating Group (AOCG)",
+          "D": "Sa Court of Tax Appeals"
+        },
+        "correct": "C",
+        "reason": "Ayon sa Sec. 7.3, ipinapasa ng District Collector ang Certificate of Origin (CO) sa Assessment and Operations Coordinating Group (AOCG) para sa verification mula sa issuing country."
+      },
+      {
+        "question": "Magkano ang surcharge na ipapataw kapag intentional o fraudulent ang misdeclaration, misclassification o undervaluation?",
+        "choices": {
+          "A": "500% ng duty at tax na due",
+          "B": "250% ng duty at tax na due",
+          "C": "100% ng duty at tax na due",
+          "D": "50% ng duty at tax na due"
+        },
+        "correct": "A",
+        "reason": "Sa Sec. 4.7, kapag intentional o fraudulent ang misdeclaration, misclassification o undervaluation, hindi na applicable ang dispute settlement at Section 1400 ng CMTA ang susundin. May surcharge na 500% ng duty at tax na due, at subject sa seizure ang goods anuman ang laki ng discrepancy."
+      }
+    ],
+    "level2": [
+      {
+        "question": "On March 3, Delta Imports received the District Collector's written ruling, adverse to Delta on a valuation issue. On March 10, Delta paid the duties and taxes demanded as a result of that ruling. Assume each period is counted starting the day after the triggering event and that no holidays or weekends affect the count. What is the last day Delta may file a written protest with the Commissioner?",
+        "choices": {
+          "A": "March 18, which is 15 days from receipt of the ruling",
+          "B": "March 25, which is 15 days from the payment",
+          "C": "April 2, which is 30 days from receipt of the ruling",
+          "D": "April 9, which is 30 days from the payment"
+        },
+        "correct": "B",
+        "reason": "Under Sec. 10.1, a protest must be filed in writing with the Commissioner within 15 days from receipt of the adverse ruling or, when payment is made as a result of the ruling, within 15 days from that payment. Delta paid on March 10 because of the ruling, so the period runs from payment: March 10 + 15 days = March 25. Otherwise, the District Collector's action becomes final and conclusive."
+      },
+      {
+        "question": "A District Collector determined that a valuation issue involving Meridian Trading is difficult and highly technical, and required position papers. Meridian and the Customs Officer both submitted their position papers on May 10. Assume the period is counted starting the day after submission and no holidays apply. By what date must the District Collector resolve the valuation issue in writing?",
+        "choices": {
+          "A": "May 12",
+          "B": "May 15",
+          "C": "May 25",
+          "D": "June 9"
+        },
+        "correct": "C",
+        "reason": "Sec. 6.2.5 requires the District Collector to resolve a difficult or highly technical Valuation Issue in writing within 15 days from submission of the position papers. Position papers were submitted on May 10, so May 10 + 15 days = May 25. The 2-day and 5-day periods in Secs. 6.2.1 and 6.2.2 concern the notice and the position papers, not the resolution."
+      },
+      {
+        "question": "Solaris Foods imported goods claiming a preferential rate under a Certificate of Origin whose authenticity the Customs Officer questioned. Solaris disagreed, requested verification, and obtained release of the goods under Tentative Assessment by paying the declared duties and posting a cash bond covering the disputed amount. The issuing country then reported that the Certificate of Origin was not authentic. What must the District Collector do with the cash bond?",
+        "choices": {
+          "A": "Forfeit the cash bond posted by Solaris",
+          "B": "Cancel the cash bond and apply the preferential rate",
+          "C": "Refund the cash bond pending a Tariff Commission ruling",
+          "D": "Hold the cash bond until the Court of Tax Appeals rules"
+        },
+        "correct": "A",
+        "reason": "Under Sec. 7.5.2, if the issuing country finds that the Certificate of Origin was not authentic or accurate, the District Collector forfeits the Security posted in case of a cash bond (or requires payment of the disputed duties and taxes). Solaris posted a cash bond (Sec. 7.4), so the bond is forfeited. Cancellation of the bond and application of the preferential rate happen only if the CO is confirmed as authentic or accurate (Sec. 7.5.1)."
+      },
+      {
+        "question": "While a tariff classification dispute involving Orion Imports is pending before the District Collector, the Customs Officer discovers that Orion submitted a forged invoice, resulting in an assessment lower than what is legally due. What should happen to the dispute settlement proceedings?",
+        "choices": {
+          "A": "The proceedings continue, and Orion may still obtain release under Tentative Assessment by posting Security",
+          "B": "The proceedings are suspended until the Tariff Commission rules on the classification",
+          "C": "The proceedings are elevated to the Commissioner as a protest filed by the Bureau",
+          "D": "The proceedings are terminated, and a Warrant of Seizure and Detention is issued against the shipment"
+        },
+        "correct": "D",
+        "reason": "Sec. 4.7 states that when fraud is discovered at any stage of a dispute settlement that has already commenced, an enforcement issue is deemed to have arisen, the proceedings are terminated, and a Warrant of Seizure and Detention is issued against the shipment. A forged invoice that lowers the assessed duties and taxes is the type of fraudulent document the provision describes."
+      },
+      {
+        "question": "A Customs Officer challenges the declaration of Kappa Corp. on a customs issue that is not about tariff classification, valuation or rules of origin but affects the assessment of duties and taxes. The officer questions the genuineness of a supporting document submitted with the goods declaration. Kappa offers to pay the declared duties and post sufficient Security to obtain release under Tentative Assessment. How should this request be treated?",
+        "choices": {
+          "A": "Allowed, because the Security covers the disputed amount",
+          "B": "Allowed, but only if a cash bond is posted instead of other Security",
+          "C": "Not allowed, because the issue involves the genuineness of a supporting document",
+          "D": "Not allowed, because Tentative Assessment is available only for tariff classification issues"
+        },
+        "correct": "C",
+        "reason": "Sec. 8.2.3 allows release under Tentative Assessment for other customs issues only if the issue does not involve the integrity, authenticity or genuineness of any document submitted in support of the goods declaration. Here the Customs Officer questions the genuineness of a supporting document, so the request cannot be granted even if Kappa pays the declared duties and posts Security."
+      },
+      {
+        "question": "Vega Imports faces a mixed dispute on tariff classification, customs valuation and another customs issue affecting assessment. The District Collector sent the classification question to the Tariff Commission and determined that the correct classification is indispensable to resolving the valuation issue, but not the other customs issue. What may the District Collector do?",
+        "choices": {
+          "A": "Resolve all three issues now, since mixed issues are resolved simultaneously",
+          "B": "Resolve the other customs issue now, but the valuation issue only after the Tariff Commission's ruling",
+          "C": "Resolve none of the issues until the Tariff Commission rules on classification",
+          "D": "Resolve the valuation issue now, but the other customs issue only after the Tariff Commission's ruling"
+        },
+        "correct": "B",
+        "reason": "Under Sec. 9.1, mixed issues are resolved simultaneously following the procedures for each issue. Sec. 9.2 adds that the District Collector may resolve the other issues without waiting for the Tariff Commission, but when tariff classification is indispensable to resolving another issue such as valuation, that issue is resolved only after the classification ruling is received. The other customs issue does not depend on classification, so it may be resolved now, while the valuation issue must wait."
+      },
+      {
+        "question": "Hartwell Imports received adverse rulings from the District Collector on Goods Declaration A, which involved both a valuation issue and a tariff classification issue, and on Goods Declaration B, which involved a separate valuation issue. Hartwell wants to contest both rulings on all issues by protest within the prescribed period. Which approach complies with Section 10?",
+        "choices": {
+          "A": "File one protest covering both Goods Declarations and all issues raised",
+          "B": "File two protests on Goods Declaration A, one per issue, and none on Goods Declaration B",
+          "C": "File one protest on Goods Declaration A raising only one issue, and another on Goods Declaration B",
+          "D": "File one protest on Goods Declaration A raising both issues, and a separate protest on Goods Declaration B"
+        },
+        "correct": "D",
+        "reason": "Sec. 10.2 limits the scope of a protest to the particular goods subject of a goods declaration, but any number of issues may be raised for that goods declaration. Hartwell may therefore raise both issues in one protest on Goods Declaration A, but the ruling on Goods Declaration B concerns a different goods declaration and needs its own protest."
+      },
+      {
+        "question": "On July 1, Zen Imports received the Commissioner's adverse ruling on a protest over tariff classification. Zen wants to file a Motion for Reconsideration with the Commissioner. How does the CAO treat this plan?",
+        "choices": {
+          "A": "No, because the Motion for Reconsideration is not available for a ruling on tariff classification",
+          "B": "Yes, within fifteen (15) calendar days from receipt of the ruling",
+          "C": "Yes, within thirty (30) days from receipt, as with an appeal to the Court of Tax Appeals",
+          "D": "No, because only the Secretary of Finance may reconsider the Commissioner's ruling"
+        },
+        "correct": "A",
+        "reason": "Sec. 11 allows a Motion for Reconsideration within 15 calendar days only for a ruling of the Commissioner other than a ruling on tariff classification. Since Zen's ruling is on tariff classification, the motion is not available. Under Sec. 5.8, Zen may instead submit the matter to the Tariff Commission within 15 days from receipt or appeal to the CTA within 30 days from receipt."
+      },
+      {
+        "question": "On September 1, Rho Trading received the Commissioner's adverse ruling on a valuation protest. Rho filed no Motion for Reconsideration and took no other action. On October 15, Rho files an appeal with the Court of Tax Appeals. Assume days are counted starting the day after receipt. What is the status of the Commissioner's ruling?",
+        "choices": {
+          "A": "Still appealable, because the period to appeal to the CTA is 60 days",
+          "B": "Still appealable, because the Commissioner has not yet acted on a Motion for Reconsideration",
+          "C": "Final and executory, because the appeal was filed beyond the 30-day period",
+          "D": "Final and executory only after the Secretary of Finance confirms it"
+        },
+        "correct": "C",
+        "reason": "Sec. 13 allows an appeal to the CTA within 30 days from receipt of the Commissioner's adverse decision, and Sec. 12 makes the ruling final and executory unless an appeal is made within that period. Rho received the ruling on September 1, so the period ended on October 1 (September 1 + 30 days). An appeal on October 15 is out of time, and no Motion for Reconsideration was filed."
+      },
+      {
+        "question": "Nova Chemicals obtained release of imported goods under Tentative Assessment after paying the declared duties and taxes and posting a surety bond for the disputed amount. The Tariff Commission later ruled that the goods fall under a heading with a higher tariff rate. No other issues are involved, and the Bureau does not appeal the ruling to the Secretary of Finance. What must the District Collector do?",
+        "choices": {
+          "A": "Collect the additional duties and taxes resulting from the higher tariff rate",
+          "B": "Cancel the surety bond and refund the duties and taxes already paid",
+          "C": "Issue a Warrant of Seizure and Detention against the goods",
+          "D": "Refer the matter to the Court of Tax Appeals for collection"
+        },
+        "correct": "A",
+        "reason": "Under Sec. 5.4.4, upon the Tariff Commission's ruling the goods are finally assessed unless other issues are involved or the Bureau appeals to the Secretary of Finance. Here neither exists, and the ruling classifies the goods under a higher tariff rate, so the District Collector collects the additional duties and taxes. Refund of the cash bond or cancellation of the surety bond applies only when the ruling is not for a higher rate."
+      }
+    ]
+  },
+  {
+    "type": "CAO",
+    "number": "05-2020",
+    "level1": [
+      {
+        "question": "Ano ang sakop ng CAO 05-2020 ayon sa Section 1?",
+        "choices": {
+          "A": "Lahat ng air cargo na dumarating sa international airports sa Pilipinas",
+          "B": "Express Shipments na dala bilang cargo sa ilalim ng MAWB na naka-consign sa AECO",
+          "C": "Express Shipments na dala sa ilalim ng HAWB na naka-consign sa ultimate consignee",
+          "D": "Consolidated shipments na dumarating sa Pilipinas sa pamamagitan ng sea freight"
+        },
+        "correct": "B",
+        "reason": "Ayon sa Sec. 1 (Scope), sakop ng CAO ang Express Shipments na dala bilang cargo sa ilalim ng Master Air Waybill (MAWB) na naka-consign sa Air Express Cargo Operators (AECO). Hindi ito sumasaklaw sa lahat ng air cargo, at ang batayan ay MAWB at hindi HAWB."
+      },
+      {
+        "question": "Ano ang House Air Waybill (HAWB) ayon sa Section 3?",
+        "choices": {
+          "A": "Air waybill na ini-issue ng air carrier sa international air freight forwarder o consolidator",
+          "B": "Manifest ng lahat ng individual shipments sa consolidation na isinusumite bilang rider ng inward foreign manifest",
+          "C": "Electronic na pagpapadala ng freight information sa Bureau bago dumating ang shipment sa port of entry",
+          "D": "Air waybill para sa isang individual shipment na ini-issue ng freight forwarder o consolidator sa consignor o sender"
+        },
+        "correct": "D",
+        "reason": "Sa Sec. 3.10, ang HAWB ay air waybill na sumasaklaw sa isang single, individual shipment o consignment at ini-issue ng freight forwarder o consolidator sa consignor o sender. Ang choice A ay ang MAWB (Sec. 3.11), ang B ay ang CIFCM (Sec. 3.3), at ang C ay ang e-IFCM (Sec. 3.4)."
+      },
+      {
+        "question": "Ilang oras bago dumating ang aircraft dapat maipadala ng AECO ang e-IFCM kung ang shipment ay galing sa continent maliban sa Asia?",
+        "choices": {
+          "A": "Hindi bababa sa apat (4) na oras",
+          "B": "Hindi bababa sa isang (1) oras",
+          "C": "Hindi bababa sa anim (6) na oras",
+          "D": "Hindi bababa sa dalawampu't apat (24) na oras"
+        },
+        "correct": "A",
+        "reason": "Ayon sa Sec. 5.1.2, ang mga galing sa continents maliban sa Asia ay dapat may e-IFCM na naipadala at least four (4) hours bago dumating ang aircraft. Ang isang (1) oras ay para lang sa galing Asia (Sec. 5.1.1)."
+      },
+      {
+        "question": "Sa loob ng ilang oras mula pagdating ng aircraft dapat isumite ang supplemental manifest para sa cargoes na hindi nakalista sa IFCM?",
+        "choices": {
+          "A": "Isang (1) oras",
+          "B": "Apat (4) na oras",
+          "C": "Anim (6) na oras",
+          "D": "Dalawampu't apat (24) na oras"
+        },
+        "correct": "C",
+        "reason": "Sa Sec. 5.4, ang cargoes na hindi nakalista sa IFCM ay dapat saklawin ng supplemental manifest na isusumite sa loob ng six (6) hours mula pagdating ng aircraft."
+      },
+      {
+        "question": "Alin ang tamang paglalarawan sa High-Value goods ayon sa Section 3.9?",
+        "choices": {
+          "A": "Goods na may FOB o FCA value na higit sa Php10,000.00 pero mas mababa sa Php50,000.00",
+          "B": "Goods na commercial ang nature at may FOB o FCA value na Php50,000.00 o higit pa",
+          "C": "Goods na may FOB o FCA value na Php10,000.00 o mas mababa",
+          "D": "Goods na may FOB o FCA value na lampas lang sa Php50,000.00, hindi kasama ang eksaktong Php50,000.00"
+        },
+        "correct": "B",
+        "reason": "Ayon sa Sec. 3.9, ang High-Value ay goods of a commercial nature na may FOB o FCA value na Php50,000.00 or over, kaya kasama ang eksaktong Php50,000.00. Ito rin ang nakasaad sa Sec. 6.4 (Php50,000.00 and above). Ang choice A ay Low-Value (Sec. 6.3) at ang C ay De Minimis."
+      },
+      {
+        "question": "Saan dapat ilagay ang lahat ng Correspondence and Documents ayon sa Section 6.1.4?",
+        "choices": {
+          "A": "Sa sealed green courier bag",
+          "B": "Sa sealed red courier bag",
+          "C": "Sa unsealed green courier bag",
+          "D": "Sa sealed blue courier bag"
+        },
+        "correct": "A",
+        "reason": "Sa Sec. 6.1.4, ang lahat ng Correspondence and Documents ay dapat ilagay sa sealed green courier bag. Mahalaga ang parehong kulay (green) at ang seal."
+      },
+      {
+        "question": "Sino ang dapat tumiyak na kumpleto ang kinakailangang bilang ng personnel para sa operasyon ng AECO?",
+        "choices": {
+          "A": "Ang Deputy Collector for Operations",
+          "B": "Ang Customs Examiner",
+          "C": "Ang Alerting Unit ng Bureau",
+          "D": "Ang District Collector"
+        },
+        "correct": "D",
+        "reason": "Ayon sa Sec. 4, ang District Collector ang dapat tumiyak na fully complemented ng required number of personnel ang operations ng AECO. Ang Bureau naman ang magbibigay ng overtime services kapag kailangan."
+      },
+      {
+        "question": "Magkano ang pinakamababang halaga na dapat i-deposit at i-maintain ng AECO sa AAB bilang security deposit para sa Low-value, Dutiable and/or Taxable Express Shipments?",
+        "choices": {
+          "A": "Php500,000.00",
+          "B": "Php1,000,000.00",
+          "C": "Php5,000,000.00",
+          "D": "Php10,000,000.00"
+        },
+        "correct": "C",
+        "reason": "Sa Sec. 11, ang AECO ay dapat mag-deposit at mag-maintain sa AAB ng not less than Five Million Pesos (Php5,000,000.00) bilang guaranty ng immediate payment ng bangko kapag hiningi ng Bureau."
+      },
+      {
+        "question": "Sa loob ng ilang oras mula pagdating ng shipment dapat i-re-export ng AECO ang mis-sorted o misrouted shipment na ibabalik sa shipper?",
+        "choices": {
+          "A": "Dalawampu't apat (24) na oras",
+          "B": "Anim (6) na oras",
+          "C": "Apatnapu't walong (48) oras",
+          "D": "Pitumpu't dalawang (72) oras"
+        },
+        "correct": "A",
+        "reason": "Ayon sa Sec. 10, ang AECO ay dapat mag-re-export ng mis-sorted o misrouted shipment within twenty-four (24) hours from the arrival of the shipment."
+      },
+      {
+        "question": "Ano ang tamang kahulugan ng Restricted Goods ayon sa Section 3.15?",
+        "choices": {
+          "A": "Goods na papayagan lang i-import o i-export matapos makuha ang kinakailangang clearances at licenses",
+          "B": "Goods na ipinagbabawal i-import at i-export nang walang anumang exception",
+          "C": "Goods na papayagan i-import basta nabayaran na ang duty at tax bago ang release",
+          "D": "Goods na ipinagbabawal i-import at i-export, maliban kapag pinahintulutan ng batas o regulasyon"
+        },
+        "correct": "D",
+        "reason": "Sa Sec. 3.15, ang Restricted Goods ay goods na ipinagbabawal i-import at i-export, except when authorized by law or regulation. Ang choice A ay Regulated Goods (Sec. 3.14) at ang B ay Prohibited Goods (Sec. 3.13)."
+      }
+    ],
+    "level2": [
+      {
+        "question": "A flight carrying an AECO's consolidated Express Shipments from Tokyo is scheduled to land at 10:00 AM. The AECO electronically sent the e-IFCM at 8:30 AM on the same day, and the e-CIFCM is to be submitted as a rider to it. Assuming the aircraft lands at 10:00 AM as scheduled, by what time should the e-CIFCM be submitted?",
+        "choices": {
+          "A": "By 9:00 AM, one hour before the aircraft lands",
+          "B": "By 10:00 AM, at the time the aircraft lands",
+          "C": "By 11:00 AM, one hour after the aircraft lands",
+          "D": "By 2:00 PM, four hours after the aircraft lands"
+        },
+        "correct": "C",
+        "reason": "Tokyo is in Asia, so the e-IFCM must be sent at least one hour before arrival (Sec. 5.1.1), meaning by 9:00 AM. Sending it at 8:30 AM is within the prescribed period. Under Sec. 5.3.1, when the e-IFCM is submitted within the prescribed period, the e-CIFCM is submitted one hour after arrival, so 10:00 AM + 1 hour = 11:00 AM."
+      },
+      {
+        "question": "After an aircraft carrying an AECO's consolidation landed at 2:00 PM, the AECO found that three packages were not listed in the IFCM. At 9:30 PM the same day, it submitted a supplemental IFCM covering the packages in both hard copy and electronic form. What is the status of the three packages under the CAO?",
+        "choices": {
+          "A": "They are treated as manifested because both forms were submitted on the day of arrival",
+          "B": "They are treated as unmanifested and subject to seizure proceedings because the six-hour period was exceeded",
+          "C": "They are treated as manifested once the AECO pays the fines under the CAO on Vessel and Aircraft Supervision and Control System",
+          "D": "They are treated as Low-Value shipments and released upon posting of a bank guaranty as security deposit"
+        },
+        "correct": "B",
+        "reason": "Sec. 5.4 requires the supplemental manifest within six hours upon arrival, so the deadline was 8:00 PM. Submission at 9:30 PM was 7.5 hours after landing, which is late. Under Sec. 5.5, a supplemental IFCM not submitted within the prescribed period makes the shipments unmanifested and subject to seizure proceedings. Submitting both forms does not cure the lateness."
+      },
+      {
+        "question": "Express Shipment X, a commercial parcel under a MAWB consigned to an AECO, has an FOB value of exactly Php10,000.00. Express Shipment Y, also commercial, has an FOB value of exactly Php50,000.00. How should X and Y be classified under the CAO?",
+        "choices": {
+          "A": "X is De Minimis and Y is Low-Value",
+          "B": "X is Low-Value and Y is Low-Value",
+          "C": "X is Low-Value and Y is High-Value",
+          "D": "X is De Minimis and Y is High-Value"
+        },
+        "correct": "D",
+        "reason": "Under Sec. 6.2, De Minimis covers FOB or FCA value of Php10,000.00 or less, so X is De Minimis. Low-Value under Sec. 6.3 requires value of more than Php10,000.00 but less than Php50,000.00, which excludes both X and Y. High-Value under Secs. 3.9 and 6.4 is Php50,000.00 and above, so Y is High-Value."
+      },
+      {
+        "question": "Two non-document, low-value Express Shipments arrive on the same flight. Both appear on the CIFCM as sent by the same shipper to the same consignee and are valued at USD 450 and USD 430. When the goods were ordered, the exchange rate was Php55.00 per USD, but on the date the shipments arrived it was Php57.50 per USD. How should the Bureau treat the two shipments?",
+        "choices": {
+          "A": "As a single consignment requiring formal entry, because their aggregate value on the arrival date is Php50,600.00",
+          "B": "As two separate Low-Value shipments, because their aggregate value at the ordering rate is only Php48,400.00",
+          "C": "As two separate Low-Value shipments, because each shipment is valued below Php50,000.00 on the arrival date",
+          "D": "As a single consignment cleared under informal entry, because each shipment is individually Low-Value"
+        },
+        "correct": "A",
+        "reason": "Sec. 8 treats two or more low value non-document express consignments with the same shipper and consignee as a single consignment requiring formal entry if their aggregate value is Php50,000.00 or more, using the foreign currency equivalent at the date of arrival. Calculation: USD 450 + USD 430 = USD 880; USD 880 x Php57.50 = Php50,600.00, which is at least Php50,000.00. The ordering-date rate (USD 880 x Php55.00 = Php48,400.00) is not the applicable rate."
+      },
+      {
+        "question": "Brightline Express, an AECO, wants to release a Low-Value shipment valued at Php35,000.00 before paying the assessed duties and taxes. It has posted a bank guaranty as its security deposit, its informal entry has been filed and processed, and the examination has been completed with duties, taxes and charges properly determined. The aggregate assessed charges are within the amount guaranteed by the AAB, and no alert or hold order has been issued by the Alerting Unit. Which requirement under the CAO still remains?",
+        "choices": {
+          "A": "Payment of the assessed duties, taxes and other charges before the shipment is released",
+          "B": "Filing of a formal entry for the shipment through the Customs Cargo Clearance System",
+          "C": "Submission to the District Collector of a notarized written commitment executed by an AAB",
+          "D": "Posting of a new Php5,000,000.00 security deposit exclusively for this single shipment"
+        },
+        "correct": "C",
+        "reason": "Sec. 6.3.3 allows release before payment for Low-Value shipments valued below Php50,000.00 upon a bank guaranty, provided five conditions are present: (a) informal entry filed and processed, (b) examination done and charges determined, (c) aggregate charges within the guaranteed amount, (d) no alert or hold order, and (e) the AECO submits to the District Collector a notarized written commitment executed by an AAB. Conditions (a) to (d) are already met, so only (e) remains. Payment before release and formal entry are not required under this provision."
+      },
+      {
+        "question": "A parcel in an AECO's consolidation has an AWB showing a consignee address in Manila, but its labels clearly show a destination in Jakarta, which the Bureau has verified. The AECO informed the Bureau of the error only on the day after the shipment arrived and after the goods declaration had been lodged. The parcel is not under any alert order and is not regulated, restricted or prohibited. May the parcel be returned to the shipper without payment of duties, taxes and other charges under Section 10?",
+        "choices": {
+          "A": "Yes, because the labels clearly show a destination outside the Philippines and the Bureau verified it",
+          "B": "No, because the Bureau was not notified before the shipment arrived and before the goods declaration was lodged",
+          "C": "Yes, because the parcel is not under an alert order and is not regulated, restricted or prohibited",
+          "D": "No, because only shipments whose AWB shows a consignee address outside the Philippines may be returned"
+        },
+        "correct": "B",
+        "reason": "Sec. 10.2 covers a case where the AWB shows a Philippine address but the labels clearly show a foreign destination verified by the Bureau, so choice D is wrong. However, Sec. 10.3 also requires that the Bureau be notified prior to the arrival of the shipment and lodgment of the goods declaration. Here the notification came after both, so the circumstances for return without duties and taxes are not complete, even though Secs. 10.2 and 10.4 are satisfied."
+      },
+      {
+        "question": "Lumina Express presents a carton of garments declared as 'of no commercial value, Php8,000.00 for customs purposes only' and asks that it be released immediately as an Express Shipment. No invoice or receipt is attached. How does the CAO treat this importation?",
+        "choices": {
+          "A": "It is not entitled to immediate release because the declaration is qualified by the phrase 'for customs purposes'",
+          "B": "It is released as De Minimis because the declared amount does not exceed Php10,000.00",
+          "C": "It is released after the AECO files a simplified goods declaration before the goods arrive",
+          "D": "It is released once the AECO posts a bank guaranty acting as the security deposit under Section 11"
+        },
+        "correct": "A",
+        "reason": "Sec. 14.1 excludes from immediate release importations declared as 'without commercial value' or 'of no commercial value', or with a specific amount qualified by the phrase 'for customs purposes' or analogous phrases. The declaration here uses both qualifiers, so the carton is not entitled to immediate release as an Express Shipment. The sender, importer, consignee or AECO must instead declare the specific value supported by available invoice, receipt or equivalent document. The De Minimis, simplified declaration and bank guaranty options all presuppose a shipment entitled to immediate release."
+      },
+      {
+        "question": "Orchid Express, an AECO, received under its MAWB a parcel of gold jewelry with an FOB value of Php45,000.00. It wants the parcel cleared as a Low-Value, Dutiable and/or Taxable Express Shipment with advanced processing. Based on the CAO, how should the parcel be treated?",
+        "choices": {
+          "A": "It qualifies as Low-Value, Dutiable and/or Taxable because its FOB value is above Php10,000.00 but below Php50,000.00",
+          "B": "It qualifies as High-Value because jewelry must always be processed under formal entry regardless of value",
+          "C": "It is excluded from immediate release only because it is a Regulated Good requiring a regulatory agency permit",
+          "D": "It is not considered an Express Shipment because valuable goods such as jewelry are expressly excluded"
+        },
+        "correct": "D",
+        "reason": "Sec. 15.3 lists valuable goods such as jewelry, works of art and the like among those that shall not be considered Express Shipments. Because the parcel is not an Express Shipment, the value-based categories in Sec. 6 do not apply to it, even though Php45,000.00 falls within the Low-Value range of Sec. 6.3. The CAO does not classify jewelry as High-Value or as a Regulated Good."
+      },
+      {
+        "question": "Kestrel Air Express applies for accreditation as an AECO. It is accredited by the Bureau as an importer and as a Customs Facility Warehouse Operator, and accredited by the Civil Aeronautics Board as a freight forwarder. It is also a member of CAPEC, certified as an operator of a regional hub for express shipments, and has a dedicated air carrier and an integrated end-to-end tracking system. Which additional requirement must it still satisfy under Section 12?",
+        "choices": {
+          "A": "An IT System capable of interfacing with the Bureau's automated system",
+          "B": "Accreditation by the Bureau as a Customs Broker",
+          "C": "A security deposit of not less than Php5,000,000.00 maintained with an AAB",
+          "D": "A notarized written commitment from an AAB submitted to the District Collector"
+        },
+        "correct": "A",
+        "reason": "Sec. 12 requires an applicant to have: importer accreditation (12.1), Customs Facility Warehouse Operator accreditation (12.2), CAB accreditation as freight forwarder (12.3), proof of membership in an international organization such as CAPEC (12.4), certification as a global or regional hub operator (12.5), a dedicated air carrier (12.6), an integrated end-to-end tracking system (12.7), and an IT System capable of interfacing with the Bureau's automated system (12.8). Kestrel has items 12.1 to 12.7, so only 12.8 remains. Customs Broker accreditation is not listed, and the security deposit and notarized commitment relate to Low-Value releases rather than accreditation."
+      },
+      {
+        "question": "An AECO's MAWB contains 40 HAWBs, all with FOB value below Php10,000.00, covered by a detailed e-CIFCM submitted before arrival. Two of the HAWBs cover Regulated Goods. How should the goods be declared under the CAO?",
+        "choices": {
+          "A": "The detailed e-CIFCM serves as the goods declaration for all 40 HAWBs, including the two covering Regulated Goods",
+          "B": "Each of the 40 HAWBs must be declared individually through the Customs Cargo Clearance System under formal entry",
+          "C": "The detailed e-CIFCM serves as the goods declaration for the other 38, while the Regulated Goods are declared separately per HAWB",
+          "D": "The other 38 need a simplified goods declaration, while the Regulated Goods are covered by the e-CIFCM"
+        },
+        "correct": "C",
+        "reason": "All 40 HAWBs are below Php10,000.00, so they are De Minimis Shipments. Under Sec. 6.2.1, the detailed e-CIFCM also serves as the goods declaration for De Minimis Shipments, but Regulated Goods shall be declared separately per HAWB. Therefore the e-CIFCM covers the 38 non-regulated HAWBs, and the two HAWBs with Regulated Goods are declared separately. Formal entry (Sec. 6.4) and the simplified goods declaration (Sec. 6.3.2) apply to other categories."
+      }
+    ]
+  },
+  {
+    "type": "CAO",
+    "number": "01-2019",
+    "level1": [
+      {
+        "question": "Sa loob ng ilang taon mula sa date ng final payment ng duties at taxes o Customs Clearance maaaring mag-conduct ang Bureau ng audit examination ng records, ayon sa Sec. 4.1.1?",
+        "choices": {
+          "A": "Isang (1) taon",
+          "B": "Tatlong (3) taon",
+          "C": "Limang (5) taon",
+          "D": "Sampung (10) taon"
+        },
+        "correct": "B",
+        "reason": "Sa Sec. 4.1.1 (at Sec. 5.3), sa loob ng tatlong (3) taon mula sa date ng final payment ng duties at taxes o Customs Clearance, maaaring mag-conduct ang Bureau ng audit examination, inspection, verification, at investigation ng records na may kaugnayan sa goods declaration."
+      },
+      {
+        "question": "Ano ang Inadvertent Error ayon sa Sec. 3.6?",
+        "choices": {
+          "A": "Sinadyang paggamit ng maling tariff heading para bawasan ang duties at taxes",
+          "B": "Sinadyang maling declaration ng quantity o weight para umiwas sa regulasyon",
+          "C": "Kabiguang magtago ng records sa Principal Place of Business ng Importer",
+          "D": "Unintentional na mechanical, electronic, o clerical error ng Importer na katumbas ng simple Negligence"
+        },
+        "correct": "D",
+        "reason": "Sa Sec. 3.6, ang Inadvertent Error ay mechanical, electronic, o clerical error na hindi sinasadya ng Importer sa kabila ng pagpapanatili ng internal controls, at itinuturing na simple Negligence. Ang sinadyang pagkilos ay mas malapit sa Fraud (Sec. 3.3)."
+      },
+      {
+        "question": "Aling operating unit ng PCAG ang nagsasagawa ng audit examination, inspection, verification, o investigation ng records, ayon sa Sec. 5.3?",
+        "choices": {
+          "A": "PCAG-CAO",
+          "B": "PCAG-TIRAO",
+          "C": "MISTG",
+          "D": "DOF-FAIU"
+        },
+        "correct": "A",
+        "reason": "Sa Sec. 5.3, ang PCAG-Compliance Assessment Office (PCAG-CAO) ang gumagawa ng audit work plan at nagsasagawa ng audit examination, inspection, verification, o investigation ng records. Ang PCAG-TIRAO naman ay para sa trade data review, risk-based profiling, at pag-develop ng audit policies at procedures."
+      },
+      {
+        "question": "Gaano katagal valid ang Audit Notification Letter (ANL) mula sa date ng issuance, ayon sa Sec. 5.5.1(b)?",
+        "choices": {
+          "A": "15 calendar days",
+          "B": "60 calendar days",
+          "C": "30 calendar days",
+          "D": "90 calendar days"
+        },
+        "correct": "C",
+        "reason": "Sa Sec. 5.5.1(b), ang ANL ay valid sa loob ng thirty (30) calendar days mula sa date ng issuance, at maaaring i-revalidate ng Assistant Commissioner para sa isa pang thirty (30) days bago ito mag-expire."
+      },
+      {
+        "question": "Ayon sa Sec. 6.1.2, gaano katagal ang ibinibigay sa Importer na nakatanggap na ng ANL para mag-avail pa rin ng PDP sa pamamagitan ng pagsumite ng application at pagbabayad ng deficiency?",
+        "choices": {
+          "A": "30 calendar days mula sa receipt ng ANL",
+          "B": "90 calendar days mula sa receipt ng ANL",
+          "C": "60 calendar days mula sa receipt ng ANL",
+          "D": "120 calendar days mula sa receipt ng ANL"
+        },
+        "correct": "B",
+        "reason": "Sa Sec. 6.1.2, ang Importer na nakatanggap ng ANL ay maaari pa ring mag-avail ng PDP kung magsusumite siya ng application at magbabayad ng deficiency duties, taxes, at penalties sa loob ng ninety (90) calendar days mula sa receipt ng ANL."
+      },
+      {
+        "question": "Ayon sa Sec. 6.3.1, ano ang babayaran ng PDP applicant na hindi pa nakakatanggap ng ANL?",
+        "choices": {
+          "A": "Deficiency sa duties at taxes plus 10% penalty ng basic deficiency",
+          "B": "Deficiency sa duties at taxes plus 125% ng revenue loss",
+          "C": "Deficiency sa duties at taxes plus 20% surcharge sa dutiable value",
+          "D": "Deficiency sa duties at taxes plus legal interest"
+        },
+        "correct": "D",
+        "reason": "Sa Sec. 6.3.1, ang PDP applicant na hindi pa nakatatanggap ng ANL ay magbabayad ng deficiency sa duties at taxes plus legal interest ayon sa Sec. 7. Ang 10% penalty ay para sa applicant na nakatanggap na ng ANL (Sec. 6.3.2)."
+      },
+      {
+        "question": "Alin sa mga sumusunod na goods declarations ang hindi qualified sa PDP ayon sa Sec. 6.2?",
+        "choices": {
+          "A": "Goods declarations na may Inadvertent Error",
+          "B": "Goods declarations na may deficiency sa duties at taxes",
+          "C": "Goods declarations na may Fraud",
+          "D": "Goods declarations ng Importer na hindi pa nakatatanggap ng ANL"
+        },
+        "correct": "C",
+        "reason": "Sa Sec. 6.2.3, hindi qualified sa PDP ang goods declarations na may Fraud ayon sa Sec. 10.3.2. Hindi rin qualified ang mga goods declarations na subject ng pending cases sa ibang Customs office (Sec. 6.2.1) o sa courts (Sec. 6.2.2)."
+      },
+      {
+        "question": "Ayon sa Sec. 10.3.2, ano ang fine para sa Fraud na napatunayang ginawa?",
+        "choices": {
+          "A": "Six (6) times ng revenue loss",
+          "B": "125% ng revenue loss",
+          "C": "25% ng revenue loss",
+          "D": "20% ng dutiable value ng goods"
+        },
+        "correct": "A",
+        "reason": "Sa Sec. 10.3.2, ang offender na guilty sa Fraud ay mapaparusahan ng fine na katumbas ng six (6) times ng revenue loss at/o imprisonment na hindi bababa sa dalawang (2) taon pero hindi lalampas sa walong (8) taon."
+      },
+      {
+        "question": "Sa loob ng ilang araw mula sa receipt ng denial ng Commissioner sa request for reconsideration o reinvestigation maaaring mag-appeal ang Importer sa Court of Tax Appeals (CTA), ayon sa Sec. 8?",
+        "choices": {
+          "A": "15 araw",
+          "B": "60 araw",
+          "C": "30 araw",
+          "D": "90 araw"
+        },
+        "correct": "C",
+        "reason": "Sa Sec. 8, kapag ang request for reconsideration o reinvestigation ay denied, buo man o bahagi, ng Commissioner, maaaring mag-appeal ang Importer sa CTA sa loob ng thirty (30) days mula sa receipt ng adverse ruling o decision."
+      },
+      {
+        "question": "Ilang porsyento kada taon ang interest na ipinapataw sa deficiency duties, taxes, at other charges, ayon sa Sec. 7?",
+        "choices": {
+          "A": "6% per annum",
+          "B": "20% per annum",
+          "C": "12% per annum",
+          "D": "25% per annum"
+        },
+        "correct": "B",
+        "reason": "Sa Sec. 7, ang interest na twenty percent (20%) per annum, na binibilang mula sa date ng final assessment ayon sa Sec. 429 ng CMTA, ay ipinapataw sa PDP availment, deficiency duties, taxes at other charges, at fine o penalty, kung mayroon."
+      }
+    ],
+    "level2": [
+      {
+        "question": "A goods declaration for an importation by Seaview Imports Inc. was filed by its customs broker, Reyes Brokerage, on 10 March 2022. Seaview made its final payment of duties and taxes on 15 March 2022, and the Customs Clearance was granted on 20 March 2022. Assume three years is counted to the same calendar date. Until when must each keep the records of the transaction at its Principal Place of Business?",
+        "choices": {
+          "A": "Seaview until 15 March 2025; Reyes Brokerage until 10 March 2025",
+          "B": "Seaview until 20 March 2025; Reyes Brokerage until 20 March 2025",
+          "C": "Seaview until 20 March 2025; Reyes Brokerage until 10 March 2025",
+          "D": "Seaview until 10 March 2025; Reyes Brokerage until 15 March 2025"
+        },
+        "correct": "C",
+        "reason": "Under the first paragraph of Sec. 4.4, importers keep records for three years from the date of final payment of duties and taxes or Customs Clearance, whichever is later, which is 20 March 2022, so until 20 March 2025. Under the second paragraph, parties engaged in Customs Clearance and processing keep records for three years from the date of filing of the goods declaration, which is 10 March 2022, so until 10 March 2025."
+      },
+      {
+        "question": "The PCAG served an Audit Notification Letter (ANL) on Northgate Corp. on 5 August 2024. Northgate did not manifest an intention to avail of the PDP. Assume days are counted starting the day after service. By what date must the audit team commence the audit proper?",
+        "choices": {
+          "A": "4 September 2024",
+          "B": "4 October 2024",
+          "C": "3 November 2024",
+          "D": "3 December 2024"
+        },
+        "correct": "B",
+        "reason": "Under Sec. 5.5.1(d), the audit team must commence the audit proper not later than sixty (60) calendar days from the service of the ANL, unless the importer manifests an intention to avail of the PDP. Sixty days counted from 5 August 2024 ends on 4 October 2024."
+      },
+      {
+        "question": "Delta Foods Inc. received an ANL on 1 February 2025. The audit covers two years of importations. Assuming no extension, what is the period, counted from the date it received the ANL, within which the audit should be completed?",
+        "choices": {
+          "A": "240 calendar days",
+          "B": "120 calendar days",
+          "C": "180 calendar days",
+          "D": "360 calendar days"
+        },
+        "correct": "A",
+        "reason": "Under Sec. 5.5.1(d), the audit shall be completed within one hundred twenty (120) calendar days per year of audit period from the date the Importer receives the ANL. For a two-year audit period, the period is 2 x 120 = 240 calendar days."
+      },
+      {
+        "question": "Orient Trading Corp. received a Demand Letter signed by the Commissioner on 10 June 2025. It wants to contest the deficiency assessment based on its existing records, without presenting additional evidence. Assume days are counted starting the day after receipt. What may it file, with whom, and by when?",
+        "choices": {
+          "A": "A request for reinvestigation with the PCAG by 10 July 2025",
+          "B": "A request for reconsideration with the Court of Tax Appeals by 25 June 2025",
+          "C": "A request for reconsideration with the Secretary of Finance by 25 June 2025",
+          "D": "A request for reconsideration with the Commissioner by 25 June 2025"
+        },
+        "correct": "D",
+        "reason": "Under Sec. 5.5.1(f), the adversely affected Importer may file a request for reconsideration or reinvestigation with the Commissioner within fifteen (15) days from receipt of the Demand Letter, which ends on 25 June 2025. Under Secs. 3.14 and 3.15, reconsideration is based on existing records, while reinvestigation requires newly discovered or additional evidence."
+      },
+      {
+        "question": "Harbor Metals Inc. filed a request for reinvestigation of audit findings on 1 July 2025 and submitted all relevant supporting documents on 20 July 2025. Assume days are counted starting the day after the triggering date. By what date must the PCAG resolve the request?",
+        "choices": {
+          "A": "19 August 2025",
+          "B": "18 September 2025",
+          "C": "30 August 2025",
+          "D": "18 October 2025"
+        },
+        "correct": "B",
+        "reason": "Under Sec. 5.5.1(f), the Importer must submit all supporting documents within thirty (30) days from the date of filing, which Harbor Metals did on 20 July 2025. The PCAG then has sixty (60) calendar days from submission of the complete documents to resolve the request. Sixty days from 20 July 2025 ends on 18 September 2025."
+      },
+      {
+        "question": "Pacific Sourcing Corp. received an ANL on 2 September 2025 and filed its PDP application on 1 October 2025, paying the deficiency. On 10 October 2025, it discovered a new issue that needs to be disclosed. Assume days are counted starting the day after the triggering date. What is the last day to amend the application and pay additional deficiency duties, taxes and penalties?",
+        "choices": {
+          "A": "1 December 2025",
+          "B": "30 November 2025",
+          "C": "31 October 2025",
+          "D": "31 December 2025"
+        },
+        "correct": "C",
+        "reason": "Under Sec. 6.1.2, the Importer may amend the PDP application and pay additional deficiency duties, taxes and penalties within an additional non-extendible period of thirty (30) calendar days from the filing of the PDP application form. Thirty days from 1 October 2025 ends on 31 October 2025. The 90-day period from receipt of the ANL does not extend this amendment period."
+      },
+      {
+        "question": "Greenfield Corp. received an ANL and then availed of the PDP under Sec. 6.1.2, and its application was approved. Its basic deficiency in duties and taxes is Php 500,000.00, and it made no disclosure on royalties. Ignoring legal interest, how much must it pay under the Order?",
+        "choices": {
+          "A": "Php 550,000.00",
+          "B": "Php 500,000.00",
+          "C": "Php 625,000.00",
+          "D": "Php 1,125,000.00"
+        },
+        "correct": "A",
+        "reason": "Under Sec. 6.3.2, a PDP applicant who has received an ANL and availed of the program under Sec. 6.1.2 pays the deficiency plus a penalty of ten percent (10%) of the basic deficiency, plus legal interest. The penalty is 10% x Php 500,000.00 = Php 50,000.00, so the payment is Php 550,000.00. Under Sec. 6.3, these replace the penalties in Sec. 10.3.1."
+      },
+      {
+        "question": "Lakeside Importers Inc. learned that its seller received subsequent proceeds from the resale of the imported goods on 5 May 2025, and it has not received any ANL. It filed its PDP application and paid the deficiency of Php 200,000.00 only on 20 June 2025, which is 46 days after the proceeds accrued. What payment treatment applies under the Order?",
+        "choices": {
+          "A": "Deficiency only, without penalty and interest",
+          "B": "Deficiency plus legal interest",
+          "C": "Deficiency plus 10% penalty and legal interest",
+          "D": "Deficiency plus a fine of 125% of the revenue loss"
+        },
+        "correct": "B",
+        "reason": "Under Sec. 6.3.3, the no-penalty and no-interest treatment for disclosures on subsequent proceeds applies only if the applicant files within thirty (30) calendar days from the accrual of the proceeds. Lakeside acted after 46 days, so the disclosure falls under Sec. 6.3.1 or 6.3.2. Because it has not received an ANL, Sec. 6.3.1 applies: deficiency plus legal interest."
+      },
+      {
+        "question": "During a post clearance audit, Metro Imports Corp. cannot produce any records for an importation with a dutiable value of Php 2,000,000.00. What surcharge may be imposed on it for failure to keep records under the Order?",
+        "choices": {
+          "A": "Php 500,000.00",
+          "B": "Php 2,500,000.00",
+          "C": "Php 12,000,000.00",
+          "D": "Php 400,000.00"
+        },
+        "correct": "D",
+        "reason": "Under Sec. 10.1.2, a surcharge of twenty percent (20%) on the dutiable value of the goods for which no records were kept and maintained is imposable for failure to keep records. 20% x Php 2,000,000.00 = Php 400,000.00."
+      },
+      {
+        "question": "Bayan Trading Co. is a delinquent importer whose audit resulted in deficiency duties and taxes of Php 9,500.00, with Php 3,000.00 in interest and penalties, for a total of Php 12,500.00. Can the Bureau use distraint and levy to collect?",
+        "choices": {
+          "A": "No, because the duties and taxes alone are not more than Php 10,000.00",
+          "B": "Yes, because the total with interest and penalties exceeds Php 10,000.00",
+          "C": "Yes, because the Bureau may pursue any remedy at its discretion",
+          "D": "No, because distraint and levy apply only to real property"
+        },
+        "correct": "A",
+        "reason": "Under Sec. 9.3, distraint and levy are not allowed when the amount of duties and taxes, excluding interest and penalties, is not more than Php 10,000.00. Bayan's duties and taxes are Php 9,500.00, so the Bureau cannot use these remedies, even though the total with interest and penalties is Php 12,500.00."
+      }
+    ]
+  }
+]

@@ -1,0 +1,1826 @@
+[
+  {
+    "type": "CMO",
+    "number": "06-2025",
+    "level1": [
+      {
+        "question": "Ano ang tawag sa alpha-numeric code na ibinibigay sa bawat PER application sa System para sa tracking purposes?",
+        "choices": {
+          "A": "Electronic Reference Number",
+          "B": "PER Control Number",
+          "C": "OMS Tracking Code",
+          "D": "Application ID Number"
+        },
+        "correct": "A",
+        "reason": "Ayon sa Sec. 3.4, ang Electronic Reference Number ang alpha-numeric code na ibinibigay sa bawat application sa System para sa tracking purposes."
+      },
+      {
+        "question": "Aling ahensya ang responsable sa hosting at maintenance ng OMS at PMS, pati na rin ang subscription ng cloud services?",
+        "choices": {
+          "A": "Bureau of Customs",
+          "B": "DTI",
+          "C": "ECD",
+          "D": "DTI-EMB"
+        },
+        "correct": "B",
+        "reason": "Sec. 4.1.1 ay nagsasaad na ang DTI ang responsable sa hosting at maintenance ng OMS at PMS, kasama ang subscription ng cloud services."
+      },
+      {
+        "question": "Sino ang may administration ng PMS, kasama ang paggawa at pamamahala ng user access?",
+        "choices": {
+          "A": "DTI",
+          "B": "DTI-EMB",
+          "C": "Bureau",
+          "D": "MISTG"
+        },
+        "correct": "C",
+        "reason": "Ayon sa Sec. 4.1.2, ang administration ng PMS ay nasa Bureau, kasama ang creation at management ng user access."
+      },
+      {
+        "question": "Ano ang GSP (Generalized System of Preference) ayon sa CMO 06-2025?",
+        "choices": {
+          "A": "Bilateral na kasunduan sa pagitan ng dalawang bansa",
+          "B": "Multilateral na regional trade agreement",
+          "C": "Reciprocal na kasunduan ng ASEAN countries",
+          "D": "Unilateral na scheme kung saan ang developed countries ang nagbibigay ng customs duty preferences"
+        },
+        "correct": "D",
+        "reason": "Sec. 3.8 ay naglalarawan sa GSP bilang unilateral na scheme kung saan ang customs duty preferences o concessions ay ibinibigay ng developed countries."
+      },
+      {
+        "question": "Ilang working days ang itinakdang panahon para matapos ang application process ng PER mula sa pagsumite ng kumpletong documents sa OMS?",
+        "choices": {
+          "A": "20 working days",
+          "B": "15 working days",
+          "C": "30 working days",
+          "D": "10 working days"
+        },
+        "correct": "A",
+        "reason": "Ayon sa Sec. 5.1.10, ang application process ay dapat matapos sa loob ng 20 working days mula sa submission ng complete documents sa OMS."
+      },
+      {
+        "question": "Alin sa mga sumusunod ang HINDI kabilang sa documentary requirements para sa PER application ayon sa Sec. 5.1.2?",
+        "choices": {
+          "A": "Manufacturing flowchart",
+          "B": "Certificate of Origin",
+          "C": "Cost of Production analysis per product",
+          "D": "List of raw materials"
+        },
+        "correct": "B",
+        "reason": "Hindi kasama ang Certificate of Origin sa listahan ng documentary requirements sa Sec. 5.1.2; ito ay inaaplayan pagkatapos ma-approve ang PER, ayon sa Sec. 5.1.9."
+      },
+      {
+        "question": "Sino ang nagsusumite ng findings at rekomendasyon sa Approver matapos ma-evaluate ang goods?",
+        "choices": {
+          "A": "Exporter",
+          "B": "Chief of ECD",
+          "C": "Evaluator",
+          "D": "DTI-EMB"
+        },
+        "correct": "C",
+        "reason": "Sec. 5.1.7 ay nagsasaad na pagkatapos ma-evaluate ang goods, ang Evaluator ang magsusumite ng findings at recommendations sa Approver."
+      },
+      {
+        "question": "Kailan maaaring magsagawa ng plant visit ayon sa Sec. 5.1.6?",
+        "choices": {
+          "A": "Palagi, para sa bawat application",
+          "B": "Kapag humiling ang exporter nito",
+          "C": "Kapag lumampas na sa 20 working days ang processing",
+          "D": "Kapag may duda sa veracity ng documents o may hindi naresolbang errors"
+        },
+        "correct": "D",
+        "reason": "Sec. 5.1.6 (a) at (b) ay nagsasaad na puwedeng magsagawa ng plant visit kapag may doubts sa veracity ng documents o may errors na hindi naayos ng applicant."
+      },
+      {
+        "question": "Tuwing kailan nagbibigay ang BOC ng report sa DTI-EMB tungkol sa mga pagkakaiba ng OMS preliminary determination at final evaluation?",
+        "choices": {
+          "A": "Tuwing ikalimang araw ng sumusunod na buwan",
+          "B": "Tuwing unang araw ng buwan",
+          "C": "Tuwing katapusan ng taon",
+          "D": "Tuwing ika-15 ng bawat buwan"
+        },
+        "correct": "A",
+        "reason": "Ayon sa Sec. 6.3, tuwing ikalimang araw ng sumusunod na buwan, magbibigay ang BOC sa DTI-EMB ng report ng mga application na may pagkakaiba."
+      },
+      {
+        "question": "Ano ang mangyayari kung piliin ng Exporter na huwag gumamit ng OMS?",
+        "choices": {
+          "A": "Hindi na puwedeng mag-apply ng PER",
+          "B": "Puwede pa ring mag-submit ng application nang manual ayon sa umiiral na procedures",
+          "C": "Kailangan munang maghintay ng isang taon bago makapag-apply",
+          "D": "Awtomatikong made-deny ang application"
+        },
+        "correct": "B",
+        "reason": "Ayon sa Sec. 7, may option ang Exporter na mag-submit ng application nang manual sa ilalim ng umiiral na procedures."
+      }
+    ],
+    "level2": [
+      {
+        "question": "Greenfield Exports Inc. files its PER application for a shipment leaving through Clark International Airport, which is not Port of Manila, MICP, or NAIA. Under the CMO, which office shall process and approve this application?",
+        "choices": {
+          "A": "The concerned Export Division of that Collection District",
+          "B": "The Export Coordination Division (ECD)",
+          "C": "The DTI-EMB",
+          "D": "The MISTG"
+        },
+        "correct": "A",
+        "reason": "Under Sec. 4.2.1, ECD processes applications only for POM, MICP, and NAIA; for other Collection Districts, the concerned Export Division processes and approves the application. Since Clark is not among the three named ports, the Export Division handles it."
+      },
+      {
+        "question": "Exporter Dagupan Fish Products submitted its initial PER application on October 1, 2026, but the Evaluator found that the manufacturing flowchart was missing. The complete set of documents, including the flowchart, was only submitted on October 10, 2026. From which date shall the 20 working-day processing period begin to run?",
+        "choices": {
+          "A": "October 1, 2026, the date of the initial submission",
+          "B": "The date the Evaluator first reviewed the application",
+          "C": "The date the Approver received the Evaluator's recommendation",
+          "D": "October 10, 2026, the date the complete documents were submitted"
+        },
+        "correct": "D",
+        "reason": "Sec. 5.1.10 states that the 20 working-day period runs from the submission of complete documents in the OMS, not from an initial or incomplete submission. Since the flowchart completed the set only on October 10, 2026, the period begins then."
+      },
+      {
+        "question": "Bohol Craft Exports uses coconut shells imported from Indonesia as a raw material for its export products. Which document must the company submit to support the origin of this particular raw material?",
+        "choices": {
+          "A": "Manufacturer's declaration for local raw materials",
+          "B": "Copy of import documents, invoice, and proof of origin for the imported raw material",
+          "C": "Cost of Production analysis per product",
+          "D": "Company profile"
+        },
+        "correct": "B",
+        "reason": "Sec. 5.1.2(e) requires a copy of import documents, invoice, and proof of origin specifically for imported raw materials, while the manufacturer's declaration under Sec. 5.1.2(g) applies only to local raw materials."
+      },
+      {
+        "question": "During evaluation, the Evaluator for Sunrise Garments' PER application noticed that the submitted cost of production analysis appeared inconsistent with the company's sales invoice, raising doubts about its accuracy. Sunrise Garments was unable to clarify or correct the discrepancy. What may the Bureau do under the CMO?",
+        "choices": {
+          "A": "Automatically deny the PER application without further review",
+          "B": "Forward the application directly to DTI-EMB for resolution",
+          "C": "Conduct a plant visit to verify the matter",
+          "D": "Require the exporter to switch to a different FTA application"
+        },
+        "correct": "C",
+        "reason": "Sec. 5.1.6(b) allows a plant visit to be conducted when there are errors and inaccuracies in the submission that are not addressed by the applicant."
+      },
+      {
+        "question": "After evaluation, the Approver determined that Luzon Textiles' product does not qualify as an originating good under the ASEAN-China Free Trade Agreement (ACFTA), the agreement the company applied for, but could potentially qualify under a different Agreement. What must the issued PER contain in this situation?",
+        "choices": {
+          "A": "The basis for disapproval and, if applicable, a recommendation of the most fitting Agreement",
+          "B": "Only a blank denial notice with no further explanation",
+          "C": "An automatic re-evaluation under all other FTAs listed in Sec. 1",
+          "D": "A referral letter instructing the exporter to appeal to the DTI-EMB"
+        },
+        "correct": "A",
+        "reason": "Sec. 5.1.8 provides that if the goods do not qualify as originating goods, the PER shall contain the basis for disapproval and shall recommend the most fitting Agreement, if applicable."
+      },
+      {
+        "question": "In Cavite Export Corp.'s PER application, the assigned Evaluator has completed the assessment of the submitted documents and wants to move the application forward. What is the Evaluator required to do next under the CMO?",
+        "choices": {
+          "A": "Directly issue the PER to the exporter",
+          "B": "Notify the DTI-EMB for final confirmation",
+          "C": "Forward the application to the MISTG for system validation",
+          "D": "Submit the findings and recommendation to the Approver"
+        },
+        "correct": "D",
+        "reason": "Sec. 5.1.7 requires the Evaluator to submit its findings and recommendations to the Approver once the goods have been evaluated; the Evaluator does not issue the PER directly."
+      },
+      {
+        "question": "Quezon Agri-Exports applied for and received its PER manually through the ECD rather than through the OMS, since it opted not to use the online system. The company later asks whether this manually obtained PER is less valid than one issued through the OMS. Based on the CMO, what is the correct answer?",
+        "choices": {
+          "A": "The manual PER is only provisional and must be reconfirmed online",
+          "B": "The manual PER has the same validity as a PER issued through the OMS",
+          "C": "The manual PER is valid only for GSP applications, not FTAs",
+          "D": "The manual PER expires after 20 working days unlike the OMS-issued PER"
+        },
+        "correct": "B",
+        "reason": "Sec. 5.1.9 states that the PER issued by the OMS will have the same validity as the PER manually applied through the ECD or equivalent office."
+      },
+      {
+        "question": "Davao Fruit Exports received notification through its registered email that its PER application has been approved. The company wants to proceed with exporting its goods under preferential tariff treatment. What should Davao Fruit Exports do next under the CMO?",
+        "choices": {
+          "A": "Immediately ship the goods without further documentation since the PER is final proof of origin",
+          "B": "Wait for a second evaluation from the DTI-EMB before proceeding",
+          "C": "Proceed with the application for issuance of a Certificate of Origin",
+          "D": "Resubmit the same documents to request a Product Specific Rule"
+        },
+        "correct": "C",
+        "reason": "Sec. 5.1.9 provides that once notified of PER approval, the Exporter or authorized representative can proceed with the application for issuance of a Certificate of Origin."
+      },
+      {
+        "question": "A newly-formed export company, Pampanga AgriTrade, wants to submit its first PER application through the OMS. Before it can access the Portal to submit any application, what must the company first do?",
+        "choices": {
+          "A": "Create an account in the OMS",
+          "B": "Secure prior written approval from the DTI-EMB",
+          "C": "Request a username and password directly from the Bureau's MISTG",
+          "D": "Complete a plant visit with the ECD"
+        },
+        "correct": "A",
+        "reason": "Sec. 4.2.2 requires the Exporter to first create an account in the OMS before it can access the Portal."
+      },
+      {
+        "question": "Iloilo Seafood Exports authorized its customs broker to register and file PER applications on its behalf through the OMS, choosing the subscription type for an authorized representative. Whose TIN and email address should be entered in the required data fields during registration?",
+        "choices": {
+          "A": "The customs broker's own TIN and email address",
+          "B": "A generic TIN assigned by the OMS for representative accounts",
+          "C": "The TIN and email address of the Bureau's Account Management Office",
+          "D": "The TIN and email address of Iloilo Seafood Exports, the Exporter"
+        },
+        "correct": "D",
+        "reason": "Sec. 4.2.5 states that for an authorized representative, the TIN and email address of the Exporter, not the representative, shall be accomplished."
+      }
+    ]
+  },
+  {
+    "type": "CMO",
+    "number": "06-2024",
+    "level1": [
+      {
+        "question": "Anong uri ng goods declaration ang sakop ng ePay para sa koleksyon ng duties at taxes, ayon sa Sec. 1?",
+        "choices": {
+          "A": "Lahat ng consumption entries na isinampa gamit ang E2M System",
+          "B": "Additional assessments na galing sa Post Entry Modification",
+          "C": "Goods declaration na manually processed sa informal entry procedure",
+          "D": "Mga entry na binayaran na sa cashier ng Port ng Bureau"
+        },
+        "correct": "C",
+        "reason": "Sa Sec. 1, sakop ng Order ang koleksyon ng duties at taxes sa goods na covered ng goods declaration na manually processed sa ilalim ng informal entry procedure, pati ang miscellaneous fees na bayad sa Bureau gamit ang ePay. Ang E2M consumption entries at Post Entry Modification assessments ay excluded (Sec. 6)."
+      },
+      {
+        "question": "Ayon sa Sec. 2.2, kailan available ang online payment channels na naka-integrate sa ePay?",
+        "choices": {
+          "A": "Sa 24/7 na basehan",
+          "B": "Tuwing working days lamang ng Bureau",
+          "C": "Hanggang cut-off time ng Collection Division ng Port",
+          "D": "Tuwing weekdays mula 8:00 AM hanggang 5:00 PM"
+        },
+        "correct": "A",
+        "reason": "Sa Sec. 2.2, layunin ng Order na magbigay ng user interface bilang alternative mode of payment sa duties, taxes, at miscellaneous fees, na naka-integrate sa iba't ibang online payment channels na available sa 24/7 basis."
+      },
+      {
+        "question": "Ano ang Order of Payment (OP) ayon sa Sec. 3.2?",
+        "choices": {
+          "A": "Resibo na inilalabas ng cashier ng Port matapos magbayad ang stakeholder",
+          "B": "Report ng daily collection na isinusumite ng Collection Division sa STAD at RAD",
+          "C": "Account Creation Form na isinusumite ng BOC personnel na mag-iisyu ng OP",
+          "D": "Instruksyon sa ePay para magbayad ang external stakeholder ng duties, taxes, o miscellaneous fees"
+        },
+        "correct": "D",
+        "reason": "Sa Sec. 3.2, ang Order of Payment ay ang mga instruksyon na ibinibigay sa pamamagitan ng ePay para sa external stakeholder upang bayaran ang duties, taxes, at/o miscellaneous fees na due sa Bureau."
+      },
+      {
+        "question": "Ano ang Fixed Values ayon sa Sec. 3.5?",
+        "choices": {
+          "A": "Halaga ng duties at taxes na kinukuwenta sa bawat assessment ng goods na ini-import",
+          "B": "Fixed na halaga ng administrative o miscellaneous fees sa ilalim ng umiiral na rules",
+          "C": "Halagang inilalagay ng BOC personnel sa bawat OP ayon sa kanyang sariling pagpapasya",
+          "D": "Halaga ng bayad na itinatakda ng Digital Payment Provider sa bawat payment channel"
+        },
+        "correct": "B",
+        "reason": "Sa Sec. 3.5, ang Fixed Values ay ang fixed amount ng administrative fees o miscellaneous fees na itinakda ng existing rules and regulations, tulad ng Customs Documentary Stamp, Document Stamp Tax, Registration Charge for Auction, Registration Charge for Account Management Office, at Accreditation Charge."
+      },
+      {
+        "question": "Ano ang tawag sa accredited juridical entities na nagbibigay ng digital payment platforms para sa online payment ng external stakeholders, ayon sa Sec. 3.4?",
+        "choices": {
+          "A": "Digital Payment Platform",
+          "B": "Electronic Payment Portal System",
+          "C": "Digital Payment Provider",
+          "D": "Order of Payment"
+        },
+        "correct": "C",
+        "reason": "Sa Sec. 3.4, ang Digital Payment Provider ay ang accredited juridical entities na nagbibigay ng digital payment platforms. Ang Digital Payment Platform (Sec. 3.3) naman ay ang ICT-enabled mechanism na nag-uugnay sa ePay ng BOC at financial institutions."
+      },
+      {
+        "question": "Aling opisina ang nagma-maintain ng ePay ayon sa Sec. 4.1?",
+        "choices": {
+          "A": "MISTG",
+          "B": "RAD",
+          "C": "STAD",
+          "D": "Collection Division"
+        },
+        "correct": "A",
+        "reason": "Sa Sec. 4.1, ang ePay ay imi-maintain ng Management Information System and Technology Group (MISTG)."
+      },
+      {
+        "question": "Kanino isinusumite ang Account Creation Form (Annex A) at indorsement letter ng chief concerned para sa account ng BOC personnel na mag-iisyu ng OP, ayon sa Sec. 4.2?",
+        "choices": {
+          "A": "RAD",
+          "B": "STAD",
+          "C": "Collection Division ng Port",
+          "D": "TSD ng MISTG"
+        },
+        "correct": "D",
+        "reason": "Sa Sec. 4.2, ang request para sa account creation ay isinusumite sa Technical Support Division (TSD) ng MISTG sa pamamagitan ng pagkumpleto ng Account Creation Form (Annex A) kasama ang indorsement letter mula sa chief concerned, electronically sa pamamagitan ng email."
+      },
+      {
+        "question": "Saan ipinapadala ang login authentication code ng ePay user, ayon sa Sec. 4.5?",
+        "choices": {
+          "A": "Sa personal email address na ibinigay ng user sa BOC",
+          "B": "Sa BOC official email ng user (<name>@customs.gov.ph)",
+          "C": "Sa mobile number na naka-register sa account ng user",
+          "D": "Sa email ng chief concerned na nag-indorse ng account"
+        },
+        "correct": "B",
+        "reason": "Sa Sec. 4.5, para sa security at accountability, ang login authentication code ay ipapadala sa email ng user na gumagamit ng BOC official domain, at tanging authorized personnel na gumagamit ng BOC official domain ang bibigyan ng access sa system."
+      },
+      {
+        "question": "Aling opisina ang nagre-reconcile ng daily ePay collection report laban sa collection report ng Digital Payment Provider, ayon sa Sec. 4.8?",
+        "choices": {
+          "A": "STAD",
+          "B": "Collection Division ng Port",
+          "C": "RAD",
+          "D": "MISTG"
+        },
+        "correct": "C",
+        "reason": "Sa Sec. 4.8, ang Revenue Accounting Division (RAD) ang nagre-reconcile ng daily ePay collection report laban sa submitted collection report ng Digital Payment Provider. Ang Collection Division ng Ports ay nagsusumite ng daily/monthly collection report sa STAD at RAD."
+      },
+      {
+        "question": "Alin sa mga sumusunod ang mga opisinang responsable sa pag-generate ng reports mula sa data na nakalap sa ePay, ayon sa Sec. 4.7?",
+        "choices": {
+          "A": "MISTG lamang, dahil ito ang nagma-maintain ng ePay at nag-iipon ng data",
+          "B": "Collection Division ng Port, RAD, STAD, at iba pang concerned offices",
+          "C": "Collection Division ng Port at TSD lamang, bilang mga direktang gumagamit ng system",
+          "D": "RAD at MISTG lamang, dahil sila ang tumatanggap ng collection reports"
+        },
+        "correct": "B",
+        "reason": "Sa Sec. 4.7, ang Collection Division ng Port, RAD, STAD, at iba pang concerned offices ang responsable sa pag-generate ng reports mula sa data na nakalap sa ePay."
+      }
+    ],
+    "level2": [
+      {
+        "question": "A port's Collection Division is reviewing two transactions. Shipment 1 is covered by a goods declaration manually processed under the informal entry procedure. Shipment 2 is a consumption entry filed through the Bureau's E2M System that later received an additional assessment through Post Entry Modification. For which transaction(s) may the duties and taxes be collected through ePay under this Order?",
+        "choices": {
+          "A": "Both shipments",
+          "B": "Shipment 1 only",
+          "C": "Shipment 2 only",
+          "D": "Neither shipment"
+        },
+        "correct": "B",
+        "reason": "Under Sec. 1, the Order covers duties and taxes on goods covered by a goods declaration manually processed under the informal entry procedure. Under Sec. 6, all consumption entries filed using the E2M System, including additional assessments from Post Entry Modification, are excluded. Only Shipment 1 is covered."
+      },
+      {
+        "question": "Greenline Trading generated an Order of Payment for miscellaneous fees but did not pay it within its validity period. When it later tries to pay, the ePay shows the OP as expired. What must Greenline do?",
+        "choices": {
+          "A": "Pay the same OP through the cashier after printing it again",
+          "B": "Reuse the same OP Reference Number with a revised remarks entry",
+          "C": "Apply for a new OP",
+          "D": "Ask the MISTG to reactivate the expired OP"
+        },
+        "correct": "C",
+        "reason": "Under Secs. 5.1.7 and 5.2.9, OPs that remain unpaid after their validity are tagged as 'Expired' in the ePay, and the external stakeholder can no longer use the expired OP for payment and must instead apply for a new OP."
+      },
+      {
+        "question": "Two stakeholders need to pay Fixed Values through ePay. Ramon generated his own OP using the stakeholder procedure and is on the Order of Payment page, having not yet clicked Proceed to Payment. Sofia's OP was generated for her by a concerned BOC office, and she is on the Order of Payment page. Who may still add or delete miscellaneous items?",
+        "choices": {
+          "A": "Ramon only",
+          "B": "Sofia only",
+          "C": "Both of them",
+          "D": "Neither of them"
+        },
+        "correct": "A",
+        "reason": "Under Sec. 5.1.9, a stakeholder who generated his own OP can still add or delete miscellaneous items on the Order of Payment page, until he clicks Proceed to Payment (Sec. 5.1.11). Under Sec. 5.2.12, when the OP was generated by a concerned BOC office, the stakeholder can no longer add or delete items. Only Ramon may still do so."
+      },
+      {
+        "question": "A stakeholder with an unexpired OP chooses 'Pay Via ePay' and wants to pay using an e-wallet. Which sequence is correct under Sec. 5?",
+        "choices": {
+          "A": "Print the OP, bring it to the cashier, and select the e-wallet channel at the cashier window",
+          "B": "Select the e-wallet channel on the ePay homepage before any OP Reference Number is generated",
+          "C": "Select the e-wallet channel, then wait for the BOC office to confirm the payment on his behalf",
+          "D": "Select a Digital Payment Provider, pick the e-wallet on its page, enter the details, and confirm payment"
+        },
+        "correct": "D",
+        "reason": "Under Secs. 5.1.12 to 5.1.14 (and 5.2.14 to 5.2.16), after choosing 'Pay Via ePay' the stakeholder chooses the Digital Payment Provider, is redirected to the provider's page to choose the payment channel (such as e-Wallet), provides the information required by that channel, and confirms payment. Printing the OP for the cashier applies only to 'Pay Via Cashier'."
+      },
+      {
+        "question": "A stakeholder tells a port's Collection Division that he paid, through an e-wallet, an OP that the Division issued. Who must validate the payment, and how?",
+        "choices": {
+          "A": "The Digital Payment Provider, by emailing the Division the stakeholder's receipt",
+          "B": "The BOC office that issued the OP, by checking its payment status in ePay",
+          "C": "The stakeholder, by presenting his e-wallet receipt to the MISTG",
+          "D": "The RAD, by reconciling the Digital Payment Provider's monthly report"
+        },
+        "correct": "B",
+        "reason": "Under Sec. 7 (and Sec. 4.6), it is the responsibility of the concerned BOC office or unit that issued the OP to validate payment by checking the payment status of the generated OP, where OPs with payments made are reflected as tagged in the ePay."
+      },
+      {
+        "question": "A BOC officer issued an OP for a stakeholder's miscellaneous fees but never checked the OP's payment status. What is the consequence under the Order?",
+        "choices": {
+          "A": "No consequence, as the ePay confirms all payments for the office automatically",
+          "B": "Automatic removal from the post without administrative proceedings",
+          "C": "A ground for administrative sanctions under Civil Service law and regulations",
+          "D": "A fine equal to the total amount stated in the unconfirmed OP"
+        },
+        "correct": "C",
+        "reason": "Under Sec. 7, the BOC office that issued the OP must validate payment. Under Sec. 8, failure to confirm payment is a ground for administrative sanctions under existing Civil Service law, rules and regulations, without prejudice to other criminal or civil liability under applicable law."
+      },
+      {
+        "question": "Carlo, a BOC personnel authorized to issue OPs, asks that his ePay login authentication code be sent to his personal email address because it is easier to access. Can this be done under the Order?",
+        "choices": {
+          "A": "No, because it is sent to the user's BOC official domain email",
+          "B": "Yes, if the chief concerned approves the request in writing",
+          "C": "Yes, if he uses the BOC email address for monitoring only",
+          "D": "No, because the code is sent only to the user's mobile number"
+        },
+        "correct": "A",
+        "reason": "Under Sec. 4.5, a login authentication code is sent to the email of the user using the BOC official domain (<name>@customs.gov.ph), and only authorized personnel using the BOC official domain are granted access to the system. Nothing in the Order allows a personal email address."
+      },
+      {
+        "question": "A BOC office is generating an OP for a stakeholder under Sec. 5.2 for two miscellaneous items: the Customs Documentary Stamp, which is a Fixed Value, and an item that is Not Fixed. How should the user enter them?",
+        "choices": {
+          "A": "Tick the checkbox for both items without entering any amount at all",
+          "B": "Enter an amount for both items, then click Add for each of them",
+          "C": "Enter an amount for the Fixed item and tick only the Not Fixed item",
+          "D": "Tick the box for the Fixed item; enter an amount for the Not Fixed item"
+        },
+        "correct": "D",
+        "reason": "Under Sec. 5.2.6, if the miscellaneous item is Not Fixed (NF), the user enters the amount and clicks Add; if it is Fixed (F), the user just ticks the checkbox and clicks Add. Under Sec. 3.5, the Customs Documentary Stamp is a Fixed Value."
+      },
+      {
+        "question": "Mario, a stakeholder, wants to pay Fixed Values through ePay and generates his own OP. He clicks the 'Generate Order of Payment' button, enters the Consignee/Company and his Email Address, selects the Port, and clicks Request. What happens next?",
+        "choices": {
+          "A": "He receives a link at the email address entered, redirecting him to ePay.",
+          "B": "He immediately receives the OP Reference Number and validity period by email.",
+          "C": "The Order of Payment page appears, where he chooses Pay Via Cashier or Pay Via ePay.",
+          "D": "A concerned BOC office must first generate the OP on his behalf."
+        },
+        "correct": "A",
+        "reason": "Under Secs. 5.1.1 to 5.1.3, after the stakeholder clicks Request, he receives a link through the email address entered and is redirected to the BOC ePay by clicking it. The OP Reference Number and validity period are emailed only later (Sec. 5.1.7), after the miscellaneous items are saved."
+      },
+      {
+        "question": "A Port Collector asks which office is authorized to issue the memorandum setting the schedule for the nationwide implementation of ePay. Who is authorized under the Order?",
+        "choices": {
+          "A": "RAD, through a memorandum",
+          "B": "STAD, through a memorandum",
+          "C": "MISTG, through a memorandum",
+          "D": "The Collection Division of the Ports, through a memorandum"
+        },
+        "correct": "C",
+        "reason": "Under Sec. 9, the MISTG is authorized to issue a Memorandum on the schedule of the nationwide implementation of the ePay."
+      }
+    ]
+  },
+  {
+    "type": "CMO",
+    "number": "11-2024",
+    "level1": [
+      {
+        "question": "Ayon sa Sec. 4.1, aling Proof of Origin ang tatanggapin lang ng Bureau sa effectivity ng Order na ito?",
+        "choices": {
+          "A": "OD na ginawa ng kahit anong exporter o producer",
+          "B": "CO Form PH-KR lamang, hindi kasama ang OD",
+          "C": "OD ng Approved Exporter lamang, hindi kasama ang CO",
+          "D": "CO Form PH-KR at OD na inisyu ng Approved Exporter"
+        },
+        "correct": "D",
+        "reason": "Sa Sec. 4.1, CO Form PH-KR at Origin Declaration (OD) na inisyu ng Approved Exporter lang ang tatanggapin ng Bureau sa effectivity ng Order. Ang OD ng exporter o producer ay ipapatupad nang hindi lalampas sa sampung (10) taon pagkatapos ng date of entry into force ng Agreement."
+      },
+      {
+        "question": "Aling unit ng Bureau ang nag-e-evaluate ng authenticity, accuracy, at validity ng Proof of Origin na isinumite ng importers at nagbibigay ng PH-KR FTA preferential tariff rates, ayon sa Sec. 3.10?",
+        "choices": {
+          "A": "Export Coordination Division (ECD)",
+          "B": "Preferential Rate Unit (PRU) o ang equivalent unit nito sa ports",
+          "C": "Customer Care Center (CCC)",
+          "D": "Export Division ng port"
+        },
+        "correct": "B",
+        "reason": "Sa Sec. 3.10 (at Sec. 4.6), ang Preferential Rate Unit (PRU) o ang equivalent unit nito sa lahat ng ports ang nag-e-evaluate ng authenticity, accuracy, at validity ng Proof of Origin ng importers at nagbibigay ng PH-KR FTA preferential tariff rates. Ang ECD naman ay nagpoproseso ng Approved Exporter applications at nagve-verify ng originating status (Sec. 3.4)."
+      },
+      {
+        "question": "Ayon sa Secs. 4.1 at 5.2.2, hanggang kailan dapat ipatupad ang Origin Declaration na ginawa ng exporter o producer?",
+        "choices": {
+          "A": "Hindi lalampas sa sampung (10) taon pagkatapos ng date of entry into force ng Agreement",
+          "B": "Hindi lalampas sa limang (5) taon pagkatapos ng date of entry into force ng Agreement",
+          "C": "Hindi lalampas sa tatlong (3) taon pagkatapos ng date of entry into force ng Agreement",
+          "D": "Hindi lalampas sa labinlimang (15) taon pagkatapos ng date of entry into force ng Agreement"
+        },
+        "correct": "A",
+        "reason": "Sa Secs. 4.1 at 5.2.2, ang Origin Declaration ng exporter o producer ay ipapatupad nang hindi lalampas sa sampung (10) taon pagkatapos ng date of entry into force ng PH-KR FTA."
+      },
+      {
+        "question": "Ayon sa Sec. 4.2, ano ang dapat ibigay ng bawat Party sa PH-KR FTA sa pamamagitan ng contact points?",
+        "choices": {
+          "A": "Listahan ng lahat ng Approved Exporters at kanilang authorization codes",
+          "B": "Listahan ng goods na may preferential tariff rate sa ilalim ng Agreement",
+          "C": "Listahan ng pangalan, address, specimen signatures, at specimen ng official seals ng issuing body nito",
+          "D": "Listahan ng importers na nag-claim ng preferential tariff treatment"
+        },
+        "correct": "C",
+        "reason": "Sa Sec. 4.2, bawat Party ay magbibigay, sa hard copy o soft copy, ng listahan ng mga pangalan, address, specimen signatures, at specimen ng official seals ng issuing body nito sa pamamagitan ng contact points. Ang anumang pagbabago ay dapat agad ding ibigay sa parehong paraan."
+      },
+      {
+        "question": "Sa PER application sa ilalim ng Sec. 5.1.1(a), kanino dapat naka-address ang request letter na nagsasabi ng intensyong gamitin ang PH-KR FTA?",
+        "choices": {
+          "A": "AOCG Deputy Commissioner",
+          "B": "ECD Chief",
+          "C": "District Collector ng port",
+          "D": "Chief ng Customer Care Center"
+        },
+        "correct": "B",
+        "reason": "Sa Sec. 5.1.1(a), ang request letter ay naka-address sa ECD Chief at nagsasaad ng intensyong gamitin ang PH-KR FTA, description ng goods, at kaukulang HS Codes."
+      },
+      {
+        "question": "Ayon sa Sec. 5.1.3, ilang working days ang ibinibigay sa ECD, Export Division ng ports outside Metro Manila, o equivalent unit para i-act ang PER application mula sa receipt ng complete documents?",
+        "choices": {
+          "A": "14 working days",
+          "B": "30 working days",
+          "C": "21 working days",
+          "D": "10 working days"
+        },
+        "correct": "C",
+        "reason": "Sa Sec. 5.1.3, kailangang i-review ang documents at i-act ang application sa loob ng twenty-one (21) working days mula sa date of receipt ng complete documents."
+      },
+      {
+        "question": "Sino ang pipirma sa written authorization o letter of disapproval sa application para sa Approved Exporter status, ayon sa Sec. 5.4.5?",
+        "choices": {
+          "A": "Chief, ECD",
+          "B": "AOCG Deputy Commissioner",
+          "C": "Commissioner of Customs",
+          "D": "District Collector ng port"
+        },
+        "correct": "A",
+        "reason": "Sa Sec. 5.4.5, ang written authorization o letter of disapproval ay dapat pirmahan ng Chief, ECD."
+      },
+      {
+        "question": "Gaano katagal dapat itago ng Approved Exporter ang kopya ng OD at ng lahat ng dokumentong sumusuporta sa originating status ng goods, ayon sa Sec. 5.5.2?",
+        "choices": {
+          "A": "Hindi bababa sa isang (1) taon mula sa petsa ng completion ng OD",
+          "B": "Hindi bababa sa dalawang (2) taon mula sa petsa ng completion ng OD",
+          "C": "Hindi bababa sa limang (5) taon mula sa petsa ng completion ng OD",
+          "D": "Hindi bababa sa tatlong (3) taon mula sa petsa ng completion ng OD"
+        },
+        "correct": "D",
+        "reason": "Sa Sec. 5.5.2, kailangang itago ng Approved Exporter ang kopya ng OD at ang lahat ng supporting documents, paper man o electronic, nang at least three (3) years mula sa petsa ng completion nito."
+      },
+      {
+        "question": "Ano ang puwedeng gawin ng Approved Exporter ayon sa Sec. 5.5.3?",
+        "choices": {
+          "A": "Mag-isyu ng sariling CO nang hindi dumadaan sa ECD o Export Division",
+          "B": "Mag-complete ng OD para sa goods na hindi sakop ng kanyang authorization",
+          "C": "Mag-apply ng CO (Form PH-KR) kapalit ng OD, ayon sa sarili niyang pagpapasya",
+          "D": "Ipasa sa isang trader ang authorization code para sa paggawa ng OD"
+        },
+        "correct": "C",
+        "reason": "Sa Sec. 5.5.3, puwedeng mag-apply ang Approved Exporter, at his own discretion, ng Certificate of Origin (Form PH-KR) in lieu of an OD. Ang CO ay dumadaan pa rin sa ECD o Export Division (Sec. 5.3), at ang OD ay para lang sa goods na sakop ng authorization (Sec. 5.5.1(b))."
+      },
+      {
+        "question": "Ayon sa Sec. 6.1, ano ang unang hakbang sa pagkakasunod-sunod ng verification na maaaring gawin ng customs authority ng importing Party?",
+        "choices": {
+          "A": "Verification visit sa premises ng exporter o producer",
+          "B": "Written requests para sa additional information mula sa importer",
+          "C": "Written request para sa additional information mula sa exporter o producer",
+          "D": "Written request sa issuing authority ng exporting Party"
+        },
+        "correct": "B",
+        "reason": "Sa Sec. 6.1, ang verification ay maaaring gawin sa ganitong pagkakasunod-sunod: (a) written requests para sa additional information mula sa importer, (b) mula sa exporter o producer, (c) written requests sa issuing authority ng exporting Party, at (d) verification visits sa premises ng exporter o producer. Kaya ang unang hakbang ay written request sa importer."
+      }
+    ],
+    "level2": [
+      {
+        "question": "Luzon Export Corp. is an Approved Exporter. At the time of exportation, it cannot complete the Origin Declaration (OD) on the commercial invoice. On which other documents may it complete the OD under Sec. 5.6.1?",
+        "choices": {
+          "A": "The Export Declaration or the Bill of Lading",
+          "B": "A billing statement or a packing list",
+          "C": "The CO Form PH-KR or the Product Evaluation Report",
+          "D": "The Certificate of Registration or the written authorization"
+        },
+        "correct": "B",
+        "reason": "Under the last paragraph of Sec. 5.6.1, the OD of an Approved Exporter is completed on the commercial invoice, but if it cannot be completed on the commercial invoice at the time of exportation, it may be completed on either a billing statement or a packing list."
+      },
+      {
+        "question": "Kaya Textiles Inc. applies for Approved Exporter status. It has sound bookkeeping and record keeping, good compliance under the Bureau's risk management, an authorized signatory competent in ROO application, and willingness to undergo regular monitoring and inspection. However, it started transacting with the Bureau only 10 months before the date of its application. Which action by the ECD is correct under Secs. 5.4.3 and 5.4.4?",
+        "choices": {
+          "A": "Grant the status, since four of the five criteria have been satisfied by Kaya",
+          "B": "Grant the status with a written authorization that is valid for only 10 months",
+          "C": "Hold the application until Kaya submits an approved PER for its textile goods",
+          "D": "Issue a letter of disapproval because it has transacted for less than one year"
+        },
+        "correct": "D",
+        "reason": "Under Sec. 5.4.3(a), the exporter must have been transacting with the Bureau at least one (1) year prior to the date of application. Kaya has transacted for only 10 months, so the application is not meritorious. Under Sec. 5.4.4, the ECD then issues a letter of disapproval stating the reason for the denial."
+      },
+      {
+        "question": "Island Traders Inc. is a trader that wants to become an Approved Exporter for goods made by an independent producer. It has the application form, the Bureau's Certificate of Registration, an approved PER, and its list of authorized signatories with specimen signatures. Which additional document must it submit under Sec. 5.4.1?",
+        "choices": {
+          "A": "A producer's declaration on the good's originating status and readiness to cooperate in verification",
+          "B": "A cost of production analysis for each product of the independent producer",
+          "C": "A manufacturing flowchart showing the production process of the producer",
+          "D": "A copy of the sales invoice for the local raw materials of the producer"
+        },
+        "correct": "A",
+        "reason": "Under Sec. 5.4.1(d), in the case of a trader, the application must include a producer's declaration indicating the originating status of the good for which it will complete an OD and the readiness of the producer to cooperate in verification procedures. The other documents are not listed in Sec. 5.4.1."
+      },
+      {
+        "question": "Manila Foods Inc. applies for a CO Form PH-KR. It has the Export Declaration, Commercial Invoice, Bill of Lading, and an approved PER, and its goods require no other permits. Which required document is still missing under Sec. 5.3.1?",
+        "choices": {
+          "A": "Company profile",
+          "B": "Manufacturing flowchart",
+          "C": "Packing List",
+          "D": "Producer's declaration"
+        },
+        "correct": "C",
+        "reason": "Under Sec. 5.3.1, an application for CO Form PH-KR must include the Export Declaration, Commercial Invoice, Bill of Lading/Airway Bill, Packing List, approved PER (if applicable), and other relevant permits. With no other permits required, the Packing List is the only missing item."
+      },
+      {
+        "question": "Visayas Marine Products applied for a CO Form PH-KR at the Export Division of a port outside Metro Manila, and the application was approved. What happens to the signed CO under Sec. 5.3.3?",
+        "choices": {
+          "A": "It is sent directly by the Export Division to the customs authority of the importing Party.",
+          "B": "It is transmitted back to the CCC, where the exporter and importer copies are retrieved.",
+          "C": "It is released only after the PRU endorses the CO for the importer concerned.",
+          "D": "It is kept by the ECD until the importer formally requests a copy of it."
+        },
+        "correct": "B",
+        "reason": "Under Sec. 5.3.3, upon approval the Export Division affixes the signature of the authorized signatory and the BOC seal, and the signed CO with its unique CO reference number is transmitted back to the CCC for retrieval of the copies intended for the exporter and importer."
+      },
+      {
+        "question": "The Philippine customs authority, as importing Party, is verifying the origin of goods under the PH-KR FTA. It has already sent a written request for additional information to the importer. Under Sec. 6.1, what is the next step in the order of verification?",
+        "choices": {
+          "A": "A verification visit to the premises of the exporter or producer",
+          "B": "A written request to the issuing authority of the exporting Party",
+          "C": "A written request for information from the exporter or producer",
+          "D": "A second written request for information to the importer"
+        },
+        "correct": "C",
+        "reason": "Under Sec. 6.1, verification may be conducted in this order: (a) written requests to the importer, (b) written requests to the exporter or producer, (c) written requests to the issuing authority of the exporting Party, and (d) verification visits. After step (a), the next step is (b)."
+      },
+      {
+        "question": "A PRU at the Port of Cebu has reasonable doubt about the accuracy of the origin information in a Proof of Origin presented by an importer. What should the PRU do under the Order?",
+        "choices": {
+          "A": "Request verification through the ECD",
+          "B": "Deny the claim immediately without any verification",
+          "C": "Ask the CCC to contact the exporter abroad",
+          "D": "Send its own verification team to the exporter's premises"
+        },
+        "correct": "A",
+        "reason": "Under Sec. 4.7, the PRU or its equivalent unit may request verification, through the ECD, when it has reasonable doubt as to the authenticity and validity of the Proof of Origin or the accuracy of the origin information. Under Sec. 4.9, the ECD carries out the verification, by documents requested from the exporter or producer or by a verification visit."
+      },
+      {
+        "question": "An employee of Harbor Spices Corp., an Approved Exporter, used the company's authorization code to complete an OD for goods that did not qualify as originating. Under Sec. 5.5.1, who bears responsibility for the misuse?",
+        "choices": {
+          "A": "The employee alone, because he personally completed the OD",
+          "B": "The importer who relied on the OD when claiming preferential treatment",
+          "C": "The ECD, because it granted the authorization to Harbor Spices Corp.",
+          "D": "Harbor Spices Corp., which accepts full responsibility for all ODs it completes"
+        },
+        "correct": "D",
+        "reason": "Under Sec. 5.5.1(d), an Approved Exporter must accept full responsibility for all Origin Declarations completed, including any misuse. Harbor Spices Corp. is therefore responsible for the misuse of its authorization code."
+      },
+      {
+        "question": "Bagong Tela Inc., a producer in Cebu, wants its goods evaluated before exportation so it can claim PH-KR FTA preferential tariff treatment. Which procedure is correct under Secs. 5.1.1 and 5.1.2?",
+        "choices": {
+          "A": "Apply to the ECD, upload the documents through the Bureau's Portal, and then submit hard copies to the CCC.",
+          "B": "Apply to the Export Division of the port, upload the documents through the Bureau's Portal, and submit hard copies to the CCC.",
+          "C": "Apply to the Export Division of the port and submit only hard copies to the CCC, without any upload.",
+          "D": "Apply to the CCC, which uploads all the documents to the Bureau's Portal on the applicant's behalf."
+        },
+        "correct": "B",
+        "reason": "Under Sec. 5.1.1, stakeholders outside Metro Manila apply to the Export Division of ports or its equivalent unit (the ECD is for Metro Manila stakeholders). Under Sec. 5.1.2, the application is submitted through the Bureau's Portal with all documents uploaded, and hard copies are also submitted to the CCC."
+      },
+      {
+        "question": "Prime Coco Exports, an Approved Exporter, completes an OD in its own format. It includes the exporter's, producer's, and importer's names and addresses, the description and six-digit HS Code, the authorization code, a unique reference number, the origin conferring criterion, the certification by an authorized signatory, the quantity, the certifier's name and signature, and the completion date. It uses a criterion other than Regional Value Content, and the OD is written in Filipino. Does the OD comply with Sec. 5.6.1?",
+        "choices": {
+          "A": "Yes, because Approved Exporters can use any format",
+          "B": "No, because the OD must follow Annex A exactly",
+          "C": "No, because the OD must be in the English language",
+          "D": "No, because the OD must bear the BOC seal"
+        },
+        "correct": "C",
+        "reason": "Under Sec. 5.6.1, an Approved Exporter may use any format for the OD provided it contains the required information, is in the English language, bears the name and signature of the certifying person, and bears the completion date. All required information is present (the FOB value is needed only if the Regional Value Content criterion is used), but the OD is in Filipino, so it fails Sec. 5.6.1(b)."
+      }
+    ]
+  },
+  {
+    "type": "CMO",
+    "number": "12-2023",
+    "level1": [
+      {
+        "question": "Ayon sa Sec. 3.13, ano ang tinatawag na Proof of Origin sa ilalim ng Order na ito?",
+        "choices": {
+          "A": "Product Evaluation Report na inisyu ng ECD o Export Division/Unit",
+          "B": "Alinman sa CO na inisyu ng issuing body o DO ng Approved Exporter",
+          "C": "Authorization Code na ibinigay sa Approved Exporter",
+          "D": "Listahan ng raw materials na ginamit sa production ng export goods"
+        },
+        "correct": "B",
+        "reason": "Sa Sec. 3.13, ang Proof of Origin ay either isang Certificate of Origin (CO) na inisyu ng issuing body o isang Declaration of Origin (DO) ng Approved Exporter. Ang PER (Sec. 3.11) ay hiwalay na dokumento na resulta ng evaluation ng export products."
+      },
+      {
+        "question": "Aling division sa ilalim ng AOCG ng BOC ang nagpoproseso ng applications ng Approved Exporters at nagsasagawa ng verification ng originating status ng goods, ayon sa Sec. 3.5?",
+        "choices": {
+          "A": "Preferential Rate Unit (PRU)",
+          "B": "Customer Care Center (CCC)",
+          "C": "Export Coordination Division (ECD)",
+          "D": "Cash Division"
+        },
+        "correct": "C",
+        "reason": "Sa Sec. 3.5, ang Export Coordination Division (ECD) ay ang division sa ilalim ng Assessment and Operations Coordinating Group (AOCG) na nagpoproseso ng applications para sa Approved Exporters at nagsasagawa ng verifications ng originating status ng goods. Ang PRU naman ay nag-e-evaluate ng Proof of Origin ng importers (Sec. 3.12)."
+      },
+      {
+        "question": "Ano ang Tariff Differential ayon sa Sec. 3.16?",
+        "choices": {
+          "A": "Ibang tariff treatment na inaaplay ng RCEP importing Party sa iba't ibang RCEP Parties para sa parehong RCEP originating good",
+          "B": "Pagkakaiba ng MFN rate at RCEP rate na inaaplay ng importing Party sa iisang originating good",
+          "C": "Pagkakaiba ng FOB value at customs value na ginagamit sa pagkuwenta ng duties sa originating good",
+          "D": "Excess duties at taxes na binayaran ng importer dahil hindi nabigyan ng preferential tariff treatment"
+        },
+        "correct": "A",
+        "reason": "Sa Sec. 3.16, ang Tariff Differential ay ang iba't ibang tariff treatment na inaaplay ng isang RCEP importing Party sa iba't ibang RCEP Parties para sa parehong RCEP originating good. Ang mga goods na sakop nito ay nasa Annex 1 (footnote 2)."
+      },
+      {
+        "question": "Ayon sa Sec. 4.2, aling Proof of Origin ang tatanggapin ng BOC sa effectivity ng Order na ito?",
+        "choices": {
+          "A": "DO na inisyu ng kahit anong exporter o producer",
+          "B": "Back-to-back Proof of Origin na hindi batay sa CO o DO ng Approved Exporter",
+          "C": "CO Form RCEP lamang, hindi kasama ang DO",
+          "D": "CO Form RCEP at DO na inisyu ng Approved Exporter"
+        },
+        "correct": "D",
+        "reason": "Sa Sec. 4.2, CO Form RCEP at DO na inisyu ng Approved Exporter lang ang tatanggapin ng BOC sa effectivity ng Order. Ang DO ng exporter o producer ay tatanggapin lang kapag na-implement na ng Pilipinas ang subparagraph 1(c), Article 3.16 ng RCEP Agreement, at ang back-to-back Proof of Origin ay tatanggapin lang kung batay sa CO o DO ng Approved Exporter."
+      },
+      {
+        "question": "Ayon sa Sec. 4.4, ano ang puwedeng gawin ng importer na hindi nag-claim ng RCEP preferential tariff treatment sa oras ng importation?",
+        "choices": {
+          "A": "Mag-file ng bagong import entry para sa parehong shipment",
+          "B": "Mag-apply ng refund ng excess duties at taxes, kasama ang Proof of Origin at ebidensya",
+          "C": "Ipaubaya sa PRU ang awtomatikong pagbalik ng duties at taxes",
+          "D": "Humingi ng bagong PER mula sa ECD bilang kapalit ng refund"
+        },
+        "correct": "B",
+        "reason": "Sa Sec. 4.4, kahit hindi nag-claim sa oras ng importation, puwedeng mag-apply ang importer ng refund ng excess duties at taxes na binayaran dahil hindi nabigyan ng preferential tariff treatment. Kailangan niyang magsumite ng Proof of Origin at iba pang ebidensya na originating good ito (Sec. 4.4.1), at ng iba pang dokumentong hihingin ng BOC (Sec. 4.4.2)."
+      },
+      {
+        "question": "Ayon sa Sec. 5.3.4, ilang working days ang ibinibigay sa ECD para ibigay ang Approved Exporter status sa pamamagitan ng written authorization na may authorization code, mula sa receipt ng complete application?",
+        "choices": {
+          "A": "14 working days",
+          "B": "21 working days",
+          "C": "10 working days",
+          "D": "30 working days"
+        },
+        "correct": "A",
+        "reason": "Sa Sec. 5.3.4, kapag meritorious ang application, ibibigay ng ECD ang Approved Exporter status sa pamamagitan ng written authorization na may authorization code sa loob ng fourteen (14) working days mula sa receipt ng complete application. Kung hindi, maglalabas ito ng letter of disapproval na may dahilan ng denial."
+      },
+      {
+        "question": "Ayon sa Sec. 5.3.3(a), gaano katagal nang dapat nakikipag-transact sa BOC ang exporter bago ang petsa ng application para maituring na legitimate exporter at maging Approved Exporter?",
+        "choices": {
+          "A": "Hindi bababa sa anim (6) na buwan",
+          "B": "Hindi bababa sa dalawang (2) taon",
+          "C": "Hindi bababa sa isang (1) taon",
+          "D": "Hindi bababa sa tatlong (3) taon"
+        },
+        "correct": "C",
+        "reason": "Sa Sec. 5.3.3(a), isa sa criteria ng ECD ay legitimate exporter na dapat nakikipag-transact na sa BOC nang at least one (1) year bago ang date ng application."
+      },
+      {
+        "question": "Gaano katagal dapat itago ng Approved Exporter ang kopya ng DO at ng lahat ng dokumentong sumusuporta sa originating status ng good, ayon sa Sec. 5.4.2?",
+        "choices": {
+          "A": "Hindi bababa sa isang (1) taon mula sa petsa ng completion ng DO",
+          "B": "Hindi bababa sa dalawang (2) taon mula sa petsa ng completion ng DO",
+          "C": "Hindi bababa sa limang (5) taon mula sa petsa ng completion ng DO",
+          "D": "Hindi bababa sa tatlong (3) taon mula sa petsa ng completion ng DO"
+        },
+        "correct": "D",
+        "reason": "Sa Sec. 5.4.2, kailangang itago ng Approved Exporter ang kopya ng DO at ang lahat ng supporting documents, paper man o electronic, nang at least three (3) years mula sa petsa ng completion ng DO."
+      },
+      {
+        "question": "Ayon sa Sec. 5.7.1(b), ano ang additional requirement para sa goods na nakalista sa Annex 1 ng Order para ang exporting Party ang maging RCEP Country of Origin?",
+        "choices": {
+          "A": "Regional Value Content na 20%",
+          "B": "Domestic Value Addition na 40%",
+          "C": "Domestic Value Addition na 20% (DV20)",
+          "D": "Pagiging wholly obtained sa exporting Party"
+        },
+        "correct": "C",
+        "reason": "Sa Sec. 5.7.1(b), ang goods na nakalista sa Annex 1 ay kailangang matugunan ang additional requirement na nakasaad doon, ibig sabihin ang Domestic Value Addition na 20% (DV20), para ang exporting Party ang maging RCEP Country of Origin."
+      },
+      {
+        "question": "Saan mag-a-apply para sa Product Evaluation Report (PER) ang producer o trader na nasa labas ng Metro Manila, ayon sa Sec. 5.1.1?",
+        "choices": {
+          "A": "Export Division/Unit",
+          "B": "ECD",
+          "C": "AOCG Deputy Commissioner",
+          "D": "PRU"
+        },
+        "correct": "A",
+        "reason": "Sa Sec. 5.1.1, ang producers, traders, o kanilang authorized representatives ay mag-a-apply sa ECD kung nasa Metro Manila, at sa Export Division/Unit kung nasa labas ng Metro Manila."
+      }
+    ],
+    "level2": [
+      {
+        "question": "Rizal Foods Inc., a producer in Metro Manila, applies for a Product Evaluation Report (PER) to claim RCEP preferential tariff treatment, and the ECD receives its complete documents. The ECD determines that a plant visit is necessary and conducts one. Assuming the ECD uses the full time allowed by the Order, within how many working days from receipt of the complete documents must it act on the application?",
+        "choices": {
+          "A": "21 working days",
+          "B": "31 working days",
+          "C": "35 working days",
+          "D": "45 working days"
+        },
+        "correct": "B",
+        "reason": "Under Sec. 5.1.3, the ECD or Export Division/Unit must act on the PER application within twenty-one (21) working days from receipt of complete documents, and the evaluation may be extended for another ten (10) working days in case of plant visits. Because a plant visit was conducted, the total is 21 + 10 = 31 working days."
+      },
+      {
+        "question": "Mabuhay Exports Corp. applies for Approved Exporter status. It has transacted with the BOC for 18 months, has sound bookkeeping and record keeping, has good compliance under BOC risk management, has a signatory competent in ROO application, and agrees to regular monitoring and inspection. However, its first shipment to an RCEP Party was made only 8 months ago. Is its application meritorious under Sec. 5.3.3?",
+        "choices": {
+          "A": "Yes, because it has transacted with the BOC for at least one year",
+          "B": "Yes, because its compliance and record keeping are sound",
+          "C": "No, because it has transacted with the BOC for less than two years",
+          "D": "No, because it has exported to an RCEP Party for less than one year"
+        },
+        "correct": "D",
+        "reason": "Under Sec. 5.3.3(b), the exporter must have been exporting products to at least one RCEP Party for at least one (1) year. Mabuhay has exported to an RCEP Party for only 8 months, so it fails this criterion even though it satisfies the others, including the one-year BOC transaction requirement in Sec. 5.3.3(a). Under Sec. 5.3.4, the ECD would then issue a letter of disapproval stating the reasons."
+      },
+      {
+        "question": "Pacific Trading Corp., a Philippine Approved Exporter, holds a valid original CO covering 1,000 cartons of goods. The original CO is valid until 30 September 2023. It will re-export 400 cartons in a partial shipment, with no processing other than repacking, and will complete a back-to-back DO. Which back-to-back DO complies with Sec. 5.6.1?",
+        "choices": {
+          "A": "Valid until 31 October 2023 and showing 400 cartons",
+          "B": "Valid until 30 September 2023 and showing 1,000 cartons",
+          "C": "Valid until 30 September 2023 and showing 400 cartons",
+          "D": "Valid until 30 September 2023 and showing 1,200 cartons"
+        },
+        "correct": "C",
+        "reason": "Under Sec. 5.6.1(b), the validity of a back-to-back Proof of Origin may not exceed the validity of the original Proof of Origin, so it cannot run past 30 September 2023. Under Sec. 5.6.1(e), for partial export shipments the partial export quantity is shown instead of the full quantity, and the total re-exported may not exceed the original total. The compliant DO therefore shows 400 cartons."
+      },
+      {
+        "question": "Under EO No. 25, the Philippines applies different RCEP rates to the same originating good from different RCEP Parties: 3% for Party W, 5% for Party X, 8% for Party Y, and 10% for Party Z. A good was produced in Party X using originating materials from Party X and Party Y, while Parties W and Z contributed none. The importer chooses to claim under Sec. 5.8.3(a). What is the highest rate at which it may claim?",
+        "choices": {
+          "A": "8%",
+          "B": "5%",
+          "C": "10%",
+          "D": "3%"
+        },
+        "correct": "A",
+        "reason": "Under Sec. 5.8.3(a), the importer may claim at the highest rate of customs duty the importing Party applies to the same originating good from any of the RCEP Parties contributing originating materials used in its production. The contributing Parties are X (5%) and Y (8%), so the highest is 8%. The 10% rate would only be available under Sec. 5.8.3(b), which is a different option, and the importer did not choose it."
+      },
+      {
+        "question": "A Preferential Rate Unit (PRU) at a port has reasonable doubt about the authenticity of a CO submitted by an importer and decides to pursue a verification through a written request. How should the written request be processed under Sec. 6.1?",
+        "choices": {
+          "A": "The PRU sends it directly to the issuing body of the RCEP exporting Party.",
+          "B": "The PRU endorses it through the District Collector, and it is forwarded to the AOCG through the ECD.",
+          "C": "The PRU forwards it to the CCC, which sends it to the exporter.",
+          "D": "The District Collector sends it to the AOCG Deputy Commissioner, who sends it to the importer."
+        },
+        "correct": "B",
+        "reason": "Under Sec. 6.1.4, the written request for verification is endorsed by the PRU through the District Collector of the port concerned and forwarded to the AOCG through the ECD. Under Sec. 6.1.5, the ECD then sends the request to the importer, exporter, producer, or issuing body or competent authority. The PRU may request verification through the ECD when it has reasonable doubt (Sec. 4.9)."
+      },
+      {
+        "question": "Goods imported under a claim for RCEP preferential tariff treatment have not yet been released, and the PRU has requested verification of the Proof of Origin covering all the goods in the shipment. The duties and taxes would be Php 480,000.00 at the MFN rate and Php 310,000.00 at the RCEP rate. What guarantee is required before release?",
+        "choices": {
+          "A": "Surety bond for Php 170,000.00",
+          "B": "Manager's check for Php 310,000.00",
+          "C": "Manager's check for Php 170,000.00",
+          "D": "Manager's check for Php 480,000.00"
+        },
+        "correct": "C",
+        "reason": "Under Sec. 6.1.7, if the goods have yet to be released, the Proof of Origin subject to verification must have a guarantee in the form of a manager's check equivalent to the difference between the duties and taxes at the applicable MFN and RCEP rates. Php 480,000.00 - Php 310,000.00 = Php 170,000.00. The Cash Division holds the check in abeyance until the ECD orders its deposit or return."
+      },
+      {
+        "question": "Alba Electronics Inc. imported goods and claimed RCEP preferential tariff treatment. The PRU requested a verification visit to the foreign exporter, and the exporter refused to consent within the 30 days given to it. What may the BOC do under Sec. 6.1.9?",
+        "choices": {
+          "A": "The BOC may deny the claim for preferential tariff treatment.",
+          "B": "The BOC must conduct the visit on its own within 60 days.",
+          "C": "The BOC must grant the claim and close the verification.",
+          "D": "The BOC must suspend all future imports of the importer."
+        },
+        "correct": "A",
+        "reason": "Under Sec. 6.1.9, the exporter, producer, or competent authority has thirty (30) days from receipt of the written request to consent to or refuse the verification visit. If the visit is refused, the claim for preferential tariff treatment may be denied."
+      },
+      {
+        "question": "Delta Circuits Inc. imported goods covered by a CO, and the ECD received the foreign exporter's consent to a verification visit on 10 March 2024. The ECD conducted the visit on 1 May 2024. Assume periods are counted in calendar days, starting the day after the triggering date. By what date must the ECD make its decision?",
+        "choices": {
+          "A": "9 April 2024",
+          "B": "9 May 2024",
+          "C": "8 June 2024",
+          "D": "31 May 2024"
+        },
+        "correct": "D",
+        "reason": "Under Sec. 6.1.10, the ECD must conduct the verification visit within 60 days from receipt of the consent (by 9 May 2024, so the 1 May visit was timely) and must make its decision within thirty (30) days from the conduct of the visit. Counting 30 days from 1 May 2024 gives 31 May 2024."
+      },
+      {
+        "question": "On 2 October 2023, a written request for verification of a Proof of Origin from an RCEP importing Party, addressed to a Philippine exporter, was received by the AOCG Deputy Commissioner with a copy furnished to the ECD Chief. Assume calendar days, counted from the day after receipt. By what dates must the exporter provide the additional information and the ECD transmit the verification result to the importing Party?",
+        "choices": {
+          "A": "Exporter by 1 December 2023; ECD by 31 December 2023",
+          "B": "Exporter by 1 November 2023; ECD by 30 March 2024",
+          "C": "Exporter by 1 November 2023; ECD by 31 December 2023",
+          "D": "Exporter by 1 December 2023; ECD by 30 March 2024"
+        },
+        "correct": "C",
+        "reason": "Under Sec. 6.2.4, the exporter has thirty (30) days from receipt of the written request to provide the additional information, which is 1 November 2023. Under Sec. 6.2.5, the ECD must transmit the verification result to the importing Party within ninety (90) days from receipt of the written request, which is 31 December 2023."
+      },
+      {
+        "question": "Greenfield Spices Corp. is an Approved Exporter authorized by the BOC only for dried mango products. It also has complete documents proving that its dried pineapple chips meet the RCEP origin requirements. It completes a DO for a shipment of dried pineapple chips. Is this allowed under the Order?",
+        "choices": {
+          "A": "Yes, because it holds documents proving the originating status of the pineapple chips",
+          "B": "No, because a DO may be completed only for goods the BOC has authorized it to declare",
+          "C": "Yes, if it informs the BOC of the change within the next three years",
+          "D": "No, because DOs may be completed only after the PRU verifies the goods"
+        },
+        "correct": "B",
+        "reason": "Under Sec. 5.4.1(b), an Approved Exporter may complete a DO only for goods for which the BOC has allowed it to do so and for which it has all appropriate documents proving originating status. Having the documents is not enough; the pineapple chips are not covered by its authorization, so the DO is not allowed."
+      }
+    ]
+  },
+  {
+    "type": "CMO",
+    "number": "16-2023",
+    "level1": [
+      {
+        "question": "Ayon sa Sec. 3.1.1, hanggang ilang porsyento ng duty na ipinataw ng batas ang maaaring i-claim bilang Duty Drawback para sa imported fuel na ginamit sa propulsion ng sea vessel na engaged sa international trade?",
+        "choices": {
+          "A": "Hanggang 50%",
+          "B": "Hanggang 99%",
+          "C": "Hanggang 100%",
+          "D": "Hanggang 90%"
+        },
+        "correct": "B",
+        "reason": "Sa Sec. 3.1.1, puwedeng mag-apply ang importer ng Duty Drawback na hanggang maximum na ninety-nine percent (99%) ng duty na ipinataw ng batas para sa fuel na ginamit sa propulsion ng sea vessel sa international trade at ng scheduled flights ng international airlines. Ang 50% ay para sa petroleum oils sa Sec. 3.1.2, at ang 100% ay limit sa imported materials sa Sec. 3.1.3."
+      },
+      {
+        "question": "Sa ilalim ng Sec. 3.2 (Prohibition against Double Claim), aling ahensya ang dating pinag-applyan ng tax credit ng isang registered enterprise na magiging dahilan para hindi na ito maging entitled sa Duty Drawback sa parehong importation?",
+        "choices": {
+          "A": "NEDA",
+          "B": "DOST",
+          "C": "BIR",
+          "D": "BOI"
+        },
+        "correct": "D",
+        "reason": "Ayon sa Sec. 3.2, ang enterprise na rehistrado sa ilalim ng RA 5186 o RA 6135 at dati nang nag-apply ng tax credits sa Board of Investments (BOI) batay sa customs duties sa imported raw materials ay hindi na entitled sa Duty Drawback para sa parehong importation na na-process at na-re-export. Ito ang paraan para maiwasan ang double claim."
+      },
+      {
+        "question": "Ayon sa Sec. 3.3, ano ang dapat gawin ng Bureau kapag may kasamang Value-Added Tax o Excise Tax sa isinumiteng Duty Drawback claim?",
+        "choices": {
+          "A": "I-disallow ang VAT at Excise Tax; customs duties lang ang ipoproseso.",
+          "B": "Iproseso ang customs duties at VAT, pero hindi ang Excise Tax.",
+          "C": "Ibalik ang buong claim para i-refile nang walang VAT at Excise Tax.",
+          "D": "Iproseso ang buong claim kung may pahintulot ang BIR."
+        },
+        "correct": "A",
+        "reason": "Sa Sec. 3.3, limitado lang sa Duty Drawback ang pagproseso ng application. Kapag may internal revenue taxes tulad ng VAT o Excise Tax sa claim, dapat itong i-disallow, at ang portion lang ng customs duties paid ang ipoproseso ng Bureau. Ang refund ng internal revenue taxes ay sakop ng rules ng BIR."
+      },
+      {
+        "question": "Ayon sa Sec. 3.5.1, kailan magpe-prescribe ang claim at application para sa Duty Drawback ng fuel sa ilalim ng Secs. 3.1.1 at 3.1.2 kung hindi ito na-file?",
+        "choices": {
+          "A": "Anim (6) na buwan mula sa date of exportation",
+          "B": "Dalawang (2) taon mula sa date of importation",
+          "C": "Isang (1) taon mula sa date of importation",
+          "D": "Isang (1) taon mula sa date of exportation"
+        },
+        "correct": "C",
+        "reason": "Sa Sec. 3.5.1, magpe-prescribe ang claim kung hindi ito na-file sa loob ng isang (1) taon mula sa date of importation para sa mga kaso ng Secs. 3.1.1 at 3.1.2. Ang anim na buwan mula exportation ay para sa claims sa ilalim ng Sec. 3.1.3 (Sec. 3.5.2)."
+      },
+      {
+        "question": "Ayon sa Sec. 3.6, gaano katagal dapat iproseso at bayaran o igawad ang eligible Duty Drawback claims matapos matanggap ang properly accomplished claims at validated complete supporting documents?",
+        "choices": {
+          "A": "45 araw, hindi lalampas sa 90 araw",
+          "B": "60 araw, hindi lalampas sa 120 araw",
+          "C": "90 araw, hindi lalampas sa 180 araw",
+          "D": "120 araw, hindi lalampas sa 240 araw"
+        },
+        "correct": "B",
+        "reason": "Sa Sec. 3.6, ang eligible claims ay dapat maproseso at mabayaran o maigawad sa loob ng sixty (60) days, pero hindi lalampas sa maximum na 120 days matapos matanggap ang properly accomplished claims at validated complete supporting documents."
+      },
+      {
+        "question": "Ayon sa Sec. 3.7, ano ang pinakamahabang validity period ng Tax Credit Certificate (TCC) na inisyu para sa Duty Drawback, kasama na ang revalidation?",
+        "choices": {
+          "A": "Sampung (10) taon",
+          "B": "Limang (5) taon",
+          "C": "Pitong (7) taon",
+          "D": "Labinlimang (15) taon"
+        },
+        "correct": "A",
+        "reason": "Sa Sec. 3.7, may validity na limang (5) taon ang TCC at puwedeng i-revalidate para sa karagdagang limang (5) taon. Sa anumang kaso, hindi puwedeng lumampas sa sampung (10) taon ang validity period nito."
+      },
+      {
+        "question": "Alin sa mga sumusunod ang dapat nakalagay sa monthly summary list ng lahat ng approved claims na ibinibigay sa Post Clearance Audit Group (PCAG) ayon sa Sec. 3.9?",
+        "choices": {
+          "A": "Petsa ng pag-isyu ng TCC",
+          "B": "Pangalan ng customs broker",
+          "C": "Petsa ng loading ng export",
+          "D": "Entry Number/s"
+        },
+        "correct": "D",
+        "reason": "Sa Sec. 3.9, ang PCAG ay bibigyan ng monthly summary list ng approved claims na may Name of Importer or Claimant (Sec. 3.9.1), Entry Number/s (Sec. 3.9.2), at Amount of Claim/s (Sec. 3.9.3). Wala sa listahang ito ang mga ibang pagpipilian."
+      },
+      {
+        "question": "Ayon sa Sec. 3.10, sino ang magrerekomenda sa Commissioner of Customs na bumuo ng task group para mag-inspect sa company, plant, at facilities ng first-time claimant?",
+        "choices": {
+          "A": "PCAG",
+          "B": "TCC Secretariat",
+          "C": "TCC Committee",
+          "D": "Collection Service"
+        },
+        "correct": "C",
+        "reason": "Sa Sec. 3.10 (Verification by TCC Committee), hindi ipoproseso ang claim ng first-time claimant hangga't hindi pa na-inspect ng Bureau ang company, plant, at facilities nito. Ang TCC Committee ang magrerekomenda sa Commissioner of Customs ng paglikha ng task group para sa inspection."
+      },
+      {
+        "question": "Alin sa mga sumusunod na dokumento ang kailangang i-submit nang isang beses lamang sa first application ng claimant para sa Duty Drawback ayon sa Sec. 4.1.1?",
+        "choices": {
+          "A": "Bill of Lading",
+          "B": "Proof of payment of processing fee",
+          "C": "List of authorized signatories at kanilang specimen signatures",
+          "D": "Computation Table Using Regular Scheme"
+        },
+        "correct": "C",
+        "reason": "Sa Sec. 4.1.1 (One-time Submission), kasama sa isang beses lang isu-submit sa first application ang SEC o DTI Registration Certificate, Board Resolution o Notarized Secretary's Certificate, List of authorized signatories at specimen signatures, at latest Formula of Conversion. Ang Bill of Lading, proof of payment ng fee, at Computation Table ay kasama sa submission per application sa Sec. 4.1.2."
+      },
+      {
+        "question": "Anong dokumento ang bumuo sa batayan ng paglilipat sa Bureau of Customs ng pagproseso ng mga claim na dating naka-file sa DOF 'CENTER', ayon sa Sec. 2.3?",
+        "choices": {
+          "A": "AO No. 04, s. 2023",
+          "B": "CAO No. 04-2019",
+          "C": "CAO No. 14-72",
+          "D": "CAO No. 31-76"
+        },
+        "correct": "A",
+        "reason": "Sa Sec. 2.3, isa sa layunin ng Order ang magtakda ng procedures sa pagproseso ng claims na naka-file sa 'CENTER' dahil sa Administrative Order (AO) No. 04, s. 2023 ng Office of the President, na naglipat ng pagproseso sa Bureau of Customs."
+      }
+    ],
+    "level2": [
+      {
+        "question": "Kalinaw Ventures Corp. is preparing a Duty Drawback claim with a total claim amount of Php 1,350,000.00 and has already gathered complete documents. It wants to know the processing fee that must be paid before the Bureau can process the claim. Under the Order, which processing fee applies?",
+        "choices": {
+          "A": "Php 3,000.00",
+          "B": "Php 4,000.00",
+          "C": "Php 2,300.00",
+          "D": "Php 5,000.00"
+        },
+        "correct": "B",
+        "reason": "Under Sec. 3.4, claims are processed only after payment of the required processing fee and submission of complete documents, and the fee follows the schedule based on the amount of claim. A claim of Php 1,350,000.00 is over Php 1,000,000.00 but not over Php 5,000,000.00, so the fee is Php 4,000.00."
+      },
+      {
+        "question": "Dalisay Foods Corp. will file a Duty Drawback claim under Sec. 3.1.3 for goods that were exported on 5 February 2024. On 1 July 2024, which is 35 days before the six-month filing period lapses, it requests an extension to file. Assume each period ends on the same calendar date on which it began (for example, six months from 5 February ends on 5 August). If the request is properly made, what is the latest date by which the claim may actually be filed?",
+        "choices": {
+          "A": "5 August 2024",
+          "B": "1 July 2025",
+          "C": "5 February 2025",
+          "D": "5 August 2025"
+        },
+        "correct": "C",
+        "reason": "Under Sec. 3.5.2, a Sec. 3.1.3 claim must be filed within six months from exportation, and the claimant may request a further six months if the request is made thirty (30) days before the six-month period lapses. Here the request was made 35 days before, so it qualifies. The actual filing may not exceed one (1) year from the date of exportation, which is 5 February 2025."
+      },
+      {
+        "question": "Sunrise Packaging Inc. files a Duty Drawback claim under Sec. 3.1.3 for goods that were constructive exports. The delivery receipt is dated 8 May 2024, the sales invoice is dated 2 May 2024, the import duties were paid on 10 January 2024, and the Shipment Information Sheet was attested on 30 May 2024. From which date is the start of the prescriptive period reckoned with respect to the exportation?",
+        "choices": {
+          "A": "8 May 2024",
+          "B": "2 May 2024",
+          "C": "10 January 2024",
+          "D": "30 May 2024"
+        },
+        "correct": "A",
+        "reason": "Under Sec. 3.5.4(c), the start of the prescriptive period is reckoned from the date of delivery receipt in case of constructive exports. The date duties were paid (Sec. 3.5.4(a)) applies to importations, and the loading date (Sec. 3.5.4(b)) applies to actual exports, so the delivery receipt date of 8 May 2024 controls for the exportation."
+      },
+      {
+        "question": "Luzon Plastics Inc. imported resin on 3 March 2023 and paid the duties on the same day. It used the resin to make a single type of product and exported all of it on 20 June 2024. It seeks a refund of 80% of the duties paid on the resin used, and NEDA has made no determination requiring a Certification on Non-availability of locally-produced substitutes. Which requirement under Sec. 3.1.3 does the claim fail to satisfy?",
+        "choices": {
+          "A": "The refund must not exceed 100% of the duties paid on the materials used",
+          "B": "There must be no NEDA determination requiring a Certification on Non-availability",
+          "C": "An equitable apportionment must be made when two or more products result",
+          "D": "Exportation must be made within one year after the importation of the materials"
+        },
+        "correct": "D",
+        "reason": "Under Sec. 3.1.3(d), exportation must be made within one (1) year after the importation of the materials used. The resin was imported on 3 March 2023 and the products were exported on 20 June 2024, which is more than one year later. The other conditions are met on the stated facts: 80% is within the 100% cap (Sec. 3.1.3(b)), NEDA made no determination (Sec. 3.1.3(c)), and only one product resulted (Sec. 3.1.3(e))."
+      },
+      {
+        "question": "Pinoy Mills Corp. imported bulk wheat, paid the duties, and used it to produce flour that it exported. It is filing a claim under Sec. 3.1.3 and it is also the importer of the wheat. Besides the Goods Declaration, Bill of Lading, and Commercial Invoice, which document is also listed in its proof of importation for this bulk shipment, if applicable?",
+        "choices": {
+          "A": "Bunkering Permit and Customs Inspector Certification",
+          "B": "Load Port Survey Report or Discharge Port Survey Report",
+          "C": "Schedule of Fuel Oil Purchases of Electric Utilities",
+          "D": "Certification waiving the importer's right to claim"
+        },
+        "correct": "B",
+        "reason": "Under Sec. 4.1.2(c)(ii), the proof of importation for a Sec. 3.1.3 claim includes the Load Port Survey Report (LPSR) or Discharge Port Survey Report (DPSR) for bulk and break-bulk shipments, if applicable. The Bunkering Permit and the Schedule of Fuel Oil Purchases are proof of exportation items for Secs. 3.1.1 and 3.1.2 claims, and the waiver certification is for cases where the importer is not the claimant, which is not the case here."
+      },
+      {
+        "question": "The hard copies of Zenith Foods Corp.'s Duty Drawback documents were received by the Customer Care Center and transmitted to the TCC Secretariat, which informed the claimant through the ticket. Zenith asks which office assigns the specific docket number to the claim and which office assigns the Customs officer who reviews the completeness of the documents. What is the correct answer?",
+        "choices": {
+          "A": "The Customer Care Center assigns the docket number; the TCC Secretariat assigns the Customs officer.",
+          "B": "The Head Secretariat assigns the docket number; the TCC Secretariat assigns the Customs officer.",
+          "C": "The TCC Secretariat assigns the docket number; the Head Secretariat assigns the Customs officer.",
+          "D": "The Collection Service assigns the docket number; the TCC Committee assigns the Customs officer."
+        },
+        "correct": "C",
+        "reason": "Under Sec. 4.2.3, after receiving the hard copies the TCC Secretariat informs the claimant through the ticket and assigns a specific docket number to the claim. The Head Secretariat then assigns a Customs officer who reviews the completeness of the documents enumerated in Sec. 4.1.2."
+      },
+      {
+        "question": "A claimant created a ticket in the Customer Care Portal System (CCPS) at 9:00 a.m. on 14 May 2024 and uploaded the initial documents. It must now submit the hard copies of the uploaded documents and those enumerated under Sec. 4.1.2. By when and where must the hard copies be submitted?",
+        "choices": {
+          "A": "By 9:00 a.m. on 15 May 2024, at the Customer Care Center, Gate 3, South Harbor, Port Area, Manila",
+          "B": "By 9:00 a.m. on 15 May 2024, at the Export Division of the concerned Port of exportation",
+          "C": "By 9:00 a.m. on 16 May 2024, at the Customer Care Center, Gate 3, South Harbor, Port Area, Manila",
+          "D": "By 9:00 a.m. on 16 May 2024, at the office of the TCC Secretariat in Manila"
+        },
+        "correct": "A",
+        "reason": "Under Sec. 4.2.2, the hard copies must be submitted within twenty-four (24) hours from the creation of the ticket, at the Customer Care Center located at Gate 3, South Harbor, Port Area, Manila. Twenty-four hours from 9:00 a.m. on 14 May 2024 is 9:00 a.m. on 15 May 2024."
+      },
+      {
+        "question": "A claimant's Duty Drawback documents are complete, and the TCC Secretariat has verified that all duties subject of the claim were paid and remitted to the Bureau of the Treasury. The Collection Service, RCMG certifies that the claimant has an outstanding obligation with the Bureau. What must happen before the claim may be approved?",
+        "choices": {
+          "A": "The obligation is deducted from the TCC to be issued after approval.",
+          "B": "The claim is disapproved and the claimant must file a new application.",
+          "C": "The PCAG must clear the obligation before the Commissioner acts on the claim.",
+          "D": "The claimant must settle all of its outstanding obligations."
+        },
+        "correct": "D",
+        "reason": "Under Sec. 4.2.4(c), the TCC Secretariat must ensure that the claimant has no outstanding obligation as certified by the Collection Service, RCMG. Where there is an outstanding obligation, the claimant must settle all of its outstanding obligations before the claim is approved."
+      },
+      {
+        "question": "Tala Garments Inc. files a Duty Drawback claim under Sec. 3.1.3. Its verified import documents show 3,000 kg of fabric with total duties paid of Php 45,000.00. The ITDI Formula of Conversion requires 2 kg of fabric per garment. Verified export documents show 1,000 garments exported, but 100 of them were exported beyond the prescriptive period and are disallowed. What amount of Duty Drawback should be computed?",
+        "choices": {
+          "A": "Php 30,000.00",
+          "B": "Php 40,500.00",
+          "C": "Php 27,000.00",
+          "D": "Php 45,000.00"
+        },
+        "correct": "C",
+        "reason": "Under Sec. 4.2.4(d), the allowable export quantity is the verified export quantity less disallowances due to prescriptive periods: 1,000 - 100 = 900 garments. Fabric used = 900 x 2 kg = 1,800 kg, which does not exceed the 3,000 kg imported. Duty per kg = Php 45,000.00 / 3,000 kg = Php 15.00. Duty Drawback = 1,800 kg x Php 15.00 = Php 27,000.00."
+      },
+      {
+        "question": "Petrogen Corp., a non-electric utility, imported crude oil on which it paid the duty imposed by law of Php 2,000,000.00. It sold the crude oil directly to an electric utility for the generation of electric power. Assuming all other requirements are met, what is the maximum Duty Drawback it may apply for?",
+        "choices": {
+          "A": "Php 1,980,000.00",
+          "B": "Php 1,000,000.00",
+          "C": "Php 990,000.00",
+          "D": "Php 2,000,000.00"
+        },
+        "correct": "B",
+        "reason": "Under Sec. 3.1.2, crude oil imported by non-electric utilities and sold to electric utilities for the generation of electric power may be refunded up to a maximum of fifty percent (50%) of the duty imposed by law. 50% x Php 2,000,000.00 = Php 1,000,000.00. The 99% limit in Sec. 3.1.1 applies to fuel used for propulsion of qualified vessels and international flights, not to this situation."
+      }
+    ]
+  },
+  {
+    "type": "CMO",
+    "number": "17-2023",
+    "level1": [
+      {
+        "question": "Ano ang e-CDF ayon sa CMO 17-2023?",
+        "choices": {
+          "A": "Electronic form ng Currencies Declaration Form na prescribed ng BSP, required kapag may dalang currency lampas sa takdang halaga",
+          "B": "Electronic form ng Customs Baggage Declaration Form na prescribed ng BOC",
+          "C": "Dokumentong isinusumite bago umalis para sa mga gamit na ibabalik sa Pilipinas",
+          "D": "Manual na permit para sa pag-export ng goods sa commercial quantity"
+        },
+        "correct": "A",
+        "reason": "Sec. 3.4: Ang e-CDF ay ang electronic Currencies Declaration Form na prescribed ng BSP, kailangan kapag may foreign currency na lampas USD10,000 o Philippine currency na lampas Php50,000."
+      },
+      {
+        "question": "Sa loob ng ilang oras bago ang arrival o departure dapat ma-access at ma-accomplish ng Traveler ang eTravel Customs System?",
+        "choices": {
+          "A": "24 oras",
+          "B": "48 oras",
+          "C": "72 oras",
+          "D": "96 oras"
+        },
+        "correct": "C",
+        "reason": "Sec. 4.4 at 6.1.1: Puwedeng i-access ang eTravel Customs System sa loob ng pitumpu't-dalawang (72) oras bago ang arrival o departure."
+      },
+      {
+        "question": "Alin sa mga lane ang para sa Traveler na walang idideklara (Nothing to Declare) at walang dalang prohibited, restricted, o regulated na goods?",
+        "choices": {
+          "A": "Red Lane",
+          "B": "Green Lane",
+          "C": "Crew Lane",
+          "D": "Diplomatic Lane"
+        },
+        "correct": "B",
+        "reason": "Sec. 6.2.1: Ang Green Lane ay para sa Traveler na walang idideklara o may dalang duty-free goods lamang, at walang prohibited/restricted/regulated na goods."
+      },
+      {
+        "question": "Sino, anuman ang kanyang declaration sa e-CBDF o e-CDF, ay palaging dinadala sa lane para sa Crew o sa Red Lane para sa mandatory physical examination?",
+        "choices": {
+          "A": "OFW",
+          "B": "Diplomatic Personnel",
+          "C": "Non-Resident Filipino",
+          "D": "Crew Member"
+        },
+        "correct": "D",
+        "reason": "Sec. 6.2.4: Ang Crew Member, anuman ang declaration, ay dinadala sa lane para sa Crew o, kung wala, sa Red Lane, para sa mandatory physical examination."
+      },
+      {
+        "question": "Ano ang dapat isumite ng Traveler na may dalang Philippine currency na lampas sa Php50,000.00?",
+        "choices": {
+          "A": "Prior written authorization mula sa BSP",
+          "B": "Import permit mula sa FDA",
+          "C": "Special Permit to Load (SPL)",
+          "D": "Owner's Pre-Departure Declaration Form (OPDD)"
+        },
+        "correct": "A",
+        "reason": "Sec. 6.1.2(b) at 6.7.16: Kailangan ng prior written authorization mula sa BSP para sa Philippine currency na lampas Php50,000."
+      },
+      {
+        "question": "Ano ang tawag sa accountable form na ini-isyu kapag na-hold ang baggage ng Traveler o Crew Member?",
+        "choices": {
+          "A": "Order of Payment",
+          "B": "Clearance Certificate",
+          "C": "Held Baggage Receipt (HBR)",
+          "D": "Owner's Pre-Departure Declaration Form"
+        },
+        "correct": "C",
+        "reason": "Sec. 6.9.1: Ang HBR ay accountable form na ini-isyu ng warehouseman ng In-Bond Section kapag na-hold ang baggage."
+      },
+      {
+        "question": "Sino ang nagre-review ng findings ng Customs Examiner at pumipirma bilang \"Solemnizing Officer for Declaration\" sa e-CDF?",
+        "choices": {
+          "A": "Cashier",
+          "B": "Supervisor o katumbas na opisyal (COO V)",
+          "C": "System Administrator",
+          "D": "MISTG"
+        },
+        "correct": "B",
+        "reason": "Sec. 5.3: Ang Supervisor o equivalent officer (COO V) ang nagre-review ng findings at pumipirma bilang Solemnizing Officer sa e-CDF."
+      },
+      {
+        "question": "Gaano katagal dapat i-review at i-update, kung kinakailangan, ang CMO 17-2023 at ang eTravel Customs System?",
+        "choices": {
+          "A": "Taun-taon",
+          "B": "Bawat dalawang (2) taon",
+          "C": "Bawat limang (5) taon",
+          "D": "Bawat tatlong (3) taon"
+        },
+        "correct": "D",
+        "reason": "Sec. 13: Ire-review at aamyendahan/aupdate ang Order at ang eTravel Customs System bawat tatlong (3) taon."
+      },
+      {
+        "question": "Alin sa mga sumusunod na regulated goods ang direktang itinuturnover sa regulatory agency NANG WALANG HBR kapag kulang ang required permit?",
+        "choices": {
+          "A": "Regulated perishable goods tulad ng prutas, gulay, at hilaw na karne",
+          "B": "Firearms at ammunitions",
+          "C": "Dangerous drugs",
+          "D": "Gambling paraphernalia"
+        },
+        "correct": "A",
+        "reason": "Sec. 6.8.2: Ang regulated perishable goods (fruits, vegetables, raw meat) ay agad na itinuturnover sa regulatory agency nang walang pag-isyu ng HBR, hindi katulad ng ibang regulated/restricted goods."
+      },
+      {
+        "question": "Aling CMO ang partikular na na-repeal ng CMO 17-2023 ayon sa Sec. 14?",
+        "choices": {
+          "A": "CMO No. 16-2021",
+          "B": "CMO No. 06-2020",
+          "C": "CMO No. 11-2022",
+          "D": "CMO No. 53-2010"
+        },
+        "correct": "C",
+        "reason": "Sec. 14: Partikular na binabanggit ang Customs Memorandum Order No. 11-2022 bilang repealed ng CMO 17-2023."
+      }
+    ],
+    "level2": [
+      {
+        "question": "A Traveler's baggage is found to contain dutiable goods. The Customs Examiner completes the assessment and signs the e-CBDF, tagging it for approval. After the Supervisor approves the assessment and the Traveler agrees to pay, what is the correct next step under Sec. 6.6?",
+        "choices": {
+          "A": "The Traveler proceeds to the Cashier or Collecting Officer for payment.",
+          "B": "The Examiner immediately tags the e-CBDF as \"Cleared\" without further action.",
+          "C": "The Traveler is directed back to the Green Lane for re-processing.",
+          "D": "The Supervisor personally collects the payment on behalf of the Cashier."
+        },
+        "correct": "A",
+        "reason": "Sec. 6.6.6-6.6.7: once the assessment is approved and the Traveler agrees to pay, the e-CBDF is tagged for payment and the Traveler proceeds to the Cashier or Collecting Officer."
+      },
+      {
+        "question": "A Traveler is bringing into the Philippines exactly USD10,000 in cash and no other currency or monetary instruments. Must this Traveler accomplish the e-CDF?",
+        "choices": {
+          "A": "Yes, because the amount meets the declarable threshold.",
+          "B": "Yes, but only if asked verbally by the Customs Examiner.",
+          "C": "No, because USD10,000 and below does not need to be declared under Sec. 6.7.1.",
+          "D": "No, because only Philippine currency needs to be declared."
+        },
+        "correct": "C",
+        "reason": "Sec. 6.7.1(a): Travelers need not declare foreign currency in an amount of USD10,000 and below — only amounts in excess of USD10,000 require declaration."
+      },
+      {
+        "question": "A Traveler only remembers to deal with customs requirements at the airport itself, having failed to accomplish the e-CBDF within 72 hours before arrival. What should the Assigned Customs Officer do under Sec. 9?",
+        "choices": {
+          "A": "Deny the Traveler entry until the e-CBDF is accomplished online beforehand.",
+          "B": "Assist the Traveler in using the eTravel Customs System Kiosk at the Arrival Area.",
+          "C": "Automatically tag the Traveler for the Red Lane as a penalty.",
+          "D": "Require the Traveler to pay a late filing fee before processing."
+        },
+        "correct": "B",
+        "reason": "Sec. 9: when a Traveler was unable to accomplish the e-CBDF/e-CDF within 72 hours, the Assigned Customs Officer shall assist them using the eTravel Customs System Kiosk in the Arrival or Departure Area."
+      },
+      {
+        "question": "Traveler Cruz declared USD15,000 in the e-CDF. During the actual counting in the secondary examination room, the Customs team found USD20,000, indicating a false declaration rather than an honest mistake. What should happen to the declared and undeclared amounts?",
+        "choices": {
+          "A": "The entire USD20,000 shall be held in the In-Bond Room, and an HBR issued for the full amount.",
+          "B": "Both amounts shall be returned since Cruz had made a declaration in good faith.",
+          "C": "The entire USD20,000 shall be confiscated without issuance of any receipt.",
+          "D": "The declared USD15,000 shall be returned to Cruz, and the undeclared USD5,000 shall be held with an HBR issued."
+        },
+        "correct": "D",
+        "reason": "Sec. 6.7.14: in case of a discrepancy between the declared and counted amount due to false declaration, the declared amount (USD15,000) is returned and the undeclared excess (USD5,000) is held in the In-Bond Room with an HBR issued."
+      },
+      {
+        "question": "During the counting of a large amount of undeclared foreign currency discovered through x-ray scanning, several Bureau personnel are required to be present as witnesses in the secondary examination room. Besides the CIIS and ESS, which other officer must also act as a witness because the currency was discovered via x-ray?",
+        "choices": {
+          "A": "The XIP (X-ray Inspection Project) Operative",
+          "B": "The System Administrator",
+          "C": "The District Collector",
+          "D": "The MISTG representative"
+        },
+        "correct": "A",
+        "reason": "Sec. 6.7.9: the XIP Operative shall also act as a witness if the currency was discovered as a result of x-ray scanning, in addition to the CIIS and ESS witnesses under the Flight Supervisor's supervision."
+      },
+      {
+        "question": "A Traveler failed to present the required import permit for a box of fresh fruits and vegetables classified as regulated goods. Under Sec. 6.8.2, what should happen to these goods?",
+        "choices": {
+          "A": "They shall be held in the In-Bond Room with an HBR issued to the Traveler.",
+          "B": "They shall be released to the Traveler subject to payment of a penalty.",
+          "C": "They shall be immediately turned over to the concerned regulatory agency without issuance of an HBR.",
+          "D": "They shall be forwarded to the ESS for investigation regardless of fraud."
+        },
+        "correct": "C",
+        "reason": "Sec. 6.8.2 specifically exempts regulated perishable goods such as fruits, vegetables, and raw meat from the HBR process — they are turned over directly to the concerned regulatory agency."
+      },
+      {
+        "question": "A departing Traveler intends to bring out goods for export in commercial quantities. Under Sec. 7.10, what must this Traveler manually accomplish and file with the Bureau of Customs?",
+        "choices": {
+          "A": "An Owner's Pre-Departure Declaration Form (OPDD)",
+          "B": "A Special Permit to Load (SPL)",
+          "C": "A Held Baggage Receipt (HBR)",
+          "D": "A Post Entry Modification Form (PEMF)"
+        },
+        "correct": "B",
+        "reason": "Sec. 7.10: departing Travelers/Crew Members with goods for export in commercial quantities shall manually accomplish and file a Special Permit to Load (SPL); the OPDD is for goods that will be returned, not commercial export."
+      },
+      {
+        "question": "A Bureau employee is found to have unlawfully disclosed confidential personal data obtained from the eTravel Customs System for personal gain. Under Sec. 12.3, what law(s) govern the penalty for this employee?",
+        "choices": {
+          "A": "Only the Data Privacy Act of 2012",
+          "B": "Only internal Bureau administrative sanctions, with no external law involved",
+          "C": "Section 1412 of the CMTA only",
+          "D": "Section 1431 of the CMTA and the Data Privacy Act"
+        },
+        "correct": "D",
+        "reason": "Sec. 12.3: an officer, agent, or employee found guilty of unlawfully disclosing confidential information shall be penalized pursuant to Section 1431 of the CMTA and the Data Privacy Act."
+      },
+      {
+        "question": "Traveler Santos declared \"Nothing to Declare\" in the e-CBDF and proceeded to the Green Lane. However, based on derogatory intelligence information, a Customs Officer decided to redirect Santos for further inspection. Is this redirection valid under CMO 17-2023?",
+        "choices": {
+          "A": "Yes, because a Customs Officer may direct any Traveler to the Red Lane regardless of declaration, based on intelligence information or risk management selection.",
+          "B": "No, because once a Traveler is routed to the Green Lane, the decision is final.",
+          "C": "No, because only Crew Members can be redirected regardless of their declaration.",
+          "D": "Yes, but only the District Collector has the authority to order such redirection."
+        },
+        "correct": "A",
+        "reason": "Sec. 6.2.3: a Customs Officer may direct any Traveler arriving at any port of entry to the RED LANE regardless of his/her declaration, pursuant to the risk management selection process (random, reasoned, or intelligence-based)."
+      },
+      {
+        "question": "Due to an unstable internet connection at a small seaport, several arriving Travelers were unable to access the eTravel Customs System. What should the assigned Customs Officer do under Sec. 10, and what happens to the paper declarations afterward?",
+        "choices": {
+          "A": "Turn away the Travelers until internet service is restored.",
+          "B": "Require Travelers to use the eTravel Kiosk exclusively, since paper forms are not allowed at seaports.",
+          "C": "Assist the Travelers in manually filling out the paper CBDF/CDF form, then encode the details in the system and upload the scanned copy.",
+          "D": "Automatically tag all affected Travelers for the Red Lane without processing."
+        },
+        "correct": "C",
+        "reason": "Sec. 10: when the system is unavailable due to breakdown or unstable internet connection, the paper form is used; the Customs Officer assists in accomplishing it, then encodes the details in the system and uploads the scanned copy of the paper form."
+      }
+    ]
+  },
+  {
+    "type": "CMO",
+    "number": "09-2022",
+    "level1": [
+      {
+        "question": "Ano ang BCOR ayon sa CMO 09-2022?",
+        "choices": {
+          "A": "Basic Customs Operations Report",
+          "B": "Bureau of Customs Order of Receipt",
+          "C": "Bureau of Customs Official Receipt",
+          "D": "Bureau Collection and Order Receipt"
+        },
+        "correct": "C",
+        "reason": "Sec. 3.1: Ang BCOR ay ang Bureau of Customs Official Receipt."
+      },
+      {
+        "question": "Saklaw ng CMO 09-2022 ang anong klaseng goods declaration?",
+        "choices": {
+          "A": "Goods Declaration for Consumption na na-lodge sa E2M customs system",
+          "B": "Goods Declaration sa ilalim ng informal entry lamang",
+          "C": "Export Declaration na na-lodge sa E2M",
+          "D": "Goods Declaration for Warehousing lamang"
+        },
+        "correct": "A",
+        "reason": "Sec. 1: Sakop ng Order ang Goods Declaration for Consumption na na-lodge sa E2M, formal man o informal entry, bayad man o hindi ng duties/taxes."
+      },
+      {
+        "question": "Ilang araw mula sa pagbayad ng duties at taxes dapat gawin ng LBD ang initiatory Notice of Discrepancy, bilang isa sa pre-requisites ng PMS?",
+        "choices": {
+          "A": "Sampu (10) araw",
+          "B": "Dalawampu (20) araw",
+          "C": "Tatlumpu (30) araw",
+          "D": "Labinlima (15) araw"
+        },
+        "correct": "D",
+        "reason": "Sec. 4.3(c): Dapat magawa ang initiatory Notice of Discrepancy sa loob ng labinlimang (15) araw mula sa pagbayad ng duties at taxes."
+      },
+      {
+        "question": "Alin sa sumusunod ang EXEMPTED sa 15-day review ng LBD ayon sa Sec. 4.4?",
+        "choices": {
+          "A": "Goods declaration na may Order of Payment",
+          "B": "Goods declaration na subject ng audit ng Post Clearance Audit Group (PCAG)",
+          "C": "Goods declaration na naka-tag na \"ACCEPTED\"",
+          "D": "Goods declaration na may Risk Code na CLADJ"
+        },
+        "correct": "B",
+        "reason": "Sec. 4.4(c): Exempted sa 15-day review ng LBD ang goods declaration na subject ng audit ng Post Clearance Audit Group (PCAG)."
+      },
+      {
+        "question": "Sino ang nag-a-approve ng Post Entry Modification Form (PEMF) bago gawin ang PMS?",
+        "choices": {
+          "A": "Chief, LBD",
+          "B": "COO V",
+          "C": "District Collector",
+          "D": "LBD Supervising Customs Assessor"
+        },
+        "correct": "C",
+        "reason": "Sec. 6.1: Sasagutan ng LBD ang PEMF para sa approval ng District Collector."
+      },
+      {
+        "question": "Sa loob ng ilang oras dapat isumite ang original hard copies ng Goods Declaration sa Customer Care Center (CCC) mula sa online filing?",
+        "choices": {
+          "A": "48 oras",
+          "B": "24 oras",
+          "C": "72 oras",
+          "D": "15 araw"
+        },
+        "correct": "A",
+        "reason": "Sec. 4.6: Dapat isumite sa CCC ang original hard copies sa loob ng apatnapu't-walong (48) oras mula sa on-line filing."
+      },
+      {
+        "question": "Ano ang tinutukoy ng Risk Code na \"CLADJ\" sa talahanayan ng Sec. 6.2?",
+        "choices": {
+          "A": "Computation Adjustment",
+          "B": "Cash Adjustment",
+          "C": "Clearance Adjustment",
+          "D": "Classification Adjustment"
+        },
+        "correct": "D",
+        "reason": "Sec. 6.2 Risk Codes table: Ang CLADJ ay Classification Adjustment (ang Computation Adjustment ay COADJ)."
+      },
+      {
+        "question": "Kailan magkakabisa ang CMO 09-2022 ayon sa Sec. 11?",
+        "choices": {
+          "A": "Kaagad pagkatapos pirmahan ng Commissioner",
+          "B": "Limang (5) araw pagkatapos mai-post sa official website ng Bureau",
+          "C": "Labinlimang (15) araw pagkatapos ng publication sa newspaper",
+          "D": "Tatlumpung (30) araw pagkatapos ng pag-file sa ONAR"
+        },
+        "correct": "B",
+        "reason": "Sec. 11: Magkakabisa ang Order limang (5) araw pagkatapos itong ma-post sa official website ng Bureau."
+      },
+      {
+        "question": "Anong status ang ilalagay ng Chief, LBD sa Goods Declaration kung walang discrepancy matapos niyang i-verify ang computation?",
+        "choices": {
+          "A": "\"For Review/Revise\"",
+          "B": "\"Delinquent\"",
+          "C": "\"ACCEPTED\"",
+          "D": "\"Cancelled\""
+        },
+        "correct": "C",
+        "reason": "Sec. 5.9: Kung walang discrepancy sa review ng Goods Declaration, ita-tag ito ng Chief, LBD bilang \"ACCEPTED\"."
+      },
+      {
+        "question": "Paano dapat bayaran ng importer ang deficiency sa in-house bank gamit ang Cash-SAD Module?",
+        "choices": {
+          "A": "Cash o Manager's Check",
+          "B": "Online bank transfer lamang",
+          "C": "Credit card",
+          "D": "Postal money order"
+        },
+        "correct": "A",
+        "reason": "Sec. 6.4: Babayaran agad ng importer ang halaga (Cash o Manager's Check) sa in-house bank gamit ang Cash-SAD Module."
+      }
+    ],
+    "level2": [
+      {
+        "question": "Alpha Trading paid the assessed duties and taxes on its Goods Declaration on October 1, 2026, and the shipment was released the same day. The LBD later found a discrepancy in the declared freight charges. Assuming the 15-day count starts the day after payment, what is the latest date under Sec. 4.3(c) by which the LBD must issue the initiatory Notice of Discrepancy for this discrepancy to still qualify for PMS?",
+        "choices": {
+          "A": "October 16, 2026",
+          "B": "October 8, 2026",
+          "C": "October 21, 2026",
+          "D": "October 31, 2026"
+        },
+        "correct": "A",
+        "reason": "Under Sec. 4.3(c), the initiatory Notice of Discrepancy must be made within fifteen (15) days from payment of duties and taxes. Counting from October 1 (day 0), the 15th day falls on October 16, 2026."
+      },
+      {
+        "question": "A shipment's Goods Declaration was flagged for audit by the Post Clearance Audit Group (PCAG) after payment of duties and taxes. Must the LBD still conduct its review and issue a Notice of Discrepancy within 15 days from payment for this Goods Declaration?",
+        "choices": {
+          "A": "Yes, the 15-day review period still strictly applies regardless of other audits.",
+          "B": "Yes, but the LBD must wait for a new 30-day period to start.",
+          "C": "No, because this Goods Declaration is exempted from the LBD's 15-day review under Sec. 4.4.",
+          "D": "No, because PCAG audit automatically cancels the Goods Declaration."
+        },
+        "correct": "C",
+        "reason": "Sec. 4.4(c) expressly exempts goods declarations subject of audit by the Post Clearance Audit Group (PCAG) from the LBD's 15-day review."
+      },
+      {
+        "question": "After completing the final assessment of a Goods Declaration, COO V is deciding what to do next with the ticket in the system. What is the correct action under CMO 09-2022?",
+        "choices": {
+          "A": "Close the ticket, since the assessment process is already complete.",
+          "B": "Transfer the ticket to the LBD instead of closing it.",
+          "C": "Forward the ticket directly to the District Collector for approval.",
+          "D": "Assign the ticket back to COO III for re-examination."
+        },
+        "correct": "B",
+        "reason": "Sec. 4.2: After final assessment, the COO V, instead of closing the ticket, shall transfer the same to the LBD."
+      },
+      {
+        "question": "The EPU personnel at the Customer Care Center (CCC) of a port OTHER than the Port of Manila (POM) or Manila International Container Port (MICP) received the hard copy of a Goods Declaration for Consumption. To whom should this hard copy be transmitted, and within how many hours?",
+        "choices": {
+          "A": "To the Section Chiefs of the Assessment Division, within 24 hours",
+          "B": "To the Chief, LBD, within 48 hours",
+          "C": "To the District Collector, within 48 hours",
+          "D": "To the Chief of the Assessment Division, within 24 hours"
+        },
+        "correct": "D",
+        "reason": "Sec. 4.7: In ports other than POM and MICP, the hard copy is transmitted to the Chief of the Assessment Division within twenty-four (24) hours (POM/MICP route to the Section Chiefs instead)."
+      },
+      {
+        "question": "The LBD of a certain port has thousands of Goods Declarations pending liquidation for the month, a volume the Chief, LBD considers high. Under Sec. 5.5, what is the minimum number of Goods Declarations that EACH assessor must liquidate per day under this condition?",
+        "choices": {
+          "A": "10 Goods Declarations per day",
+          "B": "15 Goods Declarations per day",
+          "C": "20 Goods Declarations per day",
+          "D": "25 Goods Declarations per day"
+        },
+        "correct": "C",
+        "reason": "Sec. 5.5 sets a flat minimum: in case of a higher number of Goods Declarations for liquidation, each assessor shall liquidate at least twenty (20) Goods Declarations per day, regardless of the total volume."
+      },
+      {
+        "question": "Importer Beta Corp paid the deficiency in duties and taxes through the in-house bank using the Cash-SAD Module. What must Beta Corp do next under Sec. 6.5 to complete the documentary requirement for this payment?",
+        "choices": {
+          "A": "Upload a copy of the BCOR in the CCPS as proof of payment.",
+          "B": "Submit a new Post Entry Modification Form (PEMF) to the District Collector.",
+          "C": "File a protest with the Assessment Division.",
+          "D": "Request a new Order of Payment from the LBD."
+        },
+        "correct": "A",
+        "reason": "Sec. 6.5: Upon payment, the importer shall upload a copy of the BCOR in the CCPS as proof of payment."
+      },
+      {
+        "question": "Consignee Gamma Inc. did not respond at all to the Notice of Discrepancy even after the 15-day period lapsed, and also did not respond to the subsequent Final Demand Letter. Separately, Consignee Delta Logistics answered the Notice of Discrepancy through a CCPS ticket, but refused to pay after its explanation was found without merit. How should the Chief, LBD tag both Goods Declarations?",
+        "choices": {
+          "A": "Both should be tagged \"Cancelled\", since neither consignee paid.",
+          "B": "Gamma Inc.'s Goods Declaration should be tagged \"ACCEPTED\", while Delta Logistics' should be tagged \"Delinquent\".",
+          "C": "Both should remain tagged \"For Review/Revise\" until the District Collector intervenes.",
+          "D": "Gamma Inc.'s Goods Declaration should be tagged \"Delinquent\" under Sec. 5.12, and Delta Logistics' should also be tagged \"Delinquent\" under Sec. 5.16."
+        },
+        "correct": "D",
+        "reason": "Sec. 5.12 covers a consignee who never answers the Final Demand Letter, and Sec. 5.16 covers a consignee who answers but still refuses to pay — both situations end with the Chief, LBD tagging the Goods Declaration as \"Delinquent\", even though the paths differ."
+      },
+      {
+        "question": "After the District Collector approves the PEMF for a shipment and the assigned LBD Assessor performs the PMS, a determination must be made on the level of risk for the adjustment, to be reflected using a Risk Code. Who makes this determination under Sec. 6.2?",
+        "choices": {
+          "A": "The LBD Supervising Customs Assessor",
+          "B": "The District Collector",
+          "C": "The Customs Operations Officer III (COO III)",
+          "D": "The Chief, LBD"
+        },
+        "correct": "A",
+        "reason": "Sec. 6.2: For an effective feedback mechanism, the LBD Supervising Customs Assessor shall determine the level of risk using the Risk Codes."
+      },
+      {
+        "question": "During a PMS, the LBD Assessor found that only the declared freight charges were understated, requiring an upward adjustment to reflect the correct freight value. Which Risk Code under Sec. 6.2 should be used for this adjustment?",
+        "choices": {
+          "A": "INADJ (Insurance Adjustment)",
+          "B": "FRADJ (Freight Adjustment)",
+          "C": "OCADJ (Other Charges Adjustment)",
+          "D": "COADJ (Computation Adjustment)"
+        },
+        "correct": "B",
+        "reason": "Sec. 6.2 Risk Codes table: FRADJ corresponds to Freight Adjustment, which matches the freight-only adjustment in this scenario."
+      },
+      {
+        "question": "A Goods Declaration lodged and finally assessed in the E2M system was paid and released on September 1, 2026. It turned out that the sole reason for the adjustment was a statement of errors correctable under Section 912 of the CMTA, discovered by the LBD on September 10, 2026. Must this adjustment still go through the LBD's 15-day review process under Sec. 4.3(c)?",
+        "choices": {
+          "A": "Yes, because all adjustments after release must undergo the 15-day LBD review.",
+          "B": "No, because the discovery was made outside the 15-day period from payment.",
+          "C": "No, because adjustments arising from Section 912 CMTA statement of errors are exempted from the LBD's 15-day review under Sec. 4.4(b).",
+          "D": "Yes, but only if the importer requests the exemption in writing."
+        },
+        "correct": "C",
+        "reason": "Sec. 4.4(b) exempts adjustments arising from a statement of errors in conformity with Section 912 of the CMTA from the LBD's 15-day review, regardless of when within that window the error is discovered."
+      }
+    ]
+  },
+  {
+    "type": "CMO",
+    "number": "09-2021",
+    "level1": [
+      {
+        "question": "Alin ang tamang paglalarawan sa Express Shipments ayon sa CMO 09-2021?",
+        "choices": {
+          "A": "Consolidated air shipments na time-sensitive at naka-ship sa ilalim ng HAWB na naka-consign sa ultimate consignee",
+          "B": "Consolidated air shipments na time-sensitive at naka-ship sa ilalim ng MAWB na naka-consign sa AECO",
+          "C": "Consolidated sea shipments na time-sensitive at naka-ship sa ilalim ng bill of lading na naka-consign sa AECO",
+          "D": "Consolidated air shipments na time-sensitive at naka-ship sa ilalim ng MAWB na naka-consign sa Bureau"
+        },
+        "correct": "B",
+        "reason": "Sec. 2.7: Ang Express Shipments ay consolidated air shipments ng goods na time-sensitive, usually door-to-door, at naka-ship sa ilalim ng MAWB na naka-consign sa AECO. Kaya MAWB na naka-consign sa AECO ang tamang sagot."
+      },
+      {
+        "question": "Ano ang tawag sa unloading, sortation, at reloading ng goods sa isang tuloy-tuloy na proseso sa loob ng iisang port of entry?",
+        "choices": {
+          "A": "Transhold",
+          "B": "Transload",
+          "C": "Transfer",
+          "D": "Transsort"
+        },
+        "correct": "D",
+        "reason": "Sec. 2.5.4(d): Ang Transsort ay ang unloading, sortation, at reloading ng goods sa isang continuous process sa iisang port of entry. Ang Transhold ay walang unloading o sortation, ang Transload ay paglipat sa ibang mode of transportation, at ang Transfer ay transit sa ibang port of entry."
+      },
+      {
+        "question": "Ilang working days ang ibinibigay sa AMO para kumilos sa application for accreditation ng AECO, mula sa receipt ng application at kumpletong documentary requirements at pagkatapos ng inspection ng IT systems?",
+        "choices": {
+          "A": "Pitong (7) working days",
+          "B": "Limang (5) working days",
+          "C": "Sampung (10) working days",
+          "D": "Labinlimang (15) working days"
+        },
+        "correct": "A",
+        "reason": "Sec. 4.3: Kikilos ang AMO sa application within seven (7) working days mula sa receipt ng application at kumpletong documentary requirements, at matapos ang inspection ng IT systems ng AECO."
+      },
+      {
+        "question": "Magkano ang minimum na security deposit na dapat i-deposit at i-maintain ng AECO sa AAB para sa Low-value, Dutiable and/or Taxable Express Shipments?",
+        "choices": {
+          "A": "Php1,000,000.00",
+          "B": "Php2,500,000.00",
+          "C": "Php5,000,000.00",
+          "D": "Php10,000,000.00"
+        },
+        "correct": "C",
+        "reason": "Sec. 6: Dapat mag-deposit at mag-maintain ang AECO sa AAB ng hindi bababa sa Php5,000,000.00 bilang guaranty ng immediate payment ng bangko kapag hiningi ng Bureau."
+      },
+      {
+        "question": "Para sa shipments na galing sa continent maliban sa Asia, gaano katagal bago ang arrival ng aircraft dapat maipadala ng AECO ang e-IFCM?",
+        "choices": {
+          "A": "At least isang (1) oras",
+          "B": "At least dalawang (2) oras",
+          "C": "At least apat (4) na oras",
+          "D": "At least anim (6) na oras"
+        },
+        "correct": "C",
+        "reason": "Sec. 8.1.2: Ang e-IFCM mula sa continents other than Asia ay dapat maipadala at least four (4) hours bago dumating ang aircraft. Ang at least one (1) hour ay para lamang sa shipments galing Asia (Sec. 8.1.1)."
+      },
+      {
+        "question": "Ano ang tawag sa Cargo Manifest ng lahat ng shipments na pansamantalang i-u-unload sa port of entry sa Pilipinas at ire-re-export sa bansang hindi Pilipinas?",
+        "choices": {
+          "A": "Transshipment Foreign Cargo Manifest (TFCM)",
+          "B": "Outward Foreign Cargo Manifest (OFCM)",
+          "C": "Inward Foreign Cargo Manifest (IFCM)",
+          "D": "Consolidated Inward Foreign Cargo Manifest (CIFCM)"
+        },
+        "correct": "A",
+        "reason": "Sec. 2.4.4: Ang TFCM ay ang Cargo Manifest ng shipments na pansamantalang i-u-unload sa port of entry at re-re-export sa ibang bansa. Ang OFCM (Sec. 2.4.3) ay listahan ng HAWB at/o MAWB ng transshipment cargo na aalis sa isang flight."
+      },
+      {
+        "question": "Ano ang nagsisilbing goods declaration para sa Correspondence and Documents?",
+        "choices": {
+          "A": "Single Administrative Document (SAD) na isinumite ng AECO",
+          "B": "Export Declaration ng exporter",
+          "C": "Supplemental IFCM",
+          "D": "Detailed CIFCM"
+        },
+        "correct": "D",
+        "reason": "Sec. 11: Ang detailed CIFCM para sa lahat ng Correspondence and Documents ang nagsisilbing goods declaration, kaya hindi na kailangan ng hiwalay na SAD para sa kategoryang ito."
+      },
+      {
+        "question": "Sino ang dapat magbigay ng office at IT equipment, office furniture, at iba pang implements para sa customs office sa loob ng AECO facility?",
+        "choices": {
+          "A": "District Collector",
+          "B": "AECO",
+          "C": "MISTG",
+          "D": "Accounts Management Office"
+        },
+        "correct": "B",
+        "reason": "Sec. 5.1: Ang customs office ay itinatayo sa loob ng facility ng AECO, at ang AECO ang magbibigay ng kinakailangang office at IT equipment, office furniture, at iba pang implements."
+      },
+      {
+        "question": "Gaano katagal dapat i-maintain ng AECO ang electronic database ng lahat ng TFCM at OFCM para sa reference ng Customs?",
+        "choices": {
+          "A": "Tatlong (3) taon",
+          "B": "Isang (1) taon",
+          "C": "Limang (5) taon",
+          "D": "Anim (6) na buwan"
+        },
+        "correct": "A",
+        "reason": "Sec. 21.1.5: Dapat mag-maintain ang AECOs ng electronic database para sa lahat ng TFCMs at OFCMs sa loob ng tatlong (3) taon para sa reference ng Customs."
+      },
+      {
+        "question": "Gaano katagal mula sa issuance ng Decree of Abandonment dapat i-dispose ng ACDD o equivalent unit ng port ang abandoned air Express Shipments?",
+        "choices": {
+          "A": "Hindi lalampas sa tatlumpung (30) araw",
+          "B": "Hindi lalampas sa animnapung (60) araw",
+          "C": "Hindi lalampas sa tatlong (3) buwan",
+          "D": "Hindi lalampas sa anim (6) na buwan"
+        },
+        "correct": "D",
+        "reason": "Sec. 22: Ang ACDD o equivalent unit ng port ang magdi-dispose ng goods not later than six (6) months mula sa issuance ng Decree of Abandonment, alinsunod sa CAO No. 3-2020 at implementing guidelines nito."
+      }
+    ],
+    "level2": [
+      {
+        "question": "Kestrel Parts Ltd. ships three separate packages through an AECO to the same consignee, Mario Dela Cruz. All three packages arrive in Manila on the same date, and each is valued at Php18,000 FOB. The AECO plans to file three separate informal entries, one for each package. How should the shipments be treated under CMO 09-2021?",
+        "choices": {
+          "A": "As three separate Low-Value, Dutiable shipments, each filed under the informal entry process",
+          "B": "As three De Minimis shipments covered by the detailed CIFCM as the Goods Declaration",
+          "C": "As a single consignment filed under the formal entry process",
+          "D": "As a single Low-Value, Dutiable shipment filed under the informal entry process"
+        },
+        "correct": "C",
+        "reason": "Under Sec. 23, low-value shipments with the same shipper and the same consignee whose aggregate value is Php50,000.00 or more at the date of arrival are treated as a single consignment and filed under the formal entry process. Here, 3 x Php18,000 = Php54,000, which exceeds the threshold, so the AECO cannot file three separate informal entries."
+      },
+      {
+        "question": "At the request of an AECO, a customs examiner works 4 hours of overtime on a Sunday, which is the examiner's rest day. The monthly salary of the position being designated is Php44,000. Using the formula in CMO 09-2021, how much overtime pay is the examiner entitled to?",
+        "choices": {
+          "A": "Php1,500",
+          "B": "Php1,250",
+          "C": "Php1,100",
+          "D": "Php1,000"
+        },
+        "correct": "A",
+        "reason": "Under Secs. 5.4.3 and 5.4.4, the hourly rate is Monthly Salary/22 days/8 hrs, and overtime on a rest day is the hourly rate plus 50%. Hourly rate = 44,000/22/8 = Php250; rest-day overtime rate = 250 x 1.5 = Php375; for 4 hours, 375 x 4 = Php1,500."
+      },
+      {
+        "question": "An aircraft arrives in Manila at 2:00 PM with an IFCM that was submitted on time. The AECO later discovers three cartons not listed in the IFCM and submits a supplemental IFCM, in both hard copy and electronic form, at 9:30 PM on the same day. What is the status of the three cartons?",
+        "choices": {
+          "A": "They are accepted without penalty because the supplemental IFCM was submitted within twenty-four (24) hours after arrival.",
+          "B": "They are accepted, but they must be covered by a TFCM because they were discovered after arrival.",
+          "C": "They are returned to the AECO for amendment of the CIFCM and are then cleared in the normal course.",
+          "D": "They are considered unmanifested and subject to seizure proceedings."
+        },
+        "correct": "D",
+        "reason": "Under Sec. 8.4, cargoes not listed in the IFCM must be covered by a supplemental IFCM submitted within six (6) hours upon arrival of the aircraft. The cartons were covered 7.5 hours after arrival (2:00 PM to 9:30 PM), so under Sec. 8.5 they are considered unmanifested and subject to seizure proceedings. The twenty-four-hour period in Sec. 8.3.2 applies to the e-CIFCM, not to supplemental IFCMs."
+      },
+      {
+        "question": "A Low-Value, Dutiable express shipment of dietary supplements valued at Php32,000 has a Goods Declaration lodged in the E2M. During review, the customs examiner finds that the supplements require a permit from another regulatory agency, which the AECO has not submitted. The examiner updates the SAD and enters the findings in the Inspection Act. What should the appraiser do, and what follows if the AECO never submits the permit?",
+        "choices": {
+          "A": "Re-route the Goods Declaration to Red; if the permit is not submitted, the examiner recommends the issuance of a WSD.",
+          "B": "Re-route the Goods Declaration to Yellow; if the permit is not submitted, the examiner recommends the issuance of a WSD.",
+          "C": "Re-route the Goods Declaration to Yellow; if the permit is not submitted, the system automatically assesses the shipment after six (6) hours.",
+          "D": "Re-route the Goods Declaration to Green; if the permit is not submitted, the examiner recommends the issuance of a WSD."
+        },
+        "correct": "B",
+        "reason": "Under Sec. 13.1.5(a), the appraiser re-routes the selectivity color to Yellow when additional permits, licenses or clearances from other regulatory agencies are required (Red is for physical examination). Under Sec. 13.1.7, if the declarant fails to submit the required documents, the examiner recommends the issuance of a Warrant of Seizure and Detention (WSD)."
+      },
+      {
+        "question": "Harbor Express, an AECO, has posted a bank guaranty of Php5,000,000 through an Accredited Agent Bank. Shipments with assessed duties and taxes totaling Php4,950,000 were already released prior to payment and remain unpaid. A new informal-entry shipment valued at Php38,000 has been duly processed and examined, its assessed duties and taxes of Php120,000 are determined, it is not subject to any alert or hold order, and the AECO has submitted the AAB's notarized commitment. May the District Collector release this shipment prior to payment?",
+        "choices": {
+          "A": "Yes, because its value is below Php50,000 and the other requirements are complied with.",
+          "B": "Yes, and the excess of Php70,000 will simply be deducted from the security deposit by the Bureau if the AECO later defaults on payment.",
+          "C": "No, because only shipments valued at less than Php10,000 may be released prior to payment.",
+          "D": "No, unless the AECO first increases the security deposit, because shipments not covered by it cannot be released."
+        },
+        "correct": "D",
+        "reason": "Under Sec. 16.3, only shipments whose aggregate assessed duties, taxes and charges do not exceed the amount guaranteed by the AAB may be released. Php4,950,000 + Php120,000 = Php5,070,000, which exceeds the Php5,000,000 guaranty by Php70,000. Under Sec. 6, the AECO must increase the security deposit, otherwise the District Collector shall not allow release of shipments not covered by it."
+      },
+      {
+        "question": "Swiftline, an AECO, receives Express Shipments in Manila at 8:00 AM on Monday that are intended for transshipment to Tokyo by air. The shipments are not exported until Thursday, and no valid cause for the delay is shown. What is the consequence for Swiftline under CMO 09-2021?",
+        "choices": {
+          "A": "It can no longer use the longer period to submit the TFCM or OFCM, and it is liable for fines under Section 1412 of the CMTA both as carrier and as consolidator.",
+          "B": "The shipments are converted to Low-Value, Dutiable shipments, and Swiftline must pay the corresponding duties and taxes under an informal entry before they may be exported.",
+          "C": "The shipments are treated as abandoned, and the ACDD must dispose of them not later than six (6) months from the Decree of Abandonment.",
+          "D": "Swiftline must re-export the shipments within ninety-six (96) hours from arrival using a Special Permit to Load."
+        },
+        "correct": "A",
+        "reason": "Under Sec. 21.1.8, Express Shipments for transshipment must be exported within forty-eight (48) hours from arrival. Monday 8:00 AM plus 48 hours is Wednesday 8:00 AM, so Thursday is late. Without a valid cause for extension, the AECO can no longer avail of the longer timeframe for the TFCM or OFCM, is deemed to have failed to submit on time, and is liable for fines under Section 1412 of the CMTA as carrier and as consolidator. The 96-hour period applies only to re-exportation by sea (Sec. 21.1.9)."
+      },
+      {
+        "question": "A package arrives whose Air Waybill lists a consignee address in the Philippines, but its labels clearly show a destination in Vietnam, which the assigned Warehouseman verifies. The package is not subject to any alert order, and non-intrusive inspection shows it is not regulated, restricted or prohibited. The AECO notifies the District Collector that the package is mis-sorted only after it has lodged a Goods Declaration for it, and plans to return it to the shipper within 24 hours using a Special Permit to Load. May it be returned without payment of duties, taxes and other charges as a mis-sorted shipment?",
+        "choices": {
+          "A": "Yes, because the labels clearly show a foreign destination and the Warehouseman verified it.",
+          "B": "Yes, because it will be returned to the shipper within 24 hours using a Special Permit to Load.",
+          "C": "No, because the District Collector was not notified prior to the arrival of the shipment and lodgment of the Goods Declaration.",
+          "D": "No, because the Air Waybill lists a consignee address in the Philippines, and the labels cannot override the address stated in it."
+        },
+        "correct": "C",
+        "reason": "Sec. 24.1 allows return without payment only if all listed conditions are met. Sec. 24.1.2 accepts an AWB with a Philippine address if the labels clearly show a foreign destination and the Warehouseman verified it, and the conditions on alert orders and the 24-hour return are satisfied (Secs. 24.1.4 and 24.1.5). However, Sec. 24.1.3 requires that the District Collector be notified prior to arrival and lodgment of the Goods Declaration, which was not done here."
+      },
+      {
+        "question": "A typhoon forces an AECO flight bound for Manila to divert to Clark, and the aircraft can no longer proceed to Manila. The AECO had already pre-lodged goods declarations at the Manila port, and transfer of the goods to Manila by land is not possible because of flooded roads. What may the AECO do?",
+        "choices": {
+          "A": "Request cancellation of the pre-lodged goods declarations and relodge them at the port of discharge, but only after obtaining clearance from the AOCG.",
+          "B": "Request cancellation of the pre-lodged goods declarations and relodge them at the port of discharge, without needing clearance from the AOCG.",
+          "C": "Treat the goods as mis-sorted or misrouted shipments and return them to the shipper within twenty-four (24) hours.",
+          "D": "Treat the goods as transshipment cargo and export them within forty-eight (48) hours from arrival."
+        },
+        "correct": "B",
+        "reason": "A flight diversion due to inclement weather is an exceptional circumstance beyond the AECO's control (Sec. 20.1). Under Sec. 20.2.1, the AECO may request cancellation of the pre-lodged goods declaration at the port of destination and relodge it at the port of discharge as long as transfer by land is not possible, and clearance from the AOCG is no longer required."
+      },
+      {
+        "question": "A courier package arrives under an AECO's MAWB. The HAWB describes the contents as personal items of no commercial value and states a declared value of Php800 for customs purposes only. The AECO asks for immediate release of the package as an Express Shipment. How should the package be treated?",
+        "choices": {
+          "A": "It is not entitled to immediate release; the specific value of the goods must be declared, supported by an available invoice, receipt or equivalent document.",
+          "B": "It is entitled to immediate release because its value is below the Php10,000 de minimis ceiling.",
+          "C": "It is entitled to immediate release because a specific amount is stated, even though it is qualified by the phrase for customs purposes.",
+          "D": "It is not entitled to immediate release, and it must be processed as a high-value shipment under the regular customs cargo clearance procedures once an invoice is submitted."
+        },
+        "correct": "A",
+        "reason": "Under Sec. 18.1, importations declared as of no commercial value, or with a specific amount qualified by the phrase for customs purposes, are not entitled to immediate release as Express Shipments. The same section requires the specific value to be declared, supported by an available invoice, receipt or equivalent document. The low amount does not matter, and high-value processing (Sec. 14) does not apply to a Php800 declaration."
+      },
+      {
+        "question": "A detailed CIFCM covers 40 envelopes in a sealed green courier bag. Non-intrusive scanning flags one envelope, and the examiner, with an AECO representative present, physically inspects it and finds non-document merchandise inside. What may be done with the remaining 39 envelopes?",
+        "choices": {
+          "A": "They must wait until the segregated envelope is fully examined and a decision on a WSD has been made.",
+          "B": "They may be released only after the entire CIFCM is returned to the AECO and an amended CIFCM is approved by the customs appraiser upon the examiner's recommendation.",
+          "C": "Their processing and release may continue once the AECO applies to amend the CIFCM by splitting it, and the Bureau approves the amendment within twenty-four (24) hours.",
+          "D": "They must be refiled by the AECO as informal entries using the individual air waybill of each envelope."
+        },
+        "correct": "C",
+        "reason": "Under Sec. 11.11, when the physical examination is positive, the examiner segregates the particular Correspondence or Document but allows processing and release of the cleared items upon receipt of the application for amendment. Under Sec. 11.12, the amendment splits the CIFCM into one for cleared items and one for segregated items, and the Bureau approves it within twenty-four (24) hours from receipt. Only the segregated item, if eventually released, needs a goods declaration using its individual Air Waybill (Sec. 11.13)."
+      }
+    ]
+  }
+]
