@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState, useCallback, useMemo, useRef } from "react";
 import {
-  signInWithRedirect, getRedirectResult, onAuthStateChanged, signOut,
+  signInWithRedirect, signInWithPopup, getRedirectResult, onAuthStateChanged, signOut,
   setPersistence, indexedDBLocalPersistence, signInWithCredential, GoogleAuthProvider,
 } from "firebase/auth";
 import { doc, getDoc, setDoc, updateDoc, serverTimestamp, onSnapshot, runTransaction, getDocFromServer } from "firebase/firestore";
@@ -270,7 +270,15 @@ export function AuthProvider({ children }) {
         localStorage.removeItem(PENDING_SIGNIN_KEY);
         setSigningIn(false);
       } else {
-        await signInWithRedirect(auth, googleProvider);
+        const isLocalDev = ["localhost", "127.0.0.1"].includes(window.location.hostname);
+        if (isLocalDev) {
+          // Dev only: redirect sign-in loops here because the Firebase handler is another origin.
+          await signInWithPopup(auth, googleProvider);
+          localStorage.removeItem(PENDING_SIGNIN_KEY);
+          setSigningIn(false);
+        } else {
+          await signInWithRedirect(auth, googleProvider);
+        }
         // Page navigates away here — code after this line generally won't run.
       }
     } catch (err) {

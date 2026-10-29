@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* ui-modern ------------------------------------------------------------ */
+@layer base {
+  html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+  ::selection { background: rgba(201, 162, 39, 0.28); }
+  :focus-visible { outline: 2px solid #c9a227; outline-offset: 2px; border-radius: 8px; }
+  button, [role="button"], a { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+  button { transition: transform 120ms ease, background-color 150ms ease, color 150ms ease, border-color 150ms ease; }
+  button:not(:disabled):active { transform: scale(0.975); }
+  * { scrollbar-width: thin; scrollbar-color: rgba(100, 116, 139, 0.35) transparent; }
+  *::-webkit-scrollbar { width: 6px; height: 6px; }
+  *::-webkit-scrollbar-thumb { background: rgba(100, 116, 139, 0.35); border-radius: 999px; }
+}
+
+/* room for the bottom navigation bar */
+.has-bottom-nav { padding-bottom: calc(5.5rem + env(safe-area-inset-bottom)) !important; }
+
+/* soft page-enter animation for whatever is inside <main> */
+@keyframes ui-fade-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+main > * { animation: ui-fade-up 260ms ease-out both; }
+@media (prefers-reduced-motion: reduce) {
+  main > * { animation: none; }
+  button { transition: none; }
+  button:not(:disabled):active { transform: none; }
+}

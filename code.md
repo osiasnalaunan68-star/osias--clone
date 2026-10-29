@@ -590,7 +590,7 @@ function QuizPlayViewInner({ title, entries, level, onBack, progressKey, backLab
   const isAnswered = currentAnswer !== undefined && currentAnswer !== null;
 
   useEffect(() => {
-    if (progressKey) saveLastQuizPosition(progressKey, level);
+    if (progressKey && !String(progressKey).startsWith("issuance-")) saveLastQuizPosition(progressKey, level);
   }, [progressKey, level]);
 
   useEffect(() => {
@@ -805,7 +805,7 @@ export default function AccountOverlay() {
   const activeMethod = PAYMENT_METHODS.find((m) => m.id === selectedMethod) || null;
   const planNote = selectedPlan
     ? selectedPlan.kind === "promo"
-      ? "All Access · unlock lahat ng may bayad · " + selectedPlan.days + " days lang"
+      ? "All Access · everything unlocked · valid for " + selectedPlan.days + " days"
       : selectedPlan.kind === "access"
       ? selectedPlan.months + (selectedPlan.months === 1 ? " month" : " months") + " of App Access"
       : "Valid for " + selectedPlan.months + " months · includes " + selectedPlan.months + " months of App Access"
@@ -952,8 +952,8 @@ export default function AccountOverlay() {
                 >
                   <span className="block text-sm font-extrabold">🔥 {PROMO_PLAN.label} — ₱{PROMO_PLAN.price}</span>
                   <span className="mt-1 block text-[11px] font-normal opacity-90">{PROMO_PLAN.tagline}</span>
-                  <span className="mt-1 block text-[11px] font-normal opacity-90">All Access: unlock lahat ng may bayad (RA 10863 · CDP · TL · PC · TCP) + App Access</span>
-                  <span className="mt-1 block text-[11px] font-semibold text-gold-400">⏳ {PROMO_PLAN.days} days lang</span>
+                  <span className="mt-1 block text-[11px] font-normal opacity-90">Unlocks EVERYTHING: RA 10863 (all 5 levels) · CDP · TL · PC · TCP + full App Access</span>
+                  <span className="mt-1 block text-[11px] font-semibold text-gold-400">⏳ Valid for {PROMO_PLAN.days} days only</span>
                 </button>
               )}
               {!PROMO_MODE && !bundleOwned && bundlePlan && (
@@ -1308,7 +1308,7 @@ function Paywall() {
         <div className="text-center">
           <span className="text-4xl" aria-hidden>⏳</span>
           <h1 className="mt-2 text-xl font-bold text-navy-900 dark:text-slate-50">Your free trial has ended</h1>
-          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Choose an App Access plan to continue. {user?.email}</p>
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{PROMO_MODE ? "Get the All Access promo to continue. It is the only plan available right now." : "Choose an App Access plan to continue."} {user?.email}</p>
         </div>
 
         {pending.length > 0 && (
@@ -1324,8 +1324,8 @@ function Paywall() {
                 <span>
                   <span className="block text-base font-extrabold text-navy-900 dark:text-slate-100">🔥 {PROMO_PLAN.label}</span>
                   <span className="mt-1 block text-xs text-slate-600 dark:text-slate-300">{PROMO_PLAN.tagline}</span>
-                  <span className="mt-1 block text-xs text-slate-600 dark:text-slate-300">All Access: unlock lahat ng may bayad sa app</span>
-                  <span className="mt-1 block text-xs font-semibold text-gold-600 dark:text-gold-400">⏳ {PROMO_PLAN.days} days lang</span>
+                  <span className="mt-1 block text-xs text-slate-600 dark:text-slate-300">Unlocks everything: RA 10863 (all levels) · CDP · TL · PC · TCP + full App Access</span>
+                  <span className="mt-1 block text-xs font-semibold text-gold-600 dark:text-gold-400">⏳ Valid for {PROMO_PLAN.days} days only</span>
                 </span>
                 <span className="text-3xl font-extrabold text-navy-900 dark:text-slate-50">₱{PROMO_PLAN.price}</span>
               </span>
@@ -1406,6 +1406,220 @@ export default function AccessGate() {
       <ChapterBrowser />
       <AccessPill access={access} />
     </>
+  );
+}
+```
+
+## File: ./frontend/src/components/ReaderParts.jsx
+```
+// Shared reader pieces (highlight, notes). Copied from ChapterBrowser.jsx so the CMTA screen stays untouched.
+import { useState, useEffect, useCallback, useRef } from "react";
+import {
+  addHighlight, removeHighlight, getHighlightsForNode,
+  getNotesForNode, addNote, updateNote, deleteNote,
+} from "../db";
+
+export function useNodeHighlights(nodeId, shouldLoad) {
+  const [highlights, setHighlights] = useState([]);
+  const [loaded, setLoaded] = useState(false);
+  useEffect(() => {
+    if (!shouldLoad || !nodeId || loaded) return;
+    const data = getHighlightsForNode(nodeId);
+    setHighlights(data);
+    setLoaded(true);
+  }, [shouldLoad, nodeId, loaded]);
+  const addHighlightLocal = useCallback(async (start, end) => {
+    const newHl = addHighlight(nodeId, start, end);
+    setHighlights(prev => [...prev, newHl]);
+  }, [nodeId]);
+  const removeHighlightLocal = useCallback(async (hlId) => {
+    removeHighlight(hlId);
+    setHighlights(prev => prev.filter(h => h.id !== hlId));
+  }, []);
+  return { highlights, addHighlight: addHighlightLocal, removeHighlight: removeHighlightLocal };
+}
+
+export function useNodeNotes(nodeId, shouldLoad) {
+  const [notes, setNotes] = useState([]);
+  const [loaded, setLoaded] = useState(false);
+  useEffect(() => {
+    if (!shouldLoad || !nodeId || loaded) return;
+    setNotes(getNotesForNode(nodeId));
+    setLoaded(true);
+  }, [shouldLoad, nodeId, loaded]);
+  const createNote = useCallback((content) => {
+    const note = addNote(nodeId, content);
+    setNotes((prev) => [...prev, note]);
+    return note;
+  }, [nodeId]);
+  const editNote = useCallback((noteId, content) => {
+    const note = updateNote(nodeId, noteId, content);
+    setNotes((prev) => prev.map((n) => (n.id === noteId ? note : n)));
+  }, [nodeId]);
+  const removeNote = useCallback((noteId) => {
+    deleteNote(nodeId, noteId);
+    setNotes((prev) => prev.filter((n) => n.id !== noteId));
+  }, [nodeId]);
+  return { notes, createNote, editNote, removeNote };
+}
+
+export function formatNoteDate(iso) {
+  try {
+    const d = new Date(iso);
+    return d.toLocaleDateString(undefined, { month: "short", day: "numeric" }) +
+      " · " + d.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
+  } catch {
+    return "";
+  }
+}
+
+export function applyHighlights(text, highlights) {
+  if (!highlights || highlights.length === 0) return [{ text, highlightId: null }];
+  const sorted = [...highlights].sort((a, b) => a.start_offset - b.start_offset);
+  const segments = [];
+  let cursor = 0;
+  for (const hl of sorted) {
+    if (hl.start_offset > cursor) segments.push({ text: text.slice(cursor, hl.start_offset), highlightId: null });
+    segments.push({ text: text.slice(hl.start_offset, hl.end_offset), highlightId: hl.id, color: hl.color });
+    cursor = hl.end_offset;
+  }
+  if (cursor < text.length) segments.push({ text: text.slice(cursor), highlightId: null });
+  return segments;
+}
+
+export function SelectionToolbar({ x, y, kind, onSave, onCancel, onDelete }) {
+  return (
+    <div style={{ position: "fixed", left: x, top: y, zIndex: 100 }} className="flex items-center gap-1 rounded-xl border border-slate-200 bg-white px-1.5 py-1.5 shadow-lg shadow-slate-900/10 dark:border-slate-600 dark:bg-slate-800 dark:shadow-black/40">
+      {kind === "existing" ? (
+        <>
+          <button onClick={onDelete} className="flex items-center gap-1 rounded-lg px-3 py-2 min-h-[40px] text-sm font-medium text-red-600 active:bg-red-50 dark:text-red-400 dark:active:bg-red-950/40">🗑 Remove highlight</button>
+          <button onClick={onCancel} className="rounded-lg px-3 py-2 min-h-[40px] text-sm text-slate-500 active:bg-slate-100 dark:text-slate-400 dark:active:bg-slate-700">Close</button>
+        </>
+      ) : (
+        <>
+          <button onClick={onSave} className="flex items-center gap-1 rounded-lg bg-amber-100 px-3 py-2 min-h-[40px] text-sm font-semibold text-amber-800 active:bg-amber-200 dark:bg-amber-900/50 dark:text-amber-300 dark:active:bg-amber-900/70">🖍 Highlight</button>
+          <button onClick={onCancel} className="rounded-lg px-3 py-2 min-h-[40px] text-sm text-slate-500 active:bg-slate-100 dark:text-slate-400 dark:active:bg-slate-700">Cancel</button>
+        </>
+      )}
+    </div>
+  );
+}
+
+export function HighlightableContent({ nodeId, content, highlights, addHighlight, removeHighlight, className, armed }) {
+  const containerRef = useRef(null);
+  const [pendingSelection, setPendingSelection] = useState(null);
+  const [toolbar, setToolbar] = useState(null);
+  useEffect(() => {
+    if (!armed) { setPendingSelection(null); setToolbar((t) => (t && t.kind === "existing" ? t : null)); return; }
+    const handleSelectionChange = () => {
+      const sel = window.getSelection();
+      if (!sel || sel.isCollapsed || !containerRef.current || !containerRef.current.contains(sel.anchorNode)) {
+        setPendingSelection(null); setToolbar((t) => (t && t.kind === "existing" ? t : null)); return;
+      }
+      const range = sel.getRangeAt(0);
+      const preRange = document.createRange();
+      preRange.selectNodeContents(containerRef.current);
+      preRange.setEnd(range.startContainer, range.startOffset);
+      const start = preRange.toString().length;
+      const end = start + range.toString().length;
+      if (start >= end) return;
+      setPendingSelection({ start, end });
+      const rect = range.getBoundingClientRect();
+      setToolbar({ x: Math.max(8, Math.min(rect.left, window.innerWidth - 200)), y: rect.bottom + 8, kind: "selection" });
+    };
+    document.addEventListener("selectionchange", handleSelectionChange);
+    return () => document.removeEventListener("selectionchange", handleSelectionChange);
+  }, [armed]);
+  const handleMarkClick = (e, hlId) => {
+    e.stopPropagation();
+    const rect = e.target.getBoundingClientRect();
+    setToolbar({ x: Math.max(8, Math.min(rect.left, window.innerWidth - 200)), y: rect.bottom + 8, kind: "existing", hlId });
+    setPendingSelection(null);
+  };
+  const closeToolbar = () => { setToolbar(null); setPendingSelection(null); window.getSelection()?.removeAllRanges(); };
+  const confirmHighlight = async () => { if (!pendingSelection) return; await addHighlight(pendingSelection.start, pendingSelection.end); closeToolbar(); };
+  const confirmDelete = async () => { if (!toolbar?.hlId) return; await removeHighlight(toolbar.hlId); closeToolbar(); };
+  const segments = applyHighlights(content, highlights);
+  return (
+    <div className="relative">
+      <div ref={containerRef} className={`${className} ${armed ? "rounded-lg bg-amber-50/70 ring-1 ring-amber-300 dark:bg-amber-950/30 dark:ring-amber-700" : ""}`}>
+        {segments.map((seg, i) =>
+          seg.highlightId ? (
+            <mark key={i} style={{ backgroundColor: seg.color }} className="cursor-pointer rounded-sm px-0.5" onClick={(e) => handleMarkClick(e, seg.highlightId)}>{seg.text}</mark>
+          ) : (
+            <span key={i}>{seg.text}</span>
+          )
+        )}
+      </div>
+      {toolbar && <SelectionToolbar x={toolbar.x} y={toolbar.y} kind={toolbar.kind} onSave={confirmHighlight} onDelete={confirmDelete} onCancel={closeToolbar} />}
+    </div>
+  );
+}
+
+export function NotePanel({ notes, onCreate, onEdit, onDelete, onClose }) {
+  const [editingId, setEditingId] = useState(null);
+  const [draft, setDraft] = useState("");
+  const [adding, setAdding] = useState(notes.length === 0);
+
+  const startEdit = (note) => { setEditingId(note.id); setDraft(note.content); setAdding(false); };
+  const startAdd = () => { setAdding(true); setEditingId(null); setDraft(""); };
+  const cancel = () => { setEditingId(null); setAdding(notes.length === 0); setDraft(""); };
+  const save = () => {
+    const text = draft.trim();
+    if (!text) return;
+    if (editingId) { onEdit(editingId, text); setEditingId(null); }
+    else { onCreate(text); setAdding(false); }
+    setDraft("");
+  };
+
+  return (
+    <div onClick={(e) => e.stopPropagation()} className="mt-3 rounded-xl border border-sky-200 bg-sky-50/70 p-3 dark:border-sky-800 dark:bg-sky-950/30">
+      <div className="mb-2 flex items-center justify-between">
+        <span className="text-xs font-semibold uppercase tracking-wide text-sky-700 dark:text-sky-400">📝 My Notes</span>
+        <button onClick={onClose} className="rounded-lg px-2 py-1 text-xs font-medium text-slate-500 active:bg-slate-200 dark:text-slate-400 dark:active:bg-slate-700">Close</button>
+      </div>
+      {notes.length > 0 && !adding && !editingId && (
+        <div className="mb-2 space-y-2">
+          {notes.map((n) => (
+            <div key={n.id} className="rounded-lg bg-white p-2.5 shadow-sm dark:bg-slate-800">
+              <p className="whitespace-pre-wrap text-sm text-slate-700 dark:text-slate-200">{n.content}</p>
+              <div className="mt-1.5 flex items-center justify-between">
+                <span className="text-[11px] text-slate-400 dark:text-slate-500">
+                  {n.updated_at !== n.created_at ? `Edited ${formatNoteDate(n.updated_at)}` : `Added ${formatNoteDate(n.created_at)}`}
+                </span>
+                <div className="flex gap-3">
+                  <button onClick={() => startEdit(n)} className="text-xs font-semibold text-sky-700 dark:text-sky-400">Edit</button>
+                  <button onClick={() => onDelete(n.id)} className="text-xs font-semibold text-red-600 dark:text-red-400">Delete</button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+      {adding || editingId ? (
+        <div>
+          <textarea
+            autoFocus
+            value={draft}
+            onChange={(e) => setDraft(e.target.value)}
+            placeholder="Write your own explanation or reminder…"
+            rows={3}
+            style={{ fontSize: "16px" }}
+            className="w-full rounded-lg border border-slate-200 bg-white p-2.5 text-sm text-slate-800 focus:outline-none dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100"
+          />
+          <div className="mt-2 flex justify-end gap-2">
+            <button onClick={cancel} className="rounded-lg px-3 py-1.5 text-sm text-slate-500 active:bg-slate-200 dark:text-slate-400 dark:active:bg-slate-700">Cancel</button>
+            <button onClick={save} disabled={!draft.trim()} className="rounded-lg bg-sky-700 px-3 py-1.5 text-sm font-semibold text-white active:bg-sky-800 disabled:opacity-40 dark:bg-sky-600">
+              {editingId ? "Save" : "Add Note"}
+            </button>
+          </div>
+        </div>
+      ) : (
+        <button onClick={startAdd} className="w-full rounded-lg border border-dashed border-sky-300 py-2 text-sm font-medium text-sky-700 active:bg-sky-100 dark:border-sky-700 dark:text-sky-400 dark:active:bg-sky-900/40">
+          + Add Note
+        </button>
+      )}
+    </div>
   );
 }
 ```
@@ -1631,6 +1845,93 @@ export function formatSeconds(totalSeconds) {
   const m = Math.floor(s / 60);
   const rem = s % 60;
   return `${m}:${String(rem).padStart(2, "0")}`;
+}
+```
+
+## File: ./frontend/src/components/IssuanceQuiz.jsx
+```
+import { useState, useMemo } from "react";
+import { useAuth } from "../authContext";
+import { isRaLevelUnlocked } from "../access";
+import { QuizLevelButton, QuizPlayView, resetLevelProgress } from "./QuizShared";
+import { QUIZ_LEVELS, getIssuanceQuiz, quizEntriesForLevel, issuanceQuizProgressKey } from "../issuanceQuizStore";
+
+function readProgress(key) {
+  try { return JSON.parse(localStorage.getItem(`quiz_progress_${key}`) || "{}") || {}; } catch { return {}; }
+}
+
+// Full-screen quiz for ONE CMO / CAO: level picker -> play view.
+// Level 1 is free; Level 2 uses the same RA 10863 lock as the other quizzes.
+export default function IssuanceQuizModal({ issuance, onClose }) {
+  const { profile } = useAuth();
+  const [level, setLevel] = useState(null);
+  const [, setTick] = useState(0);
+  const quiz = getIssuanceQuiz(issuance.id);
+  const progressKey = issuanceQuizProgressKey(issuance.id);
+  const entries = useMemo(() => (level && quiz ? quizEntriesForLevel(quiz, level) : null), [quiz, level]);
+  const progress = readProgress(progressKey);
+
+  const handleReset = (l) => {
+    if (confirm(`Reset your progress for ${l.label}?`)) {
+      resetLevelProgress(progressKey, l.id);
+      setTick((t) => t + 1);
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 z-[45] flex flex-col bg-slate-50 dark:bg-slate-950" style={{ height: "100dvh" }}>
+      <div className="safe-top sticky top-0 z-10 border-b border-slate-200 bg-white/95 backdrop-blur dark:border-slate-800 dark:bg-slate-900/95">
+        <div className="flex items-center gap-2 px-3 py-2">
+          <button
+            onClick={onClose}
+            className="flex h-9 flex-shrink-0 items-center gap-1 rounded-full px-3 text-sm font-medium text-slate-600 active:bg-slate-100 dark:text-slate-300 dark:active:bg-slate-800"
+          >
+            <span aria-hidden>←</span> Back to {issuance.label}
+          </button>
+          <span className="text-sm font-semibold text-slate-500 dark:text-slate-400">📝 Quiz</span>
+        </div>
+      </div>
+
+      <div className="flex-1 overflow-y-auto overscroll-contain">
+        <div className="mx-auto max-w-2xl p-4">
+          {!quiz && <p className="py-10 text-center text-sm text-slate-400">No quiz for this issuance yet.</p>}
+
+          {quiz && level && entries && (
+            <QuizPlayView
+              title={issuance.label}
+              entries={entries}
+              level={level}
+              onBack={() => { setLevel(null); setTick((t) => t + 1); }}
+              progressKey={progressKey}
+              backLabel="← Levels"
+            />
+          )}
+
+          {quiz && !level && (
+            <div className="space-y-3">
+              <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-card dark:border-slate-700 dark:bg-slate-800">
+                <h2 className="text-lg font-bold text-navy-900 dark:text-slate-50">{issuance.label}</h2>
+                {issuance.title && <p className="mt-0.5 text-sm text-slate-600 dark:text-slate-300">{issuance.title}</p>}
+                <p className="mt-2 text-xs text-slate-400">
+                  {QUIZ_LEVELS.filter((l) => quiz[l.id].length > 0).map((l) => `${l.label.replace(/^\S+\s/, "")}: ${quiz[l.id].length} questions`).join(" · ")}
+                </p>
+              </div>
+              {QUIZ_LEVELS.filter((l) => quiz[l.id].length > 0).map((l) => (
+                <QuizLevelButton
+                  key={l.id}
+                  level={l}
+                  progress={progress[l.id] || 0}
+                  locked={!isRaLevelUnlocked(profile, l.id)}
+                  onClick={() => setLevel(l.id)}
+                  onReset={() => handleReset(l)}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 }
 ```
 
@@ -2215,6 +2516,8 @@ import QuizHub from "./QuizHub";
 import AccountButton from "../components/AccountButton";
 import AdminPanel from "./AdminPanel";
 import { useAuth } from "../authContext";
+import { IssuanceSidebar, IssuanceReader } from "./IssuanceBrowser";
+import { ISSUANCE_KINDS, getIssuance } from "../issuancesStore";
 
 // Enrich nodes with hierarchy information for composite key lookup
 
@@ -2271,6 +2574,8 @@ function enrichNodesWithHierarchy(nodes) {
 
 
 const MODE_KEY = "customsLaw_mode";
+const SOURCE_KEY = "customsLaw_source";
+const ISSUANCE_KEY = "customsLaw_issuanceId";
 const FONT_KEY = "customsLaw_fontScale";
 const DARK_KEY = "customsLaw_darkMode";
 
@@ -3027,9 +3332,27 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
   const [focusMode, setFocusMode] = useState(false);
   const [resumeAvailable, setResumeAvailable] = useState(null);
   const [showTutorial, setShowTutorial] = useState(false);
+  // Source = which library is open: "cmta" (existing), "cmo" or "cao"
+  const [source, setSource] = useState(() => (demo ? "cmta" : localStorage.getItem(SOURCE_KEY) || "cmta"));
+  const [issuanceId, setIssuanceId] = useState(() => localStorage.getItem(ISSUANCE_KEY) || null);
   const mainRef = useRef(null);
   const pendingScrollRestore = useRef(null);
   const scrollSaveTimeout = useRef(null);
+
+  useEffect(() => { if (!demo) localStorage.setItem(SOURCE_KEY, source); }, [source, demo]);
+  useEffect(() => { if (issuanceId) localStorage.setItem(ISSUANCE_KEY, issuanceId); }, [issuanceId]);
+  const isIssuance = source !== "cmta";
+  const currentIssuance = isIssuance && issuanceId ? getIssuance(issuanceId) : null;
+  const issuanceTitle = currentIssuance && currentIssuance.type.toLowerCase() === source
+    ? `${currentIssuance.label}${currentIssuance.title ? " — " + currentIssuance.title : ""}`
+    : (ISSUANCE_KINDS.find((k) => k.id === source)?.full || "");
+  const openIssuance = useCallback((kind, id) => {
+    setSource(kind);
+    setIssuanceId(id);
+    setView("browse");
+    setSidebarOpen(window.innerWidth >= 768);
+    if (mainRef.current) mainRef.current.scrollTop = 0;
+  }, []);
 
   useEffect(() => localStorage.setItem(MODE_KEY, mode), [mode]);
   useEffect(() => localStorage.setItem(FONT_KEY, String(fontScale)), [fontScale]);
@@ -3072,6 +3395,7 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
       setChapterTree(data);
       setSelectedChapter(chapterNumber);
       setSelectedTitleNumber(titleNumber);
+      setSource("cmta");
       setView("browse");
       setSidebarOpen(window.innerWidth >= 768);
       if (targetNodeId && data) {
@@ -3194,7 +3518,15 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
           <aside className={`safe-top fixed inset-y-0 left-0 z-40 w-[85vw] max-w-[320px] overflow-y-auto overscroll-contain border-r border-slate-200 bg-white transition-transform duration-200 dark:border-slate-800 dark:bg-slate-900 md:static md:w-80 md:max-w-none md:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
             <div className="sticky top-0 z-10 border-b border-slate-100 bg-white/95 px-5 py-4 backdrop-blur dark:border-slate-800 dark:bg-slate-900/95">
               <div className="flex items-center gap-2"><span className="text-xl" aria-hidden>⚖️</span><div><h2 className="text-base font-bold leading-tight text-navy-900 dark:text-slate-50">RA 10863</h2><p className="text-xs text-slate-400 dark:text-slate-500">Customs Modernization &amp; Tariff Act</p></div></div>
+              <div className="mt-3 flex rounded-xl bg-slate-100 p-1 text-sm dark:bg-slate-800" role="tablist" aria-label="Library">
+                {ISSUANCE_KINDS.map((k) => (
+                  <button key={k.id} role="tab" aria-selected={source === k.id} onClick={() => setSource(k.id)} className={`min-h-[36px] flex-1 rounded-lg px-2 py-1 font-semibold transition-colors ${source === k.id ? "bg-navy-900 text-white shadow-sm dark:bg-navy-700" : "text-slate-500 dark:text-slate-400"}`}>
+                    <span aria-hidden>{k.icon}</span> {k.label}
+                  </button>
+                ))}
+              </div>
             </div>
+            {source === "cmta" ? (
             <div className="p-3">
               {error && <p className="mb-2 rounded-lg bg-red-50 p-2 text-sm text-red-600 dark:bg-red-950/30 dark:text-red-400">{error}</p>}
               {titles.map((titleGroup) => {
@@ -3236,6 +3568,9 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
                 );
               })}
             </div>
+            ) : (
+              <IssuanceSidebar kind={source} selectedId={issuanceId} onSelect={(id) => openIssuance(source, id)} />
+            )}
           </aside>
         )}
         <div className="flex min-w-0 flex-1 flex-col">
@@ -3277,7 +3612,7 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
             {view === "browse" && !(focusMode && mode === "reading") && (
               <div className="px-3 pb-2">
                 <span className="block truncate text-sm font-semibold text-slate-800 dark:text-slate-200">
-                  {chapterTree ? chapterTree.title || `Chapter ${chapterTree.node_number}` : "Select a chapter"}
+                  {isIssuance ? issuanceTitle : chapterTree ? chapterTree.title || `Chapter ${chapterTree.node_number}` : "Select a chapter"}
                 </span>
               </div>
             )}
@@ -3289,7 +3624,7 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
                 <FontStepper fontScale={fontScale} setFontScale={setFontScale} />
               </div>
             )}
-            {view === "browse" && mode === "reading" && chapterTree && <ReadingProgressBar containerRef={mainRef} />}
+            {view === "browse" && mode === "reading" && (chapterTree || (isIssuance && issuanceId)) && <ReadingProgressBar containerRef={mainRef} />}
           </div>
           <main ref={mainRef} className="safe-bottom flex-1 overflow-y-auto overscroll-contain bg-slate-50 p-4 dark:bg-slate-950 md:p-6">
             {error && (
@@ -3298,7 +3633,9 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
                 <p className="text-sm">{error}</p>
               </div>
             )}
-            {view === "search" ? <SearchView onNavigateChapter={loadChapter} /> : view === "dev" && IS_DEV ? <DevPanel /> : view === "admin" && profile?.isAdmin ? <AdminPanel /> : view === "quiz" ? null : view === "settings" ? <SettingsView darkMode={darkMode} setDarkMode={setDarkMode} onReplayTutorial={replayTutorial} /> : (
+            {view === "search" ? <SearchView onNavigateChapter={loadChapter} /> : view === "dev" && IS_DEV ? <DevPanel /> : view === "admin" && profile?.isAdmin ? <AdminPanel /> : view === "quiz" ? null : view === "settings" ? <SettingsView darkMode={darkMode} setDarkMode={setDarkMode} onReplayTutorial={replayTutorial} /> : isIssuance ? (
+              <IssuanceReader kind={source} issuanceId={issuanceId} mode={mode} fontScale={fontScale} focusMode={focusMode} onOpenIssuance={(hit) => openIssuance(hit.type.toLowerCase(), hit.id)} />
+            ) : (
               <>
                 {loading && (
                   <div className="mx-auto max-w-3xl space-y-3">
@@ -3347,7 +3684,7 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
             )}
           </main>
         </div>
-        {focusMode && mode === "reading" && chapterTree && (
+        {focusMode && mode === "reading" && (chapterTree || (isIssuance && issuanceId)) && (
           <button
             onClick={() => setFocusMode(false)}
             className="fixed bottom-6 right-4 z-30 flex items-center gap-1.5 rounded-full bg-navy-900/90 px-4 py-2.5 text-sm font-medium text-white shadow-lg backdrop-blur active:bg-navy-800 dark:bg-slate-100/90 dark:text-navy-900"
@@ -3367,10 +3704,16 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
 ```
 import { useState } from "react";
 import QuizPanel from "./QuizPanel";
-import SubjectQuizPanel from "./SubjectQuizPanel";
-import { FLAT_SUBJECTS } from "../data/subjects";
+import IssuancePanel from "./IssuancePanel";
+import IssuanceQuizPanel from "./IssuanceQuizPanel";
 
-const TABS = [{ id: "ra10863", label: "RA10863" }, ...FLAT_SUBJECTS.map((s) => ({ id: s.id, label: s.label }))];
+// Subject imports (CL/CDP/TL/PC/TCP) are removed from the Dev Panel for now.
+// To add a tab later: add an entry to TABS and a matching render below.
+const TABS = [
+  { id: "ra10863", label: "RA10863" },
+  { id: "issuances", label: "CMO / CAO" },
+  { id: "issuance-quiz", label: "CMO/CAO Quiz" },
+];
 
 export default function DevPanel() {
   const [tab, setTab] = useState("ra10863");
@@ -3387,27 +3730,27 @@ export default function DevPanel() {
         </p>
       </div>
 
-      <div className="flex flex-wrap gap-1.5">
-        {TABS.map((t) => (
-          <button
-            key={t.id}
-            onClick={() => setTab(t.id)}
-            className={`min-h-[36px] rounded-full px-3.5 py-1.5 text-sm font-semibold transition-colors ${
-              tab === t.id
-                ? "bg-navy-900 text-white shadow-sm dark:bg-navy-700"
-                : "bg-slate-100 text-slate-600 active:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:active:bg-slate-700"
-            }`}
-          >
-            {t.label}
-          </button>
-        ))}
-      </div>
-
-      {tab === "ra10863" ? (
-        <QuizPanel />
-      ) : (
-        <SubjectQuizPanel subjectId={tab} subjectLabel={TABS.find((t) => t.id === tab)?.label || tab} />
+      {TABS.length > 1 && (
+        <div className="flex flex-wrap gap-1.5">
+          {TABS.map((t) => (
+            <button
+              key={t.id}
+              onClick={() => setTab(t.id)}
+              className={`min-h-[36px] rounded-full px-3.5 py-1.5 text-sm font-semibold transition-colors ${
+                tab === t.id
+                  ? "bg-navy-900 text-white shadow-sm dark:bg-navy-700"
+                  : "bg-slate-100 text-slate-600 active:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:active:bg-slate-700"
+              }`}
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
       )}
+
+      {tab === "ra10863" && <QuizPanel />}
+      {tab === "issuances" && <IssuancePanel />}
+      {tab === "issuance-quiz" && <IssuanceQuizPanel />}
     </div>
   );
 }
@@ -6253,6 +6596,734 @@ function isWrongAnswer(answer, correct) {
 }
 ```
 
+## File: ./frontend/src/pages/IssuanceBrowser.jsx
+```
+import { useState, useEffect, useMemo } from "react";
+import { AI_APPS, copyPromptAndOpen } from "../aiContext";
+import { HighlightableContent, NotePanel, useNodeHighlights, useNodeNotes } from "../components/ReaderParts";
+import { IS_DEV } from "../env";
+import { ISSUANCE_KINDS, STATUS_META, listIssuances, getIssuance, resolveIssuanceRef } from "../issuancesStore";
+import { getIssuanceQuiz } from "../issuanceQuizStore";
+import IssuanceQuizModal from "../components/IssuanceQuiz";
+
+const INDENT_CLASS = ["ml-0", "ml-4", "ml-8", "ml-12", "ml-16"];
+
+function StatusBadge({ status }) {
+  const m = STATUS_META[status] || STATUS_META.in_force;
+  return <span className={`rounded-md px-1.5 py-0.5 text-[11px] font-semibold ${m.cls}`}>{m.label}</span>;
+}
+
+function sectionText(sec) {
+  return [sec.heading, ...sec.paragraphs.map((p) => (p.label ? p.label + " " : "") + p.text)].filter(Boolean).join("\n");
+}
+function fullText(iss) {
+  return iss.sections.map(sectionText).join("\n\n");
+}
+
+// ── Sidebar: list of CMOs / CAOs, grouped by year ────────────────────
+export function IssuanceSidebar({ kind, selectedId, onSelect }) {
+  const meta = ISSUANCE_KINDS.find((k) => k.id === kind);
+  const [q, setQ] = useState("");
+  const [collapsedYears, setCollapsedYears] = useState({});
+  const items = useMemo(() => listIssuances(kind), [kind]);
+
+  const filtered = useMemo(() => {
+    const s = q.trim().toLowerCase();
+    if (!s) return items;
+    return items.filter((i) => `${i.label} ${i.title} ${i.subject} ${i.keywords.join(" ")}`.toLowerCase().includes(s));
+  }, [items, q]);
+
+  const groups = useMemo(() => {
+    const m = new Map();
+    for (const it of filtered) {
+      const y = it.year || "Undated";
+      if (!m.has(y)) m.set(y, []);
+      m.get(y).push(it);
+    }
+    return [...m.entries()];
+  }, [filtered]);
+
+  return (
+    <div className="p-3">
+      <div className="mb-3 flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 dark:border-slate-700 dark:bg-slate-800">
+        <span aria-hidden>🔍</span>
+        <input
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          placeholder={`Search ${meta?.label || ""} (number, title, topic)`}
+          style={{ fontSize: "16px" }}
+          className="min-w-0 flex-1 border-none bg-transparent py-2 text-slate-900 placeholder:text-slate-400 focus:outline-none dark:text-slate-100"
+        />
+        {q && <button onClick={() => setQ("")} className="text-slate-400" aria-label="Clear">✕</button>}
+      </div>
+
+      {items.length === 0 && (
+        <div className="rounded-xl bg-slate-50 p-4 text-center text-sm text-slate-500 dark:bg-slate-800/60 dark:text-slate-400">
+          <p className="mb-1 text-2xl" aria-hidden>{meta?.icon}</p>
+          <p className="font-medium">No {meta?.label}s yet.</p>
+          {IS_DEV && <p className="mt-1 text-xs">Import one in the 🛠 Dev Panel → CMO / CAO tab.</p>}
+        </div>
+      )}
+      {items.length > 0 && filtered.length === 0 && (
+        <p className="p-3 text-center text-sm text-slate-400">No match for “{q}”.</p>
+      )}
+
+      {groups.map(([year, list]) => {
+        const collapsed = !q && collapsedYears[year];
+        return (
+          <div key={year} className="mb-2">
+            <button
+              onClick={() => setCollapsedYears((p) => ({ ...p, [year]: !p[year] }))}
+              className="flex min-h-[40px] w-full items-center justify-between gap-2 rounded-lg px-2 py-2 text-left active:bg-slate-50 dark:active:bg-slate-800"
+            >
+              <span className="text-sm font-bold uppercase tracking-wide text-navy-800 dark:text-slate-300">
+                {year} <span className="font-normal text-slate-400">· {list.length}</span>
+              </span>
+              <span className="text-xs text-slate-400 dark:text-slate-500">{collapsed ? "▸" : "▾"}</span>
+            </button>
+            {!collapsed && (
+              <ul className="ml-1 space-y-0.5 border-l border-slate-100 pl-2 dark:border-slate-800">
+                {list.map((it) => {
+                  const active = selectedId === it.id;
+                  return (
+                    <li key={it.id}>
+                      <button
+                        onClick={() => onSelect(it.id)}
+                        className={`block min-h-[44px] w-full rounded-lg px-3 py-2 text-left text-sm transition-colors ${
+                          active
+                            ? "bg-navy-900 font-medium text-white shadow-sm dark:bg-navy-700"
+                            : "text-slate-600 active:bg-slate-100 dark:text-slate-400 dark:active:bg-slate-800"
+                        }`}
+                      >
+                        <span className="flex items-center gap-1.5">
+                          <span className="font-semibold">{it.label}</span>
+                          {it.status !== "in_force" && (
+                            <span className="text-[10px] uppercase tracking-wide opacity-70">{STATUS_META[it.status]?.label}</span>
+                          )}
+                          {it.hasAi && <span className="text-xs" title="AI explanation available">🤖</span>}
+                        </span>
+                        {it.title && (
+                          <span className={`line-clamp-2 text-xs ${active ? "text-slate-300" : "text-slate-400 dark:text-slate-500"}`}>
+                            {it.title}
+                          </span>
+                        )}
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+// ── Ask AI modal (same look as the CMTA one) ─────────────────────────
+function IssuanceAiModal({ target, onClose }) {
+  const { title, ref, text, entry } = target;
+  const [copiedApp, setCopiedApp] = useState(null);
+
+  const ask = async (app) => {
+    const base =
+      entry?.prompt?.trim() ||
+      `Explain this provision of ${ref} (Philippine Bureau of Customs) in simple terms, with a practical customs example, why it exists, related provisions, and common board-exam traps.`;
+    const prompt = `${base}\n\nOfficial text — ${ref}:\n"""\n${text}\n"""`;
+    await copyPromptAndOpen(prompt, app.url);
+    setCopiedApp(app.id);
+    setTimeout(() => setCopiedApp(null), 2500);
+  };
+
+  return (
+    <div className="fixed inset-0 z-[70] flex items-end justify-center bg-slate-900/60 backdrop-blur-sm sm:items-center" onClick={onClose}>
+      <div onClick={(e) => e.stopPropagation()} className="max-h-[88vh] w-full overflow-y-auto rounded-t-3xl bg-white p-5 shadow-2xl dark:bg-slate-900 sm:max-w-lg sm:rounded-3xl">
+        <div className="mb-3 flex items-start justify-between gap-2">
+          <div className="flex items-center gap-2">
+            <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-amber-400 to-navy-700 text-lg">🤖</span>
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">Osias 6.7</p>
+              <p className="text-xl font-extrabold leading-tight text-slate-900 dark:text-slate-50">{entry?.title || title}</p>
+            </div>
+          </div>
+          <button onClick={onClose} className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full text-slate-400 active:bg-slate-100 dark:text-slate-500 dark:active:bg-slate-800">✕</button>
+        </div>
+
+        {entry?.content ? (
+          <p className="whitespace-pre-wrap rounded-2xl bg-slate-50 p-3 text-base leading-relaxed text-slate-700 dark:bg-slate-800/60 dark:text-slate-200">{entry.content}</p>
+        ) : (
+          <p className="rounded-2xl bg-slate-50 p-3 text-sm italic text-slate-400 dark:bg-slate-800/60 dark:text-slate-500">Osias 6.7 hasn't explained this part yet.</p>
+        )}
+
+        <div className="mt-4 border-t border-slate-100 pt-3 dark:border-slate-800">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">Still confused? Ask another AI</p>
+          <div className="flex flex-wrap gap-2">
+            {AI_APPS.map((app) => (
+              <button key={app.id} onClick={() => ask(app)} className="flex min-h-[42px] items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3.5 text-sm font-medium text-slate-700 active:bg-slate-100 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200 dark:active:bg-slate-700">
+                <span aria-hidden>{app.icon}</span> {app.label}
+              </button>
+            ))}
+          </div>
+          {copiedApp && (
+            <p className="mt-2 text-xs font-medium text-emerald-600 dark:text-emerald-400">
+              ✓ Prompt + official text copied — paste it in {AI_APPS.find((a) => a.id === copiedApp)?.label} and send.
+            </p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── One paragraph: full text + Highlight / Note / Ask AI ─────────────
+function ParagraphBlock({ issuance, section, para, reading, fontScale, armedId, setArmedId, onAsk }) {
+  const nodeId = `${issuance.id}:${section.id}:${para.id}`;
+  const [notesOpen, setNotesOpen] = useState(false);
+  const { highlights, addHighlight, removeHighlight } = useNodeHighlights(nodeId, true);
+  const { notes, createNote, editNote, removeNote } = useNodeNotes(nodeId, true);
+  const isArmed = armedId === nodeId;
+  const armed = reading || isArmed;
+
+  const askAi = () =>
+    onAsk(
+      `${issuance.label}${section.heading ? " — " + section.heading : ""}`,
+      (para.label ? para.label + " " : "") + para.text,
+      para.ai
+    );
+
+  const noteBtn = (
+    <button
+      onClick={() => setNotesOpen((v) => !v)}
+      className={`min-h-[36px] rounded-lg border px-3 py-1 text-sm font-medium transition-colors ${
+        notesOpen
+          ? "border-sky-400 bg-sky-100 text-sky-800 dark:border-sky-600 dark:bg-sky-900/40 dark:text-sky-300"
+          : "border-sky-200 bg-sky-50 text-sky-700 active:bg-sky-100 dark:border-sky-700 dark:bg-sky-950/30 dark:text-sky-400 dark:active:bg-sky-950/50"
+      }`}
+    >
+      📝 {notes.length > 0 ? `Notes (${notes.length})` : "Add Note"}
+    </button>
+  );
+  const aiBtn = (
+    <button
+      onClick={askAi}
+      className="min-h-[36px] rounded-lg border border-purple-200 bg-purple-50 px-3 py-1 text-sm font-medium text-purple-700 active:bg-purple-100 dark:border-purple-700 dark:bg-purple-950/30 dark:text-purple-400 dark:active:bg-purple-950/50"
+    >
+      🤖 Ask AI
+    </button>
+  );
+
+  return (
+    <div className={`${INDENT_CLASS[para.indent] || "ml-0"} ${reading ? "my-4" : "rounded-xl bg-slate-50/70 p-3 dark:bg-slate-800/40"}`}>
+      <div className="flex gap-2" style={{ fontSize: `${fontScale}rem` }}>
+        {para.label && (
+          <span className={`flex-shrink-0 select-none font-semibold tabular-nums text-slate-500 dark:text-slate-400 ${reading ? "font-serif leading-loose" : "leading-relaxed"}`}>
+            {para.label}
+          </span>
+        )}
+        <div className="min-w-0 flex-1">
+          <HighlightableContent
+            nodeId={nodeId}
+            content={para.text}
+            highlights={highlights}
+            addHighlight={addHighlight}
+            removeHighlight={removeHighlight}
+            armed={armed}
+            className={
+              reading
+                ? "select-text whitespace-pre-wrap font-serif leading-loose text-slate-800 dark:text-slate-300"
+                : "select-text whitespace-pre-wrap rounded-lg leading-relaxed text-slate-700 dark:text-slate-300"
+            }
+          />
+        </div>
+      </div>
+
+      <div className="mt-1.5 flex flex-wrap items-center gap-2 font-sans">
+        {!reading && (
+          <button
+            onClick={() => setArmedId(isArmed ? null : nodeId)}
+            className={`min-h-[36px] rounded-lg border px-3 py-1 text-sm font-medium transition-colors ${
+              isArmed
+                ? "border-amber-400 bg-amber-100 text-amber-800 dark:border-amber-600 dark:bg-amber-900/40 dark:text-amber-300"
+                : "border-emerald-200 bg-emerald-50 text-emerald-700 active:bg-emerald-100 dark:border-emerald-700 dark:bg-emerald-950/30 dark:text-emerald-400 dark:active:bg-emerald-950/50"
+            }`}
+          >
+            {isArmed ? "Select text to highlight…" : "🖍 Highlight"}
+          </button>
+        )}
+        {noteBtn}
+        {aiBtn}
+        {para.ai && <span className="text-[11px] font-medium text-emerald-600 dark:text-emerald-400" title="AI explanation available">✓ explained</span>}
+      </div>
+
+      {notesOpen && (
+        <div className="font-sans">
+          <NotePanel notes={notes} onCreate={createNote} onEdit={editNote} onDelete={removeNote} onClose={() => setNotesOpen(false)} />
+        </div>
+      )}
+    </div>
+  );
+}
+
+function RefChips({ title, refs, onOpen }) {
+  if (!refs.length) return null;
+  return (
+    <div className="mt-2 flex flex-wrap items-center gap-1.5 text-xs">
+      <span className="font-semibold text-slate-500 dark:text-slate-400">{title}</span>
+      {refs.map((r, i) => {
+        const hit = resolveIssuanceRef(r);
+        return hit ? (
+          <button key={i} onClick={() => onOpen(hit)} className="rounded-full border border-navy-200 bg-white px-2.5 py-1 font-medium text-navy-800 active:bg-slate-100 dark:border-navy-700 dark:bg-slate-800 dark:text-amber-400">
+            {r} →
+          </button>
+        ) : (
+          <span key={i} className="rounded-full bg-slate-100 px-2.5 py-1 text-slate-600 dark:bg-slate-700 dark:text-slate-300">{r}</span>
+        );
+      })}
+    </div>
+  );
+}
+
+// ── Main area: the selected CMO / CAO ────────────────────────────────
+export function IssuanceReader({ kind, issuanceId, mode, fontScale, focusMode, onOpenIssuance }) {
+  const meta = ISSUANCE_KINDS.find((k) => k.id === kind);
+  const issuance = useMemo(() => {
+    const i = issuanceId ? getIssuance(issuanceId) : null;
+    return i && i.type.toLowerCase() === kind ? i : null;
+  }, [issuanceId, kind]);
+  const [armedId, setArmedId] = useState(null);
+  const [aiTarget, setAiTarget] = useState(null);
+  const [collapsed, setCollapsed] = useState({});
+  const [quizOpen, setQuizOpen] = useState(false);
+
+  useEffect(() => {
+    setArmedId(null);
+    setAiTarget(null);
+    setCollapsed({});
+    setQuizOpen(false);
+  }, [issuanceId, kind]);
+
+  if (!issuance) {
+    return (
+      <div className="flex h-full flex-col items-center justify-center gap-3 px-6 text-center text-slate-400 dark:text-slate-600">
+        <span className="text-4xl">{meta?.icon || "📜"}</span>
+        <p className="text-lg font-medium text-slate-500 dark:text-slate-400">Select a {meta?.label} to start {mode === "reading" ? "reading" : "studying"}</p>
+        <p className="text-sm">Use the menu button (☰) to see the list.</p>
+      </div>
+    );
+  }
+
+  const reading = mode === "reading";
+  const openAi = (title, text, entry) => setAiTarget({ title, ref: issuance.label, text, entry });
+  const wrap = reading
+    ? `mx-auto transition-all duration-300 ${focusMode ? "max-w-[62ch]" : "max-w-[70ch]"}`
+    : "mx-auto max-w-3xl";
+  const allCollapsed = issuance.sections.every((s) => !s.heading || collapsed[s.id]);
+
+  return (
+    <div className={wrap}>
+      <div className="mb-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-card dark:border-slate-700 dark:bg-slate-900">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="rounded-md bg-navy-900 px-2 py-0.5 text-xs font-semibold uppercase tracking-wide text-white dark:bg-navy-700">{issuance.type}</span>
+          <StatusBadge status={issuance.status} />
+          {issuance.source === "preview" && <span className="rounded-md bg-purple-100 px-1.5 py-0.5 text-[11px] font-semibold text-purple-700 dark:bg-purple-900/40 dark:text-purple-300">DEV PREVIEW</span>}
+        </div>
+        <h1 className="mt-2 text-xl font-bold text-navy-900 dark:text-slate-50">{issuance.label}</h1>
+        {issuance.title && <p className="mt-1 text-base font-semibold text-slate-700 dark:text-slate-200">{issuance.title}</p>}
+        {issuance.subject && <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{issuance.subject}</p>}
+        {(issuance.date_issued || issuance.effectivity) && (
+          <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
+            {issuance.date_issued && <span>📅 Issued: {issuance.date_issued}</span>}
+            {issuance.date_issued && issuance.effectivity && <span> · </span>}
+            {issuance.effectivity && <span>Effectivity: {issuance.effectivity}</span>}
+          </p>
+        )}
+        <RefChips title="Amends / revokes" refs={issuance.amends} onOpen={onOpenIssuance} />
+        <RefChips title="Amended by" refs={issuance.amended_by} onOpen={onOpenIssuance} />
+        <RefChips title="Related" refs={issuance.related} onOpen={onOpenIssuance} />
+        {issuance.keywords.length > 0 && (
+          <div className="mt-2 flex flex-wrap gap-1">
+            {issuance.keywords.map((k) => <span key={k} className="rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-slate-700 dark:text-slate-400">{k}</span>)}
+          </div>
+        )}
+        <div className="mt-3 flex flex-wrap gap-2">
+          <button
+            onClick={() => openAi(`About ${issuance.label}`, fullText(issuance), issuance.ai)}
+            className="min-h-[38px] rounded-lg border border-purple-200 bg-purple-50 px-3 py-1.5 text-sm font-medium text-purple-700 active:bg-purple-100 dark:border-purple-700 dark:bg-purple-950/30 dark:text-purple-400"
+          >
+            🤖 Ask AI — overview
+          </button>
+          {getIssuanceQuiz(issuance.id) && (
+            <button
+              onClick={() => setQuizOpen(true)}
+              className="min-h-[38px] rounded-lg border border-blue-200 bg-blue-50 px-3 py-1.5 text-sm font-medium text-blue-700 active:bg-blue-100 dark:border-blue-700 dark:bg-blue-950/30 dark:text-blue-400"
+            >
+              📝 Quiz
+            </button>
+          )}
+          {!reading && (
+            <>
+              <button onClick={() => setCollapsed({})} className="h-[38px] rounded-full border border-slate-200 bg-white px-3 text-sm font-medium text-slate-600 active:bg-slate-100 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300">⤢ Expand All</button>
+              <button
+                onClick={() => setCollapsed(Object.fromEntries(issuance.sections.map((s) => [s.id, true])))}
+                disabled={allCollapsed}
+                className="h-[38px] rounded-full border border-slate-200 bg-white px-3 text-sm font-medium text-slate-600 active:bg-slate-100 disabled:opacity-40 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300"
+              >
+                ⤡ Collapse All
+              </button>
+            </>
+          )}
+        </div>
+      </div>
+
+      {issuance.sections.map((sec) => {
+        const open = !sec.heading || !collapsed[sec.id];
+        const paras = sec.paragraphs.map((p) => (
+          <ParagraphBlock
+            key={`${issuance.id}:${sec.id}:${p.id}`}
+            issuance={issuance}
+            section={sec}
+            para={p}
+            reading={reading}
+            fontScale={reading ? fontScale : Math.max(1, fontScale)}
+            armedId={armedId}
+            setArmedId={setArmedId}
+            onAsk={openAi}
+          />
+        ));
+        const secAi = sec.ai && (
+          <button
+            onClick={() => openAi(`${issuance.label} — ${sec.heading}`, sectionText(sec), sec.ai)}
+            className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full text-base active:bg-slate-100 dark:active:bg-slate-800"
+            aria-label="Ask AI about this section"
+          >
+            🤖
+          </button>
+        );
+
+        if (reading) {
+          return (
+            <section key={sec.id} className="mb-6">
+              {sec.heading && (
+                <div className="flex items-start gap-2">
+                  <h2 className="flex-1 font-serif font-bold text-navy-900 dark:text-slate-50" style={{ fontSize: `${1.3 * fontScale}rem` }}>{sec.heading}</h2>
+                  {secAi}
+                </div>
+              )}
+              {paras}
+            </section>
+          );
+        }
+        return (
+          <section key={sec.id} className="mb-3 rounded-2xl border border-slate-200 bg-white p-3 shadow-card dark:border-slate-700 dark:bg-slate-900">
+            {sec.heading && (
+              <div className="flex items-start gap-1">
+                <button onClick={() => setCollapsed((p) => ({ ...p, [sec.id]: !p[sec.id] }))} aria-expanded={open} className="flex min-h-[40px] flex-1 items-start gap-2 text-left">
+                  <span className={`mt-1 select-none text-slate-400 transition-transform duration-200 dark:text-slate-600 ${open ? "rotate-90" : ""}`}>▸</span>
+                  <span className="text-base font-bold text-navy-900 dark:text-slate-50 sm:text-lg">{sec.heading}</span>
+                </button>
+                {secAi}
+              </div>
+            )}
+            {open && <div className="mt-2 space-y-2">{paras}</div>}
+          </section>
+        );
+      })}
+
+      {aiTarget && <IssuanceAiModal target={aiTarget} onClose={() => setAiTarget(null)} />}
+      {quizOpen && <IssuanceQuizModal issuance={issuance} onClose={() => setQuizOpen(false)} />}
+    </div>
+  );
+}
+```
+
+## File: ./frontend/src/pages/IssuancePanel.jsx
+```
+import { useState, useCallback } from "react";
+import {
+  importIssuanceJson, getPreviewList, deletePreviewIssuance, clearPreview,
+  exportIssuanceJson, exportManyJson, issuanceFileName,
+  ISSUANCE_PROMPT, ISSUANCE_TEMPLATE, STATUS_META,
+} from "../issuancesStore";
+
+function download(name, text) {
+  const blob = new Blob([text], { type: "application/json;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = name;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+export default function IssuancePanel() {
+  const [json, setJson] = useState("");
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+  const [copied, setCopied] = useState(false);
+  const [, setTick] = useState(0);
+  const refresh = () => setTick((t) => t + 1);
+  const list = getPreviewList();
+
+  const handleImport = useCallback(() => {
+    setError(null);
+    setSuccess(null);
+    try {
+      const res = importIssuanceJson(json);
+      setSuccess(
+        "✓ Imported " + res.map((r) => `${r.label} (${r.paragraphCount} paragraphs, ${r.aiCount} explained)`).join(", ") +
+        ". Open ☰ → CMO / CAO to preview."
+      );
+      setJson("");
+      refresh();
+    } catch (e) {
+      setError(e.message);
+    }
+  }, [json]);
+
+  const copyPrompt = async () => {
+    try {
+      await navigator.clipboard.writeText(ISSUANCE_PROMPT);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    } catch {
+      alert("Clipboard blocked. Long-press the text in the box below instead.");
+    }
+  };
+
+  const handleDelete = (id, label) => {
+    if (confirm(`Remove ${label} from the dev preview?`)) { deletePreviewIssuance(id); refresh(); }
+  };
+  const handleClear = () => {
+    if (confirm("Remove ALL dev-preview CMOs / CAOs?")) { clearPreview(); refresh(); }
+  };
+
+  const btn = "min-h-[40px] rounded-lg border px-3 py-1.5 text-sm font-medium";
+
+  return (
+    <div className="space-y-4">
+      <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-card dark:border-slate-700 dark:bg-slate-800">
+        <h2 className="text-base font-bold text-navy-900 dark:text-slate-100">CMO / CAO import</h2>
+        <ol className="mt-2 list-decimal space-y-1 pl-5 text-sm text-slate-600 dark:text-slate-300">
+          <li>Copy the AI prompt, paste it in ChatGPT / Gemini, then paste the official CMO/CAO text below it.</li>
+          <li>Paste the JSON the AI gives you here (official paragraphs + Tagalog explanations in one go).</li>
+          <li>Import, then check it in ☰ → CMO / CAO.</li>
+          <li>Download the file and put it in <code className="rounded bg-slate-100 px-1 dark:bg-slate-700">frontend/src/data/issuances/</code> so it ships to users.</li>
+        </ol>
+        <div className="mt-3 flex flex-wrap gap-2">
+          <button onClick={copyPrompt} className={`${btn} border-purple-200 bg-purple-50 text-purple-700 dark:border-purple-700 dark:bg-purple-950/30 dark:text-purple-400`}>
+            {copied ? "✓ Prompt copied" : "📋 Copy AI prompt"}
+          </button>
+          <button onClick={() => setJson(ISSUANCE_TEMPLATE)} className={`${btn} border-slate-200 text-slate-600 dark:border-slate-600 dark:text-slate-300`}>
+            🧩 Insert template
+          </button>
+        </div>
+      </div>
+
+      <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-card dark:border-slate-700 dark:bg-slate-800">
+        <textarea
+          value={json}
+          onChange={(e) => setJson(e.target.value)}
+          rows={10}
+          placeholder="Paste JSON here — one CMO/CAO, or an array of many. Code fences are fine."
+          style={{ fontSize: "16px" }}
+          className="w-full rounded-lg border border-slate-200 bg-slate-50 p-2.5 font-mono text-slate-800 focus:outline-none dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100"
+        />
+        {error && <p className="mt-2 rounded-lg bg-red-50 p-2.5 text-sm text-red-700 dark:bg-red-950/30 dark:text-red-300">⚠️ {error}</p>}
+        {success && <p className="mt-2 rounded-lg bg-emerald-50 p-2.5 text-sm text-emerald-700 dark:bg-emerald-950/30 dark:text-emerald-300">{success}</p>}
+        <div className="mt-2 flex justify-end">
+          <button onClick={handleImport} disabled={!json.trim()} className="min-h-[42px] rounded-lg bg-navy-900 px-5 py-2 text-sm font-semibold text-white disabled:opacity-40 dark:bg-navy-700">
+            Import
+          </button>
+        </div>
+      </div>
+
+      <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-card dark:border-slate-700 dark:bg-slate-800">
+        <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+          <h3 className="text-sm font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400">Dev preview ({list.length})</h3>
+          {list.length > 0 && (
+            <div className="flex flex-wrap gap-2">
+              {["CMO", "CAO"].filter((t) => list.some((i) => i.type === t)).map((t) => (
+                <button key={t} onClick={() => download(`${t.toLowerCase()}-all.json`, exportManyJson(t))} className={`${btn} border-slate-200 text-slate-600 dark:border-slate-600 dark:text-slate-300`}>
+                  ⬇ All {t}
+                </button>
+              ))}
+              <button onClick={handleClear} className={`${btn} border-red-200 text-red-600 dark:border-red-800 dark:text-red-400`}>Clear</button>
+            </div>
+          )}
+        </div>
+        {list.length === 0 && <p className="text-sm text-slate-400">Nothing imported yet.</p>}
+        <ul className="space-y-2">
+          {list.map((it) => (
+            <li key={it.id} className="rounded-xl border border-slate-100 p-3 dark:border-slate-700">
+              <div className="flex items-start justify-between gap-2">
+                <div className="min-w-0">
+                  <p className="font-semibold text-navy-900 dark:text-slate-100">
+                    {it.label} <span className="text-xs font-normal text-slate-400">· {STATUS_META[it.status]?.label}</span>
+                  </p>
+                  {it.title && <p className="truncate text-sm text-slate-500 dark:text-slate-400">{it.title}</p>}
+                  <p className="text-xs text-slate-400">{it.paragraphCount} paragraphs · 🤖 {it.aiCount} explained</p>
+                </div>
+                <div className="flex flex-shrink-0 gap-2">
+                  <button onClick={() => download(issuanceFileName(it.id), exportIssuanceJson(it.id))} className="rounded-lg border border-slate-200 px-2.5 py-1.5 text-xs font-medium text-slate-600 dark:border-slate-600 dark:text-slate-300">⬇ JSON</button>
+                  <button onClick={() => handleDelete(it.id, it.label)} className="rounded-lg border border-red-200 px-2.5 py-1.5 text-xs font-medium text-red-600 dark:border-red-800 dark:text-red-400">✕</button>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+```
+
+## File: ./frontend/src/pages/IssuanceQuizPanel.jsx
+```
+import { useState, useCallback } from "react";
+import {
+  importIssuanceQuizJson, getPreviewQuizList, deletePreviewQuiz, clearPreviewQuiz,
+  exportIssuanceQuizJson, exportAllQuizJson, issuanceQuizFileName,
+  ISSUANCE_QUIZ_PROMPT, ISSUANCE_QUIZ_TEMPLATE,
+} from "../issuanceQuizStore";
+
+function download(name, text) {
+  const blob = new Blob([text], { type: "application/json;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = name;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+export default function IssuanceQuizPanel() {
+  const [json, setJson] = useState("");
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+  const [copied, setCopied] = useState(false);
+  const [, setTick] = useState(0);
+  const refresh = () => setTick((t) => t + 1);
+  const list = getPreviewQuizList();
+
+  const handleImport = useCallback(() => {
+    setError(null);
+    setSuccess(null);
+    try {
+      const res = importIssuanceQuizJson(json);
+      const missing = res.filter((r) => !r.found).map((r) => r.label);
+      setSuccess(
+        "✓ Quiz imported: " + res.map((r) => `${r.label} (L1: ${r.l1}, L2: ${r.l2})`).join(", ") + "." +
+        (missing.length
+          ? ` ⚠ ${missing.join(", ")} not in your CMO / CAO list yet — the 📝 Quiz button will appear once it is imported.`
+          : " Open ☰ → CMO / CAO and tap 📝 Quiz.")
+      );
+      setJson("");
+      refresh();
+    } catch (e) {
+      setError(e.message);
+    }
+  }, [json]);
+
+  const copyPrompt = async () => {
+    try {
+      await navigator.clipboard.writeText(ISSUANCE_QUIZ_PROMPT);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    } catch {
+      alert("Clipboard blocked. Long-press the text in the box below instead.");
+    }
+  };
+
+  const handleDelete = (id, label) => {
+    if (confirm(`Remove the quiz of ${label} from the dev preview?`)) { deletePreviewQuiz(id); refresh(); }
+  };
+  const handleClear = () => {
+    if (confirm("Remove ALL dev-preview CMO / CAO quizzes?")) { clearPreviewQuiz(); refresh(); }
+  };
+
+  const btn = "min-h-[40px] rounded-lg border px-3 py-1.5 text-sm font-medium";
+
+  return (
+    <div className="space-y-4">
+      <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-card dark:border-slate-700 dark:bg-slate-800">
+        <h2 className="text-base font-bold text-navy-900 dark:text-slate-100">CMO / CAO quiz import</h2>
+        <ol className="mt-2 list-decimal space-y-1 pl-5 text-sm text-slate-600 dark:text-slate-300">
+          <li>Copy the quiz prompt, paste it in ChatGPT / Gemini, then paste the official CMO/CAO text below it.</li>
+          <li>Paste the JSON here. Level 1 = definition / identification, Level 2 = real case. All A–D.</li>
+          <li>The quiz attaches itself to the CMO/CAO with the same type + number. Import order doesn't matter.</li>
+          <li>Check it in ☰ → CMO / CAO → 📝 Quiz.</li>
+          <li>Download the file and put it in <code className="rounded bg-slate-100 px-1 dark:bg-slate-700">frontend/src/data/issuance-quizzes/</code> so it ships to users.</li>
+        </ol>
+        <div className="mt-3 flex flex-wrap gap-2">
+          <button onClick={copyPrompt} className={`${btn} border-purple-200 bg-purple-50 text-purple-700 dark:border-purple-700 dark:bg-purple-950/30 dark:text-purple-400`}>
+            {copied ? "✓ Prompt copied" : "📋 Copy AI prompt"}
+          </button>
+          <button onClick={() => setJson(ISSUANCE_QUIZ_TEMPLATE)} className={`${btn} border-slate-200 text-slate-600 dark:border-slate-600 dark:text-slate-300`}>
+            🧩 Insert template
+          </button>
+        </div>
+      </div>
+
+      <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-card dark:border-slate-700 dark:bg-slate-800">
+        <textarea
+          value={json}
+          onChange={(e) => setJson(e.target.value)}
+          rows={10}
+          placeholder="Paste quiz JSON here — one CMO/CAO, or an array of many. Code fences are fine."
+          style={{ fontSize: "16px" }}
+          className="w-full rounded-lg border border-slate-200 bg-slate-50 p-2.5 font-mono text-slate-800 focus:outline-none dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100"
+        />
+        {error && <p className="mt-2 rounded-lg bg-red-50 p-2.5 text-sm text-red-700 dark:bg-red-950/30 dark:text-red-300">⚠️ {error}</p>}
+        {success && <p className="mt-2 rounded-lg bg-emerald-50 p-2.5 text-sm text-emerald-700 dark:bg-emerald-950/30 dark:text-emerald-300">{success}</p>}
+        <div className="mt-2 flex justify-end">
+          <button onClick={handleImport} disabled={!json.trim()} className="min-h-[42px] rounded-lg bg-navy-900 px-5 py-2 text-sm font-semibold text-white disabled:opacity-40 dark:bg-navy-700">
+            Import
+          </button>
+        </div>
+      </div>
+
+      <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-card dark:border-slate-700 dark:bg-slate-800">
+        <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+          <h3 className="text-sm font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400">Dev preview ({list.length})</h3>
+          {list.length > 0 && (
+            <div className="flex flex-wrap gap-2">
+              {["CMO", "CAO"].filter((t) => list.some((i) => i.type === t)).map((t) => (
+                <button key={t} onClick={() => download(`${t.toLowerCase()}-quizzes-all.json`, exportAllQuizJson(t))} className={`${btn} border-slate-200 text-slate-600 dark:border-slate-600 dark:text-slate-300`}>
+                  ⬇ All {t}
+                </button>
+              ))}
+              <button onClick={handleClear} className={`${btn} border-red-200 text-red-600 dark:border-red-800 dark:text-red-400`}>Clear</button>
+            </div>
+          )}
+        </div>
+        {list.length === 0 && <p className="text-sm text-slate-400">No quiz imported yet.</p>}
+        <ul className="space-y-2">
+          {list.map((it) => (
+            <li key={it.id} className="rounded-xl border border-slate-100 p-3 dark:border-slate-700">
+              <div className="flex items-start justify-between gap-2">
+                <div className="min-w-0">
+                  <p className="font-semibold text-navy-900 dark:text-slate-100">{it.label}</p>
+                  <p className="text-xs text-slate-400">🟢 L1: {it.l1} questions · 🔵 L2: {it.l2} questions</p>
+                  {!it.hasIssuance && <p className="text-xs text-amber-600 dark:text-amber-400">⚠ {it.label} isn't imported yet — no Quiz button until it is.</p>}
+                </div>
+                <div className="flex flex-shrink-0 gap-2">
+                  <button onClick={() => download(issuanceQuizFileName(it.id), exportIssuanceQuizJson(it.id))} className="rounded-lg border border-slate-200 px-2.5 py-1.5 text-xs font-medium text-slate-600 dark:border-slate-600 dark:text-slate-300">⬇ JSON</button>
+                  <button onClick={() => handleDelete(it.id, it.label)} className="rounded-lg border border-red-200 px-2.5 py-1.5 text-xs font-medium text-red-600 dark:border-red-800 dark:text-red-400">✕</button>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+```
+
 ## File: ./frontend/src/quizContext.js
 ```
 // Quiz generation — builds the "Copy Quiz Template" clipboard payload for one Title.
@@ -6989,7 +8060,7 @@ enableIndexedDbPersistence(db).catch((err) => {
 ```
 import { createContext, useContext, useEffect, useState, useCallback, useMemo, useRef } from "react";
 import {
-  signInWithRedirect, getRedirectResult, onAuthStateChanged, signOut,
+  signInWithRedirect, signInWithPopup, getRedirectResult, onAuthStateChanged, signOut,
   setPersistence, indexedDBLocalPersistence, signInWithCredential, GoogleAuthProvider,
 } from "firebase/auth";
 import { doc, getDoc, setDoc, updateDoc, serverTimestamp, onSnapshot, runTransaction, getDocFromServer } from "firebase/firestore";
@@ -7259,7 +8330,15 @@ export function AuthProvider({ children }) {
         localStorage.removeItem(PENDING_SIGNIN_KEY);
         setSigningIn(false);
       } else {
-        await signInWithRedirect(auth, googleProvider);
+        const isLocalDev = ["localhost", "127.0.0.1"].includes(window.location.hostname);
+        if (isLocalDev) {
+          // Dev only: redirect sign-in loops here because the Firebase handler is another origin.
+          await signInWithPopup(auth, googleProvider);
+          localStorage.removeItem(PENDING_SIGNIN_KEY);
+          setSigningIn(false);
+        } else {
+          await signInWithRedirect(auth, googleProvider);
+        }
         // Page navigates away here — code after this line generally won't run.
       }
     } catch (err) {
@@ -7346,13 +8425,13 @@ export const PLANS = [
 // false = bumalik sa dating subscription plans.
 // Hindi naaapektuhan ang kasalukuyang subscribers (walang binabago sa data nila).
 export const PROMO_MODE = true;
-export const PROMO_PRICE = 120;
+export const PROMO_PRICE = 100;
 export const PROMO_DAYS = 30;
 export const PROMO_PLAN = {
   id: "PROMO",
   kind: "promo",
-  label: "Pinaka ka-sulit Bundle",
-  tagline: "Pinaka Sulit na Bundle sa Earth!! Magagamit mo na lahat sa Customs Law app!",
+  label: "All Access Promo",
+  tagline: "One promo, everything unlocked. This is the only plan available right now.",
   price: PROMO_PRICE,
   days: PROMO_DAYS,
   months: 0,
@@ -7936,6 +9015,667 @@ export function buildShuffledSession(subjectId) {
   }
   return { order, choiceMaps };
 }
+```
+
+## File: ./frontend/src/issuancesStore.js
+```
+import { IS_DEV } from "./env";
+
+// CMO / CAO store. Same idea as aiContext.json for the CMTA:
+//  (1) shipped data  = every .json inside src/data/issuances/ (bundled at build time)
+//  (2) dev preview   = what you import in the Dev Panel (localStorage, npm run dev only)
+// One JSON = official text (paragraphs) + Tagalog AI explanations, together.
+
+const bundledModules = import.meta.glob("./data/issuances/*.json", { eager: true });
+const DEV_KEY = "customsLaw_issuancesDevPreview";
+const MAX_INDENT = 4;
+
+export const ISSUANCE_KINDS = [
+  { id: "cmta", label: "CMTA", icon: "⚖️", full: "Customs Modernization & Tariff Act" },
+  { id: "cmo", label: "CMO", icon: "📜", full: "Customs Memorandum Orders" },
+  { id: "cao", label: "CAO", icon: "📄", full: "Customs Administrative Orders" },
+];
+
+export const STATUS_META = {
+  in_force: { label: "In force", cls: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300" },
+  amended: { label: "Amended", cls: "bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300" },
+  superseded: { label: "Superseded", cls: "bg-slate-200 text-slate-600 dark:bg-slate-700 dark:text-slate-300" },
+  revoked: { label: "Revoked", cls: "bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300" },
+};
+
+const str = (v) => (v == null ? "" : String(v).trim());
+const strList = (v) => (Array.isArray(v) ? v.map(str).filter(Boolean) : str(v) ? [str(v)] : []);
+const slug = (s) => str(s).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+const safeId = (s) => str(s).replace(/[^\w-]+/g, "_");
+
+function normalizeAi(raw) {
+  if (raw == null) return null;
+  if (typeof raw === "string") return str(raw) ? { title: "", content: str(raw), prompt: "" } : null;
+  if (typeof raw !== "object") return null;
+  const ai = { title: str(raw.title), content: str(raw.content), prompt: str(raw.prompt) };
+  return ai.title || ai.content || ai.prompt ? ai : null;
+}
+
+export function normalizeIssuance(raw) {
+  if (!raw || typeof raw !== "object") throw new Error("Each issuance must be a JSON object.");
+  const type = str(raw.type).toUpperCase();
+  if (type !== "CMO" && type !== "CAO") {
+    throw new Error(`"type" must be "CMO" or "CAO" (got "${raw.type ?? ""}").`);
+  }
+  const number = str(raw.number)
+    .replace(/^(CMO|CAO)\b\s*(NO\.?|NUMBER)?\s*/i, "")
+    .replace(/\s+/g, "");
+  if (!number) throw new Error(`${type}: missing "number" (example: "01-2020").`);
+  const label = `${type} ${number}`;
+  const id = `${type.toLowerCase()}-${slug(number)}`;
+
+  let rawSections = Array.isArray(raw.sections) ? raw.sections : null;
+  if (!rawSections && Array.isArray(raw.paragraphs)) rawSections = [{ paragraphs: raw.paragraphs }];
+  if (!rawSections || !rawSections.length) {
+    throw new Error(`${label}: needs a "sections" array (or a flat "paragraphs" array).`);
+  }
+
+  const usedSections = new Set();
+  const sections = rawSections.map((rs, si) => {
+    if (!rs || typeof rs !== "object") throw new Error(`${label}: section ${si + 1} must be an object.`);
+    let sid = safeId(rs.id) || `s${si + 1}`;
+    while (usedSections.has(sid)) sid += `_${si}`;
+    usedSections.add(sid);
+
+    const usedParas = new Set();
+    const rawParas = Array.isArray(rs.paragraphs) ? rs.paragraphs : [];
+    const paragraphs = rawParas.map((rp, pi) => {
+      const obj = typeof rp === "string" ? { text: rp } : rp;
+      if (!obj || typeof obj !== "object") {
+        throw new Error(`${label}: section ${si + 1}, paragraph ${pi + 1} must be a string or an object.`);
+      }
+      const text = str(obj.text);
+      if (!text) throw new Error(`${label}: section ${si + 1}, paragraph ${pi + 1} has no "text".`);
+      let pid = safeId(obj.id) || `p${pi + 1}`;
+      while (usedParas.has(pid)) pid += `_${pi}`;
+      usedParas.add(pid);
+      const indent = Math.max(0, Math.min(MAX_INDENT, parseInt(obj.indent, 10) || 0));
+      return { id: pid, label: str(obj.label), indent, text, ai: normalizeAi(obj.ai) };
+    });
+    return { id: sid, heading: str(rs.heading), ai: normalizeAi(rs.ai), paragraphs };
+  });
+
+  const paragraphCount = sections.reduce((n, s) => n + s.paragraphs.length, 0);
+  if (!paragraphCount) throw new Error(`${label}: no paragraphs found.`);
+  const aiCount = sections.reduce((n, s) => n + s.paragraphs.filter((p) => p.ai).length, 0);
+
+  const date_issued = str(raw.date_issued);
+  const year = (number.match(/(\d{4})$/) || date_issued.match(/(\d{4})/) || [])[1] || "";
+  const statusKey = str(raw.status).toLowerCase().replace(/[\s-]+/g, "_");
+
+  return {
+    id, type, number, label, year,
+    title: str(raw.title),
+    subject: str(raw.subject),
+    date_issued,
+    effectivity: str(raw.effectivity),
+    status: STATUS_META[statusKey] ? statusKey : "in_force",
+    amends: strList(raw.amends),
+    amended_by: strList(raw.amended_by),
+    related: strList(raw.related),
+    keywords: strList(raw.keywords),
+    ai: normalizeAi(raw.ai),
+    sections, paragraphCount, aiCount,
+  };
+}
+
+// The same shape you import = the same shape you export (round-trip safe).
+function toExportShape(n) {
+  const o = { type: n.type, number: n.number, title: n.title };
+  if (n.subject) o.subject = n.subject;
+  if (n.date_issued) o.date_issued = n.date_issued;
+  if (n.effectivity) o.effectivity = n.effectivity;
+  o.status = n.status;
+  if (n.amends.length) o.amends = n.amends;
+  if (n.amended_by.length) o.amended_by = n.amended_by;
+  if (n.related.length) o.related = n.related;
+  if (n.keywords.length) o.keywords = n.keywords;
+  if (n.ai) o.ai = n.ai;
+  o.sections = n.sections.map((s) => {
+    const so = { id: s.id };
+    if (s.heading) so.heading = s.heading;
+    if (s.ai) so.ai = s.ai;
+    so.paragraphs = s.paragraphs.map((p) => {
+      const po = { id: p.id };
+      if (p.label) po.label = p.label;
+      if (p.indent) po.indent = p.indent;
+      po.text = p.text;
+      if (p.ai) po.ai = p.ai;
+      return po;
+    });
+    return so;
+  });
+  return o;
+}
+
+function toItems(data) {
+  return Array.isArray(data) ? data : Array.isArray(data?.issuances) ? data.issuances : [data];
+}
+
+// ── shipped (bundled) ────────────────────────────────────────────────
+let bundledCache = null;
+function getBundled() {
+  if (bundledCache) return bundledCache;
+  const out = {};
+  for (const [path, mod] of Object.entries(bundledModules)) {
+    for (const raw of toItems(mod.default ?? mod)) {
+      try {
+        const n = normalizeIssuance(raw);
+        out[n.id] = { ...n, source: "bundled" };
+      } catch (e) {
+        console.warn(`[issuances] Skipped ${path}: ${e.message}`);
+      }
+    }
+  }
+  bundledCache = out;
+  return out;
+}
+
+// ── dev preview (localStorage, dev only) ─────────────────────────────
+function readPreviewText() {
+  if (!IS_DEV) return "{}";
+  try { return localStorage.getItem(DEV_KEY) || "{}"; } catch { return "{}"; }
+}
+function readPreviewRaw() {
+  try { return JSON.parse(readPreviewText()); } catch { return {}; }
+}
+let previewCache = { text: null, value: {} };
+function getPreview() {
+  const text = readPreviewText();
+  if (previewCache.text === text) return previewCache.value;
+  const out = {};
+  for (const raw of Object.values(readPreviewRaw())) {
+    try {
+      const n = normalizeIssuance(raw);
+      out[n.id] = { ...n, source: "preview" };
+    } catch { /* ignore broken preview entries */ }
+  }
+  previewCache = { text, value: out };
+  return out;
+}
+function writePreviewRaw(obj) {
+  localStorage.setItem(DEV_KEY, JSON.stringify(obj));
+}
+
+function getAll() {
+  return { ...getBundled(), ...getPreview() };
+}
+
+// ── public read API ──────────────────────────────────────────────────
+function toSummary(i) {
+  return {
+    id: i.id, type: i.type, number: i.number, label: i.label, year: i.year,
+    title: i.title, subject: i.subject, status: i.status, keywords: i.keywords,
+    paragraphCount: i.paragraphCount, aiCount: i.aiCount,
+    hasAi: i.aiCount > 0 || !!i.ai, source: i.source,
+  };
+}
+
+function compare(a, b) {
+  if (a.year !== b.year) {
+    if (!a.year) return 1;
+    if (!b.year) return -1;
+    return b.year.localeCompare(a.year); // newest year first
+  }
+  return (parseInt(a.number, 10) || 0) - (parseInt(b.number, 10) || 0); // 01, 02, 03...
+}
+
+export function listIssuances(kind) {
+  const t = String(kind).toUpperCase();
+  return Object.values(getAll()).filter((i) => i.type === t).map(toSummary).sort(compare);
+}
+
+export function getIssuance(id) {
+  return getAll()[id] || null;
+}
+
+// "CMO 12-2016", "CMO No. 12-2016", "CAO 05-2019"  ->  summary or null
+export function resolveIssuanceRef(text) {
+  const m = String(text || "").match(/\b(CMO|CAO)\s*(?:NO\.?\s*)?(\d{1,3}\s*-\s*\d{4})/i);
+  if (!m) return null;
+  const i = getAll()[`${m[1].toLowerCase()}-${slug(m[2])}`];
+  return i ? toSummary(i) : null;
+}
+
+// ── dev import / export ──────────────────────────────────────────────
+function stripFences(text) {
+  return String(text || "").trim().replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/, "");
+}
+
+export function importIssuanceJson(text) {
+  if (!IS_DEV) throw new Error("Import is only available in npm run dev.");
+  let data;
+  try { data = JSON.parse(stripFences(text)); } catch (e) { throw new Error("Invalid JSON: " + e.message); }
+  const items = toItems(data);
+  if (!items.length) throw new Error("The JSON is empty.");
+  const normalized = items.map(normalizeIssuance); // throws before anything is saved
+  const store = readPreviewRaw();
+  for (const n of normalized) store[n.id] = toExportShape(n);
+  writePreviewRaw(store);
+  return normalized.map((n) => ({ id: n.id, label: n.label, paragraphCount: n.paragraphCount, aiCount: n.aiCount }));
+}
+
+export function getPreviewList() {
+  return Object.values(getPreview()).map(toSummary).sort((a, b) => a.type.localeCompare(b.type) || compare(a, b));
+}
+
+export function deletePreviewIssuance(id) {
+  const store = readPreviewRaw();
+  delete store[id];
+  writePreviewRaw(store);
+}
+
+export function clearPreview() {
+  if (IS_DEV) localStorage.removeItem(DEV_KEY);
+}
+
+export function exportIssuanceJson(id) {
+  const n = getIssuance(id);
+  return n ? JSON.stringify(toExportShape(n), null, 2) : "";
+}
+
+export function exportManyJson(kind) {
+  const t = String(kind).toUpperCase();
+  const all = Object.values(getPreview()).filter((i) => i.type === t).sort(compare);
+  return JSON.stringify(all.map(toExportShape), null, 2);
+}
+
+export function issuanceFileName(id) {
+  return `${id}.json`;
+}
+
+// ── template + prompt ────────────────────────────────────────────────
+export const ISSUANCE_TEMPLATE = JSON.stringify(
+  {
+    type: "CMO",
+    number: "00-2099",
+    title: "[SAMPLE] Replace everything in this template",
+    subject: "One-line topic of the order",
+    date_issued: "January 1, 2099",
+    effectivity: "15 days after publication",
+    status: "in_force",
+    amends: [],
+    related: ["CMTA Sec. 102"],
+    keywords: ["sample", "template"],
+    ai: {
+      title: "Overview ng CMO 00-2099",
+      content: "📖 Kahulugan\n[Tagalog explanation here]\n\n💡 Simpleng Paliwanag\n[Tagalog explanation here]",
+      prompt: "Explain this Customs Memorandum Order simply, with practical customs examples.",
+    },
+    sections: [
+      {
+        id: "s1",
+        heading: "I. OBJECTIVE",
+        paragraphs: [
+          { id: "p1", label: "1.", text: "[Official paragraph text, copied exactly from the document.]" },
+        ],
+      },
+      {
+        id: "s2",
+        heading: "II. PROCEDURE",
+        paragraphs: [
+          {
+            id: "p1",
+            label: "2.1",
+            text: "[Official paragraph text.]",
+            ai: {
+              title: "Procedure",
+              content: "📖 Kahulugan\n[Tagalog]\n\n⚠️ Dapat Tandaan\n[Tagalog]",
+              prompt: "Explain this procedure step by step with an example at the airport or seaport.",
+            },
+          },
+          { id: "p2", label: "a.", indent: 1, text: "[Sub-paragraph text, nested one level.]" },
+        ],
+      },
+    ],
+  },
+  null,
+  2
+);
+
+export const ISSUANCE_PROMPT = String.raw`🧠 CMO / CAO → STUDY-JSON GENERATION PROMPT
+You are an expert Philippine Customs Broker, customs-law educator, and content writer for the CMTA study app.
+Convert the OFFICIAL TEXT of ONE Customs Memorandum Order (CMO) or Customs Administrative Order (CAO) — pasted at the very bottom — into ONE valid JSON object the app can import directly. The official text and the Tagalog study guides must come out TOGETHER in this single JSON.
+
+OUTPUT RULES
+- Output ONLY the JSON. No markdown fences, no commentary before or after.
+- The official text is the only legal source. Copy it VERBATIM (same wording, numbering, punctuation). Never paraphrase, shorten, reorder, or "fix" it. Never invent provisions.
+- Keep the same paragraph structure as the original document: one entry per paragraph / numbered item, in the original order.
+- "label" = the numbering exactly as printed (e.g. "1.", "2.1", "a.", "(i)"). Do NOT repeat the label inside "text".
+- "indent" = nesting depth 0–4 (0 = main paragraph, 1 = sub-item, 2 = sub-sub-item).
+- Group paragraphs under the document's own headings (e.g. "I. OBJECTIVE", "Section 3. Scope") using "sections". If there are no headings, use one section without "heading".
+- Tables or lists inside a paragraph: write them as plain text, one row/item per line, using the two characters backslash-n as the line break. Never put real line breaks inside a JSON string.
+
+FIELDS
+Top level: type ("CMO" or "CAO"), number (e.g. "01-2020"), title, subject (one-line topic), date_issued (as printed), effectivity (as printed), status ("in_force", "amended", "superseded" or "revoked" — only if the pasted text says so, otherwise "in_force"), amends (array, e.g. ["CMO 12-2016"]), related (array of related CMTA sections / orders, e.g. ["CMTA Sec. 102", "CAO 05-2019"]), keywords (array), ai (overview study guide), sections (array).
+Section: id ("s1", "s2", ...), heading, paragraphs (array), ai (optional).
+Paragraph: id ("p1", "p2", ... unique inside its section), label, indent, text, ai (optional).
+ai object: { "title": "...", "content": "...", "prompt": "..." }
+
+AI STUDY GUIDE RULES (every "ai" object)
+- Language: simple, conversational Tagalog, like a mentor teaching a student. Keep legal terms in English. Do not sound robotic. Do not just repeat the text. Never contradict the CMTA. Never invent cases, penalties, deadlines or requirements that are not in the text.
+- Top-level "ai" (overview) uses the full format, in this order: 📖 Kahulugan · 🔍 Breakdown · 💡 Simpleng Paliwanag · 📦 Halimbawa (one realistic customs scenario) · ⭐ Bakit Mahalaga Ito? · ⚠️ Dapat Tandaan · 🎯 Board Exam Tip · ❓ Madalas Malito ang Students (one question + answer) · 🔗 Related Topics.
+- Paragraph / section "ai": every paragraph gets an "ai" object -- wala nang pure skip, maliban na lang kung puro bare heading label with zero text. Pumili ng tamang tier:
+  - Substantive (rules, requirements, procedures, deadlines, penalties, definitions) -> short format: 📖 Kahulugan · 💡 Simpleng Paliwanag · ⚠️ Dapat Tandaan (📦 Halimbawa kung kailangan talaga).
+  - Boilerplate / scope items / intro clauses / procedural connectors (effectivity, repealing clause, dissemination, "This Order covers:", atbp.) -> huwag nang iwanan sa English lang. Gumamit ng mini Tanong-Sagot breakdown (1-2 exchanges lang), hindi flat paraphrase:
+
+    Tanong: [simpleng tanong na natural itatanong ng estudyante tungkol dito]
+    Sagot: [1-2 pangungusap, plain Tagalog, parang kaklase mong nagpapaliwanag]
+
+  Dapat conversational at madaling basahin ang Q&A na ito -- huwag word-for-word na salin lang ng English.
+- "title": short topic label. "content": the Tagalog guide with the emoji headings above, separated by blank lines (use backslash-n backslash-n).
+- "prompt": a ready-to-send prompt for an external AI (ChatGPT / Gemini / Meta AI) asking it to explain this part simply, give practical customs examples, explain why it exists, mention related provisions, and clarify common misconceptions. Do NOT paste the official text into "prompt" — the app appends it automatically.
+
+SHAPE EXAMPLE (structure only — replace all content)
+{"type":"CMO","number":"01-2020","title":"...","status":"in_force","ai":{"title":"...","content":"...","prompt":"..."},"sections":[{"id":"s1","heading":"I. OBJECTIVE","paragraphs":[{"id":"p1","label":"1.","text":"...","ai":{"title":"...","content":"...","prompt":"..."}},{"id":"p2","label":"a.","indent":1,"text":"..."}]}]}
+
+OFFICIAL TEXT (the only source of truth):
+`;
+```
+
+## File: ./frontend/src/issuanceQuizStore.js
+```
+import { IS_DEV } from "./env";
+import { getIssuance } from "./issuancesStore";
+
+// CMO / CAO QUIZ store (separate from the CMO/CAO text on purpose).
+//  (1) shipped data = every .json inside src/data/issuance-quizzes/ (bundled at build time)
+//  (2) dev preview  = what you import in Dev Panel -> "CMO/CAO Quiz" (localStorage, npm run dev only)
+// A quiz is linked to its CMO/CAO by type + number (same id as issuancesStore, e.g. "cmo-01-2020"),
+// so the order you import them in does not matter.
+
+const bundledModules = import.meta.glob("./data/issuance-quizzes/*.json", { eager: true });
+const DEV_KEY = "customsLaw_issuanceQuizDevPreview";
+const LETTERS = ["A", "B", "C", "D"];
+
+// Level 1 is free for everyone, Level 2 follows the same RA 10863 lock as the other quizzes
+// (that lock lives in QuizPlayView / isRaLevelUnlocked, nothing to do here).
+export const QUIZ_LEVELS = [
+  { id: "level1", label: "🟢 Level 1 — Definition", lang: "Filipino · identification", color: "green" },
+  { id: "level2", label: "🔵 Level 2 — Real Case", lang: "English · case / problem solving", color: "blue" },
+];
+
+const str = (v) => (v == null ? "" : String(v).trim());
+const slug = (s) => str(s).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+
+function normalizeChoices(raw, where) {
+  const out = {};
+  if (Array.isArray(raw)) {
+    if (raw.length !== 4) throw new Error(`${where}: "choices" must have exactly 4 items (A, B, C, D).`);
+    raw.forEach((c, i) => { out[LETTERS[i]] = str(c).replace(/^\(?[A-Da-d][.):]\s+/, ""); });
+  } else if (raw && typeof raw === "object") {
+    for (const L of LETTERS) out[L] = str(raw[L] ?? raw[L.toLowerCase()]);
+  } else {
+    throw new Error(`${where}: missing "choices" (needs A, B, C and D).`);
+  }
+  const missing = LETTERS.filter((L) => !out[L]);
+  if (missing.length) throw new Error(`${where}: missing choice ${missing.join(", ")}. Each question needs choices A, B, C and D.`);
+  return out;
+}
+
+function normalizeCorrect(v, choices, where) {
+  const s = str(v);
+  const m = s.match(/^\(?([A-Da-d])\)?(?:[.):]|$)/);
+  if (m) return m[1].toUpperCase();
+  const byText = LETTERS.find((L) => choices[L].toLowerCase() === s.toLowerCase());
+  if (byText && s) return byText;
+  throw new Error(`${where}: "correct" must be one letter A, B, C or D (got "${s}").`);
+}
+
+function normalizeQuestion(q, where) {
+  if (!q || typeof q !== "object") throw new Error(`${where}: must be an object.`);
+  const question = str(q.question);
+  if (!question) throw new Error(`${where}: missing "question".`);
+  const choices = normalizeChoices(q.choices, where);
+  const correct = normalizeCorrect(q.correct, choices, where);
+  return { question, choices, correct, reason: str(q.reason) };
+}
+
+function normalizeLevel(raw, levelId, label) {
+  if (raw == null) return [];
+  if (!Array.isArray(raw)) throw new Error(`${label}: "${levelId}" must be an array of questions.`);
+  const n = levelId === "level1" ? 1 : 2;
+  return raw.map((q, i) => normalizeQuestion(q, `${label} Level ${n}, question ${i + 1}`));
+}
+
+export function normalizeQuiz(raw) {
+  if (!raw || typeof raw !== "object") throw new Error("Each quiz must be a JSON object.");
+  const type = str(raw.type).toUpperCase();
+  if (type !== "CMO" && type !== "CAO") throw new Error(`"type" must be "CMO" or "CAO" (got "${raw.type ?? ""}").`);
+  const number = str(raw.number)
+    .replace(/^(CMO|CAO)\b\s*(NO\.?|NUMBER)?\s*/i, "")
+    .replace(/\s+/g, "");
+  if (!number) throw new Error(`${type}: missing "number" (example: "01-2020").`);
+  const label = `${type} ${number}`;
+  const id = `${type.toLowerCase()}-${slug(number)}`;
+  const level1 = normalizeLevel(raw.level1, "level1", label);
+  const level2 = normalizeLevel(raw.level2, "level2", label);
+  if (!level1.length && !level2.length) throw new Error(`${label}: needs a "level1" and/or "level2" array with questions.`);
+  return { id, type, number, label, level1, level2 };
+}
+
+function toExportShape(n) {
+  return { type: n.type, number: n.number, level1: n.level1, level2: n.level2 };
+}
+
+function toItems(data) {
+  return Array.isArray(data) ? data : Array.isArray(data?.quizzes) ? data.quizzes : [data];
+}
+
+// ── shipped (bundled) ────────────────────────────────────────────────
+let bundledCache = null;
+function getBundled() {
+  if (bundledCache) return bundledCache;
+  const out = {};
+  for (const [path, mod] of Object.entries(bundledModules)) {
+    for (const raw of toItems(mod.default ?? mod)) {
+      try {
+        const n = normalizeQuiz(raw);
+        out[n.id] = { ...n, source: "bundled" };
+      } catch (e) {
+        console.warn(`[issuance-quiz] Skipped ${path}: ${e.message}`);
+      }
+    }
+  }
+  bundledCache = out;
+  return out;
+}
+
+// ── dev preview (localStorage, dev only) ─────────────────────────────
+function readPreviewText() {
+  if (!IS_DEV) return "{}";
+  try { return localStorage.getItem(DEV_KEY) || "{}"; } catch { return "{}"; }
+}
+function readPreviewRaw() {
+  try { return JSON.parse(readPreviewText()); } catch { return {}; }
+}
+let previewCache = { text: null, value: {} };
+function getPreview() {
+  const text = readPreviewText();
+  if (previewCache.text === text) return previewCache.value;
+  const out = {};
+  for (const raw of Object.values(readPreviewRaw())) {
+    try {
+      const n = normalizeQuiz(raw);
+      out[n.id] = { ...n, source: "preview" };
+    } catch { /* ignore broken preview entries */ }
+  }
+  previewCache = { text, value: out };
+  return out;
+}
+function writePreviewRaw(obj) {
+  localStorage.setItem(DEV_KEY, JSON.stringify(obj));
+}
+function getAll() {
+  return { ...getBundled(), ...getPreview() };
+}
+
+// ── public read API ──────────────────────────────────────────────────
+// Returns the quiz for one CMO/CAO id (e.g. "cmo-01-2020") or null when it has none.
+export function getIssuanceQuiz(issuanceId) {
+  const q = getAll()[issuanceId];
+  return q && (q.level1.length || q.level2.length) ? q : null;
+}
+
+// QuizPlayView wants { questionId: { [levelId]: question } }
+export function quizEntriesForLevel(quiz, levelId) {
+  const out = {};
+  ((quiz && quiz[levelId]) || []).forEach((q, i) => {
+    out[`q${i + 1}`] = { [levelId]: { question: q.question, choices: q.choices, correct: q.correct, reason: q.reason } };
+  });
+  return out;
+}
+
+export const issuanceQuizProgressKey = (issuanceId) => `issuance-${issuanceId}`;
+
+// ── dev import / export ──────────────────────────────────────────────
+function stripFences(text) {
+  return String(text || "").trim().replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/, "");
+}
+
+// A level that is NOT in the pasted JSON is left untouched, so you can import Level 1 now and Level 2 later.
+export function importIssuanceQuizJson(text) {
+  if (!IS_DEV) throw new Error("Import is only available in npm run dev.");
+  let data;
+  try { data = JSON.parse(stripFences(text)); } catch (e) { throw new Error("Invalid JSON: " + e.message); }
+  const items = toItems(data);
+  if (!items.length) throw new Error("The JSON is empty.");
+  const normalized = items.map(normalizeQuiz); // throws before anything is saved
+  const store = readPreviewRaw();
+  const results = [];
+  for (const n of normalized) {
+    const prev = store[n.id] || {};
+    const merged = {
+      type: n.type,
+      number: n.number,
+      level1: n.level1.length ? n.level1 : prev.level1 || [],
+      level2: n.level2.length ? n.level2 : prev.level2 || [],
+    };
+    store[n.id] = merged;
+    results.push({
+      id: n.id, label: n.label,
+      l1: merged.level1.length, l2: merged.level2.length,
+      found: !!getIssuance(n.id),
+    });
+  }
+  writePreviewRaw(store);
+  return results;
+}
+
+function yearOf(number) {
+  return (String(number).match(/(\d{4})$/) || [])[1] || "";
+}
+function compare(a, b) {
+  const ya = yearOf(a.number), yb = yearOf(b.number);
+  if (ya !== yb) {
+    if (!ya) return 1;
+    if (!yb) return -1;
+    return yb.localeCompare(ya);
+  }
+  return (parseInt(a.number, 10) || 0) - (parseInt(b.number, 10) || 0);
+}
+
+export function getPreviewQuizList() {
+  return Object.values(getPreview())
+    .map((q) => ({
+      id: q.id, type: q.type, number: q.number, label: q.label,
+      l1: q.level1.length, l2: q.level2.length,
+      hasIssuance: !!getIssuance(q.id),
+    }))
+    .sort((a, b) => a.type.localeCompare(b.type) || compare(a, b));
+}
+
+export function deletePreviewQuiz(id) {
+  const store = readPreviewRaw();
+  delete store[id];
+  writePreviewRaw(store);
+}
+
+export function clearPreviewQuiz() {
+  if (IS_DEV) localStorage.removeItem(DEV_KEY);
+}
+
+export function exportIssuanceQuizJson(id) {
+  const q = getAll()[id];
+  return q ? JSON.stringify(toExportShape(q), null, 2) : "";
+}
+
+export function exportAllQuizJson(kind) {
+  const t = String(kind).toUpperCase();
+  const all = Object.values(getPreview()).filter((q) => q.type === t).sort(compare);
+  return JSON.stringify(all.map(toExportShape), null, 2);
+}
+
+export function issuanceQuizFileName(id) {
+  return `${id}-quiz.json`;
+}
+
+// ── template + prompt ────────────────────────────────────────────────
+export const ISSUANCE_QUIZ_TEMPLATE = JSON.stringify(
+  {
+    type: "CMO",
+    number: "00-2099",
+    level1: [
+      {
+        question: "[Level 1] Ano ang tawag sa ... ayon sa CMO na ito?",
+        choices: { A: "Choice A", B: "Choice B", C: "Choice C", D: "Choice D" },
+        correct: "B",
+        reason: "Paliwanag kung bakit B ang tama, kasama ang section/paragraph.",
+      },
+    ],
+    level2: [
+      {
+        question: "[Level 2] A short real customs scenario (2-5 sentences). What is the correct action under this CMO?",
+        choices: { A: "Choice A", B: "Choice B", C: "Choice C", D: "Choice D" },
+        correct: "C",
+        reason: "Why C is correct, citing the provision.",
+      },
+    ],
+  },
+  null,
+  2
+);
+
+export const ISSUANCE_QUIZ_PROMPT = String.raw`🧠 CMO / CAO → QUIZ-JSON GENERATION PROMPT
+You are an expert Philippine Customs Broker licensure-exam reviewer and question writer for the CMTA study app.
+Create a 2-level multiple-choice quiz from the OFFICIAL TEXT of ONE Customs Memorandum Order (CMO) or Customs Administrative Order (CAO) pasted at the very bottom, and output ONE valid JSON object the app can import directly.
+
+OUTPUT RULES
+- Output ONLY the JSON. No markdown fences, no commentary before or after.
+- Every question must be answerable from the pasted text alone. Never invent provisions, numbers, periods, fees or offices that are not in the text. Never contradict the CMTA.
+- Every question is multiple choice with exactly 4 choices (A, B, C, D) and exactly ONE correct answer. Wrong choices must be plausible, never silly, and never "all of the above" or "none of the above".
+- Spread the correct letters evenly across A, B, C and D. Do not make the longest choice the right one every time.
+- No two questions may test the same fact. Cover the whole document (objective, scope, definitions, procedures, deadlines, requirements, penalties, effectivity), not just the first part.
+- Plain text only. No real line breaks inside a JSON string.
+
+LEVEL 1 — DEFINITION / IDENTIFICATION (key "level1", 10 questions)
+- Language: simple Filipino (Taglish is fine). Keep legal terms in English.
+- Straight from the text: definitions ("Ano ang tawag sa ..."), identification (who / what / which office / which document), numbers and periods (how many days, how much), and requirements. Short, direct questions.
+
+LEVEL 2 — REAL CASE / PROBLEM SOLVING (key "level2", 10 questions)
+- Language: English.
+- Each question is a short realistic customs scenario (importer, broker, exporter, Customs officer, shipment, deadline, document) of 2 to 5 sentences, followed by a clear question: what is the correct action, ruling, deadline, document, or computation under this issuance?
+- The student must APPLY the issuance, not just recall one sentence. Date counting or computations are welcome if the text gives the rule.
+- Use fictional names and amounts. Do not repeat a Level 1 question.
+
+"reason" (every question): 1 to 3 sentences saying why the answer is correct and, if useful, why the closest wrong choice is wrong. Cite the provision as printed (e.g. "Sec. 3.2" or "Par. 4"). Level 1 reason in Filipino, Level 2 reason in English.
+
+FIELDS
+Top level: type ("CMO" or "CAO"), number (exactly as in the document, e.g. "01-2020"), level1 (array), level2 (array).
+Question: question (string), choices ({"A":"...","B":"...","C":"...","D":"..."}), correct (one letter: "A", "B", "C" or "D"), reason (string).
+
+SHAPE EXAMPLE (structure only — replace all content)
+{"type":"CMO","number":"01-2020","level1":[{"question":"...","choices":{"A":"...","B":"...","C":"...","D":"..."},"correct":"B","reason":"..."}],"level2":[{"question":"...","choices":{"A":"...","B":"...","C":"...","D":"..."},"correct":"C","reason":"..."}]}
+
+Use 10 questions per level unless told otherwise. If the document is very short, write fewer, but never invent content to reach the count.
+
+OFFICIAL TEXT (the only source of truth):
+`;
 ```
 
 ## File: ./frontend/tailwind.config.js

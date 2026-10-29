@@ -18,6 +18,8 @@ import QuizHub from "./QuizHub";
 import AccountButton from "../components/AccountButton";
 import AdminPanel from "./AdminPanel";
 import { useAuth } from "../authContext";
+import { IssuanceSidebar, IssuanceReader } from "./IssuanceBrowser";
+import { ISSUANCE_KINDS, getIssuance } from "../issuancesStore";
 
 // Enrich nodes with hierarchy information for composite key lookup
 
@@ -74,6 +76,8 @@ function enrichNodesWithHierarchy(nodes) {
 
 
 const MODE_KEY = "customsLaw_mode";
+const SOURCE_KEY = "customsLaw_source";
+const ISSUANCE_KEY = "customsLaw_issuanceId";
 const FONT_KEY = "customsLaw_fontScale";
 const DARK_KEY = "customsLaw_darkMode";
 
@@ -808,6 +812,66 @@ function collectAllNodeIds(node, acc = []) {
   return acc;
 }
 
+// ── ui-modern: icons + bottom navigation ─────────────────────────────
+const NAV_ICONS = {
+  book: <><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" /><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" /></>,
+  search: <><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></>,
+  quiz: <><rect width="8" height="4" x="8" y="2" rx="1" ry="1" /><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" /><path d="m9 14 2 2 4-4" /></>,
+  settings: <><line x1="21" x2="14" y1="4" y2="4" /><line x1="10" x2="3" y1="4" y2="4" /><line x1="21" x2="12" y1="12" y2="12" /><line x1="8" x2="3" y1="12" y2="12" /><line x1="21" x2="16" y1="20" y2="20" /><line x1="12" x2="3" y1="20" y2="20" /><line x1="14" x2="14" y1="2" y2="6" /><line x1="8" x2="8" y1="10" y2="14" /><line x1="16" x2="16" y1="18" y2="22" /></>,
+  crown: <><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7z" /><path d="M5 20h14" /></>,
+  wrench: <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />,
+  menu: <><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></>,
+  x: <><path d="M18 6 6 18" /><path d="m6 6 12 12" /></>,
+};
+
+function NavIcon({ name, className = "h-[22px] w-[22px]" }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      {NAV_ICONS[name]}
+    </svg>
+  );
+}
+
+const VIEW_TITLES = { browse: "RA 10863", search: "Search", quiz: "Quiz", settings: "Settings", admin: "Admin", dev: "Dev Panel" };
+
+function BottomNav({ view, setView, showAdmin, showDev }) {
+  const items = [
+    { id: "browse", label: "Library", icon: "book" },
+    { id: "search", label: "Search", icon: "search" },
+    { id: "quiz", label: "Quiz", icon: "quiz" },
+    { id: "settings", label: "Settings", icon: "settings" },
+  ];
+  if (showAdmin) items.push({ id: "admin", label: "Admin", icon: "crown" });
+  if (showDev) items.push({ id: "dev", label: "Dev", icon: "wrench" });
+  return (
+    <nav
+      aria-label="Main navigation"
+      className="fixed inset-x-0 bottom-0 z-[35] border-t border-slate-200/80 bg-white/85 shadow-nav backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/85"
+      style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+    >
+      <div className="mx-auto flex max-w-xl items-stretch justify-around px-2 py-1.5">
+        {items.map((it) => {
+          const active = view === it.id;
+          return (
+            <button
+              key={it.id}
+              onClick={() => setView(it.id)}
+              aria-label={it.label}
+              aria-current={active ? "page" : undefined}
+              className="flex min-w-0 flex-1 flex-col items-center gap-0.5 rounded-xl py-1"
+            >
+              <span className={"flex h-8 w-14 items-center justify-center rounded-full transition-colors duration-200 " + (active ? "bg-navy-900/10 text-navy-900 dark:bg-gold-500/20 dark:text-gold-400" : "text-slate-500 dark:text-slate-400")}>
+                <NavIcon name={it.icon} />
+              </span>
+              <span className={"max-w-full truncate text-[11px] leading-tight " + (active ? "font-semibold text-navy-900 dark:text-gold-400" : "font-medium text-slate-500 dark:text-slate-400")}>{it.label}</span>
+            </button>
+          );
+        })}
+      </div>
+    </nav>
+  );
+}
+
 export default function ChapterBrowser({ initialView = "browse", initialMode = null, demo = false } = {}) {
   const { profile } = useAuth();
   const [view, setView] = useState(initialView);
@@ -830,9 +894,27 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
   const [focusMode, setFocusMode] = useState(false);
   const [resumeAvailable, setResumeAvailable] = useState(null);
   const [showTutorial, setShowTutorial] = useState(false);
+  // Source = which library is open: "cmta" (existing), "cmo" or "cao"
+  const [source, setSource] = useState(() => (demo ? "cmta" : localStorage.getItem(SOURCE_KEY) || "cmta"));
+  const [issuanceId, setIssuanceId] = useState(() => localStorage.getItem(ISSUANCE_KEY) || null);
   const mainRef = useRef(null);
   const pendingScrollRestore = useRef(null);
   const scrollSaveTimeout = useRef(null);
+
+  useEffect(() => { if (!demo) localStorage.setItem(SOURCE_KEY, source); }, [source, demo]);
+  useEffect(() => { if (issuanceId) localStorage.setItem(ISSUANCE_KEY, issuanceId); }, [issuanceId]);
+  const isIssuance = source !== "cmta";
+  const currentIssuance = isIssuance && issuanceId ? getIssuance(issuanceId) : null;
+  const issuanceTitle = currentIssuance && currentIssuance.type.toLowerCase() === source
+    ? `${currentIssuance.label}${currentIssuance.title ? " — " + currentIssuance.title : ""}`
+    : (ISSUANCE_KINDS.find((k) => k.id === source)?.full || "");
+  const openIssuance = useCallback((kind, id) => {
+    setSource(kind);
+    setIssuanceId(id);
+    setView("browse");
+    setSidebarOpen(window.innerWidth >= 768);
+    if (mainRef.current) mainRef.current.scrollTop = 0;
+  }, []);
 
   useEffect(() => localStorage.setItem(MODE_KEY, mode), [mode]);
   useEffect(() => localStorage.setItem(FONT_KEY, String(fontScale)), [fontScale]);
@@ -875,6 +957,7 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
       setChapterTree(data);
       setSelectedChapter(chapterNumber);
       setSelectedTitleNumber(titleNumber);
+      setSource("cmta");
       setView("browse");
       setSidebarOpen(window.innerWidth >= 768);
       if (targetNodeId && data) {
@@ -997,7 +1080,15 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
           <aside className={`safe-top fixed inset-y-0 left-0 z-40 w-[85vw] max-w-[320px] overflow-y-auto overscroll-contain border-r border-slate-200 bg-white transition-transform duration-200 dark:border-slate-800 dark:bg-slate-900 md:static md:w-80 md:max-w-none md:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
             <div className="sticky top-0 z-10 border-b border-slate-100 bg-white/95 px-5 py-4 backdrop-blur dark:border-slate-800 dark:bg-slate-900/95">
               <div className="flex items-center gap-2"><span className="text-xl" aria-hidden>⚖️</span><div><h2 className="text-base font-bold leading-tight text-navy-900 dark:text-slate-50">RA 10863</h2><p className="text-xs text-slate-400 dark:text-slate-500">Customs Modernization &amp; Tariff Act</p></div></div>
+              <div className="mt-3 flex rounded-xl bg-slate-100 p-1 text-sm dark:bg-slate-800" role="tablist" aria-label="Library">
+                {ISSUANCE_KINDS.map((k) => (
+                  <button key={k.id} role="tab" aria-selected={source === k.id} onClick={() => setSource(k.id)} className={`min-h-[36px] flex-1 rounded-lg px-2 py-1 font-semibold transition-colors ${source === k.id ? "bg-navy-900 text-white shadow-sm dark:bg-navy-700" : "text-slate-500 dark:text-slate-400"}`}>
+                    <span aria-hidden>{k.icon}</span> {k.label}
+                  </button>
+                ))}
+              </div>
             </div>
+            {source === "cmta" ? (
             <div className="p-3">
               {error && <p className="mb-2 rounded-lg bg-red-50 p-2 text-sm text-red-600 dark:bg-red-950/30 dark:text-red-400">{error}</p>}
               {titles.map((titleGroup) => {
@@ -1039,6 +1130,9 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
                 );
               })}
             </div>
+            ) : (
+              <IssuanceSidebar kind={source} selectedId={issuanceId} onSelect={(id) => openIssuance(source, id)} />
+            )}
           </aside>
         )}
         <div className="flex min-w-0 flex-1 flex-col">
@@ -1046,33 +1140,13 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
             <div className={`flex items-center gap-1.5 px-2 transition-all duration-300 ${focusMode && mode === "reading" ? "max-h-0 overflow-hidden opacity-0 py-0" : "max-h-16 py-2 opacity-100"}`}>
               {view === "browse" && (
                 <button onClick={() => setSidebarOpen((v) => !v)} className="flex h-9 w-9 flex-shrink-0 touch-manipulation items-center justify-center rounded-full text-lg text-slate-600 active:bg-slate-100 dark:text-slate-300 dark:active:bg-slate-800" aria-label="Toggle chapter list">
-                  {sidebarOpen ? "✕" : "☰"}
+                  <NavIcon name={sidebarOpen ? "x" : "menu"} className="h-5 w-5" />
                 </button>
               )}
-              <div className="flex flex-shrink-0 rounded-full bg-slate-100 p-1 text-sm dark:bg-slate-800">
-                <button onClick={() => setView("browse")} aria-label="Browse" className={`min-h-[34px] rounded-full px-2 py-1 font-medium transition-colors ${view === "browse" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
-                  <span aria-hidden>📚</span><span className="hidden sm:inline ml-1">Browse</span>
-                </button>
-                <button onClick={() => setView("search")} aria-label="Search" className={`min-h-[34px] rounded-full px-2 py-1 font-medium transition-colors ${view === "search" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
-                  <span aria-hidden>🔍</span><span className="hidden sm:inline ml-1">Search</span>
-                </button>
-                <button onClick={() => setView("quiz")} aria-label="Quiz/Exam" className={`min-h-[34px] rounded-full px-2 py-1 font-medium transition-colors ${view === "quiz" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
-                  <span aria-hidden>📝</span><span className="hidden sm:inline ml-1">Quiz/Exam</span>
-                </button>
-                <button onClick={() => setView("settings")} aria-label="Settings" className={`min-h-[34px] rounded-full px-2 py-1 font-medium transition-colors ${view === "settings" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
-                  ⚙️
-                </button>
-                {IS_DEV && (
-                  <button onClick={() => setView("dev")} aria-label="Dev Panel" className={`min-h-[34px] rounded-full px-2 py-1 font-medium transition-colors ${view === "dev" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
-                    🛠
-                  </button>
-                )}
+              <div className="flex min-w-0 items-center gap-2 pl-1">
+                <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl bg-navy-900 text-base text-white shadow-sm dark:bg-gold-500 dark:text-navy-950" aria-hidden>⚖️</span>
+                <span className="truncate text-[15px] font-bold tracking-tight text-navy-900 dark:text-slate-50">{VIEW_TITLES[view] || "RA 10863"}</span>
               </div>
-              {profile?.isAdmin && (
-                <button onClick={() => setView("admin")} aria-label="Admin Panel" className={`min-h-[34px] rounded-full px-2.5 py-1 font-medium transition-colors ${view === "admin" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
-                  👑
-                </button>
-              )}
               <span className="flex-1" />
               <AccountButton />
               {view === "browse" && <ModeToggle mode={mode} setMode={setMode} />}
@@ -1080,7 +1154,7 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
             {view === "browse" && !(focusMode && mode === "reading") && (
               <div className="px-3 pb-2">
                 <span className="block truncate text-sm font-semibold text-slate-800 dark:text-slate-200">
-                  {chapterTree ? chapterTree.title || `Chapter ${chapterTree.node_number}` : "Select a chapter"}
+                  {isIssuance ? issuanceTitle : chapterTree ? chapterTree.title || `Chapter ${chapterTree.node_number}` : "Select a chapter"}
                 </span>
               </div>
             )}
@@ -1092,16 +1166,18 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
                 <FontStepper fontScale={fontScale} setFontScale={setFontScale} />
               </div>
             )}
-            {view === "browse" && mode === "reading" && chapterTree && <ReadingProgressBar containerRef={mainRef} />}
+            {view === "browse" && mode === "reading" && (chapterTree || (isIssuance && issuanceId)) && <ReadingProgressBar containerRef={mainRef} />}
           </div>
-          <main ref={mainRef} className="safe-bottom flex-1 overflow-y-auto overscroll-contain bg-slate-50 p-4 dark:bg-slate-950 md:p-6">
+          <main ref={mainRef} className="has-bottom-nav safe-bottom flex-1 overflow-y-auto overscroll-contain bg-slate-50 p-4 dark:bg-slate-950 md:p-6">
             {error && (
               <div className="mx-auto max-w-3xl rounded-xl border border-red-200 bg-red-50 p-4 text-red-800 dark:border-red-800 dark:bg-red-950/30 dark:text-red-200">
                 <p className="font-bold">⚠️ Error</p>
                 <p className="text-sm">{error}</p>
               </div>
             )}
-            {view === "search" ? <SearchView onNavigateChapter={loadChapter} /> : view === "dev" && IS_DEV ? <DevPanel /> : view === "admin" && profile?.isAdmin ? <AdminPanel /> : view === "quiz" ? null : view === "settings" ? <SettingsView darkMode={darkMode} setDarkMode={setDarkMode} onReplayTutorial={replayTutorial} /> : (
+            {view === "search" ? <SearchView onNavigateChapter={loadChapter} /> : view === "dev" && IS_DEV ? <DevPanel /> : view === "admin" && profile?.isAdmin ? <AdminPanel /> : view === "quiz" ? null : view === "settings" ? <SettingsView darkMode={darkMode} setDarkMode={setDarkMode} onReplayTutorial={replayTutorial} /> : isIssuance ? (
+              <IssuanceReader kind={source} issuanceId={issuanceId} mode={mode} fontScale={fontScale} focusMode={focusMode} onOpenIssuance={(hit) => openIssuance(hit.type.toLowerCase(), hit.id)} />
+            ) : (
               <>
                 {loading && (
                   <div className="mx-auto max-w-3xl space-y-3">
@@ -1150,7 +1226,7 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
             )}
           </main>
         </div>
-        {focusMode && mode === "reading" && chapterTree && (
+        {focusMode && mode === "reading" && (chapterTree || (isIssuance && issuanceId)) && (
           <button
             onClick={() => setFocusMode(false)}
             className="fixed bottom-6 right-4 z-30 flex items-center gap-1.5 rounded-full bg-navy-900/90 px-4 py-2.5 text-sm font-medium text-white shadow-lg backdrop-blur active:bg-navy-800 dark:bg-slate-100/90 dark:text-navy-900"
@@ -1158,6 +1234,7 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
             <span aria-hidden>✕</span> Exit Focus
           </button>
         )}
+        {!(focusMode && mode === "reading") && <BottomNav view={view} setView={setView} showAdmin={!!profile?.isAdmin} showDev={IS_DEV} />}
         {view === "quiz" && <QuizHub onExit={() => setView("browse")} />}
         {showTutorial && <TutorialOverlay onFinish={finishTutorial} />}
       </div>

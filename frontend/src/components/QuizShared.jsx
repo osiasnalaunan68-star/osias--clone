@@ -218,7 +218,7 @@ function QuizPlayViewInner({ title, entries, level, onBack, progressKey, backLab
   const isAnswered = currentAnswer !== undefined && currentAnswer !== null;
 
   useEffect(() => {
-    if (progressKey) saveLastQuizPosition(progressKey, level);
+    if (progressKey && !String(progressKey).startsWith("issuance-")) saveLastQuizPosition(progressKey, level);
   }, [progressKey, level]);
 
   useEffect(() => {
