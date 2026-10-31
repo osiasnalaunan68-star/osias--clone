@@ -1,0 +1,228 @@
+{
+  "type": "CMO",
+  "number": "08-2024",
+  "level1": [
+    {
+      "question": "Aling issuance ang ipinatutupad ng CMO No. 08-2024 ayon sa Scope nito?",
+      "choices": {
+        "A": "CAO No. 1-2023, as amended by CAO No. 2-2022",
+        "B": "CAO No. 2-2022 lamang, nang walang amendment",
+        "C": "CAO No. 2-2022, as amended by CAO No. 1-2023",
+        "D": "CAO No. 1-2022, as amended by CAO No. 2-2023"
+      },
+      "correct": "C",
+      "reason": "Ayon sa Sec. 1 (Scope), ang Order na ito ang nagpapatupad ng CAO No. 2-2022 sa ATA Carnet System, as amended by CAO No. 1-2023. Ang CAO No. 2-2022 ang orihinal na rule at ang CAO No. 1-2023 ang amendment nito."
+    },
+    {
+      "question": "Aling opisina ang nagsisilbing ATA Carnet Central Monitoring Office (ATA Central)?",
+      "choices": {
+        "A": "Tax Exempt Division, Legal Service, Revenue Collection Monitoring Group (RCMG)",
+        "B": "Bonds Audit Division, Collection Service, Revenue Collection Monitoring Group (RCMG)",
+        "C": "Central Records Management Division, Administrative Office, Internal Administration Group (IAG)",
+        "D": "Informal Entry Division, Assessment and Operations Coordinating Group"
+      },
+      "correct": "A",
+      "reason": "Sec. 4.1: Ang Tax Exempt Division, Legal Service, RCMG ang nagsisilbing ATA Central, ang central monitoring office para sa lahat ng ATA Carnets na naproseso sa mga port na nakalista sa Secs. 3.8 at 3.9."
+    },
+    {
+      "question": "Aling opisina ang tumatanggap at nagsisilbing custodian ng Vouchers at iba pang related documents na ipinapasa ng ATA Central?",
+      "choices": {
+        "A": "Bonds Audit Division",
+        "B": "Informal Entry Division",
+        "C": "Office of the District Collector",
+        "D": "Central Records Management Division (CRMD)"
+      },
+      "correct": "D",
+      "reason": "Sec. 4.3(a): Ang CRMD ang tumatanggap at nagsisilbing custodian ng Vouchers at related documents na ipinapasa ng ATA Central. Hindi ito tungkulin ng Bonds Audit Division, Informal Entry Division, o District Collector."
+    },
+    {
+      "question": "Aling Voucher ang kinokolekta ng Export Division o equivalent office para sa foreign-issued ATA Carnet?",
+      "choices": {
+        "A": "Importation Voucher",
+        "B": "Re-exportation Voucher",
+        "C": "Exportation Voucher",
+        "D": "Re-importation Voucher"
+      },
+      "correct": "B",
+      "reason": "Sec. 4.6(d): Kinokolekta ng Export Division ang Exportation Voucher para sa PCCI-issued Carnet at ang Re-exportation Voucher para sa foreign-issued Carnet. Kaya Re-exportation Voucher ang sagot."
+    },
+    {
+      "question": "Alin sa mga sumusunod ang hindi tinatanggap ng Bureau ayon sa Sec. 3.3?",
+      "choices": {
+        "A": "CPD Carnet para sa temporary admission ng road vehicles",
+        "B": "ATA Carnet para sa hand-carried goods",
+        "C": "ATA Carnet para sa unaccompanied goods",
+        "D": "ATA Carnet na inisyu ng Contracting Party sa Istanbul Convention"
+      },
+      "correct": "A",
+      "reason": "Sec. 3.3: Hindi tinatanggap ang CPD Carnet (Carnet de Passages en Douane), ang customs document para sa temporary admission ng road vehicles. Tinatanggap ang hand-carried at unaccompanied goods (Sec. 3.2) at ang Carnets mula sa Contracting Parties sa ATA o Istanbul Convention (Sec. 3.6)."
+    },
+    {
+      "question": "Ilang buwan ang period ng re-exportation para sa goods for display or use sa exhibitions, fairs, meetings, o similar events?",
+      "choices": {
+        "A": "Tatlong (3) buwan",
+        "B": "Siyam (9) na buwan",
+        "C": "Anim (6) na buwan",
+        "D": "Labindalawang (12) buwan"
+      },
+      "correct": "C",
+      "reason": "Sec. 5.1(a): Anim (6) na buwan ang period ng re-exportation para sa goods for display or use sa exhibitions, fairs, meetings o similar events. Ayon sa Sec. 5.2, hindi ito dapat lumampas sa validity period ng ATA Carnet."
+    },
+    {
+      "question": "Tinatanggap ang scientific at pedagogic material sa ilalim ng goods for educational, scientific, or cultural purposes. Ano ang kailangan pa ring gawin para sa mga ito ayon sa Sec. 3.1(e)?",
+      "choices": {
+        "A": "Magsumite ng Special Power of Attorney mula sa Holder",
+        "B": "Mag-lodge o mag-file ng regular goods declaration",
+        "C": "Magbayad muna ng Regularization Fee bago ang examination",
+        "D": "Magsumite ng Letter of Explanation sa ATA Central"
+      },
+      "correct": "B",
+      "reason": "Sec. 3.1(e): Kahit tinatanggap ang scientific at pedagogic material, kailangan pa ring mag-lodge o mag-file ng regular goods declaration."
+    },
+    {
+      "question": "Kailan ipapataw ang Regularization Fee ayon sa Sec. 3.13?",
+      "choices": {
+        "A": "Kapag bahagi lamang ng goods sa General List ang na-import",
+        "B": "Kapag ang Carnet ay nakasulat sa ibang wika bukod sa English",
+        "C": "Kapag ang goods ay na-re-export sa ibang Customs Office kaysa sa pinag-importan",
+        "D": "Kapag walang patunay ng re-exportation mula sa kumpletong Re-exportation Counterfoil ng Bureau"
+      },
+      "correct": "D",
+      "reason": "Sec. 3.13: Magpapataw ng Regularization Fee kapag walang evidence ng re-exportation na ipinapakita ng Re-exportation Counterfoil na kumpleto, pirmado, may stamp, at may petsa mula sa Bureau. Pinapayagan naman ang partial importation (Sec. 3.12), ang pagsasalin sa English kapag kinakailangan (Sec. 3.7), at ang re-exportation sa ibang Customs Office (Sec. 3.11)."
+    },
+    {
+      "question": "Ano ang pinakamaikling panahon bago ang due date ng temporary admission na dapat matanggap ng Bureau ang request for extension?",
+      "choices": {
+        "A": "Sampung (10) working days",
+        "B": "Limang (5) working days",
+        "C": "Labinlimang (15) working days",
+        "D": "Tatlumpung (30) calendar days"
+      },
+      "correct": "A",
+      "reason": "Sec. 8.4: Dapat matanggap ng Bureau ang request for extension nang hindi bababa sa sampung (10) working days bago ang due date ng temporary admission."
+    },
+    {
+      "question": "Ano ang dapat isama sa Letter of Explanation sa request para sa Duplicate Carnet kapag nawala o nasira ang Original Carnet?",
+      "choices": {
+        "A": "Special Power of Attorney o Secretary's Certificate na inisyu ng Holder",
+        "B": "Tax Exemption Indorsement mula sa Department of Finance",
+        "C": "Police Report o Certification ng appropriate government agency tungkol sa loss o destruction",
+        "D": "Scanned copy ng Re-exportation Counterfoil na may stamp ng Bureau"
+      },
+      "correct": "C",
+      "reason": "Sec. 9.2.3(b): Ang Letter of Explanation para sa Duplicate Carnet ay dapat may kasamang Police Report o Certification mula sa Appropriate Government Agency na nagpapakita ng loss o destruction ng Original Carnet."
+    }
+  ],
+  "level2": [
+    {
+      "question": "Zenith Expo GmbH presents a foreign-issued ATA Carnet at the Informal Entry Division of the District Port of Manila for exhibition booth displays to be used at a trade fair. After examination with no discrepancy, the Customs Examiner endorses the Importation Voucher and Counterfoil on January 20, 2025. The Carnet is valid until April 30, 2025. What final date for re-exportation should the Examiner indicate?",
+      "choices": {
+        "A": "July 20, 2025, because the six-month period for exhibition goods always applies",
+        "B": "April 30, 2025, because the Carnet expires earlier than the six-month period",
+        "C": "January 20, 2026, because the Holder may choose a period of up to one year",
+        "D": "May 31, 2025, because the Examiner may set the date at his or her discretion"
+      },
+      "correct": "B",
+      "reason": "Under Sec. 5.1(a), goods for display at exhibitions or fairs have a six-month period, but Sec. 5.2 provides that the period of re-exportation shall not exceed the validity period of the ATA Carnet. Sec. 7.4.4 requires the Examiner to indicate the period under Section 5 or on or before the Carnet's expiration, whichever is earlier. Six months from January 20 would run to about July 20, 2025, which is later than the April 30, 2025 expiry, so April 30, 2025 governs."
+    },
+    {
+      "question": "A Philippine exporter presents a PCCI-issued ATA Carnet covering professional equipment to the Export Division of the District Port of Davao. The Trade Control Examiner assigned to the transaction has not yet started processing the document. Under CMO 08-2024, what must the Examiner do before processing the document?",
+      "choices": {
+        "A": "Ask the Bonds Audit Division to certify the Carnet's authenticity",
+        "B": "Request the Central Records Management Division to confirm the Carnet's Voucher number",
+        "C": "Wait for the District Collector to certify that the Carnet is genuine",
+        "D": "Verify the authenticity of the Carnet with the ATA Central"
+      },
+      "correct": "D",
+      "reason": "Sec. 4.6(c) provides that the Trade Control Examiner shall verify with ATA Central the authenticity of the ATA Carnet before processing the document. The decisive fact is that the Carnet is PCCI-issued and is being processed at the Export Division. No other office named in the choices has this duty under that provision."
+    },
+    {
+      "question": "Lakeshore Instruments Ltd., a foreign company, holds a foreign-issued ATA Carnet for professional equipment to be used at a conference in Cebu. Its Philippine agent, Mr. Reyes, will present the Carnet and handle the clearance at Mactan International Airport. Box B of the Carnet is blank and does not name Mr. Reyes. What must be presented to the Bureau together with the Carnet so that Mr. Reyes may act for the Holder?",
+      "choices": {
+        "A": "A Special Power of Attorney or Secretary's Certificate issued by the Holder to Mr. Reyes",
+        "B": "A letter of authorization issued by the Philippine Chamber of Commerce and Industry",
+        "C": "A Tax Exemption Indorsement from the Department of Finance in the name of Mr. Reyes",
+        "D": "A Certification from the District Collector confirming the agent's accreditation"
+      },
+      "correct": "A",
+      "reason": "Sec. 3.5 allows authorized representatives to handle ATA Carnets. If the representative's name is not specified in Box B, a Special Power of Attorney (letter of authorization) or a Secretary's Certificate issued by the holder to the representative must be presented together with the Carnet. Because Box B is blank here, the document must come from the Holder, not from PCCI, the DOF, or the District Collector."
+    },
+    {
+      "question": "Harbor Films Corp. brings professional camera equipment into the Philippines under a foreign-issued ATA Carnet whose General List contains 12 items. The Holder imports only 8 items and leaves 4 items in the country of exportation. The Holder later plans to re-export the 8 items in two separate shipments, 5 items first and 3 items afterward. How will this plan be treated under CMO 08-2024?",
+      "choices": {
+        "A": "Both the partial importation and the two-shipment re-exportation are accepted",
+        "B": "The partial importation is not accepted because all 12 listed items must be imported together",
+        "C": "The partial importation is allowed, but the 8 items must be re-exported in one consignment",
+        "D": "Only the two-shipment re-exportation is accepted, while the partial importation is not"
+      },
+      "correct": "C",
+      "reason": "Sec. 3.12 states that importation and re-exportation in split consignments are not accepted. However, importing only part of the goods listed in the General List is allowed, provided the imported goods are re-exported in one consignment. The partial importation of 8 items is therefore allowed, but re-exporting them in two shipments is not."
+    },
+    {
+      "question": "A foreign-issued ATA Carnet covering exhibition goods is processed at the Informal Entry Division of the Port of Manila, and the goods are cleared for release. The Holder says the goods will later be re-exported through the District Port of Cebu instead of Manila. What is the correct treatment under CMO 08-2024?",
+      "choices": {
+        "A": "Re-exportation through Cebu is not allowed because the goods must exit through the port of entry",
+        "B": "Re-exportation through Cebu is allowed, and the Voucher transmittal to ATA Central must clearly indicate the port of exit",
+        "C": "Re-exportation through Cebu is allowed only after the Carnet is replaced with a Replacement Carnet",
+        "D": "Re-exportation through Cebu is allowed, but the Voucher must be sent to the Cebu port instead of ATA Central"
+      },
+      "correct": "B",
+      "reason": "Sec. 3.11 allows goods covered by an ATA Carnet to be re-exported through a Customs Office other than the one through which they were imported. Under Sec. 4.5(d), the Informal Entry Division transmits the Voucher to the ATA Central as soon as the goods are cleared for release, and if the port of exit differs from the port of entry, the transmittal must clearly indicate the port of exit. Cebu is also among the authorized ports under Sec. 3.8(g)."
+    },
+    {
+      "question": "During examination of goods covered by a foreign-issued ATA Carnet at the District Port of Subic, the handling Customs Examiner finds that the Carnet is spurious. The matter has been reported through channels to the ATA Central, and the Bureau has exercised due diligence and coordinated with the PCCI. What may the Bureau do with the goods?",
+      "choices": {
+        "A": "Release the goods upon payment of the Regularization Fee only",
+        "B": "Accept the Carnet and allow the Holder to correct it within the validity period",
+        "C": "Require the Holder to obtain a Duplicate Carnet from the issuing association",
+        "D": "Issue a Warrant of Seizure and Detention covering the goods"
+      },
+      "correct": "D",
+      "reason": "Sec. 11.3.4 lists the presentation of a spurious ATA Carnet as a ground for non-acceptance. Under Sec. 12.3, goods covered by a spurious Carnet may be subject to the issuance of a Warrant of Seizure and Detention, provided that due diligence and coordination with PCCI has been made. The scenario states that this condition was met."
+    },
+    {
+      "question": "Pelican Tools Inc. completes clearance for the re-exportation of goods covered by a foreign-issued ATA Carnet at the Export Division of the Port of Batangas. The Trade Control Examiner must now prepare the Order of Payment. Which charges should the Order of Payment cover, and who approves it?",
+      "choices": {
+        "A": "Customs Documentary Stamp and Documentary Stamp Tax, approved by the Chief, Export Division",
+        "B": "Import Processing Charge, Customs Documentary Stamp, and Documentary Stamp Tax, approved by the Chief, Export Division",
+        "C": "Customs Documentary Stamp and Documentary Stamp Tax, approved by the Chief, Informal Entry Division",
+        "D": "Import Processing Charge and Documentary Stamp Tax, approved by the Chief, Informal Entry Division"
+      },
+      "correct": "A",
+      "reason": "Under Sec. 10.2, the re-exportation of goods covered by a foreign-issued Carnet is processed through the Export Division. Sec. 10.2.1 provides that the Trade Control Examiner prepares the Order of Payment for CDS and DST for the approval of the Chief, Export Division. The Import Processing Charge applies only to importation or re-importation under Sec. 10.1.1."
+    },
+    {
+      "question": "A Holder of a foreign-issued ATA Carnet wants to extend the temporary admission of professional equipment that is nearing its due date. The Holder has opened a ticket in the BOC E-Ticketing System and attached a scanned copy of the Cover Page, the General List, and the endorsed Counterfoils. Which additional document must still be attached?",
+      "choices": {
+        "A": "A Police Report or Certification from an appropriate government agency",
+        "B": "A scanned copy of a Replacement Carnet with the same General List",
+        "C": "A Letter of Explanation stating the purpose, the location of the goods, and the number of items",
+        "D": "A Special Power of Attorney or Secretary's Certificate issued by the Holder"
+      },
+      "correct": "C",
+      "reason": "Sec. 8.1 requires the ticket to attach (a) scanned copies of the Carnet documents such as the Cover Page, General List, and endorsed Counterfoils, and (b) a Letter of Explanation that clearly indicates the purpose, location of the goods, and number of items. Part (a) is already complete, so the Letter of Explanation is what remains."
+    },
+    {
+      "question": "A foreign-issued ATA Carnet (No. CN-100) for exhibition goods is about to expire while the goods are still in the Philippines. The Bureau, through the ATA Central, approves a Replacement Carnet (No. CN-200), which is then presented to the port where the goods were processed. How should the Customs Examiner endorse the two Carnets?",
+      "choices": {
+        "A": "Endorse CN-100 on Importation as 'Replaced by CN-200', and CN-200 on Re-Export as 'Replaces CN-100'",
+        "B": "Endorse CN-100 on Re-Export as 'Replaced by CN-200', and CN-200 on Importation as 'Replaces CN-100'",
+        "C": "Endorse CN-100 on Re-Import as 'Replaced by CN-200', and CN-200 on Exportation as 'Replaces CN-100'",
+        "D": "Endorse both Carnets on Re-Export, noting 'Replaces CN-100' only on CN-200"
+      },
+      "correct": "B",
+      "reason": "Sec. 9.1.5 provides that, once the Replacement Carnet is approved and presented, the Original Carnet is closed or discharged by endorsing it on Re-Export for a foreign-issued Carnet, with the notation 'Replaced by' the Replacement Carnet number. The Replacement Carnet is opened by endorsing it on Importation for a foreign-issued Carnet, with the notation 'Replaces' the Original Carnet number. The Re-Import and Exportation endorsements apply only to PCCI-issued Carnets."
+    },
+    {
+      "question": "Sunrise Medical Corp. presents a foreign-issued ATA Carnet for temporarily admitted goods at the District Port of Cebu. The Carnet is not accepted, so a goods declaration must be lodged for goods covered by the Istanbul Convention. The importer already has a Bill of Lading, a packing list, and a commercial invoice. The goods are not regulated, no security is required, and no other documents are warranted. Which required document is still missing?",
+      "choices": {
+        "A": "A Special Power of Attorney issued by the importer",
+        "B": "A regulatory permit from the appropriate agency",
+        "C": "A Police Report or Certification from an appropriate agency",
+        "D": "A Tax Exemption Indorsement from the Department of Finance"
+      },
+      "correct": "D",
+      "reason": "Sec. 12.4 lists the documents the importer must submit when a goods declaration is required for temporarily admitted goods covered by the Istanbul Convention: a Tax Exemption Indorsement from the Department of Finance, security if required, Bill of Lading or Air Waybill, packing list, commercial invoice, regulatory permits if applicable, and other documents as warranted. Since the importer already has the Bill of Lading, packing list, and commercial invoice, and the scenario excludes security, permits, and other documents, only the Tax Exemption Indorsement remains."
+    }
+  ]
+}

@@ -1860,9 +1860,12 @@ function readProgress(key) {
   try { return JSON.parse(localStorage.getItem(`quiz_progress_${key}`) || "{}") || {}; } catch { return {}; }
 }
 
-// Full-screen quiz for ONE CMO / CAO: level picker -> play view.
+// Quiz for ONE CMO / CAO: level picker -> play view.
 // Level 1 is free; Level 2 uses the same RA 10863 lock as the other quizzes.
-export default function IssuanceQuizModal({ issuance, onClose }) {
+// Two ways to show it:
+//  - default: full-screen overlay (the 📝 Quiz button inside a CMO / CAO page)
+//  - embedded: plain block, used inside Quiz/Exam -> CMO / CAO list (QuizHub already is a full-screen overlay)
+export default function IssuanceQuizModal({ issuance, onClose, embedded = false, backLabel }) {
   const { profile } = useAuth();
   const [level, setLevel] = useState(null);
   const [, setTick] = useState(0);
@@ -1877,6 +1880,61 @@ export default function IssuanceQuizModal({ issuance, onClose }) {
       setTick((t) => t + 1);
     }
   };
+
+  const closeLabel = backLabel || `← Back to ${issuance.label}`;
+
+  const content = (
+    <>
+      {!quiz && <p className="py-10 text-center text-sm text-slate-400">No quiz for this issuance yet.</p>}
+
+      {quiz && level && entries && (
+        <QuizPlayView
+          title={issuance.label}
+          entries={entries}
+          level={level}
+          onBack={() => { setLevel(null); setTick((t) => t + 1); }}
+          progressKey={progressKey}
+          backLabel="← Levels"
+        />
+      )}
+
+      {quiz && !level && (
+        <div className="space-y-3">
+          <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-card dark:border-slate-700 dark:bg-slate-800">
+            <h2 className="text-lg font-bold text-navy-900 dark:text-slate-50">{issuance.label}</h2>
+            {issuance.title && <p className="mt-0.5 text-sm text-slate-600 dark:text-slate-300">{issuance.title}</p>}
+            <p className="mt-2 text-xs text-slate-400">
+              {QUIZ_LEVELS.filter((l) => quiz[l.id].length > 0).map((l) => `${l.label.replace(/^\S+\s/, "")}: ${quiz[l.id].length} questions`).join(" · ")}
+            </p>
+          </div>
+          {QUIZ_LEVELS.filter((l) => quiz[l.id].length > 0).map((l) => (
+            <QuizLevelButton
+              key={l.id}
+              level={l}
+              progress={progress[l.id] || 0}
+              locked={!isRaLevelUnlocked(profile, l.id)}
+              onClick={() => setLevel(l.id)}
+              onReset={() => handleReset(l)}
+            />
+          ))}
+        </div>
+      )}
+    </>
+  );
+
+  if (embedded) {
+    return (
+      <div>
+        <button
+          onClick={onClose}
+          className="mb-3 flex h-9 items-center gap-1 rounded-full px-3 text-sm font-medium text-slate-600 active:bg-slate-100 dark:text-slate-300 dark:active:bg-slate-800"
+        >
+          {closeLabel}
+        </button>
+        {content}
+      </div>
+    );
+  }
 
   return (
     <div className="fixed inset-0 z-[45] flex flex-col bg-slate-50 dark:bg-slate-950" style={{ height: "100dvh" }}>
@@ -1893,42 +1951,7 @@ export default function IssuanceQuizModal({ issuance, onClose }) {
       </div>
 
       <div className="flex-1 overflow-y-auto overscroll-contain">
-        <div className="mx-auto max-w-2xl p-4">
-          {!quiz && <p className="py-10 text-center text-sm text-slate-400">No quiz for this issuance yet.</p>}
-
-          {quiz && level && entries && (
-            <QuizPlayView
-              title={issuance.label}
-              entries={entries}
-              level={level}
-              onBack={() => { setLevel(null); setTick((t) => t + 1); }}
-              progressKey={progressKey}
-              backLabel="← Levels"
-            />
-          )}
-
-          {quiz && !level && (
-            <div className="space-y-3">
-              <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-card dark:border-slate-700 dark:bg-slate-800">
-                <h2 className="text-lg font-bold text-navy-900 dark:text-slate-50">{issuance.label}</h2>
-                {issuance.title && <p className="mt-0.5 text-sm text-slate-600 dark:text-slate-300">{issuance.title}</p>}
-                <p className="mt-2 text-xs text-slate-400">
-                  {QUIZ_LEVELS.filter((l) => quiz[l.id].length > 0).map((l) => `${l.label.replace(/^\S+\s/, "")}: ${quiz[l.id].length} questions`).join(" · ")}
-                </p>
-              </div>
-              {QUIZ_LEVELS.filter((l) => quiz[l.id].length > 0).map((l) => (
-                <QuizLevelButton
-                  key={l.id}
-                  level={l}
-                  progress={progress[l.id] || 0}
-                  locked={!isRaLevelUnlocked(profile, l.id)}
-                  onClick={() => setLevel(l.id)}
-                  onReset={() => handleReset(l)}
-                />
-              ))}
-            </div>
-          )}
-        </div>
+        <div className="mx-auto max-w-2xl p-4">{content}</div>
       </div>
     </div>
   );
@@ -2433,6 +2456,32 @@ export const IS_DEV = import.meta.env.DEV;
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* ui-modern ------------------------------------------------------------ */
+@layer base {
+  html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+  ::selection { background: rgba(201, 162, 39, 0.28); }
+  :focus-visible { outline: 2px solid #c9a227; outline-offset: 2px; border-radius: 8px; }
+  button, [role="button"], a { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+  button { transition: transform 120ms ease, background-color 150ms ease, color 150ms ease, border-color 150ms ease; }
+  button:not(:disabled):active { transform: scale(0.975); }
+  * { scrollbar-width: thin; scrollbar-color: rgba(100, 116, 139, 0.35) transparent; }
+  *::-webkit-scrollbar { width: 6px; height: 6px; }
+  *::-webkit-scrollbar-thumb { background: rgba(100, 116, 139, 0.35); border-radius: 999px; }
+}
+
+/* room for the bottom navigation bar */
+.has-bottom-nav { padding-bottom: calc(5.5rem + env(safe-area-inset-bottom)) !important; }
+
+/* soft page-enter animation for whatever is inside <main> */
+@keyframes ui-fade-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+main > * { animation: ui-fade-up 260ms ease-out both; }
+@media (prefers-reduced-motion: reduce) {
+  main > * { animation: none; }
+  button { transition: none; }
+  button:not(:disabled):active { transform: none; }
+}
 ```
 
 ## File: ./frontend/src/main.jsx
@@ -3310,6 +3359,66 @@ function collectAllNodeIds(node, acc = []) {
   return acc;
 }
 
+// ── ui-modern: icons + bottom navigation ─────────────────────────────
+const NAV_ICONS = {
+  book: <><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" /><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" /></>,
+  search: <><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></>,
+  quiz: <><rect width="8" height="4" x="8" y="2" rx="1" ry="1" /><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" /><path d="m9 14 2 2 4-4" /></>,
+  settings: <><line x1="21" x2="14" y1="4" y2="4" /><line x1="10" x2="3" y1="4" y2="4" /><line x1="21" x2="12" y1="12" y2="12" /><line x1="8" x2="3" y1="12" y2="12" /><line x1="21" x2="16" y1="20" y2="20" /><line x1="12" x2="3" y1="20" y2="20" /><line x1="14" x2="14" y1="2" y2="6" /><line x1="8" x2="8" y1="10" y2="14" /><line x1="16" x2="16" y1="18" y2="22" /></>,
+  crown: <><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7z" /><path d="M5 20h14" /></>,
+  wrench: <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />,
+  menu: <><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></>,
+  x: <><path d="M18 6 6 18" /><path d="m6 6 12 12" /></>,
+};
+
+function NavIcon({ name, className = "h-[22px] w-[22px]" }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      {NAV_ICONS[name]}
+    </svg>
+  );
+}
+
+const VIEW_TITLES = { browse: "RA 10863", search: "Search", quiz: "Quiz", settings: "Settings", admin: "Admin", dev: "Dev Panel" };
+
+function BottomNav({ view, setView, showAdmin, showDev }) {
+  const items = [
+    { id: "browse", label: "Library", icon: "book" },
+    { id: "search", label: "Search", icon: "search" },
+    { id: "quiz", label: "Quiz", icon: "quiz" },
+    { id: "settings", label: "Settings", icon: "settings" },
+  ];
+  if (showAdmin) items.push({ id: "admin", label: "Admin", icon: "crown" });
+  if (showDev) items.push({ id: "dev", label: "Dev", icon: "wrench" });
+  return (
+    <nav
+      aria-label="Main navigation"
+      className="fixed inset-x-0 bottom-0 z-[35] border-t border-slate-200/80 bg-white/85 shadow-nav backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/85"
+      style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+    >
+      <div className="mx-auto flex max-w-xl items-stretch justify-around px-2 py-1.5">
+        {items.map((it) => {
+          const active = view === it.id;
+          return (
+            <button
+              key={it.id}
+              onClick={() => setView(it.id)}
+              aria-label={it.label}
+              aria-current={active ? "page" : undefined}
+              className="flex min-w-0 flex-1 flex-col items-center gap-0.5 rounded-xl py-1"
+            >
+              <span className={"flex h-8 w-14 items-center justify-center rounded-full transition-colors duration-200 " + (active ? "bg-navy-900/10 text-navy-900 dark:bg-gold-500/20 dark:text-gold-400" : "text-slate-500 dark:text-slate-400")}>
+                <NavIcon name={it.icon} />
+              </span>
+              <span className={"max-w-full truncate text-[11px] leading-tight " + (active ? "font-semibold text-navy-900 dark:text-gold-400" : "font-medium text-slate-500 dark:text-slate-400")}>{it.label}</span>
+            </button>
+          );
+        })}
+      </div>
+    </nav>
+  );
+}
+
 export default function ChapterBrowser({ initialView = "browse", initialMode = null, demo = false } = {}) {
   const { profile } = useAuth();
   const [view, setView] = useState(initialView);
@@ -3578,33 +3687,13 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
             <div className={`flex items-center gap-1.5 px-2 transition-all duration-300 ${focusMode && mode === "reading" ? "max-h-0 overflow-hidden opacity-0 py-0" : "max-h-16 py-2 opacity-100"}`}>
               {view === "browse" && (
                 <button onClick={() => setSidebarOpen((v) => !v)} className="flex h-9 w-9 flex-shrink-0 touch-manipulation items-center justify-center rounded-full text-lg text-slate-600 active:bg-slate-100 dark:text-slate-300 dark:active:bg-slate-800" aria-label="Toggle chapter list">
-                  {sidebarOpen ? "✕" : "☰"}
+                  <NavIcon name={sidebarOpen ? "x" : "menu"} className="h-5 w-5" />
                 </button>
               )}
-              <div className="flex flex-shrink-0 rounded-full bg-slate-100 p-1 text-sm dark:bg-slate-800">
-                <button onClick={() => setView("browse")} aria-label="Browse" className={`min-h-[34px] rounded-full px-2 py-1 font-medium transition-colors ${view === "browse" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
-                  <span aria-hidden>📚</span><span className="hidden sm:inline ml-1">Browse</span>
-                </button>
-                <button onClick={() => setView("search")} aria-label="Search" className={`min-h-[34px] rounded-full px-2 py-1 font-medium transition-colors ${view === "search" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
-                  <span aria-hidden>🔍</span><span className="hidden sm:inline ml-1">Search</span>
-                </button>
-                <button onClick={() => setView("quiz")} aria-label="Quiz/Exam" className={`min-h-[34px] rounded-full px-2 py-1 font-medium transition-colors ${view === "quiz" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
-                  <span aria-hidden>📝</span><span className="hidden sm:inline ml-1">Quiz/Exam</span>
-                </button>
-                <button onClick={() => setView("settings")} aria-label="Settings" className={`min-h-[34px] rounded-full px-2 py-1 font-medium transition-colors ${view === "settings" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
-                  ⚙️
-                </button>
-                {IS_DEV && (
-                  <button onClick={() => setView("dev")} aria-label="Dev Panel" className={`min-h-[34px] rounded-full px-2 py-1 font-medium transition-colors ${view === "dev" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
-                    🛠
-                  </button>
-                )}
+              <div className="flex min-w-0 items-center gap-2 pl-1">
+                <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl bg-navy-900 text-base text-white shadow-sm dark:bg-gold-500 dark:text-navy-950" aria-hidden>⚖️</span>
+                <span className="truncate text-[15px] font-bold tracking-tight text-navy-900 dark:text-slate-50">{VIEW_TITLES[view] || "RA 10863"}</span>
               </div>
-              {profile?.isAdmin && (
-                <button onClick={() => setView("admin")} aria-label="Admin Panel" className={`min-h-[34px] rounded-full px-2.5 py-1 font-medium transition-colors ${view === "admin" ? "bg-white text-navy-900 shadow-sm dark:bg-slate-700 dark:text-slate-50" : "text-slate-500 dark:text-slate-400"}`}>
-                  👑
-                </button>
-              )}
               <span className="flex-1" />
               <AccountButton />
               {view === "browse" && <ModeToggle mode={mode} setMode={setMode} />}
@@ -3626,7 +3715,7 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
             )}
             {view === "browse" && mode === "reading" && (chapterTree || (isIssuance && issuanceId)) && <ReadingProgressBar containerRef={mainRef} />}
           </div>
-          <main ref={mainRef} className="safe-bottom flex-1 overflow-y-auto overscroll-contain bg-slate-50 p-4 dark:bg-slate-950 md:p-6">
+          <main ref={mainRef} className="has-bottom-nav safe-bottom flex-1 overflow-y-auto overscroll-contain bg-slate-50 p-4 dark:bg-slate-950 md:p-6">
             {error && (
               <div className="mx-auto max-w-3xl rounded-xl border border-red-200 bg-red-50 p-4 text-red-800 dark:border-red-800 dark:bg-red-950/30 dark:text-red-200">
                 <p className="font-bold">⚠️ Error</p>
@@ -3692,6 +3781,7 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
             <span aria-hidden>✕</span> Exit Focus
           </button>
         )}
+        {!(focusMode && mode === "reading") && <BottomNav view={view} setView={setView} showAdmin={!!profile?.isAdmin} showDev={IS_DEV} />}
         {view === "quiz" && <QuizHub onExit={() => setView("browse")} />}
         {showTutorial && <TutorialOverlay onFinish={finishTutorial} />}
       </div>
@@ -4436,6 +4526,7 @@ import { useState, useMemo } from "react";
 import QuizPage, { loadQuizData } from "./QuizPage";
 import { SubjectQuizPlay } from "./SubjectDashboard";
 import CustomQuizHub from "./CustomQuizHub";
+import IssuanceQuizHub from "./IssuanceQuizHub";
 import { ProgressCircle, QuizPlayView } from "../components/QuizShared";
 import { useAuth } from "../authContext";
 import { isRaLevelUnlocked } from "../access";
@@ -4492,6 +4583,22 @@ function SubjectCard({ subjectId, expanded, onToggle, onPlay }) {
         </div>
       )}
     </div>
+  );
+}
+
+function IssuanceQuizCard({ onOpen }) {
+  return (
+    <button
+      onClick={onOpen}
+      className="col-span-2 flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-4 text-left shadow-card transition-all active:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:active:bg-slate-700/50"
+    >
+      <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-emerald-400 to-navy-700 text-lg" aria-hidden>📜</span>
+      <div className="min-w-0 flex-1">
+        <p className="truncate font-bold text-navy-900 dark:text-slate-100">CMO / CAO</p>
+        <p className="truncate text-xs text-slate-400 dark:text-slate-500">Pick a CMO or CAO by number or title</p>
+      </div>
+      <span className="flex-shrink-0 text-slate-300 dark:text-slate-600" aria-hidden>→</span>
+    </button>
   );
 }
 
@@ -4565,6 +4672,7 @@ export default function QuizHub({ onExit }) {
               onContinue={handleContinueRA10863}
               onSelectTitle={() => setActiveView({ type: "ra10863-titles" })}
             />
+            <IssuanceQuizCard onOpen={() => setActiveView({ type: "issuance-quiz" })} />
             {["tl", "cdp", "pc", "tcp"].map((id) => (
               <SubjectCard key={id} subjectId={id} expanded={expandedCard === id} onToggle={() => toggleCard(id)} onPlay={handlePlaySubject} />
             ))}
@@ -4587,6 +4695,7 @@ export default function QuizHub({ onExit }) {
           </div>
         )}
         {activeView?.type === "ra10863-titles" && <QuizPage />}
+        {activeView?.type === "issuance-quiz" && <IssuanceQuizHub onBack={backToHub} />}
         {activeView?.type === "custom-quiz" && <CustomQuizHub onBack={backToHub} />}
         {activeView?.type === "ra10863-play" && (
           <div className="mx-auto max-w-2xl p-4">
@@ -7219,7 +7328,7 @@ export default function IssuanceQuizPanel() {
         "✓ Quiz imported: " + res.map((r) => `${r.label} (L1: ${r.l1}, L2: ${r.l2})`).join(", ") + "." +
         (missing.length
           ? ` ⚠ ${missing.join(", ")} not in your CMO / CAO list yet — the 📝 Quiz button will appear once it is imported.`
-          : " Open ☰ → CMO / CAO and tap 📝 Quiz.")
+          : " Test it in 📝 Quiz/Exam → CMO / CAO (or ☰ → CMO / CAO → 📝 Quiz).")
       );
       setJson("");
       refresh();
@@ -7255,7 +7364,7 @@ export default function IssuanceQuizPanel() {
           <li>Copy the quiz prompt, paste it in ChatGPT / Gemini, then paste the official CMO/CAO text below it.</li>
           <li>Paste the JSON here. Level 1 = definition / identification, Level 2 = real case. All A–D.</li>
           <li>The quiz attaches itself to the CMO/CAO with the same type + number. Import order doesn't matter.</li>
-          <li>Check it in ☰ → CMO / CAO → 📝 Quiz.</li>
+          <li>Check it in 📝 Quiz/Exam → CMO / CAO list (or ☰ → CMO / CAO → 📝 Quiz).</li>
           <li>Download the file and put it in <code className="rounded bg-slate-100 px-1 dark:bg-slate-700">frontend/src/data/issuance-quizzes/</code> so it ships to users.</li>
         </ol>
         <div className="mt-3 flex flex-wrap gap-2">
@@ -7319,6 +7428,150 @@ export default function IssuanceQuizPanel() {
           ))}
         </ul>
       </div>
+    </div>
+  );
+}
+```
+
+## File: ./frontend/src/pages/IssuanceQuizHub.jsx
+```
+import { useState, useMemo } from "react";
+import IssuanceQuizModal from "../components/IssuanceQuiz";
+import { listIssuanceQuizzes } from "../issuanceQuizStore";
+
+// Quiz/Exam → "CMO / CAO" subject.
+// Lists every CMO / CAO that has a quiz (name/title + number like "07-2027"), grouped by year.
+// Tapping one opens that issuance's level picker (Level 1 / Level 2) right here, inline.
+// The 📝 Quiz button inside each CMO / CAO page still works as before.
+
+const TYPES = [
+  { id: "CMO", label: "CMO", icon: "📜" },
+  { id: "CAO", label: "CAO", icon: "📄" },
+];
+
+export default function IssuanceQuizHub({ onBack }) {
+  const [type, setType] = useState("CMO");
+  const [q, setQ] = useState("");
+  const [selected, setSelected] = useState(null); // { id, label, title }
+  const [collapsedYears, setCollapsedYears] = useState({});
+
+  const items = useMemo(() => listIssuanceQuizzes(type), [type, selected]);
+
+  const filtered = useMemo(() => {
+    const s = q.trim().toLowerCase();
+    if (!s) return items;
+    return items.filter((i) => `${i.label} ${i.number} ${i.title} ${i.subject}`.toLowerCase().includes(s));
+  }, [items, q]);
+
+  const groups = useMemo(() => {
+    const m = new Map();
+    for (const it of filtered) {
+      const y = it.year || "Undated";
+      if (!m.has(y)) m.set(y, []);
+      m.get(y).push(it);
+    }
+    return [...m.entries()];
+  }, [filtered]);
+
+  if (selected) {
+    return (
+      <div className="mx-auto max-w-2xl p-4">
+        <IssuanceQuizModal
+          embedded
+          issuance={selected}
+          backLabel={`← Back to ${type} list`}
+          onClose={() => setSelected(null)}
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div className="mx-auto max-w-2xl p-4">
+      <button
+        onClick={onBack}
+        className="mb-3 flex h-9 items-center gap-1 rounded-full px-3 text-sm font-medium text-slate-600 active:bg-slate-100 dark:text-slate-300 dark:active:bg-slate-800"
+      >
+        <span aria-hidden>←</span> Subjects
+      </button>
+
+      <div className="mb-3 flex gap-1.5">
+        {TYPES.map((t) => (
+          <button
+            key={t.id}
+            onClick={() => { setType(t.id); setQ(""); }}
+            className={`min-h-[40px] flex-1 rounded-full px-3.5 py-1.5 text-sm font-semibold transition-colors ${
+              type === t.id
+                ? "bg-navy-900 text-white shadow-sm dark:bg-navy-700"
+                : "bg-slate-100 text-slate-600 active:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:active:bg-slate-700"
+            }`}
+          >
+            <span aria-hidden>{t.icon}</span> {t.label}
+          </button>
+        ))}
+      </div>
+
+      <div className="mb-3 flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 dark:border-slate-700 dark:bg-slate-800">
+        <span aria-hidden>🔍</span>
+        <input
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          placeholder={`Search ${type} (number or title)`}
+          style={{ fontSize: "16px" }}
+          className="min-w-0 flex-1 border-none bg-transparent py-2 text-slate-900 placeholder:text-slate-400 focus:outline-none dark:text-slate-100"
+        />
+        {q && <button onClick={() => setQ("")} className="text-slate-400" aria-label="Clear">✕</button>}
+      </div>
+
+      {items.length === 0 && (
+        <div className="rounded-2xl bg-white p-6 text-center text-sm text-slate-500 shadow-card dark:bg-slate-800 dark:text-slate-400">
+          <p className="mb-1 text-2xl" aria-hidden>📝</p>
+          <p className="font-medium">No {type} quizzes yet.</p>
+        </div>
+      )}
+      {items.length > 0 && filtered.length === 0 && (
+        <p className="p-3 text-center text-sm text-slate-400">No match for “{q}”.</p>
+      )}
+
+      {groups.map(([year, list]) => {
+        const collapsed = !q && collapsedYears[year];
+        return (
+          <div key={year} className="mb-2">
+            <button
+              onClick={() => setCollapsedYears((p) => ({ ...p, [year]: !p[year] }))}
+              className="flex min-h-[40px] w-full items-center justify-between gap-2 rounded-lg px-2 py-2 text-left active:bg-slate-100 dark:active:bg-slate-800"
+            >
+              <span className="text-sm font-bold uppercase tracking-wide text-navy-800 dark:text-slate-300">
+                {year} <span className="font-normal text-slate-400">· {list.length}</span>
+              </span>
+              <span className="text-xs text-slate-400 dark:text-slate-500">{collapsed ? "▸" : "▾"}</span>
+            </button>
+            {!collapsed && (
+              <ul className="space-y-2">
+                {list.map((it) => (
+                  <li key={it.id}>
+                    <button
+                      onClick={() => setSelected({ id: it.id, label: it.label, title: it.title })}
+                      className="flex w-full items-center gap-3 rounded-2xl border border-slate-200 bg-white p-3.5 text-left shadow-card active:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:active:bg-slate-700/50"
+                    >
+                      <div className="min-w-0 flex-1">
+                        <p className="font-bold text-navy-900 dark:text-slate-100">{it.label}</p>
+                        {it.title && (
+                          <p className="mt-0.5 line-clamp-2 text-sm text-slate-600 dark:text-slate-300">{it.title}</p>
+                        )}
+                        <p className="mt-1 text-xs text-slate-400 dark:text-slate-500">
+                          {[it.l1 > 0 && `🟢 L1: ${it.l1}`, it.l2 > 0 && `🔵 L2: ${it.l2}`].filter(Boolean).join(" · ")}
+                        </p>
+                      </div>
+                      <span className="flex-shrink-0 text-slate-300 dark:text-slate-600" aria-hidden>→</span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }
@@ -9522,6 +9775,25 @@ export function getIssuanceQuiz(issuanceId) {
   return q && (q.level1.length || q.level2.length) ? q : null;
 }
 
+// All CMO / CAO that have a quiz (bundled + dev preview) for the Quiz/Exam list.
+// type = "CMO" | "CAO". Title/subject come from the CMO/CAO text when it is imported.
+export function listIssuanceQuizzes(type) {
+  const t = String(type).toUpperCase();
+  return Object.values(getAll())
+    .filter((q) => q.type === t && (q.level1.length || q.level2.length))
+    .map((q) => {
+      const iss = getIssuance(q.id);
+      return {
+        id: q.id, type: q.type, number: q.number, label: q.label,
+        year: yearOf(q.number),
+        title: (iss && iss.title) || "",
+        subject: (iss && iss.subject) || "",
+        l1: q.level1.length, l2: q.level2.length,
+      };
+    })
+    .sort(compare);
+}
+
 // QuizPlayView wants { questionId: { [levelId]: question } }
 export function quizEntriesForLevel(quiz, levelId) {
   const out = {};
@@ -9689,6 +9961,11 @@ export default {
   darkMode: 'class',
   theme: {
     extend: {
+      boxShadow: {
+        card: '0 1px 2px rgba(15,23,42,0.04), 0 4px 14px -4px rgba(15,23,42,0.10)',
+        soft: '0 8px 30px -12px rgba(15,23,42,0.25)',
+        nav: '0 -6px 24px -10px rgba(15,23,42,0.18)',
+      },
       fontFamily: {
         sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         serif: ['"Source Serif 4"', 'Georgia', 'Cambria', 'serif'],

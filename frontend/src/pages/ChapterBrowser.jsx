@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef, useMemo, useContext, createContext } from "react";
+import { createPortal } from "react-dom";
 import {
   getTitles, getChapter, getTitleTree, search,
   addHighlight, removeHighlight, getHighlightsForNode,
@@ -298,6 +299,12 @@ function AiContextModal({ node, onClose }) {
     node?.title
   ]);
   const [copiedApp, setCopiedApp] = useState(null);
+  // lock the page behind the modal so only the modal itself scrolls
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = prev; };
+  }, []);
 
   const handleAskExternal = async (app) => {
     const prompt = entry?.prompt?.trim() ||
@@ -307,9 +314,9 @@ function AiContextModal({ node, onClose }) {
     setTimeout(() => setCopiedApp(null), 2500);
   };
 
-  return (
-    <div className="fixed inset-0 z-[70] flex items-end justify-center bg-slate-900/60 backdrop-blur-sm sm:items-center" onClick={onClose}>
-      <div onClick={(e) => e.stopPropagation()} className="max-h-[88vh] w-full overflow-y-auto rounded-t-3xl bg-white p-5 shadow-2xl dark:bg-slate-900 sm:max-w-lg sm:rounded-3xl">
+  return createPortal(
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-900/60 p-3 backdrop-blur-sm" onClick={(e) => { e.stopPropagation(); onClose(); }}>
+      <div onClick={(e) => e.stopPropagation()} className="max-h-full w-full max-w-lg overflow-y-auto overscroll-contain rounded-3xl bg-white p-5 shadow-2xl dark:bg-slate-900">
         <div className="mb-3 flex items-start justify-between gap-2">
           <div className="flex items-center gap-2">
             <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-amber-400 to-navy-700 text-lg">🤖</span>
@@ -345,7 +352,8 @@ function AiContextModal({ node, onClose }) {
           )}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 const STUDY_TYPE_STYLES = {

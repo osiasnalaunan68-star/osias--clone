@@ -1,0 +1,228 @@
+{
+  "type": "CMO",
+  "number": "03-2022",
+  "level1": [
+    {
+      "question": "Ayon sa Sec. 2.1.2, ilang taon ang maximum na storage period ng bonded goods (hindi perishable) sa loob ng CBW, bilang mula sa pagdating nito sa warehouse?",
+      "choices": {
+        "A": "6 na buwan",
+        "B": "2 taon",
+        "C": "1 taon",
+        "D": "3 taon"
+      },
+      "correct": "C",
+      "reason": "Ayon sa Sec. 2.1.2, ang bonded goods na pumasok sa warehousing ay puwedeng manatili sa CBW nang hanggang isang (1) taon mula sa pagdating nito sa warehouse, WSAD man o TSAD ang gamit."
+    },
+    {
+      "question": "Ilang buwan ang unang storage period ng perishable goods sa CBW bago ito ma-extend, ayon sa Sec. 2.1.2?",
+      "choices": {
+        "A": "3 buwan",
+        "B": "1 buwan",
+        "C": "6 na buwan",
+        "D": "1 taon"
+      },
+      "correct": "A",
+      "reason": "Sec. 2.1.2 nagsasaad na ang storage period ng perishable goods ay tatlong (3) buwan mula sa petsa ng pagdating sa warehouse, na puwedeng i-extend pa ng another three (3) months kung may valid reason at written request."
+    },
+    {
+      "question": "Ayon sa Sec. 2.2.1, ano ang tawag sa iisang CCBW kung saan maaaring mag-accredit ang isang manufacturer-exporter?",
+      "choices": {
+        "A": "Extension warehouse",
+        "B": "Client CBW",
+        "C": "Common facility",
+        "D": "Mother warehouse"
+      },
+      "correct": "D",
+      "reason": "Sec. 2.2.1 ay nagsasabing ang manufacturer-exporter ay maaaring mag-accredit sa isang CCBW lang, na tinatawag na 'mother warehouse.'"
+    },
+    {
+      "question": "Ilang taon ang validity ng Authority to Operate ng isang CBW, ayon sa Sec. 6.1, bilang mula sa petsa ng approval nito?",
+      "choices": {
+        "A": "1 taon",
+        "B": "3 taon",
+        "C": "2 taon",
+        "D": "5 taon"
+      },
+      "correct": "B",
+      "reason": "Sa Sec. 6.1, ang Authority to Operate ng CBW ay valid sa loob ng tatlong (3) taon mula sa petsa ng approval nito, ayon sa nakasaad sa Certificate of Authority to Operate."
+    },
+    {
+      "question": "Ayon sa Sec. 4.1, sa loob ng anong window dapat i-file ang application for renewal ng Authority to Operate ng CBW?",
+      "choices": {
+        "A": "120 hanggang 91 araw bago mag-expire ang Authority",
+        "B": "90 hanggang 60 araw bago mag-expire ang Authority",
+        "C": "150 hanggang 120 araw bago mag-expire ang Authority",
+        "D": "60 hanggang 30 araw bago mag-expire ang Authority"
+      },
+      "correct": "A",
+      "reason": "Ayon sa Sec. 4.1, ang application for renewal ay ifa-file sa Collection District na may jurisdiction hindi mas maaga sa 120 araw ngunit hindi mas huli sa 91 araw bago mag-expire ang Authority to Operate."
+    },
+    {
+      "question": "Ilang porsyento ng total volume ng bonded raw materials na inilipat sa CBW sa loob ng isang taon ang maaaring i-withdraw para sa local sales/domestic consumption, ayon sa Sec. 2.1.6 (maliban sa PCBW)?",
+      "choices": {
+        "A": "20%",
+        "B": "40%",
+        "C": "30%",
+        "D": "50%"
+      },
+      "correct": "C",
+      "reason": "Sec. 2.1.6 nagtatakda na hindi dapat lumampas sa tatlumpung porsyento (30%) ng total volume ng bonded raw materials na inilipat sa CBW para sa taon ang withdrawal para sa local sales/domestic consumption, maliban sa mga PCBW."
+    },
+    {
+      "question": "Anong ahensya ang nag-iissue ng Formula of Manufacture (FOM) na isinusumite bilang requirement sa application para sa Authority to Operate, ayon sa Sec. 3.2.h?",
+      "choices": {
+        "A": "Board of Investments (BOI)",
+        "B": "Industrial Technology Development Institute (ITDI)",
+        "C": "Department of Trade and Industry (DTI)",
+        "D": "Bureau of Customs (BOC)"
+      },
+      "correct": "B",
+      "reason": "Ayon sa Sec. 3.2.h, ang Formula of Manufacture (FOM) ay dapat duly issued ng Industrial Technology Development Institute (ITDI), kung saan nakadetalye ang paggamit ng imported raw materials at ang percentage ng wastages at by-products."
+    },
+    {
+      "question": "Ilang araw bago mag-expire ang storage period dapat abisuhan sa pamamagitan ng sulat ng assigned Warehouseman ang CBW Operator na mag-withdraw ng bonded goods, ayon sa Sec. 16.1?",
+      "choices": {
+        "A": "7 araw",
+        "B": "15 araw",
+        "C": "60 araw",
+        "D": "30 araw"
+      },
+      "correct": "D",
+      "reason": "Sec. 16.1 nagsasaad na tatlumpung (30) araw bago mag-expire ang storage period, aabisuhan ng assigned Warehouseman sa pamamagitan ng sulat ang CBW Operator para mag-withdraw ng bonded goods para sa manufacture at export o export mismo kung finished goods na."
+    },
+    {
+      "question": "Magkanong Performance Bond ang kailangang i-file ng CBW Operator sa District Collector bago magsimula ng aktwal na operasyon, ayon sa Sec. 8.1.4?",
+      "choices": {
+        "A": "Php1,000,000.00",
+        "B": "Php500,000.00",
+        "C": "Php2,000,000.00",
+        "D": "Php5,000,000.00"
+      },
+      "correct": "A",
+      "reason": "Ayon sa Sec. 8.1.4, dapat mag-file ang CBW Operator ng Performance Bond na Php1,000,000.00 sa District Collector bilang garantiya ng pagsunod sa mga probisyon ng batas at regulasyon ukol sa CBW."
+    },
+    {
+      "question": "Sino ang may kapangyarihang mag-isyu ng Certificate of Authority to Operate pagkatapos maaprubahan ang application ng CBW, ayon sa Sec. 6?",
+      "choices": {
+        "A": "District Collector",
+        "B": "Deputy Commissioner, AOCG",
+        "C": "Commissioner",
+        "D": "CBWC Chairman"
+      },
+      "correct": "C",
+      "reason": "Sec. 6 nagsasabing pagkatapos maaprubahan ang CBW application, ang Commissioner ang mag-iissue ng Certificate of Authority to Operate ng CBW, na dapat conspicuously displayed sa warehouse."
+    }
+  ],
+  "level2": [
+    {
+      "question": "Harborline Manufacturing, an MCBW operator (not a PCBW), transferred a total of 80,000 kilograms of bonded raw materials to its warehouse for the calendar year. It wants to withdraw the maximum volume allowed for local sales/domestic consumption, subject to District Collector approval and payment of duties and taxes. Under Section 2.1.6, what is the maximum volume, in kilograms, that Harborline may validly withdraw for local sales?",
+      "choices": {
+        "A": "16,000 kilograms",
+        "B": "24,000 kilograms",
+        "C": "28,000 kilograms",
+        "D": "30,000 kilograms"
+      },
+      "correct": "B",
+      "reason": "Section 2.1.6 limits withdrawal for local sales/domestic consumption of an MCBW to thirty percent (30%) of the total volume of bonded raw materials transferred to the CBW for the year. Thirty percent of 80,000 kilograms is 24,000 kilograms, which is the maximum volume Harborline may withdraw, still subject to District Collector approval and payment of duties and taxes."
+    },
+    {
+      "question": "Visayas Garments Corp. operates an MCBW located in a different Collection District from the port where its imported fabric was discharged. The fabric arrived under a Goods Declaration for Transit (TSAD) and was physically transferred to the CBW on March 1. Assuming the five-day period is counted starting the day after the transfer date, by what date must Visayas Garments file the corresponding WSAD under Section 10.2.9?",
+      "choices": {
+        "A": "March 3",
+        "B": "March 4",
+        "C": "March 5",
+        "D": "March 6"
+      },
+      "correct": "D",
+      "reason": "Section 10.2.9 requires that the corresponding WSAD be filed within five (5) days from the date of transfer of the goods to the CBW. Counting five days starting the day after March 1 (the transfer date) results in a filing deadline of March 6."
+    },
+    {
+      "question": "Luzon Toys Manufacturing, an MCBW operator, lacks sufficient machine capacity to meet an urgent export order and wants Speedy Assembly Co., a nearby firm, to process part of its bonded raw materials. Speedy Assembly Co. has not applied for or received any accreditation from the Bureau of Customs. Under Section 2.1.7, what must Luzon Toys do before it may validly withdraw the bonded goods without payment of duty and/or tax for processing by Speedy Assembly Co.?",
+      "choices": {
+        "A": "Secure the District Collector's approval and ensure that Speedy Assembly Co. is accredited as a sub-contractor",
+        "B": "File a Goods Declaration for Consumption covering the raw materials to be subcontracted",
+        "C": "Obtain the CBWC's approval and register Speedy Assembly Co. as a new CBW operator",
+        "D": "Simply notify the assigned Warehouseman and proceed with the transfer"
+      },
+      "correct": "A",
+      "reason": "Section 2.1.7 allows withdrawal for sub-contracting without payment of duty and/or tax only subject to the approval of the District Collector, and Section 2.1.7(a) requires that only duly accredited sub-contractors may undertake subcontracting jobs. Since Speedy Assembly Co. is not yet accredited, Luzon Toys must secure both the District Collector's approval and Speedy Assembly Co.'s accreditation before the tax-free withdrawal can be made."
+    },
+    {
+      "question": "Golden Thread Garments is an accredited member of Northstar CCBW. Golden Thread imported raw materials under a WSAD but failed to properly account for and liquidate the materials within the required period. The Bureau of Customs now seeks to collect the resulting unpaid duties and taxes. Under Section 2.2.13, from whom may the Bureau validly collect the full liability?",
+      "choices": {
+        "A": "Only Golden Thread Garments, as the importer of record",
+        "B": "Only Northstar CCBW, as the operator of the mother warehouse",
+        "C": "Either Northstar CCBW or Golden Thread Garments, since they are jointly and severally responsible",
+        "D": "The District Collector who approved the transfer of the goods"
+      },
+      "correct": "C",
+      "reason": "Section 2.2.13 provides that the CCBW and the accredited member shall be jointly and severally responsible for the liquidation of the WSADs covering the bonded goods. A joint and several liability means the Bureau may collect the full amount from either party, so it may pursue either Northstar CCBW or Golden Thread Garments."
+    },
+    {
+      "question": "Riverside Packaging Corp. is applying for renewal of its Authority to Operate a CBW. Its certificate of title, vicinity map, list of machineries, SMRMIR, and ITDI FOM have not changed since its last submission to the Bureau, and it wants to avoid resubmitting updated copies of these documents. Under Section 4.3(j), what must Riverside submit instead to be excused from resubmitting these specific documents?",
+      "choices": {
+        "A": "A notarized Power of Attorney designating an authorized signatory",
+        "B": "An Affidavit of No Change of Circumstances with supporting documents",
+        "C": "A Certificate of No Outstanding Accountability from the Bonds Division",
+        "D": "A new Feasibility Study covering the next five years"
+      },
+      "correct": "B",
+      "reason": "Section 4.3(j) allows an Affidavit of No Change of Circumstances, with supporting documents, where there are no changes relative to paragraphs e (title/lease), f (vicinity map), g (machineries), h (SMRMIR), and i (ITDI FOM). Submitting this affidavit excuses Riverside from resubmitting updated copies of those particular documents."
+    },
+    {
+      "question": "Summit Electronics Inc. operates a Private Customs Bonded Warehouse (PCBW) and imported 100,000 units of raw materials for the year. It wants to withdraw 45,000 units, which is more than 30% of that volume, for local sales/domestic consumption, subject to District Collector approval and payment of duties and taxes. Under Section 2.1.6, is this withdrawal allowed?",
+      "choices": {
+        "A": "Yes, because the 30% threshold limit for local sales does not apply to PCBWs",
+        "B": "No, because no CBW may exceed the 30% threshold for local sales under any circumstance",
+        "C": "No, because only ICBWs are exempt from the 30% threshold limit",
+        "D": "Yes, but only if Summit first converts its PCBW into an MCBW"
+      },
+      "correct": "A",
+      "reason": "Section 2.1.6 expressly states that the prohibition on the threshold limit for local sales shall not apply to Private Customs Bonded Warehouses (PCBWs). Since Summit operates a PCBW, it may withdraw more than 30% for local sales, subject to District Collector approval and payment of duties and taxes."
+    },
+    {
+      "question": "Cebu Weaving Mills operates an MCBW located within Cebu's Collection District, but its imported yarn was discharged at the Port of Manila, which is under a different Collection District. Under Section 10.2, what document should be lodged to cover the movement of the yarn from the Manila port of discharge to the CBW in Cebu, before a WSAD is later filed?",
+      "choices": {
+        "A": "A Goods Declaration for Warehousing (WSAD) filed directly at Manila",
+        "B": "A Goods Declaration for Consumption filed at the port of discharge",
+        "C": "An Export Declaration-Single Administrative Document (ED-SAD)",
+        "D": "A Goods Declaration for Transit (TSAD) lodged for transfer to the CBW"
+      },
+      "correct": "D",
+      "reason": "Section 10.2 provides that where the goods to be entered are under the jurisdiction of another Collection District, the transfer of the imported goods for warehousing from the customs zone to the CBW shall be made under the procedures for transit, with a TSAD lodged in the E2M system. Since Manila and Cebu are different Collection Districts, Cebu Weaving Mills must use a TSAD, with a WSAD to be filed later."
+    },
+    {
+      "question": "Mountain View Exports fully exported its finished goods ten days before its one-year storage period expired. It did not submit the complete liquidation documents within sixty (60) days from exportation, and the thirty (30)-day period counted from the expiration of the storage period has also lapsed without submission. Under Section 15.2, what is the consequence of submitting the liquidation documents only after this point?",
+      "choices": {
+        "A": "The WSAD is automatically deemed liquidated without need for documents",
+        "B": "The CBW Operator loses the right to liquidate the WSAD permanently",
+        "C": "The submission is treated as late and becomes subject to the penalties under CAO No. 01-2022",
+        "D": "The goods are automatically considered abandoned regardless of actual exportation"
+      },
+      "correct": "C",
+      "reason": "Section 15.2 provides that the maximum period within which to submit complete liquidation documents is thirty (30) days from the expiration of the storage period, and submission of documents after this thirty-day period is considered late submission subject to the penalties prescribed under Section 15 of CAO No. 01-2022."
+    },
+    {
+      "question": "Bright Star Apparel, an MCBW operator, has two options for a batch of bonded fabric: (1) withdraw it tax-free for processing by an accredited sub-contractor to meet an export deadline, or (2) withdraw it for sale within the domestic market. Both withdrawals require District Collector approval. Based on Sections 2.1.6 and 2.1.7, which statement correctly distinguishes the two withdrawals?",
+      "choices": {
+        "A": "Both withdrawals require payment of duties and taxes before release",
+        "B": "The sub-contracting withdrawal is duty/tax-free, while the local sales withdrawal requires payment of duties and taxes",
+        "C": "Neither withdrawal requires District Collector approval",
+        "D": "The local sales withdrawal is duty/tax-free, while the sub-contracting withdrawal requires payment of duties and taxes"
+      },
+      "correct": "B",
+      "reason": "Section 2.1.7 allows withdrawal for sub-contracting without payment of duty and/or tax, subject to District Collector approval and accreditation of the sub-contractor. Section 2.1.6 allows withdrawal for local sales/domestic consumption only upon payment of the corresponding duties and taxes, in addition to District Collector approval, so the two withdrawals differ precisely on whether duties and taxes are paid."
+    },
+    {
+      "question": "Pacific Shoes Corp.'s raw materials arrived at its MCBW on January 15, 2025, giving it a one-year storage period ending January 15, 2026. On December 16, 2025, the assigned Warehouseman sent Pacific Shoes a written notice to withdraw the bonded goods, as the storage period is about to expire. Pacific Shoes has not manufactured or exported the goods and does not want to pay duties and taxes or request an export extension. Under Sections 16.1 and 16.2, what option lets Pacific Shoes validly give up its rights over the unused raw materials before the storage period lapses?",
+      "choices": {
+        "A": "File a notarized Letter of Express Abandonment indicating the WSAD number, quantity, and reason for abandonment",
+        "B": "Simply allow the storage period to lapse without taking any action",
+        "C": "Request the Warehouseman to destroy the goods without documentation",
+        "D": "Transfer the goods informally to another CCBW member without approval"
+      },
+      "correct": "A",
+      "reason": "Section 16.1 requires the Warehouseman to notify the CBW Operator thirty (30) days before the storage period expires, consistent with the notice sent on December 16, 2025, thirty days before the January 15, 2026 expiration. Section 16.2.3 then allows the Operator, upon receipt of this notice, to expressly abandon the bonded goods by filing a notarized Letter of Express Abandonment stating the WSAD number, quantity of goods, and reason for abandonment, which matches Pacific Shoes' stated intent to avoid duties, taxes, and an export extension request."
+    }
+  ]
+}
