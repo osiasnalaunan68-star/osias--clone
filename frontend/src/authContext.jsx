@@ -161,12 +161,16 @@ export function AuthProvider({ children }) {
       const updated = devices.map((d) =>
         d.id === currentDeviceId ? { ...d, lastActive: Date.now() } : d
       );
-      await updateDoc(ref, { devices: updated });
+      // Huwag hintayin ang server: kapag offline o mahina ang signal, mahahang ang app dito.
+      // Ipinipila ng Firestore ang write at ipapadala kapag bumalik ang connection.
+      updateDoc(ref, { devices: updated }).catch((e) => console.warn("device update failed:", e));
       setProfile({ ...data, devices: updated });
       setDeviceLimitReached(false);
     } else if (devices.length < 2) {
       const updated = [...devices, { id: currentDeviceId, label: guessDeviceLabel(), lastActive: Date.now() }];
-      await updateDoc(ref, { devices: updated });
+      // Huwag hintayin ang server: kapag offline o mahina ang signal, mahahang ang app dito.
+      // Ipinipila ng Firestore ang write at ipapadala kapag bumalik ang connection.
+      updateDoc(ref, { devices: updated }).catch((e) => console.warn("device update failed:", e));
       setProfile({ ...data, devices: updated });
       setDeviceLimitReached(false);
     } else {
