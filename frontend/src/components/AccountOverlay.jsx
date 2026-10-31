@@ -364,13 +364,20 @@ export default function AccountOverlay() {
                   2. Pay ₱{selectedPlan.price} and write your email address + the reference code in the note/message.<br />
                   3. Tap "I've paid" below.
                 </p>
-                <button
-                  onClick={confirmPaid}
-                  disabled={submitting}
-                  className="w-full rounded-xl bg-navy-900 px-4 py-3 text-sm font-semibold text-white disabled:opacity-50 dark:bg-navy-700"
+                {/* Naka-pin sa baba ng popup: laging kita, hindi na kailangang mag-scroll */}
+                <div
+                  className="sticky -bottom-5 -mx-5 -mb-7 border-t border-slate-200 bg-white px-5 pt-3 dark:border-slate-700 dark:bg-slate-800"
+                  style={{ paddingBottom: "calc(env(safe-area-inset-bottom) + 12px)" }}
                 >
-                  {submitting ? "Submitting..." : "✅ I've paid"}
-                </button>
+                  <p className="mb-2 text-center text-[11px] text-slate-500 dark:text-slate-400">Tap only after you have sent the payment.</p>
+                  <button
+                    onClick={confirmPaid}
+                    disabled={submitting}
+                    className="w-full rounded-xl bg-navy-900 px-4 py-3 text-sm font-semibold text-white disabled:opacity-50 dark:bg-navy-700"
+                  >
+                    {submitting ? "Submitting..." : "✅ I've paid"}
+                  </button>
+                </div>
               </>
             ) : (
               <div className="space-y-3 py-4 text-center">
