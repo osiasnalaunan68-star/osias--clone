@@ -274,16 +274,26 @@ function OfflinePill() {
 
 // ── Maliit na pill: natitirang oras ──────────────────────────────────
 function AccessPill({ access }) {
-  const { overlayOpen, setOverlayOpen } = useAuth();
+  const { user, overlayOpen, setOverlayOpen } = useAuth();
+  const [, setTick] = useState(0);
   if (overlayOpen) return null;
   let label = null;
   if (access.state === "trial") label = "🎁 Free trial · " + formatTimeLeft(access.msLeft) + " left";
   else if (access.state === "paid" && access.msLeft < 7 * DAY_MS) label = "⏳ Access · " + formatTimeLeft(access.msLeft) + " left";
   if (!label) return null;
+
+  // Puwedeng itago (✕) para hindi matakpan ang bottom navigation. Naaalala per account at per state.
+  const KEY = "cuble_pill_hidden_" + (user ? user.uid : "x") + "_" + access.state;
+  let hidden = false;
+  try { hidden = localStorage.getItem(KEY) === "1"; } catch (_) {}
+  if (hidden) return null;
+  const hide = () => { try { localStorage.setItem(KEY, "1"); } catch (_) {} setTick((n) => n + 1); };
+
   return (
-    <button onClick={() => setOverlayOpen(true)} className="safe-bottom fixed bottom-3 left-3 z-40 rounded-full bg-navy-900/90 px-3 py-1.5 text-[11px] font-semibold text-white shadow-lg backdrop-blur active:bg-navy-800 dark:bg-slate-100/90 dark:text-navy-900">
-      {label}
-    </button>
+    <div className="safe-bottom fixed bottom-3 left-3 z-40 flex items-center rounded-full bg-navy-900/90 text-[11px] font-semibold text-white shadow-lg backdrop-blur dark:bg-slate-100/90 dark:text-navy-900">
+      <button onClick={() => setOverlayOpen(true)} className="rounded-l-full py-1.5 pl-3 pr-1 active:opacity-70">{label}</button>
+      <button onClick={hide} aria-label="Hide time left" className="flex h-8 w-8 items-center justify-center rounded-r-full text-sm opacity-70 active:opacity-100">✕</button>
+    </div>
   );
 }
 
