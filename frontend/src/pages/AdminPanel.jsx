@@ -1,11 +1,11 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { collection, getDocs, doc, updateDoc, arrayUnion, deleteField, Timestamp, runTransaction, writeBatch } from "firebase/firestore";
 import { db } from "../firebase";
 import AdminOverview from "./AdminOverview";
 import { SUBJECT_LABELS, PAYMENT_METHODS, PROMO_PLAN } from "../payments";
 import {
   TRIAL_DAYS, DAY_MS, serverNow, getTrialInfo, getAppAccessInfo,
-  getAccess, formatTimeLeft, formatDateShort, getSubjectInfo,
+  getAccess, formatTimeLeft, formatDateShort, getSubjectInfo, toMs,
 } from "../access";
 
 // Admin-only. One bundle now (PROMO_PLAN = All Access, ₱{price} / {days} days),
@@ -31,6 +31,20 @@ const STATE_UI = {
   expired: { label: "Expired", cls: "bg-red-100 text-red-700 dark:bg-red-950/40 dark:text-red-300" },
   none: { label: "No trial yet", cls: "bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400" },
 };
+
+// "5h 20m" na paghihintay ng pending payment. Pula kapag lampas 12 oras, amber kapag lampas 3 oras.
+function waitInfo(requestedAt) {
+  const t = toMs(requestedAt);
+  if (!t) return null;
+  const mins = Math.max(0, Math.floor((serverNow() - t) / 60000));
+  const label = mins < 60 ? mins + "m"
+    : mins < 1440 ? Math.floor(mins / 60) + "h " + (mins % 60) + "m"
+    : Math.floor(mins / 1440) + "d " + Math.floor((mins % 1440) / 60) + "h";
+  const cls = mins >= 720 ? "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300"
+    : mins >= 180 ? "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300"
+    : "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300";
+  return { label, cls };
+}
 
 function formatDateTime(ts) {
   try {
@@ -71,6 +85,8 @@ export default function AdminPanel() {
   const [trialFilter, setTrialFilter] = useState("all");
   const [monthsInput, setMonthsInput] = useState({}); // uid -> typed string
   const [bulkBusy, setBulkBusy] = useState(false);
+  const [copiedRef, setCopiedRef] = useState("");
+  const lastLoad = useRef(0);
 
   const loadUsers = async () => {
     setError(null);
@@ -79,6 +95,7 @@ export default function AdminPanel() {
       const list = snap.docs.map((d) => ({ uid: d.id, ...d.data() }));
       list.sort((a, b) => (a.fullName || a.email || "").localeCompare(b.fullName || b.email || ""));
       setUsers(list);
+      lastLoad.current = Date.now();
       return list;
     } catch (err) {
       console.warn("AdminPanel load failed:", err);
@@ -94,8 +111,10 @@ export default function AdminPanel() {
     if (!users) return [];
     const q = query.trim().toLowerCase();
     if (!q) return users;
+    const hasRef = (u) => [...(u.pendingPurchases || []), ...(u.pendingAccess || [])]
+      .some((p) => (p.referenceCode || "").toLowerCase().includes(q));
     return users.filter((u) =>
-      (u.fullName || "").toLowerCase().includes(q) || (u.email || "").toLowerCase().includes(q)
+      (u.fullName || "").toLowerCase().includes(q) || (u.email || "").toLowerCase().includes(q) || hasRef(u)
     );
   }, [users, query]);
 
@@ -476,20 +495,52 @@ export default function AdminPanel() {
   const btnRed = btn + "border border-red-200 text-red-600 active:bg-red-50 dark:border-red-800 dark:text-red-400";
   const inputCls = "w-16 rounded-lg border border-slate-200 px-2 py-1.5 text-center text-xs font-semibold dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100";
 
-  const PendingCard = ({ u, p, onApprove, onReject, approveLabel }) => (
-    <div className="rounded-xl border border-amber-200 bg-amber-50 p-3 dark:border-amber-900 dark:bg-amber-950/20">
-      <p className="truncate font-semibold text-navy-900 dark:text-slate-100">{u.fullName || "(no name)"}</p>
-      <p className="truncate text-xs text-slate-400">{u.email}</p>
-      <p className="mt-2 text-sm font-semibold text-navy-900 dark:text-amber-300">
-        {ALL_PLAN_LABELS[p.plan] || p.plan} · ₱{p.price} · {METHOD_LABELS[p.method] || p.method}
-      </p>
-      <p className="text-xs text-slate-500 dark:text-slate-400">Ref: {p.referenceCode} · {formatDateTime(p.requestedAt)}</p>
-      <div className="mt-3 flex gap-2">
-        <button onClick={onApprove} disabled={!!busyKey} className={btnGreen}>{approveLabel}</button>
-        <button onClick={onReject} disabled={!!busyKey} className={btnRed}>✕ Reject</button>
+  const PendingCard = ({ u, p, onApprove, onReject, approveLabel }) => {
+    const wait = waitInfo(p.requestedAt);
+    const app = getAppAccessInfo(u, serverNow());
+    const nPending = (u.pendingPurchases || []).length + (u.pendingAccess || []).length;
+    const mismatch = p.plan === PROMO_PLAN.id && p.price !== PROMO_PLAN.price;
+    const copyRef = async () => {
+      try {
+        await navigator.clipboard.writeText(p.referenceCode);
+        setCopiedRef(p.referenceCode);
+        setTimeout(() => setCopiedRef(""), 1200);
+      } catch (_) {
+        window.prompt("Copy this:", p.referenceCode);
+      }
+    };
+    const warn = "rounded-full bg-red-100 px-2 py-0.5 text-[11px] font-semibold text-red-700 dark:bg-red-900/30 dark:text-red-300";
+    return (
+      <div className="rounded-xl border border-amber-200 bg-amber-50 p-3 dark:border-amber-900 dark:bg-amber-950/20">
+        <div className="flex items-start justify-between gap-2">
+          <div className="min-w-0">
+            <p className="truncate font-semibold text-navy-900 dark:text-slate-100">{u.fullName || "(no name)"}</p>
+            <p className="truncate text-xs text-slate-400">{u.email}</p>
+          </div>
+          {wait && <span className={"flex-shrink-0 rounded-full px-2 py-0.5 text-[11px] font-semibold " + wait.cls}>⏱ {wait.label}</span>}
+        </div>
+        <p className="mt-2 text-sm font-semibold text-navy-900 dark:text-amber-300">
+          {ALL_PLAN_LABELS[p.plan] || p.plan} · ₱{p.price} · {METHOD_LABELS[p.method] || p.method}
+        </p>
+        <div className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-slate-500 dark:text-slate-400">
+          <span>Ref: <span className="font-semibold">{p.referenceCode}</span></span>
+          <button onClick={copyRef} className="rounded-full border border-slate-300 px-2 py-0.5 text-[11px] font-semibold text-slate-600 active:bg-slate-100 dark:border-slate-600 dark:text-slate-300">{copiedRef === p.referenceCode ? "Copied ✓" : "Copy"}</button>
+          <span>· {formatDateTime(p.requestedAt)}</span>
+        </div>
+        <div className="mt-1.5 flex flex-wrap gap-1.5">
+          {mismatch && <span className={warn}>⚠️ Paid ₱{p.price} · plan is ₱{PROMO_PLAN.price}</span>}
+          {nPending > 1 && <span className={warn}>⚠️ {nPending} pending requests (possible double payment)</span>}
+          <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-600 dark:bg-slate-700 dark:text-slate-300">
+            {app.active ? "Active until " + formatDateShort(app.expiresAt) + " · renewal adds days" : "No active access"}
+          </span>
+        </div>
+        <div className="mt-3 flex gap-2">
+          <button onClick={onApprove} disabled={!!busyKey} className={btnGreen}>{approveLabel}</button>
+          <button onClick={onReject} disabled={!!busyKey} className={btnRed}>✕ Reject</button>
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <div className="mx-auto max-w-2xl space-y-4 pb-10">
@@ -504,7 +555,7 @@ export default function AdminPanel() {
         {TABS.map((t) => (
           <button
             key={t.id}
-            onClick={() => setTab(t.id)}
+            onClick={() => { setTab(t.id); if (t.id === "pending" && Date.now() - lastLoad.current > 60000) loadUsers(); }}
             className={"flex-shrink-0 rounded-full border px-3.5 py-1.5 text-sm font-semibold transition-colors " + (tab === t.id ? "border-navy-900 bg-navy-900 text-white dark:border-slate-100 dark:bg-slate-100 dark:text-navy-900" : "border-slate-200 text-slate-600 dark:border-slate-700 dark:text-slate-300")}
           >
             {t.label}
@@ -517,7 +568,7 @@ export default function AdminPanel() {
         <input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search name or email..."
+          placeholder="Search name, email or ref code..."
           className="flex-1 rounded-xl border border-slate-200 px-4 py-2.5 text-sm dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100"
         />
         <button
@@ -620,7 +671,7 @@ export default function AdminPanel() {
       {/* ───────────── PENDING ───────────── */}
       {tab === "pending" && users !== null && !error && (
         <div className="space-y-3">
-          <p className="text-sm font-semibold text-navy-900 dark:text-slate-100">⏳ Pending approvals ({pendingRows.length})</p>
+          <p className="text-sm font-semibold text-navy-900 dark:text-slate-100">⏳ Pending approvals ({pendingRows.length}){pendingRows.length > 0 && waitInfo(pendingRows[0].p.requestedAt) ? " · oldest waiting " + waitInfo(pendingRows[0].p.requestedAt).label : ""}</p>
           {pendingRows.length === 0 && <p className="py-8 text-center text-slate-400">No pending payments. 🎉</p>}
           {pendingRows.map(({ u, p, kind }) => {
             if (kind === "access") {
