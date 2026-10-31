@@ -31,6 +31,7 @@ export default function AccountOverlay() {
   const [referenceCode, setReferenceCode] = useState(null);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [copied, setCopied] = useState("");
 
   // Reset ang payment flow tuwing magsasara ang overlay, para hindi
   // ma-stuck ang susunod na pagbukas sa gitna ng isang lumang flow.
@@ -66,6 +67,16 @@ export default function AccountOverlay() {
     setSubmitted(false);
     setReferenceCode(generateReferenceCode(plan.id));
     setStep("payment-method");
+  };
+
+  const copyText = async (key, text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(key);
+      setTimeout(() => setCopied(""), 1500);
+    } catch (_) {
+      window.prompt("Copy this:", text);
+    }
   };
 
   const selectMethod = (methodId) => {
@@ -329,7 +340,10 @@ export default function AccountOverlay() {
                     ⚠️ Ilagay sa note ang iyong email address para makita namin na ikaw talaga ang nag-avail, and wait for our confirmation.
                   </p>
                   {profile?.email && (
-                    <p className="mt-1 break-all text-xs font-semibold text-slate-700 dark:text-slate-200">📧 {profile.email}</p>
+                    <div className="mt-1 flex items-center justify-center gap-2">
+                      <p className="break-all text-xs font-semibold text-slate-700 dark:text-slate-200">📧 {profile.email}</p>
+                      <button onClick={() => copyText("email", profile.email)} className="flex-shrink-0 rounded-full border border-slate-300 px-2.5 py-0.5 text-[11px] font-semibold text-slate-600 active:bg-slate-100 dark:border-slate-600 dark:text-slate-300">{copied === "email" ? "Copied ✓" : "Copy"}</button>
+                    </div>
                   )}
                 </div>
                 <img
@@ -337,9 +351,13 @@ export default function AccountOverlay() {
                   alt={`${activeMethod.label} QR code`}
                   className="mx-auto w-full max-w-[280px] rounded-xl border border-slate-100 dark:border-slate-700"
                 />
+                <a href={activeMethod.qr} download={activeMethod.id + "-qr.png"} className="mx-auto block w-fit rounded-full border border-slate-200 px-4 py-1.5 text-xs font-semibold text-slate-600 active:bg-slate-100 dark:border-slate-600 dark:text-slate-300">⬇️ Save QR (or take a screenshot)</a>
                 <div className="rounded-xl bg-amber-50 p-3 text-center dark:bg-amber-950/30">
                   <p className="text-xs text-slate-500 dark:text-slate-400">Reference Code — write it in the payment note</p>
-                  <p className="text-xl font-bold tracking-widest text-navy-900 dark:text-amber-400">{referenceCode}</p>
+                  <div className="flex items-center justify-center gap-2">
+                    <p className="text-xl font-bold tracking-widest text-navy-900 dark:text-amber-400">{referenceCode}</p>
+                    <button onClick={() => copyText("ref", referenceCode)} className="flex-shrink-0 rounded-full border border-slate-300 px-2.5 py-0.5 text-[11px] font-semibold text-slate-600 active:bg-slate-100 dark:border-slate-600 dark:text-slate-300">{copied === "ref" ? "Copied ✓" : "Copy"}</button>
+                  </div>
                 </div>
                 <p className="text-center text-xs leading-relaxed text-slate-500 dark:text-slate-400">
                   1. Scan the QR code with your {activeMethod.label} app.<br />

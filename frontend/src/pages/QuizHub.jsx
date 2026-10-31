@@ -5,6 +5,7 @@ import CustomQuizHub from "./CustomQuizHub";
 import IssuanceQuizHub from "./IssuanceQuizHub";
 import { ProgressCircle, QuizPlayView } from "../components/QuizShared";
 import { useAuth } from "../authContext";
+import { PROMO_PLAN } from "../payments";
 import { isRaLevelUnlocked } from "../access";
 import { getSubjectStats, resetSubjectProgress } from "../subjectQuizStore";
 import { getLastQuizPosition } from "../quizStore";
@@ -103,10 +104,10 @@ function RA10863Card({ expanded, onToggle, onContinue, onSelectTitle }) {
   );
 }
 
-export default function QuizHub({ onExit }) {
+export default function QuizHub({ onExit, limited = false }) {
   const [expandedCard, setExpandedCard] = useState(null);
   const [activeView, setActiveView] = useState(null);
-  const { profile } = useAuth();
+  const { profile, setOverlayOpen, setIntentPlanId } = useAuth();
 
   const toggleCard = (id) => setExpandedCard((prev) => (prev === id ? null : id));
   const backToHub = () => setActiveView(null);
@@ -139,6 +140,17 @@ export default function QuizHub({ onExit }) {
           <span className="text-sm font-semibold text-slate-500 dark:text-slate-400">📝 Quiz / Exam</span>
         </div>
       </div>
+      {limited && (
+        <div className="flex items-center justify-between gap-3 border-b border-gold-500/40 bg-gold-50 px-4 py-2 dark:bg-slate-900">
+          <p className="text-xs text-slate-600 dark:text-slate-300">🔓 Free preview: RA 10863 Level 1 + first 10 items per subject.</p>
+          <button
+            onClick={() => { setIntentPlanId(PROMO_PLAN.id); setOverlayOpen(true); }}
+            className="flex-shrink-0 rounded-full bg-navy-900 px-3 py-1.5 text-xs font-bold text-white active:bg-navy-800 dark:bg-navy-700"
+          >
+            Unlock all · ₱{PROMO_PLAN.price}
+          </button>
+        </div>
+      )}
       <div className="flex-1 overflow-y-auto overscroll-contain">
         {!activeView && (
           <div className="mx-auto grid max-w-2xl grid-cols-2 gap-3 p-4">
@@ -148,7 +160,7 @@ export default function QuizHub({ onExit }) {
               onContinue={handleContinueRA10863}
               onSelectTitle={() => setActiveView({ type: "ra10863-titles" })}
             />
-            <IssuanceQuizCard onOpen={() => setActiveView({ type: "issuance-quiz" })} />
+            {!limited && <IssuanceQuizCard onOpen={() => setActiveView({ type: "issuance-quiz" })} />}
             {["tl", "cdp", "pc", "tcp"].map((id) => (
               <SubjectCard key={id} subjectId={id} expanded={expandedCard === id} onToggle={() => toggleCard(id)} onPlay={handlePlaySubject} />
             ))}

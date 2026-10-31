@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef, useMemo, useContext, createContext } from "react";
+import { useState, useEffect, useCallback, useRef, useMemo, useContext, createContext, lazy, Suspense } from "react";
 import { createPortal } from "react-dom";
 import {
   getTitles, getChapter, getTitleTree, search,
@@ -17,10 +17,15 @@ import DevPanel from "./DevPanel";
 import QuizPage from "./QuizPage";
 import QuizHub from "./QuizHub";
 import AccountButton from "../components/AccountButton";
-import AdminPanel from "./AdminPanel";
+// Admin Panel: nilo-load lang kapag admin ang nagbukas (mas magaan ang unang load ng ibang user).
+const AdminPanel = lazy(() =>
+  import("./AdminPanel").catch(() => ({
+    default: () => <p className="p-6 text-center text-sm text-slate-500">Couldn't load the Admin Panel. Check your connection and try again.</p>,
+  }))
+);
 import { useAuth } from "../authContext";
 import { IssuanceSidebar, IssuanceReader } from "./IssuanceBrowser";
-import { ISSUANCE_KINDS, getIssuance } from "../issuancesStore";
+import { ISSUANCE_KINDS, getIssuance, getIssuanceProgress, saveIssuanceProgress } from "../issuancesStore";
 
 // Enrich nodes with hierarchy information for composite key lookup
 
@@ -903,7 +908,7 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
   const [resumeAvailable, setResumeAvailable] = useState(null);
   const [showTutorial, setShowTutorial] = useState(false);
   // Source = which library is open: "cmta" (existing), "cmo" or "cao"
-  const [source, setSource] = useState(() => (demo ? "cmta" : localStorage.getItem(SOURCE_KEY) || "cmta"));
+  const [source, setSource] = useState("cmta"); // laging home ang unang bukas; Continue buttons na ang bahala
   const [issuanceId, setIssuanceId] = useState(() => localStorage.getItem(ISSUANCE_KEY) || null);
   const mainRef = useRef(null);
   const pendingScrollRestore = useRef(null);
@@ -916,13 +921,58 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
   const issuanceTitle = currentIssuance && currentIssuance.type.toLowerCase() === source
     ? `${currentIssuance.label}${currentIssuance.title ? " — " + currentIssuance.title : ""}`
     : (ISSUANCE_KINDS.find((k) => k.id === source)?.full || "");
-  const openIssuance = useCallback((kind, id) => {
+  const openIssuance = useCallback((kind, id, scrollTo = 0) => {
     setSource(kind);
     setIssuanceId(id);
     setView("browse");
     setSidebarOpen(window.innerWidth >= 768);
+    // i-save agad kung ano ang binuksan para may Continue kahit hindi pa nag-scroll
+    saveIssuanceProgress(kind, { id, scrollTop: scrollTo });
     if (mainRef.current) mainRef.current.scrollTop = 0;
+    if (scrollTo > 0) {
+      const restore = () => { if (mainRef.current) mainRef.current.scrollTop = scrollTo; };
+      setTimeout(restore, 150);
+      setTimeout(restore, 450);
+    }
   }, []);
+
+  // ── Continue para sa CMO / CAO (kapareho ng CMTA) ──
+  const [issuanceResume, setIssuanceResume] = useState(() => ({ cmo: getIssuanceProgress("cmo"), cao: getIssuanceProgress("cao") }));
+  useEffect(() => {
+    setIssuanceResume({ cmo: getIssuanceProgress("cmo"), cao: getIssuanceProgress("cao") });
+  }, [source, view, issuanceId, chapterTree]);
+
+  const resumeIssuance = useCallback((kind) => {
+    const p = getIssuanceProgress(kind);
+    if (p) { openIssuance(kind, p.id, p.scrollTop || 0); return; }
+    // wala pang progress -> buksan ang listahan
+    setSource(kind);
+    setView("browse");
+    setSidebarOpen(true);
+  }, [openIssuance]);
+
+  // auto-save kung saan huling nag-scroll sa CMO / CAO
+  useEffect(() => {
+    if (view !== "browse" || !isIssuance || !issuanceId) return;
+    const cur = getIssuance(issuanceId);
+    if (!cur || cur.type.toLowerCase() !== source) return;
+    const el = mainRef.current;
+    if (!el) return;
+    let t = null;
+    const persist = () => saveIssuanceProgress(source, { id: issuanceId, scrollTop: el.scrollTop });
+    const onScroll = () => { clearTimeout(t); t = setTimeout(persist, 300); };
+    const onHide = () => { if (document.visibilityState === "hidden") { clearTimeout(t); persist(); } };
+    const onPageHide = () => { clearTimeout(t); persist(); };
+    el.addEventListener("scroll", onScroll, { passive: true });
+    document.addEventListener("visibilitychange", onHide);
+    window.addEventListener("pagehide", onPageHide);
+    return () => {
+      clearTimeout(t);
+      el.removeEventListener("scroll", onScroll);
+      document.removeEventListener("visibilitychange", onHide);
+      window.removeEventListener("pagehide", onPageHide);
+    };
+  }, [view, isIssuance, source, issuanceId]);
 
   useEffect(() => localStorage.setItem(MODE_KEY, mode), [mode]);
   useEffect(() => localStorage.setItem(FONT_KEY, String(fontScale)), [fontScale]);
@@ -1078,6 +1128,32 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
     }
   }, []);
 
+  const homeContinueItems = [
+    {
+      id: "cmta", icon: "⚖️", label: "Continue CMTA", has: !!resumeAvailable,
+      sub: resumeAvailable
+        ? (resumeAvailable.title_number ? "Title " + resumeAvailable.title_number + " · " : "") + "Chapter " + resumeAvailable.chapter_number
+        : "No progress yet — tap to pick a chapter",
+      onClick: () => {
+        if (resumeAvailable) resumeReading();
+        else { setSource("cmta"); setSidebarOpen(true); }
+      },
+    },
+    ...["cmo", "cao"].map((k) => {
+      const meta = ISSUANCE_KINDS.find((x) => x.id === k);
+      const p = issuanceResume[k];
+      const iss = p ? getIssuance(p.id) : null;
+      return {
+        id: k,
+        icon: meta ? meta.icon : "📜",
+        label: "Continue " + (meta ? meta.label : k.toUpperCase()),
+        has: !!iss,
+        sub: iss ? iss.label + (iss.title ? " — " + iss.title : "") : "No progress yet — tap to pick a " + k.toUpperCase(),
+        onClick: () => resumeIssuance(k),
+      };
+    }),
+  ];
+
   const highlightUIValue = useMemo(() => ({ activeHighlightNodeId, setActiveHighlightNodeId, setLastViewedNodeId }), [activeHighlightNodeId, setLastViewedNodeId]);
 
   return (
@@ -1183,7 +1259,7 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
                 <p className="text-sm">{error}</p>
               </div>
             )}
-            {view === "search" ? <SearchView onNavigateChapter={loadChapter} /> : view === "dev" && IS_DEV ? <DevPanel /> : view === "admin" && profile?.isAdmin ? <AdminPanel /> : view === "quiz" ? null : view === "settings" ? <SettingsView darkMode={darkMode} setDarkMode={setDarkMode} onReplayTutorial={replayTutorial} /> : isIssuance ? (
+            {view === "search" ? <SearchView onNavigateChapter={loadChapter} /> : view === "dev" && IS_DEV ? <DevPanel /> : view === "admin" && profile?.isAdmin ? <Suspense fallback={<p className="p-6 text-center text-sm text-slate-400">Loading…</p>}><AdminPanel /></Suspense> : view === "quiz" ? null : view === "settings" ? <SettingsView darkMode={darkMode} setDarkMode={setDarkMode} onReplayTutorial={replayTutorial} /> : isIssuance ? (
               <IssuanceReader kind={source} issuanceId={issuanceId} mode={mode} fontScale={fontScale} focusMode={focusMode} onOpenIssuance={(hit) => openIssuance(hit.type.toLowerCase(), hit.id)} />
             ) : (
               <>
@@ -1194,17 +1270,21 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
                 )}
                 {!loading && !chapterTree && !error && (
                   <div className="flex h-full flex-col items-center justify-center gap-3 px-6 text-center text-slate-400 dark:text-slate-600">
-                    {resumeAvailable && (
-                      <button onClick={resumeReading} className="mb-2 flex w-full max-w-sm items-center gap-3 rounded-2xl border border-navy-200 bg-white p-4 text-left shadow-card active:bg-slate-50 dark:border-navy-700 dark:bg-slate-900 dark:active:bg-slate-800">
-                        <span className="text-2xl" aria-hidden>⏱️</span>
-                        <span className="min-w-0">
-                          <span className="block text-sm font-semibold text-navy-900 dark:text-slate-100">Continue where you left off</span>
-                          <span className="block truncate text-xs text-slate-500 dark:text-slate-400">
-                            {resumeAvailable.title_number ? `Title ${resumeAvailable.title_number} · ` : ""}Chapter {resumeAvailable.chapter_number}
+                    <div className="mb-2 w-full max-w-sm space-y-2">
+                      {homeContinueItems.map((c) => (
+                        <button
+                          key={c.id}
+                          onClick={c.onClick}
+                          className={"flex w-full items-center gap-3 rounded-2xl border border-navy-200 bg-white p-4 text-left shadow-card active:bg-slate-50 dark:border-navy-700 dark:bg-slate-900 dark:active:bg-slate-800 " + (c.has ? "" : "opacity-70")}
+                        >
+                          <span className="text-2xl" aria-hidden>{c.icon}</span>
+                          <span className="min-w-0">
+                            <span className="block text-sm font-semibold text-navy-900 dark:text-slate-100">{c.label}</span>
+                            <span className="block truncate text-xs text-slate-500 dark:text-slate-400">{c.sub}</span>
                           </span>
-                        </span>
-                      </button>
-                    )}
+                        </button>
+                      ))}
+                    </div>
                     <span className="text-4xl">📖</span>
                     <p className="text-lg font-medium text-slate-500 dark:text-slate-400">Select a chapter to start {mode === "reading" ? "reading" : "studying"}</p>
                     <p className="text-sm">Use the menu button or Search to find what you need.</p>

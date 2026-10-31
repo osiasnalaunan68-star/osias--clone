@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { useAuth } from "../authContext";
 import ChapterBrowser from "../pages/ChapterBrowser";
-import { TRIAL_DAYS, DAY_MS, formatTimeLeft } from "../access";
+import QuizHub from "../pages/QuizHub";
+import { TRIAL_DAYS, DAY_MS, formatTimeLeft, formatDateShort, toMs } from "../access";
 import { PROMO_PLAN } from "../payments";
 
 const DEMO_SECONDS = 60;
@@ -129,7 +130,7 @@ function GuestWelcome({ step, setStep, onStartDemo }) {
 }
 
 // ── Paywall: tapos na ang trial, plans lang ang makikita ─────────────
-function Paywall() {
+function Paywall({ onFree }) {
   const { user, profile, signOutUser, setOverlayOpen, setIntentPlanId } = useAuth();
   // Promo purchases are saved in pendingPurchases, so read both lists.
   const pending = [...(profile?.pendingPurchases || []), ...(profile?.pendingAccess || [])]
@@ -169,9 +170,104 @@ function Paywall() {
           </button>
         </div>
 
+        {onFree && (
+          <button onClick={onFree} className="w-full rounded-xl border-2 border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-navy-900 active:bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100">
+            📝 Try the free practice questions
+            <span className="mt-0.5 block text-[11px] font-normal text-slate-500 dark:text-slate-400">RA 10863 Level 1 + the first 10 items of each subject</span>
+          </button>
+        )}
+
         <p className="text-center text-xs text-slate-400">Pay via GCash · Maya · MariBank. Payments are confirmed manually by the admin.</p>
         <button onClick={signOutUser} className="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-medium text-slate-500 dark:border-slate-600 dark:text-slate-300">Sign out</button>
       </div>
+    </div>
+  );
+}
+
+// ── Tapos na ang trial: paywall + libreng practice questions ─────────
+function ExpiredGate() {
+  const [free, setFree] = useState(false);
+  if (free) return <QuizHub limited onExit={() => setFree(false)} />;
+  return <Paywall onFree={() => setFree(true)} />;
+}
+
+// ── "Updated!" kapag nadagdagan ang access (hal. na-approve ni admin ang bayad) ──
+function UnlockToast() {
+  const { user, profile } = useAuth();
+  const exp = profile && profile.appAccess ? toMs(profile.appAccess.expiresAt) || 0 : 0;
+  const seen = useRef(null);
+  const [msg, setMsg] = useState(null);
+
+  useEffect(() => { seen.current = null; }, [user ? user.uid : null]);
+
+  useEffect(() => {
+    if (!profile) return;
+    if (seen.current === null) { seen.current = exp; return; }
+    if (exp > seen.current && exp > Date.now()) setMsg("🎉 Your access was updated! Valid until " + formatDateShort(exp));
+    seen.current = exp;
+  }, [exp, profile]);
+
+  useEffect(() => {
+    if (!msg) return;
+    const id = setTimeout(() => setMsg(null), 9000);
+    return () => clearTimeout(id);
+  }, [msg]);
+
+  if (!msg) return null;
+  return (
+    <div className="pointer-events-none fixed inset-x-0 top-0 z-[70] flex justify-center px-4" style={{ paddingTop: "calc(env(safe-area-inset-top) + 12px)" }}>
+      <button onClick={() => setMsg(null)} className="pointer-events-auto rounded-2xl bg-emerald-600 px-4 py-3 text-sm font-semibold text-white shadow-xl">{msg}</button>
+    </div>
+  );
+}
+
+// ── Paalala sa renewal: access <7 araw o trial <1 araw ang natitira ──
+function RenewBanner() {
+  const { user, access, overlayOpen, setOverlayOpen, setIntentPlanId } = useAuth();
+  const [, setTick] = useState(0);
+  const uid = user ? user.uid : null;
+  const kind = !access ? null
+    : access.state === "paid" && access.msLeft < 7 * DAY_MS ? "paid"
+    : access.state === "trial" && access.msLeft < DAY_MS ? "trial" : null;
+  if (!uid || !kind || overlayOpen) return null;
+  const KEY = "cuble_renew_dismiss_" + uid;
+  let last = 0;
+  try { last = Number(localStorage.getItem(KEY)) || 0; } catch (_) {}
+  if (Date.now() - last < 12 * 60 * 60 * 1000) return null;
+  const open = () => { setIntentPlanId(PROMO_PLAN.id); setOverlayOpen(true); };
+  const later = () => { try { localStorage.setItem(KEY, String(Date.now())); } catch (_) {} setTick((n) => n + 1); };
+  return (
+    <div className="fixed inset-x-3 z-[45] mx-auto max-w-md rounded-2xl border border-gold-500 bg-white p-3 shadow-xl dark:bg-slate-800" style={{ bottom: "calc(env(safe-area-inset-bottom) + 76px)" }}>
+      <p className="text-sm font-semibold text-navy-900 dark:text-slate-100">
+        {kind === "paid" ? "⏳ Your access ends in " : "🎁 Your free trial ends in "}{formatTimeLeft(access.msLeft)}
+      </p>
+      <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
+        {kind === "paid" ? "Renew early and your remaining days are kept." : "Get All Access and keep studying without interruption."}
+      </p>
+      <div className="mt-2 flex gap-2">
+        <button onClick={open} className="flex-1 rounded-xl bg-navy-900 py-2 text-sm font-semibold text-white active:bg-navy-800 dark:bg-navy-700">
+          {kind === "paid" ? "Renew" : "Get All Access"} · ₱{PROMO_PLAN.price}
+        </button>
+        <button onClick={later} className="rounded-xl border border-slate-200 px-4 py-2 text-sm font-medium text-slate-500 dark:border-slate-600 dark:text-slate-300">Later</button>
+      </div>
+    </div>
+  );
+}
+
+// ── "Offline" pill ───────────────────────────────────────────────────
+function OfflinePill() {
+  const [online, setOnline] = useState(() => typeof navigator === "undefined" || navigator.onLine !== false);
+  useEffect(() => {
+    const on = () => setOnline(true);
+    const off = () => setOnline(false);
+    window.addEventListener("online", on);
+    window.addEventListener("offline", off);
+    return () => { window.removeEventListener("online", on); window.removeEventListener("offline", off); };
+  }, []);
+  if (online) return null;
+  return (
+    <div className="pointer-events-none fixed inset-x-0 z-[60] flex justify-center" style={{ top: "calc(env(safe-area-inset-top) + 4px)" }}>
+      <span className="rounded-full bg-slate-800/90 px-3 py-1 text-[11px] font-semibold text-white shadow dark:bg-slate-100/90 dark:text-navy-900">📴 Offline · saved content still works</span>
     </div>
   );
 }
@@ -192,6 +288,17 @@ function AccessPill({ access }) {
 }
 
 export default function AccessGate() {
+  return (
+    <>
+      <AccessGateInner />
+      <UnlockToast />
+      <RenewBanner />
+      <OfflinePill />
+    </>
+  );
+}
+
+function AccessGateInner() {
   const { user, profile, loading, signingIn, needsFullName, deviceLimitReached, access, overlayOpen, setOverlayOpen } = useAuth();
   const [demo, setDemo] = useState(null);
   const [guestStep, setGuestStep] = useState(0);
@@ -210,7 +317,7 @@ export default function AccessGate() {
 
   if (!profile || needsFullName || deviceLimitReached) return <Splash text="Finishing your account setup…" />;
   if (access.state === "loading") return <Splash text="Checking your trial…" />;
-  if (access.state === "expired") return <Paywall />;
+  if (access.state === "expired") return <ExpiredGate />;
 
   return (
     <>

@@ -1,18 +1,18 @@
 import { useState, useEffect, useMemo } from "react";
-import { collection, getDocs, doc, updateDoc, arrayUnion, deleteField, Timestamp, runTransaction } from "firebase/firestore";
+import { collection, getDocs, doc, updateDoc, arrayUnion, deleteField, Timestamp, runTransaction, writeBatch } from "firebase/firestore";
 import { db } from "../firebase";
 import AdminOverview from "./AdminOverview";
 import { SUBJECT_LABELS, PAYMENT_METHODS, PROMO_PLAN } from "../payments";
 import {
   TRIAL_DAYS, DAY_MS, serverNow, getTrialInfo, getAppAccessInfo,
-  getAccess, addMonths, formatTimeLeft, formatDateShort,
-  stackAccess, computeGrant, computePromoGrant, getSubjectInfo, SUBJECT_TERM_MONTHS,
+  getAccess, formatTimeLeft, formatDateShort, getSubjectInfo,
 } from "../access";
 
+// Admin-only. One bundle now (PROMO_PLAN = All Access, ₱{price} / {days} days),
+// so there is no more per-subject admin UI — granting/removing App Access also
+// carries the subject flags along (see restartAccess / manualGrant below).
 const SUBJECT_CODES = ["CL", "CDP", "TL", "PC", "TCP"];
-// Admin-only: manual "+N mo" App Access buttons, and months for old
-// App Access requests that may still be waiting in pendingAccess.
-const MANUAL_GRANT_MONTHS = [1, 3, 8];
+// Months for old App Access requests that may still be waiting in pendingAccess.
 const LEGACY_ACCESS_MONTHS = { M1: 1, M3: 3, M8: 8 };
 const METHOD_LABELS = Object.fromEntries(PAYMENT_METHODS.map((m) => [m.id, m.label]));
 const ALL_PLAN_LABELS = { ...SUBJECT_LABELS, [PROMO_PLAN.id]: PROMO_PLAN.label };
@@ -52,13 +52,6 @@ function accessKey(u) {
   return a.state;
 }
 
-// RA 10863 (CL) status: "paid" = active (lifetime or not expired), "expired", or "none".
-function clAccessKey(u) {
-  const s = getSubjectInfo(u, "CL");
-  if (!s.owned) return "none";
-  return s.active ? "paid" : "expired";
-}
-
 function StateChip({ u }) {
   const key = accessKey(u);
   const a = getAccess(u);
@@ -76,8 +69,8 @@ export default function AdminPanel() {
   const [busyKey, setBusyKey] = useState(null);
   const [tab, setTab] = useState("overview");
   const [trialFilter, setTrialFilter] = useState("all");
-  const [clFilter, setClFilter] = useState("all");
-  const [migMsg, setMigMsg] = useState("");
+  const [monthsInput, setMonthsInput] = useState({}); // uid -> typed string
+  const [bulkBusy, setBulkBusy] = useState(false);
 
   const loadUsers = async () => {
     setError(null);
@@ -86,10 +79,12 @@ export default function AdminPanel() {
       const list = snap.docs.map((d) => ({ uid: d.id, ...d.data() }));
       list.sort((a, b) => (a.fullName || a.email || "").localeCompare(b.fullName || b.email || ""));
       setUsers(list);
+      return list;
     } catch (err) {
       console.warn("AdminPanel load failed:", err);
       setError(err?.message || String(err));
       setUsers([]);
+      return [];
     }
   };
 
@@ -147,54 +142,15 @@ export default function AdminPanel() {
     }
   };
 
-  // ── Practice questions ──────────────────────────────────────────────
-  // Manual unlock/remove. Unlocking grants the standard term (3 months, 4 for CL) from now;
-  // removing clears the subject flag and its expiry.
-  const toggleSubject = async (u, code) => {
-    const owned = !!u.subscriptions?.[code];
-    const key = u.uid + ":" + code;
-    if (owned) {
-      if (!window.confirm("Remove " + code + " from " + (u.fullName || u.email) + "?")) return;
-      const exp = { ...(u.subscriptionExpiry || {}) };
-      delete exp[code];
-      await run(
-        key, u,
-        { ["subscriptions." + code]: false, ["subscriptionExpiry." + code]: deleteField() },
-        { subscriptions: { ...u.subscriptions, [code]: false }, subscriptionExpiry: exp }
-      );
-      return;
-    }
-    const months = SUBJECT_TERM_MONTHS[code] || 3;
-    if (!window.confirm("Unlock " + code + " for " + months + " months for " + (u.fullName || u.email) + "?")) return;
-    const expiresAt = addMonths(serverNow(), months);
-    await txn(key, u, (d) => {
-      const remaining = (d.pendingPurchases || []).filter((p) => !((p.subjects || []).length === 1 && p.subjects[0] === code));
-      return {
-        write: { ["subscriptions." + code]: true, ["subscriptionExpiry." + code]: expiresAt, pendingPurchases: remaining },
-        patch: { subscriptions: { ...(d.subscriptions || {}), [code]: true }, subscriptionExpiry: { ...(d.subscriptionExpiry || {}), [code]: expiresAt }, pendingPurchases: remaining },
-      };
-    });
-  };
-
-  // Admin extension: +N months on an expiring subject. Lifetime subjects are never touched.
-  const extendSubject = async (u, code, months) => {
-    const s = getSubjectInfo(u, code);
-    if (!s.owned || s.lifetime) return;
-    const expiresAt = addMonths(s.active ? s.expiresAt : serverNow(), months);
-    await run(
-      u.uid + ":" + code, u,
-      { ["subscriptionExpiry." + code]: expiresAt },
-      { subscriptionExpiry: { ...(u.subscriptionExpiry || {}), [code]: expiresAt } }
-    );
-  };
-
   const setTriage = (u, status) =>
     run(u.uid + ":triage", u, { triageStatus: status }, { triageStatus: status });
 
+  // ── Pending — All Access promo purchases (pendingPurchases) ──────────
   const approvePractice = async (u, p) => {
     const plan = p.plan === PROMO_PLAN.id ? PROMO_PLAN : undefined;
-    const diff = plan && plan.price !== p.price ? "⚠️ Price mismatch: the user paid ₱" + p.price + " but the plan is now ₱" + plan.price + " (older app version). " : "";
-    if (!window.confirm(diff + "Approve " + (ALL_PLAN_LABELS[p.plan] || p.plan) + " ₱" + p.price + " for " + (u.fullName || u.email) + "?")) return;
+    if (!plan) { alert("Unknown plan: " + p.plan + ". Nothing was changed."); return; }
+    const diff = plan.price !== p.price ? "⚠️ Price mismatch: the user paid ₱" + p.price + " but the plan is now ₱" + plan.price + " (older app version). " : "";
+    if (!window.confirm(diff + "Approve " + plan.label + " ₱" + p.price + " for " + (u.fullName || u.email) + "?")) return;
     const ref = doc(db, "users", u.uid);
     setBusyKey(u.uid + ":pp:" + p.referenceCode);
     try {
@@ -207,38 +163,40 @@ export default function AdminPanel() {
         const pending = (d.pendingPurchases || []).some((x) => x.referenceCode === p.referenceCode);
         if (done || !pending) return null;
         const now = serverNow();
-        const subjects = p.subjects || (plan ? plan.subjects : []);
-        const term = plan ? plan.months : (subjects.length === 1 ? (SUBJECT_TERM_MONTHS[subjects[0]] || 3) : 6);
-        const isPromo = !!plan && plan.kind === "promo";
-        const g = isPromo ? computePromoGrant(d, plan, now) : computeGrant(d, { subjects, months: term }, now);
+        const days = plan.days || 30;
+        const span = days * DAY_MS;
         const remaining = (d.pendingPurchases || []).filter((x) => x.referenceCode !== p.referenceCode);
+
+        const subsPatch = {};
+        const expPatch = { ...(d.subscriptionExpiry || {}) };
         const upd = {
           pendingPurchases: remaining,
           triageStatus: "subscribed",
-          paymentHistory: arrayUnion({ kind: "practice", plan: p.plan, price: p.price, method: p.method, referenceCode: p.referenceCode, approvedAt: now, months: term, ...(isPromo ? { days: plan.days } : {}) }),
+          paymentHistory: arrayUnion({ kind: "practice", plan: p.plan, price: p.price, method: p.method, referenceCode: p.referenceCode, approvedAt: now, days }),
         };
-        const subsPatch = {};
-        const expPatch = { ...(d.subscriptionExpiry || {}) };
-        subjects.forEach((c) => { upd["subscriptions." + c] = true; subsPatch[c] = true; });
-        Object.keys(g.subjectExpiry).forEach((c) => {
-          upd["subscriptionExpiry." + c] = g.subjectExpiry[c];
-          expPatch[c] = g.subjectExpiry[c];
+        plan.subjects.forEach((code) => {
+          const info = getSubjectInfo(d, code, now);
+          if (info.lifetime) return; // never shorten a legacy lifetime subject
+          const base = info.active ? info.expiresAt : now;
+          const end = base + span;
+          upd["subscriptions." + code] = true;
+          upd["subscriptionExpiry." + code] = end;
+          subsPatch[code] = true;
+          expPatch[code] = end;
         });
+
+        const curApp = getAppAccessInfo(d, now);
+        const appExpiresAt = (curApp.active ? curApp.expiresAt : now) + span;
+        upd.appAccess = { plan: p.plan, expiresAt: appExpiresAt };
+        upd.appAccessHistory = arrayUnion({ plan: p.plan, price: 0, referenceCode: p.referenceCode, method: "practice-purchase", approvedAt: now, expiresAt: appExpiresAt, days });
+
         const patch = {
           pendingPurchases: remaining,
           triageStatus: "subscribed",
           subscriptions: { ...(d.subscriptions || {}), ...subsPatch },
           subscriptionExpiry: expPatch,
+          appAccess: upd.appAccess,
         };
-        if (g.appExpiresAt) {
-          upd.appAccess = { plan: p.plan, expiresAt: g.appExpiresAt };
-          upd.appAccessHistory = arrayUnion({ plan: p.plan, price: 0, referenceCode: p.referenceCode, method: "practice-purchase", approvedAt: now, expiresAt: g.appExpiresAt, months: term + g.bonusMonths, ...(isPromo ? { days: plan.days } : {}) });
-          patch.appAccess = upd.appAccess;
-        }
-        if (g.bonusFlag) {
-          upd["bonuses.threeSubjects"] = now;
-          patch.bonuses = { ...(d.bonuses || {}), threeSubjects: now };
-        }
         tx.update(ref, upd);
         return patch;
       });
@@ -268,11 +226,15 @@ export default function AdminPanel() {
     const now = serverNow();
     await txn(u.uid + ":acc", u, (d) => {
       if (pendingItem && !(d.pendingAccess || []).some((x) => x.referenceCode === pendingItem.referenceCode)) return null;
-      const expiresAt = stackAccess(d, plan.months, now);
-      const appAccess = { plan: plan.id, expiresAt };
+      const cur = getAppAccessInfo(d, now);
+      const expiresAt = (cur.active ? cur.expiresAt : now);
+      const base = new Date(expiresAt);
+      base.setMonth(base.getMonth() + plan.months);
+      const newExpiresAt = base.getTime();
+      const appAccess = { plan: plan.id, expiresAt: newExpiresAt };
       const write = {
         appAccess,
-        appAccessHistory: arrayUnion({ plan: plan.id, price: plan.price, referenceCode: pendingItem ? pendingItem.referenceCode : "MANUAL", method: pendingItem ? pendingItem.method : "manual", approvedAt: now, expiresAt }),
+        appAccessHistory: arrayUnion({ plan: plan.id, price: plan.price, referenceCode: pendingItem ? pendingItem.referenceCode : "MANUAL", method: pendingItem ? pendingItem.method : "manual", approvedAt: now, expiresAt: newExpiresAt }),
       };
       const patch = { appAccess };
       if (pendingItem) {
@@ -292,14 +254,121 @@ export default function AdminPanel() {
     await grantAccess(u, plan, p);
   };
 
+  // Typeable manual grant: admin types any whole number of months.
   const manualGrant = async (u, months) => {
     if (!window.confirm("Give " + (u.fullName || u.email) + " " + months + " month(s) of App Access?")) return;
     await grantAccess(u, { id: "M" + months, months, price: 0 }, null);
   };
 
+  const doManualGrant = (u) => {
+    const raw = (monthsInput[u.uid] ?? "").trim();
+    const months = Math.floor(Number(raw));
+    if (!raw || !Number.isFinite(months) || months <= 0) {
+      alert("Type a whole number of months (1 or more) first.");
+      return;
+    }
+    manualGrant(u, months);
+  };
+
+  // Restart: resets App Access + all All-Access subjects to EXACTLY 30 days from
+  // now, replacing any remaining time (does not stack). Legacy lifetime subjects
+  // are left untouched.
+  const restartAccess = async (u) => {
+    if (!window.confirm("Restart " + (u.fullName || u.email) + " to a fresh " + PROMO_PLAN.days + " days? Any remaining time will be replaced, not added to.")) return;
+    await txn(u.uid + ":acc", u, (d) => {
+      const now = serverNow();
+      const expiresAt = now + PROMO_PLAN.days * DAY_MS;
+      const subsPatch = {};
+      const expPatch = { ...(d.subscriptionExpiry || {}) };
+      const write = {
+        appAccess: { plan: PROMO_PLAN.id, expiresAt },
+        appAccessHistory: arrayUnion({ plan: PROMO_PLAN.id, price: 0, referenceCode: "MANUAL-RESTART", method: "manual-restart", approvedAt: now, expiresAt, days: PROMO_PLAN.days }),
+      };
+      PROMO_PLAN.subjects.forEach((code) => {
+        const info = getSubjectInfo(d, code, now);
+        if (info.lifetime) return;
+        write["subscriptions." + code] = true;
+        write["subscriptionExpiry." + code] = expiresAt;
+        subsPatch[code] = true;
+        expPatch[code] = expiresAt;
+      });
+      const patch = {
+        appAccess: write.appAccess,
+        subscriptions: { ...(d.subscriptions || {}), ...subsPatch },
+        subscriptionExpiry: expPatch,
+      };
+      return { write, patch };
+    });
+  };
+
   const removeAccess = async (u) => {
     if (!window.confirm("Remove App Access for " + (u.fullName || u.email) + "?")) return;
     await run(u.uid + ":acc", u, { appAccess: deleteField() }, { appAccess: undefined });
+  };
+
+  // Bulk restart: every currently-paid (active App Access) user, one click.
+  // Same rule as the per-user Restart: exactly PROMO_PLAN.days from now,
+  // REPLACES remaining time (does not stack), never touches admins or
+  // legacy lifetime subjects. Uses batched writes (not transactions) since
+  // this can touch many docs at once; each user's own race window is small
+  // because we reload fresh data right before computing who is eligible.
+  const restartAllPaid = async () => {
+    if (bulkBusy || busyKey) return;
+    setBulkBusy(true);
+    try {
+      const fresh = await loadUsers();
+      const now = serverNow();
+      const expiresAt = now + PROMO_PLAN.days * DAY_MS;
+      const eligible = fresh.filter((u) => !u.isAdmin && getAppAccessInfo(u, now).active);
+
+      if (eligible.length === 0) {
+        alert("Walang currently-paid user na ire-restart.");
+        return;
+      }
+      if (!window.confirm(
+        "Restart " + eligible.length + " paid user(s) to exactly " + PROMO_PLAN.days + " days from now?\n\n" +
+        "Papalitan ang natitirang oras nila (hindi idadagdag). Legacy lifetime subjects ay hindi magagalaw. " +
+        "Trial-only, expired, at admin accounts ay hindi kasama."
+      )) return;
+
+      const CHUNK = 450; // margin under Firestore's 500-write batch limit
+      const patches = {};
+      for (let i = 0; i < eligible.length; i += CHUNK) {
+        const slice = eligible.slice(i, i + CHUNK);
+        const batch = writeBatch(db);
+        slice.forEach((u) => {
+          const write = {
+            appAccess: { plan: PROMO_PLAN.id, expiresAt },
+            appAccessHistory: arrayUnion({ plan: PROMO_PLAN.id, price: 0, referenceCode: "BULK-RESTART", method: "manual-restart", approvedAt: now, expiresAt, days: PROMO_PLAN.days }),
+          };
+          const subsPatch = {};
+          const expPatch = { ...(u.subscriptionExpiry || {}) };
+          PROMO_PLAN.subjects.forEach((code) => {
+            const info = getSubjectInfo(u, code, now);
+            if (info.lifetime) return;
+            write["subscriptions." + code] = true;
+            write["subscriptionExpiry." + code] = expiresAt;
+            subsPatch[code] = true;
+            expPatch[code] = expiresAt;
+          });
+          batch.update(doc(db, "users", u.uid), write);
+          patches[u.uid] = {
+            appAccess: write.appAccess,
+            subscriptions: { ...(u.subscriptions || {}), ...subsPatch },
+            subscriptionExpiry: expPatch,
+          };
+        });
+        await batch.commit();
+      }
+
+      setUsers((prev) => prev.map((u) => (patches[u.uid] ? { ...u, ...patches[u.uid] } : u)));
+      alert("✅ Na-restart ang " + eligible.length + " paid user(s) sa " + PROMO_PLAN.days + " days.");
+    } catch (err) {
+      console.warn("restartAllPaid failed:", err);
+      alert("May problema: " + (err?.message || err));
+    } finally {
+      setBulkBusy(false);
+    }
   };
 
   const rejectAccess = async (u, p) => {
@@ -335,28 +404,17 @@ export default function AdminPanel() {
     return writeTrial(u, 0);
   };
 
-  // (The RA 10863 free trial is retired. Level 1 is free for everyone instead.)
-
   // ── Derived lists ───────────────────────────────────────────────────
-  const practicePending = useMemo(() => {
+  // All pending payments (promo purchases + any leftover legacy App Access
+  // requests) in one combined list — there is only one bundle now.
+  const pendingRows = useMemo(() => {
     const rows = [];
-    filtered.forEach((u) => (u.pendingPurchases || []).forEach((p) => rows.push({ u, p })));
+    filtered.forEach((u) => {
+      (u.pendingPurchases || []).forEach((p) => rows.push({ u, p, kind: "practice" }));
+      (u.pendingAccess || []).forEach((p) => rows.push({ u, p, kind: "access" }));
+    });
     return rows.sort((a, b) => (a.p.requestedAt || 0) - (b.p.requestedAt || 0));
   }, [filtered]);
-
-  const accessPending = useMemo(() => {
-    const rows = [];
-    filtered.forEach((u) => (u.pendingAccess || []).forEach((p) => rows.push({ u, p })));
-    return rows.sort((a, b) => (a.p.requestedAt || 0) - (b.p.requestedAt || 0));
-  }, [filtered]);
-
-  const activeSubscribers = useMemo(
-    () =>
-      filtered
-        .filter((u) => getAppAccessInfo(u).exists)
-        .sort((a, b) => getAppAccessInfo(a).expiresAt - getAppAccessInfo(b).expiresAt),
-    [filtered, users]
-  );
 
   const trialRows = useMemo(() => {
     return filtered.filter((u) => {
@@ -370,16 +428,8 @@ export default function AdminPanel() {
     });
   }, [filtered, trialFilter, users]);
 
-  const clRows = useMemo(() => {
-    return filtered.filter((u) => {
-      const k = clAccessKey(u);
-      if (clFilter === "all") return true;
-      return k === clFilter;
-    });
-  }, [filtered, clFilter, users]);
-
-  const rawPracticeCount = (users || []).reduce((n, u) => n + (u.pendingPurchases || []).length, 0);
-  const rawAccessCount = (users || []).reduce((n, u) => n + (u.pendingAccess || []).length, 0);
+  const rawPendingCount = (users || []).reduce((n, u) => n + (u.pendingPurchases || []).length + (u.pendingAccess || []).length, 0);
+  const paidCount = useMemo(() => (users || []).filter((u) => !u.isAdmin && getAppAccessInfo(u).active).length, [users]);
 
   // Users whose App Access or any subject ends within 7 days.
   // Computed from the users already loaded, so it costs no extra Firestore reads.
@@ -415,17 +465,16 @@ export default function AdminPanel() {
   const TABS = [
     { id: "overview", label: "📊 Overview" },
     { id: "users", label: "👥 Users" },
-    { id: "practice", label: "💳 Practice", count: rawPracticeCount },
-    { id: "access", label: "⏱ Access", count: rawAccessCount },
+    { id: "pending", label: "💳 Pending", count: rawPendingCount },
     { id: "expiring", label: "⏳ Expiring", count: expiringRows.length },
     { id: "trial", label: "🎁 Trial" },
-    { id: "cl", label: "📜 RA 10863" },
   ];
 
   const btn = "min-h-[34px] rounded-full px-3 py-1.5 text-xs font-semibold transition-colors disabled:opacity-50 ";
   const btnGhost = btn + "border border-slate-200 text-slate-600 active:bg-slate-100 dark:border-slate-600 dark:text-slate-300 dark:active:bg-slate-700";
   const btnGreen = btn + "bg-emerald-600 text-white active:bg-emerald-700";
   const btnRed = btn + "border border-red-200 text-red-600 active:bg-red-50 dark:border-red-800 dark:text-red-400";
+  const inputCls = "w-16 rounded-lg border border-slate-200 px-2 py-1.5 text-center text-xs font-semibold dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100";
 
   const PendingCard = ({ u, p, onApprove, onReject, approveLabel }) => (
     <div className="rounded-xl border border-amber-200 bg-amber-50 p-3 dark:border-amber-900 dark:bg-amber-950/20">
@@ -447,7 +496,7 @@ export default function AdminPanel() {
       <div>
         <h1 className="text-2xl font-bold text-navy-900 dark:text-slate-50">👑 Admin Panel</h1>
         <p className="text-sm text-slate-500 dark:text-slate-400">
-          Practice Questions and App Access have separate pending lists, and Trial has its own panel.
+          One All Access bundle (₱{PROMO_PLAN.price} · {PROMO_PLAN.days} days) — grant months, restart to {PROMO_PLAN.days} days, or approve pending payments below.
         </p>
       </div>
 
@@ -492,15 +541,24 @@ export default function AdminPanel() {
       )}
 
       {/* ───────────── USERS ───────────── */}
-
-
       {tab === "users" && users !== null && !error && (
         <div className="space-y-3">
+          <div className="rounded-xl border-2 border-gold-400 bg-gold-50 p-3 dark:border-gold-600 dark:bg-slate-800/60">
+            <p className="text-sm font-semibold text-navy-900 dark:text-slate-100">🔁 Restart ALL paid users</p>
+            <p className="mt-0.5 text-xs text-slate-600 dark:text-slate-400">
+              One click: resets App Access + All Access subjects of every currently-paid user to exactly {PROMO_PLAN.days} days from now. Replaces remaining time (hindi idinadagdag). Hindi kasama ang trial-only, expired, o admin accounts. Lifetime subjects untouched. Hindi apektado ng search box sa itaas.
+            </p>
+            <button onClick={restartAllPaid} disabled={bulkBusy || !!busyKey} className={btnGreen + " mt-2"}>
+              {bulkBusy ? "Restarting…" : "↺ Restart " + PROMO_PLAN.days + "d for all paid (" + paidCount + ")"}
+            </button>
+          </div>
+
           {filtered.length === 0 && <p className="py-8 text-center text-slate-400">No users found.</p>}
           {filtered.map((u) => {
             const triage = defaultTriage(u);
             const t = TRIAGE[triage] || TRIAGE.none;
             const app = getAppAccessInfo(u);
+            const busy = busyKey === u.uid + ":acc" || bulkBusy;
             return (
               <div key={u.uid} className="rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-700 dark:bg-slate-800">
                 <div className="flex items-start justify-between gap-2">
@@ -513,45 +571,6 @@ export default function AdminPanel() {
                     {t.label}
                   </span>
                 </div>
-
-                <div className="mt-3 flex flex-wrap gap-1.5">
-                  {SUBJECT_CODES.map((code) => {
-                    const si = getSubjectInfo(u, code);
-                    const busy = busyKey === u.uid + ":" + code;
-                    const tone = si.active
-                      ? "bg-emerald-600 text-white active:bg-emerald-700 "
-                      : si.owned
-                        ? "bg-amber-100 text-amber-800 active:bg-amber-200 dark:bg-amber-950/40 dark:text-amber-300 "
-                        : "bg-slate-100 text-slate-600 active:bg-slate-200 dark:bg-slate-900/40 dark:text-slate-300 ";
-                    return (
-                      <button
-                        key={code}
-                        onClick={() => toggleSubject(u, code)}
-                        disabled={busy}
-                        title={SUBJECT_LABELS[code]}
-                        className={btn + tone}
-                      >
-                        {code} {si.active ? (si.lifetime ? "∞" : "✓") : si.owned ? "⏳" : "✕"}
-                      </button>
-                    );
-                  })}
-                </div>
-
-                {SUBJECT_CODES.some((c) => u.subscriptions?.[c]) && (
-                  <div className="mt-2 space-y-1">
-                    {SUBJECT_CODES.filter((c) => u.subscriptions?.[c]).map((c) => {
-                      const si = getSubjectInfo(u, c);
-                      return (
-                        <div key={c} className="flex items-center justify-between gap-2 text-xs text-slate-500 dark:text-slate-400">
-                          <span>{c} · {si.lifetime ? "Lifetime" : (si.active ? "until " : "expired ") + formatDateShort(si.expiresAt)}</span>
-                          {!si.lifetime && (
-                            <button onClick={() => extendSubject(u, c, 1)} disabled={busyKey === u.uid + ":" + c} className={btnGhost}>+1 mo</button>
-                          )}
-                        </div>
-                      );
-                    })}
-                  </div>
-                )}
 
                 <div className="mt-3 flex gap-1.5">
                   {Object.entries(TRIAGE).map(([status, cfg]) => (
@@ -568,7 +587,7 @@ export default function AdminPanel() {
 
                 <div className="mt-3 border-t border-slate-100 pt-3 dark:border-slate-700">
                   <div className="mb-2 flex items-center justify-between gap-2">
-                    <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">App Access</p>
+                    <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">All Access</p>
                     <StateChip u={u} />
                   </div>
                   {app.exists && (
@@ -576,11 +595,20 @@ export default function AdminPanel() {
                       {app.active ? "Until " : "Ended on "}{formatDateShort(app.expiresAt)}
                     </p>
                   )}
-                  <div className="flex flex-wrap gap-1.5">
-                    {MANUAL_GRANT_MONTHS.map((m) => (
-                      <button key={m} onClick={() => manualGrant(u, m)} disabled={busyKey === u.uid + ":acc"} className={btnGhost}>+{m} mo</button>
-                    ))}
-                    {app.exists && <button onClick={() => removeAccess(u)} disabled={busyKey === u.uid + ":acc"} className={btnRed}>Remove</button>}
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    <input
+                      type="number"
+                      min="1"
+                      inputMode="numeric"
+                      value={monthsInput[u.uid] ?? ""}
+                      onChange={(e) => setMonthsInput((prev) => ({ ...prev, [u.uid]: e.target.value }))}
+                      placeholder="mo"
+                      aria-label="Months to grant"
+                      className={inputCls}
+                    />
+                    <button onClick={() => doManualGrant(u)} disabled={busy} className={btnGhost}>＋ Grant</button>
+                    <button onClick={() => restartAccess(u)} disabled={busy} className={btnGreen}>↺ Restart {PROMO_PLAN.days}d</button>
+                    {app.exists && <button onClick={() => removeAccess(u)} disabled={busy} className={btnRed}>Remove</button>}
                   </div>
                 </div>
               </div>
@@ -589,60 +617,34 @@ export default function AdminPanel() {
         </div>
       )}
 
-      {/* ───────────── PRACTICE PENDING ───────────── */}
-      {tab === "practice" && users !== null && !error && (
+      {/* ───────────── PENDING ───────────── */}
+      {tab === "pending" && users !== null && !error && (
         <div className="space-y-3">
-          <p className="text-sm font-semibold text-navy-900 dark:text-slate-100">💳 Pending — Practice Questions ({practicePending.length})</p>
-          {practicePending.length === 0 && <p className="py-8 text-center text-slate-400">No pending practice payments. 🎉</p>}
-          {practicePending.map(({ u, p }) => (
-            <PendingCard
-              key={u.uid + p.referenceCode}
-              u={u}
-              p={p}
-              approveLabel="✅ Approve"
-              onApprove={() => approvePractice(u, p)}
-              onReject={() => rejectPractice(u, p)}
-            />
-          ))}
-        </div>
-      )}
-
-      {/* ───────────── ACCESS PENDING ───────────── */}
-      {tab === "access" && users !== null && !error && (
-        <div className="space-y-3">
-          <p className="text-sm font-semibold text-navy-900 dark:text-slate-100">⏱ Pending — App Access ({accessPending.length})</p>
-          {accessPending.length === 0 && <p className="py-6 text-center text-slate-400">No pending App Access payments. 🎉</p>}
-          {accessPending.map(({ u, p }) => {
-            const months = LEGACY_ACCESS_MONTHS[p.plan];
+          <p className="text-sm font-semibold text-navy-900 dark:text-slate-100">⏳ Pending approvals ({pendingRows.length})</p>
+          {pendingRows.length === 0 && <p className="py-8 text-center text-slate-400">No pending payments. 🎉</p>}
+          {pendingRows.map(({ u, p, kind }) => {
+            if (kind === "access") {
+              const months = LEGACY_ACCESS_MONTHS[p.plan];
+              return (
+                <PendingCard
+                  key={u.uid + p.referenceCode}
+                  u={u}
+                  p={p}
+                  approveLabel={"✅ Approve " + (months ? months + " mo" : "")}
+                  onApprove={() => approveAccess(u, p)}
+                  onReject={() => rejectAccess(u, p)}
+                />
+              );
+            }
             return (
               <PendingCard
                 key={u.uid + p.referenceCode}
                 u={u}
                 p={p}
-                approveLabel={"✅ Approve " + (months ? months + " mo" : "")}
-                onApprove={() => approveAccess(u, p)}
-                onReject={() => rejectAccess(u, p)}
+                approveLabel="✅ Approve"
+                onApprove={() => approvePractice(u, p)}
+                onReject={() => rejectPractice(u, p)}
               />
-            );
-          })}
-
-          <p className="pt-3 text-sm font-semibold text-navy-900 dark:text-slate-100">Active App Access ({activeSubscribers.length})</p>
-          {activeSubscribers.length === 0 && <p className="py-4 text-center text-sm text-slate-400">No one has App Access yet.</p>}
-          {activeSubscribers.map((u) => {
-            const app = getAppAccessInfo(u);
-            return (
-              <div key={u.uid} className="flex items-center justify-between gap-2 rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-slate-800">
-                <div className="min-w-0">
-                  <p className="truncate text-sm font-semibold text-navy-900 dark:text-slate-100">{u.fullName || u.email}</p>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">
-                    {app.active ? formatTimeLeft(app.msLeft) + " left · until " : "Ended on "}{formatDateShort(app.expiresAt)}
-                  </p>
-                </div>
-                <div className="flex flex-shrink-0 gap-1.5">
-                  <button onClick={() => manualGrant(u, 1)} disabled={busyKey === u.uid + ":acc"} className={btnGhost}>+1 mo</button>
-                  <button onClick={() => removeAccess(u)} disabled={busyKey === u.uid + ":acc"} className={btnRed}>✕</button>
-                </div>
-              </div>
             );
           })}
         </div>
@@ -681,50 +683,6 @@ export default function AdminPanel() {
                   <button onClick={() => extendTrial(u, 1)} disabled={busyKey === u.uid + ":trial"} className={btnGhost}>+1 day</button>
                   <button onClick={() => extendTrial(u, 3)} disabled={busyKey === u.uid + ":trial"} className={btnGhost}>+3 days</button>
                   {tr.exists && tr.active && <button onClick={() => endTrial(u)} disabled={busyKey === u.uid + ":trial"} className={btnRed}>End</button>}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      )}
-
-      {/* ───────────── RA 10863 (CL) + EXPIRING ───────────── */}
-      {tab === "cl" && users !== null && !error && (
-        <div className="space-y-3">
-          <p className="text-xs text-slate-500 dark:text-slate-400">
-            Level 1 is free for everyone. Levels 2–5 unlock with the All Access promo (₱{PROMO_PLAN.price}, {PROMO_PLAN.days} days). Old lifetime owners stay unlocked.
-          </p>
-          <div className="flex flex-wrap gap-1.5">
-            {[["all", "All"], ["paid", "Unlocked"], ["expired", "Expired"], ["none", "Not purchased"]].map(([id, label]) => (
-              <button key={id} onClick={() => setClFilter(id)} className={"rounded-full border px-3 py-1 text-xs font-semibold " + (clFilter === id ? "border-navy-900 bg-navy-900 text-white dark:border-slate-100 dark:bg-slate-100 dark:text-navy-900" : "border-slate-200 text-slate-500 dark:border-slate-700 dark:text-slate-400")}>
-                {label}
-              </button>
-            ))}
-          </div>
-          <p className="text-xs text-slate-400">{clRows.length} user(s)</p>
-
-          {clRows.map((u) => {
-            const cs = getSubjectInfo(u, "CL");
-            return (
-              <div key={u.uid} className="rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-slate-800">
-                <div className="flex items-start justify-between gap-2">
-                  <div className="min-w-0">
-                    <p className="truncate text-sm font-semibold text-navy-900 dark:text-slate-100">{u.fullName || "(no name)"}</p>
-                    <p className="truncate text-xs text-slate-400">{u.email}</p>
-                  </div>
-                  <span className={"rounded-full px-2 py-0.5 text-[11px] font-semibold " + (cs.active ? "bg-purple-100 text-purple-700 dark:bg-purple-950/40 dark:text-purple-300" : cs.owned ? "bg-amber-100 text-amber-800 dark:bg-amber-950/40 dark:text-amber-300" : "bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400")}>
-                    {cs.active ? (cs.lifetime ? "♾️ Lifetime" : "👑 Active") : cs.owned ? "⏳ Expired" : "Not purchased"}
-                  </span>
-                </div>
-                {cs.owned && !cs.lifetime && (
-                  <p className="mt-1.5 text-xs text-slate-500 dark:text-slate-400">
-                    {cs.active ? "Active until " : "Expired on "}{formatDateTime(cs.expiresAt)}
-                  </p>
-                )}
-                <div className="mt-2 flex flex-wrap gap-1.5">
-                  {!cs.owned && <button onClick={() => toggleSubject(u, "CL")} disabled={busyKey === u.uid + ":CL"} className={btnGhost + " border-purple-300 text-purple-700 dark:border-purple-700 dark:text-purple-300"}>👑 Unlock CL (4 mo)</button>}
-                  {cs.owned && !cs.lifetime && <button onClick={() => extendSubject(u, "CL", 1)} disabled={busyKey === u.uid + ":CL"} className={btnGhost}>+1 mo</button>}
-                  {cs.owned && <button onClick={() => toggleSubject(u, "CL")} disabled={busyKey === u.uid + ":CL"} className={btnRed}>Remove</button>}
                 </div>
               </div>
             );

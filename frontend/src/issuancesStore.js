@@ -355,3 +355,27 @@ SHAPE EXAMPLE (structure only — replace all content)
 
 OFFICIAL TEXT (the only source of truth):
 `;
+
+// ── Continue / resume progress para sa CMO at CAO ────────────────────
+const ISSUANCE_PROGRESS_KEY = "customsLaw_issuanceProgress";
+
+function readIssuanceProgressAll() {
+  try { return JSON.parse(localStorage.getItem(ISSUANCE_PROGRESS_KEY) || "{}") || {}; } catch { return {}; }
+}
+
+// kind = "cmo" | "cao"  ->  { id, scrollTop, saved_at }
+export function saveIssuanceProgress(kind, data) {
+  try {
+    const all = readIssuanceProgressAll();
+    all[kind] = { ...(all[kind] || {}), ...data, saved_at: new Date().toISOString() };
+    localStorage.setItem(ISSUANCE_PROGRESS_KEY, JSON.stringify(all));
+  } catch {}
+}
+
+export function getIssuanceProgress(kind) {
+  const p = readIssuanceProgressAll()[kind];
+  if (!p || !p.id) return null;
+  const iss = getIssuance(p.id);
+  if (!iss || iss.type.toLowerCase() !== kind) return null;
+  return p;
+}
