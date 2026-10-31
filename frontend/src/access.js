@@ -13,11 +13,7 @@ export const DAY_MS = 24 * 60 * 60 * 1000;
 // false = everyone (except admin) needs a trial / App Access.
 export const PRACTICE_BUYERS_KEEP_APP_ACCESS = false;
 
-export const ACCESS_PLANS = [
-  { id: "M1", kind: "access", months: 1, label: "App Access — 1 Month", price: 50, subjects: [] },
-  { id: "M3", kind: "access", months: 3, label: "App Access — 3 Months", price: 139, subjects: [] },
-  { id: "M8", kind: "access", months: 8, label: "App Access — 8 Months", price: 380, subjects: [] },
-];
+
 
 // ── Server clock ─────────────────────────────────────────────────────
 // We do not trust the phone's clock. When online we read the Firestore server

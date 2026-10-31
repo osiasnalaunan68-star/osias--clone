@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { useAuth } from "../authContext";
 import ChapterBrowser from "../pages/ChapterBrowser";
-import { ACCESS_PLANS, TRIAL_DAYS, DAY_MS, formatTimeLeft } from "../access";
-import { PLANS, PROMO_MODE, PROMO_PLAN } from "../payments";
+import { TRIAL_DAYS, DAY_MS, formatTimeLeft } from "../access";
+import { PROMO_PLAN } from "../payments";
 
 const DEMO_SECONDS = 60;
 
@@ -131,7 +131,9 @@ function GuestWelcome({ step, setStep, onStartDemo }) {
 // ── Paywall: tapos na ang trial, plans lang ang makikita ─────────────
 function Paywall() {
   const { user, profile, signOutUser, setOverlayOpen, setIntentPlanId } = useAuth();
-  const pending = profile?.pendingAccess || [];
+  // Promo purchases are saved in pendingPurchases, so read both lists.
+  const pending = [...(profile?.pendingPurchases || []), ...(profile?.pendingAccess || [])]
+    .sort((a, b) => (a.requestedAt || 0) - (b.requestedAt || 0));
 
   const choose = (plan) => {
     setIntentPlanId(plan.id);
@@ -144,7 +146,7 @@ function Paywall() {
         <div className="text-center">
           <span className="text-4xl" aria-hidden>⏳</span>
           <h1 className="mt-2 text-xl font-bold text-navy-900 dark:text-slate-50">Your free trial has ended</h1>
-          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{PROMO_MODE ? "Get the All Access promo to continue. It is the only plan available right now." : "Choose an App Access plan to continue."} {user?.email}</p>
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Get the All Access promo to continue. It is the only plan available right now. {user?.email}</p>
         </div>
 
         {pending.length > 0 && (
@@ -154,44 +156,17 @@ function Paywall() {
         )}
 
         <div className="space-y-2">
-          {PROMO_MODE && (
-            <button onClick={() => choose(PROMO_PLAN)} className="w-full rounded-2xl border-2 border-gold-500 bg-gold-50 px-4 py-4 text-left active:opacity-80 dark:border-gold-400 dark:bg-slate-900">
-              <span className="flex items-center justify-between gap-3">
-                <span>
-                  <span className="block text-base font-extrabold text-navy-900 dark:text-slate-100">🔥 {PROMO_PLAN.label}</span>
-                  <span className="mt-1 block text-xs text-slate-600 dark:text-slate-300">{PROMO_PLAN.tagline}</span>
-                  <span className="mt-1 block text-xs text-slate-600 dark:text-slate-300">Unlocks everything: RA 10863 (all levels) · CDP · TL · PC · TCP + full App Access</span>
-                  <span className="mt-1 block text-xs font-semibold text-gold-600 dark:text-gold-400">⏳ Valid for {PROMO_PLAN.days} days only</span>
-                </span>
-                <span className="text-3xl font-extrabold text-navy-900 dark:text-slate-50">₱{PROMO_PLAN.price}</span>
-              </span>
-            </button>
-          )}
-          {(PROMO_MODE ? [] : ACCESS_PLANS).map((p) => {
-            const best = p.months === 8;
-            return (
-              <button key={p.id} onClick={() => choose(p)} className={"flex w-full items-center justify-between rounded-2xl border-2 px-4 py-3 text-left active:opacity-80 " + (best ? "border-gold-500 bg-gold-50 dark:border-gold-400 dark:bg-slate-900" : "border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-900")}>
-                <span>
-                  <span className="block text-base font-bold text-navy-900 dark:text-slate-100">{p.months} {p.months === 1 ? "Month" : "Months"}</span>
-                  <span className="block text-xs text-slate-500 dark:text-slate-400">₱{(p.price / p.months).toFixed(0)}/month{best ? " · Best value" : ""}</span>
-                </span>
-                <span className="text-2xl font-extrabold text-navy-900 dark:text-slate-50">₱{p.price}</span>
-              </button>
-            );
-          })}
-        </div>
-
-        <div className="space-y-2">
-          <p className={(PROMO_MODE ? "hidden " : "") + "px-1 text-xs font-semibold uppercase tracking-wide text-slate-400"}>Bundle — practice questions + App Access</p>
-          {(PROMO_MODE ? [] : PLANS.filter((p) => p.bonusMonths)).map((p) => (
-            <button key={p.id} onClick={() => choose(p)} className="flex w-full items-center justify-between rounded-2xl border-2 border-gold-500 bg-gold-50 px-4 py-3 text-left active:opacity-80 dark:border-gold-400 dark:bg-slate-900">
+          <button onClick={() => choose(PROMO_PLAN)} className="w-full rounded-2xl border-2 border-gold-500 bg-gold-50 px-4 py-4 text-left active:opacity-80 dark:border-gold-400 dark:bg-slate-900">
+            <span className="flex items-center justify-between gap-3">
               <span>
-                <span className="block text-base font-bold text-navy-900 dark:text-slate-100">{p.label}</span>
-                <span className="block text-xs text-slate-500 dark:text-slate-400">{p.subjects.map((c) => (c === "CL" ? "RA 10863" : c)).join(" · ")} · {p.months} months + {p.bonusMonths} months App Access</span>
+                <span className="block text-base font-extrabold text-navy-900 dark:text-slate-100">🔥 {PROMO_PLAN.label}</span>
+                <span className="mt-1 block text-xs text-slate-600 dark:text-slate-300">{PROMO_PLAN.tagline}</span>
+                <span className="mt-1 block text-xs text-slate-600 dark:text-slate-300">Unlocks everything: RA 10863 (all levels) · CDP · TL · PC · TCP + full App Access</span>
+                <span className="mt-1 block text-xs font-semibold text-gold-600 dark:text-gold-400">⏳ Valid for {PROMO_PLAN.days} days only</span>
               </span>
-              <span className="text-2xl font-extrabold text-navy-900 dark:text-slate-50">₱{p.price}</span>
-            </button>
-          ))}
+              <span className="text-3xl font-extrabold text-navy-900 dark:text-slate-50">₱{PROMO_PLAN.price}</span>
+            </span>
+          </button>
         </div>
 
         <p className="text-center text-xs text-slate-400">Pay via GCash · Maya · MariBank. Payments are confirmed manually by the admin.</p>

@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { PLANS } from "../payments";
+import { SUBJECT_LABELS } from "../payments";
 import { getAccess, serverNow, toMs, DAY_MS, getSubjectInfo } from "../access";
 
 // Admin Overview — read-only dashboard. Walang bagong Firestore read/write:
@@ -227,12 +227,11 @@ export default function AdminOverview({ users }) {
           <div className="space-y-3">
             <p className={"text-sm font-semibold " + t("text-navy-900", "dark:text-slate-100")}>Practice subscribers per subject</p>
             {SUBJECT_CODES.map((code) => {
-              const plan = PLANS.find((p) => p.id === code);
               return (
                 <Bar
                   key={code}
                   label={code}
-                  sub={plan ? plan.label : ""}
+                  sub={SUBJECT_LABELS[code] || ""}
                   value={s.subjects[code]}
                   max={maxSubject}
                   barClass={barNavy}

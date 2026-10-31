@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../authContext";
-import { PLANS, PAYMENT_METHODS, PROMO_MODE, PROMO_PLAN, generateReferenceCode, submitPendingPurchase } from "../payments";
-import { ACCESS_PLANS, TRIAL_DAYS, DAY_MS, THREE_SUBJECT_BONUS, countActiveSubjects, getSubjectInfo, getClTrialInfo, formatTimeLeft, formatDateShort } from "../access";
+import { PAYMENT_METHODS, PROMO_PLAN, generateReferenceCode, submitPendingPurchase } from "../payments";
+import { TRIAL_DAYS, getSubjectInfo, getClTrialInfo, formatTimeLeft, formatDateShort } from "../access";
 
 const SUBJECT_LABELS = { CL: "RA 10863 (CMTA)", TL: "Tariff Law", CDP: "Customs Documentation & Procedures", PC: "Practical Computations", TCP: "Tariff Commission Primer" };
 
@@ -48,7 +48,7 @@ export default function AccountOverlay() {
   // Galing sa Paywall: diretso sa payment method ng napiling plan.
   useEffect(() => {
     if (!overlayOpen || !intentPlanId || !user || !profile) return;
-    const plan = [...PLANS, ...ACCESS_PLANS, PROMO_PLAN].find((p) => p.id === intentPlanId);
+    const plan = intentPlanId === PROMO_PLAN.id ? PROMO_PLAN : null;
     setIntentPlanId(null);
     if (!plan) return;
     setSelectedPlan(plan);
@@ -106,21 +106,10 @@ export default function AccountOverlay() {
     }
   };
 
-  const ownedCount = countActiveSubjects(profile);
-  const bonusDone = !!profile?.bonuses?.threeSubjects;
   const clTrial = getClTrialInfo(profile);
-  const bundlePlan = PLANS.find((p) => p.id === "BUNDLE");
-  const allInPlan = PLANS.find((p) => p.id === "ALL");
-  const bundleOwned = !!bundlePlan && bundlePlan.subjects.every((c) => getSubjectInfo(profile, c).active);
-  // The all-in bundle only makes sense if TCP is not active and the 4-subject bundle is not fully owned.
-  const showAllIn = !!allInPlan && !getSubjectInfo(profile, "TCP").active && !bundleOwned;
   const activeMethod = PAYMENT_METHODS.find((m) => m.id === selectedMethod) || null;
   const planNote = selectedPlan
-    ? selectedPlan.kind === "promo"
-      ? "All Access · everything unlocked · valid for " + selectedPlan.days + " days"
-      : selectedPlan.kind === "access"
-      ? selectedPlan.months + (selectedPlan.months === 1 ? " month" : " months") + " of App Access"
-      : "Valid for " + selectedPlan.months + " months · includes " + selectedPlan.months + " months of App Access"
+    ? "All Access · everything unlocked · valid for " + selectedPlan.days + " days"
     : "";
 
   return (
@@ -219,73 +208,36 @@ export default function AccountOverlay() {
               <p className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-slate-400">Practice Questions</p>
               <div className="space-y-1.5">
                 {Object.keys(SUBJECT_LABELS).map((code) => {
-                  const plan = PLANS.find((p) => p.id === code);
                   const info = getSubjectInfo(profile, code);
                   let status;
                   if (info.active) status = info.lifetime ? "♾️ Lifetime access" : "Active until " + formatDateShort(info.expiresAt) + " · " + formatTimeLeft(info.msLeft) + " left";
                   else if (info.owned) status = "⏳ Expired on " + formatDateShort(info.expiresAt);
                   else if (code === "CL") status = clTrial.active ? "🎁 Trial: " + formatTimeLeft(clTrial.msLeft) + " left" : "Level 1 free · Levels 2–5 locked";
                   else status = "First 10 items free";
-                  const canRenew = !PROMO_MODE && (!info.active || (!info.lifetime && info.msLeft < 14 * DAY_MS));
                   return (
                     <div key={code} className="flex items-center justify-between rounded-lg bg-slate-50 px-3 py-2 text-sm dark:bg-slate-900/40">
                       <span className="min-w-0 pr-2">
                         <span className="block text-slate-600 dark:text-slate-300">{SUBJECT_LABELS[code]}</span>
                         <span className={"block text-[11px] " + (info.active ? "text-emerald-600 dark:text-emerald-400" : "text-slate-400")}>{status}</span>
                       </span>
-                      {canRenew ? (
-                        <button
-                          onClick={() => startPurchase(plan)}
-                          className="flex-shrink-0 rounded-lg bg-navy-900 px-3 py-1.5 text-xs font-semibold text-white active:bg-navy-800 dark:bg-navy-700"
-                        >
-                          {info.owned ? "Renew" : "Subscribe"} ₱{plan.price}
-                          <span className="block text-[10px] font-normal opacity-80">{plan.months} months</span>
-                        </button>
+                      {info.active ? (
+                        <span className="flex-shrink-0 font-medium text-emerald-600 dark:text-emerald-400">Unlocked</span>
                       ) : (
-                        info.active ? (
-                          <span className="flex-shrink-0 font-medium text-emerald-600 dark:text-emerald-400">Unlocked</span>
-                        ) : (
-                          <span className="flex-shrink-0 text-xs font-medium text-slate-400">🔒 Locked</span>
-                        )
+                        <span className="flex-shrink-0 text-xs font-medium text-slate-400">🔒 Locked</span>
                       )}
                     </div>
                   );
                 })}
               </div>
-              <p className={(PROMO_MODE ? "hidden " : "") + "mt-2 rounded-lg bg-slate-50 px-3 py-2 text-xs text-slate-500 dark:bg-slate-900/40 dark:text-slate-400"}>
-                🎯 Own {THREE_SUBJECT_BONUS.count} active subjects = +{THREE_SUBJECT_BONUS.months} months App Access ({Math.min(ownedCount, THREE_SUBJECT_BONUS.count)}/{THREE_SUBJECT_BONUS.count}){bonusDone ? " · ✅ claimed" : ""}
-                <br />
-                Each subject lasts 3 months (RA 10863: 4 months) with the same length of App Access. Renew early and your remaining days are kept.
-              </p>
-              {PROMO_MODE && (
-                <button
-                  onClick={() => startPurchase(PROMO_PLAN)}
-                  className="mt-2 w-full rounded-xl border-2 border-gold-500 bg-navy-900 px-3 py-3 text-center text-white active:bg-navy-800 dark:bg-navy-700"
-                >
-                  <span className="block text-sm font-extrabold">🔥 {PROMO_PLAN.label} — ₱{PROMO_PLAN.price}</span>
-                  <span className="mt-1 block text-[11px] font-normal opacity-90">{PROMO_PLAN.tagline}</span>
-                  <span className="mt-1 block text-[11px] font-normal opacity-90">Unlocks EVERYTHING: RA 10863 (all 5 levels) · CDP · TL · PC · TCP + full App Access</span>
-                  <span className="mt-1 block text-[11px] font-semibold text-gold-400">⏳ Valid for {PROMO_PLAN.days} days only</span>
-                </button>
-              )}
-              {!PROMO_MODE && !bundleOwned && bundlePlan && (
-                <button
-                  onClick={() => startPurchase(bundlePlan)}
-                  className="mt-2 w-full rounded-lg border-2 border-gold-500 bg-gold-50 px-3 py-2 text-xs font-semibold text-navy-900 active:bg-gold-100 dark:border-gold-400 dark:bg-slate-900/40 dark:text-gold-400"
-                >
-                  🎁 {bundlePlan.label} ₱{bundlePlan.price} · {bundlePlan.months} months
-                  <span className="mt-0.5 block text-[11px] font-normal opacity-80">RA 10863 · CDP · TL · PC · includes {bundlePlan.bonusMonths} months App Access</span>
-                </button>
-              )}
-              {!PROMO_MODE && showAllIn && (
-                <button
-                  onClick={() => startPurchase(allInPlan)}
-                  className="mt-2 w-full rounded-lg border-2 border-gold-500 bg-navy-900 px-3 py-2 text-xs font-semibold text-white active:bg-navy-800 dark:bg-navy-700"
-                >
-                  👑 {allInPlan.label} ₱{allInPlan.price} · {allInPlan.months} months
-                  <span className="mt-0.5 block text-[11px] font-normal opacity-80">RA 10863 · CDP · TL · PC · TCP · includes {allInPlan.bonusMonths} months App Access</span>
-                </button>
-              )}
+              <button
+                onClick={() => startPurchase(PROMO_PLAN)}
+                className="mt-2 w-full rounded-xl border-2 border-gold-500 bg-navy-900 px-3 py-3 text-center text-white active:bg-navy-800 dark:bg-navy-700"
+              >
+                <span className="block text-sm font-extrabold">🔥 {PROMO_PLAN.label} — ₱{PROMO_PLAN.price}</span>
+                <span className="mt-1 block text-[11px] font-normal opacity-90">{PROMO_PLAN.tagline}</span>
+                <span className="mt-1 block text-[11px] font-normal opacity-90">Unlocks EVERYTHING: RA 10863 (all 5 levels) · CDP · TL · PC · TCP + full App Access</span>
+                <span className="mt-1 block text-[11px] font-semibold text-gold-400">⏳ Valid for {PROMO_PLAN.days} days only</span>
+              </button>
             </div>
 
             <div>
@@ -295,7 +247,7 @@ export default function AccountOverlay() {
                 {access?.state === "member" && <span>✅ Access active (practice subscriber)</span>}
                 {access?.state === "paid" && <span>✅ Active until {formatDateShort(access.app.expiresAt)} ({formatTimeLeft(access.msLeft)} left)</span>}
                 {access?.state === "trial" && <span>🎁 Free trial: {formatTimeLeft(access.msLeft)} left</span>}
-                {(access?.state === "expired" || access?.state === "loading") && <span>⏳ Your trial has ended. {PROMO_MODE ? "Get the Promo bundle above." : "Choose a plan below."}</span>}
+                {(access?.state === "expired" || access?.state === "loading") && <span>⏳ Your trial has ended. Get the Promo bundle above.</span>}
               </div>
               {(profile?.pendingAccess || []).length > 0 && (
                 <p className="mb-2 rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-800 dark:bg-amber-950/20 dark:text-amber-300">
@@ -307,20 +259,7 @@ export default function AccountOverlay() {
                   ⏳ Practice payment pending ({profile.pendingPurchases[profile.pendingPurchases.length - 1].referenceCode}) — waiting for confirmation.
                 </p>
               )}
-              {!PROMO_MODE && access && access.state !== "admin" && access.state !== "member" && (
-                <div className="grid grid-cols-3 gap-1.5">
-                  {ACCESS_PLANS.map((p) => (
-                    <button
-                      key={p.id}
-                      onClick={() => startPurchase(p)}
-                      className="rounded-lg border border-slate-200 px-2 py-2 text-center text-xs font-semibold text-navy-900 active:bg-slate-100 dark:border-slate-600 dark:text-slate-100 dark:active:bg-slate-700"
-                    >
-                      {p.months} {p.months === 1 ? "month" : "months"}
-                      <span className="block text-sm font-bold">₱{p.price}</span>
-                    </button>
-                  ))}
-                </div>
-              )}
+
             </div>
 
             <div>

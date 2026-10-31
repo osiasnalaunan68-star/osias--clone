@@ -2,22 +2,20 @@ import { useState, useEffect, useMemo } from "react";
 import { collection, getDocs, doc, updateDoc, arrayUnion, deleteField, Timestamp, runTransaction } from "firebase/firestore";
 import { db } from "../firebase";
 import AdminOverview from "./AdminOverview";
-import { PLANS, PAYMENT_METHODS, CL_PRICE, PROMO_PLAN } from "../payments";
+import { SUBJECT_LABELS, PAYMENT_METHODS, PROMO_PLAN } from "../payments";
 import {
-  ACCESS_PLANS, TRIAL_DAYS, DAY_MS, serverNow, getTrialInfo, getAppAccessInfo,
+  TRIAL_DAYS, DAY_MS, serverNow, getTrialInfo, getAppAccessInfo,
   getAccess, addMonths, formatTimeLeft, formatDateShort,
   stackAccess, computeGrant, computePromoGrant, getSubjectInfo, SUBJECT_TERM_MONTHS,
 } from "../access";
 
 const SUBJECT_CODES = ["CL", "CDP", "TL", "PC", "TCP"];
-const SUBJECT_LABELS = {
-  CL: "RA 10863 (CMTA)",
-  ...Object.fromEntries(
-    PLANS.filter((p) => p.id !== "BUNDLE" && p.id !== "ALL").map((p) => [p.id, p.label])
-  ),
-};
+// Admin-only: manual "+N mo" App Access buttons, and months for old
+// App Access requests that may still be waiting in pendingAccess.
+const MANUAL_GRANT_MONTHS = [1, 3, 8];
+const LEGACY_ACCESS_MONTHS = { M1: 1, M3: 3, M8: 8 };
 const METHOD_LABELS = Object.fromEntries(PAYMENT_METHODS.map((m) => [m.id, m.label]));
-const ALL_PLAN_LABELS = Object.fromEntries([...PLANS, ...ACCESS_PLANS, PROMO_PLAN].map((p) => [p.id, p.label]));
+const ALL_PLAN_LABELS = { ...SUBJECT_LABELS, [PROMO_PLAN.id]: PROMO_PLAN.label };
 
 const TRIAGE = {
   pending: { label: "Pending", dot: "bg-amber-500", chip: "border-amber-300 text-amber-700 dark:border-amber-700 dark:text-amber-400" },
@@ -144,7 +142,7 @@ export default function AdminPanel() {
     const months = SUBJECT_TERM_MONTHS[code] || 3;
     if (!window.confirm("Unlock " + code + " for " + months + " months for " + (u.fullName || u.email) + "?")) return;
     const expiresAt = addMonths(serverNow(), months);
-    const remaining = (u.pendingPurchases || []).filter((p) => !(p.subjects || []).includes(code));
+    const remaining = (u.pendingPurchases || []).filter((p) => !((p.subjects || []).length === 1 && p.subjects[0] === code));
     await run(
       key, u,
       { ["subscriptions." + code]: true, ["subscriptionExpiry." + code]: expiresAt, pendingPurchases: remaining },
@@ -168,7 +166,7 @@ export default function AdminPanel() {
     run(u.uid + ":triage", u, { triageStatus: status }, { triageStatus: status });
 
   const approvePractice = async (u, p) => {
-    const plan = PLANS.find((x) => x.id === p.plan) || (p.plan === PROMO_PLAN.id ? PROMO_PLAN : undefined);
+    const plan = p.plan === PROMO_PLAN.id ? PROMO_PLAN : undefined;
     const diff = plan && plan.price !== p.price ? "⚠️ Price mismatch: the user paid ₱" + p.price + " but the plan is now ₱" + plan.price + " (older app version). " : "";
     if (!window.confirm(diff + "Approve " + (ALL_PLAN_LABELS[p.plan] || p.plan) + " ₱" + p.price + " for " + (u.fullName || u.email) + "?")) return;
     const ref = doc(db, "users", u.uid);
@@ -254,16 +252,16 @@ export default function AdminPanel() {
   };
 
   const approveAccess = async (u, p) => {
-    const plan = ACCESS_PLANS.find((x) => x.id === p.plan);
-    if (!plan) { alert("Unknown plan: " + p.plan); return; }
-    const diff = plan.price !== p.price ? "⚠️ Price mismatch: the user paid ₱" + p.price + " but the plan is now ₱" + plan.price + ". " : "";
-    if (!window.confirm(diff + "Approve " + plan.months + " month(s) (₱" + plan.price + ") for " + (u.fullName || u.email) + "?")) return;
+    const months = LEGACY_ACCESS_MONTHS[p.plan];
+    if (!months) { alert("Unknown plan: " + p.plan); return; }
+    const plan = { id: p.plan, months, price: Number(p.price) || 0 };
+    if (!window.confirm("Approve " + months + " month(s) (₱" + plan.price + ") for " + (u.fullName || u.email) + "?")) return;
     await grantAccess(u, plan, p);
   };
 
-  const manualGrant = async (u, plan) => {
-    if (!window.confirm("Give " + (u.fullName || u.email) + " " + plan.months + " month(s) of App Access?")) return;
-    await grantAccess(u, plan, null);
+  const manualGrant = async (u, months) => {
+    if (!window.confirm("Give " + (u.fullName || u.email) + " " + months + " month(s) of App Access?")) return;
+    await grantAccess(u, { id: "M" + months, months, price: 0 }, null);
   };
 
   const removeAccess = async (u) => {
@@ -542,8 +540,8 @@ export default function AdminPanel() {
                     </p>
                   )}
                   <div className="flex flex-wrap gap-1.5">
-                    {ACCESS_PLANS.map((p) => (
-                      <button key={p.id} onClick={() => manualGrant(u, p)} disabled={busyKey === u.uid + ":acc"} className={btnGhost}>+{p.months} mo</button>
+                    {MANUAL_GRANT_MONTHS.map((m) => (
+                      <button key={m} onClick={() => manualGrant(u, m)} disabled={busyKey === u.uid + ":acc"} className={btnGhost}>+{m} mo</button>
                     ))}
                     {app.exists && <button onClick={() => removeAccess(u)} disabled={busyKey === u.uid + ":acc"} className={btnRed}>Remove</button>}
                   </div>
@@ -578,13 +576,13 @@ export default function AdminPanel() {
           <p className="text-sm font-semibold text-navy-900 dark:text-slate-100">⏱ Pending — App Access ({accessPending.length})</p>
           {accessPending.length === 0 && <p className="py-6 text-center text-slate-400">No pending App Access payments. 🎉</p>}
           {accessPending.map(({ u, p }) => {
-            const plan = ACCESS_PLANS.find((x) => x.id === p.plan);
+            const months = LEGACY_ACCESS_MONTHS[p.plan];
             return (
               <PendingCard
                 key={u.uid + p.referenceCode}
                 u={u}
                 p={p}
-                approveLabel={"✅ Approve " + (plan ? plan.months + " mo" : "")}
+                approveLabel={"✅ Approve " + (months ? months + " mo" : "")}
                 onApprove={() => approveAccess(u, p)}
                 onReject={() => rejectAccess(u, p)}
               />
@@ -604,7 +602,7 @@ export default function AdminPanel() {
                   </p>
                 </div>
                 <div className="flex flex-shrink-0 gap-1.5">
-                  <button onClick={() => manualGrant(u, ACCESS_PLANS[0])} disabled={busyKey === u.uid + ":acc"} className={btnGhost}>+1 mo</button>
+                  <button onClick={() => manualGrant(u, 1)} disabled={busyKey === u.uid + ":acc"} className={btnGhost}>+1 mo</button>
                   <button onClick={() => removeAccess(u)} disabled={busyKey === u.uid + ":acc"} className={btnRed}>✕</button>
                 </div>
               </div>
@@ -657,7 +655,7 @@ export default function AdminPanel() {
       {tab === "cl" && users !== null && !error && (
         <div className="space-y-3">
           <p className="text-xs text-slate-500 dark:text-slate-400">
-            Level 1 is free for everyone. Levels 2–5 unlock with RA 10863 (₱{CL_PRICE}, 4 months). Old lifetime owners stay unlocked.
+            Level 1 is free for everyone. Levels 2–5 unlock with the All Access promo (₱{PROMO_PLAN.price}, {PROMO_PLAN.days} days). Old lifetime owners stay unlocked.
           </p>
           <div className="flex flex-wrap gap-1.5">
             {[["all", "All"], ["paid", "Unlocked"], ["expired", "Expired"], ["none", "Not purchased"]].map(([id, label]) => (
