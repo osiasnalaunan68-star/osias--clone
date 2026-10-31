@@ -46,6 +46,28 @@ function shortDate(ms) {
   }
 }
 
+function ago(ms, now) {
+  if (!ms) return "never";
+  const m = Math.floor((now - ms) / 60000);
+  if (m < 1) return "just now";
+  if (m < 60) return m + "m ago";
+  const h = Math.floor(m / 60);
+  if (h < 24) return h + "h ago";
+  return Math.floor(h / 24) + "d ago";
+}
+
+const CHIP_SLATE = "bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300";
+const CHIP_PAID = "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300";
+const STATUS_CHIP = {
+  paid: ["Paid", CHIP_PAID],
+  member: ["Paid", CHIP_PAID],
+  trial: ["Trial", "bg-sky-100 text-sky-700 dark:bg-sky-900/30 dark:text-sky-300"],
+  expired: ["Ended", CHIP_SLATE],
+  none: ["No trial", CHIP_SLATE],
+};
+
+const NEW_FILTERS = [["24h", "24 hrs", 1], ["7d", "7 days", 7], ["30d", "30 days", 30], ["all", "All", null]];
+
 function compute(users) {
   const now = serverNow();
   const members = users.filter((u) => !u.isAdmin);
@@ -95,18 +117,18 @@ function compute(users) {
     if (spent > 0) { revenue += spent; payers++; }
   });
 
-  const recent = members
-    .map((u) => ({ u, created: toMs(u.createdAt) }))
-    .filter((r) => r.created)
-    .sort((a, b) => b.created - a.created)
-    .slice(0, 5);
+  // Lahat ng user (pinakabago muna). Ang walang createdAt ay nasa dulo.
+  const all = members
+    .map((u) => ({ u, created: toMs(u.createdAt), seen: toMs(u.lastSeenAt), key: accessKey(u) }))
+    .sort((a, b) => (b.created || 0) - (a.created || 0));
+  const recent = all.filter((r) => r.created).slice(0, 5);
 
   const pendingPractice = users.reduce((n, u) => n + (u.pendingPurchases || []).length, 0);
   const pendingAccess = users.reduce((n, u) => n + (u.pendingAccess || []).length, 0);
 
   return {
     now, total: members.length, active7, new7, new30, status, subjects,
-    days, revenue, payers, recent, pendingPractice, pendingAccess,
+    days, revenue, payers, recent, all, pendingPractice, pendingAccess,
   };
 }
 
@@ -131,7 +153,12 @@ function Bar({ label, sub, value, max, barClass, trackClass, labelClass }) {
 export default function AdminOverview({ users }) {
   const [share, setShare] = useState(false);
   const [showRevenue, setShowRevenue] = useState(false);
+  const [newFilter, setNewFilter] = useState("7d");
+  const [shown, setShown] = useState(20);
   const s = useMemo(() => compute(users), [users]);
+  const inRange = (r, d) => d == null || (r.created && s.now - r.created <= d * DAY_MS);
+  const newCounts = Object.fromEntries(NEW_FILTERS.map(([id, , d]) => [id, s.all.filter((r) => inRange(r, d)).length]));
+  const newList = s.all.filter((r) => inRange(r, NEW_FILTERS.find((f) => f[0] === newFilter)[2]));
 
   // Sa share mode, light theme lang (malinis sa screenshot kahit dark ang app).
   const t = (light, dark) => (share ? light : light + " " + dark);
@@ -275,8 +302,47 @@ export default function AdminOverview({ users }) {
             </div>
           )}
 
-          {/* Recent sign-ups */}
-          {s.recent.length > 0 && (
+          {/* New users: lahat ng user, may filter (hindi lalabas sa share mode) */}
+          {!share && (
+            <div>
+              <p className="mb-2 text-sm font-semibold text-navy-900 dark:text-slate-100">New users</p>
+              <div className="mb-2 flex flex-wrap gap-1.5">
+                {NEW_FILTERS.map(([id, label]) => (
+                  <button
+                    key={id}
+                    onClick={() => { setNewFilter(id); setShown(20); }}
+                    className={"rounded-full border px-3 py-1 text-xs font-semibold " + (newFilter === id ? "border-navy-900 bg-navy-900 text-white dark:border-slate-100 dark:bg-slate-100 dark:text-navy-900" : "border-slate-200 text-slate-500 dark:border-slate-700 dark:text-slate-400")}
+                  >
+                    {label} ({newCounts[id]})
+                  </button>
+                ))}
+              </div>
+              {newList.length === 0 && <p className="py-4 text-center text-sm text-slate-400">No users in this range.</p>}
+              <ul className="divide-y divide-slate-100 dark:divide-slate-700">
+                {newList.slice(0, shown).map(({ u, created, seen, key }) => {
+                  const chip = STATUS_CHIP[key] || STATUS_CHIP.none;
+                  return (
+                    <li key={u.uid} className="flex items-center justify-between gap-3 py-2">
+                      <div className="min-w-0">
+                        <p className="truncate text-sm font-medium">{u.fullName || "(no name)"}</p>
+                        <p className="truncate text-xs text-slate-500 dark:text-slate-400">{u.email}</p>
+                        <p className="text-[11px] text-slate-400">{created ? "Joined " + shortDate(created) : "Joined: unknown"} · seen {ago(seen, s.now)}</p>
+                      </div>
+                      <span className={"flex-shrink-0 rounded-full px-2 py-0.5 text-[11px] font-semibold " + chip[1]}>{chip[0]}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+              {newList.length > shown && (
+                <button onClick={() => setShown(shown + 20)} className="mt-2 w-full rounded-xl border border-slate-200 py-2 text-xs font-semibold text-slate-600 dark:border-slate-700 dark:text-slate-300">
+                  Show more ({newList.length - shown} left)
+                </button>
+              )}
+            </div>
+          )}
+
+          {/* Recent sign-ups (compact, para sa share mode / screenshot) */}
+          {share && s.recent.length > 0 && (
             <div>
               <p className={"mb-2 text-sm font-semibold " + t("text-navy-900", "dark:text-slate-100")}>Recent sign-ups</p>
               <ul className={"divide-y " + t("divide-slate-100", "dark:divide-slate-700")}>

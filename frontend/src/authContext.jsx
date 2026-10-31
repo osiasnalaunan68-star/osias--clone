@@ -115,6 +115,32 @@ export function AuthProvider({ children }) {
     return () => clearInterval(id);
   }, []);
 
+  // "Last seen" heartbeat. Dati, lastSeenAt ay nagbabago lang kapag bagong bukas ang app
+  // (at online). Ngayon nagbabago rin kapag bumalik ang app sa harap o nagka-internet ulit
+  // (hanggang isang beses lang kada 6 na oras). Kapag offline, ipinipila ng Firestore ang write.
+  useEffect(() => {
+    if (!uid) return;
+    const KEY = "cuble_seen_ping_" + uid;
+    const ping = () => {
+      try {
+        if (document.visibilityState === "hidden") return;
+        const last = Number(localStorage.getItem(KEY)) || 0;
+        if (Date.now() - last < 6 * 60 * 60 * 1000) return;
+        localStorage.setItem(KEY, String(Date.now()));
+        updateDoc(doc(db, "users", uid), { lastSeenAt: serverTimestamp() })
+          .catch(() => { try { localStorage.removeItem(KEY); } catch (_) {} });
+      } catch (_) {}
+    };
+    document.addEventListener("visibilitychange", ping);
+    window.addEventListener("online", ping);
+    window.addEventListener("focus", ping);
+    return () => {
+      document.removeEventListener("visibilitychange", ping);
+      window.removeEventListener("online", ping);
+      window.removeEventListener("focus", ping);
+    };
+  }, [uid]);
+
   // Ang server data ang masusunod para sa access fields (real-time kapag nag-approve si admin).
   const mergedProfile = useMemo(() => {
     if (!profile || !serverData) return profile;
