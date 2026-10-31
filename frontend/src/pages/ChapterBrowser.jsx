@@ -12,6 +12,8 @@ import {
   getAiContext, AI_APPS, copyPromptAndOpen,
 } from "../aiContext";
 import { IS_DEV } from "../env";
+import InstallView from "./InstallView";
+import { useInstallInfo, isNativeApp } from "../pwaInstall";
 import { copyQuizPromptForTitle } from "../quizContext";
 import DevPanel from "./DevPanel";
 import QuizPage from "./QuizPage";
@@ -832,6 +834,7 @@ const NAV_ICONS = {
   quiz: <><rect width="8" height="4" x="8" y="2" rx="1" ry="1" /><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" /><path d="m9 14 2 2 4-4" /></>,
   settings: <><line x1="21" x2="14" y1="4" y2="4" /><line x1="10" x2="3" y1="4" y2="4" /><line x1="21" x2="12" y1="12" y2="12" /><line x1="8" x2="3" y1="12" y2="12" /><line x1="21" x2="16" y1="20" y2="20" /><line x1="12" x2="3" y1="20" y2="20" /><line x1="14" x2="14" y1="2" y2="6" /><line x1="8" x2="8" y1="10" y2="14" /><line x1="16" x2="16" y1="18" y2="22" /></>,
   crown: <><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7z" /><path d="M5 20h14" /></>,
+  download: <><path d="M12 3v12" /><path d="m7 11 5 5 5-5" /><path d="M5 21h14" /></>,
   wrench: <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />,
   menu: <><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></>,
   x: <><path d="M18 6 6 18" /><path d="m6 6 12 12" /></>,
@@ -845,15 +848,18 @@ function NavIcon({ name, className = "h-[22px] w-[22px]" }) {
   );
 }
 
-const VIEW_TITLES = { browse: "RA 10863", search: "Search", quiz: "Quiz", settings: "Settings", admin: "Admin", dev: "Dev Panel" };
+const VIEW_TITLES = { browse: "RA 10863", search: "Search", quiz: "Quiz", settings: "Settings", update: "Update", admin: "Admin", dev: "Dev Panel" };
 
 function BottomNav({ view, setView, showAdmin, showDev }) {
+  const install = useInstallInfo();
   const items = [
     { id: "browse", label: "Library", icon: "book" },
     { id: "search", label: "Search", icon: "search" },
     { id: "quiz", label: "Quiz", icon: "quiz" },
     { id: "settings", label: "Settings", icon: "settings" },
   ];
+  // Walang "Update" tab sa Android APK (real app na ito).
+  if (!isNativeApp()) items.push({ id: "update", label: "Update", icon: "download" });
   if (showAdmin) items.push({ id: "admin", label: "Admin", icon: "crown" });
   if (showDev) items.push({ id: "dev", label: "Dev", icon: "wrench" });
   return (
@@ -874,7 +880,7 @@ function BottomNav({ view, setView, showAdmin, showDev }) {
               className="flex min-w-0 flex-1 flex-col items-center gap-0.5 rounded-xl py-1"
             >
               <span className={"flex h-8 w-14 items-center justify-center rounded-full transition-colors duration-200 " + (active ? "bg-navy-900/10 text-navy-900 dark:bg-gold-500/20 dark:text-gold-400" : "text-slate-500 dark:text-slate-400")}>
-                <NavIcon name={it.icon} />
+                <span className="relative"><NavIcon name={it.icon} />{it.id === "update" && install.canInstall && !install.justInstalled && !install.standalone && (<span className="absolute -right-1 -top-0.5 h-2.5 w-2.5 rounded-full border-2 border-white bg-amber-500 dark:border-slate-900" />)}</span>
               </span>
               <span className={"max-w-full truncate text-[11px] leading-tight " + (active ? "font-semibold text-navy-900 dark:text-gold-400" : "font-medium text-slate-500 dark:text-slate-400")}>{it.label}</span>
             </button>
@@ -1259,7 +1265,7 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
                 <p className="text-sm">{error}</p>
               </div>
             )}
-            {view === "search" ? <SearchView onNavigateChapter={loadChapter} /> : view === "dev" && IS_DEV ? <DevPanel /> : view === "admin" && profile?.isAdmin ? <Suspense fallback={<p className="p-6 text-center text-sm text-slate-400">Loading…</p>}><AdminPanel /></Suspense> : view === "quiz" ? null : view === "settings" ? <SettingsView darkMode={darkMode} setDarkMode={setDarkMode} onReplayTutorial={replayTutorial} /> : isIssuance ? (
+            {view === "search" ? <SearchView onNavigateChapter={loadChapter} /> : view === "dev" && IS_DEV ? <DevPanel /> : view === "admin" && profile?.isAdmin ? <Suspense fallback={<p className="p-6 text-center text-sm text-slate-400">Loading…</p>}><AdminPanel /></Suspense> : view === "quiz" ? null : view === "update" ? <InstallView /> : view === "settings" ? <SettingsView darkMode={darkMode} setDarkMode={setDarkMode} onReplayTutorial={replayTutorial} /> : isIssuance ? (
               <IssuanceReader kind={source} issuanceId={issuanceId} mode={mode} fontScale={fontScale} focusMode={focusMode} onOpenIssuance={(hit) => openIssuance(hit.type.toLowerCase(), hit.id)} />
             ) : (
               <>
