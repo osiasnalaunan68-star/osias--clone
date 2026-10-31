@@ -122,6 +122,31 @@ export default function AdminPanel() {
     }
   };
 
+  // Transaction helper: reads the latest user doc first, so an admin action can
+  // never overwrite a request the user sent after this list was loaded.
+  // build(d) returns { write, patch } or null (= already handled).
+  const txn = async (key, u, build) => {
+    setBusyKey(key);
+    try {
+      const ref = doc(db, "users", u.uid);
+      const res = await runTransaction(db, async (t) => {
+        const snap = await t.get(ref);
+        if (!snap.exists()) throw new Error("User document no longer exists.");
+        const out = build(snap.data());
+        if (!out) return null;
+        t.update(ref, out.write);
+        return out.patch;
+      });
+      if (res) patchUser(u.uid, res);
+      else { alert("Already handled or no longer pending. Refreshing the list."); await loadUsers(); }
+    } catch (err) {
+      console.warn("admin transaction failed:", err);
+      alert("Something went wrong. Please try again:\n" + (err?.message || err));
+    } finally {
+      setBusyKey(null);
+    }
+  };
+
   // ── Practice questions ──────────────────────────────────────────────
   // Manual unlock/remove. Unlocking grants the standard term (3 months, 4 for CL) from now;
   // removing clears the subject flag and its expiry.
@@ -142,12 +167,13 @@ export default function AdminPanel() {
     const months = SUBJECT_TERM_MONTHS[code] || 3;
     if (!window.confirm("Unlock " + code + " for " + months + " months for " + (u.fullName || u.email) + "?")) return;
     const expiresAt = addMonths(serverNow(), months);
-    const remaining = (u.pendingPurchases || []).filter((p) => !((p.subjects || []).length === 1 && p.subjects[0] === code));
-    await run(
-      key, u,
-      { ["subscriptions." + code]: true, ["subscriptionExpiry." + code]: expiresAt, pendingPurchases: remaining },
-      { subscriptions: { ...u.subscriptions, [code]: true }, subscriptionExpiry: { ...(u.subscriptionExpiry || {}), [code]: expiresAt }, pendingPurchases: remaining }
-    );
+    await txn(key, u, (d) => {
+      const remaining = (d.pendingPurchases || []).filter((p) => !((p.subjects || []).length === 1 && p.subjects[0] === code));
+      return {
+        write: { ["subscriptions." + code]: true, ["subscriptionExpiry." + code]: expiresAt, pendingPurchases: remaining },
+        patch: { subscriptions: { ...(d.subscriptions || {}), [code]: true }, subscriptionExpiry: { ...(d.subscriptionExpiry || {}), [code]: expiresAt }, pendingPurchases: remaining },
+      };
+    });
   };
 
   // Admin extension: +N months on an expiring subject. Lifetime subjects are never touched.
@@ -228,27 +254,34 @@ export default function AdminPanel() {
 
   const rejectPractice = async (u, p) => {
     if (!window.confirm("Remove this pending request (ref " + p.referenceCode + ")?")) return;
-    const remaining = (u.pendingPurchases || []).filter((x) => x.referenceCode !== p.referenceCode);
-    await run(u.uid + ":pp:" + p.referenceCode, u, { pendingPurchases: remaining }, { pendingPurchases: remaining });
+    await txn(u.uid + ":pp:" + p.referenceCode, u, (d) => {
+      const list = d.pendingPurchases || [];
+      if (!list.some((x) => x.referenceCode === p.referenceCode)) return null;
+      const remaining = list.filter((x) => x.referenceCode !== p.referenceCode);
+      return { write: { pendingPurchases: remaining }, patch: { pendingPurchases: remaining } };
+    });
   };
 
   // ── App Access (buwanang plan) ──────────────────────────────────────
   // Kapag may active pa, dinadagdag sa dulo ng natitirang oras (hindi nasasayang).
   const grantAccess = async (u, plan, pendingItem) => {
     const now = serverNow();
-    const expiresAt = stackAccess(u, plan.months, now);
-    const appAccess = { plan: plan.id, expiresAt };
-    const payload = {
-      appAccess,
-      appAccessHistory: arrayUnion({ plan: plan.id, price: plan.price, referenceCode: pendingItem ? pendingItem.referenceCode : "MANUAL", method: pendingItem ? pendingItem.method : "manual", approvedAt: now, expiresAt }),
-    };
-    const patch = { appAccess };
-    if (pendingItem) {
-      const remaining = (u.pendingAccess || []).filter((x) => x.referenceCode !== pendingItem.referenceCode);
-      payload.pendingAccess = remaining;
-      patch.pendingAccess = remaining;
-    }
-    await run(u.uid + ":acc", u, payload, patch);
+    await txn(u.uid + ":acc", u, (d) => {
+      if (pendingItem && !(d.pendingAccess || []).some((x) => x.referenceCode === pendingItem.referenceCode)) return null;
+      const expiresAt = stackAccess(d, plan.months, now);
+      const appAccess = { plan: plan.id, expiresAt };
+      const write = {
+        appAccess,
+        appAccessHistory: arrayUnion({ plan: plan.id, price: plan.price, referenceCode: pendingItem ? pendingItem.referenceCode : "MANUAL", method: pendingItem ? pendingItem.method : "manual", approvedAt: now, expiresAt }),
+      };
+      const patch = { appAccess };
+      if (pendingItem) {
+        const remaining = (d.pendingAccess || []).filter((x) => x.referenceCode !== pendingItem.referenceCode);
+        write.pendingAccess = remaining;
+        patch.pendingAccess = remaining;
+      }
+      return { write, patch };
+    });
   };
 
   const approveAccess = async (u, p) => {
@@ -271,8 +304,12 @@ export default function AdminPanel() {
 
   const rejectAccess = async (u, p) => {
     if (!window.confirm("Remove this pending request (ref " + p.referenceCode + ")?")) return;
-    const remaining = (u.pendingAccess || []).filter((x) => x.referenceCode !== p.referenceCode);
-    await run(u.uid + ":acc:" + p.referenceCode, u, { pendingAccess: remaining }, { pendingAccess: remaining });
+    await txn(u.uid + ":acc:" + p.referenceCode, u, (d) => {
+      const list = d.pendingAccess || [];
+      if (!list.some((x) => x.referenceCode === p.referenceCode)) return null;
+      const remaining = list.filter((x) => x.referenceCode !== p.referenceCode);
+      return { write: { pendingAccess: remaining }, patch: { pendingAccess: remaining } };
+    });
   };
 
   // ── Trial CRUD ──────────────────────────────────────────────────────

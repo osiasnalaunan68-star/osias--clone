@@ -43,6 +43,7 @@ service cloud.firestore {
 
       allow create: if signedIn() && request.auth.uid == uid
         && request.resource.data.get('isAdmin', false) == false
+        && request.resource.data.get('createdAt', request.time) == request.time
         && !('appAccess' in request.resource.data)
         && !('appAccessHistory' in request.resource.data)
         && !('paymentHistory' in request.resource.data)
