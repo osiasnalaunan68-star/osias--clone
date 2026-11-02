@@ -1,7 +1,9 @@
-// Service worker — network-first, with a short timeout for this app's own files.
-// On a weak or "connected but not really" network, a normal fetch can hang forever and the app
-// freezes on the loading screen. Now, if a cached copy exists, it is used after NETWORK_TIMEOUT_MS.
-const CACHE_NAME = "cmta-app-cache-v3";
+// Service worker v4
+// - /assets/*, .wasm, .db: cache-first (no re-download on every open)
+// - Firebase / Google APIs: not cached, browser handles them
+// - Everything else (index.html etc.): network-first with a 4s timeout
+// NOTE: bump CACHE_NAME whenever you change customs_law.db
+const CACHE_NAME = "cmta-app-cache-v4";
 const NETWORK_TIMEOUT_MS = 4000;
 
 self.addEventListener("install", () => {
@@ -40,15 +42,29 @@ async function offlineFallback(request) {
 self.addEventListener("fetch", (event) => {
   const { request } = event;
   if (request.method !== "GET") return;
-  const sameOrigin = new URL(request.url).origin === self.location.origin;
+  const url = new URL(request.url);
+  const sameOrigin = url.origin === self.location.origin;
 
+  // Cross-origin: only cache Google Fonts. Firebase/Auth/APIs go straight to the browser.
+  if (!sameOrigin) {
+    if (!/(^|\.)fonts\.(googleapis|gstatic)\.com$/.test(url.hostname)) return;
+    event.respondWith(fetchAndCache(request).catch(() => offlineFallback(request)));
+    return;
+  }
+
+  // Big static files: cache-first. Vite hashes /assets/ names, so new deploys still load.
+  if (url.pathname.includes("/assets/") || /\.(wasm|db)$/.test(url.pathname)) {
+    event.respondWith(
+      caches.match(request).then((hit) => hit || fetchAndCache(request).catch(() => offlineFallback(request)))
+    );
+    return;
+  }
+
+  // Rest of same-origin files: network-first with short timeout.
   event.respondWith(
     (async () => {
-      // Cross-origin (fonts, Firebase): old behavior, no timeout, so stale API data is never served.
-      if (!sameOrigin) return fetchAndCache(request).catch(() => offlineFallback(request));
-
       const network = fetchAndCache(request);
-      network.catch(() => {}); // avoid an unhandled rejection if the timeout wins the race
+      network.catch(() => {});
       const cached = await caches.match(request);
       if (!cached) return network.catch(() => offlineFallback(request));
 

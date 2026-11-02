@@ -1,9 +1,10 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import { useAuth } from "../authContext";
-import ChapterBrowser from "../pages/ChapterBrowser";
-import QuizHub from "../pages/QuizHub";
 import { TRIAL_DAYS, DAY_MS, formatTimeLeft, formatDateShort, toMs } from "../access";
 import { PROMO_PLAN } from "../payments";
+
+const ChapterBrowser = lazy(() => import("../pages/ChapterBrowser"));
+const QuizHub = lazy(() => import("../pages/QuizHub"));
 
 const DEMO_SECONDS = 60;
 
@@ -300,7 +301,9 @@ function AccessPill({ access }) {
 export default function AccessGate() {
   return (
     <>
-      <AccessGateInner />
+      <Suspense fallback={<Splash text="Loading…" />}>
+        <AccessGateInner />
+      </Suspense>
       <UnlockToast />
       <RenewBanner />
       <OfflinePill />

@@ -189,7 +189,9 @@ export function AuthProvider({ children }) {
       );
       // Huwag hintayin ang server: kapag offline o mahina ang signal, mahahang ang app dito.
       // Ipinipila ng Firestore ang write at ipapadala kapag bumalik ang connection.
-      updateDoc(ref, { devices: updated }).catch((e) => console.warn("device update failed:", e));
+      if (!already.lastActive || Date.now() - already.lastActive > 6 * 60 * 60 * 1000) {
+        updateDoc(ref, { devices: updated }).catch((e) => console.warn("device update failed:", e));
+      }
       setProfile({ ...data, devices: updated });
       setDeviceLimitReached(false);
     } else if (devices.length < 2) {
