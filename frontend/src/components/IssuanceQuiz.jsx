@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { createPortal } from "react-dom";
 import { useAuth } from "../authContext";
 import { isRaLevelUnlocked } from "../access";
 import { QuizLevelButton, QuizPlayView, resetLevelProgress } from "./QuizShared";
@@ -84,8 +85,8 @@ export default function IssuanceQuizModal({ issuance, onClose, embedded = false,
     );
   }
 
-  return (
-    <div className="fixed inset-0 z-[45] flex flex-col bg-slate-50 dark:bg-slate-950" style={{ height: "100dvh" }}>
+  return createPortal(
+    <div className="fixed inset-0 z-[48] flex flex-col bg-slate-50 dark:bg-slate-950" style={{ height: "100dvh" }}>
       <div className="safe-top sticky top-0 z-10 border-b border-slate-200 bg-white/95 backdrop-blur dark:border-slate-800 dark:bg-slate-900/95">
         <div className="flex items-center gap-2 px-3 py-2">
           <button
@@ -99,8 +100,9 @@ export default function IssuanceQuizModal({ issuance, onClose, embedded = false,
       </div>
 
       <div className="flex-1 overflow-y-auto overscroll-contain">
-        <div className="mx-auto max-w-2xl p-4">{content}</div>
+        <div className="mx-auto max-w-2xl p-4" style={{ paddingBottom: "calc(2rem + env(safe-area-inset-bottom))" }}>{content}</div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
