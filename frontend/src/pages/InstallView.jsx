@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { useInstallInfo, promptInstall, detectPlatform } from "../pwaInstall";
+import { useUpdateAvailable, checkForUpdate, getRemoteId, applyUpdate } from "../updateCheck";
 
 const card = "rounded-2xl border border-slate-200 bg-white p-4 shadow-card dark:border-slate-700 dark:bg-slate-800";
 const h2 = "mb-3 text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500";
@@ -25,6 +26,7 @@ export default function InstallView() {
   const [dismissed, setDismissed] = useState(false);
   const [added, setAdded] = useState(false);
   const [upd, setUpd] = useState("");
+  const updateAvailable = useUpdateAvailable();
 
   const doInstall = async () => {
     const r = await promptInstall();
@@ -34,10 +36,11 @@ export default function InstallView() {
   const checkUpdate = async () => {
     setUpd("checking");
     try {
-      const reg = "serviceWorker" in navigator ? await navigator.serviceWorker.getRegistration() : null;
-      if (reg) await reg.update();
+      const available = await checkForUpdate(true);
+      if (!getRemoteId()) { setUpd("error"); return; }
+      if (!available) { setUpd("latest"); return; }
       setUpd("reloading");
-      setTimeout(() => window.location.reload(), 700);
+      setTimeout(() => applyUpdate(), 400);
     } catch (_) {
       setUpd("error");
     }
@@ -142,6 +145,14 @@ export default function InstallView() {
         <p className="text-sm text-slate-500 dark:text-slate-400">Put the app on your Home Screen and keep it up to date.</p>
       </div>
 
+      <section className="rounded-2xl border border-amber-300 bg-amber-50 p-4 dark:border-amber-700 dark:bg-amber-950/30">
+        <p className="text-sm font-bold text-amber-800 dark:text-amber-300">🔄 Reminder: check for updates every time you open the app</p>
+        <p className="mt-1 text-sm text-slate-700 dark:text-slate-200">New questions, fixes, and features do not always show up right away. Tap <b>Check for updates</b> below each time you open the app, or tap <b>Update now</b> when the "New version available" banner appears at the top.</p>
+        {updateAvailable && (
+          <button onClick={() => { applyUpdate(); }} className="mt-3 flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl bg-navy-900 px-4 py-2.5 text-sm font-bold text-white active:bg-navy-800 dark:bg-navy-700">🆕 New version available — Update now</button>
+        )}
+      </section>
+
       {body}
 
       <section className={card}>
@@ -151,6 +162,7 @@ export default function InstallView() {
           {upd === "checking" ? "Checking…" : upd === "reloading" ? "Updating… the app will reload" : "🔄 Check for updates"}
         </button>
         {upd === "error" && <p className="mt-2 text-xs text-red-600 dark:text-red-400">Could not check. Please connect to the internet and try again.</p>}
+        {upd === "latest" && <p className="mt-2 text-xs font-semibold text-emerald-600 dark:text-emerald-400">✅ You are on the latest version.</p>}
       </section>
     </div>
   );

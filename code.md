@@ -44,6 +44,13 @@ workflows:
           ./gradlew assembleRelease
           echo "--- Searching for build output ---"
           find app/build/outputs -type f 2>/dev/null || echo "outputs dir missing"
+      - name: Build release AAB (for Play Store)
+        script: |
+          cd frontend/android
+          chmod +x gradlew
+          ./gradlew bundleRelease
+          echo "--- Searching for AAB output ---"
+          find app/build/outputs/bundle -type f 2>/dev/null || echo "bundle outputs dir missing"
       - name: Print APK signing SHA-1
         script: |
           APK=$(find frontend/android/app/build/outputs -name "*.apk" | head -1)
@@ -51,6 +58,7 @@ workflows:
           "$APKSIGNER" verify --print-certs "$APK" | grep -E "SHA-1|SHA-256" || true
     artifacts:
       - frontend/android/app/build/outputs/**/*.apk
+      - frontend/android/app/build/outputs/**/*.aab
       - frontend/android/app/build/outputs/**/output-metadata.json
     publishing:
       email:
@@ -118,10 +126,12 @@ export default {
 
 ## File: ./frontend/public/sw.js
 ```
-// Service worker — network-first, with a short timeout for this app's own files.
-// On a weak or "connected but not really" network, a normal fetch can hang forever and the app
-// freezes on the loading screen. Now, if a cached copy exists, it is used after NETWORK_TIMEOUT_MS.
-const CACHE_NAME = "cmta-app-cache-v3";
+// Service worker v4
+// - /assets/*, .wasm, .db: cache-first (no re-download on every open)
+// - Firebase / Google APIs: not cached, browser handles them
+// - Everything else (index.html etc.): network-first with a 4s timeout
+// NOTE: bump CACHE_NAME whenever you change customs_law.db
+const CACHE_NAME = "cmta-app-cache-v4";
 const NETWORK_TIMEOUT_MS = 4000;
 
 self.addEventListener("install", () => {
@@ -160,15 +170,29 @@ async function offlineFallback(request) {
 self.addEventListener("fetch", (event) => {
   const { request } = event;
   if (request.method !== "GET") return;
-  const sameOrigin = new URL(request.url).origin === self.location.origin;
+  const url = new URL(request.url);
+  const sameOrigin = url.origin === self.location.origin;
 
+  // Cross-origin: only cache Google Fonts. Firebase/Auth/APIs go straight to the browser.
+  if (!sameOrigin) {
+    if (!/(^|\.)fonts\.(googleapis|gstatic)\.com$/.test(url.hostname)) return;
+    event.respondWith(fetchAndCache(request).catch(() => offlineFallback(request)));
+    return;
+  }
+
+  // Big static files: cache-first. Vite hashes /assets/ names, so new deploys still load.
+  if (url.pathname.includes("/assets/") || /\.(wasm|db)$/.test(url.pathname)) {
+    event.respondWith(
+      caches.match(request).then((hit) => hit || fetchAndCache(request).catch(() => offlineFallback(request)))
+    );
+    return;
+  }
+
+  // Rest of same-origin files: network-first with short timeout.
   event.respondWith(
     (async () => {
-      // Cross-origin (fonts, Firebase): old behavior, no timeout, so stale API data is never served.
-      if (!sameOrigin) return fetchAndCache(request).catch(() => offlineFallback(request));
-
       const network = fetchAndCache(request);
-      network.catch(() => {}); // avoid an unhandled rejection if the timeout wins the race
+      network.catch(() => {});
       const cached = await caches.match(request);
       if (!cached) return network.catch(() => offlineFallback(request));
 
@@ -719,6 +743,7 @@ export default function AccountOverlay() {
   const [referenceCode, setReferenceCode] = useState(null);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [copied, setCopied] = useState("");
 
   // Reset ang payment flow tuwing magsasara ang overlay, para hindi
   // ma-stuck ang susunod na pagbukas sa gitna ng isang lumang flow.
@@ -754,6 +779,16 @@ export default function AccountOverlay() {
     setSubmitted(false);
     setReferenceCode(generateReferenceCode(plan.id));
     setStep("payment-method");
+  };
+
+  const copyText = async (key, text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(key);
+      setTimeout(() => setCopied(""), 1500);
+    } catch (_) {
+      window.prompt("Copy this:", text);
+    }
   };
 
   const selectMethod = (methodId) => {
@@ -1017,7 +1052,10 @@ export default function AccountOverlay() {
                     ⚠️ Ilagay sa note ang iyong email address para makita namin na ikaw talaga ang nag-avail, and wait for our confirmation.
                   </p>
                   {profile?.email && (
-                    <p className="mt-1 break-all text-xs font-semibold text-slate-700 dark:text-slate-200">📧 {profile.email}</p>
+                    <div className="mt-1 flex items-center justify-center gap-2">
+                      <p className="break-all text-xs font-semibold text-slate-700 dark:text-slate-200">📧 {profile.email}</p>
+                      <button onClick={() => copyText("email", profile.email)} className="flex-shrink-0 rounded-full border border-slate-300 px-2.5 py-0.5 text-[11px] font-semibold text-slate-600 active:bg-slate-100 dark:border-slate-600 dark:text-slate-300">{copied === "email" ? "Copied ✓" : "Copy"}</button>
+                    </div>
                   )}
                 </div>
                 <img
@@ -1025,22 +1063,33 @@ export default function AccountOverlay() {
                   alt={`${activeMethod.label} QR code`}
                   className="mx-auto w-full max-w-[280px] rounded-xl border border-slate-100 dark:border-slate-700"
                 />
+                <a href={activeMethod.qr} download={activeMethod.id + "-qr.png"} className="mx-auto block w-fit rounded-full border border-slate-200 px-4 py-1.5 text-xs font-semibold text-slate-600 active:bg-slate-100 dark:border-slate-600 dark:text-slate-300">⬇️ Save QR (or take a screenshot)</a>
                 <div className="rounded-xl bg-amber-50 p-3 text-center dark:bg-amber-950/30">
                   <p className="text-xs text-slate-500 dark:text-slate-400">Reference Code — write it in the payment note</p>
-                  <p className="text-xl font-bold tracking-widest text-navy-900 dark:text-amber-400">{referenceCode}</p>
+                  <div className="flex items-center justify-center gap-2">
+                    <p className="text-xl font-bold tracking-widest text-navy-900 dark:text-amber-400">{referenceCode}</p>
+                    <button onClick={() => copyText("ref", referenceCode)} className="flex-shrink-0 rounded-full border border-slate-300 px-2.5 py-0.5 text-[11px] font-semibold text-slate-600 active:bg-slate-100 dark:border-slate-600 dark:text-slate-300">{copied === "ref" ? "Copied ✓" : "Copy"}</button>
+                  </div>
                 </div>
                 <p className="text-center text-xs leading-relaxed text-slate-500 dark:text-slate-400">
                   1. Scan the QR code with your {activeMethod.label} app.<br />
                   2. Pay ₱{selectedPlan.price} and write your email address + the reference code in the note/message.<br />
                   3. Tap "I've paid" below.
                 </p>
-                <button
-                  onClick={confirmPaid}
-                  disabled={submitting}
-                  className="w-full rounded-xl bg-navy-900 px-4 py-3 text-sm font-semibold text-white disabled:opacity-50 dark:bg-navy-700"
+                {/* Naka-pin sa baba ng popup: laging kita, hindi na kailangang mag-scroll */}
+                <div
+                  className="sticky -bottom-5 -mx-5 -mb-7 border-t border-slate-200 bg-white px-5 pt-3 dark:border-slate-700 dark:bg-slate-800"
+                  style={{ paddingBottom: "calc(env(safe-area-inset-bottom) + 12px)" }}
                 >
-                  {submitting ? "Submitting..." : "✅ I've paid"}
-                </button>
+                  <p className="mb-2 text-center text-[11px] text-slate-500 dark:text-slate-400">Tap only after you have sent the payment.</p>
+                  <button
+                    onClick={confirmPaid}
+                    disabled={submitting}
+                    className="w-full rounded-xl bg-navy-900 px-4 py-3 text-sm font-semibold text-white disabled:opacity-50 dark:bg-navy-700"
+                  >
+                    {submitting ? "Submitting..." : "✅ I've paid"}
+                  </button>
+                </div>
               </>
             ) : (
               <div className="space-y-3 py-4 text-center">
@@ -1101,11 +1150,13 @@ export default function AccountButton() {
 
 ## File: ./frontend/src/components/AccessGate.jsx
 ```
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import { useAuth } from "../authContext";
-import ChapterBrowser from "../pages/ChapterBrowser";
-import { TRIAL_DAYS, DAY_MS, formatTimeLeft } from "../access";
+import { TRIAL_DAYS, DAY_MS, formatTimeLeft, formatDateShort, toMs } from "../access";
 import { PROMO_PLAN } from "../payments";
+
+const ChapterBrowser = lazy(() => import("../pages/ChapterBrowser"));
+const QuizHub = lazy(() => import("../pages/QuizHub"));
 
 const DEMO_SECONDS = 60;
 
@@ -1232,7 +1283,7 @@ function GuestWelcome({ step, setStep, onStartDemo }) {
 }
 
 // ── Paywall: tapos na ang trial, plans lang ang makikita ─────────────
-function Paywall() {
+function Paywall({ onFree }) {
   const { user, profile, signOutUser, setOverlayOpen, setIntentPlanId } = useAuth();
   // Promo purchases are saved in pendingPurchases, so read both lists.
   const pending = [...(profile?.pendingPurchases || []), ...(profile?.pendingAccess || [])]
@@ -1272,6 +1323,13 @@ function Paywall() {
           </button>
         </div>
 
+        {onFree && (
+          <button onClick={onFree} className="w-full rounded-xl border-2 border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-navy-900 active:bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100">
+            📝 Try the free practice questions
+            <span className="mt-0.5 block text-[11px] font-normal text-slate-500 dark:text-slate-400">RA 10863 Level 1 + the first 10 items of each subject</span>
+          </button>
+        )}
+
         <p className="text-center text-xs text-slate-400">Pay via GCash · Maya · MariBank. Payments are confirmed manually by the admin.</p>
         <button onClick={signOutUser} className="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-medium text-slate-500 dark:border-slate-600 dark:text-slate-300">Sign out</button>
       </div>
@@ -1279,22 +1337,133 @@ function Paywall() {
   );
 }
 
+// ── Tapos na ang trial: paywall + libreng practice questions ─────────
+function ExpiredGate() {
+  const [free, setFree] = useState(false);
+  if (free) return <QuizHub limited onExit={() => setFree(false)} />;
+  return <Paywall onFree={() => setFree(true)} />;
+}
+
+// ── "Updated!" kapag nadagdagan ang access (hal. na-approve ni admin ang bayad) ──
+function UnlockToast() {
+  const { user, profile } = useAuth();
+  const exp = profile && profile.appAccess ? toMs(profile.appAccess.expiresAt) || 0 : 0;
+  const seen = useRef(null);
+  const [msg, setMsg] = useState(null);
+
+  useEffect(() => { seen.current = null; }, [user ? user.uid : null]);
+
+  useEffect(() => {
+    if (!profile) return;
+    if (seen.current === null) { seen.current = exp; return; }
+    if (exp > seen.current && exp > Date.now()) setMsg("🎉 Your access was updated! Valid until " + formatDateShort(exp));
+    seen.current = exp;
+  }, [exp, profile]);
+
+  useEffect(() => {
+    if (!msg) return;
+    const id = setTimeout(() => setMsg(null), 9000);
+    return () => clearTimeout(id);
+  }, [msg]);
+
+  if (!msg) return null;
+  return (
+    <div className="pointer-events-none fixed inset-x-0 top-0 z-[70] flex justify-center px-4" style={{ paddingTop: "calc(env(safe-area-inset-top) + 12px)" }}>
+      <button onClick={() => setMsg(null)} className="pointer-events-auto rounded-2xl bg-emerald-600 px-4 py-3 text-sm font-semibold text-white shadow-xl">{msg}</button>
+    </div>
+  );
+}
+
+// ── Paalala sa renewal: access <7 araw o trial <1 araw ang natitira ──
+function RenewBanner() {
+  const { user, access, overlayOpen, setOverlayOpen, setIntentPlanId } = useAuth();
+  const [, setTick] = useState(0);
+  const uid = user ? user.uid : null;
+  const kind = !access ? null
+    : access.state === "paid" && access.msLeft < 7 * DAY_MS ? "paid"
+    : access.state === "trial" && access.msLeft < DAY_MS ? "trial" : null;
+  if (!uid || !kind || overlayOpen) return null;
+  const KEY = "cuble_renew_dismiss_" + uid;
+  let last = 0;
+  try { last = Number(localStorage.getItem(KEY)) || 0; } catch (_) {}
+  if (Date.now() - last < 12 * 60 * 60 * 1000) return null;
+  const open = () => { setIntentPlanId(PROMO_PLAN.id); setOverlayOpen(true); };
+  const later = () => { try { localStorage.setItem(KEY, String(Date.now())); } catch (_) {} setTick((n) => n + 1); };
+  return (
+    <div className="fixed inset-x-3 z-[45] mx-auto max-w-md rounded-2xl border border-gold-500 bg-white p-3 shadow-xl dark:bg-slate-800" style={{ bottom: "calc(env(safe-area-inset-bottom) + 76px)" }}>
+      <p className="text-sm font-semibold text-navy-900 dark:text-slate-100">
+        {kind === "paid" ? "⏳ Your access ends in " : "🎁 Your free trial ends in "}{formatTimeLeft(access.msLeft)}
+      </p>
+      <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
+        {kind === "paid" ? "Renew early and your remaining days are kept." : "Get All Access and keep studying without interruption."}
+      </p>
+      <div className="mt-2 flex gap-2">
+        <button onClick={open} className="flex-1 rounded-xl bg-navy-900 py-2 text-sm font-semibold text-white active:bg-navy-800 dark:bg-navy-700">
+          {kind === "paid" ? "Renew" : "Get All Access"} · ₱{PROMO_PLAN.price}
+        </button>
+        <button onClick={later} className="rounded-xl border border-slate-200 px-4 py-2 text-sm font-medium text-slate-500 dark:border-slate-600 dark:text-slate-300">Later</button>
+      </div>
+    </div>
+  );
+}
+
+// ── "Offline" pill ───────────────────────────────────────────────────
+function OfflinePill() {
+  const [online, setOnline] = useState(() => typeof navigator === "undefined" || navigator.onLine !== false);
+  useEffect(() => {
+    const on = () => setOnline(true);
+    const off = () => setOnline(false);
+    window.addEventListener("online", on);
+    window.addEventListener("offline", off);
+    return () => { window.removeEventListener("online", on); window.removeEventListener("offline", off); };
+  }, []);
+  if (online) return null;
+  return (
+    <div className="pointer-events-none fixed inset-x-0 z-[60] flex justify-center" style={{ top: "calc(env(safe-area-inset-top) + 4px)" }}>
+      <span className="rounded-full bg-slate-800/90 px-3 py-1 text-[11px] font-semibold text-white shadow dark:bg-slate-100/90 dark:text-navy-900">📴 Offline · saved content still works</span>
+    </div>
+  );
+}
+
 // ── Maliit na pill: natitirang oras ──────────────────────────────────
 function AccessPill({ access }) {
-  const { overlayOpen, setOverlayOpen } = useAuth();
+  const { user, overlayOpen, setOverlayOpen } = useAuth();
+  const [, setTick] = useState(0);
   if (overlayOpen) return null;
   let label = null;
   if (access.state === "trial") label = "🎁 Free trial · " + formatTimeLeft(access.msLeft) + " left";
   else if (access.state === "paid" && access.msLeft < 7 * DAY_MS) label = "⏳ Access · " + formatTimeLeft(access.msLeft) + " left";
   if (!label) return null;
+
+  // Puwedeng itago (✕) para hindi matakpan ang bottom navigation. Naaalala per account at per state.
+  const KEY = "cuble_pill_hidden_" + (user ? user.uid : "x") + "_" + access.state;
+  let hidden = false;
+  try { hidden = localStorage.getItem(KEY) === "1"; } catch (_) {}
+  if (hidden) return null;
+  const hide = () => { try { localStorage.setItem(KEY, "1"); } catch (_) {} setTick((n) => n + 1); };
+
   return (
-    <button onClick={() => setOverlayOpen(true)} className="safe-bottom fixed bottom-3 left-3 z-40 rounded-full bg-navy-900/90 px-3 py-1.5 text-[11px] font-semibold text-white shadow-lg backdrop-blur active:bg-navy-800 dark:bg-slate-100/90 dark:text-navy-900">
-      {label}
-    </button>
+    <div className="safe-bottom fixed bottom-3 left-3 z-40 flex items-center rounded-full bg-navy-900/90 text-[11px] font-semibold text-white shadow-lg backdrop-blur dark:bg-slate-100/90 dark:text-navy-900">
+      <button onClick={() => setOverlayOpen(true)} className="rounded-l-full py-1.5 pl-3 pr-1 active:opacity-70">{label}</button>
+      <button onClick={hide} aria-label="Hide time left" className="flex h-8 w-8 items-center justify-center rounded-r-full text-sm opacity-70 active:opacity-100">✕</button>
+    </div>
   );
 }
 
 export default function AccessGate() {
+  return (
+    <>
+      <Suspense fallback={<Splash text="Loading…" />}>
+        <AccessGateInner />
+      </Suspense>
+      <UnlockToast />
+      <RenewBanner />
+      <OfflinePill />
+    </>
+  );
+}
+
+function AccessGateInner() {
   const { user, profile, loading, signingIn, needsFullName, deviceLimitReached, access, overlayOpen, setOverlayOpen } = useAuth();
   const [demo, setDemo] = useState(null);
   const [guestStep, setGuestStep] = useState(0);
@@ -1313,7 +1482,7 @@ export default function AccessGate() {
 
   if (!profile || needsFullName || deviceLimitReached) return <Splash text="Finishing your account setup…" />;
   if (access.state === "loading") return <Splash text="Checking your trial…" />;
-  if (access.state === "expired") return <Paywall />;
+  if (access.state === "expired") return <ExpiredGate />;
 
   return (
     <>
@@ -1765,6 +1934,7 @@ export function formatSeconds(totalSeconds) {
 ## File: ./frontend/src/components/IssuanceQuiz.jsx
 ```
 import { useState, useMemo } from "react";
+import { createPortal } from "react-dom";
 import { useAuth } from "../authContext";
 import { isRaLevelUnlocked } from "../access";
 import { QuizLevelButton, QuizPlayView, resetLevelProgress } from "./QuizShared";
@@ -1850,8 +2020,8 @@ export default function IssuanceQuizModal({ issuance, onClose, embedded = false,
     );
   }
 
-  return (
-    <div className="fixed inset-0 z-[45] flex flex-col bg-slate-50 dark:bg-slate-950" style={{ height: "100dvh" }}>
+  return createPortal(
+    <div className="fixed inset-0 z-[48] flex flex-col bg-slate-50 dark:bg-slate-950" style={{ height: "100dvh" }}>
       <div className="safe-top sticky top-0 z-10 border-b border-slate-200 bg-white/95 backdrop-blur dark:border-slate-800 dark:bg-slate-900/95">
         <div className="flex items-center gap-2 px-3 py-2">
           <button
@@ -1865,9 +2035,10 @@ export default function IssuanceQuizModal({ issuance, onClose, embedded = false,
       </div>
 
       <div className="flex-1 overflow-y-auto overscroll-contain">
-        <div className="mx-auto max-w-2xl p-4">{content}</div>
+        <div className="mx-auto max-w-2xl p-4" style={{ paddingBottom: "calc(2rem + env(safe-area-inset-bottom))" }}>{content}</div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 ```
@@ -2459,7 +2630,7 @@ if ("serviceWorker" in navigator) {
 
 ## File: ./frontend/src/pages/ChapterBrowser.jsx
 ```
-import { useState, useEffect, useCallback, useRef, useMemo, useContext, createContext } from "react";
+import { useState, useEffect, useCallback, useRef, useMemo, useContext, createContext, lazy, Suspense } from "react";
 import { createPortal } from "react-dom";
 import {
   getTitles, getChapter, getTitleTree, search,
@@ -2473,12 +2644,19 @@ import {
   getAiContext, AI_APPS, copyPromptAndOpen,
 } from "../aiContext";
 import { IS_DEV } from "../env";
+import InstallView from "./InstallView";
+import { useInstallInfo, isNativeApp } from "../pwaInstall";
 import { copyQuizPromptForTitle } from "../quizContext";
 import DevPanel from "./DevPanel";
 import QuizPage from "./QuizPage";
 import QuizHub from "./QuizHub";
 import AccountButton from "../components/AccountButton";
-import AdminPanel from "./AdminPanel";
+// Admin Panel: nilo-load lang kapag admin ang nagbukas (mas magaan ang unang load ng ibang user).
+const AdminPanel = lazy(() =>
+  import("./AdminPanel").catch(() => ({
+    default: () => <p className="p-6 text-center text-sm text-slate-500">Couldn't load the Admin Panel. Check your connection and try again.</p>,
+  }))
+);
 import { useAuth } from "../authContext";
 import { IssuanceSidebar, IssuanceReader } from "./IssuanceBrowser";
 import { ISSUANCE_KINDS, getIssuance, getIssuanceProgress, saveIssuanceProgress } from "../issuancesStore";
@@ -3288,6 +3466,7 @@ const NAV_ICONS = {
   quiz: <><rect width="8" height="4" x="8" y="2" rx="1" ry="1" /><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" /><path d="m9 14 2 2 4-4" /></>,
   settings: <><line x1="21" x2="14" y1="4" y2="4" /><line x1="10" x2="3" y1="4" y2="4" /><line x1="21" x2="12" y1="12" y2="12" /><line x1="8" x2="3" y1="12" y2="12" /><line x1="21" x2="16" y1="20" y2="20" /><line x1="12" x2="3" y1="20" y2="20" /><line x1="14" x2="14" y1="2" y2="6" /><line x1="8" x2="8" y1="10" y2="14" /><line x1="16" x2="16" y1="18" y2="22" /></>,
   crown: <><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7z" /><path d="M5 20h14" /></>,
+  download: <><path d="M12 3v12" /><path d="m7 11 5 5 5-5" /><path d="M5 21h14" /></>,
   wrench: <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />,
   menu: <><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></>,
   x: <><path d="M18 6 6 18" /><path d="m6 6 12 12" /></>,
@@ -3301,15 +3480,18 @@ function NavIcon({ name, className = "h-[22px] w-[22px]" }) {
   );
 }
 
-const VIEW_TITLES = { browse: "RA 10863", search: "Search", quiz: "Quiz", settings: "Settings", admin: "Admin", dev: "Dev Panel" };
+const VIEW_TITLES = { browse: "RA 10863", search: "Search", quiz: "Quiz", settings: "Settings", update: "Update", admin: "Admin", dev: "Dev Panel" };
 
 function BottomNav({ view, setView, showAdmin, showDev }) {
+  const install = useInstallInfo();
   const items = [
     { id: "browse", label: "Library", icon: "book" },
     { id: "search", label: "Search", icon: "search" },
     { id: "quiz", label: "Quiz", icon: "quiz" },
     { id: "settings", label: "Settings", icon: "settings" },
   ];
+  // Walang "Update" tab sa Android APK (real app na ito).
+  if (!isNativeApp()) items.push({ id: "update", label: "Update", icon: "download" });
   if (showAdmin) items.push({ id: "admin", label: "Admin", icon: "crown" });
   if (showDev) items.push({ id: "dev", label: "Dev", icon: "wrench" });
   return (
@@ -3330,7 +3512,7 @@ function BottomNav({ view, setView, showAdmin, showDev }) {
               className="flex min-w-0 flex-1 flex-col items-center gap-0.5 rounded-xl py-1"
             >
               <span className={"flex h-8 w-14 items-center justify-center rounded-full transition-colors duration-200 " + (active ? "bg-navy-900/10 text-navy-900 dark:bg-gold-500/20 dark:text-gold-400" : "text-slate-500 dark:text-slate-400")}>
-                <NavIcon name={it.icon} />
+                <span className="relative"><NavIcon name={it.icon} />{it.id === "update" && install.canInstall && !install.justInstalled && !install.standalone && (<span className="absolute -right-1 -top-0.5 h-2.5 w-2.5 rounded-full border-2 border-white bg-amber-500 dark:border-slate-900" />)}</span>
               </span>
               <span className={"max-w-full truncate text-[11px] leading-tight " + (active ? "font-semibold text-navy-900 dark:text-gold-400" : "font-medium text-slate-500 dark:text-slate-400")}>{it.label}</span>
             </button>
@@ -3715,7 +3897,7 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
                 <p className="text-sm">{error}</p>
               </div>
             )}
-            {view === "search" ? <SearchView onNavigateChapter={loadChapter} /> : view === "dev" && IS_DEV ? <DevPanel /> : view === "admin" && profile?.isAdmin ? <AdminPanel /> : view === "quiz" ? null : view === "settings" ? <SettingsView darkMode={darkMode} setDarkMode={setDarkMode} onReplayTutorial={replayTutorial} /> : isIssuance ? (
+            {view === "search" ? <SearchView onNavigateChapter={loadChapter} /> : view === "dev" && IS_DEV ? <DevPanel /> : view === "admin" && profile?.isAdmin ? <Suspense fallback={<p className="p-6 text-center text-sm text-slate-400">Loading…</p>}><AdminPanel /></Suspense> : view === "quiz" ? null : view === "update" ? <InstallView /> : view === "settings" ? <SettingsView darkMode={darkMode} setDarkMode={setDarkMode} onReplayTutorial={replayTutorial} /> : isIssuance ? (
               <IssuanceReader kind={source} issuanceId={issuanceId} mode={mode} fontScale={fontScale} focusMode={focusMode} onOpenIssuance={(hit) => openIssuance(hit.type.toLowerCase(), hit.id)} />
             ) : (
               <>
@@ -4526,6 +4708,7 @@ import CustomQuizHub from "./CustomQuizHub";
 import IssuanceQuizHub from "./IssuanceQuizHub";
 import { ProgressCircle, QuizPlayView } from "../components/QuizShared";
 import { useAuth } from "../authContext";
+import { PROMO_PLAN } from "../payments";
 import { isRaLevelUnlocked } from "../access";
 import { getSubjectStats, resetSubjectProgress } from "../subjectQuizStore";
 import { getLastQuizPosition } from "../quizStore";
@@ -4624,10 +4807,10 @@ function RA10863Card({ expanded, onToggle, onContinue, onSelectTitle }) {
   );
 }
 
-export default function QuizHub({ onExit }) {
+export default function QuizHub({ onExit, limited = false }) {
   const [expandedCard, setExpandedCard] = useState(null);
   const [activeView, setActiveView] = useState(null);
-  const { profile } = useAuth();
+  const { profile, setOverlayOpen, setIntentPlanId } = useAuth();
 
   const toggleCard = (id) => setExpandedCard((prev) => (prev === id ? null : id));
   const backToHub = () => setActiveView(null);
@@ -4660,6 +4843,17 @@ export default function QuizHub({ onExit }) {
           <span className="text-sm font-semibold text-slate-500 dark:text-slate-400">📝 Quiz / Exam</span>
         </div>
       </div>
+      {limited && (
+        <div className="flex items-center justify-between gap-3 border-b border-gold-500/40 bg-gold-50 px-4 py-2 dark:bg-slate-900">
+          <p className="text-xs text-slate-600 dark:text-slate-300">🔓 Free preview: RA 10863 Level 1 + first 10 items per subject.</p>
+          <button
+            onClick={() => { setIntentPlanId(PROMO_PLAN.id); setOverlayOpen(true); }}
+            className="flex-shrink-0 rounded-full bg-navy-900 px-3 py-1.5 text-xs font-bold text-white active:bg-navy-800 dark:bg-navy-700"
+          >
+            Unlock all · ₱{PROMO_PLAN.price}
+          </button>
+        </div>
+      )}
       <div className="flex-1 overflow-y-auto overscroll-contain">
         {!activeView && (
           <div className="mx-auto grid max-w-2xl grid-cols-2 gap-3 p-4">
@@ -4669,7 +4863,7 @@ export default function QuizHub({ onExit }) {
               onContinue={handleContinueRA10863}
               onSelectTitle={() => setActiveView({ type: "ra10863-titles" })}
             />
-            <IssuanceQuizCard onOpen={() => setActiveView({ type: "issuance-quiz" })} />
+            {!limited && <IssuanceQuizCard onOpen={() => setActiveView({ type: "issuance-quiz" })} />}
             {["tl", "cdp", "pc", "tcp"].map((id) => (
               <SubjectCard key={id} subjectId={id} expanded={expandedCard === id} onToggle={() => toggleCard(id)} onPlay={handlePlaySubject} />
             ))}
@@ -4898,14 +5092,14 @@ export default function SubjectQuizPanel({ subjectId, subjectLabel }) {
 
 ## File: ./frontend/src/pages/AdminPanel.jsx
 ```
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { collection, getDocs, doc, updateDoc, arrayUnion, deleteField, Timestamp, runTransaction, writeBatch } from "firebase/firestore";
 import { db } from "../firebase";
 import AdminOverview from "./AdminOverview";
 import { SUBJECT_LABELS, PAYMENT_METHODS, PROMO_PLAN } from "../payments";
 import {
   TRIAL_DAYS, DAY_MS, serverNow, getTrialInfo, getAppAccessInfo,
-  getAccess, formatTimeLeft, formatDateShort, getSubjectInfo,
+  getAccess, formatTimeLeft, formatDateShort, getSubjectInfo, toMs,
 } from "../access";
 
 // Admin-only. One bundle now (PROMO_PLAN = All Access, ₱{price} / {days} days),
@@ -4931,6 +5125,20 @@ const STATE_UI = {
   expired: { label: "Expired", cls: "bg-red-100 text-red-700 dark:bg-red-950/40 dark:text-red-300" },
   none: { label: "No trial yet", cls: "bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400" },
 };
+
+// "5h 20m" na paghihintay ng pending payment. Pula kapag lampas 12 oras, amber kapag lampas 3 oras.
+function waitInfo(requestedAt) {
+  const t = toMs(requestedAt);
+  if (!t) return null;
+  const mins = Math.max(0, Math.floor((serverNow() - t) / 60000));
+  const label = mins < 60 ? mins + "m"
+    : mins < 1440 ? Math.floor(mins / 60) + "h " + (mins % 60) + "m"
+    : Math.floor(mins / 1440) + "d " + Math.floor((mins % 1440) / 60) + "h";
+  const cls = mins >= 720 ? "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300"
+    : mins >= 180 ? "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300"
+    : "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300";
+  return { label, cls };
+}
 
 function formatDateTime(ts) {
   try {
@@ -4971,6 +5179,8 @@ export default function AdminPanel() {
   const [trialFilter, setTrialFilter] = useState("all");
   const [monthsInput, setMonthsInput] = useState({}); // uid -> typed string
   const [bulkBusy, setBulkBusy] = useState(false);
+  const [copiedRef, setCopiedRef] = useState("");
+  const lastLoad = useRef(0);
 
   const loadUsers = async () => {
     setError(null);
@@ -4979,6 +5189,7 @@ export default function AdminPanel() {
       const list = snap.docs.map((d) => ({ uid: d.id, ...d.data() }));
       list.sort((a, b) => (a.fullName || a.email || "").localeCompare(b.fullName || b.email || ""));
       setUsers(list);
+      lastLoad.current = Date.now();
       return list;
     } catch (err) {
       console.warn("AdminPanel load failed:", err);
@@ -4994,8 +5205,10 @@ export default function AdminPanel() {
     if (!users) return [];
     const q = query.trim().toLowerCase();
     if (!q) return users;
+    const hasRef = (u) => [...(u.pendingPurchases || []), ...(u.pendingAccess || [])]
+      .some((p) => (p.referenceCode || "").toLowerCase().includes(q));
     return users.filter((u) =>
-      (u.fullName || "").toLowerCase().includes(q) || (u.email || "").toLowerCase().includes(q)
+      (u.fullName || "").toLowerCase().includes(q) || (u.email || "").toLowerCase().includes(q) || hasRef(u)
     );
   }, [users, query]);
 
@@ -5376,20 +5589,52 @@ export default function AdminPanel() {
   const btnRed = btn + "border border-red-200 text-red-600 active:bg-red-50 dark:border-red-800 dark:text-red-400";
   const inputCls = "w-16 rounded-lg border border-slate-200 px-2 py-1.5 text-center text-xs font-semibold dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100";
 
-  const PendingCard = ({ u, p, onApprove, onReject, approveLabel }) => (
-    <div className="rounded-xl border border-amber-200 bg-amber-50 p-3 dark:border-amber-900 dark:bg-amber-950/20">
-      <p className="truncate font-semibold text-navy-900 dark:text-slate-100">{u.fullName || "(no name)"}</p>
-      <p className="truncate text-xs text-slate-400">{u.email}</p>
-      <p className="mt-2 text-sm font-semibold text-navy-900 dark:text-amber-300">
-        {ALL_PLAN_LABELS[p.plan] || p.plan} · ₱{p.price} · {METHOD_LABELS[p.method] || p.method}
-      </p>
-      <p className="text-xs text-slate-500 dark:text-slate-400">Ref: {p.referenceCode} · {formatDateTime(p.requestedAt)}</p>
-      <div className="mt-3 flex gap-2">
-        <button onClick={onApprove} disabled={!!busyKey} className={btnGreen}>{approveLabel}</button>
-        <button onClick={onReject} disabled={!!busyKey} className={btnRed}>✕ Reject</button>
+  const PendingCard = ({ u, p, onApprove, onReject, approveLabel }) => {
+    const wait = waitInfo(p.requestedAt);
+    const app = getAppAccessInfo(u, serverNow());
+    const nPending = (u.pendingPurchases || []).length + (u.pendingAccess || []).length;
+    const mismatch = p.plan === PROMO_PLAN.id && p.price !== PROMO_PLAN.price;
+    const copyRef = async () => {
+      try {
+        await navigator.clipboard.writeText(p.referenceCode);
+        setCopiedRef(p.referenceCode);
+        setTimeout(() => setCopiedRef(""), 1200);
+      } catch (_) {
+        window.prompt("Copy this:", p.referenceCode);
+      }
+    };
+    const warn = "rounded-full bg-red-100 px-2 py-0.5 text-[11px] font-semibold text-red-700 dark:bg-red-900/30 dark:text-red-300";
+    return (
+      <div className="rounded-xl border border-amber-200 bg-amber-50 p-3 dark:border-amber-900 dark:bg-amber-950/20">
+        <div className="flex items-start justify-between gap-2">
+          <div className="min-w-0">
+            <p className="truncate font-semibold text-navy-900 dark:text-slate-100">{u.fullName || "(no name)"}</p>
+            <p className="truncate text-xs text-slate-400">{u.email}</p>
+          </div>
+          {wait && <span className={"flex-shrink-0 rounded-full px-2 py-0.5 text-[11px] font-semibold " + wait.cls}>⏱ {wait.label}</span>}
+        </div>
+        <p className="mt-2 text-sm font-semibold text-navy-900 dark:text-amber-300">
+          {ALL_PLAN_LABELS[p.plan] || p.plan} · ₱{p.price} · {METHOD_LABELS[p.method] || p.method}
+        </p>
+        <div className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-slate-500 dark:text-slate-400">
+          <span>Ref: <span className="font-semibold">{p.referenceCode}</span></span>
+          <button onClick={copyRef} className="rounded-full border border-slate-300 px-2 py-0.5 text-[11px] font-semibold text-slate-600 active:bg-slate-100 dark:border-slate-600 dark:text-slate-300">{copiedRef === p.referenceCode ? "Copied ✓" : "Copy"}</button>
+          <span>· {formatDateTime(p.requestedAt)}</span>
+        </div>
+        <div className="mt-1.5 flex flex-wrap gap-1.5">
+          {mismatch && <span className={warn}>⚠️ Paid ₱{p.price} · plan is ₱{PROMO_PLAN.price}</span>}
+          {nPending > 1 && <span className={warn}>⚠️ {nPending} pending requests (possible double payment)</span>}
+          <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-600 dark:bg-slate-700 dark:text-slate-300">
+            {app.active ? "Active until " + formatDateShort(app.expiresAt) + " · renewal adds days" : "No active access"}
+          </span>
+        </div>
+        <div className="mt-3 flex gap-2">
+          <button onClick={onApprove} disabled={!!busyKey} className={btnGreen}>{approveLabel}</button>
+          <button onClick={onReject} disabled={!!busyKey} className={btnRed}>✕ Reject</button>
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <div className="mx-auto max-w-2xl space-y-4 pb-10">
@@ -5404,7 +5649,7 @@ export default function AdminPanel() {
         {TABS.map((t) => (
           <button
             key={t.id}
-            onClick={() => setTab(t.id)}
+            onClick={() => { setTab(t.id); if (t.id === "pending" && Date.now() - lastLoad.current > 60000) loadUsers(); }}
             className={"flex-shrink-0 rounded-full border px-3.5 py-1.5 text-sm font-semibold transition-colors " + (tab === t.id ? "border-navy-900 bg-navy-900 text-white dark:border-slate-100 dark:bg-slate-100 dark:text-navy-900" : "border-slate-200 text-slate-600 dark:border-slate-700 dark:text-slate-300")}
           >
             {t.label}
@@ -5417,7 +5662,7 @@ export default function AdminPanel() {
         <input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search name or email..."
+          placeholder="Search name, email or ref code..."
           className="flex-1 rounded-xl border border-slate-200 px-4 py-2.5 text-sm dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100"
         />
         <button
@@ -5520,7 +5765,7 @@ export default function AdminPanel() {
       {/* ───────────── PENDING ───────────── */}
       {tab === "pending" && users !== null && !error && (
         <div className="space-y-3">
-          <p className="text-sm font-semibold text-navy-900 dark:text-slate-100">⏳ Pending approvals ({pendingRows.length})</p>
+          <p className="text-sm font-semibold text-navy-900 dark:text-slate-100">⏳ Pending approvals ({pendingRows.length}){pendingRows.length > 0 && waitInfo(pendingRows[0].p.requestedAt) ? " · oldest waiting " + waitInfo(pendingRows[0].p.requestedAt).label : ""}</p>
           {pendingRows.length === 0 && <p className="py-8 text-center text-slate-400">No pending payments. 🎉</p>}
           {pendingRows.map(({ u, p, kind }) => {
             if (kind === "access") {
@@ -5991,6 +6236,167 @@ export default function AdminOverview({ users }) {
           </p>
         </div>
       </div>
+    </div>
+  );
+}
+```
+
+## File: ./frontend/src/pages/InstallView.jsx
+```
+import { useMemo, useState } from "react";
+import { useInstallInfo, promptInstall, detectPlatform } from "../pwaInstall";
+
+const card = "rounded-2xl border border-slate-200 bg-white p-4 shadow-card dark:border-slate-700 dark:bg-slate-800";
+const h2 = "mb-3 text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500";
+const bigBtn = "flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl bg-navy-900 px-4 py-3 text-sm font-bold text-white active:bg-navy-800 disabled:opacity-50 dark:bg-navy-700";
+const ghostBtn = "flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-700 active:bg-slate-100 dark:border-slate-600 dark:text-slate-200 dark:active:bg-slate-700";
+
+function Steps({ items }) {
+  return (
+    <ol className="space-y-2.5">
+      {items.map((t, i) => (
+        <li key={i} className="flex gap-3 text-sm text-slate-700 dark:text-slate-200">
+          <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-navy-900 text-xs font-bold text-white dark:bg-navy-700">{i + 1}</span>
+          <span className="pt-0.5">{t}</span>
+        </li>
+      ))}
+    </ol>
+  );
+}
+
+export default function InstallView() {
+  const { canInstall, justInstalled, standalone } = useInstallInfo();
+  const p = useMemo(() => detectPlatform(), []);
+  const [dismissed, setDismissed] = useState(false);
+  const [added, setAdded] = useState(false);
+  const [upd, setUpd] = useState("");
+
+  const doInstall = async () => {
+    const r = await promptInstall();
+    if (r === "dismissed") setDismissed(true);
+  };
+
+  const checkUpdate = async () => {
+    setUpd("checking");
+    try {
+      const reg = "serviceWorker" in navigator ? await navigator.serviceWorker.getRegistration() : null;
+      if (reg) await reg.update();
+      setUpd("reloading");
+      setTimeout(() => window.location.reload(), 700);
+    } catch (_) {
+      setUpd("error");
+    }
+  };
+
+  const done = justInstalled || added;
+
+  let body;
+  if (standalone) {
+    body = (
+      <section className={card}>
+        <p className="text-lg font-bold text-emerald-600 dark:text-emerald-400">✅ You are using the installed app</p>
+        <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">Nothing to install. It opens full screen straight from your Home Screen.</p>
+      </section>
+    );
+  } else if (done) {
+    body = (
+      <section className={card + " text-center"}>
+        <p className="text-4xl" aria-hidden>🎉</p>
+        <p className="mt-2 text-xl font-bold text-emerald-600 dark:text-emerald-400">Done!</p>
+        <p className="mt-2 text-sm text-slate-700 dark:text-slate-200">
+          Check your <b>Home Screen</b>, find the app icon, and open it from there. It opens full screen, like a real app.
+        </p>
+        <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">Tapos na! Hanapin ang icon sa Home Screen mo at buksan doon. Puwede mo nang isara ang browser na ito.</p>
+        {added && !justInstalled && (
+          <button onClick={() => setAdded(false)} className="mt-4 text-xs text-slate-400 underline">I did not add it yet</button>
+        )}
+      </section>
+    );
+  } else if (p.inApp) {
+    body = (
+      <section className={card + " border-amber-300 bg-amber-50 dark:border-amber-700 dark:bg-amber-950/20"}>
+        <p className="font-bold text-amber-800 dark:text-amber-300">⚠️ Open this in your browser first</p>
+        <p className="mt-1 text-sm text-slate-700 dark:text-slate-200">
+          You are inside the Facebook / Messenger (or similar) built-in browser, which cannot install apps.
+        </p>
+        <div className="mt-3">
+          <Steps items={[
+            "Tap the ⋯ or ⋮ menu (top right or bottom right).",
+            p.ios ? "Tap \"Open in Safari\"." : "Tap \"Open in Chrome\" (or \"Open in browser\").",
+            "Come back to this Update tab and install from there.",
+          ]} />
+        </div>
+      </section>
+    );
+  } else if (canInstall) {
+    body = (
+      <section className={card}>
+        <h2 className={h2}>Install the app</h2>
+        <p className="mb-3 text-sm text-slate-600 dark:text-slate-300">One tap. It adds the app to your Home Screen and opens full screen, no browser bars.</p>
+        <button onClick={doInstall} className={bigBtn}>📲 Install app</button>
+        {dismissed && (
+          <p className="mt-3 text-xs text-slate-500 dark:text-slate-400">No problem. Tap the button again later, or use your browser menu (⋮) → "Install app".</p>
+        )}
+      </section>
+    );
+  } else if (p.ios) {
+    body = (
+      <section className={card}>
+        <h2 className={h2}>Add to Home Screen (iPhone / iPad)</h2>
+        <p className="mb-3 text-xs text-slate-500 dark:text-slate-400">Apple does not allow one-tap install, so it takes 3 quick steps:</p>
+        <Steps items={[
+          p.browser === "safari"
+            ? "Tap the Share button ⬆️ (the square with an arrow, at the bottom of Safari). On newer iPhones it may be inside the ••• menu."
+            : "Tap the Share button ⬆️ (the square with an arrow). If you cannot find \"Add to Home Screen\", open this page in Safari instead.",
+          "Scroll down and tap \"Add to Home Screen\".",
+          "Tap \"Add\" (top right). The app icon appears on your Home Screen.",
+        ]} />
+        <button onClick={() => setAdded(true)} className={bigBtn + " mt-4"}>✅ I added it</button>
+      </section>
+    );
+  } else if (p.android) {
+    body = (
+      <section className={card}>
+        <h2 className={h2}>Add to Home Screen (Android)</h2>
+        <p className="mb-3 text-xs text-slate-500 dark:text-slate-400">
+          {p.browser === "chrome" ? "Your browser did not offer the one-tap install, so use the menu:" : "For one-tap install, open this page in Google Chrome. Or use your browser menu:"}
+        </p>
+        <Steps items={[
+          p.browser === "samsung" ? "Tap the ☰ menu at the bottom right." : "Tap the ⋮ menu at the top right.",
+          p.browser === "samsung" ? "Tap \"Add page to\" → \"Home screen\"." : "Tap \"Install app\" (or \"Add to Home screen\").",
+          "Tap \"Install\" / \"Add\". The app icon appears on your Home Screen.",
+        ]} />
+        <button onClick={() => setAdded(true)} className={bigBtn + " mt-4"}>✅ I added it</button>
+      </section>
+    );
+  } else {
+    body = (
+      <section className={card}>
+        <h2 className={h2}>Install the app</h2>
+        <p className="text-sm text-slate-600 dark:text-slate-300">
+          Open this site on your phone to add it to your Home Screen. On a computer, use the install icon in the Chrome / Edge address bar.
+        </p>
+      </section>
+    );
+  }
+
+  return (
+    <div className="mx-auto max-w-2xl space-y-4 pb-10">
+      <div>
+        <h1 className="mb-1 text-2xl font-bold text-slate-900 dark:text-slate-50">Update</h1>
+        <p className="text-sm text-slate-500 dark:text-slate-400">Put the app on your Home Screen and keep it up to date.</p>
+      </div>
+
+      {body}
+
+      <section className={card}>
+        <h2 className={h2}>Get the latest version</h2>
+        <p className="mb-3 text-sm text-slate-600 dark:text-slate-300">Fixes and new features load automatically. Tap below if you want to check right now (needs internet).</p>
+        <button onClick={checkUpdate} disabled={upd === "checking" || upd === "reloading"} className={ghostBtn}>
+          {upd === "checking" ? "Checking…" : upd === "reloading" ? "Updating… the app will reload" : "🔄 Check for updates"}
+        </button>
+        {upd === "error" && <p className="mt-2 text-xs text-red-600 dark:text-red-400">Could not check. Please connect to the internet and try again.</p>}
+      </section>
     </div>
   );
 }
@@ -8565,7 +8971,9 @@ export function AuthProvider({ children }) {
       );
       // Huwag hintayin ang server: kapag offline o mahina ang signal, mahahang ang app dito.
       // Ipinipila ng Firestore ang write at ipapadala kapag bumalik ang connection.
-      updateDoc(ref, { devices: updated }).catch((e) => console.warn("device update failed:", e));
+      if (!already.lastActive || Date.now() - already.lastActive > 6 * 60 * 60 * 1000) {
+        updateDoc(ref, { devices: updated }).catch((e) => console.warn("device update failed:", e));
+      }
       setProfile({ ...data, devices: updated });
       setDeviceLimitReached(false);
     } else if (devices.length < 2) {
@@ -9107,6 +9515,97 @@ export function computePromoGrant(profile, plan, now = serverNow()) {
   const cur = getAppAccessInfo(profile, now);
   const appBase = cur.active ? cur.expiresAt : now;
   return { days, subjectExpiry, appExpiresAt: appBase + span, bonusFlag: false, bonusMonths: 0 };
+}
+```
+
+## File: ./frontend/src/pwaInstall.js
+```
+// Install-to-Home-Screen helper (PWA).
+// Imported by ChapterBrowser, so the browser's "beforeinstallprompt" event is
+// captured at startup (it often fires before the user opens the Update tab).
+import { useEffect, useState } from "react";
+
+let deferred = null;
+let justInstalled = false;
+const subs = new Set();
+const notify = () => subs.forEach((f) => f());
+
+if (typeof window !== "undefined") {
+  window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault();
+    deferred = e;
+    notify();
+  });
+  window.addEventListener("appinstalled", () => {
+    deferred = null;
+    justInstalled = true;
+    notify();
+  });
+}
+
+// Capacitor APK = already a real app.
+export function isNativeApp() {
+  try {
+    return !!(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform());
+  } catch (_) {
+    return false;
+  }
+}
+
+// Running from the Home Screen icon (no browser bars).
+export function isStandalone() {
+  try {
+    return (
+      window.matchMedia("(display-mode: standalone)").matches ||
+      window.matchMedia("(display-mode: fullscreen)").matches ||
+      window.navigator.standalone === true
+    );
+  } catch (_) {
+    return false;
+  }
+}
+
+export function detectPlatform() {
+  const nav = typeof navigator !== "undefined" ? navigator : {};
+  const ua = nav.userAgent || "";
+  const touchMac = nav.platform === "MacIntel" && nav.maxTouchPoints > 1; // iPadOS
+  const ios = /iPhone|iPad|iPod/.test(ua) || touchMac;
+  const android = /Android/i.test(ua);
+  // Facebook / Messenger / Instagram etc. built-in browsers cannot install apps.
+  const inApp = /FBAN|FBAV|FB_IAB|Messenger|Instagram|Line\/|Snapchat|TikTok|MicroMessenger|Viber/i.test(ua);
+  let browser = "other";
+  if (/SamsungBrowser/i.test(ua)) browser = "samsung";
+  else if (/EdgA|EdgiOS|Edg\//.test(ua)) browser = "edge";
+  else if (/OPR\/|OPiOS/.test(ua)) browser = "opera";
+  else if (/FxiOS|Firefox/.test(ua)) browser = "firefox";
+  else if (/CriOS|Chrome\//.test(ua)) browser = "chrome";
+  else if (/Safari/.test(ua)) browser = "safari";
+  return { ios, android, inApp, browser };
+}
+
+// Android / desktop Chrome: shows the browser's own install dialog (one tap).
+export async function promptInstall() {
+  if (!deferred) return "unavailable";
+  const ev = deferred;
+  try {
+    await ev.prompt();
+    const choice = await ev.userChoice;
+    deferred = null; // the event can only be used once
+    notify();
+    return choice && choice.outcome === "accepted" ? "accepted" : "dismissed";
+  } catch (_) {
+    return "unavailable";
+  }
+}
+
+export function useInstallInfo() {
+  const [, force] = useState(0);
+  useEffect(() => {
+    const f = () => force((n) => n + 1);
+    subs.add(f);
+    return () => { subs.delete(f); };
+  }, []);
+  return { canInstall: !!deferred, justInstalled, standalone: isStandalone() };
 }
 ```
 
@@ -10595,5 +11094,60 @@ console.log("✅ Tapos na!");
 console.log("   • " + cbPath + "  (backup: .bak)");
 console.log("   • " + storePath + "  (backup: .bak)");
 console.log("Susunod: cd frontend && npm run build   (o i-push na sa Codemagic)");
+```
+
+## File: ./patch-speed.js
+```
+const fs = require("fs");
+
+function rep(s, from, to) {
+  if (!s.includes(from)) throw new Error("Text not found: " + from.slice(0, 70));
+  return s.replace(from, () => to);
+}
+
+function patch(file, fn) {
+  try {
+    const s = fs.readFileSync(file, "utf8");
+    const out = fn(s);
+    if (out === s) { console.log("skipped (already patched):", file); return; }
+    fs.copyFileSync(file, file + ".bak");
+    fs.writeFileSync(file, out);
+    console.log("patched:", file);
+  } catch (e) {
+    console.log("FAILED:", file, "-", e.message);
+  }
+}
+
+// 1) AccessGate: lazy-load ChapterBrowser + QuizHub
+patch("frontend/src/components/AccessGate.jsx", (s) => {
+  if (s.includes("lazy(() => import(")) return s;
+  s = rep(s, 'import { useState, useEffect, useRef } from "react";',
+             'import { useState, useEffect, useRef, lazy, Suspense } from "react";');
+  s = rep(s, 'import ChapterBrowser from "../pages/ChapterBrowser";\n', "");
+  s = rep(s, 'import QuizHub from "../pages/QuizHub";\n', "");
+  s = rep(s, 'import { PROMO_PLAN } from "../payments";\n',
+    'import { PROMO_PLAN } from "../payments";\n\n' +
+    'const ChapterBrowser = lazy(() => import("../pages/ChapterBrowser"));\n' +
+    'const QuizHub = lazy(() => import("../pages/QuizHub"));\n');
+  s = rep(s, "      <AccessGateInner />\n",
+    '      <Suspense fallback={<Splash text="Loading…" />}>\n' +
+    "        <AccessGateInner />\n" +
+    "      </Suspense>\n");
+  return s;
+});
+
+// 2) authContext: write device lastActive at most once every 6 hours
+patch("frontend/src/authContext.jsx", (s) => {
+  if (s.includes("!already.lastActive")) return s;
+  const start = s.indexOf("if (already) {");
+  if (start < 0) throw new Error("if (already) { not found");
+  const target = 'updateDoc(ref, { devices: updated }).catch((e) => console.warn("device update failed:", e));';
+  const i = s.indexOf(target, start);
+  if (i < 0) throw new Error("device updateDoc line not found");
+  const repl =
+    "if (!already.lastActive || Date.now() - already.lastActive > 6 * 60 * 60 * 1000) {\n        " +
+    target + "\n      }";
+  return s.slice(0, i) + repl + s.slice(i + target.length);
+});
 ```
 

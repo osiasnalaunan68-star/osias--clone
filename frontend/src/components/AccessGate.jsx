@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import { useAuth } from "../authContext";
 import { TRIAL_DAYS, DAY_MS, formatTimeLeft, formatDateShort, toMs } from "../access";
 import { PROMO_PLAN } from "../payments";
+import { useUpdateAvailable, getRemoteId, applyUpdate } from "../updateCheck";
 
 const ChapterBrowser = lazy(() => import("../pages/ChapterBrowser"));
 const QuizHub = lazy(() => import("../pages/QuizHub"));
@@ -298,6 +299,29 @@ function AccessPill({ access }) {
   );
 }
 
+// ── "New version available" banner (dismissible, comes back next app open) ──
+function UpdateBanner() {
+  const available = useUpdateAvailable();
+  const [busy, setBusy] = useState(false);
+  const [, setTick] = useState(0);
+  if (!available) return null;
+  const KEY = "cuble_update_dismiss";
+  let dismissed = false;
+  try { dismissed = sessionStorage.getItem(KEY) === getRemoteId(); } catch (_) {}
+  if (dismissed) return null;
+  const hide = () => { try { sessionStorage.setItem(KEY, String(getRemoteId())); } catch (_) {} setTick((n) => n + 1); };
+  const go = async () => { setBusy(true); const ok = await applyUpdate(); if (!ok) setBusy(false); };
+  return (
+    <div className="pointer-events-none fixed inset-x-0 top-0 z-[65] flex justify-center px-3" style={{ paddingTop: "calc(env(safe-area-inset-top) + 8px)" }}>
+      <div className="pointer-events-auto flex w-full max-w-md items-center gap-2 rounded-2xl border border-gold-500 bg-navy-900 py-2 pl-4 pr-2 text-white shadow-xl dark:bg-slate-800">
+        <span className="min-w-0 flex-1 text-xs font-semibold leading-snug">🆕 New version available. Update to get the latest fixes.</span>
+        <button onClick={go} disabled={busy} className="flex-shrink-0 rounded-full bg-gold-500 px-3 py-1.5 text-xs font-bold text-navy-900 active:bg-gold-600 disabled:opacity-60">{busy ? "Updating…" : "Update now"}</button>
+        <button onClick={hide} aria-label="Dismiss" className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full text-sm opacity-70 active:opacity-100">✕</button>
+      </div>
+    </div>
+  );
+}
+
 export default function AccessGate() {
   return (
     <>
@@ -307,6 +331,7 @@ export default function AccessGate() {
       <UnlockToast />
       <RenewBanner />
       <OfflinePill />
+      <UpdateBanner />
     </>
   );
 }

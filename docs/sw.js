@@ -19,8 +19,8 @@ self.addEventListener("activate", (event) => {
   self.clients.claim();
 });
 
-function fetchAndCache(request) {
-  return fetch(request).then((response) => {
+function fetchAndCache(request, init) {
+  return fetch(request, init).then((response) => {
     if (response && (response.ok || response.type === "opaque")) {
       const copy = response.clone();
       caches.open(CACHE_NAME).then((cache) => cache.put(request, copy)).catch(() => {});
@@ -44,6 +44,7 @@ self.addEventListener("fetch", (event) => {
   if (request.method !== "GET") return;
   const url = new URL(request.url);
   const sameOrigin = url.origin === self.location.origin;
+  if (sameOrigin && url.pathname.endsWith("/version.json")) return; // always straight to the network
 
   // Cross-origin: only cache Google Fonts. Firebase/Auth/APIs go straight to the browser.
   if (!sameOrigin) {
@@ -63,7 +64,7 @@ self.addEventListener("fetch", (event) => {
   // Rest of same-origin files: network-first with short timeout.
   event.respondWith(
     (async () => {
-      const network = fetchAndCache(request);
+      const network = fetchAndCache(request, { cache: "no-cache" }); // skip the 10-min HTTP cache of GitHub Pages
       network.catch(() => {});
       const cached = await caches.match(request);
       if (!cached) return network.catch(() => offlineFallback(request));
