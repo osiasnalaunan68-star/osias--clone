@@ -1,0 +1,195 @@
+{
+  "type": "CAO",
+  "number": "01-2023",
+  "level1": [
+    {
+      "question": "Aling section ng CAO No. 02-2022 ang in-amend ng Sec. 1.1 ng CAO 01-2023?",
+      "choices": {
+        "A": "Sec. 4.1",
+        "B": "Sec. 7.7",
+        "C": "Sec. 7.1",
+        "D": "Sec. 4.11"
+      },
+      "correct": "D",
+      "reason": "Sa Sec. 1.1, ang Section 4.11 ng CAO No. 2-2022 ang amended. Ang Sec. 7.7 ay bagong idinagdag sa Sec. 1.2, hindi in-amend."
+    },
+    {
+      "question": "Kailan ipapataw ang Regularization Fee ayon sa amended Sec. 4.11?",
+      "choices": {
+        "A": "Kapag walang naipakitang ATA Carnet sa pagpasok ng goods",
+        "B": "Kapag walang evidence of re-exportation mula sa re-exportation counterfoil na duly completed, signed, stamped at dated ng Bureau",
+        "C": "Kapag hindi nabayaran ang duties at taxes sa temporary admission",
+        "D": "Kapag lumampas sa validity period ng carnet ang goods"
+      },
+      "correct": "B",
+      "reason": "Ayon sa amended Sec. 4.11, ipapataw ang Regularization Fee kung ang evidence of re-exportation ay hindi naibigay ng re-exportation counterfoil na duly completed, signed, stamped at dated ng Bureau."
+    },
+    {
+      "question": "Magkano ang Regularization Fee sa first offense ayon sa Sec. 4.11.1?",
+      "choices": {
+        "A": "Philippine peso amount na katumbas ng 25 US dollars",
+        "B": "Philippine peso amount na katumbas ng 50 US dollars",
+        "C": "Philippine peso amount na katumbas ng 100 US dollars",
+        "D": "Philippine peso amount na katumbas ng 10 US dollars"
+      },
+      "correct": "A",
+      "reason": "Sa Sec. 4.11.1, ang fee sa first offense ay Philippine peso amount na katumbas ng 25 US dollars."
+    },
+    {
+      "question": "Magkano ang Regularization Fee sa second o subsequent offenses ayon sa Sec. 4.11.2?",
+      "choices": {
+        "A": "Philippine peso amount na katumbas ng 25 US dollars",
+        "B": "Philippine peso amount na katumbas ng 75 US dollars",
+        "C": "Philippine peso amount na katumbas ng 50 US dollars",
+        "D": "Philippine peso amount na katumbas ng 100 US dollars"
+      },
+      "correct": "C",
+      "reason": "Sa Sec. 4.11.2, ang fee sa second o subsequent offenses ay Philippine peso amount na katumbas ng 50 US dollars, doble ng first offense."
+    },
+    {
+      "question": "Ano ang paksa ng bagong Sec. 7.7 na idinagdag sa CAO No. 02-2022?",
+      "choices": {
+        "A": "Ang Regularization Fee sa second offense",
+        "B": "Ang utilization at implementation ng electronic ATA (E-ATA) Carnet System",
+        "C": "Ang paggamit ng re-exportation counterfoil",
+        "D": "Ang pagpapalawig ng validity ng ATA Carnet"
+      },
+      "correct": "B",
+      "reason": "Ayon sa Sec. 1.2 at sa bagong Sec. 7.7, makikipagtrabaho ang Bureau sa NIGA at ICC para sa utilization at implementation ng electronic ATA (E-ATA) Carnet System sa Pilipinas."
+    },
+    {
+      "question": "Sino ang makikipagtrabaho nang malapit sa Bureau para sa E-ATA Carnet System ayon sa Sec. 7.7?",
+      "choices": {
+        "A": "Ang Secretary of Finance at ang Tariff Commission",
+        "B": "Ang ICC lamang",
+        "C": "Ang NIGA lamang",
+        "D": "Ang NIGA at ang ICC"
+      },
+      "correct": "D",
+      "reason": "Sinasabi sa Sec. 7.7 na ang Bureau ay makikipagtrabaho nang malapit sa NIGA at sa ICC para sa utilization at implementation ng E-ATA Carnet System."
+    },
+    {
+      "question": "Kailan makikipagtrabaho ang Bureau sa NIGA at ICC para sa E-ATA Carnet System ayon sa Sec. 7.7?",
+      "choices": {
+        "A": "Kapag fully adopted at implemented na ang digital carnet system bilang acceptable admission document para sa temporarily admitted goods sa ilalim ng Istanbul Convention",
+        "B": "Kaagad matapos pumirma ang Acting Commissioner sa CAO",
+        "C": "Kapag nabayaran na ang first offense na Regularization Fee",
+        "D": "Pagkatapos ng periodic review makalipas ang tatlong taon"
+      },
+      "correct": "A",
+      "reason": "Conditional ang Sec. 7.7: 'once the digital carnet system is fully adopted and implemented as acceptable admission document for temporarily admitted goods covered under the Istanbul Convention.' Wala sa teksto ang pirma ng Commissioner, ang bayad ng fee o ang periodic review bilang kondisyon."
+    },
+    {
+      "question": "Kailan magiging epektibo ang CAO No. 01-2023 ayon sa Sec. 3?",
+      "choices": {
+        "A": "30 araw mula publication",
+        "B": "15 araw matapos aprubahan ng Secretary of Finance",
+        "C": "Kaagad matapos ang complete publication sa Official Gazette o newspaper of general circulation",
+        "D": "Sa petsa ng pirma ng Acting Commissioner"
+      },
+      "correct": "C",
+      "reason": "Sa Sec. 3 (Effectivity), epektibo ang CAO immediately after its complete publication sa Official Gazette o sa newspaper of general circulation, kaya walang 30-day waiting period."
+    },
+    {
+      "question": "Ano ang layunin ng CAO No. 01-2023 ayon sa Introduction?",
+      "choices": {
+        "A": "Dagdagan ang rate ng duties sa temporarily admitted goods",
+        "B": "Palitan ang buong ATA system ng bagong sistema",
+        "C": "Ipagbawal ang temporary admission ng goods",
+        "D": "I-align ang pertinent provisions ng CAO No. 2-2022 sa international best practices sa regularization fee at sa guidance ng ICC"
+      },
+      "correct": "D",
+      "reason": "Ayon sa Introduction, ina-amend ng CAO ang pertinent provisions ng CAO No. 2-2022 para i-align sa international best practices sa pag-impose ng regularization fee ng mga signatories sa ATA Carnet Convention, at alinsunod sa guidance ng ICC."
+    },
+    {
+      "question": "Ilang certified copies ng CAO ang ibibigay sa Office of the National Administrative Register ng University of the Philippines Law Center?",
+      "choices": {
+        "A": "Dalawa",
+        "B": "Tatlo",
+        "C": "Lima",
+        "D": "Isa"
+      },
+      "correct": "B",
+      "reason": "Sa closing clause ng CAO, tatlong (3) certified copies ang ibibigay sa Office of the National Administrative Register ng University of the Philippines Law Center."
+    }
+  ],
+  "level2": [
+    {
+      "question": "Techno Expo Ltd. brought exhibition equipment into the Philippines under an ATA Carnet. When the equipment left, no evidence of re-exportation was provided by a re-exportation counterfoil duly completed, signed, stamped and dated by the Bureau. This is Techno Expo's first offense. What Regularization Fee applies under CAO No. 01-2023?",
+      "choices": {
+        "A": "US dollar amount of 25, payable in US dollars",
+        "B": "Philippine peso amount equivalent to 50 US dollars",
+        "C": "Philippine peso amount equivalent to 25 US dollars",
+        "D": "No fee, because first offenses are only warned"
+      },
+      "correct": "C",
+      "reason": "Under amended Sec. 4.11, the Regularization Fee is imposed when evidence of re-exportation is not provided by the duly completed, signed, stamped and dated counterfoil. Sec. 4.11.1 sets the first-offense fee at the Philippine peso amount equivalent to 25 US dollars, so it is payable in pesos and a first offense is not excused."
+    },
+    {
+      "question": "Brightway Exhibits previously failed twice to provide evidence of re-exportation through a duly completed, signed, stamped and dated counterfoil. It now fails a third time for another carnet shipment. What Regularization Fee applies under CAO No. 01-2023?",
+      "choices": {
+        "A": "Philippine peso amount equivalent to 50 US dollars",
+        "B": "Philippine peso amount equivalent to 75 US dollars, because the fee increases with each offense",
+        "C": "Philippine peso amount equivalent to 25 US dollars, because only the first offense is covered by the schedule",
+        "D": "Philippine peso amount equivalent to 100 US dollars"
+      },
+      "correct": "A",
+      "reason": "Sec. 4.11.2 sets a single rate for second or subsequent offenses: the Philippine peso amount equivalent to 50 US dollars. A third failure is a subsequent offense, so the fee does not keep increasing."
+    },
+    {
+      "question": "After an exhibition, Reyes Display Co. re-exported its carnet goods. The re-exportation counterfoil was completed and signed by the carnet holder but bears neither a Bureau stamp nor a Bureau date. Assuming this is its first offense, what is the result under CAO No. 01-2023?",
+      "choices": {
+        "A": "No fee is imposed, because the goods were in fact re-exported",
+        "B": "No fee is imposed, because the carnet holder's signature is sufficient",
+        "C": "A fee equivalent to 50 US dollars is imposed",
+        "D": "A fee equivalent to 25 US dollars is imposed"
+      },
+      "correct": "D",
+      "reason": "Amended Sec. 4.11 imposes the Regularization Fee if evidence of re-exportation is not provided by the counterfoil duly completed, signed, stamped and dated by the Bureau. The counterfoil lacks the Bureau stamp and date, so the evidence requirement is not met. As a first offense under Sec. 4.11.1, the fee is the peso equivalent of 25 US dollars."
+    },
+    {
+      "question": "Harbor Gallery re-exported its carnet goods. The re-exportation counterfoil is duly completed, signed, stamped and dated by the Bureau. A junior officer proposes to impose the Regularization Fee as a precaution. Is this consistent with CAO No. 01-2023?",
+      "choices": {
+        "A": "Yes, because the fee is imposed on all ATA Carnet users",
+        "B": "No, because the fee is imposed only if evidence of re-exportation is not provided by such a counterfoil",
+        "C": "Yes, but only at the equivalent of 25 US dollars",
+        "D": "No, because the fee applies only to subsequent offenses"
+      },
+      "correct": "B",
+      "reason": "Under amended Sec. 4.11, the Regularization Fee is imposed only if evidence of re-exportation is not provided by the counterfoil duly completed, signed, stamped and dated by the Bureau. Here the evidence is provided, so the condition for the fee is absent. The fee also applies to first offenses under Sec. 4.11.1, not only to subsequent ones."
+    },
+    {
+      "question": "A carnet holder asks the Bureau to accept an electronic ATA (E-ATA) carnet right away. The digital carnet system has not yet been fully adopted and implemented as an acceptable admission document for temporarily admitted goods under the Istanbul Convention. What does Sec. 7.7 provide in this situation?",
+      "choices": {
+        "A": "The Bureau must accept the E-ATA carnet immediately, because Sec. 7.7 has been added",
+        "B": "The Bureau must wait three years before acting on the E-ATA carnet",
+        "C": "The Bureau's duty to work closely with the NIGA and the ICC on the E-ATA system arises once the digital carnet system is fully adopted and implemented",
+        "D": "The Bureau must refer the request to the Secretary of Finance"
+      },
+      "correct": "C",
+      "reason": "Sec. 7.7 is conditional: the Bureau shall work closely with the NIGA and the ICC for the utilization and implementation of the E-ATA Carnet System once the digital carnet system is fully adopted and implemented as an acceptable admission document under the Istanbul Convention. Because that condition is not yet met, the Bureau's duty under Sec. 7.7 has not arisen."
+    },
+    {
+      "question": "CAO No. 01-2023 was signed by the Acting Commissioner on JAN 16 2023 and approved by the Secretary of Finance on FEB 06 2023. Assume its complete publication in a newspaper of general circulation was finished on 1 March 2023. When does it take effect?",
+      "choices": {
+        "A": "Immediately after its complete publication on 1 March 2023",
+        "B": "30 days after publication",
+        "C": "On FEB 06 2023, the date of approval",
+        "D": "On JAN 16 2023, the date of signing"
+      },
+      "correct": "A",
+      "reason": "Sec. 3 provides that the CAO takes effect immediately after its complete publication in the Official Gazette or a newspaper of general circulation. Effectivity is counted from complete publication, not from signing or approval, and there is no 30-day waiting period."
+    },
+    {
+      "question": "A customs officer claims that CAO No. 01-2023 repealed all of CAO No. 02-2022. Which statement is correct?",
+      "choices": {
+        "A": "The officer is correct, because the entire CAO No. 02-2022 was replaced",
+        "B": "The officer is wrong, because CAO No. 01-2023 amends Sec. 4.11 and adds a new Sec. 7.7 to CAO No. 02-2022, repealing only inconsistent provisions, particularly Sec. 4.11",
+        "C": "The officer is wrong, because only Sec. 7.7 was amended and Sec. 4.11 remains unchanged",
+        "D": "The officer is wrong, because Sec. 4.11 was kept and only a new Sec. 7.7 was added"
+      },
+      "correct": "B",
+      "reason": "Sec. 1.1 amends Sec. 4.11 of CAO No. 2-2022, and Sec. 1.2 adds a new Sec. 7.7. Under Sec. 2, only provisions inconsistent with CAO No. 01-2023, particularly Sec. 4.11, are repealed, amended or modified. The CAO therefore does not replace the whole CAO No. 02-2022."
+    }
+  ]
+}

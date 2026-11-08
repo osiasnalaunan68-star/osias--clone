@@ -1,0 +1,228 @@
+{
+  "type": "CAO",
+  "number": "11-2019",
+  "level1": [
+    {
+      "question": "Anong duty rate at exchange rate ang ia-apply sa imported Goods na withdrawn mula sa Free Zone papunta sa Customs Territory?",
+      "choices": {
+        "A": "Ang rates sa petsa ng Admission ng Goods sa Free Zone",
+        "B": "Ang rates sa petsa ng pag-issue ng Certificate of Registration ng Locator",
+        "C": "Ang rates sa oras ng withdrawal",
+        "D": "Ang rates sa petsa ng pagdating ng sasakyang pandagat"
+      },
+      "correct": "C",
+      "reason": "Ayon sa Sec. 4.4.3, ang duty rate at exchange rate sa time of withdrawal ang ia-apply sa Goods na orihinal na ina-admit, original man o advanced form."
+    },
+    {
+      "question": "Ilang taon dapat itago ng Locators at Port Users ang records ng kanilang activities, mula sa date of filing ng Goods Declaration?",
+      "choices": {
+        "A": "Tatlong (3) taon",
+        "B": "Limang (5) taon",
+        "C": "Sampung (10) taon",
+        "D": "Isang (1) taon"
+      },
+      "correct": "A",
+      "reason": "Sa Sec. 4.6.1, kailangang itago ng Locators at Port Users ang records ng lahat ng activities nila, kasama ang records ng imported Goods na withdrawn papuntang Customs Territory, sa loob ng tatlong (3) taon mula sa date of filing ng Goods Declaration."
+    },
+    {
+      "question": "Anong dokumento ang sumasaklaw sa Goods na direktang ina-admit sa Free Zone ng isang Free Zone Locator?",
+      "choices": {
+        "A": "Goods Declaration for Consumption",
+        "B": "Goods Declaration for Transit",
+        "C": "Transit Permit",
+        "D": "Goods Declaration for Admission"
+      },
+      "correct": "D",
+      "reason": "Ayon sa Sec. 4.2.3.a, ang Goods na direktang ina-admit ng Free Zone Locator ay covered ng Goods Declaration for Admission kasama ang required documents."
+    },
+    {
+      "question": "Ayon sa Sec. 3.11, sino ang Port User?",
+      "choices": {
+        "A": "Entity na rehistrado sa Free Zone Authority at may valid na Certificate of Registration",
+        "B": "Entity na hindi Free Zone Locator na gumagamit ng seaport o airport facility ng Free Zone para sa customs clearance ng importation nito",
+        "C": "Entity na naglilipat ng Goods mula isang Free Zone papunta sa isa pang Free Zone",
+        "D": "Entity na may Certificate of Tax Exemption na hindi pa expired"
+      },
+      "correct": "B",
+      "reason": "Sa Sec. 3.11, ang Port User ay sole proprietorship, partnership, corporation o entity na hindi Free Zone Locator at gumagamit ng seaport o airport facility ng Free Zone para sa customs clearance ng importation nila."
+    },
+    {
+      "question": "Sino ang may responsibilidad na mag-monitor ng galaw ng Goods sa loob ng Free Zone kung saan ito ina-admit?",
+      "choices": {
+        "A": "Ang Free Zone Authorities",
+        "B": "Ang Port User",
+        "C": "Ang District Collector of Customs",
+        "D": "Ang Secretary of Finance"
+      },
+      "correct": "A",
+      "reason": "Ayon sa Sec. 4.3.1, ang Free Zone Authorities ang may responsibilidad na i-monitor ang movement ng Goods sa loob ng Free Zone, at magbibigay sila ng copies ng report sa Bureau para ma-monitor ang location ng admitted Goods."
+    },
+    {
+      "question": "Anong dokumento ang sumasaklaw sa paglipat ng Goods mula isang Free Zone papunta sa isa pang Free Zone?",
+      "choices": {
+        "A": "Goods Declaration for Consumption",
+        "B": "Authority to Release Imported Goods (ATRIG)",
+        "C": "Transit Permit",
+        "D": "Certificate of Registration ng Locator"
+      },
+      "correct": "C",
+      "reason": "Sa Sec. 4.3.2, ang transfer ng Goods mula isang Free Zone papunta sa isa pa ay covered ng necessary Transit Permit, na tatanggapin ng Bureau at Free Zone Authorities bilang Goods Declaration for Transit and Admission, whenever appropriate."
+    },
+    {
+      "question": "Ayon sa Sec. 4.4.4, ano ang dapat mangyari bago ma-release ang Goods na ipinasok sa Customs Territory mula sa Free Zone, maliban sa mga kasong itinakda ng batas?",
+      "choices": {
+        "A": "Babayaran ang duties at taxes sa Free Zone Authority",
+        "B": "Maghihintay ng 15 araw para maging final ang assessment",
+        "C": "Magsusumite ng Certificate of Origin sa Free Zone Authority",
+        "D": "Babayaran sa Bureau ang lahat ng applicable duties, taxes at charges, subject sa ATRIG para sa certain Goods"
+      },
+      "correct": "D",
+      "reason": "Sinasabi sa Sec. 4.4.4 na, maliban sa mga kasong itinakda ng batas, lahat ng applicable duties, taxes at other charges ay babayaran sa Bureau bago ma-release mula custody, subject sa prior requirement ng Authority to Release Imported Goods (ATRIG) para sa certain Goods."
+    },
+    {
+      "question": "Ano ang dapat ilakip sa Goods Declaration for Consumption sa Bureau kapag ang Goods na direktang ina-admit sa Free Zone ay withdrawn for Entry sa Customs Territory?",
+      "choices": {
+        "A": "Copy ng Transit Permit",
+        "B": "Copy ng naunang na-lodge na Goods Declaration for Admission at iba pang required documents",
+        "C": "Copy lamang ng Certificate of Tax Exemption ng Locator",
+        "D": "Copy ng Goods Declaration for Transit"
+      },
+      "correct": "B",
+      "reason": "Ayon sa Sec. 4.4.1, ang Goods Declaration for Consumption ay lo-lodge sa Bureau kasama ang copy ng previously lodged Goods Declaration for Admission at iba pang required documents."
+    },
+    {
+      "question": "Ayon sa Sec. 4.7, anong opisina ang itatayo ng Bureau para mag-monitor at mag-coordinate sa Free Zones Authorities?",
+      "choices": {
+        "A": "Free Zones Monitoring Office",
+        "B": "Post-Clearance Audit Office",
+        "C": "Office of the National Administrative Register",
+        "D": "Joint Administrative Office"
+      },
+      "correct": "A",
+      "reason": "Sa Sec. 4.7, magtatayo ang Bureau ng Free Zones Monitoring Office para mag-monitor at mag-coordinate sa Free Zones Authorities tungkol sa Admission, Transit, withdrawal o anumang movement ng Goods papunta at galing sa Free Zones."
+    },
+    {
+      "question": "Ano ang tawag sa act, documentation at process ng pagdadala ng imported Goods sa Customs Territory, kasama ang Goods na galing sa Free Zones?",
+      "choices": {
+        "A": "Admission",
+        "B": "Importation",
+        "C": "Transit",
+        "D": "Entry"
+      },
+      "correct": "D",
+      "reason": "Ayon sa Sec. 3.3, ang Entry ay ang act, documentation at process ng pagdadala ng imported Goods sa Customs Territory, kasama ang Goods na galing sa Free Zones. Ang Admission (Sec. 3.1) ay pagpasok sa Free Zone, hindi sa Customs Territory."
+    }
+  ],
+  "level2": [
+    {
+      "question": "Mariner Parts Corp., a Free Zone Locator with a valid Certificate of Registration, imports machine parts that are discharged at a Manila port of entry outside the Free Zone. The goods will be transported through the Customs Territory to the Free Zone and admitted there. Which document covers this movement and admission under CAO No. 11-2019?",
+      "choices": {
+        "A": "A Goods Declaration for Consumption accepted by the Bureau as a Goods Declaration for Admission",
+        "B": "A Goods Declaration for Transit accepted by the Bureau and Free Zone Authorities as a Goods Declaration for Transit and Admission whenever appropriate",
+        "C": "A Transit Permit issued for transfers from one Free Zone to another Free Zone",
+        "D": "A Goods Declaration for Admission lodged only with the Free Zone Authority"
+      },
+      "correct": "B",
+      "reason": "Under Sec. 4.2.3.c, Goods transited through a Customs Territory and admitted into Free Zones are covered by a Goods Declaration for Transit, which the Bureau and Free Zone Authorities accept as a Goods Declaration for Transit and Admission whenever appropriate. A Transit Permit under Sec. 4.3.2 applies only to zone-to-zone transfers, and a Goods Declaration for Consumption applies to Port Users under Sec. 4.2.3.b or to withdrawals."
+    },
+    {
+      "question": "Polar Electronics has goods already admitted into Free Zone A and wants to transfer them to Free Zone B. Which document covers the transfer, and how is it treated by the Bureau and the Free Zone Authorities?",
+      "choices": {
+        "A": "A Goods Declaration for Consumption lodged with the Bureau",
+        "B": "An Authority to Release Imported Goods accepted as a Goods Declaration for Admission",
+        "C": "A Goods Declaration for Admission issued by Free Zone A only",
+        "D": "A Transit Permit, accepted as a Goods Declaration for Transit and Admission whenever appropriate under joint guidelines"
+      },
+      "correct": "D",
+      "reason": "Sec. 4.3.2 provides that a transfer of Goods from one Free Zone to another is covered by the necessary Transit Permit, which the Bureau and Free Zone Authorities accept as a Goods Declaration for Transit and Admission, whenever appropriate, under guidelines issued jointly by the Bureau and the Free Zone Authorities. The Goods Declaration for Consumption is for withdrawal into the Customs Territory, and ATRIG is a release requirement for certain Goods under Sec. 4.4.4."
+    },
+    {
+      "question": "Kestrel Industries, a Free Zone Locator, directly admitted unassembled machines into a Free Zone when the applicable duty rate was 10% and the exchange rate was Php55 per US dollar. Eight months later, it withdrew the assembled units for Entry into the Customs Territory, when the duty rate on the goods was 5% and the exchange rate was Php57 per US dollar. Which rates apply under CAO No. 11-2019?",
+      "choices": {
+        "A": "5% duty and Php57 per US dollar, the rates at the time of withdrawal",
+        "B": "10% duty and Php55 per US dollar, the rates at the time of Admission",
+        "C": "10% duty and Php57 per US dollar, a mix of the Admission and withdrawal rates",
+        "D": "5% duty and Php55 per US dollar, a mix of the withdrawal and Admission rates"
+      },
+      "correct": "A",
+      "reason": "Sec. 4.4.3 provides that the duty rate and exchange rate at the time of withdrawal apply to the Goods originally admitted, whether withdrawn in their original or advanced form. The assembled units are an advanced form, so the rates at withdrawal (5% and Php57) apply, not those at Admission."
+    },
+    {
+      "question": "Sunrise Locator directly admitted goods into a Free Zone and now wants to withdraw them for Entry into the Customs Territory. It has lodged a Goods Declaration for Consumption with the Bureau and attached a copy of the previously lodged Goods Declaration for Admission. It has not yet obtained a withdrawal permit from the Free Zone Authority. What else must be satisfied for the withdrawal under CAO No. 11-2019?",
+      "choices": {
+        "A": "A Transit Permit issued jointly by the Bureau and the Free Zone Authority",
+        "B": "A new Goods Declaration for Admission lodged with the Bureau",
+        "C": "The corresponding permit issued by the Free Zone Authority, together with sufficient security where applicable",
+        "D": "A Certificate of Origin issued by the supplier"
+      },
+      "correct": "C",
+      "reason": "Under Sec. 4.4.2, imported Goods are withdrawn for Entry when the Goods Declaration is lodged with the corresponding permit issued by the Free Zone Authority and upon posting of sufficient security as applicable. Sunrise has already lodged the Goods Declaration for Consumption with the earlier Goods Declaration for Admission (Sec. 4.4.1), so the missing item is the Free Zone Authority permit, plus security where applicable."
+    },
+    {
+      "question": "Cobalt Imports, a Port User, filed a Goods Declaration on 10 March 2023 for goods withdrawn into the Customs Territory. It discarded its records of the transaction after 18 months. In 2025, the Bureau audits Cobalt under its post-clearance audit function. What is the consequence of Cobalt's failure to keep the records?",
+      "choices": {
+        "A": "Cobalt may still freely contest the audit results, because records need to be kept for only one year",
+        "B": "Cobalt waives its right to contest the audit results based on records kept by the Bureau",
+        "C": "The Bureau must cancel the audit, because the records are no longer available",
+        "D": "The goods become automatically subject to Seizure"
+      },
+      "correct": "B",
+      "reason": "Under Sec. 4.6.1, Locators and Port Users are subject to the Bureau's post-clearance audit and must keep records for three years from the date of filing of the Goods Declaration. Filing was on 10 March 2023, so the 2025 audit falls within the three-year period. Failure to keep the required records constitutes a waiver of the right to contest the results of the audit based on records kept by the Bureau."
+    },
+    {
+      "question": "Zenith Locator sells imported goods to a buyer in the Customs Territory in a domestic sale. The VAT due and collected on the imported goods paid by the locator is Php40,000. The VAT due on the actual selling price is Php120,000. The locator has input VAT of Php30,000. How much VAT is payable, and to whom, under CAO No. 11-2019?",
+      "choices": {
+        "A": "Php130,000, payable to the Bureau of Customs",
+        "B": "Php90,000, payable to the Bureau of Customs",
+        "C": "Php130,000, payable to the Free Zone Authority",
+        "D": "Php160,000, payable to the Bureau of Customs"
+      },
+      "correct": "A",
+      "reason": "The paragraph under Sec. 4.4.4 states that, in a domestic sale by a Free Zone locator, VAT due is payable to the Bureau of Customs and consists of the VAT due and collected on the imported goods paid by the locator, plus the VAT due on the actual selling price, less the input VAT. Computation: Php40,000 + Php120,000 - Php30,000 = Php130,000."
+    },
+    {
+      "question": "The Bureau and a Free Zone Authority have not yet issued a Joint Administrative Order on the procedures for Admission and Transit of Goods. A locator asks which procedures it should follow in the meantime. What is the correct answer under CAO No. 11-2019?",
+      "choices": {
+        "A": "It must wait until the Joint Administrative Order is issued, because no Admission is allowed before then",
+        "B": "It must follow the Entry procedures for consumption in the Customs Territory",
+        "C": "It must follow the existing clearance procedures adopted by the Free Zone Authority and the Bureau, respectively",
+        "D": "It must follow the procedures listed in the Related Policies of the Informational Section"
+      },
+      "correct": "C",
+      "reason": "Sec. 10 (Transitory Provision) provides that, pending issuance of a Joint Administrative Order between the Bureau and the Free Zone Authorities, the existing clearance procedure on Admission and Transit adopted by the Free Zone Authorities and the Bureau shall apply respectively. The Informational Section does not give rise to substantive rights or obligations."
+    },
+    {
+      "question": "Harbor Locator is withdrawing goods for Entry into the Customs Territory. It has paid to the Bureau all applicable duties, taxes and charges. The goods are among those for which an Authority to Release Imported Goods (ATRIG) is required. May the goods be released on the basis of payment alone?",
+      "choices": {
+        "A": "Yes, because payment to the Bureau is the only requirement before release",
+        "B": "Yes, because payment to the Free Zone Authority would also suffice",
+        "C": "Yes, because ATRIG applies only to Goods in Transit",
+        "D": "No, because release of these Goods still requires the prior ATRIG"
+      },
+      "correct": "D",
+      "reason": "Sec. 4.4.4 requires that applicable duties, taxes and other charges on Goods introduced into the Customs Territory from Free Zones be paid to the Bureau before release from custody, subject to the prior requirement of ATRIG for certain Goods. Because the goods here are among those requiring ATRIG, payment alone is not enough."
+    },
+    {
+      "question": "Trident Corp. held a Certificate of Registration with a Free Zone Authority, but the certificate was cancelled before its shipment arrived. The goods were discharged directly at the seaport of the Free Zone, and Trident uses the port facility for customs clearance of its importation. Which Goods Declaration covers the direct admission of these goods under CAO No. 11-2019?",
+      "choices": {
+        "A": "Goods Declaration for Admission, because Trident was formerly a Locator",
+        "B": "Goods Declaration for Transit, because the goods were discharged at a port",
+        "C": "Goods Declaration for Consumption, because Trident is no longer a Locator and acts as a Port User",
+        "D": "Transit Permit, because the goods were discharged at a Free Zone seaport"
+      },
+      "correct": "C",
+      "reason": "Under Sec. 3.5, an entity whose Certificate of Registration has been cancelled is no longer a Free Zone Locator. Under Sec. 3.11, an entity that is not a Locator and uses the seaport of a Free Zone for customs clearance is a Port User. Sec. 4.2.3.b then provides that Goods directly admitted by a Port User are covered by a Goods Declaration for Consumption."
+    },
+    {
+      "question": "Orion Locator imported equipment discharged directly at a Freeport. It electronically submitted its Goods Declaration for Admission and supporting documents only to the Free Zone Authority and not to the Bureau, then claimed that the goods were already admitted. The Goods Declaration was not lodged with the Bureau through an interface or otherwise. Is the claim correct under CAO No. 11-2019?",
+      "choices": {
+        "A": "No, because the Goods Declaration and documents must also be electronically lodged with the Bureau at the time of Admission",
+        "B": "Yes, because the Free Zone Authority is the governing authority of the Freeport",
+        "C": "Yes, provided the Bureau receives a copy within three years",
+        "D": "Yes, provided the Goods Declaration is lodged with the Bureau within 15 days"
+      },
+      "correct": "A",
+      "reason": "Sec. 4.2.1 provides that imported Goods are admitted into a Free Zone when the Goods Declaration, with all required documents, is electronically lodged with the Bureau and the relevant Free Zone Authorities at the time of Admission. Orion lodged only with the Free Zone Authority and not with the Bureau, so the requirement is not met. The CAO states no three-year or 15-day grace period for lodging with the Bureau."
+    }
+  ]
+}

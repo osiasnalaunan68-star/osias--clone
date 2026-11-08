@@ -18,6 +18,46 @@ const SUBJECT_LABELS = {
   tcp: "Tariff Commission Primer",
 };
 
+// Subjects that are temporarily closed while being fixed.
+// To re-open a subject later, just delete its line here.
+const DISABLED_SUBJECTS = {};
+
+function DisabledSubjectCard({ subjectId, expanded, onToggle, onOpenIssuance, showIssuanceTip }) {
+  const label = SUBJECT_LABELS[subjectId];
+  const info = DISABLED_SUBJECTS[subjectId];
+
+  return (
+    <div className={`overflow-hidden rounded-2xl border border-amber-200 bg-white shadow-card transition-all dark:border-amber-700/50 dark:bg-slate-800 ${expanded ? "col-span-2" : ""}`}>
+      <button onClick={onToggle} className="flex w-full items-center gap-3 p-4 text-left active:bg-slate-50 dark:active:bg-slate-700/50">
+        <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-amber-100 text-lg dark:bg-amber-900/40" aria-hidden>🛠️</span>
+        <div className="min-w-0 flex-1">
+          <p className="truncate font-bold text-navy-900 dark:text-slate-100">{label}</p>
+          <p className="truncate text-xs font-medium text-amber-600 dark:text-amber-400">{info.title}</p>
+        </div>
+        <span className={`flex-shrink-0 text-slate-300 transition-transform dark:text-slate-600 ${expanded ? "rotate-180" : ""}`} aria-hidden>▾</span>
+      </button>
+      {expanded && (
+        <div className="space-y-3 border-t border-amber-100 p-4 dark:border-slate-700">
+          <p className="text-sm text-slate-600 dark:text-slate-300">{info.message}</p>
+          {showIssuanceTip && (
+            <>
+              <p className="text-sm text-slate-600 dark:text-slate-300">
+                In the meantime, we recommend practicing with <span className="font-semibold">CMO / CAO</span> instead.
+              </p>
+              <button
+                onClick={onOpenIssuance}
+                className="w-full rounded-xl bg-navy-900 px-4 py-3 text-sm font-semibold text-white shadow-sm active:bg-navy-800 dark:bg-navy-700 dark:active:bg-navy-600"
+              >
+                📜 Go to CMO / CAO
+              </button>
+            </>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function SubjectCard({ subjectId, expanded, onToggle, onPlay }) {
   const label = SUBJECT_LABELS[subjectId];
   const [refreshKey, setRefreshKey] = useState(0);
@@ -113,6 +153,8 @@ export default function QuizHub({ onExit, limited = false }) {
   const backToHub = () => setActiveView(null);
 
   const handlePlaySubject = (subjectId, label) => {
+    // Safety net: never open a subject that is under maintenance.
+    if (DISABLED_SUBJECTS[subjectId]) return;
     setActiveView({ type: "subject-play", subjectId, label });
   };
 
@@ -161,9 +203,20 @@ export default function QuizHub({ onExit, limited = false }) {
               onSelectTitle={() => setActiveView({ type: "ra10863-titles" })}
             />
             {!limited && <IssuanceQuizCard onOpen={() => setActiveView({ type: "issuance-quiz" })} />}
-            {["tl", "cdp", "pc", "tcp"].map((id) => (
-              <SubjectCard key={id} subjectId={id} expanded={expandedCard === id} onToggle={() => toggleCard(id)} onPlay={handlePlaySubject} />
-            ))}
+            {["tl", "cdp", "pc", "tcp"].map((id) =>
+              DISABLED_SUBJECTS[id] ? (
+                <DisabledSubjectCard
+                  key={id}
+                  subjectId={id}
+                  expanded={expandedCard === id}
+                  onToggle={() => toggleCard(id)}
+                  onOpenIssuance={() => setActiveView({ type: "issuance-quiz" })}
+                  showIssuanceTip={!limited}
+                />
+              ) : (
+                <SubjectCard key={id} subjectId={id} expanded={expandedCard === id} onToggle={() => toggleCard(id)} onPlay={handlePlaySubject} />
+              )
+            )}
             <button
               onClick={() => setActiveView({ type: "custom-quiz" })}
               className="col-span-2 flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-4 text-left shadow-card transition-all active:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:active:bg-slate-700/50"

@@ -6,11 +6,18 @@ import {
 import { doc, getDoc, setDoc, updateDoc, serverTimestamp, onSnapshot, runTransaction, getDocFromServer } from "firebase/firestore";
 import { auth, db, googleProvider } from "./firebase";
 import { FirebaseAuthentication } from "@capacitor-firebase/authentication";
-import { setServerClock, persistClock, getAccess, hasAnyPractice, TRIAL_DAYS } from "./access";
+import { setServerClock, persistClock, getAccess, hasAnyPractice, TRIAL_DAYS, serverNow } from "./access";
+import { LEGAL_VERSION } from "./legalContent";
 
 const DEVICE_ID_KEY = "cuble_deviceId";
 const PENDING_SIGNIN_KEY = "cuble_pendingSignIn";
 const PROFILE_CACHE_KEY = "cuble_profileCache_";
+const LEGAL_KEY = "cuble_legalAccepted_";
+
+function readLocalLegal(uid) {
+  if (!uid) return null;
+  try { return JSON.parse(localStorage.getItem(LEGAL_KEY + uid)); } catch (_) { return null; }
+}
 
 function makeId() {
   if (window.crypto && window.crypto.randomUUID) return window.crypto.randomUUID();
@@ -153,6 +160,15 @@ export function AuthProvider({ children }) {
   }, [profile, serverData]);
 
   const access = getAccess(mergedProfile, { clockReady });
+
+  // ── Privacy Notice / Terms acceptance ───────────────────────────────
+  // Accepted version is kept in Firestore (users/{uid}.legalAccepted) AND in localStorage,
+  // so an offline user is not asked again and a changed LEGAL_VERSION asks everyone once more.
+  const [legalTick, setLegalTick] = useState(0);
+  const localLegal = useMemo(() => readLocalLegal(uid), [uid, legalTick]);
+  const legalCandidates = [serverData && serverData.legalAccepted, mergedProfile && mergedProfile.legalAccepted, localLegal].filter(Boolean);
+  const legalAccepted = legalCandidates.find((r) => r.version === LEGAL_VERSION) || legalCandidates[0] || null;
+  const needsLegal = !!user && !!mergedProfile && !(legalAccepted && legalAccepted.version === LEGAL_VERSION);
 
   const syncProfile = useCallback(async (fbUser) => {
     setProfileError(null);
@@ -332,6 +348,17 @@ export function AuthProvider({ children }) {
     setNeedsFullName(false);
   }, [user]);
 
+  const acceptLegal = useCallback(async () => {
+    if (!user) return;
+    const rec = { version: LEGAL_VERSION, at: serverNow(), ai: true };
+    try { localStorage.setItem(LEGAL_KEY + user.uid, JSON.stringify(rec)); } catch (_) {}
+    setProfile((p) => (p ? { ...p, legalAccepted: rec } : p));
+    setLegalTick((t) => t + 1);
+    // Not awaited: when offline Firestore queues the write and sends it later.
+    updateDoc(doc(db, "users", user.uid), { legalAccepted: rec })
+      .catch((e) => console.warn("legal acceptance sync failed:", e));
+  }, [user]);
+
   const removeDevice = useCallback(async (deviceId) => {
     if (!user || !profile) return;
     const ref = doc(db, "users", user.uid);
@@ -353,6 +380,7 @@ export function AuthProvider({ children }) {
     access, clockReady, tick, intentPlanId, setIntentPlanId,
     overlayOpen, setOverlayOpen, authError, profileError, signingIn,
     signInWithGoogle, signOutUser, completeFullName, removeDevice,
+    needsLegal, legalAccepted, acceptLegal,
   };
 
   return <AuthCtx.Provider value={value}>{children}</AuthCtx.Provider>;

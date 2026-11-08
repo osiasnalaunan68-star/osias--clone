@@ -1,0 +1,228 @@
+{
+ "type": "CAO",
+ "number": "02-2020",
+ "level1": [
+  {
+   "question": "Ano ang tinatawag na 'Protestable Case' sa CAO na ito?",
+   "choices": {
+    "A": "Anumang ruling ng Customs Officer sa assessment na hindi sinang-ayunan ng importer",
+    "B": "Anumang ruling ng District Collector na adverse sa importer, consignee o exporter, maliban sa fixing of fines sa seizure cases",
+    "C": "Anumang ruling ng Commissioner na adverse sa importer, consignee o exporter sa isang seizure case",
+    "D": "Anumang ruling ng Tariff Commission na hindi sinang-ayunan ng importer o ng Bureau"
+   },
+   "correct": "B",
+   "reason": "Ayon sa Sec. 3.8, ang Protestable Case ay anumang ruling o decision ng District Collector na adverse sa importer, consignee o exporter, maliban sa fixing of fines sa seizure cases. Kaya B ang tama; hindi kasama sa depinisyon ang ruling ng Customs Officer, Commissioner o Tariff Commission."
+  },
+  {
+   "question": "Ilang araw ang taning para mag-protest nang nakasulat sa Commissioner mula pagtanggap ng adverse ruling ng District Collector?",
+   "choices": {
+    "A": "Lima (5) araw",
+    "B": "Sampung (10) araw",
+    "C": "Tatlumpung (30) araw",
+    "D": "Labinlimang (15) araw"
+   },
+   "correct": "D",
+   "reason": "Sa Sec. 10.1, may labinlimang (15) araw ang aggrieved importer, exporter o stakeholder para mag-protest nang nakasulat sa Commissioner. Kapag hindi ito nagawa sa loob ng panahong iyon, final and conclusive na ang aksyon ng District Collector."
+  },
+  {
+   "question": "Kapag difficult o highly technical ang tariff classification issue, saan ipapadala ng District Collector ang certified true copies ng relevant documents para sa ruling?",
+   "choices": {
+    "A": "Tariff Commission",
+    "B": "Assessment and Operations Coordinating Group (AOCG)",
+    "C": "Chief, Formal Entry Division",
+    "D": "Deputy Collector for Assessment"
+   },
+   "correct": "A",
+   "reason": "Ayon sa Sec. 5.4.2, ipapadala ng District Collector ang certified true copies ng relevant documents (hal. goods declaration, brochures, MSDS para sa chemicals, samples at/o pictures) sa Tariff Commission para sa ruling. Ang AOCG ay para sa verification ng CO sa rules of origin (Sec. 7.3)."
+  },
+  {
+   "question": "Alin sa mga ito ang sitwasyon kung kailan itinuturing na difficult o highly technical ang Tariff Classification Issue?",
+   "choices": {
+    "A": "Kapag hindi sumang-ayon ang importer sa reclassification ng Customs Officer",
+    "B": "Kapag nag-request ang importer ng release ng goods under Tentative Assessment",
+    "C": "Kapag classifiable ang goods sa higit sa isang AHTN chapter, heading o subheading",
+    "D": "Kapag may Material Safety Data Sheet na isinumite kasama ng goods declaration"
+   },
+   "correct": "C",
+   "reason": "Sa Sec. 5.3.1, difficult o highly technical ang issue kapag classifiable ang goods sa higit sa isang AHTN chapter, heading o subheading. Ang disagreement ng importer o ang request para sa Tentative Assessment ay hindi criteria ayon sa Sec. 5.3."
+  },
+  {
+   "question": "Ilang araw ang taning ng District Collector para ipaalam sa importer na difficult o highly technical ang Valuation Issue?",
+   "choices": {
+    "A": "Isang (1) araw",
+    "B": "Dalawang (2) araw",
+    "C": "Limang (5) araw",
+    "D": "Labinlimang (15) araw"
+   },
+   "correct": "B",
+   "reason": "Ayon sa Sec. 6.2.1, kailangang ipaalam ng District Collector sa importer sa loob ng dalawang (2) araw na difficult o highly technical ang Valuation Issue. Ang 5 araw ay para sa position papers (Sec. 6.2.2) at ang 15 araw ay para sa resolusyon (Sec. 6.2.5)."
+  },
+  {
+   "question": "Kapag napag-alaman ng issuing country na hindi authentic o accurate ang CO, ano ang gagawin ng District Collector?",
+   "choices": {
+    "A": "I-forfeit ang Security kung cash bond, o singilin ang importer ng katumbas na disputed na duties at taxes",
+    "B": "I-apply ang preferential rate at ibalik o i-cancel ang Security na na-post ng importer",
+    "C": "Ipasa ang kaso sa Tariff Commission para sa ruling sa tamang classification ng goods",
+    "D": "Ibalik ang CO sa importer para palitan bago magpatuloy ang assessment ng goods"
+   },
+   "correct": "A",
+   "reason": "Sa Sec. 7.5.2, kapag hindi authentic o accurate ang CO, ifo-forfeit ng District Collector ang Security kung cash bond, o uutusan ang importer na magbayad ng applicable na duties at taxes na katumbas ng disputed na halaga. Ang preferential rate at pag-cancel ng Security ay para sa confirmed na CO (Sec. 7.5.1)."
+  },
+  {
+   "question": "Magkano ang surcharge na ipapataw kapag intentional o fraudulent ang misdeclaration, misclassification o undervaluation?",
+   "choices": {
+    "A": "100% ng duty at tax due",
+    "B": "250% ng duty at tax due",
+    "C": "1000% ng duty at tax due",
+    "D": "500% ng duty at tax due"
+   },
+   "correct": "D",
+   "reason": "Ayon sa Sec. 4.7 (huling talata), kapag intentional o fraudulent ang misdeclaration, misclassification o undervaluation, may surcharge na limandaang porsyento (500%) ng duty at tax due, at subject to seizure ang goods anuman ang halaga ng discrepancy."
+  },
+  {
+   "question": "Sa Other Customs Issues, kailan HINDI pinapayagan ang release ng goods under Tentative Assessment?",
+   "choices": {
+    "A": "Kapag hindi pa nakapagsumite ng position paper ang Customs Officer",
+    "B": "Kapag lampas na sa tatlumpung (30) araw ang pending na dispute",
+    "C": "Kapag ang issue ay may kinalaman sa integrity, authenticity o genuineness ng dokumentong isinumite",
+    "D": "Kapag hindi pa nakakapag-file ng protest ang importer sa Commissioner"
+   },
+   "correct": "C",
+   "reason": "Sa Sec. 8.2.3, pinapayagan lang ang release under Tentative Assessment kung ang customs-related issue ay hindi tungkol sa integrity, authenticity o genuineness ng anumang dokumentong isinumite bilang suporta sa goods declaration."
+  },
+  {
+   "question": "Alin sa mga ruling ng Commissioner ang HINDI pwedeng i-file ng Motion for Reconsideration sa Commissioner?",
+   "choices": {
+    "A": "Ruling sa tariff classification",
+    "B": "Ruling sa customs valuation",
+    "C": "Ruling sa rules of origin",
+    "D": "Ruling sa other customs issues"
+   },
+   "correct": "A",
+   "reason": "Ayon sa Sec. 11, pwedeng mag-file ng Motion for Reconsideration sa loob ng labinlimang (15) calendar days ang importer laban sa ruling ng Commissioner, maliban sa ruling sa tariff classification."
+  },
+  {
+   "question": "Ayon sa Sec. 4.2, ano ang kondisyon para ma-dispute settlement ang issue sa tariff classification, customs valuation o rules of origin?",
+   "choices": {
+    "A": "Dapat may kasamang Tentative Assessment ang goods declaration",
+    "B": "Hindi ito dapat paksa ng pending na application for Advance Ruling na hindi pa nare-resolve",
+    "C": "Dapat naka-file na muna ang protest sa Commissioner bago ang dispute settlement",
+    "D": "Dapat naka-post na ng importer ang Security bago magsimula ang dispute settlement"
+   },
+   "correct": "B",
+   "reason": "Sa Sec. 4.2, hindi dapat paksa ng pending na application for Advance Ruling ang issue sa classification, valuation o rules of origin, o dapat ay na-resolve na ang application ayon sa batas, bago ito maging subject ng dispute settlement."
+  }
+ ],
+ "level2": [
+  {
+   "question": "Mabuhay Chemicals Corp. imported a chemical blend. The Customs Officer reclassified the goods and the importer disagrees. The District Collector finds that the product description is not specifically provided for in any AHTN heading or subheading, informs the importer, and forwards the relevant documents and samples to the Tariff Commission. The importer needs its goods released while the ruling is pending. What may the importer do under the CAO?",
+   "choices": {
+    "A": "Pay the duties and taxes computed by the Customs Officer under the reclassification, with no Security required.",
+    "B": "Wait for the Tariff Commission ruling, since goods under a classification dispute cannot be released earlier.",
+    "C": "Pay the duties and taxes as declared in the goods declaration and post sufficient Security covering the disputed amount.",
+    "D": "File a protest with the Commissioner immediately, since the District Collector has already elevated the issue."
+   },
+   "correct": "C",
+   "reason": "Under Sec. 5.3.2 the issue is difficult or highly technical, so Sec. 5.4 applies. Sec. 5.4.3 allows the importer to request release under Tentative Assessment upon payment of duties and taxes as declared in the goods declaration and posting of sufficient Security to cover the disputed amount. Sec. 4.3.1 lists this type of issue as eligible for release under Tentative Assessment."
+  },
+  {
+   "question": "Orion Foods Inc. declared a customs value that the Customs Officer challenged with his own valuation findings. The dispute does not involve difficult or highly technical questions on the proper application of valuation methods, and the District Collector adopts the Customs Officer's findings. Within what period, and in what form, must the District Collector notify Orion Foods of the ruling?",
+   "choices": {
+    "A": "Within five (5) days, through an oral notice, directing the importer to submit a position paper on the declared value.",
+    "B": "Within forty-eight (48) hours, in writing, stating the reasons and directing payment of duties and taxes in full based on the Customs Officer's valuation.",
+    "C": "Within fifteen (15) days, in writing, directing the importer to post Security covering the disputed amount of duties and taxes.",
+    "D": "Within thirty (30) days, in writing, referring the ruling to the Commissioner for approval before it takes effect."
+   },
+   "correct": "B",
+   "reason": "Sec. 6.3 covers a valuation dispute that is not difficult or highly technical where the District Collector adopts the Customs Officer's findings. The District Collector shall notify the aggrieved importer within forty-eight (48) hours, in writing, stating his reasons and with a directive to pay the duties and taxes in full based on the Customs Officer's valuation."
+  },
+  {
+   "question": "Tagum Imports Ltd. protested, in proper form, the District Collector's adverse ruling on an Other Customs Issue. More than thirty (30) days have passed since the Commissioner received the protest, and the Commissioner has issued no ruling. What is the effect of the Commissioner's inaction?",
+   "choices": {
+    "A": "The protest is deemed granted and the importer's declaration is accepted.",
+    "B": "The protest is deemed abandoned, and the importer must file a new protest.",
+    "C": "The case is automatically elevated to the Tariff Commission for a ruling.",
+    "D": "The ruling of the District Collector is deemed affirmed."
+   },
+   "correct": "D",
+   "reason": "Under Sec. 8.5 (and Sec. 10.3), the Commissioner shall rule within thirty (30) days from receipt of the protest. If the Commissioner fails to act, the ruling of the Collector is deemed affirmed. Nothing in the CAO treats inaction as a grant of the protest, abandonment, or automatic referral to the Tariff Commission."
+  },
+  {
+   "question": "Delta Garments Inc. is in a valuation dispute that has reached the position paper stage. While the case is ongoing, the Bureau discovers that the commercial invoice submitted by Delta was forged and resulted in an assessment of lower duties and taxes than legally due. What follows under the CAO?",
+   "choices": {
+    "A": "An enforcement issue is deemed to have arisen, the proceedings are terminated, and a Warrant of Seizure and Detention is issued against the shipment.",
+    "B": "The dispute settlement continues, and the forged invoice is considered only when the District Collector resolves the Valuation Issue.",
+    "C": "The case is referred to the Tariff Commission to determine whether the invoice was forged before any action on the shipment.",
+    "D": "The shipment is released under Tentative Assessment once Security covering the discrepancy in duties and taxes is posted."
+   },
+   "correct": "A",
+   "reason": "Sec. 4.7 states that where dispute settlement has commenced and fraud is discovered at any stage, an enforcement issue is deemed to have arisen, the proceedings shall be terminated, and a Warrant of Seizure and Detention shall be issued against the shipment. The CAO also defines an enforcement issue to include the use of spurious, forged or fraudulent documents resulting in lower duties and taxes."
+  },
+  {
+   "question": "A shipment of motorcycle parts imported by Vinta Trading involves three disputes: a tariff classification issue forwarded to the Tariff Commission, an Other Customs Issue that does not depend on the classification, and a Valuation Issue that the District Collector finds cannot be resolved without the correct classification. How should the District Collector proceed?",
+   "choices": {
+    "A": "Resolve all three issues only after the Tariff Commission's classification ruling is received.",
+    "B": "Resolve all three issues without waiting for the Tariff Commission's classification ruling.",
+    "C": "Resolve the Valuation Issue first, then resolve the Other Customs Issue after the classification ruling.",
+    "D": "Resolve the Other Customs Issue without waiting, but resolve the Valuation Issue only upon receipt of the classification ruling."
+   },
+   "correct": "D",
+   "reason": "Under Sec. 9.1 mixed issues are resolved simultaneously following the procedures in the preceding sections. Sec. 9.2 allows the District Collector to resolve all other issues without waiting for the Tariff Commission's classification ruling, except where classification is indispensable to resolving another issue such as valuation, which is resolved only upon receipt of the ruling."
+  },
+  {
+   "question": "The District Collector issued an adverse valuation ruling against Kalayaan Trading Inc. Because of that ruling, Kalayaan paid the additional duties and taxes assessed and now wishes to protest in writing to the Commissioner. Within what period, and counted from what event, must the protest be filed?",
+   "choices": {
+    "A": "Within thirty (30) days from receipt of the adverse ruling.",
+    "B": "Within fifteen (15) days from the date the goods declaration was lodged.",
+    "C": "Within fifteen (15) days from the date of payment.",
+    "D": "Within five (5) days from payment, together with a position paper."
+   },
+   "correct": "C",
+   "reason": "Sec. 10.1 requires a written protest to the Commissioner within fifteen (15) days from receipt of the adverse ruling or, when payment is made as a result of the adverse ruling, within fifteen (15) days from such payment. Since Kalayaan paid because of the ruling, the 15 days run from the payment."
+  },
+  {
+   "question": "Sunrise Trading's protest on a tariff classification dispute was decided adversely by the Commissioner. Sunrise wants to take the matter further. Which course is allowed under the CAO?",
+   "choices": {
+    "A": "Submit the matter to the Tariff Commission within fifteen (15) days from receipt of the ruling, or appeal to the Court of Tax Appeals within thirty (30) days from receipt.",
+    "B": "File a second protest with the Commissioner within fifteen (15) days from receipt of the ruling.",
+    "C": "Appeal directly to the Court of Tax Appeals within fifteen (15) days from receipt of the ruling.",
+    "D": "Ask the District Collector to refer the case to the Tariff Commission within thirty (30) days from receipt of the ruling."
+   },
+   "correct": "A",
+   "reason": "Sec. 5.8 provides that an importer aggrieved by the Commissioner's ruling in a classification dispute may submit the matter to the Tariff Commission within fifteen (15) days from receipt of the ruling, or file an appeal with the CTA within thirty (30) days from receipt. The other options state remedies or periods that the CAO does not provide."
+  },
+  {
+   "question": "Before Assessment becomes final, a Customs Officer verifying the Certificate of Origin (CO) of imported textiles questions the accuracy of the information on the true origin of the product. The importer does not agree with the findings. What should the importer do next?",
+   "choices": {
+    "A": "Directly request the issuing country to verify the CO.",
+    "B": "Formally request the District Collector to verify the CO from the issuing country.",
+    "C": "File a protest with the Commissioner within fifteen (15) days.",
+    "D": "Ask the Tariff Commission to determine the origin of the textiles."
+   },
+   "correct": "B",
+   "reason": "Under Sec. 7.2, if the importer does not agree with the Customs Officer's findings, he may formally request the District Collector for the verification of the CO from the issuing country. The District Collector then forwards the CO to the AOCG (Sec. 7.3). A protest under Sec. 10 applies to an adverse ruling of the District Collector, which has not yet been issued here."
+  },
+  {
+   "question": "Dagat Importers Inc. is in a valuation dispute that the District Collector found difficult and highly technical. The importer was informed of this, and both the importer and the Customs Officer have submitted their position papers. By when must the District Collector resolve the Valuation Issue?",
+   "choices": {
+    "A": "In writing within two (2) days from the date the importer was informed that the issue is technical.",
+    "B": "Within forty-eight (48) hours from submission of the position papers, by notifying the importer orally.",
+    "C": "In writing within fifteen (15) days from submission of the position papers.",
+    "D": "Within five (5) days from receipt of the notice, together with the taking of samples."
+   },
+   "correct": "C",
+   "reason": "Sec. 6.2.5 states that the District Collector shall resolve in writing the Valuation Issue within fifteen (15) days from submission of the position papers. The 2-day period in Sec. 6.2.1 is for informing the importer, and the 5-day period in Sec. 6.2.2 is for submitting position papers."
+  },
+  {
+   "question": "A chemical import of Bayanihan Corp. was released under Tentative Assessment after it posted a cash bond. The Tariff Commission then ruled that the goods fall under a heading with a higher tariff rate than declared. Assume no other issues are involved and the Bureau does not appeal the ruling. What should the District Collector do?",
+   "choices": {
+    "A": "Refund the cash bond and cancel the Tentative Assessment because the dispute has ended.",
+    "B": "Forfeit the cash bond as a penalty for the misclassification.",
+    "C": "Require the importer to file a Motion for Reconsideration before collecting any amount.",
+    "D": "Collect the additional duties and taxes resulting from the higher tariff rate and finally assess the goods."
+   },
+   "correct": "D",
+   "reason": "Under Sec. 5.4.4, upon receipt of the Tariff Commission's ruling the goods are finally assessed unless other issues are involved or the Bureau appeals to the Secretary of Finance. The District Collector shall collect the additional duties and taxes if the goods are classified with a higher tariff rate; the bond is refunded or cancelled only otherwise."
+  }
+ ]
+}

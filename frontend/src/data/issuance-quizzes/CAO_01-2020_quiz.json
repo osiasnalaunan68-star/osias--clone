@@ -1,0 +1,228 @@
+{
+  "type": "CAO",
+  "number": "01-2020",
+  "level1": [
+    {
+      "question": "Magkano ang fine na kokolektahin para sa bawat clerical error sa Goods Declaration pagka-Lodgement nito?",
+      "choices": {
+        "A": "Php2,500.00",
+        "B": "Php5,000.00",
+        "C": "Php10,000.00",
+        "D": "Php25,000.00"
+      },
+      "correct": "B",
+      "reason": "Ayon sa Sec. 4.1, Php5,000.00 ang fine para sa bawat clerical error na natukoy sa covering Goods Declaration pagka-Lodgement nito, bukod pa sa assessed duties, taxes, fees, fines o surcharges."
+    },
+    {
+      "question": "Ayon sa Sec. 4.1, sino ang maniningil ng fine para sa clerical errors?",
+      "choices": {
+        "A": "Ang Commissioner of Customs, sa pamamagitan ng Deputy Commissioner for Assessment",
+        "B": "Ang Deputy Collector for Operations, nang mag-isa",
+        "C": "Ang District Collector, sa pamamagitan ng Deputy Collector for Assessment",
+        "D": "Ang Secretary of Finance, sa pamamagitan ng Commissioner of Customs"
+      },
+      "correct": "C",
+      "reason": "Sinasabi sa Sec. 4.1 na ang concerned District Collector, through the Deputy Collector for Assessment, ang kokolekta ng Php5,000.00 fine kada clerical error."
+    },
+    {
+      "question": "Ano ang minimum na discrepancy sa duty at tax para maipataw ang 250% surcharge ayon sa Sec. 4.2?",
+      "choices": {
+        "A": "10% o higit pa",
+        "B": "Higit sa 20%",
+        "C": "Higit sa 30%",
+        "D": "50% o higit pa"
+      },
+      "correct": "A",
+      "reason": "Sa Sec. 4.2, kailangang 10% o higit pa ang discrepancy sa duty at tax na galing sa Misdeclaration, Misclassification o Undervaluation. Ang higit sa 30% ay para sa prima facie evidence of Fraud sa Sec. 6, hindi para sa 250% surcharge."
+    },
+    {
+      "question": "Ilang araw matapos matanggap ng importer o consignee ang notice of assessment, nang walang timely at legally instituted dispute o protest, ituturing na Final Assessment ang assessment?",
+      "choices": {
+        "A": "5 araw",
+        "B": "10 araw",
+        "C": "30 araw",
+        "D": "15 araw"
+      },
+      "correct": "D",
+      "reason": "Ayon sa Sec. 3.2, ang Final Assessment ay assessment na deemed final 15 araw matapos matanggap ang notice of assessment ng importer o consignee, nang walang timely at legally instituted na dispute at/o protest."
+    },
+    {
+      "question": "Ayon sa Sec. 6, anong discrepancy sa duty at tax ang prima facie evidence of Fraud sa kaso ng Misdeclaration, Misclassification o Undervaluation?",
+      "choices": {
+        "A": "Higit sa 30% ng duty at tax na babayaran",
+        "B": "10% o higit pa ng duty at tax na babayaran",
+        "C": "Higit sa 50% ng duty at tax na babayaran",
+        "D": "Anumang discrepancy, kahit gaano kaliit"
+      },
+      "correct": "A",
+      "reason": "Sinasabi sa Sec. 6 na ang discrepancy na amounting to more than thirty percent (30%) ng duty at tax na babayaran ay prima facie evidence of Fraud. Tandaan: 'more than' 30%, hindi 'at least' 30%."
+    },
+    {
+      "question": "Kapag intentional o fraudulent ang Misdeclaration, Misclassification o Undervaluation, ano ang ipinapataw bukod sa 500% surcharge ayon sa Sec. 4.2.3?",
+      "choices": {
+        "A": "Karagdagang 250% surcharge",
+        "B": "Php5,000.00 fine kada error",
+        "C": "Pagtutuwid lamang ng Goods Declaration",
+        "D": "Seizure ng subject shipment"
+      },
+      "correct": "D",
+      "reason": "Ayon sa Sec. 4.2.3, kapag intentional o fraudulent ang Misdeclaration, Misclassification o Undervaluation, bukod sa Seizure ng subject shipment ay magpapataw ng surcharge na 500% ng duties at taxes due."
+    },
+    {
+      "question": "Ano ang tawag sa paggamit ng erroneous tariff heading o sub-heading na nagresulta sa kulang na duty at tax na binayaran?",
+      "choices": {
+        "A": "Misdeclaration",
+        "B": "Misclassification",
+        "C": "Undervaluation",
+        "D": "Inadvertent Error"
+      },
+      "correct": "B",
+      "reason": "Sa Sec. 3.9, ang Misclassification ay ang paggamit ng insufficient o wrong description ng goods o ng erroneous tariff heading/s at sub-heading/s na nagresulta sa kulang na duty at tax. Ito ay isa sa pitong instances ng 250% surcharge (Sec. 4.2.1.g)."
+    },
+    {
+      "question": "Ayon sa Sec. 4.1.1, kailan maituturing na clerical ang isang error sa Goods Declaration?",
+      "choices": {
+        "A": "Kapag hindi lalampas sa Php5,000.00 ang epekto nito sa duty at tax",
+        "B": "Kapag natuklasan lamang ito bago ma-release ang shipment",
+        "C": "Kapag inadvertent ito, walang kasamang Fraud, at hindi dahil sa Gross Negligence",
+        "D": "Kapag naitama ito sa loob ng 15 araw mula sa Lodgement"
+      },
+      "correct": "C",
+      "reason": "Sa Sec. 4.1.1, clerical ang error kapag inadvertent, basta hindi attendant sa Fraud at hindi due to Gross Negligence. Wala sa teksto ang halaga ng epekto o 15-araw na panahon bilang batayan ng pagiging clerical."
+    },
+    {
+      "question": "Alin sa mga sumusunod ang kasama sa depinisyon ng Goods ayon sa Sec. 3.4?",
+      "choices": {
+        "A": "Philippine at foreign notes at coins na imported o exported",
+        "B": "Mga serbisyo na ibinibigay ng customs broker",
+        "C": "Mga dokumentong isinusumite sa Bureau",
+        "D": "Intellectual property rights ng imported products"
+      },
+      "correct": "A",
+      "reason": "Ayon sa Sec. 3.4, ang Goods ay articles, wares, merchandise at iba pang items na imported o exported, na maaaring kabilang ang Philippine at foreign notes at coins."
+    },
+    {
+      "question": "Ayon sa Sec. 5.2, ang ruling ng anong body ang kailangan kapag ang Goods ay classifiable sa higit sa isang AHTN heading o walang eksaktong heading para sa product description?",
+      "choices": {
+        "A": "Court of Tax Appeals",
+        "B": "Tariff Commission",
+        "C": "Secretary of Finance",
+        "D": "Collector of Customs"
+      },
+      "correct": "B",
+      "reason": "Sa ikalawang talata ng Sec. 5.2, ang difficult o highly technical question on tariff classification ay nangyayari kapag classifiable ang Goods sa higit sa isang AHTN chapter, heading o sub-heading, o walang specific na heading, at kakailanganin ang ruling ng Tariff Commission."
+    }
+  ],
+  "level2": [
+    {
+      "question": "Lakeside Foods Corp. lodged a Goods Declaration for imported seasoning mix under a tariff heading it believed to be correct. After assessment, the Bureau determined that the goods were misclassified. The discrepancy between the duty and tax legally determined upon assessment and the duty and tax declared is 8%. There is no evidence of false documents, the classification was not the subject of a formal dispute settlement process, no official government ruling was relied upon, and no amendment was filed. Which treatment applies under CAO No. 01-2020?",
+      "choices": {
+        "A": "A 250% surcharge, because Misclassification is among the instances for the surcharge",
+        "B": "A 500% surcharge plus Seizure, because Misclassification was found",
+        "C": "No surcharge under the CAO, because the discrepancy is less than 10%",
+        "D": "A Php5,000.00 fine, because discrepancies below 10% are treated as clerical errors"
+      },
+      "correct": "C",
+      "reason": "The discrepancy is 8%. Under Sec. 5.1, no surcharge is imposed when the discrepancy between the duty legally determined upon assessment and the duty declared is less than 10%. The 250% surcharge in Sec. 4.2 requires a discrepancy of 10% or more, and the 500% surcharge in Sec. 4.2.3 requires intentional or fraudulent conduct, which is not present. Nothing in the CAO treats discrepancies below 10% as clerical errors."
+    },
+    {
+      "question": "Harbor Gears Inc. lodged a Goods Declaration using a tariff heading that its broker later realized was wrong. Left uncorrected, the discrepancy in duty and tax would have been 18%. Before the Bureau examined the goods and before any Final Assessment, the broker filed a timely amendment correcting the heading. What is the effect on the surcharge under CAO No. 01-2020?",
+      "choices": {
+        "A": "No surcharge is imposed, because the Misclassification was timely amended and corrected before Final Assessment or examination",
+        "B": "A 250% surcharge is imposed, because the discrepancy would have been 10% or more",
+        "C": "A 250% surcharge is imposed even after the amendment, because any discrepancy of 10% or more is surcharged",
+        "D": "A 500% surcharge is imposed, because the original declaration used a wrong tariff heading"
+      },
+      "correct": "A",
+      "reason": "Under Sec. 5.4, no surcharge is imposed when the Misdeclaration, Misclassification or Undervaluation was subjected to timely amendment and corrected prior to Final Assessment or examination of the Goods pursuant to Section 408 of the CMTA. The decisive facts are that the amendment was filed before both examination and Final Assessment. The 10% threshold in Sec. 4.2 does not override this exception."
+    },
+    {
+      "question": "Brightline Trading declared an industrial component under one AHTN heading. The Bureau rejected the declared heading in a formal customs dispute settlement process after finding that the product was classifiable under more than one AHTN heading, and the Tariff Commission ruled on the proper classification. The reclassification produced a 22% discrepancy in duty and tax, and no fraud was found. What follows regarding surcharge?",
+      "choices": {
+        "A": "A 250% surcharge, because the discrepancy is 10% or more",
+        "B": "A 500% surcharge, because the heading was rejected by the Bureau",
+        "C": "A Php5,000.00 fine for each AHTN heading involved",
+        "D": "No surcharge, because the heading was rejected in a formal dispute settlement involving a difficult or highly technical classification question"
+      },
+      "correct": "D",
+      "reason": "Sec. 5.2 provides that no surcharge is imposed when the declared tariff heading is rejected in a formal customs dispute settlement process involving a difficult or highly technical question of tariff classification. The second paragraph of Sec. 5.2 defines this as goods classifiable under more than one AHTN heading that need a Tariff Commission ruling, which matches the facts. The 22% discrepancy therefore does not trigger the 250% surcharge."
+    },
+    {
+      "question": "Pioneer Imports lodged a Goods Declaration in which the consignee's name was misspelled, the importing vessel was incorrectly encoded, and the number of package marks was transposed. The Bureau determined that all three errors were inadvertent, not attendant with Fraud, and not due to Gross Negligence. What total fine applies for these errors, in addition to assessed duties and taxes?",
+      "choices": {
+        "A": "Php5,000.00",
+        "B": "Php15,000.00",
+        "C": "Php25,000.00",
+        "D": "Php30,000.00"
+      },
+      "correct": "B",
+      "reason": "Under Sec. 4.1, a fine of Php5,000.00 is collected for every clerical error in the Goods Declaration. Sec. 4.1.1 lists consignee's name, importing vessel and number or marks of packages as examples of clerical errors when inadvertent, without Fraud and without Gross Negligence. Three errors x Php5,000.00 = Php15,000.00."
+    },
+    {
+      "question": "A declarant's staff encoded the wrong port of departure in a Goods Declaration. The invoice and bill of lading clearly showed the correct port, but the staff ignored them with indifference to the declarant's obligations. There is no evidence that the error was meant to reduce duties or avoid regulations. How should this error be treated for purposes of the Php5,000.00 fine for clerical errors?",
+      "choices": {
+        "A": "As a clerical error, because the port of departure is a listed example in Sec. 4.1.1",
+        "B": "As an Inadvertent Error, because it was only an encoding mistake",
+        "C": "Not as a clerical error, because it is attributable to Gross Negligence",
+        "D": "As Fraud, because the staff knew the correct port of departure"
+      },
+      "correct": "C",
+      "reason": "Sec. 4.1.1 treats an error as clerical only if it is inadvertent, not attendant with Fraud, and not due to Gross Negligence. Under Sec. 3.6, Gross Negligence is an act or omission done with wanton disregard of the relevant facts and indifference to the obligation under the statute, which matches the staff's conduct. It is not Fraud, because Sec. 3.3 requires a knowing, voluntary and intentional act to reduce taxes or avoid regulations, and it is not an Inadvertent Error under Sec. 3.7 because it was not unintentional despite controls."
+    },
+    {
+      "question": "Delta Metals Corp. imported steel coils supported by a Commercial Invoice that the Bureau later found to be false. The Bureau determined that the shipment was undervalued, producing a 35% discrepancy in duty and tax. Which consequence follows under CAO No. 01-2020?",
+      "choices": {
+        "A": "A 500% surcharge in addition to Seizure of the shipment",
+        "B": "A 250% surcharge only, because the discrepancy is below 50%",
+        "C": "A Php5,000.00 fine for each false entry in the Commercial Invoice",
+        "D": "Seizure of the shipment only, without any surcharge"
+      },
+      "correct": "A",
+      "reason": "Under Sec. 4.2.3, Undervaluation is considered intentional or fraudulent when a false document is submitted, and in that case a 500% surcharge is imposed in addition to Seizure of the shipment. The 35% discrepancy is also more than 30%, which is prima facie evidence of Fraud under Sec. 6. The 250% surcharge in Sec. 4.2 applies to non-fraudulent cases."
+    },
+    {
+      "question": "Evergreen Tools' shipment was assessed with duty and tax legally determined at Php500,000.00. Based on the declared value, the duty and tax would have been Php350,000.00. The cause is Undervaluation, with no false documents shown and no exception under Section 5 applicable. Which statement is correct under CAO No. 01-2020?",
+      "choices": {
+        "A": "The discrepancy is prima facie evidence of Fraud, because it has reached 30%",
+        "B": "The 250% surcharge applies, because the 30% discrepancy is 10% or more but is not more than 30%",
+        "C": "No surcharge applies, because the discrepancy does not exceed 30%",
+        "D": "The 500% surcharge automatically applies, because the discrepancy is above 10%"
+      },
+      "correct": "B",
+      "reason": "The discrepancy is Php500,000.00 - Php350,000.00 = Php150,000.00, or 30% of the duty and tax to be paid. Sec. 4.2 imposes the 250% surcharge for Undervaluation when the discrepancy is 10% or more. Sec. 6 makes the discrepancy prima facie evidence of Fraud only when it is more than 30%, so exactly 30% does not qualify. The 500% surcharge in Sec. 4.2.3 requires an intentional or fraudulent act."
+    },
+    {
+      "question": "During examination of an imported industrial solvent, a Bureau officer evaluates whether the shipment was misdeclared. The broker argues that only the Commercial Invoice, Bill of Lading and Packing List may be considered. The officer also wants to consider the Certificate of Analysis, the survey report of an accredited surveyor, and other pertinent documents. Who is correct under CAO No. 01-2020?",
+      "choices": {
+        "A": "The broker, because only those three documents may be considered",
+        "B": "The officer, but only as to the Certificate of Analysis",
+        "C": "The officer, because Sec. 4.2.2 also lists the Safety Data Sheet/Certificate of Analysis, the Survey Report of Accredited Surveyor and other pertinent documents",
+        "D": "Neither, because only the Goods Declaration may be considered"
+      },
+      "correct": "C",
+      "reason": "Sec. 4.2.2 lists the documents considered in determining misdeclaration, misclassification or undervaluation: Commercial Invoice, Bill of Lading/Airway Bill, Packing List, Safety Data Sheet/Certificate of Analysis, Certificate of Origin/Origin Declaration, Survey Report of Accredited Surveyor, Import Permit/Clearance, and other pertinent documents. The list is therefore not limited to the three documents the broker named."
+    },
+    {
+      "question": "A shipment of garments imported by Tidewater Apparel was found misdeclared with a discrepancy of 36% in duty and tax. A Bureau officer wants to take the goods into custody as a Seizure. On what must the Seizure be based under CAO No. 01-2020?",
+      "choices": {
+        "A": "The notice of assessment becoming final after 15 days",
+        "B": "A Warrant of Seizure and Detention issued by the District Collector of Customs",
+        "C": "Payment by the importer of the 500% surcharge",
+        "D": "Approval of the Secretary of Finance"
+      },
+      "correct": "B",
+      "reason": "Sec. 3.11 defines Seizure as the actual or constructive taking or placing under custody of Goods by virtue of a Warrant of Seizure and Detention issued by the District Collector of Customs. A discrepancy of more than 30% is prima facie evidence of Fraud, and Sec. 6 makes the goods subject to Seizure proceedings under Section 1113 of the CMTA. Final assessment, surcharge payment or approval by the Secretary of Finance are not stated as requirements for Seizure."
+    },
+    {
+      "question": "Corbel Imports paid a Php5,000.00 fine for one clerical error in a Goods Declaration. After the shipment was released from Customs, the Bureau discovered another Inadvertent Error in the same Goods Declaration. Corbel argues that its earlier payment bars any further fine. What is the correct position under CAO No. 01-2020?",
+      "choices": {
+        "A": "Corbel is correct, because the Php5,000.00 fine covers all errors in that Goods Declaration",
+        "B": "Corbel is correct, because errors discovered after release are not penalized",
+        "C": "Corbel is mistaken, because errors found after release can only be answered by a 250% surcharge",
+        "D": "Corbel is mistaken, because the Php5,000.00 fine is without prejudice to additional fines or penalties for other Inadvertent Errors discovered after release"
+      },
+      "correct": "D",
+      "reason": "Sec. 4.1.2 states that the Php5,000.00 fine under Sec. 4.1 is without prejudice to the imposition of additional fines or penalties for other Inadvertent Errors discovered in the Goods Declarations of shipments after release from Customs. The earlier payment therefore does not bar further fines."
+    }
+  ]
+}

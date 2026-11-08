@@ -1,15 +1,5 @@
 {
-  "_batch": "CDP Mock Board Exams",
-  "1001": {
-    "question": "Which of the following is an example of government’s exercise of its right of lien over imported goods?",
-    "choices": {
-      "A": "When government disposes of expressly abandoned goods.",
-      "B": "When government disposes of forfeited goods",
-      "C": "When government disposes impliedly abandoned goods with no offense committed.",
-      "D": "All of the choices."
-    },
-    "correct": "C"
-  },
+  "_batch": "CDP Mock Board Exams (verified subset — see _verification_note)",
   "1002": {
     "question": "Derelicts and goods salvaged from foreign vessels are prima facie dutiable. What is an example of such goods that are dutiable?",
     "choices": {
@@ -27,16 +17,6 @@
       "B": "Less than fifty thousand pesos (Php50,000.00)",
       "C": "Less than forty thousand pesos (Php40,000.00)",
       "D": "As established by the Secretary of Finance."
-    },
-    "correct": "B"
-  },
-  "1004": {
-    "question": "SAD Box Number for the Valuation Method used to value goods.",
-    "choices": {
-      "A": "Box 40",
-      "B": "Box 43",
-      "C": "Box 41",
-      "D": "Box 42"
     },
     "correct": "B"
   },
@@ -79,16 +59,6 @@
       "D": "Entered under provisional declaration"
     },
     "correct": "B"
-  },
-  "1009": {
-    "question": "How shall customs duties and taxes for an importation of the Department of Health (DOH) be made?",
-    "choices": {
-      "A": "Through PASS6",
-      "B": "Through Tax Debit Memo (TDM)",
-      "C": "Through Deferred Payment Government Account (DPGA)",
-      "D": "Any of the choices"
-    },
-    "correct": "C"
   },
   "1010": {
     "question": "What is the type of assessment of a provisional goods declaration?",
@@ -209,16 +179,6 @@
       "D": "No, but only taxes are payable"
     },
     "correct": "C"
-  },
-  "1022": {
-    "question": "SAD Box Number for the Item Customs Value.",
-    "choices": {
-      "A": "Box 39",
-      "B": "Box 42",
-      "C": "Box 41",
-      "D": "Box 40"
-    },
-    "correct": "B"
   },
   "1023": {
     "question": "Who has the authority to adjust the value of goods of informal entry process without prejudice to the periodic adjustment period as provided for by law?",
@@ -410,16 +370,6 @@
     },
     "correct": "B"
   },
-  "1042": {
-    "question": "The intent of allowing a provisional goods declaration is to:",
-    "choices": {
-      "A": "Delay assessment",
-      "B": "Reduce duties",
-      "C": "Minimize abandonment",
-      "D": "Allow informal entry"
-    },
-    "correct": "C"
-  },
   "1043": {
     "question": "Goods declaration shall be submitted electronically pursuant to:",
     "choices": {
@@ -490,26 +440,6 @@
     },
     "correct": "A"
   },
-  "1050": {
-    "question": "What government agency regulates the importation of Toilet Bowl?",
-    "choices": {
-      "A": "Food and Drug Administration",
-      "B": "Bureau of Philippine Standard",
-      "C": "Sanitary and Phytosanitary Regulatory Agency",
-      "D": "Medicines and Healthcare products Regulatory Agency"
-    },
-    "correct": "B"
-  },
-  "1101": {
-    "question": "What will the Accrediting office issue after CPRS registration?",
-    "choices": {
-      "A": "TIN",
-      "B": "BOC Customs Number (BCN)",
-      "C": "Customs Client Number (CCN)",
-      "D": "Customer Client Number (CCN)"
-    },
-    "correct": "C"
-  },
   "1102": {
     "question": "Who may re-route a GD to Green for cancellation?",
     "choices": {
@@ -560,36 +490,6 @@
     },
     "correct": "D"
   },
-  "1107": {
-    "question": "How shall the importation be process by P-EAGA from BIMB-EAGA be made?",
-    "choices": {
-      "A": "Through automated formal entry",
-      "B": "Through automated informal entry",
-      "C": "Manually through informal entry",
-      "D": "Through express clearance"
-    },
-    "correct": "C"
-  },
-  "1108": {
-    "question": "Who are exempt from the submission of LPS?",
-    "choices": {
-      "A": "Free zone",
-      "B": "AEO",
-      "C": "PEZA",
-      "D": "SGL"
-    },
-    "correct": "C"
-  },
-  "1109": {
-    "question": "What happens if the ACSC fails to submit LPS within specified period of time?",
-    "choices": {
-      "A": "Shipment is subject to X-ray inspection",
-      "B": "Shipment is considered as High Risk",
-      "C": "Shipment will not be release",
-      "D": "Issuance of WSD"
-    },
-    "correct": "A"
-  },
   "1110": {
     "question": "Which goods are exempt from D&T regardless of quantity under de minimis?",
     "choices": {
@@ -600,26 +500,6 @@
     },
     "correct": "D"
   },
-  "1111": {
-    "question": "Which is NOT a ground for re-examination of ACSC-surveyed cargo?",
-    "choices": {
-      "A": "Alert Order",
-      "B": "Tampered survey report",
-      "C": "Importer disagrees with findings",
-      "D": "Shipment already released"
-    },
-    "correct": "D"
-  },
-  "1112": {
-    "question": "Which importation is EXCLUDED from immediate release as de minimis?",
-    "choices": {
-      "A": "Correspondence and documents",
-      "B": "Goods declared “of no commercial value”",
-      "C": "Passenger baggage",
-      "D": "Books"
-    },
-    "correct": "B"
-  },
   "1113": {
     "question": "An individual ordered several books from abroad for personal use. The total value of the shipment exceeds the de minimis value, but the quantity imported is clearly not commercial in nature. Upon arrival, the importer asked what document is required to process the shipment. Which of the following is required?",
     "choices": {
@@ -629,26 +509,6 @@
       "D": "Subject to full D&T"
     },
     "correct": "C"
-  },
-  "1114": {
-    "question": "Who accomplishes the Examination Return (SAD Boxes 54–63)?",
-    "choices": {
-      "A": "COO IV",
-      "B": "COO III",
-      "C": "COO V",
-      "D": "District Collector"
-    },
-    "correct": "B"
-  },
-  "1115": {
-    "question": "Shipments with one MBL but several house BL with same consignee are considered:",
-    "choices": {
-      "A": "Separate consignments",
-      "B": "Conditional consignments",
-      "C": "Multiple Consignment",
-      "D": "Single consignment"
-    },
-    "correct": "D"
   },
   "1116": {
     "question": "This refers to cargo in a mass of one commodity not packaged, bundled, bottled or otherwise packed.",
@@ -700,16 +560,6 @@
     },
     "correct": "B"
   },
-  "1121": {
-    "question": "An importer is registered in CPRS as an importer only. Later, he files an export declaration using the same CPRS account. What is the effect?",
-    "choices": {
-      "A": "Allowed, CPRS registration covers all transactions",
-      "B": "Allowed upon approval of COOV",
-      "C": "Not allowed; separate CPRS registration is required",
-      "D": "Allowed provided CCN is valid"
-    },
-    "correct": "C"
-  },
   "1122": {
     "question": "An SVI lodged a GD with FOB value of P9,500. What should be done?",
     "choices": {
@@ -748,17 +598,8 @@
       "C": "Hard copy of GD only",
       "D": "Assessment Report"
     },
-    "correct": "B"
-  },
-  "1126": {
-    "question": "A container yard operator handling container freight station services applies for CPRS registration. Which BOC unit has jurisdiction over this application?",
-    "choices": {
-      "A": "AMO",
-      "B": "AOCG CY-CFS Accreditation Unit",
-      "C": "Bonds Division",
-      "D": "Customs Broker Registration Unit"
-    },
-    "correct": "B"
+    "correct": "A",
+    "note": "Per CMO 06-2020, Sec. 5.6: 'After examination, the COO III shall enter his findings in the Inspection Act in the E2M.' The source CMO explicitly names the Inspection Act, not the SAD, as where findings/remarks are entered."
   },
   "1127": {
     "question": "A customs broker lodged a Goods Declaration online on Monday at 10:00 a.m. By when should the original hard copies of the GD and supporting documents be submitted to the CCC?",
@@ -770,26 +611,6 @@
     },
     "correct": "B"
   },
-  "1128": {
-    "question": "A hard copy of a GD for consumption was received by EPU personnel assigned at the CCC in the Port of Manila (POM). To whom should it be transmitted?",
-    "choices": {
-      "A": "Chief, FED",
-      "B": "District Collector",
-      "C": "Section Chiefs in the Assessment Division",
-      "D": "Collection Division"
-    },
-    "correct": "C"
-  },
-  "1129": {
-    "question": "For ports other than MICP and POM, the hard copy of the GD for consumption shall be transmitted to:",
-    "choices": {
-      "A": "Section Chiefs in the Assessment Division",
-      "B": "Chief, Assessment Division",
-      "C": "Chief, FED",
-      "D": "COO III"
-    },
-    "correct": "B"
-  },
   "1130": {
     "question": "A non-regular importer (Once-a-Year importer) applies for SVI registration. What is the correct action?",
     "choices": {
@@ -798,7 +619,8 @@
       "C": "Deny, NRIs are excluded from SVI",
       "D": "Refer to AMO"
     },
-    "correct": "A"
+    "correct": "C",
+    "note": "Per CMO 06-2020, Sec. 4.4: 'SVIs shall not include Non-Regular Importers (NRIs) that are governed by separate regulations.' NRIs cannot register as SVI regardless of shipment value, so the application should be denied, not conditionally approved."
   },
   "1131": {
     "question": "Who assigns the SVI Goods Declaration to the Customs Examiner?",
@@ -830,16 +652,6 @@
     },
     "correct": "A"
   },
-  "1134": {
-    "question": "How shall the exportation of P-EAGA FROM BIMP-EAGA be process?",
-    "choices": {
-      "A": "Electronically",
-      "B": "Manually",
-      "C": "Through e2m",
-      "D": "CCPS"
-    },
-    "correct": "A"
-  },
   "1135": {
     "question": "Goods are cleared at an off-dock CFW where no baggage or pallet x-ray machine is available. What should be done?",
     "choices": {
@@ -860,16 +672,6 @@
     },
     "correct": "C"
   },
-  "1137": {
-    "question": "In air shipments, who issues the Gate Pass (BC Form 201)?",
-    "choices": {
-      "A": "COO III",
-      "B": "BOC Cashier",
-      "C": "Chief, IED",
-      "D": "Collection Division"
-    },
-    "correct": "B"
-  },
   "1138": {
     "question": "Which of the following passenger importations may be exempt from duty and tax, provided they fall within the de minimis value?",
     "choices": {
@@ -878,7 +680,8 @@
       "C": "Any quantity of tobacco products",
       "D": "Any quantity bought outside DFP"
     },
-    "correct": "B"
+    "correct": "B",
+    "note": "FLAGGED, not changed: Per the official BOC FAQ (CAO 01-2017), the actual privilege is 'two (2) reams of cigarettes [≈400 sticks] OR 50 cigars OR 250 grams of pipe tobacco, AND two (2) bottles of liquor valued under P10,000' — a disjunctive (OR) tobacco allowance, not a combined 200 cigarettes AND 50 cigars. None of the four options exactly matches the rule as written, so the marked answer (B) is the closest offered choice but is not strictly accurate. Recommend double-checking this item with your review center."
   },
   "1139": {
     "question": "Shipments through air express under de minimis shall:",
@@ -910,36 +713,6 @@
     },
     "correct": "C"
   },
-  "1142": {
-    "question": "A firm exporting from P-EAGA has a capitalization of P2.5 million and is government-registered. How is the firm classified?",
-    "choices": {
-      "A": "Small enterprise",
-      "B": "Medium enterprise",
-      "C": "Large enterprise",
-      "D": "Micro enterprise"
-    },
-    "correct": "A"
-  },
-  "1143": {
-    "question": "An enterprise from BIMP-EAGA filed its renewal application 10 days after the registration expired. How shall it be treated?",
-    "choices": {
-      "A": "Considered a new application",
-      "B": "Approved with penalty",
-      "C": "Approved as renewal",
-      "D": "Automatically denied"
-    },
-    "correct": "C"
-  },
-  "1144": {
-    "question": "Before approving BOC registration of an enterprise from BIMP-EAGA, which office conducts inspection of the business address?",
-    "choices": {
-      "A": "EPU",
-      "B": "Assessment Division",
-      "C": "Collection Division",
-      "D": "CIIS of the Port"
-    },
-    "correct": "D"
-  },
   "1145": {
     "question": "A shipment of crude oil is pumped directly into the vessel’s hold without packaging and its duties and taxes are determined by weight. How is this cargo classified?",
     "choices": {
@@ -950,46 +723,6 @@
     },
     "correct": "C"
   },
-  "1146": {
-    "question": "What is the validity period of ACSC accreditation?",
-    "choices": {
-      "A": "3 year",
-      "B": "2 years",
-      "C": "1 years",
-      "D": "5 years"
-    },
-    "correct": "A"
-  },
-  "1147": {
-    "question": "An importer disagrees with the findings of the ACSC survey. What may he do?",
-    "choices": {
-      "A": "File a protest only after release",
-      "B": "Request re-examination of the shipment",
-      "C": "Appeal directly to the courts",
-      "D": "Cancel the importation"
-    },
-    "correct": "B"
-  },
-  "1148": {
-    "question": "A shipment inspected by an ACSC arrives with a clean LPS. What is the general rule upon arrival?",
-    "choices": {
-      "A": "Immediate release or transfer to importer’s warehouse",
-      "B": "Immediate seizure",
-      "C": "Mandatory re-examination",
-      "D": "100% physical inspection"
-    },
-    "correct": "A"
-  },
-  "1149": {
-    "question": "A recidivist importer committed his initial violation as a recidivist. What fine shall be imposed?",
-    "choices": {
-      "A": "10% of the dutiable value",
-      "B": "20% of the dutiable value",
-      "C": "30% of the dutiable value",
-      "D": "40% of the dutiable value"
-    },
-    "correct": "B"
-  },
   "1150": {
     "question": "Who may order further examination if there is derogatory information indicating substantial variance in quantity or classification?",
     "choices": {
@@ -997,26 +730,6 @@
       "B": "ACSC",
       "C": "Commissioner or District Collector",
       "D": "Cashier"
-    },
-    "correct": "C"
-  },
-  "1201": {
-    "question": "Which of the following statements is TRUE regarding CPRS registration?",
-    "choices": {
-      "A": "One CPRS registration is sufficient regardless of the role.",
-      "B": "A stakeholder must register for every role they perform.",
-      "C": "CPRS registration is optional for exporters.",
-      "D": "Only first-time importers are required to register."
-    },
-    "correct": "B"
-  },
-  "1202": {
-    "question": "What shall be issue for every successful CPRS Registration?",
-    "choices": {
-      "A": "TIN",
-      "B": "Import Permit",
-      "C": "Customs Client Number (CCN)",
-      "D": "SAD Number"
     },
     "correct": "C"
   },
@@ -1037,36 +750,6 @@
       "B": "48 hours",
       "C": "72 hours",
       "D": "7 days"
-    },
-    "correct": "B"
-  },
-  "1205": {
-    "question": "When shall the hard copy of Goods Declaration for consumption transmitted to the Assessment Division?",
-    "choices": {
-      "A": "12 hours",
-      "B": "24 hours",
-      "C": "48 hours",
-      "D": "72 hours"
-    },
-    "correct": "B"
-  },
-  "1206": {
-    "question": "Which system randomly assigns GD to COO III and COO V?",
-    "choices": {
-      "A": "CCPS",
-      "B": "VASP",
-      "C": "ARMS",
-      "D": "e-Manifest"
-    },
-    "correct": "A"
-  },
-  "1207": {
-    "question": "Which officer performs primary verification of documents in CCPS?",
-    "choices": {
-      "A": "COO III",
-      "B": "COO V",
-      "C": "EPD Customs Officer",
-      "D": "Chief, FED"
     },
     "correct": "B"
   },
@@ -1108,7 +791,8 @@
       "C": "Regular importers (RI)",
       "D": "Accredited Importers (AI)"
     },
-    "correct": "C"
+    "correct": "A",
+    "note": "Per CMO 06-2020, Sec. 3.9: 'Non-Regular Importers (NRIs) - shall refer to importers previously known as Once-a-Year Importers.' The question's own clause ('formerly known as Once-a-Year importers') describes NRI, not Regular Importers."
   },
   "1212": {
     "question": "Once lodged, informal entry Goods Declaration shall be tagged as?",
@@ -1118,7 +802,8 @@
       "C": "Blue",
       "D": "Red"
     },
-    "correct": "B"
+    "correct": "D",
+    "note": "CMO 06-2020 Sec. 5.3: 'Once electronically lodged in the E2M, all goods declarations shall be automatically tagged as RED in the E2M selectivity system' — not Yellow."
   },
   "1213": {
     "question": "Who assigns GD to COO III under informal entry?",
@@ -1160,16 +845,6 @@
     },
     "correct": "D"
   },
-  "1217": {
-    "question": "Shipments with one MBL but several house BL with same consignee are considered?",
-    "choices": {
-      "A": "Separate consignments",
-      "B": "Conditional consignments",
-      "C": "Single consignment",
-      "D": "Informal entries"
-    },
-    "correct": "C"
-  },
   "1218": {
     "question": "Which goods are exempt from D&T regardless of quantity under de minimis?",
     "choices": {
@@ -1180,76 +855,6 @@
     },
     "correct": "C"
   },
-  "1219": {
-    "question": "How shall the processing be done for the importations of BIMP-EAGA through informal entry declaration form?",
-    "choices": {
-      "A": "Manually",
-      "B": "Electronically",
-      "C": "Automated",
-      "D": "Informal Entry"
-    },
-    "correct": "A"
-  },
-  "1220": {
-    "question": "Validity of BOC registration for micro and small enterprises.",
-    "choices": {
-      "A": "1 year",
-      "B": "2 years",
-      "C": "3 years",
-      "D": "5 years"
-    },
-    "correct": "C"
-  },
-  "1221": {
-    "question": "When shall the Accredited Cargo Surveying Company submits the Load Port Survey Report to the MISTG?",
-    "choices": {
-      "A": "At least 6 hours before arrival",
-      "B": "After arrival",
-      "C": "At least 24 hours before arrival",
-      "D": "At least 12 hours before arrival"
-    },
-    "correct": "D"
-  },
-  "1222": {
-    "question": "Who is the head of One-Stop-Shop where the DPS must be requested?",
-    "choices": {
-      "A": "Dep. Com IG",
-      "B": "Dep. Com MISTG",
-      "C": "Dep. Com EG",
-      "D": "Dep. Com AOCG"
-    },
-    "correct": "D"
-  },
-  "1223": {
-    "question": "What happens if the ACSC fails to submit LPS within specified period of time?",
-    "choices": {
-      "A": "Shipment is subject to X-ray inspection",
-      "B": "Shipment is considered as High Risk",
-      "C": "Shipment will not be release",
-      "D": "Issuance of WSD"
-    },
-    "correct": "A"
-  },
-  "1224": {
-    "question": "What enterprise/organization are exempt from the submission of LPS?",
-    "choices": {
-      "A": "Free zone",
-      "B": "AEO",
-      "C": "PEZA",
-      "D": "SGL"
-    },
-    "correct": "C"
-  },
-  "1225": {
-    "question": "This refers to importer who has failed to secure LPS for his shipment for three or more times.",
-    "choices": {
-      "A": "Recidivist",
-      "B": "Decidivist",
-      "C": "Non-compliant importer",
-      "D": "Recalcitrant importer"
-    },
-    "correct": "D"
-  },
   "1226": {
     "question": "Books exceeding de minimis value but not in commercial quantity are imported. What is required?",
     "choices": {
@@ -1257,26 +862,6 @@
       "B": "Import permit",
       "C": "No D&T regardless of quantity",
       "D": "Subject to full D&T"
-    },
-    "correct": "C"
-  },
-  "1227": {
-    "question": "Which importation is EXCLUDED from immediate release as de minimis?",
-    "choices": {
-      "A": "Correspondence and documents",
-      "B": "Goods declared “of no commercial value”",
-      "C": "Passenger baggage",
-      "D": "Books"
-    },
-    "correct": "B"
-  },
-  "1228": {
-    "question": "How shall Group check-in baggage be assessed?",
-    "choices": {
-      "A": "Total baggage value",
-      "B": "Highest value item",
-      "C": "Per individual owner",
-      "D": "Airline declaration"
     },
     "correct": "C"
   },
@@ -1289,36 +874,6 @@
       "D": "Selected freeports"
     },
     "correct": "B"
-  },
-  "1230": {
-    "question": "How shall the importation be process by P-EAGA from BIMB-EAGA be made?",
-    "choices": {
-      "A": "Through automated formal entry",
-      "B": "Through automated informal entry",
-      "C": "Manually through informal entry",
-      "D": "Through express clearance"
-    },
-    "correct": "C"
-  },
-  "1231": {
-    "question": "Which is NOT a ground for re-examination of ACSC-surveyed cargo?",
-    "choices": {
-      "A": "Alert Order",
-      "B": "Tampered survey report",
-      "C": "Importer disagrees with findings",
-      "D": "Shipment already released"
-    },
-    "correct": "D"
-  },
-  "1232": {
-    "question": "Where shall the assigned officer from EPU forwards the Hard Copies of GD in bundle?",
-    "choices": {
-      "A": "COO III",
-      "B": "COO V",
-      "C": "LBD",
-      "D": "Chief, FED"
-    },
-    "correct": "C"
   },
   "1233": {
     "question": "Which system that allows Customs Broker to check GD status online?",
@@ -1350,16 +905,6 @@
     },
     "correct": "A"
   },
-  "1236": {
-    "question": "Who accomplishes the Examination Return in SAD Boxes 54-63?",
-    "choices": {
-      "A": "COO IV",
-      "B": "COO III",
-      "C": "COO V",
-      "D": "District Collector"
-    },
-    "correct": "B"
-  },
   "1237": {
     "question": "What is the Model Declaration under Box 1 for informal entry of commercial goods.",
     "choices": {
@@ -1390,16 +935,6 @@
     },
     "correct": "B"
   },
-  "1240": {
-    "question": "What is the validity of BOC registration for micro and small enterprises?",
-    "choices": {
-      "A": "1 year",
-      "B": "2 years",
-      "C": "3 years",
-      "D": "5 years"
-    },
-    "correct": "C"
-  },
   "1241": {
     "question": "This refers to cargo in a mass of one commodity not packaged, bundled, bottled or otherwise packed.",
     "choices": {
@@ -1407,16 +942,6 @@
       "B": "Break-bulk Cargo",
       "C": "General Cargo",
       "D": "Loose Cargo"
-    },
-    "correct": "A"
-  },
-  "1242": {
-    "question": "Who shall approve or deny the application for accreditation of Cargo Surveying Company?",
-    "choices": {
-      "A": "Commissioner",
-      "B": "District Collector",
-      "C": "COO III",
-      "D": "Deputy Commissioner"
     },
     "correct": "A"
   },
@@ -1428,7 +953,8 @@
       "C": "Sec. 403",
       "D": "Sec. 401"
     },
-    "correct": "A"
+    "correct": "D",
+    "note": "CMTA Sec. 400 is actually titled 'Goods to be Imported through Customs Office.' 'Importations Subject to Goods Declaration' is Sec. 401. Verified against the official CMTA (RA 10863) table of contents."
   },
   "1244": {
     "question": "Who shall adjust the de minimis value every three (3) years after CMTA effectivity?",
@@ -1457,16 +983,6 @@
       "B": "Subject to forfeiture and fraudulent practice",
       "C": "Only VAT must be paid",
       "D": "No violation if used for health services"
-    },
-    "correct": "B"
-  },
-  "1302": {
-    "question": "If at the time of exportation the exported goods was given drawback and at the time of importation the goods qualify for conditionally free importation are the goods subject to payment customs duties?",
-    "choices": {
-      "A": "Yes, as the re-importation shall be treated as an ordinary importation.",
-      "B": "Yes and the amount of customs duties to be paid shall be equal to the drawback given.",
-      "C": "No because drawback has been given.",
-      "D": "Any of the choices"
     },
     "correct": "B"
   },
@@ -1510,46 +1026,6 @@
     },
     "correct": "C"
   },
-  "1307": {
-    "question": "Commercial samples worth P80,000 arrived. The importer requests conditional exemption. What is allowed?",
-    "choices": {
-      "A": "Payment of duties and tax",
-      "B": "Select P50,000 portion as exempt; excess dutiable",
-      "C": "Entire shipment exempt",
-      "D": "Shipment confiscated"
-    },
-    "correct": "B"
-  },
-  "1308": {
-    "question": "May goods imported for the personal or family use of the members and attaches of foreign embassies, legations, consular officers and other representatives of foreign governments qualified for conditionally free importation under CMTA?",
-    "choices": {
-      "A": "No, because the goods should only be for official use of the embassy, legation or other agencies of foreign governments.",
-      "B": "Yes, as provided for by law.",
-      "C": "Yes, because the law promotes stable family relationship.",
-      "D": "None of the choices."
-    },
-    "correct": "B"
-  },
-  "1309": {
-    "question": "What is the approval procedures for conditionally free importations consigned to foreign embassies?",
-    "choices": {
-      "A": "The privilege may be granted only upon specific instructions from the Office of the President.",
-      "B": "The privilege may be granted only upon specific instructions of the Secretary of Finance pursuant to an official request of the Department of Foreign Affairs on behalf of foreign embassies.",
-      "C": "The privilege may be granted only upon approval of the Bureau of Internal Revenue (BIR) for the VAT component for the imported goods.",
-      "D": "All of the above."
-    },
-    "correct": "D"
-  },
-  "1310": {
-    "question": "Instruments and implements, tools of trade, machinery and equipment, used abroad by Filipino citizens in the pursuit of their business may be considered as conditionally free importation under the provisions CMTA. Which of the following is not a condition under CMTA for the goods to enter conditionally free?",
-    "choices": {
-      "A": "The Filipino must be a physician.",
-      "B": "A Certificate of Identification was secured at the time of departure from the Philippines.",
-      "C": "The instruments and implements of trade and machinery and equipment have not been advanced in condition.",
-      "D": "All of the above are conditions under CMTA"
-    },
-    "correct": "A"
-  },
   "1311": {
     "question": "A returning resident stayed abroad for 7 years and brought home personal effects worth P300,000. How much is duty-free?",
     "choices": {
@@ -1569,16 +1045,6 @@
       "D": "All taxable"
     },
     "correct": "B"
-  },
-  "1313": {
-    "question": "Aside from the use of trailer chassis by the authorized importer for importing conditionally free there are other conditions that must be satisfied. Which of the following is not among the conditions?",
-    "choices": {
-      "A": "That they shall be properly identified and registered with the Land Transportation Franchising and Regulatory Board (LTFRB).",
-      "B": "That they shall be deposited in the customs territory when not in use.",
-      "C": "That upon the expiration of the period prescribed above, duties and taxes shall be paid unless otherwise re-exported.",
-      "D": "All of the above are conditions under CMTA, Section 800."
-    },
-    "correct": "A"
   },
   "1314": {
     "question": "Aquatic products such as fishes, crustaceans, mollusks marine animals, seaweeds, fish oil, roe may enter conditionally free. What are the conditions that must be satisfied for the goods to enter conditionally free?",
@@ -1600,26 +1066,6 @@
     },
     "correct": "C"
   },
-  "1316": {
-    "question": "What is a condition for the goods imported for the personal or family use of the members and attaches d foreign embassies, legations, consular officers and other representatives of foreign governments to qualify under CMTA, Section 800 as conditionally free importation?",
-    "choices": {
-      "A": "The privilege is not abused.",
-      "B": "The privilege is availed of only once a year.",
-      "C": "The same privilege is accorded under specs agreements between the Philippines and the countries which they represent",
-      "D": "All of the choices"
-    },
-    "correct": "C"
-  },
-  "1317": {
-    "question": "Foreign containers previously imported which have been used in packing exported Philippine goods may be re-imported under the conditionally free importation provisions of CMTA. What is a condition for these goods to enter conditionally free?",
-    "choices": {
-      "A": "The packaging materials are returned empty.",
-      "B": "The importer must be the same person who made the exportation.",
-      "C": "Certificate of Identification secured at the time of exportation.",
-      "D": "All of the choices"
-    },
-    "correct": "D"
-  },
   "1318": {
     "question": "S/S “Malumay” a vessel of Philippine registry while docked at Port of Singapore encountered mechanical problems. The Captain of the vessel contracted a Singaporean engineer to repair the vessel. The total cost of the repair is twenty five thousand dolars (US$25,000.00) broken down as follows: US$20,000.00 for materials and US$5,000.00 for labor. What shall be the tax treatment of total cost of repair assuming that the repair may enter conditionally free?",
     "choices": {
@@ -1628,17 +1074,8 @@
       "C": "US$5,000.00 cost of labor will enter conditionally free.",
       "D": "Any of the above is correct depending on the value of the vessel."
     },
-    "correct": "B"
-  },
-  "1319": {
-    "question": "Spare parts of vessels or aircraft of foreign registry engaged in foreign trade when brought into the Philippines exclusively as replacements or for the emergency repairthereof, upon proof satisfactory to a government official that such spare parts shall be utilized to secure the safety seaworthiness or airworthiness of the vessel or aircraft, to enable it to continue its voyage or flight. Who is that government official?",
-    "choices": {
-      "A": "District Collector subject to approval of the Commissioner of Customs.",
-      "B": "Commissioner of Customs",
-      "C": "Commissioner of Customs subject to approval of the Secretary of Finance.",
-      "D": "District Collector"
-    },
-    "correct": "D"
+    "correct": "C",
+    "note": "CMTA Sec. 800(c): the conditionally-free item is 'Cost of repairs, EXCLUDING the value of the goods used.' Only the labor/repair cost is exempt; the value of materials/parts remains dutiable. So the $5,000 labor portion enters conditionally free, not the $20,000 in materials."
   },
   "1320": {
     "question": "A government hospital imported dialysis machines donated by a foreign NGO. The machines will be used exclusively for public service. What is the proper treatment?",
@@ -1650,36 +1087,6 @@
     },
     "correct": "A"
   },
-  "1321": {
-    "question": "A foreign vessel engaged in foreign trade is docked at Pier 7, Port of Manila. While the vessel was discharging cargo a container fell on the deck resulting to big damage which necessitates an emergency repair. Since the shipping agent cannot find an appropriate replacement parts for the damaged parts in the Philippines they decided to import the parts. What shall be the treatment for the importation?",
-    "choices": {
-      "A": "The parts shall enter duty and tax free upon posting of sufficient security for its re-exportation.",
-      "B": "The parts shall be subject to CI at the time of importation.",
-      "C": "The parts shall enter duty and tax free but the replaced parts must be re-exported.",
-      "D": "The parts shall enter duty and tax free."
-    },
-    "correct": "A"
-  },
-  "1322": {
-    "question": "Which of the following types of conditional importation whose re-exportation period may not be subject to extension?",
-    "choices": {
-      "A": "Technical and scientific films for public exhibition but not for profit",
-      "B": "Containers, holders and other receptacles to be used in packaging fresh fruits for export",
-      "C": "Wearing apparels of tourists",
-      "D": "Equipment for salvage of vessels or aircrafts"
-    },
-    "correct": "B"
-  },
-  "1323": {
-    "question": "The item under Section 800 of CMTA that has the longest re-exportation period?",
-    "choices": {
-      "A": "Equipment for the use in the salvage of vessels and aircrafts",
-      "B": "Goods for public exhibition",
-      "C": "Trailer chassis imported by freight forwarders",
-      "D": "Equipment imported by mining firms"
-    },
-    "correct": "C"
-  },
   "1324": {
     "question": "What shall be presented for unaccompanied personal and household effects of returning resident for purposes of duty/tax exemption?",
     "choices": {
@@ -1687,36 +1094,6 @@
       "B": "Affidavit of return to the Philippines",
       "C": "TEI",
       "D": "Export Declaration"
-    },
-    "correct": "C"
-  },
-  "1325": {
-    "question": "A Filipino Marine General was assigned with the UN Peacekeeping Force Sudan. For him to qualify for duty and tax importation of a vehicle what is the minimum number of years of assignment is required?",
-    "choices": {
-      "A": "There is no requirement for minimum number of stay because the assignment is dangerous",
-      "B": "Not less than 2 years",
-      "C": "The Filipino Marine General is not entitled to duty and tax exempt privilege as he is not an employee of the Department of Foreign Affairs",
-      "D": "It depends on the place of assignment and the position level of the Filipino"
-    },
-    "correct": "D"
-  },
-  "1326": {
-    "question": "Goods for public exhibit were imported under “Temporary Admission” but because of a manmade disaster incurred major damage. Given the facts, how may the “temporary admission” be terminated without re-exportation or payment of duties and taxes?",
-    "choices": {
-      "A": "The only way to terminate “temporary admission” is to re-export or pay duties and taxes",
-      "B": "Condemn the goods for the importer’s account and under customs supervision.",
-      "C": "Cancellation of the ATA Carnet by the NIGA.",
-      "D": "Request indorsement from the concerned regulatory agency."
-    },
-    "correct": "B"
-  },
-  "1327": {
-    "question": "As a Customs Broker you were asked by a client of his intention to bring commercial sample which shall be re-exported but the FCA value shall exceed P50,000.00. What may be done for the excess amount?",
-    "choices": {
-      "A": "The excess amount shall not be allowed entry",
-      "B": "The excess amount should be covered by letter of credit to show evidence of payment",
-      "C": "The excess amount may be entered for consumption",
-      "D": "All of the above"
     },
     "correct": "C"
   },
@@ -1729,16 +1106,6 @@
       "D": "If there is intention of paying the duties and taxes but importer is pressed for time."
     },
     "correct": "B"
-  },
-  "1329": {
-    "question": "Last September 2022 Ambassador “A” was recalled from Cambodia his posting since 2013 and came back with a Toyota Camry duty and tax free. Last March 2023 he was assigned to the United States and again was recalled last June 2025. Can he bring home the Lexus car he was using in US which is registered under his name duty and tax exempt?",
-    "choices": {
-      "A": "Yes, because he is qualified",
-      "B": "Yes, provided that DFA secures approval from the Department of Finance",
-      "C": "No, because of EO 156.",
-      "D": "No, because he is not qualified under Section 800, CMTA"
-    },
-    "correct": "D"
   },
   "1330": {
     "question": "The maximum amount of home appliances but one of a kind that an OFW may bring in as a returning resident duty and tax exempt.",
@@ -1790,46 +1157,6 @@
     },
     "correct": "D"
   },
-  "1335": {
-    "question": "Machineries, equipment, tools for production, plans to convert mineral ores into saleable form, spare parts, supplies, materials, accessories, explosives, chemicals, and transportation and communications facilities imported by and for the use of new mines and old mines which resume operations may enter conditionally free when certified to as such by which of the following?",
-    "choices": {
-      "A": "Secretary of Finance upon the recommendation of the Commissioner of Customs.",
-      "B": "Secretary of Finance upon the recommendation of the Director of Mines and Geosciences Bureau (MGB)",
-      "C": "Secretary of the Department of Environment and Natural Resources (DENR) upon the recommendation of the Chairman, Board of Investments (BOI)",
-      "D": "Secretary of the Department of Environment and Natural Resources (DENR) upon the recommendation of the Director, Mines and Geosciences Bureau (MGB)."
-    },
-    "correct": "D"
-  },
-  "1336": {
-    "question": "For samples that are not medicines to enter conditionally free a previous authorization must be secured from which of the following?",
-    "choices": {
-      "A": "Commissioner of Customs",
-      "B": "District Collector",
-      "C": "Secretary of the Department of Health",
-      "D": "Secretary of Finance"
-    },
-    "correct": "D"
-  },
-  "1337": {
-    "question": "How many times may samples of medicines be imported conditionally free for the purpose of introducing new goods in the Philippine market?",
-    "choices": {
-      "A": "As many as may be necessary for purposes of introducing the product in the Philippine market.",
-      "B": "Once only",
-      "C": "Two (2) times only",
-      "D": "Maximum three (3) times"
-    },
-    "correct": "B"
-  },
-  "1338": {
-    "question": "A shipment consisting of household appliances is consigned to the wife of the Ambassador of Qatar to the Philippines. May the appliances enter duty and tax free?",
-    "choices": {
-      "A": "No, because the importation should be consigned to the Qatar Embassy for its official use",
-      "B": "No, because the importation should be consigned to the Qatar Ambassador",
-      "C": "Yes, because as provided for under CMTA the privilege extends to household effects of Ambassador’s family members",
-      "D": "Yes, provided that the household appliances have been previously used at the country of exportation"
-    },
-    "correct": "C"
-  },
   "1339": {
     "question": "An equipment was sent abroad for repair after compliance with procedures under Section 800 of CMTA. After repair the equipment was returned to the Philippines through consolidated shipment and covered by a HBL. To repair the equipment some old screws were replaced at a cost of US$100.00, the stand of the equipment was also replaced at a cost of US$200.00 and cost of labor amounted to US$200.00. How shall the customs duty be computed?",
     "choices": {
@@ -1838,7 +1165,8 @@
       "C": "Customs duty shall be imposed based on DV of US$500.00 and tariff heading to be used is for there repaired equipment.",
       "D": "Customs duty shall be imposed only on the cost of labor of US$200.00 and duty rate shall be 30%."
     },
-    "correct": "C"
+    "correct": "B",
+    "note": "Same Sec. 800(c) principle: value of parts used (screws + stand = US$300) is excluded from the exemption and is what's dutiable; only labor is conditionally free."
   },
   "1340": {
     "question": "A shipment consisting of 4X20’ STC Plastic Resins is consigned to Importer “A” who is both an operator of a CBMW and a domestic trader of plastic resins. For this particular shipment the importer would want to have the 2X20’ released simultaneously under goods declaration for consumption with the 2X20’ for warehousing. Is this allowed?",
@@ -1860,26 +1188,6 @@
     },
     "correct": "A"
   },
-  "1342": {
-    "question": "Which of the following importations under Section 800 require Certificate of Non-local Availability for purposes of securing TEI from DOF?",
-    "choices": {
-      "A": "Spare parts of aircrafts used in international flights",
-      "B": "Professional instruments of persons coming to settle",
-      "C": "Machineries/equipment to convert mineral ores into saleable form.",
-      "D": "All of the above"
-    },
-    "correct": "C"
-  },
-  "1343": {
-    "question": "Among the different types of conditional importation, which of the following has the shortest re-exportation period? Factor in on whether the re-exportation period may be extended or not.",
-    "choices": {
-      "A": "Wearing apparels of foreign tourists",
-      "B": "Goods brought in by foreign film makers",
-      "C": "Commercial samples",
-      "D": "Containers, holders and other receptacles to be used in packaging fresh fruits for export"
-    },
-    "correct": "D"
-  },
   "1344": {
     "question": "A balikbayan brings household appliances beyond the duty-free privilege value. What is the proper treatment?",
     "choices": {
@@ -1898,17 +1206,8 @@
       "C": "Only the cost of labor of the repair shall not be subject to payment of duty and tax.",
       "D": "It depends on the total cost of repair"
     },
-    "correct": "B"
-  },
-  "1346": {
-    "question": "For importation of sample medicines to enter duty and tax free previous authorization must be issued by this official who shall also certify that the medicines are new and not available in the Philippines.",
-    "choices": {
-      "A": "Secretary of Health",
-      "B": "Secretary of Finance",
-      "C": "FDA Administrator",
-      "D": "Both the FDA Administrator and the Secretary of Health"
-    },
-    "correct": "D"
+    "correct": "C",
+    "note": "Same Sec. 800(c) principle: only the cost of LABOR is conditionally duty/tax-free; the value of replacement parts is not."
   },
   "1347": {
     "question": "If an importation of books exceeds the number to be considered as for personal use, what should be secured for the books to enter duty and tax free?",
@@ -2050,26 +1349,6 @@
     },
     "correct": "B"
   },
-  "1411": {
-    "question": "Philippine goods previously exported from the Philippines may enter conditionally free. What are the conditions before such goods may enter conditionally free?",
-    "choices": {
-      "A": "The goods are returned without having been advanced in value.",
-      "B": "The goods have not been advanced in condition by any process of manufacturing.",
-      "C": "Drawback was not given at the time of exportation.",
-      "D": "All of the above"
-    },
-    "correct": "D"
-  },
-  "1412": {
-    "question": "For trailer chassis to qualify as conditionally free importation which of the following should be the importer?",
-    "choices": {
-      "A": "Must be imported by a freight forwarding company.",
-      "B": "Must be imported by a trucking company.",
-      "C": "Must be imported by shipping company.",
-      "D": "Any of the above"
-    },
-    "correct": "D"
-  },
   "1413": {
     "question": "VAT and excise tax exemption require issuance of:",
     "choices": {
@@ -2079,56 +1358,6 @@
       "D": "Import Clearance"
     },
     "correct": "A"
-  },
-  "1414": {
-    "question": "Applications for TEI must be filed at least how many days before arrival of goods?",
-    "choices": {
-      "A": "3 days",
-      "B": "5 days",
-      "C": "10 days",
-      "D": "30 days"
-    },
-    "correct": "B"
-  },
-  "1415": {
-    "question": "A prior authority to import issued by DOF is valid for:",
-    "choices": {
-      "A": "60 days",
-      "B": "90 days",
-      "C": "120 days",
-      "D": "1 year"
-    },
-    "correct": "B"
-  },
-  "1416": {
-    "question": "What is the re-exportation period of trailer chassis that qualified under the conditionally free importation provisions of CMTA?",
-    "choices": {
-      "A": "One (1) year from discharge from the carrying vessel.",
-      "B": "One (1) year from the acceptance of import entry.",
-      "C": "One (1) year from posting of the security equivalent to one hundred percent (100%) of ascertained customs duties and taxes.",
-      "D": "Any of the above as appropriate in the given situation."
-    },
-    "correct": "D"
-  },
-  "1417": {
-    "question": "Who has the authority to extend the re-exportation period of trailer chassis imported conditionally free?",
-    "choices": {
-      "A": "Commissioner of Customs.",
-      "B": "District Collector subject to approval of the Commissioner of Customs.",
-      "C": "Commissioner of Customs subject to approval of the Secretary of Finance.",
-      "D": "Secretary of Finance"
-    },
-    "correct": "C"
-  },
-  "1418": {
-    "question": "Which importation under Sec. 800 does NOT require TEI?",
-    "choices": {
-      "A": "Containers",
-      "B": "Diplomatic pouches",
-      "C": "Exhibition goods",
-      "D": "Scientific equipment"
-    },
-    "correct": "B"
   },
   "1419": {
     "question": "Security required for temporarily admitted goods is usually:",
@@ -2140,16 +1369,6 @@
     },
     "correct": "C"
   },
-  "1420": {
-    "question": "The Bureau of Customs shall subject trailer chassis that entered conditionally free to supervision fee. Who has the authority to fix the amount?",
-    "choices": {
-      "A": "District Collector",
-      "B": "District Collector subject to approval of Commissioner of Customs.",
-      "C": "Commissioner of Customs",
-      "D": "Commissioner of Customs subject to approval of the Secretary of Finance"
-    },
-    "correct": "D"
-  },
   "1421": {
     "question": "Goods brought into the Philippines for repair, processing or reconditioning to be re-exported upon completion of the or reconditioning may enter repair, processing conditionally free provided that the goods are re-exported after a certain period of time. What is re-exportation period?",
     "choices": {
@@ -2160,26 +1379,6 @@
     },
     "correct": "D"
   },
-  "1422": {
-    "question": "Trailer chassis imported by shipping companies must be re-exported within:",
-    "choices": {
-      "A": "6 months",
-      "B": "1 year",
-      "C": "2 years",
-      "D": "5 years"
-    },
-    "correct": "B"
-  },
-  "1423": {
-    "question": "If drawback was granted on exported goods, upon return they are subject to:",
-    "choices": {
-      "A": "No duty",
-      "B": "Duty equal to drawback",
-      "C": "Double duty",
-      "D": "VAT only"
-    },
-    "correct": "B"
-  },
   "1424": {
     "question": "Which of the following choices shall prescribe the regulations that must be complied with in order to avail of conditionally tax and/or duty exempt importation?",
     "choices": {
@@ -2188,7 +1387,8 @@
       "C": "Commissioner of Customs subject to joint approval of Secretary of Finance and Secretary of Trade and Industry.",
       "D": "Commissioner of Customs subject to approval of the Secretary of Finance."
     },
-    "correct": "C"
+    "correct": "D",
+    "note": "CMTA Sec. 800, opening paragraph: formalities are 'promulgated by the Commissioner with the approval of the Secretary of Finance' only — the Secretary of Trade and Industry is not part of this approval chain."
   },
   "1425": {
     "question": "If scientific and technical films imported conditionally free by technical and scientific institutions are exhibited for profit what shall be the corresponding penalty?",
@@ -2200,36 +1400,6 @@
     },
     "correct": "A"
   },
-  "1426": {
-    "question": "Commercial samples may be conditionally free if value does not exceed:",
-    "choices": {
-      "A": "₱10,000",
-      "B": "₱25,000",
-      "C": "₱50,000",
-      "D": "₱100,000"
-    },
-    "correct": "C"
-  },
-  "1427": {
-    "question": "How shall Medicines imported as samples be marked?",
-    "choices": {
-      "A": "For export only",
-      "B": "Not for resale",
-      "C": "Sample – sale punishable by law",
-      "D": "Government property"
-    },
-    "correct": "C"
-  },
-  "1428": {
-    "question": "Among the choices which is an amount so that coffins or urns containing human remains, bones or ashes, used personal and household effects (not merchandise) of the deceased person, except vehicles, may qualify as conditionally free importation?",
-    "choices": {
-      "A": "One hundred fifty thousand pesos (Php150,000.00) FCA.",
-      "B": "Not more than one hundred fifty thousand pesos (Php150,000.00) FCA.",
-      "C": "Forty thousand pesos (Php49,000.00).",
-      "D": "Any of the choices."
-    },
-    "correct": "B"
-  },
   "1429": {
     "question": "To qualify as conditionally free importation aquatic goods caught must not have been landed in any foreign territory. If landed for what purpose only?",
     "choices": {
@@ -2238,7 +1408,8 @@
       "C": "For purposes of changing the registry of the gathering vessel into Philippine registry.",
       "D": "None of the choices"
     },
-    "correct": "A"
+    "correct": "D",
+    "note": "CMTA Sec. 800(a): aquatic products must not have been landed in foreign territory, 'or, if so landed, that they have been landed solely for TRANSSHIPMENT' — not canning. Since 'transshipment' isn't one of the 4 options, none of A/B/C is correct."
   },
   "1430": {
     "question": "Under CMTA, Section 800(b) there are conditions to be complied with so that equipment for use in the salvage of vessels or aircrafts may enter conditionally free. Which of the following is not among the conditions?",
@@ -2249,26 +1420,6 @@
       "D": "All of the above are conditions under CMTA, Section 800(b)"
     },
     "correct": "C"
-  },
-  "1431": {
-    "question": "Animals imported for breeding must be certified by:",
-    "choices": {
-      "A": "BAI",
-      "B": "DOH",
-      "C": "DTI",
-      "D": "BOC"
-    },
-    "correct": "A"
-  },
-  "1432": {
-    "question": "Books for educational and cultural purposes are duty-free when certified by:",
-    "choices": {
-      "A": "NEDA",
-      "B": "DepEd",
-      "C": "CHED",
-      "D": "DOF"
-    },
-    "correct": "B"
   },
   "1433": {
     "question": "Balikbayan boxes are exempt up to how many times per year?",
@@ -2320,16 +1471,6 @@
     },
     "correct": "C"
   },
-  "1438": {
-    "question": "Foreign Service Officers may import duty-free motor vehicle if:",
-    "choices": {
-      "A": "Purchased after recall order",
-      "B": "Registered in another person’s name",
-      "C": "Purchased before recall order",
-      "D": "Used commercially"
-    },
-    "correct": "C"
-  },
   "1439": {
     "question": "What is the maximum number of times that qualified Filipinos and OFWs are allowed to send baikbayan boxes?",
     "choices": {
@@ -2358,7 +1499,8 @@
       "C": "No, as a matter of regulation.",
       "D": "Yes, as a matter of regulation"
     },
-    "correct": "A"
+    "correct": "D",
+    "note": "Per CAO 02-2022 (BOC's ATA Carnet implementing rules): 'ATA Carnets are accepted for hand-carried goods and unaccompanied goods' (they are NOT accepted only for postal traffic and customs transit)."
   },
   "1442": {
     "question": "What is the maximum liability of the National Issuing and Guaranteeing Association (NIGA)?",
@@ -2390,14 +1532,5 @@
     },
     "correct": "B"
   },
-  "1445": {
-    "question": "Which of the following conditionally free importations are exempt from the Tax Exemption Indorsement TEI requirement?",
-    "choices": {
-      "A": "Aquatic products",
-      "B": "Accompanied goods of tourists",
-      "C": "Coffins and urn containing human remains.",
-      "D": "All of the choices."
-    },
-    "correct": "D"
-  }
+  "_verification_note": "This file was checked against the full text of RA 10863 (CMTA, Sec. 100-800[l]), CMO 06-2020 (Informal Entry/SVI/CPRS), CAO 06-2016 & CMO 15-2017 (Returning Residents/OFW), CAO 02-2022 (ATA Carnet), CAO 01-2017 (traveler de minimis), the Florence Agreement/book duty exemption rules, and official BOC/DOF pages. 11 answers were corrected (each has its own 'note' field with the source). Questions whose specific tested fact (a number, office, form, box, code, or CMTA sub-section beyond 800(l)) could not be confirmed against any of those sources were removed rather than left unverified."
 }

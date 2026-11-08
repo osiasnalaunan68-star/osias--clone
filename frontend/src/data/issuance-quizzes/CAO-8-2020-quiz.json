@@ -1,0 +1,228 @@
+{
+ "type": "CAO",
+ "number": "8-2020",
+ "level1": [
+  {
+   "question": "Gaano katagal dapat itago ng exporters ang records ng exported goods, mula sa petsa ng filing ng Export Declaration, maliban kung iba ang hinihingi ng international agreement?",
+   "choices": {
+    "A": "Isang (1) taon",
+    "B": "Dalawang (2) taon",
+    "C": "Tatlong (3) taon",
+    "D": "Limang (5) taon"
+   },
+   "correct": "C",
+   "reason": "Ayon sa Sec. 9 (Requirement to Keep Records), kailangang itago ng exporters ang records ng kanilang activities, kasama ang records sa exported goods, sa loob ng tatlong (3) taon mula sa date of filing ng Export Declaration, unless otherwise required by international agreement."
+  },
+  {
+   "question": "Ano ang tawag sa dokumentong kinukuha pag-alis at ini-issue ng District Collector o authorized customs officer para i-identify ang goods na i-e-export at babalik din sa Pilipinas?",
+   "choices": {
+    "A": "Certificate of Identification",
+    "B": "Certificate of Origin",
+    "C": "Certificate of Shipment or Non-Shipment",
+    "D": "Special Permit to Load"
+   },
+   "correct": "A",
+   "reason": "Sa Sec. 3.2, ang Certificate of Identification ay dokumentong secured upon departure at ini-issue ng District Collector o authorized customs officer, na nag-i-identify sa goods na i-e-export at subsequently brought back to the Philippines."
+  },
+  {
+   "question": "Alin ang tamang paglalarawan sa Non-Regular Exporter (NRE) ayon sa CAO?",
+   "choices": {
+    "A": "Exporter na accredited sa Bureau at may regular na exportations kada buwan",
+    "B": "Hindi accredited na exporter na may isang (1) exportation within 365 days bago mag-apply ng registration",
+    "C": "Free Zone Locator na may valid na Certificate of Registration at/o Tax Exemption",
+    "D": "Third party na humaharap sa Bureau para sa at on behalf ng exporter"
+   },
+   "correct": "B",
+   "reason": "Sa Sec. 3.9, ang NRE ay hindi accredited bilang regular exporter AT once-a-year exporter na may isang (1) exportation within 365 days bago mag-apply ng registration bilang NRE. Ang Free Zone Locators at third parties ay nakalista bilang Regular Exporters sa Secs. 5.1.2 at 5.1.3."
+  },
+  {
+   "question": "Sino ang itinatakdang dapat present habang nilo-load ang export shipment sa vessel o aircraft?",
+   "choices": {
+    "A": "Personnel ng Free Zone Authority",
+    "B": "Authorized representative ng exporter",
+    "C": "Personnel ng MISTG",
+    "D": "Bureau personnel"
+   },
+   "correct": "D",
+   "reason": "Ayon sa Sec. 7.6 (Loading), ang Bureau personnel ay dapat present habang nilo-load ang export shipment sa vessel o aircraft."
+  },
+  {
+   "question": "Ano ang tawag sa pag-load ng export shipment sa container, na ginagawa sa designated examination area ng Bureau o sa warehouse ng exporter?",
+   "choices": {
+    "A": "Lodgement",
+    "B": "Stuffing",
+    "C": "Post loading",
+    "D": "Examination"
+   },
+   "correct": "B",
+   "reason": "Sa Sec. 3.15, ang Stuffing ay ang loading ng export shipment sa container, na conducted sa designated examination area ng Bureau o sa warehouse ng exporter."
+  },
+  {
+   "question": "Aling opisina ang magbibigay ng IT infrastructure sa Export Division o equivalent units sa ports para sa electronic processing ng Export Declaration?",
+   "choices": {
+    "A": "Management Information System and Technology Group (MISTG)",
+    "B": "Export Division o equivalent unit",
+    "C": "Concerned Free Zone Authority",
+    "D": "Office of National Administrative Register (ONAR)"
+   },
+   "correct": "A",
+   "reason": "Sa Sec. 4.1, ang MISTG ng Bureau ang magbibigay ng necessary IT infrastructure sa Export Division o equivalent units sa various ports para sa electronic processing ng Export Declaration. Sa Sec. 13, MISTG din ang responsable sa paggawa ng system."
+  },
+  {
+   "question": "Kailan magiging epektibo ang CAO na ito?",
+   "choices": {
+    "A": "Sa mismong petsa ng complete publication sa Official Gazette o newspaper of general circulation",
+    "B": "Labinlimang (15) araw pagkatapos ng complete publication sa Official Gazette o newspaper of general circulation",
+    "C": "Tatlumpung (30) araw pagkatapos ng complete publication sa Official Gazette o newspaper of general circulation",
+    "D": "Animnapung (60) araw pagkatapos ng complete publication sa Official Gazette o newspaper of general circulation"
+   },
+   "correct": "C",
+   "reason": "Ayon sa Sec. 17 (Effectivity), magiging epektibo ang Order tatlumpung (30) araw pagkatapos ng complete publication sa Official Gazette o newspaper of general circulation."
+  },
+  {
+   "question": "Alin ang batayan ng parusa sa violations ng CAO na ginawa ng sinumang tao, officer, o employee?",
+   "choices": {
+    "A": "Title X ng CMTA",
+    "B": "Title V ng CMTA",
+    "C": "Title XII ng CMTA",
+    "D": "Title XIV ng CMTA"
+   },
+   "correct": "D",
+   "reason": "Sa Sec. 12 (Penal Provision), ang violations ng CAO ay pepenalidad ayon sa Title XIV ng CMTA at iba pang applicable penal provision."
+  },
+  {
+   "question": "Ano ang batayan ng criteria sa pag-grant ng Certificate of Origin ayon sa CAO?",
+   "choices": {
+    "A": "ROO at OCP sa ilalim ng particular FTA o tariff preference scheme",
+    "B": "Export standard grades na itinakda ng appropriate agency",
+    "C": "Commodity description at value na nakasaad sa Export Declaration",
+    "D": "Certificate of Registration ng exporter sa Free Zone Authority"
+   },
+   "correct": "A",
+   "reason": "Ayon sa Sec. 4.5.3, ang criteria sa pag-grant ng CO ay alinsunod sa Rules of Origin (ROO) at Operational Certification Procedure (OCP) sa ilalim ng particular FTA o tariff preference scheme na kasapi o beneficiary ang Pilipinas."
+  },
+  {
+   "question": "Habang hindi pa paperless ang Bureau, aling dalawang dokumento ang tahasang nakalista (items a at b) na isusumite kasama ng pirmadong printout ng Export Declaration?",
+   "choices": {
+    "A": "Certificate of Origin at Transfer Note",
+    "B": "Special Permit to Load at Certificate of Identification",
+    "C": "Proforma/Commercial Invoice at Packing List",
+    "D": "Certificate of Shipment at Inspector's Certificate of Loading"
+   },
+   "correct": "C",
+   "reason": "Sa Sec. 7.1.1, kasama ng signed printout ng Export Declaration ang (a) Proforma/Commercial Invoice at (b) Packing List, at (c) iba pang documents na hihingin ng rules and regulations."
+  }
+ ],
+ "level2": [
+  {
+   "question": "Pioneer Container Lines plans to ship 12 empty containers from the Port of Subic to a foreign port. The shipping agent asks whether an Export Declaration must be lodged for the containers. What should the Bureau issue under the CAO?",
+   "choices": {
+    "A": "An Export Declaration, because every export shipment requires one without exception",
+    "B": "A Special Permit to Load, which the Bureau issues in lieu of the Export Declaration",
+    "C": "A Certificate of Identification, because the containers are covered by the Bureau's identification rules",
+    "D": "A Certificate of Origin, because the containers are being exported to another country"
+   },
+   "correct": "B",
+   "reason": "Under Sec. 4.3 the Bureau issues a Special Permit to Load in lieu of the Export Declaration for the shipments listed, and Sec. 4.3.2 includes empty containers. The facts match Sec. 4.3.2, so a Special Permit to Load applies."
+  },
+  {
+   "question": "Cebu Premium Foods plans to export packed dried fruit. The appropriate agency has established export standard grades, but the shipment does not conform to those grades and its packaging is not labeled or marked as required by related laws and regulations. What is the consequence at the Bureau?",
+   "choices": {
+    "A": "The Bureau must automatically seize the goods and file a penal case against the exporter",
+    "B": "The Bureau may allow the export provided the exporter pays the applicable fees and charges",
+    "C": "The Bureau must clear the shipment and refer the violation to the appropriate agency after loading",
+    "D": "The Bureau may refuse to give clearance for the export of the goods"
+   },
+   "correct": "D",
+   "reason": "Sec. 4.6 requires products to conform to export standard grades, where applicable, and requires packaging to be labeled and marked in accordance with related laws. It states that goods violating these requirements may not be given clearance by the Bureau."
+  },
+  {
+   "question": "Luzon Dried Fish Corp., a Regular Exporter, authorizes Ocean Link Forwarding to lodge its Export Declaration in the name of Ocean Link as the exporter's agent. Who retains the primary responsibilities or liabilities of the exporter, and how is that party shown in the Export Declaration?",
+   "choices": {
+    "A": "Luzon Dried Fish Corp., the principal, whose name is disclosed with the phrase “For the account of” or similar terms",
+    "B": "Ocean Link Forwarding, the agent, because the Export Declaration was lodged in its own name and no disclosure is required",
+    "C": "Both parties equally, with only the agent's name appearing in the Export Declaration",
+    "D": "The consignee, whose name is disclosed with the phrase “For the account of” or similar terms"
+   },
+   "correct": "A",
+   "reason": "Under Sec. 5.1.3, when export lodgement is made in the name of an exporter's agent, the primary responsibilities or liabilities of the exporter remain with the principal, whose name must be disclosed in the Export Declaration with the phrase “For the account of” or similar terms. Here the principal is Luzon Dried Fish Corp."
+  },
+  {
+   "question": "On a scheduled loading day, the Bureau's electronic lodgement is not available. Mindoro Exports, a Regular Exporter, asks to have its Export Declaration processed manually. What condition applies under the CAO?",
+   "choices": {
+    "A": "Manual processing is not allowed, and the exporter must wait until electronic lodgement is restored",
+    "B": "Manual processing is allowed, and the exporter no longer has to lodge the Export Declaration electronically",
+    "C": "Manual processing is allowed, but the Export Declaration must be electronically lodged as soon as practicable",
+    "D": "Manual processing is allowed, but the Export Declaration must be electronically lodged within thirty (30) days"
+   },
+   "correct": "C",
+   "reason": "Sec. 7.1 allows manual processing of Export Declarations when electronic lodgement is not available, provided that manually processed Export Declarations must be electronically lodged as soon as practicable. The CAO states no fixed number of days."
+  },
+  {
+   "question": "Davao Premium Bananas' export shipment was selected for inspection under the Bureau's risk management system. The Bureau handled and stored the goods during the physical examination and incurred expenses. Who bears the cost, and what is the effect on the goods?",
+   "choices": {
+    "A": "The exporter bears the cost, and the Bureau's expenses are chargeable against the goods and constitute a lien on them",
+    "B": "The Bureau bears the cost because the shipment was selected by its own risk management system",
+    "C": "The exporter bears the cost, but the Bureau cannot charge its handling or storage expenses against the goods",
+    "D": "The cost is shared equally by the Bureau and the exporter, and the goods are released without any lien"
+   },
+   "correct": "A",
+   "reason": "Sec. 7.2.4 makes goods selected under the risk management system subject to examination. Under Sec. 7.2, the cost of examination is for the account of the exporter, and the Bureau's expenses for handling or storage of goods and other necessary operations are chargeable against the goods and constitute a lien on them."
+  },
+  {
+   "question": "Visayas Agro-Chem Trading has lodged its Export Declaration for goods that are subject to regulation. The license required for the goods has not yet been issued, although the other documents are complete. The exporter wants to load the goods immediately. What does the CAO require?",
+   "choices": {
+    "A": "The goods may be loaded now, and the license may be secured after the shipment leaves",
+    "B": "The goods may be loaded now if the exporter pays the applicable duties and fees",
+    "C": "The goods may be loaded under a Special Permit to Load while the license is pending",
+    "D": "The goods may be exported only after the license and other requirements are secured"
+   },
+   "correct": "D",
+   "reason": "Sec. 4.4 (Regulated Exportation) provides that goods subject to regulation shall be exported only after securing the necessary Export Declaration, clearances, licenses, and any other requirements, prior to exportation. The license is still missing, so the goods cannot yet be exported."
+  },
+  {
+   "question": "Bataan Garments requested a Certificate of Shipment or Non-Shipment on June 3 to prove that its shipment had left. The carrier departed on June 5. When and on what basis may the Export Division/Unit that processed the Export Declaration issue the certificate?",
+   "choices": {
+    "A": "Immediately on June 3, upon the exporter's request, based on the Export Declaration alone",
+    "B": "Only after thirty (30) days from June 5, based on the Certificate of Identification",
+    "C": "After the carrier has departed, based on the Inspector's Certificate of Loading",
+    "D": "Immediately on June 3, upon the exporter's request, based on the Commercial Invoice and Packing List"
+   },
+   "correct": "C",
+   "reason": "Sec. 8 provides that upon request of the exporter and after the carrier has departed, the Export Division/Unit that processed the Export Declaration shall issue a Certificate of Shipment or Non-Shipment based on the Inspector's Certificate of Loading. The carrier departed on June 5, so issuance follows that departure."
+  },
+  {
+   "question": "Coco Harvest Inc. exports to a country under ATIGA and wants to issue a proof of origin for its own goods instead of applying for a CO. It has no authority from the Bureau. What does the CAO require before it may do so?",
+   "choices": {
+    "A": "Nothing further, because any exporter may issue a proof of origin under ATIGA on its own",
+    "B": "The Bureau must first authorize the exporter to issue the proof of origin under the Self-Certification Scheme",
+    "C": "The concerned free zone authority must first issue a Certificate of Identification to the exporter",
+    "D": "The exporter must first be registered as a Non-Regular Exporter with the Bureau"
+   },
+   "correct": "B",
+   "reason": "Sec. 4.5.4 (Self-Certification Scheme) states that the Bureau may authorize an exporter to issue a proof of origin certifying the origin of the goods pursuant to ATIGA or other international agreements. Without that authorization, the exporter cannot self-certify. Sec. 3.13 defines self-certification as a system for eligible exporters."
+  },
+  {
+   "question": "Tuguegarao Electronics, a Free Zone Locator in a freeport zone, applied for a Certificate of Origin. The concerned freeport zone authority has completed verification of the goods' origin and wants to issue the CO. What does the CAO require?",
+   "choices": {
+    "A": "The zone authority may issue it without the Bureau's involvement because the exporter is a Free Zone Locator",
+    "B": "The zone authority must first obtain a Special Permit to Load from the Bureau before issuing it",
+    "C": "Only the Bureau may issue it, and the zone authority has no authority to issue a Certificate of Origin",
+    "D": "The zone authority may issue it, but only with the concurrence of the Bureau"
+   },
+   "correct": "D",
+   "reason": "Sec. 4.5.2 provides that after verification, the Certificate of Origin may be issued by the Bureau, or by the concerned special economic and/or freeport zone authority subject to the concurrence of the Bureau. The zone authority therefore needs the Bureau's concurrence."
+  },
+  {
+   "question": "Mabuhay Timber Corp. will export logs that are subject to payment of export duty. Which statement correctly describes how the CAO treats this shipment?",
+   "choices": {
+    "A": "It requires an Export Declaration and is subject to physical examination or non-intrusive inspection",
+    "B": "It requires only a Special Permit to Load and is not subject to examination",
+    "C": "It requires an Export Declaration but is examined only if selected under the risk management system",
+    "D": "It requires no Export Declaration because it is subject to export duty, but it is subject to examination"
+   },
+   "correct": "A",
+   "reason": "Under Sec. 4.1, all export shipments, whether subject to export duty or not, must be covered by an Export Declaration. Sec. 7.2.6 separately subjects the exportation of logs subject to payment of export duty to physical examination or non-intrusive inspection, regardless of risk management selection under Sec. 7.2.4."
+  }
+ ]
+}

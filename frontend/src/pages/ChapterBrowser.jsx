@@ -27,6 +27,7 @@ const AdminPanel = lazy(() =>
   }))
 );
 import { useAuth } from "../authContext";
+import { LegalSettingsSection } from "../components/LegalNotice";
 import { PROMO_PLAN, PAYMENT_METHODS, SUBJECT_LABELS } from "../payments";
 import { formatTimeLeft, formatDateShort } from "../access";
 import { IssuanceSidebar, IssuanceReader } from "./IssuanceBrowser";
@@ -797,6 +798,7 @@ function SettingsView({ darkMode, setDarkMode, onReplayTutorial }) {
         <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-300">RA 10863 — Customs Modernization and Tariff Act. A study &amp; reading companion with search and highlights. Works fully offline.</p>
         <p className="mt-2 text-xs text-slate-400 dark:text-slate-500">Version 1.0.0 (Offline)</p>
       </section>
+      <LegalSettingsSection />
       <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-card dark:border-slate-700 dark:bg-slate-800">
         <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">Developer</h2>
         <div className="flex items-center gap-3">

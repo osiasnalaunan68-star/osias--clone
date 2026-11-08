@@ -1,0 +1,591 @@
+{
+  "type": "CAO",
+  "number": "03-2019",
+  "level1": [
+    {
+      "question": "Gaano katagal ang pinakamahabang validity ng isang Deputization Order mula sa pag-issue nito, maliban kung mas maaga itong na-revoke?",
+      "choices": {
+        "A": "Hindi lalampas sa isang (1) taon",
+        "B": "Hindi lalampas sa tatlumpung (30) araw",
+        "C": "Hindi lalampas sa anim (6) na buwan",
+        "D": "Hindi lalampas sa dalawang (2) taon"
+      },
+      "correct": "A",
+      "reason": "Ayon sa Sec. 4.4.6(a), ang Deputization Order ay dapat may validity period na hindi lalampas sa isang (1) taon mula issuance, maliban kung mas maaga itong na-revoke. Inuulit din ito sa Sec. 4.4.7(a)."
+    },
+    {
+      "question": "Ilang calendar days ang pinakamahabang validity ng isang Mission Order mula sa petsa ng pag-issue nito?",
+      "choices": {
+        "A": "Labinlimang (15) calendar days",
+        "B": "Animnapung (60) calendar days",
+        "C": "Siyamnapung (90) calendar days",
+        "D": "Tatlumpung (30) calendar days"
+      },
+      "correct": "D",
+      "reason": "Sa Sec. 4.5.4, ang Mission Order ay valid nang hindi hihigit sa tatlumpung (30) calendar days mula sa petsa ng issuance, at dapat nakasaad din ang petsa ng expiration."
+    },
+    {
+      "question": "Sa loob ng gaano katagal mula sa completion of mission dapat isumite ang return at after-mission/operation report kasama ang detalyadong inventory ng na-seize na goods?",
+      "choices": {
+        "A": "Sa loob ng pitumpu't dalawang (72) oras",
+        "B": "Sa loob ng dalawampu't apat (24) na oras",
+        "C": "Sa loob ng apatnapu't walong (48) oras",
+        "D": "Sa loob ng labinlimang (15) araw"
+      },
+      "correct": "B",
+      "reason": "Ayon sa Sec. 4.5.7, ang mga Customs Officer o deputized officer na nag-implement ng Mission Order ay dapat magsumite ng return at after-mission report, kasama ang detailed inventory, sa loob ng 24 oras mula completion of mission."
+    },
+    {
+      "question": "Ano ang minimum na orientation na kailangang daanan ng isang officer o miyembro ng NLEA bago siya ma-deputize?",
+      "choices": {
+        "A": "Hindi bababa sa isang (1) buwang orientation seminar ng Bureau tungkol sa CMTA",
+        "B": "Hindi bababa sa isang (1) araw na orientation seminar ng Bureau tungkol sa CMTA",
+        "C": "Hindi bababa sa tatlong (3) araw na orientation seminar ng Bureau tungkol sa CMTA",
+        "D": "Hindi bababa sa isang (1) linggong orientation seminar ng Bureau tungkol sa CMTA"
+      },
+      "correct": "B",
+      "reason": "Sa Sec. 4.4.6(c) (Customs Orientation), walang officer o miyembro ng NLEA ang pwedeng ma-deputize nang hindi muna dumadaan sa at least one (1) day orientation seminar ng Bureau tungkol sa mga kaugnay na probisyon ng CMTA."
+    },
+    {
+      "question": "Sino ang pwedeng mag-issue ng Mission Order ayon sa CAO 03-2019?",
+      "choices": {
+        "A": "Ang head ng ahensya ng mga officer na ide-deputize, sa pamamagitan ng sarili nitong order",
+        "B": "Ang Secretary of Finance, bilang pinuno ng Department na sumasakop sa Bureau",
+        "C": "Ang Commissioner of Customs lamang, at walang ibang officer na pwedeng bigyan ng authority",
+        "D": "Ang Commissioner of Customs o ang Customs Officer na authorized niya nang nakasulat"
+      },
+      "correct": "D",
+      "reason": "Sa Sec. 4.5.1, ang Mission Order ay issued ng Commissioner of Customs o ng ibang Customs Officer na authorized nang nakasulat ng Commissioner, at dapat may original signature at official seal ng Bureau."
+    },
+    {
+      "question": "Kapag walang naipakitang evidence of payment of duties and taxes ang interested party pagkatapos ng inventory sa ilalim ng LOA, ilang araw ang ibinibigay bago puwedeng i-seize ang goods at isailalim sa forfeiture proceedings?",
+      "choices": {
+        "A": "Animnapung (60) araw",
+        "B": "Labinlimang (15) araw",
+        "C": "Tatlumpung (30) araw",
+        "D": "Pitong (7) araw"
+      },
+      "correct": "B",
+      "reason": "Ayon sa Sec. 4.6.5(c), kapag hindi nakapag-produce ng evidence of payment of duties and taxes ang interested party sa loob ng labinlimang (15) araw, ang goods ay pwedeng i-seize at isailalim sa forfeiture proceedings."
+    },
+    {
+      "question": "Ano ang kailangan bago pasukin at i-search ang isang Dwelling House?",
+      "choices": {
+        "A": "Warrant mula sa Judge ng competent court, base sa sworn application na may probable cause",
+        "B": "Letter of Authority na pirmado ng Commissioner ng Customs para sa inspection",
+        "C": "Warrant of Seizure and Detention na pirmado ng Collector ng Customs para sa goods",
+        "D": "Mission Order na pirmado ng Commissioner ng Customs para sa operasyon"
+      },
+      "correct": "A",
+      "reason": "Sa Sec. 4.3.4, ang Dwelling House ay pwedeng pasukin at i-search lamang kung may warrant mula sa Judge ng competent court, kung saan ang sworn application ay nagpapakita ng probable cause at malinaw na naglalarawan ng lugar at goods."
+    },
+    {
+      "question": "Aling ahensya ang mga opisyal ay awtorisadong gumamit ng Police Authority sa lahat ng kasong sakop ng regular nilang tungkulin kapag may kinalaman ang pagbabayad ng internal revenue taxes?",
+      "choices": {
+        "A": "Department of Budget and Management (DBM)",
+        "B": "Philippine Economic Zone Authority (PEZA)",
+        "C": "Bureau of Internal Revenue (BIR)",
+        "D": "Dangerous Drugs Board (DDB)"
+      },
+      "correct": "C",
+      "reason": "Ayon sa Sec. 4.1.3, kabilang sa mga awtorisadong gumamit ng Police Authority ang mga opisyal ng Bureau of Internal Revenue (BIR) sa lahat ng kaso sa regular nilang performance of duties, kapag payment ng internal revenue taxes ang involved."
+    },
+    {
+      "question": "Sino ang pwedeng mag-apply para sa judicial warrant para sa layunin ng CAO na ito?",
+      "choices": {
+        "A": "Deputized officers na saklaw ng Deputization Order",
+        "B": "Customs Officers na authorized lamang ng District Collector",
+        "C": "Customs Officers na authorized nang nakasulat ng Commissioner",
+        "D": "Kahit sinong Customs Officer na may hawak na Mission Order"
+      },
+      "correct": "C",
+      "reason": "Sa Sec. 4.7.1, tanging mga Customs Officer na authorized nang nakasulat ng Commissioner ang pwedeng mag-apply para sa judicial warrant."
+    },
+    {
+      "question": "Gaano kadalas dapat i-review ang CAO 03-2019, maliban kung may ibang nakasaad?",
+      "choices": {
+        "A": "Hindi lalampas sa bawat tatlong (3) taon",
+        "B": "Hindi lalampas sa bawat isang (1) taon",
+        "C": "Hindi lalampas sa bawat dalawang (2) taon",
+        "D": "Hindi lalampas sa bawat limang (5) taon"
+      },
+      "correct": "A",
+      "reason": "Ayon sa Section 9 (Periodic Review), ang CAO ay dapat i-review nang hindi lalampas sa bawat tatlong (3) taon, at i-amend o i-revise kung kinakailangan."
+    }
+  ],
+  "level2": [
+    {
+      "question": "A trainee reads Sec. 4.3.2, which states that 'the Bureau shall establish a system for the receipt, processing and dissemination of all information' on smuggled goods. Which entity does the CAO mean by 'Bureau'?",
+      "choices": {
+        "A": "Bureau of Internal Revenue",
+        "B": "Bureau of Customs",
+        "C": "Bureau of Fisheries and Aquatic Resources",
+        "D": "National Bureau of Investigation"
+      },
+      "correct": "B",
+      "reason": "Sec. 3.2 defines 'Bureau' as the Bureau of Customs. The other entities are named elsewhere in the CAO but are not what the term 'Bureau' refers to."
+    },
+    {
+      "question": "A Customs Officer prepares a Warrant of Seizure and Detention for goods that are subject to forfeiture under Section 1113 of the CMTA. Who must sign the WSD under the CAO?",
+      "choices": {
+        "A": "The Secretary of Finance",
+        "B": "The Commissioner of Customs",
+        "C": "The Collector of Customs",
+        "D": "A judge of a competent court"
+      },
+      "correct": "C",
+      "reason": "Sec. 3.33 defines the WSD as a written order issued in the name of the Republic of the Philippines and signed by the Collector of Customs, directing a Customs Officer to seize and detain property subject to forfeiture under Section 1113 of the CMTA."
+    },
+    {
+      "question": "Intelligence shows that a container holds prohibited articles. Instead of seizing it immediately, the Commissioner lets the consignment pass through the country under the supervision of an authorized officer so that evidence identifying the persons involved can be gathered. What is this investigative technique called?",
+      "choices": {
+        "A": "Constructive Customs Custody",
+        "B": "Seizure",
+        "C": "Diversion of Goods",
+        "D": "Controlled Delivery"
+      },
+      "correct": "D",
+      "reason": "Sec. 3.4 defines Controlled Delivery as allowing an unlawful or suspect consignment to enter, pass through or exit the country under the supervision of an authorized officer to gather evidence identifying the persons involved in smuggling-related offenses."
+    },
+    {
+      "question": "A trainee is asked to identify which place is Customs Premises under the CAO. Which of the following qualifies?",
+      "choices": {
+        "A": "A private residence where imported goods are kept in storage by the owner",
+        "B": "A public highway outside the customs districts used by trucks carrying cargo",
+        "C": "A wharf inside a customs district under the Bureau's exclusive control",
+        "D": "A privately owned store outside any customs district that sells imported goods"
+      },
+      "correct": "C",
+      "reason": "Sec. 3.9 defines Customs Premises as customs offices, facilities, warehouses, ports, airports, wharves, infrastructures and other areas within the customs districts over which the Bureau has exclusive control, direction and management for customs purposes."
+    },
+    {
+      "question": "A shipment declared for admission into a Free Zone is instead sold in the domestic market without customs formalities and without payment of duties and taxes. What is this act called under the CAO?",
+      "choices": {
+        "A": "Constructive Customs Custody",
+        "B": "Diversion of Goods",
+        "C": "Seizure",
+        "D": "Controlled Delivery"
+      },
+      "correct": "B",
+      "reason": "Sec. 3.12 defines Diversion of Goods to include imported goods for admission into Free Zones that are illegally introduced into the domestic market without compliance with customs formalities or without payment of duties and taxes."
+    },
+    {
+      "question": "The Bureau applies inspections, risk management and other measures to ensure that the laws it is responsible for enforcing are complied with. Which defined term refers to these measures?",
+      "choices": {
+        "A": "Customs Control",
+        "B": "Police Authority",
+        "C": "Constructive Customs Custody",
+        "D": "Customs Jurisdiction"
+      },
+      "correct": "A",
+      "reason": "Sec. 3.6 defines Customs Control as the measures applied to ensure compliance with the laws and regulations which Customs is responsible for enforcing. Customs Jurisdiction (Sec. 3.7) concerns the areas covered, and Police Authority (Sec. 3.23) concerns the power to search, seize and arrest."
+    },
+    {
+      "question": "A Mission Order has ten days of validity left. The team has carried out everything stated in the Mission Order in accordance with the Execution Plan. When is the mission considered completed under the CAO?",
+      "choices": {
+        "A": "When the Commissioner approves the after-mission report of the team",
+        "B": "When the Collector issues a Warrant of Seizure and Detention over the goods",
+        "C": "When the thirty-day validity period of the Mission Order finally lapses",
+        "D": "When the Mission Order is accomplished according to the Execution Plan"
+      },
+      "correct": "D",
+      "reason": "Sec. 3.3 defines Completion of Mission as the accomplishment of the Mission Order in accordance with the Execution Plan. Sec. 4.5.5 adds that accomplishment of the operation automatically terminates the Mission Order, so the remaining validity period is irrelevant."
+    },
+    {
+      "question": "The Commissioner signs a written authorization naming specific Customs Officers who may demand evidence of payment of duties and taxes on imported goods openly offered for sale in a market stall. What is this document?",
+      "choices": {
+        "A": "Warrant of Seizure and Detention",
+        "B": "Letter of Authority",
+        "C": "Mission Order",
+        "D": "Deputization Order"
+      },
+      "correct": "B",
+      "reason": "Sec. 3.18 defines the Letter of Authority as a written authorization signed by the Commissioner in the exercise of the power to visit and inspect premises and goods, identifying the Customs Officers authorized to demand evidence of payment of duties and taxes on imported goods openly offered for sale or kept in storage."
+    },
+    {
+      "question": "Customs Officers are planning to enter four structures. Which of them is a Dwelling House under the CAO?",
+      "choices": {
+        "A": "A warehouse used to store imported goods",
+        "B": "A store where imported goods are offered for sale",
+        "C": "A family home used only as living quarters",
+        "D": "An office where a customs brokerage conducts its business"
+      },
+      "correct": "C",
+      "reason": "Sec. 3.13 defines a Dwelling House as a building or structure exclusively devoted to rest and comfort, as distinguished from places devoted to business or offices. The warehouse, store and office are devoted to business."
+    },
+    {
+      "question": "A customs broker's trainee is asked which of the following is expressly named in the CAO as a Free Zone. Which one is it?",
+      "choices": {
+        "A": "John Hay Special Economic Zone",
+        "B": "Port of Batangas",
+        "C": "Ninoy Aquino International Airport",
+        "D": "Manila International Container Port"
+      },
+      "correct": "A",
+      "reason": "Sec. 3.15 expressly lists the John Hay Special Economic Zone among the Free Zones. The seaports and airport in the other choices are not named in that definition."
+    },
+    {
+      "question": "The Commissioner is considering which entities may be deputized. Which of the following is a national law enforcement agency in the sense of the CAO, being responsible for preventing, detecting and investigating crimes and apprehending offenders?",
+      "choices": {
+        "A": "Office of the National Administrative Registrar (ONAR)",
+        "B": "Philippine Drug Enforcement Agency (PDEA)",
+        "C": "Philippine Economic Zone Authority (PEZA)",
+        "D": "Department of Budget and Management (DBM)"
+      },
+      "correct": "B",
+      "reason": "Sec. 3.20 defines NLEAs as agencies responsible for enforcing the law, particularly the prevention, detection and investigation of crimes and the apprehension of offenders. PDEA is listed among the NLEAs that may be deputized in Sec. 4.4.4(e)."
+    },
+    {
+      "question": "Deputized PNP officers, acting on a tip, conduct an anti-smuggling operation at a private storage yard located well outside the customs premises. The team holds a valid Deputization Order naming each officer, but no Mission Order was ever issued for the operation. What is the status of the operation under the CAO?",
+      "choices": {
+        "A": "It is legal, because a Deputization Order alone covers operations outside customs premises.",
+        "B": "It is illegal only as to the goods seized, while the arrests made remain fully valid.",
+        "C": "It is legal, provided the officers coordinated with the District Collector before the operation.",
+        "D": "It is deemed illegal, because no Mission Order covers the operation outside customs premises."
+      },
+      "correct": "D",
+      "reason": "Under Sec. 4.4.7(c), the exercise of police authority by deputized officers must in all cases be covered by a Mission Order, and any anti-smuggling operation outside customs premises not covered by a Mission Order is deemed illegal. The decisive fact is the absence of a Mission Order; the Deputization Order and coordination do not cure it."
+    },
+    {
+      "question": "A vessel suspected of carrying smuggled goods is intercepted in the waters connecting two islands of the archipelago, where the channel is very wide. Are these waters part of Philippine Territory under the CAO?",
+      "choices": {
+        "A": "Yes, because waters between the islands are internal waters regardless of their breadth.",
+        "B": "Yes, but only if the channel is also navigable from the open sea.",
+        "C": "Yes, but only if the Commissioner has declared the channel part of Philippine Territory.",
+        "D": "No, because very wide channels between the islands are excluded from Philippine Territory."
+      },
+      "correct": "A",
+      "reason": "Sec. 3.22 states that the waters around, between and connecting the islands of the archipelago, regardless of their breadth and dimensions, form part of the internal waters of the Philippines, which are part of Philippine Territory."
+    },
+    {
+      "question": "A Mission Order was issued to deputized NBI officers for an anti-smuggling operation. Before the operation is completed, the Bureau decides to take over as lead agency. May the issuing authority revoke the Mission Order, and on what basis?",
+      "choices": {
+        "A": "Yes, but only after proof of abuse of authority in the implementation of the Mission Order.",
+        "B": "Yes, because the Bureau, as lead agency, takes over the operation from the deputized officers.",
+        "C": "No, because a Mission Order may be revoked only after the operation has been completed.",
+        "D": "No, because only the head of the NBI may revoke a Mission Order issued to its officers."
+      },
+      "correct": "B",
+      "reason": "Sec. 4.5.6 allows the issuing authority to revoke a Mission Order even before implementation or completion, and Sec. 4.5.6(c) lists as a ground the case where the Order was issued to deputized officers and the Bureau, as lead agency, takes over the operation. Abuse of authority is a separate ground under Sec. 4.5.6(b), not a precondition."
+    },
+    {
+      "question": "A Customs Officer and deputized officers hold a duly issued search warrant for a dwelling house. The affidavit asserted that the goods are in the place to be searched, and the warrant carries a direction that it may be served at any time of day or night. The team arrives after dark but, for some reason, cannot serve the warrant that night. What must the team do?",
+      "choices": {
+        "A": "Conduct perimeter guarding until service of the warrant can be effected.",
+        "B": "Leave the premises until the Commissioner issues a fresh Mission Order.",
+        "C": "Return the warrant to the court and apply for a new one the next morning.",
+        "D": "Force open the entrance in the presence of the Barangay Chairman and the police unit."
+      },
+      "correct": "A",
+      "reason": "Sec. 4.7.2 states that if for any reason the warrant cannot be served during night time, perimeter guarding shall be conducted until service can be effected. The facts show the warrant could not be served that night, so the officers must secure the perimeter rather than abandon, reapply or force entry."
+    },
+    {
+      "question": "Customs Officer Lim submits the return of service of a search warrant to the court at 3:00 PM on March 4. Under the CAO, by what time must Lim furnish the Bureau with a copy of the return?",
+      "choices": {
+        "A": "By 3:00 PM on March 7",
+        "B": "By 3:00 PM on March 5",
+        "C": "By 3:00 PM on March 11",
+        "D": "By 3:00 PM on March 6"
+      },
+      "correct": "B",
+      "reason": "Sec. 4.7.4 requires the officers to furnish the Bureau a copy of the return within twenty-four (24) hours from submission of the return to the court. Counting 24 hours from 3:00 PM on March 4 gives 3:00 PM on March 5."
+    },
+    {
+      "question": "Customs Officers receive information that a launch carrying suspected smuggled goods is moving along an inland river that is not navigable from the sea. The river lies within Philippine territory. Is the river covered by the Bureau's Customs Jurisdiction?",
+      "choices": {
+        "A": "No, because only seas, ports and airports are covered by the jurisdiction.",
+        "B": "Yes, since it covers inland waters whether navigable or not from the sea.",
+        "C": "Yes, but only after the Commissioner issues a Mission Order for that river.",
+        "D": "No, because only waters that are navigable from the sea are covered by the jurisdiction."
+      },
+      "correct": "B",
+      "reason": "Sec. 3.7 defines Customs Jurisdiction as the Bureau's jurisdiction over all seas within Philippine territory and all lands, coasts, ports, airports, harbors, bays, rivers and inland waters whether navigable or not from the sea, and any means of conveyance. A Mission Order is not a precondition of jurisdiction."
+    },
+    {
+      "question": "After an inventory under a Letter of Authority, the owner of the goods, Mr. Dela Rosa, refuses to receive and acknowledge the Inventory Report. The Customs Officer has already prepared and signed the report and the witnesses have signed it. What must the Customs Officer do with the owner's copy?",
+      "choices": {
+        "A": "Keep the copy in Bureau records until the owner agrees to acknowledge it.",
+        "B": "Void the inventory and conduct a new one in the owner's presence.",
+        "C": "Ask the barangay officials to sign for the owner in his place.",
+        "D": "Post a copy in any conspicuous space in the building or premises."
+      },
+      "correct": "D",
+      "reason": "Sec. 4.6.5(c)(iv) requires that a copy of the Inventory Report be furnished to the owner, occupant or person in possession and acknowledged by them. If that person refuses to receive and acknowledge it, a copy shall be posted in any conspicuous space in the building or premises."
+    },
+    {
+      "question": "Customs Officers compare four shipments. Which one is a Prohibited Importation, as distinguished from a Restricted Importation, under the CAO?",
+      "choices": {
+        "A": "Gold jewelry with a stamp that misstates its fineness",
+        "B": "Firearms and weapons of war, or parts thereof",
+        "C": "Lottery and sweepstakes tickets, excluding advertisements",
+        "D": "Pinball and jackpot machines used in gambling"
+      },
+      "correct": "A",
+      "reason": "Sec. 3.26(d) lists goods of gold, silver or other precious metals whose stamp, brand or mark does not indicate the actual fineness of quality as prohibited. Gambling machines, lottery tickets and ammunition are listed under Restricted Importation in Sec. 3.29(a)-(c)."
+    },
+    {
+      "question": "A warehouse owner proposes that his private security guard be given the authority to search, seize and arrest suspected smugglers. Which of the following may be granted Police Authority as defined in the CAO?",
+      "choices": {
+        "A": "An employee of a licensed customs brokerage firm in the port",
+        "B": "A foreign customs attache assigned to an embassy in Manila",
+        "C": "A private security guard hired by a warehouse owner or an importer",
+        "D": "A specific regular government employee who is authorized"
+      },
+      "correct": "D",
+      "reason": "Sec. 3.23 defines Police Authority as the authority granted to specific regular government employees to effect search, seizure and arrest under the CMTA and related laws. Private or foreign personnel do not qualify."
+    },
+    {
+      "question": "A Deputization Order issued to named NBI officers expired on June 30. The Commissioner issued a renewal on July 10 so the officers could continue assisting the Bureau. A dispute arises over whether the renewal covers the period from June 30 to July 10. What is the correct rule?",
+      "choices": {
+        "A": "The renewal takes effect on July 10, but acts done from June 30 to July 10 are validated by it.",
+        "B": "The renewal takes effect only when the NBI head confirms it, regardless of its date of issuance.",
+        "C": "The renewal takes effect on June 30 because it merely continues the original order.",
+        "D": "The renewal takes effect only on July 10 and does not retroact to the expiration date of June 30."
+      },
+      "correct": "D",
+      "reason": "Under Sec. 4.4.6(a), the renewal of a Deputization Order takes effect only on the date of issuance and shall not retroact to the date of expiration of the original or earlier order. The renewal issued on July 10 therefore cannot cover June 30 to July 10."
+    },
+    {
+      "question": "Deputized PDEA officers apprehend a truck carrying suspected smuggled goods outside customs premises. After reporting the apprehension to the Bureau by phone, they turn over the confiscated goods to the Collector's authorized representative. Which document must the deputized officers submit upon this turn-over?",
+      "choices": {
+        "A": "An Affidavit of Apprehension",
+        "B": "An Inventory Report signed by a Customs Operations Officer III",
+        "C": "A Warrant of Seizure and Detention",
+        "D": "An Undertaking that the goods will not be removed or disposed of"
+      },
+      "correct": "A",
+      "reason": "Sec. 4.4.5(c) requires deputized officers to submit an Affidavit of Apprehension upon turn-over of the confiscated goods to the Collector or his duly authorized representative. A WSD is signed by the Collector, and the other documents belong to LOA proceedings."
+    },
+    {
+      "question": "Customs Officers take possession of 200 cartons of undeclared cigarettes found in a van, for violation of the CMTA. What is this act called under the CAO?",
+      "choices": {
+        "A": "Diversion of Goods",
+        "B": "Seizure",
+        "C": "Completion of Mission",
+        "D": "Controlled Delivery"
+      },
+      "correct": "B",
+      "reason": "Sec. 3.31 defines Seizure as the act of taking possession of property for violations of the CMTA and other related laws, implying the taking or removal of something from the possession of another person."
+    },
+    {
+      "question": "An agency submits a definite, target-specific and usually short-term activity plan connected to an intelligence project to support its request for a Mission Order. What is this plan called?",
+      "choices": {
+        "A": "Inventory Report",
+        "B": "Execution Plan (EXEPLAN)",
+        "C": "Undertaking",
+        "D": "Return and after-mission report"
+      },
+      "correct": "B",
+      "reason": "Sec. 3.14 defines the Execution Plan (EXEPLAN) as a definite target-specific activity, usually short-term, conducted in relation to an intelligence project. Sec. 4.5.3(c) requires every request for a Mission Order to be accompanied by an EXEPLAN."
+    },
+    {
+      "question": "A memorandum assigns certain tasks to the 'Police Officers' of the Bureau. The section chief wants to know which Customs Officers are covered by that term in the CAO. Which group is meant?",
+      "choices": {
+        "A": "Customs Officers under the Enforcement and Security Service (ESS)",
+        "B": "Customs Officers under the District Collector assigned in customs bonded warehouses",
+        "C": "Customs Officers under the District Collector who inspect vessels upon landing",
+        "D": "Customs Officers under the Customs Intelligence and Investigation Service (CIIS)"
+      },
+      "correct": "A",
+      "reason": "Sec. 3.24 defines Police Officers as customs officers under the Enforcement and Security Service (ESS). The other groups correspond to Agents (Sec. 3.1), Inspectors (Sec. 3.17) and Guards (Sec. 3.16)."
+    },
+    {
+      "question": "Customs Officers carrying a Mission Order and the Commissioner's written authority arrive at a warehouse suspected of holding undeclared goods. They disclose the nature of their authority, but the owner cannot be located within a reasonable time and the gate is locked. The officers decide to open the gate by necessary means. Whose presence is required when they do so?",
+      "choices": {
+        "A": "Two witnesses who are residents of the same locality, or a representative of the building management",
+        "B": "The District Collector having jurisdiction and a duly authorized representative of the Commissioner",
+        "C": "The Barangay Chairman or his representative, and the police unit with jurisdiction over the area",
+        "D": "A judge of a competent court and the Collector of Customs of the port concerned"
+      },
+      "correct": "C",
+      "reason": "Sec. 4.3.3 allows necessary means to open a gate when the owner or person in charge cannot be located within a reasonable time, and requires that in all instances this be done in the presence of the Barangay Chairman or his authorized representative and the police unit having jurisdiction. The two-witness rule belongs to LOA entry under Sec. 4.6.5(c)(i), not to opening a gate."
+    },
+    {
+      "question": "A Customs Officer stops a van because of derogatory information received about its cargo. A student asks what standard 'reasonable cause' refers to under the CAO. Which is correct?",
+      "choices": {
+        "A": "What an ordinary person of average intelligence and sound mind would believe",
+        "B": "Circumstances strong enough to warrant a cautious man in believing the accused is guilty",
+        "C": "A finding made by a judge after a sworn application",
+        "D": "Facts leading a prudent man to believe the items sought are in the place to be searched"
+      },
+      "correct": "A",
+      "reason": "Sec. 3.27 defines Reasonable Cause as that which an ordinary person of average intelligence and sound mind would believe. The first two alternatives come from the definition of Probable Cause in Sec. 3.25, and a judge's finding relates to warrants, not to this definition."
+    },
+    {
+      "question": "Customs Officers receive a written order issued in the name of the People of the Philippines, signed by a judge of a competent court, directing a peace officer to search for certain personal property and bring it before the Court. What is this document?",
+      "choices": {
+        "A": "Mission Order",
+        "B": "Warrant of Seizure and Detention",
+        "C": "Letter of Authority",
+        "D": "Search Warrant"
+      },
+      "correct": "D",
+      "reason": "Sec. 3.30 defines a Search Warrant as an order in writing issued in the name of the People of the Philippines, signed by a judge of a competent court and directed to a peace officer to search for certain personal property and bring it before the Court."
+    },
+    {
+      "question": "PNP officers named in a Deputization Order plan to conduct a search of a customs warehouse located inside a port that is under the Bureau's exclusive control. Does the authority granted by the Deputization Order cover this search?",
+      "choices": {
+        "A": "Yes, if the District Collector gives verbal consent to the officers.",
+        "B": "Yes, because a Deputization Order covers search, seizure and arrest anywhere.",
+        "C": "No, because the authority covers specified areas outside customs premises.",
+        "D": "No, because deputized officers cannot be authorized to search at all."
+      },
+      "correct": "C",
+      "reason": "Sec. 3.11 defines the Deputization Order as authorizing named officers to assist in the exercise of customs police authority, particularly the power to search, seize and arrest, in specified areas outside of customs premises. A warehouse inside the port is within customs premises."
+    },
+    {
+      "question": "Officer Ramos, a Customs Officer under the District Collector, boards a vessel upon its landing and again before its departure to inspect it. Under the CAO, how is Officer Ramos referred to?",
+      "choices": {
+        "A": "Guard",
+        "B": "Police Officer",
+        "C": "Inspector",
+        "D": "Agent"
+      },
+      "correct": "C",
+      "reason": "Sec. 3.17 defines Inspectors as Customs Officers under the District Collector who conduct inspection of vessels or aircraft upon landing and prior to departure."
+    },
+    {
+      "question": "Acting under a Letter of Authority, a Customs Officer inspects a stall that openly offers imported items. Part of the stock consists of regulated goods that lack the required government regulatory permits and clearances. What should the Customs Officer do with respect to these goods?",
+      "choices": {
+        "A": "Confiscate the goods on the spot under the plain view doctrine without any inventory.",
+        "B": "Give the owner fifteen (15) days to produce the missing permits before taking any action.",
+        "C": "Apply for a search warrant from a judge before doing anything with the goods in the stall.",
+        "D": "Immediately conduct an inventory and recommend a Warrant of Seizure and Detention."
+      },
+      "correct": "D",
+      "reason": "Sec. 4.6.5(c)(v) provides that for restricted or regulated goods wanting government regulatory permits and clearances, the Customs Officer must immediately conduct an inventory and recommend the issuance of a WSD. The 15-day period applies to evidence of payment of duties and taxes, and the plain view doctrine applies to prohibited articles discovered during service of the LOA (Sec. 4.6.5(c)(vi))."
+    },
+    {
+      "question": "The Commissioner wants to issue a Mission Order to a deputized officer. Which of the following deputized officers may validly receive it under the CAO?",
+      "choices": {
+        "A": "A contractual employee hired by the PNP on a six-month contract",
+        "B": "A private security guard employed by a warehouse owner",
+        "C": "A PDEA agent who holds a regular plantilla position in government",
+        "D": "A consultant engaged by the Bureau on a retainer basis"
+      },
+      "correct": "C",
+      "reason": "Sec. 3.19 defines the Mission Order as a directive to carry out specific instructions given to any Customs Officer or any deputized officer who must be a government employee holding a regular plantilla position. Only the PDEA agent meets that requirement."
+    },
+    {
+      "question": "Customs Officers apply for a search warrant covering a dwelling house. Which showing best satisfies the CAO's meaning of probable cause?",
+      "choices": {
+        "A": "The firm belief of the officers that persons inside the premises are removing evidence of violations",
+        "B": "Facts that would lead a reasonably prudent person to believe an offense was committed and the items sought are in the place",
+        "C": "The belief of an ordinary person of average intelligence and sound mind that something unlawful occurred",
+        "D": "Derogatory information received from any source, without any other supporting circumstances"
+      },
+      "correct": "B",
+      "reason": "Sec. 3.25 defines Probable Cause as including facts and circumstances that could lead a reasonably discreet and prudent man to believe that an offense has been committed and the items sought are in the place to be searched. The first alternative is the definition of Reasonable Cause (Sec. 3.27), and the others are not part of the probable cause definition."
+    },
+    {
+      "question": "An importer's regulated goods have arrived, but a required permit has not yet been submitted. The importer asks to submit it after arrival but before the goods are released from customs custody. Under the CAO's definition of regulated importation, when is this allowed?",
+      "choices": {
+        "A": "In every case, as long as submission is made before release",
+        "B": "Whenever the Commissioner issues a Letter of Authority",
+        "C": "Only in cases provided for by governing laws or regulations",
+        "D": "In no case, since all requirements must be secured before arrival"
+      },
+      "correct": "C",
+      "reason": "Sec. 3.28 states that, for importation, submission of requirements after arrival of the goods but prior to release from customs custody is allowed only in cases provided for by governing laws or regulations."
+    },
+    {
+      "question": "Officer Gomez is a Customs Officer under the District Collector and is assigned in a customs bonded warehouse. Under the CAO, how is he referred to?",
+      "choices": {
+        "A": "Agent",
+        "B": "Police Officer",
+        "C": "Guard",
+        "D": "Inspector"
+      },
+      "correct": "C",
+      "reason": "Sec. 3.16 defines Guards as Customs Officers under the District Collector, including guards assigned in customs bonded warehouses, customs facility warehouses and other customs facilities."
+    },
+    {
+      "question": "The Bureau reviews four of its employees. Which one is a Customs Officer, as distinguished from a clerk or employee, under the CAO?",
+      "choices": {
+        "A": "Mr. Cruz, whose duties are limited to manual work such as loading and unloading cartons",
+        "B": "Ms. Bautista, whose duties are limited to clerical work such as encoding and filing records",
+        "C": "Ms. Dizon, whose duties are limited to clerical work such as copying and delivering documents",
+        "D": "Mr. Abad, whose duties involve exercising discretion in performing functions of the Bureau"
+      },
+      "correct": "D",
+      "reason": "Sec. 3.8 defines a Customs Officer as a person whose duty, not being clerical or manual in nature, involves the exercise of discretion in performing the functions of the Bureau. The other three have only clerical or manual duties."
+    },
+    {
+      "question": "Under Sec. 4.3.9, all goods entering or leaving a certain area are subject to Customs Control whether or not they are liable to duties and taxes. A newly hired officer asks which defined term refers to the areas in the Philippines where customs and tariff laws may be enforced. What is the term?",
+      "choices": {
+        "A": "Customs Jurisdiction",
+        "B": "Customs Premises",
+        "C": "Free Zones",
+        "D": "Customs Territory"
+      },
+      "correct": "D",
+      "reason": "Sec. 3.10 defines Customs Territory as the areas in the Philippines where customs and tariff laws may be enforced. Customs Premises (Sec. 3.9) are the places under the Bureau's exclusive control, and Free Zones (Sec. 3.15) are specific special economic zones and freeports."
+    },
+    {
+      "question": "Dr. Mercado, duly authorized by the Dangerous Drugs Board, brings in a consignment of opium solely for medicinal purposes. How does the CAO treat this importation?",
+      "choices": {
+        "A": "It is a restricted good excepted from the prohibition due to the authorized medicinal use.",
+        "B": "It is a prohibited importation that admits of no exception once opium is involved in the shipment.",
+        "C": "It is an ordinary importation that is not subject to any restriction or required authorization.",
+        "D": "It is allowed only if the Bureau of Customs itself is the importer of the opium."
+      },
+      "correct": "A",
+      "reason": "Sec. 3.29(d) lists opium among restricted goods, which are prohibited except when authorized by law or regulation, and excepts importation by the government or any person duly authorized by the Dangerous Drugs Board for medicinal purposes. Dr. Mercado falls within that exception."
+    },
+    {
+      "question": "Mr. Cruz did not import a shipment himself, but he buys and transports the goods while fully knowing that they were fraudulently imported. How does the CAO classify his act?",
+      "choices": {
+        "A": "Not smuggling, because only the person who personally imported the goods commits it",
+        "B": "Diversion of Goods, because the goods were brought to a place other than the proper destination",
+        "C": "Smuggling, because he helped transport the goods knowing they were fraudulently imported",
+        "D": "Controlled Delivery, because the goods were allowed to pass under the supervision of an officer"
+      },
+      "correct": "C",
+      "reason": "Sec. 3.32 defines Smuggling to include assisting in receiving, concealing, buying, selling, disposing or transporting goods with full knowledge that they were fraudulently imported. Mr. Cruz's knowledge and his buying and transporting bring him within that definition."
+    },
+    {
+      "question": "Officer Reyes is a Customs Officer assigned to the Customs Intelligence and Investigation Service (CIIS) and is preparing a surveillance report. In the terminology of CAO 03-2019, how are Customs Officers under the CIIS referred to?",
+      "choices": {
+        "A": "Agents",
+        "B": "Guards",
+        "C": "Police Officers",
+        "D": "Inspectors"
+      },
+      "correct": "A",
+      "reason": "Sec. 3.1 defines Agents as Customs Officers under the CIIS. Police Officers (Sec. 3.24) are under the ESS, while Guards (Sec. 3.16) and Inspectors (Sec. 3.17) are under the District Collector."
+    },
+    {
+      "question": "The Commissioner's office lists the 'Officials of the Bureau' who exercise police authority, other than those specifically mentioned in Section 214(a) of the CMTA. Which of the following falls within that term?",
+      "choices": {
+        "A": "A deputized NBI officer",
+        "B": "A Service Director of the Bureau",
+        "C": "A Customs Examiner designated to a mission team",
+        "D": "A Guard assigned in a bonded warehouse"
+      },
+      "correct": "B",
+      "reason": "Sec. 3.21 defines Officials of the Bureau as the Commissioner, Deputy Commissioners and Service Directors exercising police authority other than those specifically mentioned in Section 214(a) of the CMTA. Guards are separately defined in Sec. 3.16."
+    },
+    {
+      "question": "After an inventory under a Letter of Authority, the Customs Officers do not physically take the goods. Instead, the owner signs a written agreement that the goods will not be removed or disposed of until it is resolved whether duties and taxes were properly paid. What is this situation called?",
+      "choices": {
+        "A": "Constructive Customs Custody",
+        "B": "Special Customs Area",
+        "C": "Seizure",
+        "D": "Controlled Delivery"
+      },
+      "correct": "A",
+      "reason": "Sec. 3.5 defines Constructive Customs Custody as the situation, falling short of physical seizure, where the Customs Officers and the owner enter into a written agreement after the inventory that the goods subject of a LOA shall not be removed or disposed of pending resolution of the payment issue."
+    },
+    {
+      "question": "The Commissioner allows a controlled delivery of a shipment of firearm parts imported without PNP permits. The team includes Customs Officer Ramos and deputized PNP officer Santos, both covered by a duly issued Mission Order, and deputized NBI agent Uy, who has a Deputization Order but is not covered by any Mission Order. Who may participate in the controlled delivery?",
+      "choices": {
+        "A": "Santos and Uy only, because controlled delivery is reserved exclusively for deputized officers",
+        "B": "Ramos, Santos and Uy, because a Deputization Order alone is enough to participate",
+        "C": "Ramos and Santos only, because they are covered by a duly issued Mission Order",
+        "D": "Ramos only, because deputized officers may not take part in a controlled delivery conducted by the Bureau"
+      },
+      "correct": "C",
+      "reason": "Sec. 4.8.2 provides that only Customs Officers and deputized officers covered by a duly issued Mission Order may participate in a controlled delivery. Sec. 4.8.3(b) supports the Commissioner allowing it for firearms imported without PNP permits. Uy lacks Mission Order coverage and is therefore excluded."
+    }
+  ]
+}

@@ -147,8 +147,8 @@ self.addEventListener("activate", (event) => {
   self.clients.claim();
 });
 
-function fetchAndCache(request) {
-  return fetch(request).then((response) => {
+function fetchAndCache(request, init) {
+  return fetch(request, init).then((response) => {
     if (response && (response.ok || response.type === "opaque")) {
       const copy = response.clone();
       caches.open(CACHE_NAME).then((cache) => cache.put(request, copy)).catch(() => {});
@@ -172,6 +172,7 @@ self.addEventListener("fetch", (event) => {
   if (request.method !== "GET") return;
   const url = new URL(request.url);
   const sameOrigin = url.origin === self.location.origin;
+  if (sameOrigin && url.pathname.endsWith("/version.json")) return; // always straight to the network
 
   // Cross-origin: only cache Google Fonts. Firebase/Auth/APIs go straight to the browser.
   if (!sameOrigin) {
@@ -191,7 +192,7 @@ self.addEventListener("fetch", (event) => {
   // Rest of same-origin files: network-first with short timeout.
   event.respondWith(
     (async () => {
-      const network = fetchAndCache(request);
+      const network = fetchAndCache(request, { cache: "no-cache" }); // skip the 10-min HTTP cache of GitHub Pages
       network.catch(() => {});
       const cached = await caches.match(request);
       if (!cached) return network.catch(() => offlineFallback(request));
@@ -1154,6 +1155,8 @@ import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import { useAuth } from "../authContext";
 import { TRIAL_DAYS, DAY_MS, formatTimeLeft, formatDateShort, toMs } from "../access";
 import { PROMO_PLAN } from "../payments";
+import { useUpdateAvailable, getRemoteId, applyUpdate } from "../updateCheck";
+import { LegalGate, LegalLinkButton } from "./LegalNotice";
 
 const ChapterBrowser = lazy(() => import("../pages/ChapterBrowser"));
 const QuizHub = lazy(() => import("../pages/QuizHub"));
@@ -1274,6 +1277,10 @@ function GuestWelcome({ step, setStep, onStartDemo }) {
 
       <div className="border-t border-slate-200 bg-white/90 p-4 backdrop-blur dark:border-slate-800 dark:bg-slate-900/90">
         {authError && <p className="mb-2 text-center text-xs text-red-600 dark:text-red-400">{authError}</p>}
+        <p className="mx-auto mb-2 max-w-md text-center text-[11px] leading-snug text-slate-500 dark:text-slate-400">
+          After you log in you will be asked to accept the{" "}
+          <LegalLinkButton className="font-semibold text-navy-900 dark:text-gold-400">Privacy Notice &amp; Terms</LegalLinkButton>.
+        </p>
         <button onClick={signInWithGoogle} disabled={signingIn} className="mx-auto flex h-12 w-full max-w-md items-center justify-center rounded-xl bg-gold-500 text-sm font-bold text-navy-900 shadow-sm active:bg-gold-600 disabled:opacity-50">
           {signingIn ? "Waiting for Google..." : "🎁 Login with Google — start your " + TRIAL_DAYS + "-day free trial"}
         </button>
@@ -1450,6 +1457,29 @@ function AccessPill({ access }) {
   );
 }
 
+// ── "New version available" banner (dismissible, comes back next app open) ──
+function UpdateBanner() {
+  const available = useUpdateAvailable();
+  const [busy, setBusy] = useState(false);
+  const [, setTick] = useState(0);
+  if (!available) return null;
+  const KEY = "cuble_update_dismiss";
+  let dismissed = false;
+  try { dismissed = sessionStorage.getItem(KEY) === getRemoteId(); } catch (_) {}
+  if (dismissed) return null;
+  const hide = () => { try { sessionStorage.setItem(KEY, String(getRemoteId())); } catch (_) {} setTick((n) => n + 1); };
+  const go = async () => { setBusy(true); const ok = await applyUpdate(); if (!ok) setBusy(false); };
+  return (
+    <div className="pointer-events-none fixed inset-x-0 top-0 z-[65] flex justify-center px-3" style={{ paddingTop: "calc(env(safe-area-inset-top) + 8px)" }}>
+      <div className="pointer-events-auto flex w-full max-w-md items-center gap-2 rounded-2xl border border-gold-500 bg-navy-900 py-2 pl-4 pr-2 text-white shadow-xl dark:bg-slate-800">
+        <span className="min-w-0 flex-1 text-xs font-semibold leading-snug">🆕 New version available. Update to get the latest fixes.</span>
+        <button onClick={go} disabled={busy} className="flex-shrink-0 rounded-full bg-gold-500 px-3 py-1.5 text-xs font-bold text-navy-900 active:bg-gold-600 disabled:opacity-60">{busy ? "Updating…" : "Update now"}</button>
+        <button onClick={hide} aria-label="Dismiss" className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full text-sm opacity-70 active:opacity-100">✕</button>
+      </div>
+    </div>
+  );
+}
+
 export default function AccessGate() {
   return (
     <>
@@ -1459,12 +1489,13 @@ export default function AccessGate() {
       <UnlockToast />
       <RenewBanner />
       <OfflinePill />
+      <UpdateBanner />
     </>
   );
 }
 
 function AccessGateInner() {
-  const { user, profile, loading, signingIn, needsFullName, deviceLimitReached, access, overlayOpen, setOverlayOpen } = useAuth();
+  const { user, profile, loading, signingIn, needsFullName, deviceLimitReached, needsLegal, access, overlayOpen, setOverlayOpen } = useAuth();
   const [demo, setDemo] = useState(null);
   const [guestStep, setGuestStep] = useState(0);
 
@@ -1481,6 +1512,8 @@ function AccessGateInner() {
   }
 
   if (!profile || needsFullName || deviceLimitReached) return <Splash text="Finishing your account setup…" />;
+  // After a successful login: Privacy Notice / Terms / AI disclaimer must be accepted first.
+  if (needsLegal) return <LegalGate />;
   if (access.state === "loading") return <Splash text="Checking your trial…" />;
   if (access.state === "expired") return <ExpiredGate />;
 
@@ -2041,6 +2074,277 @@ export default function IssuanceQuizModal({ issuance, onClose, embedded = false,
     document.body
   );
 }
+```
+
+## File: ./frontend/src/components/LegalNotice.jsx
+```
+// LegalNotice.jsx — Privacy Notice / Terms / About + the "I agree" screen shown
+// once after login, and a read-only copy that lives in Settings.
+//
+// Exports:
+//   LegalGate             full-screen acceptance screen (used by AccessGate)
+//   LegalModal            read-only full-screen reader (opened from Settings / guest screen)
+//   LegalSettingsSection  the "Privacy & Terms" card for SettingsView
+//   LegalLinkButton       small text link that opens LegalModal (guest screen)
+
+import { useEffect, useState } from "react";
+import { useAuth } from "../authContext";
+import { formatDateShort, toMs } from "../access";
+import {
+  LEGAL_VERSION, LEGAL_UPDATED, LEGAL_SECTIONS, KEY_POINTS, CONSENT_ITEMS,
+  CONTACT_EMAIL, DEVELOPER_PORTFOLIO,
+} from "../legalContent";
+
+// ── Rendering of the legal text ──────────────────────────────────────
+function Block({ block }) {
+  if (block.type === "ul") {
+    return (
+      <ul className="ml-4 list-disc space-y-1.5 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+        {block.items.map((t, i) => <li key={i}>{t}</li>)}
+      </ul>
+    );
+  }
+  return <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-300">{block.text}</p>;
+}
+
+function Section({ section, open, onToggle }) {
+  const warn = section.tone === "warn";
+  return (
+    <section
+      className={
+        "overflow-hidden rounded-2xl border shadow-card " +
+        (warn
+          ? "border-amber-300 bg-amber-50 dark:border-amber-700 dark:bg-amber-950/30"
+          : "border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-800")
+      }
+    >
+      <button
+        type="button"
+        onClick={onToggle}
+        aria-expanded={open}
+        className="flex min-h-[48px] w-full items-center gap-3 px-4 py-3 text-left"
+      >
+        <span className="text-xl" aria-hidden>{section.icon}</span>
+        <span className={"flex-1 text-sm font-bold " + (warn ? "text-amber-900 dark:text-amber-200" : "text-slate-800 dark:text-slate-100")}>
+          {section.title}
+        </span>
+        <span aria-hidden className={"text-slate-400 transition-transform " + (open ? "rotate-180" : "")}>▾</span>
+      </button>
+      {open && (
+        <div className="space-y-3 px-4 pb-4">
+          {section.blocks.map((b, i) => <Block key={i} block={b} />)}
+        </div>
+      )}
+    </section>
+  );
+}
+
+export function LegalContent({ defaultOpen = ["ai"] }) {
+  const [openIds, setOpenIds] = useState(() => new Set(defaultOpen));
+  const toggle = (id) =>
+    setOpenIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id); else next.add(id);
+      return next;
+    });
+  const allOpen = openIds.size === LEGAL_SECTIONS.length;
+
+  return (
+    <div className="space-y-3">
+      <div className="flex items-center justify-between">
+        <p className="text-xs text-slate-400 dark:text-slate-500">Version {LEGAL_VERSION} · Updated {LEGAL_UPDATED}</p>
+        <button
+          type="button"
+          onClick={() => setOpenIds(allOpen ? new Set() : new Set(LEGAL_SECTIONS.map((s) => s.id)))}
+          className="text-xs font-semibold text-navy-900 underline dark:text-gold-400"
+        >
+          {allOpen ? "Collapse all" : "Expand all"}
+        </button>
+      </div>
+
+      {LEGAL_SECTIONS.map((s) => (
+        <Section key={s.id} section={s} open={openIds.has(s.id)} onToggle={() => toggle(s.id)} />
+      ))}
+
+      <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-card dark:border-slate-700 dark:bg-slate-800">
+        <h2 className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">Contact the developer</h2>
+        <p className="text-sm text-slate-600 dark:text-slate-300">For privacy requests, corrections, deletion of your data, or any question about this notice:</p>
+        {CONTACT_EMAIL && (
+          <a href={"mailto:" + CONTACT_EMAIL} className="mt-2 block text-sm font-semibold text-navy-900 underline dark:text-gold-400">{CONTACT_EMAIL}</a>
+        )}
+        <a href={DEVELOPER_PORTFOLIO} target="_blank" rel="noopener noreferrer" className="mt-2 block text-sm font-semibold text-navy-900 underline dark:text-gold-400">
+          Developer portfolio
+        </a>
+      </section>
+    </div>
+  );
+}
+
+// ── Read-only full-screen reader ─────────────────────────────────────
+export function LegalModal({ onClose }) {
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
+
+  return (
+    <div className="fixed inset-0 z-[100] flex flex-col bg-slate-50 dark:bg-slate-950" role="dialog" aria-modal="true" aria-label="Privacy Notice and Terms">
+      <header className="safe-top flex items-center gap-3 border-b border-slate-200 bg-white px-4 py-3 dark:border-slate-800 dark:bg-slate-900">
+        <h1 className="flex-1 text-base font-bold text-navy-900 dark:text-slate-50">Privacy Notice, Terms &amp; About</h1>
+        <button onClick={onClose} aria-label="Close" className="flex h-10 w-10 items-center justify-center rounded-full text-lg text-slate-500 active:bg-slate-100 dark:text-slate-300 dark:active:bg-slate-800">✕</button>
+      </header>
+      <main className="flex-1 overflow-y-auto px-4 py-4">
+        <div className="mx-auto max-w-2xl pb-6">
+          <LegalContent />
+        </div>
+      </main>
+      <div className="safe-bottom border-t border-slate-200 bg-white p-3 dark:border-slate-800 dark:bg-slate-900">
+        <button onClick={onClose} className="mx-auto flex h-11 w-full max-w-2xl items-center justify-center rounded-xl bg-navy-900 text-sm font-semibold text-white active:bg-navy-800 dark:bg-navy-700">Close</button>
+      </div>
+    </div>
+  );
+}
+
+// ── Small link (guest screen) ────────────────────────────────────────
+export function LegalLinkButton({ className = "", children = "Privacy Notice & Terms" }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <button type="button" onClick={() => setOpen(true)} className={"underline " + className}>{children}</button>
+      {open && <LegalModal onClose={() => setOpen(false)} />}
+    </>
+  );
+}
+
+// ── Settings card ────────────────────────────────────────────────────
+export function LegalSettingsSection() {
+  const { legalAccepted } = useAuth();
+  const [open, setOpen] = useState(false);
+  const at = legalAccepted ? toMs(legalAccepted.at) : null;
+
+  return (
+    <section className="mb-6 rounded-2xl border border-slate-200 bg-white p-4 shadow-card dark:border-slate-700 dark:bg-slate-800">
+      <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">Privacy &amp; Terms</h2>
+      <p className="mb-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+        About this project, the AI-generated content disclaimer, the Privacy Notice and the Terms of Use.
+      </p>
+      <button
+        onClick={() => setOpen(true)}
+        className="flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-700 active:bg-slate-100 dark:border-slate-600 dark:text-slate-200 dark:active:bg-slate-700"
+      >
+        📄 Read Privacy Notice &amp; Terms
+      </button>
+      {legalAccepted && (
+        <p className="mt-2 text-xs text-slate-400 dark:text-slate-500">
+          ✅ You accepted version {legalAccepted.version}{at ? " on " + formatDateShort(at) : ""}.
+        </p>
+      )}
+      {open && <LegalModal onClose={() => setOpen(false)} />}
+    </section>
+  );
+}
+
+// ── Acceptance screen (right after login) ────────────────────────────
+export function LegalGate() {
+  const { user, acceptLegal, signOutUser, setOverlayOpen } = useAuth();
+  const [checked, setChecked] = useState({});
+  const [showFull, setShowFull] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState(null);
+
+  // Make sure the account overlay is not sitting on top of this screen.
+  useEffect(() => { setOverlayOpen(false); }, [setOverlayOpen]);
+
+  const allChecked = CONSENT_ITEMS.every((c) => checked[c.id]);
+
+  const onContinue = async () => {
+    if (!allChecked || saving) return;
+    setSaving(true);
+    setError(null);
+    try {
+      await acceptLegal();
+    } catch (e) {
+      setError("Could not save your choice. Please try again.");
+      setSaving(false);
+    }
+  };
+
+  return (
+    <div className="safe-top flex h-[100dvh] flex-col bg-slate-50 dark:bg-slate-950">
+      <header className="px-5 pb-2 pt-4 text-center">
+        <p className="text-xs font-semibold uppercase tracking-widest text-gold-600 dark:text-gold-400">Before you continue</p>
+        <h1 className="text-xl font-bold text-navy-900 dark:text-slate-50">Privacy Notice &amp; Terms</h1>
+        {user && user.email && <p className="mt-0.5 text-xs text-slate-400 dark:text-slate-500">Signed in as {user.email}</p>}
+      </header>
+
+      <main className="flex-1 overflow-y-auto px-4 py-3">
+        <div className="mx-auto max-w-md space-y-3">
+          {KEY_POINTS.map((k, i) => (
+            <div
+              key={i}
+              className={
+                "rounded-2xl border p-4 shadow-card " +
+                (i === 0
+                  ? "border-amber-300 bg-amber-50 dark:border-amber-700 dark:bg-amber-950/30"
+                  : "border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-900")
+              }
+            >
+              <p className="flex items-center gap-2 text-sm font-bold text-slate-800 dark:text-slate-100">
+                <span className="text-xl" aria-hidden>{k.icon}</span>{k.title}
+              </p>
+              <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">{k.body}</p>
+            </div>
+          ))}
+
+          <button
+            type="button"
+            onClick={() => setShowFull((v) => !v)}
+            className="flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border-2 border-gold-500 bg-gold-50 px-4 py-2.5 text-sm font-semibold text-navy-900 active:bg-gold-100 dark:border-gold-400 dark:bg-slate-800 dark:text-gold-400"
+          >
+            {showFull ? "▲ Hide the full text" : "📄 Read the full Privacy Notice, Terms & About"}
+          </button>
+
+          {showFull && <LegalContent />}
+        </div>
+      </main>
+
+      <footer className="safe-bottom border-t border-slate-200 bg-white/95 p-4 backdrop-blur dark:border-slate-800 dark:bg-slate-900/95">
+        <div className="mx-auto max-w-md space-y-3">
+          {CONSENT_ITEMS.map((c) => (
+            <label key={c.id} className="flex cursor-pointer items-start gap-3 text-sm leading-snug text-slate-700 dark:text-slate-200">
+              <input
+                type="checkbox"
+                checked={!!checked[c.id]}
+                onChange={(e) => setChecked((p) => ({ ...p, [c.id]: e.target.checked }))}
+                className="mt-0.5 h-5 w-5 flex-shrink-0 accent-navy-900"
+              />
+              <span>{c.text}</span>
+            </label>
+          ))}
+
+          {error && <p className="text-center text-xs text-red-600 dark:text-red-400">{error}</p>}
+
+          <button
+            onClick={onContinue}
+            disabled={!allChecked || saving}
+            className="flex h-12 w-full items-center justify-center rounded-xl bg-gold-500 text-sm font-bold text-navy-900 shadow-sm active:bg-gold-600 disabled:opacity-40"
+          >
+            {saving ? "Saving…" : "I agree · Continue"}
+          </button>
+          <button
+            onClick={signOutUser}
+            className="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-medium text-slate-500 dark:border-slate-600 dark:text-slate-300"
+          >
+            I do not agree · Sign out
+          </button>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
+export default LegalGate;
 ```
 
 ## File: ./frontend/src/data/subjects.js
@@ -2646,6 +2950,7 @@ import {
 import { IS_DEV } from "../env";
 import InstallView from "./InstallView";
 import { useInstallInfo, isNativeApp } from "../pwaInstall";
+import { useUpdateAvailable } from "../updateCheck";
 import { copyQuizPromptForTitle } from "../quizContext";
 import DevPanel from "./DevPanel";
 import QuizPage from "./QuizPage";
@@ -2658,6 +2963,9 @@ const AdminPanel = lazy(() =>
   }))
 );
 import { useAuth } from "../authContext";
+import { LegalSettingsSection } from "../components/LegalNotice";
+import { PROMO_PLAN, PAYMENT_METHODS, SUBJECT_LABELS } from "../payments";
+import { formatTimeLeft, formatDateShort } from "../access";
 import { IssuanceSidebar, IssuanceReader } from "./IssuanceBrowser";
 import { ISSUANCE_KINDS, getIssuance, getIssuanceProgress, saveIssuanceProgress } from "../issuancesStore";
 
@@ -3426,6 +3734,7 @@ function SettingsView({ darkMode, setDarkMode, onReplayTutorial }) {
         <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-300">RA 10863 — Customs Modernization and Tariff Act. A study &amp; reading companion with search and highlights. Works fully offline.</p>
         <p className="mt-2 text-xs text-slate-400 dark:text-slate-500">Version 1.0.0 (Offline)</p>
       </section>
+      <LegalSettingsSection />
       <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-card dark:border-slate-700 dark:bg-slate-800">
         <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">Developer</h2>
         <div className="flex items-center gap-3">
@@ -3470,6 +3779,7 @@ const NAV_ICONS = {
   wrench: <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />,
   menu: <><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></>,
   x: <><path d="M18 6 6 18" /><path d="m6 6 12 12" /></>,
+  tag: <><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z" /><circle cx="7.5" cy="7.5" r="1" fill="currentColor" /></>,
 };
 
 function NavIcon({ name, className = "h-[22px] w-[22px]" }) {
@@ -3480,14 +3790,16 @@ function NavIcon({ name, className = "h-[22px] w-[22px]" }) {
   );
 }
 
-const VIEW_TITLES = { browse: "RA 10863", search: "Search", quiz: "Quiz", settings: "Settings", update: "Update", admin: "Admin", dev: "Dev Panel" };
+const VIEW_TITLES = { browse: "RA 10863", search: "Search", quiz: "Quiz", fees: "Fees", settings: "Settings", update: "Update", admin: "Admin", dev: "Dev Panel" };
 
 function BottomNav({ view, setView, showAdmin, showDev }) {
   const install = useInstallInfo();
+  const updateAvailable = useUpdateAvailable();
   const items = [
     { id: "browse", label: "Library", icon: "book" },
     { id: "search", label: "Search", icon: "search" },
     { id: "quiz", label: "Quiz", icon: "quiz" },
+    { id: "fees", label: "Fees", icon: "tag" },
     { id: "settings", label: "Settings", icon: "settings" },
   ];
   // Walang "Update" tab sa Android APK (real app na ito).
@@ -3512,7 +3824,7 @@ function BottomNav({ view, setView, showAdmin, showDev }) {
               className="flex min-w-0 flex-1 flex-col items-center gap-0.5 rounded-xl py-1"
             >
               <span className={"flex h-8 w-14 items-center justify-center rounded-full transition-colors duration-200 " + (active ? "bg-navy-900/10 text-navy-900 dark:bg-gold-500/20 dark:text-gold-400" : "text-slate-500 dark:text-slate-400")}>
-                <span className="relative"><NavIcon name={it.icon} />{it.id === "update" && install.canInstall && !install.justInstalled && !install.standalone && (<span className="absolute -right-1 -top-0.5 h-2.5 w-2.5 rounded-full border-2 border-white bg-amber-500 dark:border-slate-900" />)}</span>
+                <span className="relative"><NavIcon name={it.icon} />{it.id === "update" && (updateAvailable || (install.canInstall && !install.justInstalled && !install.standalone)) && (<span className="absolute -right-1 -top-0.5 h-2.5 w-2.5 rounded-full border-2 border-white bg-amber-500 dark:border-slate-900" />)}</span>
               </span>
               <span className={"max-w-full truncate text-[11px] leading-tight " + (active ? "font-semibold text-navy-900 dark:text-gold-400" : "font-medium text-slate-500 dark:text-slate-400")}>{it.label}</span>
             </button>
@@ -3520,6 +3832,78 @@ function BottomNav({ view, setView, showAdmin, showDev }) {
         })}
       </div>
     </nav>
+  );
+}
+
+function FeesView() {
+  const { user, profile, access, setOverlayOpen, setIntentPlanId } = useAuth();
+  const pending = [...(profile?.pendingPurchases || []), ...(profile?.pendingAccess || [])]
+    .sort((a, b) => (a.requestedAt || 0) - (b.requestedAt || 0));
+  const isPaid = access?.state === "paid";
+
+  // Same shortcut the Paywall uses: opens the payment-method step directly.
+  const payNow = () => {
+    if (user) setIntentPlanId(PROMO_PLAN.id);
+    setOverlayOpen(true);
+  };
+
+  let status = null;
+  if (access?.state === "admin") status = "👑 Admin — everything is unlocked.";
+  else if (isPaid) status = "✅ Active until " + formatDateShort(access.app.expiresAt) + " (" + formatTimeLeft(access.msLeft) + " left). Renew early and your remaining days are kept.";
+  else if (access?.state === "trial") status = "🎁 Free trial: " + formatTimeLeft(access.msLeft) + " left";
+  else if (access?.state === "expired") status = "⏳ Your trial has ended. Get the promo to continue.";
+
+  return (
+    <div className="mx-auto max-w-2xl space-y-4 pb-10">
+      <div>
+        <h1 className="mb-1 text-2xl font-bold text-slate-900 dark:text-slate-50">Fees</h1>
+        <p className="text-sm text-slate-500 dark:text-slate-400">The promo bundle and where to pay.</p>
+      </div>
+
+      {status && (
+        <div className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-600 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300">{status}</div>
+      )}
+
+      {pending.length > 0 && (
+        <div className="rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-800 dark:border-amber-700 dark:bg-amber-950/30 dark:text-amber-300">
+          ⏳ Payment pending ({pending[pending.length - 1].referenceCode}) — waiting for confirmation.
+        </div>
+      )}
+
+      <section className="rounded-2xl border-2 border-gold-500 bg-white p-4 shadow-card dark:bg-slate-800">
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0">
+            <p className="text-base font-extrabold text-navy-900 dark:text-slate-100">🔥 {PROMO_PLAN.label}</p>
+            <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">{PROMO_PLAN.tagline}</p>
+          </div>
+          <span className="flex-shrink-0 text-3xl font-extrabold text-navy-900 dark:text-slate-50">₱{PROMO_PLAN.price}</span>
+        </div>
+        <ul className="mt-3 space-y-1 text-sm text-slate-700 dark:text-slate-200">
+          {PROMO_PLAN.subjects.map((code) => (
+            <li key={code}>✅ {SUBJECT_LABELS[code] || code}</li>
+          ))}
+          <li>✅ Full app access</li>
+        </ul>
+        <p className="mt-3 text-xs font-semibold text-gold-600 dark:text-gold-400">⏳ Valid for {PROMO_PLAN.days} days only</p>
+        <button onClick={payNow} className="mt-4 flex min-h-[48px] w-full items-center justify-center rounded-xl bg-navy-900 px-4 py-3 text-sm font-bold text-white active:bg-navy-800 dark:bg-navy-700">
+          {user ? (isPaid ? "Renew" : "Pay now") + " · ₱" + PROMO_PLAN.price : "Sign in to get started"}
+        </button>
+      </section>
+
+      <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-card dark:border-slate-700 dark:bg-slate-800">
+        <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">How to pay</h2>
+        <div className="mb-3 flex flex-wrap gap-2">
+          {PAYMENT_METHODS.map((m) => (
+            <span key={m.id} className="rounded-full border border-slate-200 px-3 py-1 text-sm font-semibold text-slate-700 dark:border-slate-600 dark:text-slate-200">{m.label}</span>
+          ))}
+        </div>
+        <ol className="space-y-2 text-sm text-slate-600 dark:text-slate-300">
+          <li>1. Tap <b>Pay now</b> above and choose GCash, Maya, or MariBank.</li>
+          <li>2. Scan the QR code and pay ₱{PROMO_PLAN.price}. Write your <b>email address</b> and the <b>reference code</b> in the payment note.</li>
+          <li>3. Tap <b>I've paid</b>. Payments are confirmed manually by the admin within a few hours.</li>
+        </ol>
+      </section>
+    </div>
   );
 }
 
@@ -3897,7 +4281,7 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
                 <p className="text-sm">{error}</p>
               </div>
             )}
-            {view === "search" ? <SearchView onNavigateChapter={loadChapter} /> : view === "dev" && IS_DEV ? <DevPanel /> : view === "admin" && profile?.isAdmin ? <Suspense fallback={<p className="p-6 text-center text-sm text-slate-400">Loading…</p>}><AdminPanel /></Suspense> : view === "quiz" ? null : view === "update" ? <InstallView /> : view === "settings" ? <SettingsView darkMode={darkMode} setDarkMode={setDarkMode} onReplayTutorial={replayTutorial} /> : isIssuance ? (
+            {view === "search" ? <SearchView onNavigateChapter={loadChapter} /> : view === "dev" && IS_DEV ? <DevPanel /> : view === "admin" && profile?.isAdmin ? <Suspense fallback={<p className="p-6 text-center text-sm text-slate-400">Loading…</p>}><AdminPanel /></Suspense> : view === "fees" ? <FeesView /> : view === "quiz" ? null : view === "update" ? <InstallView /> : view === "settings" ? <SettingsView darkMode={darkMode} setDarkMode={setDarkMode} onReplayTutorial={replayTutorial} /> : isIssuance ? (
               <IssuanceReader kind={source} issuanceId={issuanceId} mode={mode} fontScale={fontScale} focusMode={focusMode} onOpenIssuance={(hit) => openIssuance(hit.type.toLowerCase(), hit.id)} />
             ) : (
               <>
@@ -4721,6 +5105,52 @@ const SUBJECT_LABELS = {
   tcp: "Tariff Commission Primer",
 };
 
+// Subjects that are temporarily closed while being fixed.
+// To re-open a subject later, just delete its line here.
+const DISABLED_SUBJECTS = {
+  cdp: {
+    title: "Under maintenance",
+    message:
+      "This subject is temporarily unavailable. We are fixing some questions and a data (JSON) bug, so the quiz is closed for now. Thank you for your patience — it will be back soon.",
+  },
+};
+
+function DisabledSubjectCard({ subjectId, expanded, onToggle, onOpenIssuance, showIssuanceTip }) {
+  const label = SUBJECT_LABELS[subjectId];
+  const info = DISABLED_SUBJECTS[subjectId];
+
+  return (
+    <div className={`overflow-hidden rounded-2xl border border-amber-200 bg-white shadow-card transition-all dark:border-amber-700/50 dark:bg-slate-800 ${expanded ? "col-span-2" : ""}`}>
+      <button onClick={onToggle} className="flex w-full items-center gap-3 p-4 text-left active:bg-slate-50 dark:active:bg-slate-700/50">
+        <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-amber-100 text-lg dark:bg-amber-900/40" aria-hidden>🛠️</span>
+        <div className="min-w-0 flex-1">
+          <p className="truncate font-bold text-navy-900 dark:text-slate-100">{label}</p>
+          <p className="truncate text-xs font-medium text-amber-600 dark:text-amber-400">{info.title}</p>
+        </div>
+        <span className={`flex-shrink-0 text-slate-300 transition-transform dark:text-slate-600 ${expanded ? "rotate-180" : ""}`} aria-hidden>▾</span>
+      </button>
+      {expanded && (
+        <div className="space-y-3 border-t border-amber-100 p-4 dark:border-slate-700">
+          <p className="text-sm text-slate-600 dark:text-slate-300">{info.message}</p>
+          {showIssuanceTip && (
+            <>
+              <p className="text-sm text-slate-600 dark:text-slate-300">
+                In the meantime, we recommend practicing with <span className="font-semibold">CMO / CAO</span> instead.
+              </p>
+              <button
+                onClick={onOpenIssuance}
+                className="w-full rounded-xl bg-navy-900 px-4 py-3 text-sm font-semibold text-white shadow-sm active:bg-navy-800 dark:bg-navy-700 dark:active:bg-navy-600"
+              >
+                📜 Go to CMO / CAO
+              </button>
+            </>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function SubjectCard({ subjectId, expanded, onToggle, onPlay }) {
   const label = SUBJECT_LABELS[subjectId];
   const [refreshKey, setRefreshKey] = useState(0);
@@ -4816,6 +5246,8 @@ export default function QuizHub({ onExit, limited = false }) {
   const backToHub = () => setActiveView(null);
 
   const handlePlaySubject = (subjectId, label) => {
+    // Safety net: never open a subject that is under maintenance.
+    if (DISABLED_SUBJECTS[subjectId]) return;
     setActiveView({ type: "subject-play", subjectId, label });
   };
 
@@ -4864,9 +5296,20 @@ export default function QuizHub({ onExit, limited = false }) {
               onSelectTitle={() => setActiveView({ type: "ra10863-titles" })}
             />
             {!limited && <IssuanceQuizCard onOpen={() => setActiveView({ type: "issuance-quiz" })} />}
-            {["tl", "cdp", "pc", "tcp"].map((id) => (
-              <SubjectCard key={id} subjectId={id} expanded={expandedCard === id} onToggle={() => toggleCard(id)} onPlay={handlePlaySubject} />
-            ))}
+            {["tl", "cdp", "pc", "tcp"].map((id) =>
+              DISABLED_SUBJECTS[id] ? (
+                <DisabledSubjectCard
+                  key={id}
+                  subjectId={id}
+                  expanded={expandedCard === id}
+                  onToggle={() => toggleCard(id)}
+                  onOpenIssuance={() => setActiveView({ type: "issuance-quiz" })}
+                  showIssuanceTip={!limited}
+                />
+              ) : (
+                <SubjectCard key={id} subjectId={id} expanded={expandedCard === id} onToggle={() => toggleCard(id)} onPlay={handlePlaySubject} />
+              )
+            )}
             <button
               onClick={() => setActiveView({ type: "custom-quiz" })}
               className="col-span-2 flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-4 text-left shadow-card transition-all active:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:active:bg-slate-700/50"
@@ -6245,6 +6688,7 @@ export default function AdminOverview({ users }) {
 ```
 import { useMemo, useState } from "react";
 import { useInstallInfo, promptInstall, detectPlatform } from "../pwaInstall";
+import { useUpdateAvailable, checkForUpdate, getRemoteId, applyUpdate } from "../updateCheck";
 
 const card = "rounded-2xl border border-slate-200 bg-white p-4 shadow-card dark:border-slate-700 dark:bg-slate-800";
 const h2 = "mb-3 text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500";
@@ -6270,6 +6714,7 @@ export default function InstallView() {
   const [dismissed, setDismissed] = useState(false);
   const [added, setAdded] = useState(false);
   const [upd, setUpd] = useState("");
+  const updateAvailable = useUpdateAvailable();
 
   const doInstall = async () => {
     const r = await promptInstall();
@@ -6279,10 +6724,11 @@ export default function InstallView() {
   const checkUpdate = async () => {
     setUpd("checking");
     try {
-      const reg = "serviceWorker" in navigator ? await navigator.serviceWorker.getRegistration() : null;
-      if (reg) await reg.update();
+      const available = await checkForUpdate(true);
+      if (!getRemoteId()) { setUpd("error"); return; }
+      if (!available) { setUpd("latest"); return; }
       setUpd("reloading");
-      setTimeout(() => window.location.reload(), 700);
+      setTimeout(() => applyUpdate(), 400);
     } catch (_) {
       setUpd("error");
     }
@@ -6387,6 +6833,14 @@ export default function InstallView() {
         <p className="text-sm text-slate-500 dark:text-slate-400">Put the app on your Home Screen and keep it up to date.</p>
       </div>
 
+      <section className="rounded-2xl border border-amber-300 bg-amber-50 p-4 dark:border-amber-700 dark:bg-amber-950/30">
+        <p className="text-sm font-bold text-amber-800 dark:text-amber-300">🔄 Reminder: check for updates every time you open the app</p>
+        <p className="mt-1 text-sm text-slate-700 dark:text-slate-200">New questions, fixes, and features do not always show up right away. Tap <b>Check for updates</b> below each time you open the app, or tap <b>Update now</b> when the "New version available" banner appears at the top.</p>
+        {updateAvailable && (
+          <button onClick={() => { applyUpdate(); }} className="mt-3 flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl bg-navy-900 px-4 py-2.5 text-sm font-bold text-white active:bg-navy-800 dark:bg-navy-700">🆕 New version available — Update now</button>
+        )}
+      </section>
+
       {body}
 
       <section className={card}>
@@ -6396,6 +6850,7 @@ export default function InstallView() {
           {upd === "checking" ? "Checking…" : upd === "reloading" ? "Updating… the app will reload" : "🔄 Check for updates"}
         </button>
         {upd === "error" && <p className="mt-2 text-xs text-red-600 dark:text-red-400">Could not check. Please connect to the internet and try again.</p>}
+        {upd === "latest" && <p className="mt-2 text-xs font-semibold text-emerald-600 dark:text-emerald-400">✅ You are on the latest version.</p>}
       </section>
     </div>
   );
@@ -8788,11 +9243,18 @@ import {
 import { doc, getDoc, setDoc, updateDoc, serverTimestamp, onSnapshot, runTransaction, getDocFromServer } from "firebase/firestore";
 import { auth, db, googleProvider } from "./firebase";
 import { FirebaseAuthentication } from "@capacitor-firebase/authentication";
-import { setServerClock, persistClock, getAccess, hasAnyPractice, TRIAL_DAYS } from "./access";
+import { setServerClock, persistClock, getAccess, hasAnyPractice, TRIAL_DAYS, serverNow } from "./access";
+import { LEGAL_VERSION } from "./legalContent";
 
 const DEVICE_ID_KEY = "cuble_deviceId";
 const PENDING_SIGNIN_KEY = "cuble_pendingSignIn";
 const PROFILE_CACHE_KEY = "cuble_profileCache_";
+const LEGAL_KEY = "cuble_legalAccepted_";
+
+function readLocalLegal(uid) {
+  if (!uid) return null;
+  try { return JSON.parse(localStorage.getItem(LEGAL_KEY + uid)); } catch (_) { return null; }
+}
 
 function makeId() {
   if (window.crypto && window.crypto.randomUUID) return window.crypto.randomUUID();
@@ -8935,6 +9397,15 @@ export function AuthProvider({ children }) {
   }, [profile, serverData]);
 
   const access = getAccess(mergedProfile, { clockReady });
+
+  // ── Privacy Notice / Terms acceptance ───────────────────────────────
+  // Accepted version is kept in Firestore (users/{uid}.legalAccepted) AND in localStorage,
+  // so an offline user is not asked again and a changed LEGAL_VERSION asks everyone once more.
+  const [legalTick, setLegalTick] = useState(0);
+  const localLegal = useMemo(() => readLocalLegal(uid), [uid, legalTick]);
+  const legalCandidates = [serverData && serverData.legalAccepted, mergedProfile && mergedProfile.legalAccepted, localLegal].filter(Boolean);
+  const legalAccepted = legalCandidates.find((r) => r.version === LEGAL_VERSION) || legalCandidates[0] || null;
+  const needsLegal = !!user && !!mergedProfile && !(legalAccepted && legalAccepted.version === LEGAL_VERSION);
 
   const syncProfile = useCallback(async (fbUser) => {
     setProfileError(null);
@@ -9114,6 +9585,17 @@ export function AuthProvider({ children }) {
     setNeedsFullName(false);
   }, [user]);
 
+  const acceptLegal = useCallback(async () => {
+    if (!user) return;
+    const rec = { version: LEGAL_VERSION, at: serverNow(), ai: true };
+    try { localStorage.setItem(LEGAL_KEY + user.uid, JSON.stringify(rec)); } catch (_) {}
+    setProfile((p) => (p ? { ...p, legalAccepted: rec } : p));
+    setLegalTick((t) => t + 1);
+    // Not awaited: when offline Firestore queues the write and sends it later.
+    updateDoc(doc(db, "users", user.uid), { legalAccepted: rec })
+      .catch((e) => console.warn("legal acceptance sync failed:", e));
+  }, [user]);
+
   const removeDevice = useCallback(async (deviceId) => {
     if (!user || !profile) return;
     const ref = doc(db, "users", user.uid);
@@ -9135,6 +9617,7 @@ export function AuthProvider({ children }) {
     access, clockReady, tick, intentPlanId, setIntentPlanId,
     overlayOpen, setOverlayOpen, authError, profileError, signingIn,
     signInWithGoogle, signOutUser, completeFullName, removeDevice,
+    needsLegal, legalAccepted, acceptLegal,
   };
 
   return <AuthCtx.Provider value={value}>{children}</AuthCtx.Provider>;
@@ -10229,6 +10712,265 @@ export function getIssuanceProgress(kind) {
 }
 ```
 
+## File: ./frontend/src/updateCheck.js
+```
+// Detects when a newer build was deployed (compares __BUILD_ID__ with /version.json).
+import { useEffect, useState } from "react";
+import { isNativeApp } from "./pwaInstall";
+
+/* global __BUILD_ID__ */
+export const BUILD_ID = typeof __BUILD_ID__ !== "undefined" ? __BUILD_ID__ : "dev";
+
+let remoteId = null;
+let lastCheck = 0;
+let inflight = null;
+const subs = new Set();
+const notify = () => subs.forEach((f) => f());
+
+export function getRemoteId() { return remoteId; }
+export function isUpdateAvailable() { return !!remoteId && remoteId !== BUILD_ID; }
+
+async function fetchRemoteId() {
+  try {
+    const res = await fetch(import.meta.env.BASE_URL + "version.json?t=" + Date.now(), { cache: "no-store" });
+    if (!res.ok) return null;
+    const data = await res.json();
+    return data && data.id ? String(data.id) : null;
+  } catch (_) {
+    return null;
+  }
+}
+
+// force = true ignores the 60-second throttle.
+export function checkForUpdate(force) {
+  if (import.meta.env.DEV || isNativeApp()) return Promise.resolve(false);
+  if (inflight) return inflight;
+  if (!force && Date.now() - lastCheck < 60000) return Promise.resolve(isUpdateAvailable());
+  inflight = fetchRemoteId().then((id) => {
+    lastCheck = Date.now();
+    inflight = null;
+    if (id) { remoteId = id; notify(); }
+    return isUpdateAvailable();
+  });
+  return inflight;
+}
+
+// Removes the stale page files (index.html etc.) but keeps the big offline
+// files (/assets/, .wasm, .db, fonts), then reloads. Needs internet.
+export async function applyUpdate() {
+  if (typeof navigator !== "undefined" && navigator.onLine === false) return false;
+  try {
+    if ("caches" in window) {
+      const keys = await caches.keys();
+      for (const k of keys) {
+        const cache = await caches.open(k);
+        const reqs = await cache.keys();
+        await Promise.all(reqs.map((r) => {
+          const u = new URL(r.url);
+          const keep = u.origin !== location.origin || u.pathname.includes("/assets/") || /\.(wasm|db)$/.test(u.pathname);
+          return keep ? null : cache.delete(r);
+        }));
+      }
+    }
+  } catch (_) {}
+  try {
+    const reg = "serviceWorker" in navigator ? await navigator.serviceWorker.getRegistration() : null;
+    if (reg) await reg.update();
+  } catch (_) {}
+  location.reload();
+  return true;
+}
+
+export function useUpdateAvailable() {
+  const [, force] = useState(0);
+  useEffect(() => {
+    const f = () => force((n) => n + 1);
+    subs.add(f);
+    checkForUpdate(false);
+    return () => { subs.delete(f); };
+  }, []);
+  return isUpdateAvailable();
+}
+
+// Re-check when the app opens, comes back to the front, or gets internet again.
+if (typeof window !== "undefined") {
+  const recheck = () => { if (document.visibilityState !== "hidden") checkForUpdate(false); };
+  document.addEventListener("visibilitychange", recheck);
+  window.addEventListener("online", recheck);
+  window.addEventListener("focus", recheck);
+  setInterval(recheck, 30 * 60 * 1000);
+  setTimeout(recheck, 1500);
+}
+```
+
+## File: ./frontend/src/legalContent.js
+```
+// legalContent.js — text + version for the Privacy Notice / Terms / About screen.
+// Pure data (no React, no imports) so authContext.jsx can import LEGAL_VERSION
+// without creating a circular import.
+//
+// HOW TO FORCE EVERYONE TO ACCEPT AGAIN:
+//   change LEGAL_VERSION (e.g. "2027-01-15"). Every user will see the
+//   acceptance screen once more after their next login.
+
+export const LEGAL_VERSION = "2026-11-03";
+export const LEGAL_UPDATED = "November 3, 2026";
+
+// Optional: put your support email here to show a "Contact" line.
+// Leave "" to hide it (the developer portfolio link is shown instead).
+export const CONTACT_EMAIL = "";
+export const DEVELOPER_PORTFOLIO = "https://osiasnalaunan68-star.github.io/osias-personal-portfolio";
+
+// The two things the user must tick on the acceptance screen.
+export const CONSENT_ITEMS = [
+  {
+    id: "terms",
+    text: "I have read and agree to the Privacy Notice and Terms of Use, and I consent to the collection and use of my information as described.",
+  },
+  {
+    id: "ai",
+    text: "I understand that the AI-generated explanations (Osias 6.7) and quiz content may contain mistakes, and that I use them at my own risk.",
+  },
+];
+
+// Short highlights shown on the acceptance screen before the full text.
+export const KEY_POINTS = [
+  { icon: "🤖", title: "AI explanations: use at your own risk", body: "Gamitin sa sariling panganib. AI-generated ang mga paliwanag at maaaring may mali. Laging kumpirmahin sa opisyal na teksto ng batas." },
+  { icon: "⚖️", title: "Not official, not legal advice", body: "This is an independent study app. It is not affiliated with the Bureau of Customs, the PRC, or any government agency." },
+  { icon: "🔒", title: "Your data", body: "We store your Google name, email and photo, the full name you enter, your device info and your access/payment records. Highlights, notes and quiz progress stay on your device." },
+];
+
+// Each section: { id, icon, title, tone?: "warn", blocks: [{ type: "p"|"ul", ... }] }
+export const LEGAL_SECTIONS = [
+  {
+    id: "about",
+    icon: "ℹ️",
+    title: "About this app",
+    blocks: [
+      { type: "p", text: "RA 10863 – CuBLE Review App is an offline study and review companion for the Customs Modernization and Tariff Act (CMTA, RA 10863) of the Philippines. It is made for BSCA (Bachelor of Science in Customs Administration) students and Customs Broker Licensure Exam (CuBLE) takers." },
+      { type: "p", text: "What you can do in the app:" },
+      {
+        type: "ul",
+        items: [
+          "Read the full text of RA 10863, arranged by Title, Chapter and Section, in Study Mode or Reading Mode.",
+          "Highlight text, add your own notes, and search the law.",
+          "Read Osias 6.7 explanations, which are AI-generated and bundled in the app so they work offline.",
+          "Browse Customs Memorandum Orders (CMO) and Customs Administrative Orders (CAO), with summaries and quizzes.",
+          "Practice with quizzes and exams in RA 10863, CDP, TL, PC and TCP, or build your own custom quizzes.",
+        ],
+      },
+      { type: "p", text: "The app is built and maintained by Osias. Most content works fully offline once the app has loaded." },
+    ],
+  },
+  {
+    id: "ai",
+    icon: "🤖",
+    title: "AI-generated content: use at your own risk",
+    tone: "warn",
+    blocks: [
+      { type: "p", text: "The Osias 6.7 explanations, summaries and some quiz material in this app were generated with the help of artificial intelligence. AI can be wrong, incomplete or out of date, and it can misread or oversimplify a legal provision." },
+      {
+        type: "ul",
+        items: [
+          "Do not rely on AI explanations as the only basis for answering an exam, doing customs work, or making a legal, business or financial decision.",
+          "The official text of the law, CMOs and CAOs always prevails over anything in this app. Please verify with the official publications.",
+          "Quiz questions, choices, answer keys and explanations may contain errors. If something looks wrong, check the source.",
+          "Gamitin ang AI explanations sa sarili ninyong panganib. Hindi ito garantiya ng tamang sagot sa pagsusulit.",
+        ],
+      },
+      { type: "p", text: "Ask AI hand-off: when you tap Meta AI, ChatGPT or Gemini, the app copies a prompt (and the section text) to your clipboard and opens that service. What you paste there is handled by that service under its own terms and privacy policy, not by this app." },
+    ],
+  },
+  {
+    id: "official",
+    icon: "⚖️",
+    title: "Not official · not legal advice",
+    blocks: [
+      { type: "p", text: "This is an independent study tool. It is not an official publication and is not affiliated with, endorsed by, or connected to the Bureau of Customs, the Professional Regulation Commission, the Tariff Commission, or any other government agency." },
+      {
+        type: "ul",
+        items: [
+          "Nothing in the app is legal advice, and no lawyer-client or professional relationship is created by using it.",
+          "Laws, CMOs, CAOs and tariff rates are amended from time to time. The app may not reflect the latest changes.",
+          "The law text and issuances are included for study and reference. Always confirm against the official sources.",
+          "Using the app does not guarantee that you will pass any exam.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "privacy",
+    icon: "🔒",
+    title: "Privacy Notice",
+    blocks: [
+      { type: "p", text: "This notice explains how your personal information is handled, in line with the Data Privacy Act of 2012 (Republic Act No. 10173)." },
+      { type: "p", text: "Information we collect when you sign in and use the app:" },
+      {
+        type: "ul",
+        items: [
+          "From your Google account: name, email address and profile photo.",
+          "From you: the full name you enter when setting up your account.",
+          "Device information: a random device ID, a device label (for example \"Android · Chrome\") and when it was last active. This is used to enforce the limit of 2 devices per account.",
+          "Access records: trial start date, access expiry, subjects unlocked, and the purchase requests you submit (plan, price, payment method chosen, reference code and time). We do not receive or store your GCash, Maya or MariBank login or card details.",
+          "Last-seen time, so the admin can see account activity.",
+          "Your acceptance of this notice (version and date).",
+        ],
+      },
+      { type: "p", text: "What stays on your device only: highlights, notes, quiz answers and progress, custom quizzes, and display settings are saved in your phone's or browser's local storage. They are not uploaded to our servers. Clearing app data, uninstalling the app or clearing your browser will delete them." },
+      { type: "p", text: "Why we use your information:" },
+      {
+        type: "ul",
+        items: [
+          "To sign you in and keep your account secure.",
+          "To run the free trial and the device limit.",
+          "To confirm manual payments and unlock your access.",
+          "To let the admin support you and keep the service running.",
+        ],
+      },
+      { type: "p", text: "Who can see it: the app admin can view user records (name, email, device list, access and purchase requests) in the admin panel. Your data is stored and processed using Google Firebase (Authentication and Cloud Firestore), and the app loads fonts from Google Fonts. We do not sell your personal information or use it for advertising." },
+      { type: "p", text: "How long we keep it: for as long as your account is active, or until you ask us to delete it, unless we need to keep a record for payments or to prevent abuse." },
+    ],
+  },
+  {
+    id: "rights",
+    icon: "🙋",
+    title: "Your rights",
+    blocks: [
+      { type: "p", text: "Under the Data Privacy Act you have the right to be informed, to access your data, to correct it, to object to or withdraw consent for its processing, to request blocking or deletion, and to file a complaint with the National Privacy Commission (privacy.gov.ph)." },
+      { type: "p", text: "To use any of these rights, or to ask for your account data to be deleted, contact the developer using the details at the bottom of this page. Withdrawing consent means you will no longer be able to use the signed-in features of the app." },
+    ],
+  },
+  {
+    id: "terms",
+    icon: "📄",
+    title: "Terms of use",
+    blocks: [
+      {
+        type: "ul",
+        items: [
+          "Personal use only. Your account is for you. Do not share it, sell access, or let others use your paid access.",
+          "Device limit. One account can be signed in on up to 2 devices at a time.",
+          "No copying or scraping. Do not copy, redistribute, resell or scrape the app's explanations, quizzes or other compiled content.",
+          "Trial and plans. New accounts get a free trial. After that, access is time-limited and depends on the plan you pay for. Prices, plans and what each plan includes may change.",
+          "Manual payments. Payments are confirmed manually by the admin, so unlocking access may take some time. Keep your reference code until your access is confirmed.",
+          "Service provided \"as is\". We try to keep the app accurate and available, but we make no warranty that it is error-free, uninterrupted or fit for any particular purpose.",
+          "Limit of liability. To the extent allowed by law, the developer is not liable for any loss or damage arising from your use of, or reliance on, the app or its content, including AI-generated content.",
+          "Misuse. We may suspend or remove access for abuse, sharing, or attempts to bypass the trial, device limit or payment checks.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "changes",
+    icon: "🔄",
+    title: "Changes to this notice",
+    blocks: [
+      { type: "p", text: "We may update this page when the app changes. When we make a meaningful change you will be asked to review and accept it again the next time you sign in. You can read the current version at any time in Settings → Privacy & Terms." },
+    ],
+  },
+];
+```
+
 ## File: ./frontend/src/issuanceQuizStore.js
 ```
 import { IS_DEV } from "./env";
@@ -10583,9 +11325,23 @@ export default {
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
+// Unique ID per build. The app compares its own ID with /version.json
+// on the server to know if a newer version was deployed.
+const BUILD_ID = String(Date.now());
+
+function emitVersionFile() {
+  return {
+    name: 'emit-version-json',
+    generateBundle() {
+      this.emitFile({ type: 'asset', fileName: 'version.json', source: JSON.stringify({ id: BUILD_ID }) });
+    },
+  };
+}
+
 export default defineConfig({
   base: './',
-  plugins: [react()],
+  define: { __BUILD_ID__: JSON.stringify(BUILD_ID) },
+  plugins: [react(), emitVersionFile()],
   build: {
     outDir: '../docs',
     emptyOutDir: true,
@@ -11149,5 +11905,174 @@ patch("frontend/src/authContext.jsx", (s) => {
     target + "\n      }";
   return s.slice(0, i) + repl + s.slice(i + target.length);
 });
+```
+
+## File: ./patch-fees.js
+```
+const fs = require("fs");
+const path = require("path");
+
+const base = fs.existsSync("frontend/src/pages/ChapterBrowser.jsx")
+  ? "frontend/src"
+  : fs.existsSync("src/pages/ChapterBrowser.jsx")
+  ? "src"
+  : null;
+if (!base) {
+  console.error("❌ Hindi makita ang ChapterBrowser.jsx. I-run sa project root.");
+  process.exit(1);
+}
+
+const file = path.join(base, "pages", "ChapterBrowser.jsx");
+let cb = fs.readFileSync(file, "utf8");
+
+if (cb.includes("function FeesView")) {
+  console.log("ℹ️ Na-patch na ito dati. Walang binago.");
+  process.exit(0);
+}
+
+function swap(src, find, repl, label) {
+  const i = src.indexOf(find);
+  if (i === -1) {
+    console.error("❌ Hindi makita ang anchor: " + label + " (walang binago)");
+    process.exit(1);
+  }
+  if (src.indexOf(find, i + 1) !== -1) {
+    console.error("❌ Higit sa 1 match: " + label + " (walang binago)");
+    process.exit(1);
+  }
+  return src.slice(0, i) + repl + src.slice(i + find.length);
+}
+
+// 1) imports
+cb = swap(
+  cb,
+  'import { useAuth } from "../authContext";',
+  'import { useAuth } from "../authContext";\n' +
+    'import { PROMO_PLAN, PAYMENT_METHODS, SUBJECT_LABELS } from "../payments";\n' +
+    'import { formatTimeLeft, formatDateShort } from "../access";',
+  "import authContext"
+);
+
+// 2) tag icon
+cb = swap(
+  cb,
+  '  x: <><path d="M18 6 6 18" /><path d="m6 6 12 12" /></>,',
+  '  x: <><path d="M18 6 6 18" /><path d="m6 6 12 12" /></>,\n' +
+    '  tag: <><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z" /><circle cx="7.5" cy="7.5" r="1" fill="currentColor" /></>,',
+  "NAV_ICONS x"
+);
+
+// 3) header title
+cb = swap(
+  cb,
+  'quiz: "Quiz", settings: "Settings",',
+  'quiz: "Quiz", fees: "Fees", settings: "Settings",',
+  "VIEW_TITLES"
+);
+
+// 4) bottom nav item (after Quiz)
+cb = swap(
+  cb,
+  '    { id: "quiz", label: "Quiz", icon: "quiz" },',
+  '    { id: "quiz", label: "Quiz", icon: "quiz" },\n    { id: "fees", label: "Fees", icon: "tag" },',
+  "BottomNav items"
+);
+
+// 5) render the Fees view
+cb = swap(
+  cb,
+  'view === "quiz" ? null : view === "update" ?',
+  'view === "fees" ? <FeesView /> : view === "quiz" ? null : view === "update" ?',
+  "render chain"
+);
+
+// 6) the FeesView component
+const FEES = String.raw`function FeesView() {
+  const { user, profile, access, setOverlayOpen, setIntentPlanId } = useAuth();
+  const pending = [...(profile?.pendingPurchases || []), ...(profile?.pendingAccess || [])]
+    .sort((a, b) => (a.requestedAt || 0) - (b.requestedAt || 0));
+  const isPaid = access?.state === "paid";
+
+  // Same shortcut the Paywall uses: opens the payment-method step directly.
+  const payNow = () => {
+    if (user) setIntentPlanId(PROMO_PLAN.id);
+    setOverlayOpen(true);
+  };
+
+  let status = null;
+  if (access?.state === "admin") status = "👑 Admin — everything is unlocked.";
+  else if (isPaid) status = "✅ Active until " + formatDateShort(access.app.expiresAt) + " (" + formatTimeLeft(access.msLeft) + " left). Renew early and your remaining days are kept.";
+  else if (access?.state === "trial") status = "🎁 Free trial: " + formatTimeLeft(access.msLeft) + " left";
+  else if (access?.state === "expired") status = "⏳ Your trial has ended. Get the promo to continue.";
+
+  return (
+    <div className="mx-auto max-w-2xl space-y-4 pb-10">
+      <div>
+        <h1 className="mb-1 text-2xl font-bold text-slate-900 dark:text-slate-50">Fees</h1>
+        <p className="text-sm text-slate-500 dark:text-slate-400">The promo bundle and where to pay.</p>
+      </div>
+
+      {status && (
+        <div className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-600 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300">{status}</div>
+      )}
+
+      {pending.length > 0 && (
+        <div className="rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-800 dark:border-amber-700 dark:bg-amber-950/30 dark:text-amber-300">
+          ⏳ Payment pending ({pending[pending.length - 1].referenceCode}) — waiting for confirmation.
+        </div>
+      )}
+
+      <section className="rounded-2xl border-2 border-gold-500 bg-white p-4 shadow-card dark:bg-slate-800">
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0">
+            <p className="text-base font-extrabold text-navy-900 dark:text-slate-100">🔥 {PROMO_PLAN.label}</p>
+            <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">{PROMO_PLAN.tagline}</p>
+          </div>
+          <span className="flex-shrink-0 text-3xl font-extrabold text-navy-900 dark:text-slate-50">₱{PROMO_PLAN.price}</span>
+        </div>
+        <ul className="mt-3 space-y-1 text-sm text-slate-700 dark:text-slate-200">
+          {PROMO_PLAN.subjects.map((code) => (
+            <li key={code}>✅ {SUBJECT_LABELS[code] || code}</li>
+          ))}
+          <li>✅ Full app access</li>
+        </ul>
+        <p className="mt-3 text-xs font-semibold text-gold-600 dark:text-gold-400">⏳ Valid for {PROMO_PLAN.days} days only</p>
+        <button onClick={payNow} className="mt-4 flex min-h-[48px] w-full items-center justify-center rounded-xl bg-navy-900 px-4 py-3 text-sm font-bold text-white active:bg-navy-800 dark:bg-navy-700">
+          {user ? (isPaid ? "Renew" : "Pay now") + " · ₱" + PROMO_PLAN.price : "Sign in to get started"}
+        </button>
+      </section>
+
+      <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-card dark:border-slate-700 dark:bg-slate-800">
+        <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">How to pay</h2>
+        <div className="mb-3 flex flex-wrap gap-2">
+          {PAYMENT_METHODS.map((m) => (
+            <span key={m.id} className="rounded-full border border-slate-200 px-3 py-1 text-sm font-semibold text-slate-700 dark:border-slate-600 dark:text-slate-200">{m.label}</span>
+          ))}
+        </div>
+        <ol className="space-y-2 text-sm text-slate-600 dark:text-slate-300">
+          <li>1. Tap <b>Pay now</b> above and choose GCash, Maya, or MariBank.</li>
+          <li>2. Scan the QR code and pay ₱{PROMO_PLAN.price}. Write your <b>email address</b> and the <b>reference code</b> in the payment note.</li>
+          <li>3. Tap <b>I've paid</b>. Payments are confirmed manually by the admin within a few hours.</li>
+        </ol>
+      </section>
+    </div>
+  );
+}
+
+`;
+
+cb = swap(
+  cb,
+  'export default function ChapterBrowser({ initialView = "browse", initialMode = null, demo = false } = {}) {',
+  FEES + 'export default function ChapterBrowser({ initialView = "browse", initialMode = null, demo = false } = {}) {',
+  "ChapterBrowser export"
+);
+
+if (!fs.existsSync(file + ".bak")) fs.copyFileSync(file, file + ".bak");
+fs.writeFileSync(file, cb);
+
+console.log("✅ Tapos na! Nadagdag ang Fees tab.");
+console.log("   • " + file + "  (backup: .bak)");
+console.log("Susunod: cd frontend && npm run build   (o i-push na sa Codemagic)");
 ```
 

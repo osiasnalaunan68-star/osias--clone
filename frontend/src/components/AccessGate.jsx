@@ -3,6 +3,7 @@ import { useAuth } from "../authContext";
 import { TRIAL_DAYS, DAY_MS, formatTimeLeft, formatDateShort, toMs } from "../access";
 import { PROMO_PLAN } from "../payments";
 import { useUpdateAvailable, getRemoteId, applyUpdate } from "../updateCheck";
+import { LegalGate, LegalLinkButton } from "./LegalNotice";
 
 const ChapterBrowser = lazy(() => import("../pages/ChapterBrowser"));
 const QuizHub = lazy(() => import("../pages/QuizHub"));
@@ -123,6 +124,10 @@ function GuestWelcome({ step, setStep, onStartDemo }) {
 
       <div className="border-t border-slate-200 bg-white/90 p-4 backdrop-blur dark:border-slate-800 dark:bg-slate-900/90">
         {authError && <p className="mb-2 text-center text-xs text-red-600 dark:text-red-400">{authError}</p>}
+        <p className="mx-auto mb-2 max-w-md text-center text-[11px] leading-snug text-slate-500 dark:text-slate-400">
+          After you log in you will be asked to accept the{" "}
+          <LegalLinkButton className="font-semibold text-navy-900 dark:text-gold-400">Privacy Notice &amp; Terms</LegalLinkButton>.
+        </p>
         <button onClick={signInWithGoogle} disabled={signingIn} className="mx-auto flex h-12 w-full max-w-md items-center justify-center rounded-xl bg-gold-500 text-sm font-bold text-navy-900 shadow-sm active:bg-gold-600 disabled:opacity-50">
           {signingIn ? "Waiting for Google..." : "🎁 Login with Google — start your " + TRIAL_DAYS + "-day free trial"}
         </button>
@@ -337,7 +342,7 @@ export default function AccessGate() {
 }
 
 function AccessGateInner() {
-  const { user, profile, loading, signingIn, needsFullName, deviceLimitReached, access, overlayOpen, setOverlayOpen } = useAuth();
+  const { user, profile, loading, signingIn, needsFullName, deviceLimitReached, needsLegal, access, overlayOpen, setOverlayOpen } = useAuth();
   const [demo, setDemo] = useState(null);
   const [guestStep, setGuestStep] = useState(0);
 
@@ -354,6 +359,8 @@ function AccessGateInner() {
   }
 
   if (!profile || needsFullName || deviceLimitReached) return <Splash text="Finishing your account setup…" />;
+  // After a successful login: Privacy Notice / Terms / AI disclaimer must be accepted first.
+  if (needsLegal) return <LegalGate />;
   if (access.state === "loading") return <Splash text="Checking your trial…" />;
   if (access.state === "expired") return <ExpiredGate />;
 
