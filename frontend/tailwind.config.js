@@ -15,10 +15,16 @@ export default {
       fontFamily: {
         sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         serif: ['"Source Serif 4"', 'Georgia', 'Cambria', 'serif'],
+        ui: ['"Public Sans"', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['Newsreader', '"Source Serif 4"', 'Georgia', 'serif'],
       },
       colors: {
         navy: { 950: '#0b1220', 900: '#0f172a', 800: '#152238', 700: '#1e3a5f' },
         gold: { 50: '#fdf8ec', 100: '#faedc4', 400: '#e0b94d', 500: '#c9a227', 600: '#a9841c' },
+        parchment: { DEFAULT: '#F6F5F1', 50: '#FBFAF6', 200: '#E6E3D8' },
+        seal: { DEFAULT: '#9C7A32', 300: '#D9B869' },
+        verdigris: { DEFAULT: '#1F6D4C', 300: '#6FBE98' },
+        oxblood: { DEFAULT: '#8C3331', 300: '#E39B98' },
       },
     },
   },
