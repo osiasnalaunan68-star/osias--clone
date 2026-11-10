@@ -18,7 +18,7 @@ export const SUBJECT_LABELS = {
 
 // ── ALL ACCESS PROMO (the only plan) ─────────────────────────────────
 // Existing subscribers are not affected (their data is untouched).
-export const PROMO_PRICE = 89;
+export const PROMO_PRICE = 50;
 export const PROMO_DAYS = 30;
 export const PROMO_PLAN = {
   id: "PROMO",

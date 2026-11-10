@@ -11,7 +11,7 @@ export default function AccountButton() {
     <button
       onClick={() => setOverlayOpen(true)}
       aria-label="Open profile"
-      className="flex h-11 w-11 flex-shrink-0 touch-manipulation flex-col items-center justify-center gap-0.5 rounded-xl border border-slate-300 bg-white shadow-sm active:bg-slate-100 dark:border-slate-600 dark:bg-slate-800 dark:active:bg-slate-700"
+      className="flex h-11 w-11 flex-shrink-0 touch-manipulation flex-col items-center justify-center gap-0.5 rounded-xl border border-parchment-200 bg-parchment-50 shadow-sm active:bg-parchment dark:border-navy-700 dark:bg-navy-800 dark:active:bg-navy-700"
     >
       {showPhoto ? (
         <img
@@ -22,7 +22,10 @@ export default function AccountButton() {
           className="h-5 w-5 rounded-full object-cover"
         />
       ) : (
-        <span className="text-sm leading-5" aria-hidden>👤</span>
+        <svg className="h-4 w-4 text-navy-700 dark:text-parchment-50" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+          <circle cx="12" cy="8" r="3.4" />
+          <path d="M5 20c1.3-3.6 4.2-5.5 7-5.5s5.7 1.9 7 5.5" />
+        </svg>
       )}
       <span className="text-[9px] font-semibold leading-none text-slate-600 dark:text-slate-300">Profile</span>
     </button>
