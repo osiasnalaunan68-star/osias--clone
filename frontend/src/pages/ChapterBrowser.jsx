@@ -166,15 +166,15 @@ function applyHighlights(text, highlights) {
 
 function SelectionToolbar({ x, y, kind, onSave, onCancel, onDelete }) {
   return (
-    <div style={{ position: "fixed", left: x, top: y, zIndex: 100 }} className="flex items-center gap-1 rounded-xl border border-slate-200 bg-white px-1.5 py-1.5 shadow-lg shadow-slate-900/10 dark:border-slate-600 dark:bg-slate-800 dark:shadow-black/40">
+    <div style={{ position: "fixed", left: x, top: y, zIndex: 100 }} className="flex items-center gap-1 rounded-xl border border-parchment-200 bg-parchment-50 px-1.5 py-1.5 shadow-lg shadow-slate-900/10 dark:border-navy-700 dark:bg-navy-800 dark:shadow-black/40">
       {kind === "existing" ? (
         <>
-          <button onClick={onDelete} className="flex items-center gap-1 rounded-lg px-3 py-2 min-h-[40px] text-sm font-medium text-red-600 active:bg-red-50 dark:text-red-400 dark:active:bg-red-950/40">🗑 Remove highlight</button>
+          <button onClick={onDelete} className="flex items-center gap-1.5 rounded-lg px-3 py-2 min-h-[40px] text-sm font-medium text-red-600 active:bg-red-50 dark:text-red-400 dark:active:bg-red-950/40"><NavIcon name="trash" className="h-4 w-4" /> Remove highlight</button>
           <button onClick={onCancel} className="rounded-lg px-3 py-2 min-h-[40px] text-sm text-slate-500 active:bg-slate-100 dark:text-slate-400 dark:active:bg-slate-700">Close</button>
         </>
       ) : (
         <>
-          <button onClick={onSave} className="flex items-center gap-1 rounded-lg bg-amber-100 px-3 py-2 min-h-[40px] text-sm font-semibold text-amber-800 active:bg-amber-200 dark:bg-amber-900/50 dark:text-amber-300 dark:active:bg-amber-900/70">🖍 Highlight</button>
+          <button onClick={onSave} className="flex items-center gap-1.5 rounded-lg bg-amber-100 px-3 py-2 min-h-[40px] text-sm font-semibold text-amber-800 active:bg-amber-200 dark:bg-amber-900/50 dark:text-amber-300 dark:active:bg-amber-900/70"><NavIcon name="highlighter" className="h-4 w-4" /> Highlight</button>
           <button onClick={onCancel} className="rounded-lg px-3 py-2 min-h-[40px] text-sm text-slate-500 active:bg-slate-100 dark:text-slate-400 dark:active:bg-slate-700">Cancel</button>
         </>
       )}
@@ -252,13 +252,13 @@ function NotePanel({ notes, onCreate, onEdit, onDelete, onClose }) {
   return (
     <div onClick={(e) => e.stopPropagation()} className="mt-3 rounded-xl border border-sky-200 bg-sky-50/70 p-3 dark:border-sky-800 dark:bg-sky-950/30">
       <div className="mb-2 flex items-center justify-between">
-        <span className="text-xs font-semibold uppercase tracking-wide text-sky-700 dark:text-sky-400">📝 My Notes</span>
+        <span className="flex items-center gap-1 text-xs font-semibold uppercase tracking-wide text-sky-700 dark:text-sky-400"><NavIcon name="note" className="h-3.5 w-3.5" /> My Notes</span>
         <button onClick={onClose} className="rounded-lg px-2 py-1 text-xs font-medium text-slate-500 active:bg-slate-200 dark:text-slate-400 dark:active:bg-slate-700">Close</button>
       </div>
       {notes.length > 0 && !adding && !editingId && (
         <div className="mb-2 space-y-2">
           {notes.map((n) => (
-            <div key={n.id} className="rounded-lg bg-white p-2.5 shadow-sm dark:bg-slate-800">
+            <div key={n.id} className="rounded-lg bg-parchment-50 p-2.5 shadow-sm dark:bg-navy-800">
               <p className="whitespace-pre-wrap text-sm text-slate-700 dark:text-slate-200">{n.content}</p>
               <div className="mt-1.5 flex items-center justify-between">
                 <span className="text-[11px] text-slate-400 dark:text-slate-500">
@@ -282,7 +282,7 @@ function NotePanel({ notes, onCreate, onEdit, onDelete, onClose }) {
             placeholder="Write your own explanation or reminder…"
             rows={3}
             style={{ fontSize: "16px" }}
-            className="w-full rounded-lg border border-slate-200 bg-white p-2.5 text-sm text-slate-800 focus:outline-none dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100"
+            className="w-full rounded-lg border border-parchment-200 bg-parchment-50 p-2.5 text-sm text-navy-900 focus:outline-none dark:border-navy-700 dark:bg-navy-900 dark:text-parchment-50"
           />
           <div className="mt-2 flex justify-end gap-2">
             <button onClick={cancel} className="rounded-lg px-3 py-1.5 text-sm text-slate-500 active:bg-slate-200 dark:text-slate-400 dark:active:bg-slate-700">Cancel</button>
@@ -327,13 +327,13 @@ function AiContextModal({ node, onClose }) {
 
   return createPortal(
     <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-900/60 p-3 backdrop-blur-sm" onClick={(e) => { e.stopPropagation(); onClose(); }}>
-      <div onClick={(e) => e.stopPropagation()} className="max-h-full w-full max-w-lg overflow-y-auto overscroll-contain rounded-3xl bg-white p-5 shadow-2xl dark:bg-slate-900">
+      <div onClick={(e) => e.stopPropagation()} className="max-h-full w-full max-w-lg overflow-y-auto overscroll-contain rounded-3xl bg-parchment-50 p-5 shadow-2xl dark:bg-navy-900">
         <div className="mb-3 flex items-start justify-between gap-2">
           <div className="flex items-center gap-2">
-            <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-amber-400 to-navy-700 text-lg">🤖</span>
+            <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border border-seal text-seal dark:border-gold-400 dark:text-gold-400"><NavIcon name="spark" className="h-5 w-5" /></span>
             <div>
               <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">Osias 6.7</p>
-              <p className="text-xl font-extrabold leading-tight text-slate-900 dark:text-slate-50">
+              <p className="text-xl font-extrabold leading-tight text-navy-900 dark:text-parchment-50">
                 {entry?.title || `About ${node.node_type} ${node.node_number || ""}`}
               </p>
             </div>
@@ -342,16 +342,16 @@ function AiContextModal({ node, onClose }) {
         </div>
 
         {entry?.content ? (
-          <p className="whitespace-pre-wrap rounded-2xl bg-slate-50 p-3 text-base leading-relaxed text-slate-700 dark:bg-slate-800/60 dark:text-slate-200">{entry.content}</p>
+          <p className="whitespace-pre-wrap rounded-2xl bg-parchment p-3 text-base leading-relaxed text-slate-700 dark:bg-navy-800/60 dark:text-slate-200">{entry.content}</p>
         ) : (
-          <p className="rounded-2xl bg-slate-50 p-3 text-sm italic text-slate-400 dark:bg-slate-800/60 dark:text-slate-500">Osias 6.7 hasn't explained this part yet.</p>
+          <p className="rounded-2xl bg-parchment p-3 text-sm italic text-slate-400 dark:bg-navy-800/60 dark:text-slate-500">Osias 6.7 hasn't explained this part yet.</p>
         )}
 
-        <div className="mt-4 border-t border-slate-100 pt-3 dark:border-slate-800">
+        <div className="mt-4 border-t border-slate-100 pt-3 dark:border-navy-800">
           <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">Still confused? Ask another AI</p>
           <div className="flex flex-wrap gap-2">
             {AI_APPS.map((app) => (
-              <button key={app.id} onClick={() => handleAskExternal(app)} className="flex min-h-[42px] items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3.5 text-sm font-medium text-slate-700 active:bg-slate-100 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200 dark:active:bg-slate-700">
+              <button key={app.id} onClick={() => handleAskExternal(app)} className="flex min-h-[42px] items-center gap-1.5 rounded-full border border-parchment-200 bg-parchment-50 px-3.5 text-sm font-medium text-slate-700 active:bg-slate-100 dark:border-navy-700 dark:bg-navy-800 dark:text-slate-200 dark:active:bg-slate-700">
                 <span aria-hidden>{app.icon}</span> {app.label}
               </button>
             ))}
@@ -368,15 +368,15 @@ function AiContextModal({ node, onClose }) {
   );
 }
 const STUDY_TYPE_STYLES = {
-  chapter: "text-xl sm:text-2xl font-bold text-navy-900 dark:text-slate-50",
-  section: "text-lg sm:text-xl font-semibold text-slate-800 dark:text-slate-200",
+  chapter: "text-xl sm:text-2xl font-bold text-navy-900 dark:text-parchment-50",
+  section: "text-lg sm:text-xl font-semibold text-navy-900 dark:text-slate-200",
   paragraph: "text-base sm:text-lg text-slate-700 dark:text-slate-300",
   subparagraph: "text-base text-slate-600 dark:text-slate-400",
   item: "text-sm text-slate-500 dark:text-slate-500",
 };
 
 const STUDY_DEPTH_BORDERS = [
-  "border-slate-200 dark:border-slate-700",
+  "border-parchment-200 dark:border-navy-700",
   "border-amber-200 dark:border-amber-800",
   "border-emerald-200 dark:border-emerald-800",
   "border-purple-200 dark:border-purple-800",
@@ -426,26 +426,26 @@ function StudyNodeRenderer({ node, level = 0, expandedSet = new Set(), scrollToI
 
   return (
     <div ref={nodeRef} style={{ marginLeft: `${Math.min(level, 6) * 0.9}rem` }} className="my-1 rounded-xl transition-colors">
-      <div onClick={toggle} role="button" tabIndex={0} aria-expanded={isExpandable ? expanded : undefined} className="flex items-start gap-2 rounded-xl px-3 py-2.5 hover:bg-slate-50 active:bg-slate-100 cursor-pointer touch-manipulation dark:hover:bg-slate-800/60 dark:active:bg-slate-800">
+      <div onClick={toggle} role="button" tabIndex={0} aria-expanded={isExpandable ? expanded : undefined} className="flex items-start gap-2 rounded-xl px-3 py-2.5 hover:bg-parchment active:bg-slate-100 cursor-pointer touch-manipulation dark:hover:bg-slate-800/60 dark:active:bg-slate-800">
         <span className={`mt-1 flex h-5 w-5 flex-shrink-0 items-center justify-center select-none text-slate-400 transition-transform duration-200 dark:text-slate-600 ${expanded ? "rotate-90" : ""}`}>{isExpandable ? "▸" : ""}</span>
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
             {node.node_type === "chapter" && <span className="inline-block rounded-md bg-navy-900 px-2 py-0.5 text-xs font-semibold uppercase tracking-wide text-white dark:bg-navy-700">Chapter {node.node_number}</span>}
             {node.node_type === "section" && <span className="inline-block rounded-md bg-amber-100 px-2 py-0.5 text-xs font-semibold uppercase tracking-wide text-amber-800 dark:bg-amber-900/40 dark:text-amber-300">Sec. {node.node_number}</span>}
             <span className={STUDY_TYPE_STYLES[node.node_type] || "text-sm text-slate-700 dark:text-slate-300"}>{node.title || node.node_number}</span>
-            {!expanded && notes.length > 0 && <span className="text-xs" title="Has notes">📝</span>}
-            {!expanded && aiEntry && <span className="text-xs" title="AI explanation available">🤖</span>}
+            {!expanded && notes.length > 0 && <span className="text-sky-500 dark:text-sky-400" title="Has notes"><NavIcon name="note" className="h-3.5 w-3.5" /></span>}
+            {!expanded && aiEntry && <span className="text-seal dark:text-gold-400" title="AI explanation available"><NavIcon name="spark" className="h-3.5 w-3.5" /></span>}
           </div>
           {expanded && node.content && (
             <div onClick={(e) => e.stopPropagation()} className="mt-2">
               <HighlightableContent nodeId={node.id} content={node.content} highlights={highlights} addHighlight={addHighlight} removeHighlight={removeHighlight} armed={isHighlighting} className="select-text rounded-lg p-2 text-base leading-relaxed text-slate-700 dark:text-slate-300" />
               <div className="mt-1 flex flex-wrap items-center gap-2">
-                <button onClick={() => setActiveHighlightNodeId(isHighlighting ? null : node.id)} className={`min-h-[38px] rounded-lg border px-3 py-1.5 text-sm font-medium transition-colors ${isHighlighting ? "border-amber-400 bg-amber-100 text-amber-800 dark:border-amber-600 dark:bg-amber-900/40 dark:text-amber-300" : "border-emerald-200 bg-emerald-50 text-emerald-700 active:bg-emerald-100 dark:border-emerald-700 dark:bg-emerald-950/30 dark:text-emerald-400 dark:active:bg-emerald-950/50"}`}>{isHighlighting ? "Select text to highlight…" : "🖍 Highlight"}</button>
-                <button onClick={() => setNotesOpen((v) => !v)} className={`min-h-[38px] rounded-lg border px-3 py-1.5 text-sm font-medium transition-colors ${notesOpen ? "border-sky-400 bg-sky-100 text-sky-800 dark:border-sky-600 dark:bg-sky-900/40 dark:text-sky-300" : "border-sky-200 bg-sky-50 text-sky-700 active:bg-sky-100 dark:border-sky-700 dark:bg-sky-950/30 dark:text-sky-400 dark:active:bg-sky-950/50"}`}>
-                  📝 {notes.length > 0 ? `Notes (${notes.length})` : "Add Note"}
+                <button onClick={() => setActiveHighlightNodeId(isHighlighting ? null : node.id)} className={`flex min-h-[38px] items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm font-medium transition-colors ${isHighlighting ? "border-amber-400 bg-amber-100 text-amber-800 dark:border-amber-600 dark:bg-amber-900/40 dark:text-amber-300" : "border-emerald-200 bg-emerald-50 text-emerald-700 active:bg-emerald-100 dark:border-emerald-700 dark:bg-emerald-950/30 dark:text-emerald-400 dark:active:bg-emerald-950/50"}`}>{isHighlighting ? null : <NavIcon name="highlighter" className="h-4 w-4" />} {isHighlighting ? "Select text to highlight…" : "Highlight"}</button>
+                <button onClick={() => setNotesOpen((v) => !v)} className={`flex min-h-[38px] items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm font-medium transition-colors ${notesOpen ? "border-sky-400 bg-sky-100 text-sky-800 dark:border-sky-600 dark:bg-sky-900/40 dark:text-sky-300" : "border-sky-200 bg-sky-50 text-sky-700 active:bg-sky-100 dark:border-sky-700 dark:bg-sky-950/30 dark:text-sky-400 dark:active:bg-sky-950/50"}`}>
+                  <NavIcon name="note" className="h-4 w-4" /> {notes.length > 0 ? `Notes (${notes.length})` : "Add Note"}
                 </button>
-                <button onClick={() => setAiModalOpen(true)} className="min-h-[38px] rounded-lg border border-purple-200 bg-purple-50 px-3 py-1.5 text-sm font-medium text-purple-700 active:bg-purple-100 dark:border-purple-700 dark:bg-purple-950/30 dark:text-purple-400 dark:active:bg-purple-950/50">
-                  🤖 Ask AI
+                <button onClick={() => setAiModalOpen(true)} className="flex min-h-[38px] items-center gap-1.5 rounded-lg border border-purple-200 bg-purple-50 px-3 py-1.5 text-sm font-medium text-purple-700 active:bg-purple-100 dark:border-purple-700 dark:bg-purple-950/30 dark:text-purple-400 dark:active:bg-purple-950/50">
+                  <NavIcon name="spark" className="h-4 w-4" /> Ask AI
                 </button>
               </div>
               {notesOpen && (
@@ -453,7 +453,7 @@ function StudyNodeRenderer({ node, level = 0, expandedSet = new Set(), scrollToI
               )}
               {aiModalOpen && <AiContextModal node={node} onClose={() => setAiModalOpen(false)} />}
               {node.cross_references && node.cross_references.length > 0 && (
-                <div className="mt-3 rounded-lg bg-slate-50 p-3 text-sm dark:bg-slate-800/60" onClick={(e) => e.stopPropagation()}>
+                <div className="mt-3 rounded-lg bg-parchment p-3 text-sm dark:bg-navy-800/60" onClick={(e) => e.stopPropagation()}>
                   <span className="font-medium text-slate-700 dark:text-slate-300">See Also</span>
                   <ul className="mt-1 list-disc space-y-0.5 pl-4 text-slate-600 dark:text-slate-400">
                     {node.cross_references.map((ref, idx) => (
@@ -481,10 +481,10 @@ function StudyNodeRenderer({ node, level = 0, expandedSet = new Set(), scrollToI
 }
 
 const READING_TYPE_STYLES = {
-  chapter: "font-bold text-navy-900 dark:text-slate-50 mb-2",
-  section: "font-semibold text-slate-900 dark:text-slate-100 mb-1",
-  paragraph: "text-slate-800 dark:text-slate-300",
-  subparagraph: "text-slate-800 dark:text-slate-300",
+  chapter: "font-bold text-navy-900 dark:text-parchment-50 mb-2",
+  section: "font-semibold text-navy-900 dark:text-parchment-50 mb-1",
+  paragraph: "text-navy-900 dark:text-slate-300",
+  subparagraph: "text-navy-900 dark:text-slate-300",
   item: "text-slate-700 dark:text-slate-400",
 };
 
@@ -517,21 +517,21 @@ function ReadingNodeRenderer({ node, level = 0, fontScale, expandedSet = new Set
   const headingSize = node.node_type === "chapter" ? 1.6 : node.node_type === "section" ? 1.3 : 1;
   return (
     <div ref={nodeRef} style={{ marginLeft: `${Math.min(level, 4) * 0.6}rem` }} className="my-5 rounded-lg transition-colors">
-      <div className={`font-serif ${READING_TYPE_STYLES[node.node_type] || "text-slate-800 dark:text-slate-200"}`} style={{ fontSize: `${headingSize * fontScale}rem` }}>
+      <div className={`font-serif ${READING_TYPE_STYLES[node.node_type] || "text-navy-900 dark:text-slate-200"}`} style={{ fontSize: `${headingSize * fontScale}rem` }}>
         {node.node_type === "section" && `Section ${node.node_number}. `}
         {node.node_type === "chapter" && `Chapter ${node.node_number}. `}
         {node.title || node.node_number}
-        {notes.length > 0 && <span className="ml-1 align-middle text-sm" title="Has notes">📝</span>}
-        {aiEntry && <span className="ml-1 align-middle text-sm" title="AI explanation available">🤖</span>}
+        {notes.length > 0 && <span className="ml-1 inline-block align-middle text-sky-500 dark:text-sky-400" title="Has notes"><NavIcon name="note" className="h-3.5 w-3.5" /></span>}
+        {aiEntry && <span className="ml-1 inline-block align-middle text-seal dark:text-gold-400" title="AI explanation available"><NavIcon name="spark" className="h-3.5 w-3.5" /></span>}
       </div>
-      {node.content && <HighlightableContent nodeId={node.id} content={node.content} highlights={highlights} addHighlight={addHighlight} removeHighlight={removeHighlight} armed={true} className="select-text font-serif leading-loose text-slate-800 dark:text-slate-300" />}
+      {node.content && <HighlightableContent nodeId={node.id} content={node.content} highlights={highlights} addHighlight={addHighlight} removeHighlight={removeHighlight} armed={true} className="select-text font-serif leading-loose text-navy-900 dark:text-slate-300" />}
       {node.content && (
         <div className="mt-2 flex flex-wrap items-center gap-2 font-sans">
-          <button onClick={() => setNotesOpen((v) => !v)} className={`min-h-[36px] rounded-lg border px-3 py-1 text-sm font-medium transition-colors ${notesOpen ? "border-sky-400 bg-sky-100 text-sky-800 dark:border-sky-600 dark:bg-sky-900/40 dark:text-sky-300" : "border-sky-200 bg-sky-50 text-sky-700 active:bg-sky-100 dark:border-sky-700 dark:bg-sky-950/30 dark:text-sky-400 dark:active:bg-sky-950/50"}`}>
-            📝 {notes.length > 0 ? `Notes (${notes.length})` : "Add Note"}
+          <button onClick={() => setNotesOpen((v) => !v)} className={`flex min-h-[36px] items-center gap-1.5 rounded-lg border px-3 py-1 text-sm font-medium transition-colors ${notesOpen ? "border-sky-400 bg-sky-100 text-sky-800 dark:border-sky-600 dark:bg-sky-900/40 dark:text-sky-300" : "border-sky-200 bg-sky-50 text-sky-700 active:bg-sky-100 dark:border-sky-700 dark:bg-sky-950/30 dark:text-sky-400 dark:active:bg-sky-950/50"}`}>
+            <NavIcon name="note" className="h-4 w-4" /> {notes.length > 0 ? `Notes (${notes.length})` : "Add Note"}
           </button>
-          <button onClick={() => setAiModalOpen(true)} className="min-h-[36px] rounded-lg border border-purple-200 bg-purple-50 px-3 py-1 text-sm font-medium text-purple-700 active:bg-purple-100 dark:border-purple-700 dark:bg-purple-950/30 dark:text-purple-400 dark:active:bg-purple-950/50">
-            🤖 Ask AI
+          <button onClick={() => setAiModalOpen(true)} className="flex min-h-[36px] items-center gap-1.5 rounded-lg border border-purple-200 bg-purple-50 px-3 py-1 text-sm font-medium text-purple-700 active:bg-purple-100 dark:border-purple-700 dark:bg-purple-950/30 dark:text-purple-400 dark:active:bg-purple-950/50">
+            <NavIcon name="spark" className="h-4 w-4" /> Ask AI
           </button>
         </div>
       )}
@@ -542,7 +542,7 @@ function ReadingNodeRenderer({ node, level = 0, fontScale, expandedSet = new Set
       )}
       {aiModalOpen && <AiContextModal node={node} onClose={() => setAiModalOpen(false)} />}
       {node.cross_references && node.cross_references.length > 0 && (
-        <div className="mt-2 rounded-lg bg-slate-50 p-3 font-sans text-sm dark:bg-slate-800/60">
+        <div className="mt-2 rounded-lg bg-parchment p-3 font-sans text-sm dark:bg-navy-800/60">
           <span className="font-medium text-slate-700 dark:text-slate-300">See Also</span>
           <ul className="mt-1 list-disc space-y-0.5 pl-4 text-slate-600 dark:text-slate-400">
             {node.cross_references.map((ref, idx) => (
@@ -558,12 +558,12 @@ function ReadingNodeRenderer({ node, level = 0, fontScale, expandedSet = new Set
 
 function ModeToggle({ mode, setMode }) {
   return (
-    <div className="inline-flex flex-shrink-0 rounded-full bg-slate-100 p-1 text-sm dark:bg-slate-800" role="tablist" aria-label="View mode">
-      <button role="tab" aria-selected={mode === "study"} onClick={() => setMode("study")} className={`min-h-[34px] rounded-full px-2.5 py-1 transition-colors ${mode === "study" ? "bg-navy-900 font-medium text-white shadow-sm dark:bg-navy-700" : "text-slate-500 dark:text-slate-400"}`}>
-        <span aria-hidden>📘</span><span className="hidden sm:inline ml-1">Study</span>
+    <div className="inline-flex flex-shrink-0 rounded-full bg-slate-100 p-1 text-sm dark:bg-navy-800" role="tablist" aria-label="View mode">
+      <button role="tab" aria-selected={mode === "study"} onClick={() => setMode("study")} className={`flex min-h-[34px] items-center rounded-full px-2.5 py-1 transition-colors ${mode === "study" ? "bg-navy-900 font-medium text-white shadow-sm dark:bg-navy-700" : "text-slate-500 dark:text-slate-400"}`}>
+        <NavIcon name="note" className="h-4 w-4" aria-hidden /><span className="hidden sm:inline ml-1">Study</span>
       </button>
-      <button role="tab" aria-selected={mode === "reading"} onClick={() => setMode("reading")} className={`min-h-[34px] rounded-full px-2.5 py-1 transition-colors ${mode === "reading" ? "bg-navy-900 font-medium text-white shadow-sm dark:bg-navy-700" : "text-slate-500 dark:text-slate-400"}`}>
-        <span aria-hidden>📖</span><span className="hidden sm:inline ml-1">Reading</span>
+      <button role="tab" aria-selected={mode === "reading"} onClick={() => setMode("reading")} className={`flex min-h-[34px] items-center rounded-full px-2.5 py-1 transition-colors ${mode === "reading" ? "bg-navy-900 font-medium text-white shadow-sm dark:bg-navy-700" : "text-slate-500 dark:text-slate-400"}`}>
+        <NavIcon name="book" className="h-4 w-4" aria-hidden /><span className="hidden sm:inline ml-1">Reading</span>
       </button>
     </div>
   );
@@ -573,9 +573,9 @@ function FontStepper({ fontScale, setFontScale }) {
   const clamp = (v) => Math.min(1.6, Math.max(0.85, v));
   return (
     <div className="flex items-center gap-1.5 text-sm">
-      <button onClick={() => setFontScale((s) => clamp(s - 0.1))} className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 text-slate-600 active:bg-slate-100 dark:border-slate-600 dark:text-slate-300 dark:active:bg-slate-700" aria-label="Decrease font size">A-</button>
+      <button onClick={() => setFontScale((s) => clamp(s - 0.1))} className="flex h-9 w-9 items-center justify-center rounded-full border border-parchment-200 text-slate-600 active:bg-slate-100 dark:border-navy-700 dark:text-slate-300 dark:active:bg-slate-700" aria-label="Decrease font size">A-</button>
       <span className="w-10 text-center text-xs text-slate-400 dark:text-slate-500">{Math.round(fontScale * 100)}%</span>
-      <button onClick={() => setFontScale((s) => clamp(s + 0.1))} className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 text-slate-600 active:bg-slate-100 dark:border-slate-600 dark:text-slate-300 dark:active:bg-slate-700" aria-label="Increase font size">A+</button>
+      <button onClick={() => setFontScale((s) => clamp(s + 0.1))} className="flex h-9 w-9 items-center justify-center rounded-full border border-parchment-200 text-slate-600 active:bg-slate-100 dark:border-navy-700 dark:text-slate-300 dark:active:bg-slate-700" aria-label="Increase font size">A+</button>
     </div>
   );
 }
@@ -591,7 +591,7 @@ function ReadingProgressBar({ containerRef }) {
     return () => el.removeEventListener("scroll", onScroll);
   }, [containerRef]);
   return (
-    <div className="h-1 w-full bg-slate-100 dark:bg-slate-800">
+    <div className="h-1 w-full bg-slate-100 dark:bg-navy-800">
       <div className="h-1 bg-gradient-to-r from-amber-400 to-navy-700 transition-all dark:from-amber-500 dark:to-navy-400" style={{ width: `${pct}%` }} />
     </div>
   );
@@ -599,7 +599,7 @@ function ReadingProgressBar({ containerRef }) {
 
 function FilterChip({ label, value, active, onClick }) {
   return (
-    <button onClick={() => onClick(value)} className={`min-h-[38px] rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors ${active ? "border-navy-900 bg-navy-900 text-white dark:border-navy-600 dark:bg-navy-700" : "border-slate-200 bg-white text-slate-600 active:bg-slate-100 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 dark:active:bg-slate-700"}`}>{label}</button>
+    <button onClick={() => onClick(value)} className={`min-h-[38px] rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors ${active ? "border-navy-900 bg-navy-900 text-white dark:border-navy-600 dark:bg-navy-700" : "border-parchment-200 bg-parchment-50 text-slate-600 active:bg-slate-100 dark:border-navy-700 dark:bg-navy-800 dark:text-slate-300 dark:active:bg-slate-700"}`}>{label}</button>
   );
 }
 
@@ -620,7 +620,7 @@ function SearchResultCard({ item, onClick }) {
     item: "bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300",
   };
   return (
-    <button onClick={onClick} className={`block w-full rounded-2xl border bg-white p-4 text-left shadow-card transition active:scale-[0.99] active:bg-slate-50 dark:bg-slate-800 dark:active:bg-slate-700/70 ${item.exact_match ? "border-amber-400 ring-1 ring-amber-300 dark:border-amber-600 dark:ring-amber-700" : "border-slate-200 dark:border-slate-700"}`}>
+    <button onClick={onClick} className={`block w-full rounded-2xl border bg-parchment-50 p-4 text-left transition active:scale-[0.99] active:bg-parchment dark:bg-navy-800 dark:active:bg-slate-700/70 ${item.exact_match ? "border-amber-400 ring-1 ring-amber-300 dark:border-amber-600 dark:ring-amber-700" : "border-parchment-200 dark:border-navy-700"}`}>
       <div className="flex items-center justify-between gap-2">
         <div className="flex flex-wrap items-center gap-1.5 text-xs">
           <span className={`rounded-md px-1.5 py-0.5 font-semibold uppercase tracking-wide ${typeColors[item.node_type] || "bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300"}`}>{item.node_type}</span>
@@ -628,7 +628,7 @@ function SearchResultCard({ item, onClick }) {
         </div>
         {item.exact_match && <span className="flex-shrink-0 rounded-full bg-amber-400 px-2 py-0.5 text-xs font-semibold text-amber-950 dark:bg-amber-500 dark:text-amber-950">✓ Exact match</span>}
       </div>
-      <div className="mt-1.5 text-base font-semibold text-slate-900 dark:text-slate-100">{item.title || item.node_number}</div>
+      <div className="mt-1.5 text-base font-semibold text-navy-900 dark:text-parchment-50">{item.title || item.node_number}</div>
       {item.excerpt && <div className="mt-1 text-sm leading-relaxed text-slate-500 dark:text-slate-400" dangerouslySetInnerHTML={{ __html: item.excerpt.replace(/\[/g, "<mark>").replace(/\]/g, "</mark>") }} />}
       <div className="mt-2 flex items-center gap-1 text-xs font-medium text-navy-700 dark:text-amber-400">Open <span aria-hidden>→</span></div>
     </button>
@@ -682,13 +682,13 @@ function SearchView({ onNavigateChapter }) {
   
   return (
     <div className="mx-auto max-w-3xl p-4">
-      <div className="rounded-2xl border border-slate-200 bg-white p-3 shadow-card dark:border-slate-700 dark:bg-slate-800">
+      <div className="rounded-2xl border border-parchment-200 bg-parchment-50 p-3 dark:border-navy-700 dark:bg-navy-800">
         <div className="flex items-center gap-2">
-          <span className="pl-1 text-lg text-slate-400 dark:text-slate-500" aria-hidden>🔍</span>
-          <input ref={inputRef} type="text" value={query} onChange={(e) => setQuery(e.target.value)} onKeyDown={handleKeyDown} placeholder='Search e.g. "Section 102" or "smuggling"' className="min-w-0 flex-1 border-none bg-transparent py-2 text-base text-slate-900 placeholder:text-slate-400 focus:outline-none dark:text-slate-100 dark:placeholder:text-slate-500" style={{ fontSize: "16px" }} />
+          <span className="pl-1 text-slate-400 dark:text-slate-500" aria-hidden><NavIcon name="search" className="h-5 w-5" /></span>
+          <input ref={inputRef} type="text" value={query} onChange={(e) => setQuery(e.target.value)} onKeyDown={handleKeyDown} placeholder='Search e.g. "Section 102" or "smuggling"' className="min-w-0 flex-1 border-none bg-transparent py-2 text-base text-navy-900 placeholder:text-slate-400 focus:outline-none dark:text-parchment-50 dark:placeholder:text-slate-500" style={{ fontSize: "16px" }} />
           {query && <button onClick={clearQuery} className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full text-slate-400 active:bg-slate-100 dark:text-slate-500 dark:active:bg-slate-700" aria-label="Clear search">✕</button>}
         </div>
-        <div className="mt-2 flex flex-wrap items-center justify-between gap-2 border-t border-slate-100 pt-2 dark:border-slate-700">
+        <div className="mt-2 flex flex-wrap items-center justify-between gap-2 border-t border-slate-100 pt-2 dark:border-navy-700">
           <div className="flex flex-wrap gap-1.5">
             <FilterChip label="All" value="all" active={filter === "all"} onClick={setFilter} />
             <FilterChip label="Title" value="title" active={filter === "title"} onClick={setFilter} />
@@ -701,13 +701,13 @@ function SearchView({ onNavigateChapter }) {
       {error && <p className="mt-4 rounded-xl bg-red-50 p-3 text-sm text-red-600 dark:bg-red-950/30 dark:text-red-400">{error}</p>}
       {loading && (
         <div className="mt-4 space-y-3">
-          {[0,1,2].map(i => <div key={i} className="animate-pulse rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-700 dark:bg-slate-800"><div className="h-3 w-1/3 rounded bg-slate-200 dark:bg-slate-700"/><div className="mt-3 h-4 w-2/3 rounded bg-slate-200 dark:bg-slate-700"/><div className="mt-2 h-3 w-full rounded bg-slate-100 dark:bg-slate-700/60"/></div>)}
+          {[0,1,2].map(i => <div key={i} className="animate-pulse rounded-2xl border border-parchment-200 bg-parchment-50 p-4 dark:border-navy-700 dark:bg-navy-800"><div className="h-3 w-1/3 rounded bg-slate-200 dark:bg-slate-700"/><div className="mt-3 h-4 w-2/3 rounded bg-slate-200 dark:bg-slate-700"/><div className="mt-2 h-3 w-full rounded bg-slate-100 dark:bg-slate-700/60"/></div>)}
         </div>
       )}
       {!loading && exactResults.length > 0 && <div className="mt-5 space-y-2">{exactResults.map((item, idx) => <SearchResultCard key={`exact-${idx}`} item={item} onClick={() => handleResultClick(item)} />)}</div>}
       {!loading && otherResults.length > 0 && <div className="mt-5">{exactResults.length > 0 && <p className="mb-2 px-1 text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">Related mentions</p>}<div className="space-y-2">{otherResults.map((item, idx) => <SearchResultCard key={`other-${idx}`} item={item} onClick={() => handleResultClick(item)} />)}</div></div>}
-      {!loading && hasSearched && results.length === 0 && !error && <div className="mt-10 flex flex-col items-center gap-2 text-center text-slate-400 dark:text-slate-600"><span className="text-3xl">🔎</span><p className="text-base font-medium text-slate-500 dark:text-slate-400">No results for "{query}"</p><p className="text-sm">Try a section number (e.g. 102), a keyword, or a shorter phrase.</p></div>}
-      {!hasSearched && !loading && <div className="mt-10 flex flex-col items-center gap-2 text-center text-slate-400 dark:text-slate-600"><span className="text-3xl">📚</span><p className="text-sm">Search the full text of RA 10863 — titles, chapters, sections, and definitions.</p></div>}
+      {!loading && hasSearched && results.length === 0 && !error && <div className="mt-10 flex flex-col items-center gap-2 text-center text-slate-400 dark:text-slate-600"><NavIcon name="search" className="h-8 w-8" /><p className="text-base font-medium text-slate-500 dark:text-slate-400">No results for "{query}"</p><p className="text-sm">Try a section number (e.g. 102), a keyword, or a shorter phrase.</p></div>}
+      {!hasSearched && !loading && <div className="mt-10 flex flex-col items-center gap-2 text-center text-slate-400 dark:text-slate-600"><NavIcon name="book" className="h-8 w-8" /><p className="text-sm">Search the full text of RA 10863 — titles, chapters, sections, and definitions.</p></div>}
     </div>
   );
 }
@@ -715,7 +715,7 @@ function SearchView({ onNavigateChapter }) {
 function DarkModeToggle({ enabled, onChange }) {
   return (
     <button type="button" role="switch" aria-checked={enabled} onClick={() => onChange(!enabled)} className={`relative inline-flex h-8 w-14 flex-shrink-0 items-center rounded-full transition-colors duration-300 ${enabled ? "bg-navy-700" : "bg-slate-300"}`}>
-      <span className={`inline-block h-6 w-6 transform rounded-full bg-white shadow-md transition-transform duration-300 ${enabled ? "translate-x-7" : "translate-x-1"}`} />
+      <span className={`inline-block h-6 w-6 transform rounded-full bg-parchment-50 shadow-md transition-transform duration-300 ${enabled ? "translate-x-7" : "translate-x-1"}`} />
     </button>
   );
 }
@@ -744,7 +744,7 @@ function TutorialOverlay({ onFinish }) {
 
   return (
     <div className="fixed inset-0 z-[60] flex flex-col justify-end bg-slate-900/70 backdrop-blur-sm sm:items-center sm:justify-center">
-      <div className="w-full rounded-t-3xl bg-white p-6 shadow-2xl dark:bg-slate-900 sm:max-w-md sm:rounded-3xl">
+      <div className="w-full rounded-t-3xl bg-parchment-50 p-6 shadow-2xl dark:bg-navy-900 sm:max-w-md sm:rounded-3xl">
         <div className="mb-4 flex items-center justify-between">
           <div className="flex gap-1.5">
             {TUTORIAL_STEPS.map((_, i) => (
@@ -757,12 +757,12 @@ function TutorialOverlay({ onFinish }) {
         </div>
         <div className="mb-6 flex flex-col items-center text-center">
           <span className="mb-3 text-5xl" aria-hidden>{current.icon}</span>
-          <h2 className="mb-2 text-xl font-bold text-slate-900 dark:text-slate-50">{current.title}</h2>
+          <h2 className="mb-2 text-xl font-bold text-navy-900 dark:text-parchment-50">{current.title}</h2>
           <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-300">{current.body}</p>
         </div>
         <div className="flex items-center gap-2">
           {step > 0 && (
-            <button onClick={back} className="flex h-12 flex-1 items-center justify-center rounded-xl border border-slate-200 text-sm font-semibold text-slate-600 active:bg-slate-100 dark:border-slate-600 dark:text-slate-300 dark:active:bg-slate-800">
+            <button onClick={back} className="flex h-12 flex-1 items-center justify-center rounded-xl border border-parchment-200 text-sm font-semibold text-slate-600 active:bg-slate-100 dark:border-navy-700 dark:text-slate-300 dark:active:bg-slate-800">
               Back
             </button>
           )}
@@ -778,34 +778,34 @@ function TutorialOverlay({ onFinish }) {
 function SettingsView({ darkMode, setDarkMode, onReplayTutorial }) {
   return (
     <div className="mx-auto max-w-2xl pb-10">
-      <h1 className="mb-1 text-2xl font-bold text-slate-900 dark:text-slate-50">Settings</h1>
+      <h1 className="mb-1 text-2xl font-bold text-navy-900 dark:text-parchment-50">Settings</h1>
       <p className="mb-6 text-sm text-slate-500 dark:text-slate-400">Customize your reading experience.</p>
-      <section className="mb-6 rounded-2xl border border-slate-200 bg-white p-4 shadow-card dark:border-slate-700 dark:bg-slate-800">
+      <section className="mb-6 rounded-2xl border border-parchment-200 bg-parchment-50 p-4 dark:border-navy-700 dark:bg-navy-800">
         <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">Appearance</h2>
         <div className="flex items-center justify-between gap-4 rounded-xl py-1">
-          <div className="min-w-0"><p className="font-medium text-slate-800 dark:text-slate-100">🌙 Dark Mode</p><p className="text-sm text-slate-500 dark:text-slate-400">Easier on the eyes in low light.</p></div>
+          <div className="min-w-0"><p className="flex items-center gap-1.5 font-medium text-navy-900 dark:text-parchment-50"><NavIcon name="moon" className="h-4 w-4" /> Dark Mode</p><p className="text-sm text-slate-500 dark:text-slate-400">Easier on the eyes in low light.</p></div>
           <DarkModeToggle enabled={darkMode} onChange={setDarkMode} />
         </div>
       </section>
-      <section className="mb-6 rounded-2xl border border-slate-200 bg-white p-4 shadow-card dark:border-slate-700 dark:bg-slate-800">
+      <section className="mb-6 rounded-2xl border border-parchment-200 bg-parchment-50 p-4 dark:border-navy-700 dark:bg-navy-800">
         <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">Help</h2>
-        <button onClick={onReplayTutorial} className="flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-700 active:bg-slate-100 dark:border-slate-600 dark:text-slate-200 dark:active:bg-slate-700">
-          🔄 Replay Tutorial
+        <button onClick={onReplayTutorial} className="flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border border-parchment-200 px-4 py-2.5 text-sm font-semibold text-slate-700 active:bg-slate-100 dark:border-navy-700 dark:text-slate-200 dark:active:bg-slate-700">
+          <NavIcon name="refresh" className="h-4 w-4" /> Replay Tutorial
         </button>
       </section>
-      <section className="mb-6 rounded-2xl border border-slate-200 bg-white p-4 shadow-card dark:border-slate-700 dark:bg-slate-800">
+      <section className="mb-6 rounded-2xl border border-parchment-200 bg-parchment-50 p-4 dark:border-navy-700 dark:bg-navy-800">
         <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">About this App</h2>
         <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-300">RA 10863 — Customs Modernization and Tariff Act. A study &amp; reading companion with search and highlights. Works fully offline.</p>
         <p className="mt-2 text-xs text-slate-400 dark:text-slate-500">Version 1.0.0 (Offline)</p>
       </section>
       <LegalSettingsSection />
-      <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-card dark:border-slate-700 dark:bg-slate-800">
+      <section className="rounded-2xl border border-parchment-200 bg-parchment-50 p-4 dark:border-navy-700 dark:bg-navy-800">
         <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">Developer</h2>
         <div className="flex items-center gap-3">
           <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-navy-900 text-lg font-bold text-white dark:bg-navy-700">O</div>
-          <div className="min-w-0"><p className="font-semibold text-slate-800 dark:text-slate-100">Osias</p><p className="text-sm text-slate-500 dark:text-slate-400">App developer &amp; maintainer</p></div>
+          <div className="min-w-0"><p className="font-semibold text-navy-900 dark:text-parchment-50">Osias</p><p className="text-sm text-slate-500 dark:text-slate-400">App developer &amp; maintainer</p></div>
         </div>
-        <a href="https://osiasnalaunan68-star.github.io/osias-personal-portfolio" target="_blank" rel="noopener noreferrer" className="mt-4 flex min-h-[44px] items-center justify-center gap-2 rounded-xl bg-navy-900 px-4 py-2.5 text-sm font-semibold text-white shadow-sm active:bg-navy-800 dark:bg-navy-700 dark:active:bg-navy-600">🌐 View Developer Portfolio</a>
+        <a href="https://osiasnalaunan68-star.github.io/osias-personal-portfolio" target="_blank" rel="noopener noreferrer" className="mt-4 flex min-h-[44px] items-center justify-center gap-2 rounded-xl bg-navy-900 px-4 py-2.5 text-sm font-semibold text-white shadow-sm active:bg-navy-800 dark:bg-navy-700 dark:active:bg-navy-600"><NavIcon name="globe" className="h-4 w-4" /> View Developer Portfolio</a>
       </section>
     </div>
   );
@@ -844,6 +844,18 @@ const NAV_ICONS = {
   menu: <><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></>,
   x: <><path d="M18 6 6 18" /><path d="m6 6 12 12" /></>,
   tag: <><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z" /><circle cx="7.5" cy="7.5" r="1" fill="currentColor" /></>,
+  scale: <><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="2" fill="currentColor" /></>,
+  target: <><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="4.5" /><circle cx="12" cy="12" r="0.8" fill="currentColor" /></>,
+  moon: <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z" />,
+  refresh: <><path d="M3 11a9 9 0 0 1 15.3-5.7L21 8" /><path d="M21 3v5h-5" /><path d="M21 13a9 9 0 0 1-15.3 5.7L3 16" /><path d="M3 21v-5h5" /></>,
+  globe: <><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18Z" /></>,
+  check: <path d="M20 6 9 17l-5-5" />,
+  clock: <><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3.5 2" /></>,
+  trash: <><path d="M4 7h16" /><path d="M10 11v6M14 11v6" /><path d="M6 7l1 13a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-13" /><path d="M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3" /></>,
+  highlighter: <><path d="M3 21v-3.5L14.5 6a2.1 2.1 0 0 1 3 3L6 21H3Z" /><path d="M13 7l4 4" /></>,
+  note: <><rect x="4" y="3" width="16" height="18" rx="2" /><path d="M8 8h8M8 12h8M8 16h5" /></>,
+  spark: <path d="M12 3c.8 4 2.2 5.4 6.2 6.2-4 .8-5.4 2.2-6.2 6.2-.8-4-2.2-5.4-6.2-6.2 4-.8 5.4-2.2 6.2-6.2Z" />,
+  warning: <><path d="M12 9v4" /><circle cx="12" cy="16.2" r="0.3" fill="currentColor" /><path d="M10.3 3.9 2.5 18a1.8 1.8 0 0 0 1.6 2.7h15.8a1.8 1.8 0 0 0 1.6-2.7L13.7 3.9a1.8 1.8 0 0 0-3.4 0Z" /></>,
 };
 
 function NavIcon({ name, className = "h-[22px] w-[22px]" }) {
@@ -873,7 +885,7 @@ function BottomNav({ view, setView, showAdmin, showDev }) {
   return (
     <nav
       aria-label="Main navigation"
-      className="fixed inset-x-0 bottom-0 z-[35] border-t border-slate-200/80 bg-white/85 shadow-nav backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/85"
+      className="fixed inset-x-0 bottom-0 z-[35] border-t border-parchment-200/80 bg-parchment-50/85 shadow-nav backdrop-blur-xl dark:border-navy-800 dark:bg-navy-900/85"
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >
       <div className="mx-auto flex max-w-xl items-stretch justify-around px-2 py-1.5">
@@ -912,53 +924,53 @@ function FeesView() {
   };
 
   let status = null;
-  if (access?.state === "admin") status = "👑 Admin — everything is unlocked.";
-  else if (isPaid) status = "✅ Active until " + formatDateShort(access.app.expiresAt) + " (" + formatTimeLeft(access.msLeft) + " left). Renew early and your remaining days are kept.";
-  else if (access?.state === "trial") status = "🎁 Free trial: " + formatTimeLeft(access.msLeft) + " left";
-  else if (access?.state === "expired") status = "⏳ Your trial has ended. Get the promo to continue.";
+  if (access?.state === "admin") status = { icon: "crown", text: "Admin — everything is unlocked." };
+  else if (isPaid) status = { icon: "check", text: "Active until " + formatDateShort(access.app.expiresAt) + " (" + formatTimeLeft(access.msLeft) + " left). Renew early and your remaining days are kept." };
+  else if (access?.state === "trial") status = { icon: "tag", text: "Free trial: " + formatTimeLeft(access.msLeft) + " left" };
+  else if (access?.state === "expired") status = { icon: "clock", text: "Your trial has ended. Get the promo to continue." };
 
   return (
     <div className="mx-auto max-w-2xl space-y-4 pb-10">
       <div>
-        <h1 className="mb-1 text-2xl font-bold text-slate-900 dark:text-slate-50">Fees</h1>
+        <h1 className="mb-1 text-2xl font-bold text-navy-900 dark:text-parchment-50">Fees</h1>
         <p className="text-sm text-slate-500 dark:text-slate-400">The promo bundle and where to pay.</p>
       </div>
 
       {status && (
-        <div className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-600 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300">{status}</div>
+        <div className="flex items-start gap-2 rounded-xl border border-parchment-200 bg-parchment-50 px-4 py-3 text-sm text-slate-600 dark:border-navy-700 dark:bg-navy-800 dark:text-slate-300"><NavIcon name={status.icon} className="mt-0.5 h-4 w-4 flex-shrink-0 text-seal dark:text-gold-400" />{status.text}</div>
       )}
 
       {pending.length > 0 && (
-        <div className="rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-800 dark:border-amber-700 dark:bg-amber-950/30 dark:text-amber-300">
-          ⏳ Payment pending ({pending[pending.length - 1].referenceCode}) — waiting for confirmation.
+        <div className="flex items-start gap-2 rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-800 dark:border-amber-700 dark:bg-amber-950/30 dark:text-amber-300">
+          <NavIcon name="clock" className="mt-0.5 h-4 w-4 flex-shrink-0" /> Payment pending ({pending[pending.length - 1].referenceCode}) — waiting for confirmation.
         </div>
       )}
 
-      <section className="rounded-2xl border-2 border-gold-500 bg-white p-4 shadow-card dark:bg-slate-800">
+      <section className="rounded-2xl border-2 border-gold-500 bg-parchment-50 p-4 dark:bg-navy-800">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
-            <p className="text-base font-extrabold text-navy-900 dark:text-slate-100">🔥 {PROMO_PLAN.label}</p>
+            <p className="text-base font-extrabold text-navy-900 dark:text-parchment-50">{PROMO_PLAN.label}</p>
             <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">{PROMO_PLAN.tagline}</p>
           </div>
-          <span className="flex-shrink-0 text-3xl font-extrabold text-navy-900 dark:text-slate-50">₱{PROMO_PLAN.price}</span>
+          <span className="flex-shrink-0 text-3xl font-extrabold text-navy-900 dark:text-parchment-50">₱{PROMO_PLAN.price}</span>
         </div>
         <ul className="mt-3 space-y-1 text-sm text-slate-700 dark:text-slate-200">
           {PROMO_PLAN.subjects.map((code) => (
-            <li key={code}>✅ {SUBJECT_LABELS[code] || code}</li>
+            <li key={code} className="flex items-center gap-1.5"><NavIcon name="check" className="h-3.5 w-3.5 flex-shrink-0 text-verdigris dark:text-verdigris-300" /> {SUBJECT_LABELS[code] || code}</li>
           ))}
-          <li>✅ Full app access</li>
+          <li className="flex items-center gap-1.5"><NavIcon name="check" className="h-3.5 w-3.5 flex-shrink-0 text-verdigris dark:text-verdigris-300" /> Full app access</li>
         </ul>
-        <p className="mt-3 text-xs font-semibold text-gold-600 dark:text-gold-400">⏳ Valid for {PROMO_PLAN.days} days only</p>
+        <p className="mt-3 flex items-center gap-1.5 text-xs font-semibold text-gold-600 dark:text-gold-400"><NavIcon name="clock" className="h-3.5 w-3.5" /> Valid for {PROMO_PLAN.days} days only</p>
         <button onClick={payNow} className="mt-4 flex min-h-[48px] w-full items-center justify-center rounded-xl bg-navy-900 px-4 py-3 text-sm font-bold text-white active:bg-navy-800 dark:bg-navy-700">
           {user ? (isPaid ? "Renew" : "Pay now") + " · ₱" + PROMO_PLAN.price : "Sign in to get started"}
         </button>
       </section>
 
-      <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-card dark:border-slate-700 dark:bg-slate-800">
+      <section className="rounded-2xl border border-parchment-200 bg-parchment-50 p-4 dark:border-navy-700 dark:bg-navy-800">
         <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">How to pay</h2>
         <div className="mb-3 flex flex-wrap gap-2">
           {PAYMENT_METHODS.map((m) => (
-            <span key={m.id} className="rounded-full border border-slate-200 px-3 py-1 text-sm font-semibold text-slate-700 dark:border-slate-600 dark:text-slate-200">{m.label}</span>
+            <span key={m.id} className="rounded-full border border-parchment-200 px-3 py-1 text-sm font-semibold text-slate-700 dark:border-navy-700 dark:text-slate-200">{m.label}</span>
           ))}
         </div>
         <ol className="space-y-2 text-sm text-slate-600 dark:text-slate-300">
@@ -1216,7 +1228,7 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
 
   const homeContinueItems = [
     {
-      id: "cmta", icon: "⚖️", label: "Continue CMTA", has: !!resumeAvailable,
+      id: "cmta", icon: "scale", label: "Continue CMTA", has: !!resumeAvailable,
       sub: resumeAvailable
         ? (resumeAvailable.title_number ? "Title " + resumeAvailable.title_number + " · " : "") + "Chapter " + resumeAvailable.chapter_number
         : "No progress yet — tap to pick a chapter",
@@ -1244,13 +1256,13 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
 
   return (
     <HighlightUIContext.Provider value={highlightUIValue}>
-      <div className="relative flex h-screen overflow-hidden bg-slate-50 dark:bg-slate-950" style={{ height: "100dvh" }}>
+      <div className="relative flex h-screen overflow-hidden bg-parchment dark:bg-navy-950" style={{ height: "100dvh" }}>
         {sidebarOpen && view === "browse" && <div className="fixed inset-0 z-30 bg-slate-900/40 backdrop-blur-[1px] md:hidden" onClick={() => setSidebarOpen(false)} />}
         {view === "browse" && (
-          <aside className={`safe-top fixed inset-y-0 left-0 z-40 w-[85vw] max-w-[320px] overflow-y-auto overscroll-contain border-r border-slate-200 bg-white transition-transform duration-200 dark:border-slate-800 dark:bg-slate-900 md:static md:w-80 md:max-w-none md:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
-            <div className="sticky top-0 z-10 border-b border-slate-100 bg-white/95 px-5 py-4 backdrop-blur dark:border-slate-800 dark:bg-slate-900/95">
-              <div className="flex items-center gap-2"><span className="text-xl" aria-hidden>⚖️</span><div><h2 className="text-base font-bold leading-tight text-navy-900 dark:text-slate-50">RA 10863</h2><p className="text-xs text-slate-400 dark:text-slate-500">Customs Modernization &amp; Tariff Act</p></div></div>
-              <div className="mt-3 flex rounded-xl bg-slate-100 p-1 text-sm dark:bg-slate-800" role="tablist" aria-label="Library">
+          <aside className={`safe-top fixed inset-y-0 left-0 z-40 w-[85vw] max-w-[320px] overflow-y-auto overscroll-contain border-r border-parchment-200 bg-parchment-50 transition-transform duration-200 dark:border-navy-800 dark:bg-navy-900 md:static md:w-80 md:max-w-none md:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
+            <div className="sticky top-0 z-10 border-b border-slate-100 bg-parchment-50/95 px-5 py-4 backdrop-blur dark:border-navy-800 dark:bg-navy-900/95">
+              <div className="flex items-center gap-2"><span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-seal text-seal dark:border-gold-400 dark:text-gold-400" aria-hidden><NavIcon name="scale" className="h-4 w-4" /></span><div><h2 className="text-base font-bold leading-tight text-navy-900 dark:text-parchment-50">RA 10863</h2><p className="text-xs text-slate-400 dark:text-slate-500">Customs Modernization &amp; Tariff Act</p></div></div>
+              <div className="mt-3 flex rounded-xl bg-slate-100 p-1 text-sm dark:bg-navy-800" role="tablist" aria-label="Library">
                 {ISSUANCE_KINDS.map((k) => (
                   <button key={k.id} role="tab" aria-selected={source === k.id} onClick={() => setSource(k.id)} className={`min-h-[36px] flex-1 rounded-lg px-2 py-1 font-semibold transition-colors ${source === k.id ? "bg-navy-900 text-white shadow-sm dark:bg-navy-700" : "text-slate-500 dark:text-slate-400"}`}>
                     <span aria-hidden>{k.icon}</span> {k.label}
@@ -1267,7 +1279,7 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
                 return (
                   <div key={key} className="mb-2">
                     <div className="flex items-center gap-1">
-                      <button onClick={() => toggleTitleCollapse(key)} className="flex min-h-[40px] flex-1 items-center justify-between gap-2 rounded-lg px-2 py-2 text-left active:bg-slate-50 dark:active:bg-slate-800">
+                      <button onClick={() => toggleTitleCollapse(key)} className="flex min-h-[40px] flex-1 items-center justify-between gap-2 rounded-lg px-2 py-2 text-left active:bg-parchment dark:active:bg-slate-800">
                         <span className="text-sm font-bold uppercase tracking-wide text-navy-800 dark:text-slate-300">{titleGroup.title_number ? `Title ${titleGroup.title_number}` : titleGroup.title_title}</span>
                         <span className="flex-shrink-0 text-xs text-slate-400 dark:text-slate-500">{collapsed ? "▸" : "▾"}</span>
                       </button>
@@ -1275,14 +1287,14 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
                         <button
                           onClick={() => handleCopyQuizTemplate(titleGroup.title_number)}
                           title="Download Quiz Template as .txt"
-                          className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-dashed border-purple-400 text-sm text-purple-700 active:bg-purple-100 dark:border-purple-600 dark:text-purple-400"
+                          className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-dashed border-purple-400 text-purple-700 active:bg-purple-100 dark:border-purple-600 dark:text-purple-400"
                         >
-                          📝
+                          <NavIcon name="note" className="h-4 w-4" />
                         </button>
                       )}
                     </div>
                     {!collapsed && (
-                      <ul className="ml-1 space-y-0.5 border-l border-slate-100 pl-2 dark:border-slate-800">
+                      <ul className="ml-1 space-y-0.5 border-l border-slate-100 pl-2 dark:border-navy-800">
                         {titleGroup.chapters.map((ch) => {
                           const active = selectedChapter === ch.node_number && selectedTitleNumber === titleGroup.title_number;
                           return (
@@ -1306,7 +1318,7 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
           </aside>
         )}
         <div className="flex min-w-0 flex-1 flex-col">
-          <div className="safe-top sticky top-0 z-20 border-b border-slate-200 bg-white/90 backdrop-blur dark:border-slate-800 dark:bg-slate-900/90">
+          <div className="safe-top sticky top-0 z-20 border-b border-parchment-200 bg-parchment-50/90 backdrop-blur dark:border-navy-800 dark:bg-navy-900/90">
             <div className={`flex items-center gap-1.5 px-2 transition-all duration-300 ${focusMode && mode === "reading" ? "max-h-0 overflow-hidden opacity-0 py-0" : "max-h-16 py-2 opacity-100"}`}>
               {view === "browse" && (
                 <button onClick={() => setSidebarOpen((v) => !v)} className="flex h-9 w-9 flex-shrink-0 touch-manipulation items-center justify-center rounded-full text-lg text-slate-600 active:bg-slate-100 dark:text-slate-300 dark:active:bg-slate-800" aria-label="Toggle chapter list">
@@ -1314,8 +1326,8 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
                 </button>
               )}
               <div className="flex min-w-0 items-center gap-2 pl-1">
-                <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl bg-navy-900 text-base text-white shadow-sm dark:bg-gold-500 dark:text-navy-950" aria-hidden>⚖️</span>
-                <span className="truncate text-[15px] font-bold tracking-tight text-navy-900 dark:text-slate-50">{VIEW_TITLES[view] || "RA 10863"}</span>
+                <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl bg-navy-900 text-white dark:bg-gold-500 dark:text-navy-950" aria-hidden><NavIcon name="scale" className="h-4 w-4" /></span>
+                <span className="truncate text-[15px] font-bold tracking-tight text-navy-900 dark:text-parchment-50">{VIEW_TITLES[view] || "RA 10863"}</span>
               </div>
               <span className="flex-1" />
               <AccountButton />
@@ -1323,25 +1335,25 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
             </div>
             {view === "browse" && !(focusMode && mode === "reading") && (
               <div className="px-3 pb-2">
-                <span className="block truncate text-sm font-semibold text-slate-800 dark:text-slate-200">
+                <span className="block truncate text-sm font-semibold text-navy-900 dark:text-slate-200">
                   {isIssuance ? issuanceTitle : chapterTree ? chapterTree.title || `Chapter ${chapterTree.node_number}` : "Select a chapter"}
                 </span>
               </div>
             )}
             {view === "browse" && mode === "reading" && (
               <div className="flex items-center justify-end gap-2 px-3 pb-2">
-                <button onClick={() => setFocusMode((v) => !v)} className={`flex h-9 items-center gap-1 rounded-full border px-3 text-sm font-medium transition-colors ${focusMode ? "border-navy-900 bg-navy-900 text-white dark:border-slate-200 dark:bg-slate-100 dark:text-navy-900" : "border-slate-200 text-slate-600 active:bg-slate-100 dark:border-slate-600 dark:text-slate-300 dark:active:bg-slate-700"}`}>
-                  🎯 <span className="hidden sm:inline">Focus</span>
+                <button onClick={() => setFocusMode((v) => !v)} className={`flex h-9 items-center gap-1 rounded-full border px-3 text-sm font-medium transition-colors ${focusMode ? "border-navy-900 bg-navy-900 text-white dark:border-parchment-200 dark:bg-slate-100 dark:text-navy-900" : "border-parchment-200 text-slate-600 active:bg-slate-100 dark:border-navy-700 dark:text-slate-300 dark:active:bg-slate-700"}`}>
+                  <NavIcon name="target" className="h-4 w-4" /> <span className="hidden sm:inline">Focus</span>
                 </button>
                 <FontStepper fontScale={fontScale} setFontScale={setFontScale} />
               </div>
             )}
             {view === "browse" && mode === "reading" && (chapterTree || (isIssuance && issuanceId)) && <ReadingProgressBar containerRef={mainRef} />}
           </div>
-          <main ref={mainRef} className="has-bottom-nav safe-bottom flex-1 overflow-y-auto overscroll-contain bg-slate-50 p-4 dark:bg-slate-950 md:p-6">
+          <main ref={mainRef} className="has-bottom-nav safe-bottom flex-1 overflow-y-auto overscroll-contain bg-parchment p-4 dark:bg-navy-950 md:p-6">
             {error && (
               <div className="mx-auto max-w-3xl rounded-xl border border-red-200 bg-red-50 p-4 text-red-800 dark:border-red-800 dark:bg-red-950/30 dark:text-red-200">
-                <p className="font-bold">⚠️ Error</p>
+                <p className="flex items-center gap-1.5 font-bold"><NavIcon name="warning" className="h-4 w-4" /> Error</p>
                 <p className="text-sm">{error}</p>
               </div>
             )}
@@ -1351,7 +1363,7 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
               <>
                 {loading && (
                   <div className="mx-auto max-w-3xl space-y-3">
-                    {[0,1,2].map(i => <div key={i} className="animate-pulse rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900"><div className="h-4 w-1/2 rounded bg-slate-200 dark:bg-slate-700"/><div className="mt-3 h-3 w-full rounded bg-slate-100 dark:bg-slate-800"/><div className="mt-2 h-3 w-5/6 rounded bg-slate-100 dark:bg-slate-800"/></div>)}
+                    {[0,1,2].map(i => <div key={i} className="animate-pulse rounded-2xl border border-parchment-200 bg-parchment-50 p-4 dark:border-navy-800 dark:bg-navy-900"><div className="h-4 w-1/2 rounded bg-slate-200 dark:bg-slate-700"/><div className="mt-3 h-3 w-full rounded bg-slate-100 dark:bg-navy-800"/><div className="mt-2 h-3 w-5/6 rounded bg-slate-100 dark:bg-navy-800"/></div>)}
                   </div>
                 )}
                 {!loading && !chapterTree && !error && (
@@ -1361,29 +1373,33 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
                         <button
                           key={c.id}
                           onClick={c.onClick}
-                          className={"flex w-full items-center gap-3 rounded-2xl border border-navy-200 bg-white p-4 text-left shadow-card active:bg-slate-50 dark:border-navy-700 dark:bg-slate-900 dark:active:bg-slate-800 " + (c.has ? "" : "opacity-70")}
+                          className={"flex w-full items-center gap-3 rounded-2xl border border-navy-200 bg-parchment-50 p-4 text-left active:bg-parchment dark:border-navy-700 dark:bg-navy-900 dark:active:bg-slate-800 " + (c.has ? "" : "opacity-70")}
                         >
-                          <span className="text-2xl" aria-hidden>{c.icon}</span>
+                          {NAV_ICONS[c.icon] ? (
+                            <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-seal text-seal dark:border-gold-400 dark:text-gold-400" aria-hidden><NavIcon name={c.icon} className="h-4 w-4" /></span>
+                          ) : (
+                            <span className="text-2xl" aria-hidden>{c.icon}</span>
+                          )}
                           <span className="min-w-0">
-                            <span className="block text-sm font-semibold text-navy-900 dark:text-slate-100">{c.label}</span>
+                            <span className="block text-sm font-semibold text-navy-900 dark:text-parchment-50">{c.label}</span>
                             <span className="block truncate text-xs text-slate-500 dark:text-slate-400">{c.sub}</span>
                           </span>
                         </button>
                       ))}
                     </div>
-                    <span className="text-4xl">📖</span>
+                    <NavIcon name="book" className="h-9 w-9" />
                     <p className="text-lg font-medium text-slate-500 dark:text-slate-400">Select a chapter to start {mode === "reading" ? "reading" : "studying"}</p>
                     <p className="text-sm">Use the menu button or Search to find what you need.</p>
                   </div>
                 )}
                 {chapterTree && mode === "study" && (
                   <div className="mx-auto max-w-3xl">
-                    {chapterTree.content && <p className="mb-4 rounded-xl bg-white p-4 text-base text-slate-600 shadow-card dark:bg-slate-900 dark:text-slate-300">{chapterTree.content}</p>}
+                    {chapterTree.content && <p className="mb-4 rounded-xl bg-parchment-50 p-4 text-base text-slate-600 dark:bg-navy-900 dark:text-slate-300">{chapterTree.content}</p>}
                     <div className="mb-3 flex flex-wrap items-center justify-end gap-2">
-                      <button onClick={expandAllStudy} className="flex h-9 items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 text-sm font-medium text-slate-600 active:bg-slate-100 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 dark:active:bg-slate-700">
+                      <button onClick={expandAllStudy} className="flex h-9 items-center gap-1.5 rounded-full border border-parchment-200 bg-parchment-50 px-3 text-sm font-medium text-slate-600 active:bg-slate-100 dark:border-navy-700 dark:bg-navy-800 dark:text-slate-300 dark:active:bg-slate-700">
                         <span aria-hidden>⤢</span> Expand All
                       </button>
-                      <button onClick={collapseAllStudy} className="flex h-9 items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 text-sm font-medium text-slate-600 active:bg-slate-100 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 dark:active:bg-slate-700">
+                      <button onClick={collapseAllStudy} className="flex h-9 items-center gap-1.5 rounded-full border border-parchment-200 bg-parchment-50 px-3 text-sm font-medium text-slate-600 active:bg-slate-100 dark:border-navy-700 dark:bg-navy-800 dark:text-slate-300 dark:active:bg-slate-700">
                         <span aria-hidden>⤡</span> Collapse All
                       </button>
                     </div>
