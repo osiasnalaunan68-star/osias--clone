@@ -5,6 +5,23 @@ import { LEVELS, QuizLevelButton, QuizPlayView, resetLevelProgress } from "../co
 import { useAuth } from "../authContext";
 import { isRaLevelUnlocked } from "../access";
 
+const IconQuiz = (p) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" {...p}>
+    <rect x="3.5" y="3.5" width="17" height="17" rx="3" />
+    <path d="M8 12l2.5 2.5L16 9" />
+  </svg>
+);
+const IconRefresh = (p) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" {...p}>
+    <path d="M3 11a9 9 0 0 1 15.3-5.7L21 8" /><path d="M21 3v5h-5" /><path d="M21 13a9 9 0 0 1-15.3 5.7L3 16" /><path d="M3 21v-5h5" />
+  </svg>
+);
+const IconWrench = (p) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" {...p}>
+    <path d="M14.7 6.3a4 4 0 0 0-5.4 4.9L4 16.5V20h3.5l5.3-5.3a4 4 0 0 0 4.9-5.4l-2.6 2.6-2-2z" />
+  </svg>
+);
+
 // Helper to extract Roman numeral from title string like "Title I – ..."
 function extractTitleNumber(title) {
   const match = title.match(/^Title\s+([IVXLCDM]+)/i);
@@ -108,10 +125,10 @@ function QuizTitleCard({ title, data, onSelectLevel }) {
   const total = Object.values(totalQuestions).reduce((a, b) => a + b, 0);
 
   return (
-    <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-card dark:border-slate-700 dark:bg-slate-800">
+    <div className="rounded-lg border border-parchment-200 bg-parchment-50 p-4 dark:border-navy-700 dark:bg-navy-800">
       <div className="mb-3 flex items-center justify-between gap-2">
         <button onClick={() => setOpen((v) => !v)} className="min-w-0 flex-1 text-left">
-          <p className="truncate font-semibold text-navy-900 dark:text-slate-100">{open ? "▾" : "▸"} {title}</p>
+          <p className="truncate font-semibold text-navy-900 dark:text-parchment-50">{open ? "▾" : "▸"} {title}</p>
           <p className="text-xs text-slate-400 dark:text-slate-500">{Object.keys(data).length} provisions · {total} total questions</p>
         </button>
       </div>
@@ -170,17 +187,17 @@ export default function QuizPage() {
     <div className="mx-auto max-w-2xl p-4">
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-50">📝 Quiz / Exam</h1>
+          <h1 className="flex items-center gap-2 text-2xl font-bold text-navy-900 dark:text-parchment-50"><IconQuiz className="h-6 w-6" /> Quiz / Exam</h1>
           <p className="text-sm text-slate-500 dark:text-slate-400">Test your knowledge with 5 levels of difficulty — from Easy to Will Done.</p>
           <p className="mt-1 text-xs font-medium text-amber-700 dark:text-amber-400">Note: Level 1 is the Filipino version (free). Levels 2–5 are the English version.</p>
         </div>
-        <button onClick={() => setRefreshKey((prev) => prev + 1)} className="rounded-lg border border-slate-200 px-3 py-1.5 text-sm text-slate-600 hover:bg-slate-50 dark:border-slate-600 dark:text-slate-300 dark:hover:bg-slate-800" title="Refresh quiz data from imported files">🔄 Refresh</button>
+        <button onClick={() => setRefreshKey((prev) => prev + 1)} className="flex items-center gap-1.5 rounded-lg border border-parchment-200 px-3 py-1.5 text-sm text-slate-600 hover:bg-parchment dark:border-navy-700 dark:text-slate-300 dark:hover:bg-navy-700" title="Refresh quiz data from imported files"><IconRefresh className="h-4 w-4" /> Refresh</button>
       </div>
 
       {titles.length === 0 ? (
         <div className="flex h-64 flex-col items-center justify-center text-center text-slate-500 dark:text-slate-400">
           <p className="text-lg font-medium">No quiz data available</p>
-          <p className="text-sm mt-2">Import quiz data from <strong>Dev Panel (🛠) → Quiz tab</strong>.</p>
+          <p className="text-sm mt-2">Import quiz data from <strong className="inline-flex items-center gap-1">Dev Panel (<IconWrench className="h-3.5 w-3.5" />) → Quiz tab</strong>.</p>
           <p className="text-sm mt-1">After importing, click <strong>Refresh</strong> or reload the page.</p>
         </div>
       ) : (

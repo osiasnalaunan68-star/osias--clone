@@ -7,6 +7,27 @@ import {
 } from "../subjectQuizStore";
 import { isClUnlocked, isSubjectUnlocked } from "../access";
 
+const IconLock = (p) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" {...p}>
+    <rect x="4.5" y="10.5" width="15" height="9" rx="2" /><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
+  </svg>
+);
+const IconCheckCircle = (p) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" {...p}>
+    <circle cx="12" cy="12" r="9" /><path d="M8 12.5l2.5 2.5L16 9.5" />
+  </svg>
+);
+const IconXCircle = (p) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" {...p}>
+    <circle cx="12" cy="12" r="9" /><path d="M9 9l6 6M15 9l-6 6" />
+  </svg>
+);
+const IconPlay = (p) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" stroke="none" {...p}>
+    <path d="M7 5.3v13.4a1 1 0 0 0 1.5.86l11-6.7a1 1 0 0 0 0-1.72l-11-6.7A1 1 0 0 0 7 5.3Z" />
+  </svg>
+);
+
 // First N items (by sorted order) na libre bawat subject — lahat ng lagpas dito
 // ay naka-lock hanggang mag-subscribe. Tugma sa pricing table sa handoff doc.
 // CL ang eksepsyon: CL_TRIAL_DAYS na FULL access trial (hindi item-count based) tapos
@@ -24,14 +45,14 @@ function isItemUnlocked(idx, subjectId, profile) {
 function LockedPrompt({ subjectLabel, onUnlock }) {
   return (
     <div className="flex flex-col items-center gap-3 py-10 text-center">
-      <span className="text-4xl" aria-hidden>🔒</span>
-      <p className="text-lg font-semibold text-slate-800 dark:text-slate-100">This item is locked</p>
+      <span className="text-slate-400 dark:text-slate-500" aria-hidden><IconLock className="h-9 w-9" /></span>
+      <p className="text-lg font-semibold text-navy-900 dark:text-parchment-50">This item is locked</p>
       <p className="max-w-xs text-sm text-slate-500 dark:text-slate-400">
         Subscribe to unlock the remaining {subjectLabel} items.
       </p>
       <button
         onClick={onUnlock}
-        className="mt-2 rounded-xl bg-navy-900 px-5 py-2.5 text-sm font-semibold text-white shadow-sm active:bg-navy-800 dark:bg-navy-700 dark:active:bg-navy-600"
+        className="mt-2 rounded-md bg-navy-900 px-5 py-2.5 text-sm font-semibold text-white active:bg-navy-800 dark:bg-navy-700 dark:active:bg-navy-600"
       >
         View Subscription
       </button>
@@ -44,20 +65,24 @@ function FlatQuizQuestion({ item, onAnswer, answered, selected }) {
   const choices = item?.choices && typeof item.choices === "object" ? item.choices : null;
   const correct = item?.correct || "";
   const reason = item?.reason || "";
+  const isRight = answersMatch(selected, correct);
 
   if (!choices) {
     const handleSubmit = () => { if (!answered && inputValue.trim()) onAnswer(inputValue.trim()); };
     return (
       <div className="space-y-4">
-        <p className="text-lg font-medium text-slate-800 dark:text-slate-100">{item?.question || "No question available"}</p>
+        <p className="font-display text-lg font-medium text-navy-900 dark:text-parchment-50">{item?.question || "No question available"}</p>
         <div className="flex gap-2">
-          <input type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)} onKeyDown={(e) => e.key === "Enter" && handleSubmit()} disabled={answered} placeholder="Type your answer here…" className="flex-1 rounded-lg border border-slate-200 bg-white px-4 py-2 text-slate-800 focus:outline-none focus:ring-2 focus:ring-navy-900 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:focus:ring-navy-500 disabled:opacity-50" />
-          <button onClick={handleSubmit} disabled={answered || !inputValue.trim()} className="rounded-lg bg-navy-900 px-6 py-2 text-sm font-semibold text-white disabled:opacity-40 dark:bg-navy-700">Submit</button>
+          <input type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)} onKeyDown={(e) => e.key === "Enter" && handleSubmit()} disabled={answered} placeholder="Type your answer here…" className="flex-1 rounded-md border border-parchment-200 bg-parchment-50 px-4 py-2 text-navy-900 focus:outline-none focus:ring-2 focus:ring-navy-900 dark:border-navy-700 dark:bg-navy-800 dark:text-parchment-50 dark:focus:ring-gold-500 disabled:opacity-50" />
+          <button onClick={handleSubmit} disabled={answered || !inputValue.trim()} className="rounded-md bg-navy-900 px-6 py-2 text-sm font-semibold text-white disabled:opacity-40 dark:bg-navy-700">Submit</button>
         </div>
         {answered && (
-          <div className={`mt-4 rounded-lg p-4 ${answersMatch(selected, correct) ? "bg-emerald-50 dark:bg-emerald-950/30" : "bg-red-50 dark:bg-red-950/30"}`}>
-            <p className="font-medium text-slate-800 dark:text-slate-100">{answersMatch(selected, correct) ? "✅ Correct!" : `❌ Incorrect. The correct answer is: ${correct}`}</p>
-            {reason && <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{reason}</p>}
+          <div className={`mt-4 flex items-start gap-2 rounded-md p-4 ${isRight ? "bg-verdigris/10 dark:bg-verdigris/20" : "bg-oxblood/10 dark:bg-oxblood/20"}`}>
+            {isRight ? <IconCheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-verdigris dark:text-verdigris-300" /> : <IconXCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-oxblood dark:text-oxblood-300" />}
+            <div>
+              <p className={`font-medium ${isRight ? "text-verdigris dark:text-verdigris-300" : "text-oxblood dark:text-oxblood-300"}`}>{isRight ? "Correct!" : `Incorrect. The correct answer is: ${correct}`}</p>
+              {reason && <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{reason}</p>}
+            </div>
           </div>
         )}
       </div>
@@ -67,7 +92,7 @@ function FlatQuizQuestion({ item, onAnswer, answered, selected }) {
   const choiceKeys = Object.keys(choices);
   return (
     <div className="space-y-4">
-      <p className="text-lg font-medium text-slate-800 dark:text-slate-100">{item?.question || "No question available"}</p>
+      <p className="font-display text-lg font-medium text-navy-900 dark:text-parchment-50">{item?.question || "No question available"}</p>
       <div className="space-y-2">
         {choiceKeys.map((key) => {
           const label = choices[key] || "";
@@ -75,22 +100,25 @@ function FlatQuizQuestion({ item, onAnswer, answered, selected }) {
           const isCorrect = answered && key === correct;
           const isWrong = answered && isSelected && key !== correct;
           const choiceClass = answered
-            ? isCorrect ? "border-emerald-400 bg-emerald-50 dark:border-emerald-600 dark:bg-emerald-950/30"
-              : isWrong ? "border-red-400 bg-red-50 dark:border-red-600 dark:bg-red-950/30"
-              : "border-slate-200 bg-white dark:border-slate-600 dark:bg-slate-800"
-            : isSelected ? "border-navy-900 dark:border-navy-500"
-              : "border-slate-200 bg-white hover:border-slate-400 dark:border-slate-600 dark:bg-slate-800 dark:hover:border-slate-400";
+            ? isCorrect ? "border-verdigris bg-verdigris/10 dark:border-verdigris/70 dark:bg-verdigris/20"
+              : isWrong ? "border-oxblood bg-oxblood/10 dark:border-oxblood/70 dark:bg-oxblood/20"
+              : "border-parchment-200 bg-parchment-50 dark:border-navy-700 dark:bg-navy-800"
+            : isSelected ? "border-seal dark:border-gold-400"
+              : "border-parchment-200 bg-parchment-50 hover:border-navy-700 dark:border-navy-700 dark:bg-navy-800 dark:hover:border-slate-500";
           return (
-            <button key={key} onClick={() => !answered && onAnswer(key)} disabled={answered} className={`block w-full rounded-xl border-2 px-4 py-3 text-left text-sm transition-colors ${choiceClass} ${!answered && "cursor-pointer"} disabled:cursor-default`}>
+            <button key={key} onClick={() => !answered && onAnswer(key)} disabled={answered} className={`block w-full rounded-lg border-2 px-4 py-3 text-left text-sm transition-colors ${choiceClass} ${!answered && "cursor-pointer"} disabled:cursor-default`}>
               <span className="font-semibold">{key}.</span> {label}
             </button>
           );
         })}
       </div>
       {answered && (
-        <div className={`mt-4 rounded-lg p-4 ${answersMatch(selected, correct) ? "bg-emerald-50 dark:bg-emerald-950/30" : "bg-red-50 dark:bg-red-950/30"}`}>
-          <p className="font-medium text-slate-800 dark:text-slate-100">{answersMatch(selected, correct) ? "✅ Correct!" : `❌ Incorrect. The correct answer is: ${correct}`}</p>
-          {reason && <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{reason}</p>}
+        <div className={`mt-4 flex items-start gap-2 rounded-md p-4 ${isRight ? "bg-verdigris/10 dark:bg-verdigris/20" : "bg-oxblood/10 dark:bg-oxblood/20"}`}>
+          {isRight ? <IconCheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-verdigris dark:text-verdigris-300" /> : <IconXCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-oxblood dark:text-oxblood-300" />}
+          <div>
+            <p className={`font-medium ${isRight ? "text-verdigris dark:text-verdigris-300" : "text-oxblood dark:text-oxblood-300"}`}>{isRight ? "Correct!" : `Incorrect. The correct answer is: ${correct}`}</p>
+            {reason && <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{reason}</p>}
+          </div>
         </div>
       )}
     </div>
@@ -139,7 +167,7 @@ export function SubjectQuizPlay({ subjectId, subjectLabel, onBack }) {
     return (
       <div className="flex h-64 flex-col items-center justify-center text-center text-slate-500 dark:text-slate-400">
         <p className="text-lg font-medium">No questions available yet.</p>
-        <button onClick={onBack} className="mt-3 rounded-lg border border-slate-200 px-4 py-2 text-sm dark:border-slate-600">← Back</button>
+        <button onClick={onBack} className="mt-3 rounded-lg border border-parchment-200 px-4 py-2 text-sm dark:border-navy-700">← Back</button>
       </div>
     );
   }
@@ -147,7 +175,7 @@ export function SubjectQuizPlay({ subjectId, subjectLabel, onBack }) {
   return (
     <div>
       <div className="mb-4 flex items-center justify-between">
-        <button onClick={onBack} className="flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800">← Back</button>
+        <button onClick={onBack} className="flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-parchment dark:text-slate-300 dark:hover:bg-navy-800">← Back</button>
         <div className="flex items-center gap-3">
           <span className="text-sm font-medium text-slate-600 dark:text-slate-300">{subjectLabel}</span>
           <span className="text-xs text-slate-400 dark:text-slate-500">{currentIndex + 1} / {total}</span>
@@ -158,8 +186,8 @@ export function SubjectQuizPlay({ subjectId, subjectLabel, onBack }) {
         <span>Progress: {Math.round(progressPct)}%</span>
         <span>Score: {Math.round(scorePct)}%</span>
       </div>
-      <div className="mb-3 h-1 w-full rounded-full bg-slate-100 dark:bg-slate-700">
-        <div className="h-1 rounded-full bg-gradient-to-r from-amber-400 to-navy-700 transition-all duration-300 dark:from-amber-500 dark:to-navy-400" style={{ width: `${progressPct}%` }} />
+      <div className="mb-3 h-1 w-full rounded-full bg-parchment-200 dark:bg-navy-700">
+        <div className="h-1 rounded-full bg-navy-900 transition-all duration-300 dark:bg-gold-500" style={{ width: `${progressPct}%` }} />
       </div>
 
       <div className="mb-4 flex flex-wrap gap-1">
@@ -169,7 +197,7 @@ export function SubjectQuizPlay({ subjectId, subjectLabel, onBack }) {
           const isCorrect = entries[id] && answersMatch(answers[id], entries[id].correct);
           const locked = !isItemUnlocked(idx, subjectId, profile);
           const dotColor = isAnsweredDot
-            ? (isCorrect ? "bg-emerald-400 dark:bg-emerald-500" : "bg-red-400 dark:bg-red-500")
+            ? (isCorrect ? "bg-verdigris dark:bg-verdigris-300" : "bg-oxblood dark:bg-oxblood-300")
             : locked ? "bg-slate-200 dark:bg-slate-700" : "bg-slate-300 dark:bg-slate-600";
           return (
             <button
@@ -182,7 +210,7 @@ export function SubjectQuizPlay({ subjectId, subjectLabel, onBack }) {
         })}
       </div>
 
-      <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-card dark:border-slate-700 dark:bg-slate-800">
+      <div className="rounded-lg border border-parchment-200 bg-parchment-50 p-6 dark:border-navy-700 dark:bg-navy-800">
         {currentLocked ? (
           <LockedPrompt subjectLabel={subjectLabel} onUnlock={() => setOverlayOpen(true)} />
         ) : (
@@ -191,8 +219,8 @@ export function SubjectQuizPlay({ subjectId, subjectLabel, onBack }) {
       </div>
 
       <div className="mt-4 flex justify-between">
-        <button onClick={() => goTo(currentIndex - 1)} disabled={currentIndex === 0} className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-medium text-slate-600 disabled:opacity-40 dark:border-slate-600 dark:text-slate-300">Previous</button>
-        <button onClick={() => goTo(currentIndex + 1)} disabled={currentIndex === total - 1} className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-medium text-slate-600 disabled:opacity-40 dark:border-slate-600 dark:text-slate-300">Next</button>
+        <button onClick={() => goTo(currentIndex - 1)} disabled={currentIndex === 0} className="rounded-lg border border-parchment-200 px-4 py-2 text-sm font-medium text-slate-600 disabled:opacity-40 dark:border-navy-700 dark:text-slate-300">Previous</button>
+        <button onClick={() => goTo(currentIndex + 1)} disabled={currentIndex === total - 1} className="rounded-lg border border-parchment-200 px-4 py-2 text-sm font-medium text-slate-600 disabled:opacity-40 dark:border-navy-700 dark:text-slate-300">Next</button>
       </div>
     </div>
   );
@@ -229,8 +257,8 @@ export default function SubjectDashboard({ subjectId, subjectLabel }) {
 
   return (
     <div className="mx-auto max-w-md p-4">
-      <div className="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-card dark:border-slate-700 dark:bg-slate-800">
-        <h2 className="mb-1 text-xl font-bold text-slate-900 dark:text-slate-50">{subjectLabel}</h2>
+      <div className="rounded-lg border border-parchment-200 bg-parchment-50 p-6 text-center dark:border-navy-700 dark:bg-navy-800">
+        <h2 className="mb-1 text-xl font-bold text-navy-900 dark:text-parchment-50">{subjectLabel}</h2>
         <p className="mb-6 text-sm text-slate-500 dark:text-slate-400">
           {stats.total > 0 ? `${stats.total} question${stats.total !== 1 ? "s" : ""} available` : "No questions imported yet"}
         </p>
@@ -247,14 +275,14 @@ export default function SubjectDashboard({ subjectId, subjectLabel }) {
         </div>
 
         {stats.total === 0 ? (
-          <p className="rounded-lg bg-slate-50 p-3 text-sm text-slate-400 dark:bg-slate-900/40 dark:text-slate-500">Import {subjectLabel} questions in the Dev Panel first.</p>
+          <p className="rounded-lg bg-parchment p-3 text-sm text-slate-400 dark:bg-navy-900/40 dark:text-slate-500">Import {subjectLabel} questions in the Dev Panel first.</p>
         ) : (
           <div className="space-y-2">
-            <button onClick={() => setPlaying(true)} className="w-full rounded-xl bg-navy-900 px-4 py-3 text-sm font-semibold text-white shadow-sm active:bg-navy-800 dark:bg-navy-700 dark:active:bg-navy-600">
-              {hasProgress ? "▶️ Continue" : "▶️ Start"}
+            <button onClick={() => setPlaying(true)} className="flex w-full items-center justify-center gap-1.5 rounded-md bg-navy-900 px-4 py-3 text-sm font-semibold text-white active:bg-navy-800 dark:bg-navy-700 dark:active:bg-navy-600">
+              <IconPlay className="h-4 w-4" /> {hasProgress ? "Continue" : "Start"}
             </button>
             {hasProgress && (
-              <button onClick={handleReset} className="w-full rounded-xl border border-red-200 px-4 py-2 text-xs font-medium text-red-600 active:bg-red-50 dark:border-red-800 dark:text-red-400 dark:active:bg-red-950/30">
+              <button onClick={handleReset} className="w-full rounded-md border border-red-200 px-4 py-2 text-xs font-medium text-red-600 active:bg-red-50 dark:border-red-800 dark:text-red-400 dark:active:bg-red-950/30">
                 Reset progress
               </button>
             )}
