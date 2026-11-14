@@ -4,9 +4,9 @@ import { useEffect, useRef, useState } from "react";
 
 export function OnOffToggle({ label, description, checked, onChange }) {
   return (
-    <div className="flex items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white px-3 py-2.5 dark:border-slate-700 dark:bg-slate-800">
+    <div className="flex items-center justify-between gap-3 rounded-xl border border-parchment-200 bg-parchment-50 px-3 py-2.5 dark:border-navy-700 dark:bg-navy-800">
       <div className="min-w-0">
-        <p className="truncate text-sm font-semibold text-slate-800 dark:text-slate-100">{label}</p>
+        <p className="truncate text-sm font-semibold text-navy-900 dark:text-parchment-50">{label}</p>
         {description && <p className="truncate text-xs text-slate-400 dark:text-slate-500">{description}</p>}
       </div>
       <button
@@ -25,6 +25,8 @@ export function OnOffToggle({ label, description, checked, onChange }) {
 }
 
 // ---------- Icon (emoji) options ----------
+// Note: these are the user's own choices for decorating THEIR custom subjects —
+// a creative picker, not app chrome, so the emoji set itself stays as-is.
 
 export const EMOJI_OPTIONS = [
   "📘", "🔬", "🧮", "📐", "🌍", "💻", "🧪", "⚗️",
@@ -68,7 +70,7 @@ export function IconPicker({ value, onChange }) {
         maxLength={4}
         onChange={(e) => onChange(e.target.value || "📘")}
         placeholder="Or type your own emoji"
-        className="mt-2 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-navy-900 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:focus:ring-navy-500"
+        className="mt-2 w-full rounded-lg border border-parchment-200 bg-parchment-50 px-3 py-2 text-sm text-navy-900 focus:outline-none focus:ring-2 focus:ring-navy-900 dark:border-navy-700 dark:bg-navy-800 dark:text-parchment-50 dark:focus:ring-gold-500"
       />
     </div>
   );
@@ -92,7 +94,7 @@ export function ColorPicker({ value, onChange }) {
         <label
           title="Custom color"
           style={{ backgroundColor: isCustom ? value : "transparent" }}
-          className={`relative flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border-2 border-dashed border-slate-300 text-xs dark:border-slate-500 ${isCustom ? "ring-2 ring-offset-2 ring-slate-900 dark:ring-offset-slate-900 dark:ring-slate-100" : "bg-slate-50 dark:bg-slate-700"}`}
+          className={`relative flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border-2 border-dashed border-slate-300 text-xs dark:border-slate-500 ${isCustom ? "ring-2 ring-offset-2 ring-slate-900 dark:ring-offset-slate-900 dark:ring-slate-100" : "bg-parchment dark:bg-navy-700"}`}
         >
           {!isCustom && "🎨"}
           <input type="color" value={isCustom ? value : "#8b5cf6"} onChange={(e) => onChange(e.target.value)} className="absolute inset-0 h-full w-full cursor-pointer opacity-0" />
@@ -126,17 +128,17 @@ export function useCustomQuizTheme(blossomMode) {
   }
   return {
     blossom: false,
-    page: "bg-slate-50 dark:bg-slate-950",
-    card: "border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-800",
-    cardAlt: "border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-900/40",
-    text: "text-navy-900 dark:text-slate-100",
+    page: "bg-parchment dark:bg-navy-950",
+    card: "border-parchment-200 bg-parchment-50 dark:border-navy-700 dark:bg-navy-800",
+    cardAlt: "border-parchment-200 bg-parchment dark:border-navy-700 dark:bg-navy-900/40",
+    text: "text-navy-900 dark:text-parchment-50",
     subtext: "text-slate-400 dark:text-slate-500",
-    accentBtn: "bg-navy-900 text-white shadow-sm active:bg-navy-800 dark:bg-navy-700 dark:active:bg-navy-600",
-    outlineBtn: "border-slate-200 text-slate-600 active:bg-slate-100 dark:border-slate-600 dark:text-slate-300 dark:active:bg-slate-700",
+    accentBtn: "bg-navy-900 text-white active:bg-navy-800 dark:bg-navy-700 dark:active:bg-navy-600",
+    outlineBtn: "border-parchment-200 text-slate-600 active:bg-parchment dark:border-navy-700 dark:text-slate-300 dark:active:bg-navy-700",
     dangerBtn: "border-red-200 text-red-600 active:bg-red-50 dark:border-red-800 dark:text-red-400 dark:active:bg-red-950/30",
-    chip: "bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300",
-    barTrack: "bg-slate-100 dark:bg-slate-700",
-    barFill: "bg-gradient-to-r from-amber-400 to-navy-700 dark:from-amber-500 dark:to-navy-400",
+    chip: "bg-parchment-200 text-slate-600 dark:bg-navy-700 dark:text-slate-300",
+    barTrack: "bg-parchment-200 dark:bg-navy-700",
+    barFill: "bg-navy-900 dark:bg-gold-500",
   };
 }
 
@@ -147,15 +149,18 @@ export const TOTAL_TIMER_MINUTES = [5, 10, 20, 45, 60];
 export function TimerPickerModal({ theme, onPick, onCancel }) {
   return (
     <div className="fixed inset-0 z-[80] flex flex-col justify-end bg-slate-900/60 backdrop-blur-sm">
-      <div className={`w-full rounded-t-3xl border-t p-5 shadow-2xl ${theme.card}`}>
-        <p className={`mb-1 text-lg font-bold ${theme.text}`}>⏱️ Timer</p>
+      <div className={`w-full rounded-t-xl border-t p-5 ${theme.card}`}>
+        <p className={`mb-1 flex items-center gap-1.5 text-lg font-bold ${theme.text}`}>
+          <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.6"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3.5 2" /></svg>
+          Timer
+        </p>
         <p className={`mb-4 text-sm ${theme.subtext}`}>Choose how the timer runs for this quiz.</p>
         <button
           type="button"
           onClick={() => onPick({ mode: "perQuestion", seconds: 25 })}
           className={`mb-2 w-full rounded-xl border-2 px-4 py-3 text-left text-sm font-semibold transition-colors ${theme.outlineBtn}`}
         >
-          🔂 Per question — 25s each
+          Per question — 25s each
         </button>
         <div className="mb-2 grid grid-cols-3 gap-2">
           {TOTAL_TIMER_MINUTES.map((min) => (

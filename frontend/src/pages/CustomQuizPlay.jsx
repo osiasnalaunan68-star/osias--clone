@@ -5,6 +5,27 @@ import {
 } from "../customQuizStore";
 import { useDeadlineCountdown, formatSeconds } from "../components/CustomQuizShared";
 
+const IconClock = (p) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" {...p}>
+    <circle cx="12" cy="12" r="9" /><path d="M12 7v5l3.5 2" />
+  </svg>
+);
+const IconRefresh = (p) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" {...p}>
+    <path d="M3 11a9 9 0 0 1 15.3-5.7L21 8" /><path d="M21 3v5h-5" /><path d="M21 13a9 9 0 0 1-15.3 5.7L3 16" /><path d="M3 21v-5h5" />
+  </svg>
+);
+const IconCheckCircle = (p) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" {...p}>
+    <circle cx="12" cy="12" r="9" /><path d="M8 12.5l2.5 2.5L16 9.5" />
+  </svg>
+);
+const IconXCircle = (p) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" {...p}>
+    <circle cx="12" cy="12" r="9" /><path d="M9 9l6 6M15 9l-6 6" />
+  </svg>
+);
+
 function sameIdSet(a, b) {
   if (!Array.isArray(a) || !Array.isArray(b) || a.length !== b.length) return false;
   const setA = new Set(a);
@@ -62,14 +83,14 @@ function ResultsView({ theme, entries, order, answers, subjectName, onRetry, onB
 
   return (
     <div className="mx-auto max-w-md p-4">
-      <div className={`rounded-2xl border p-6 text-center shadow-md ${theme.card}`}>
+      <div className={`rounded-lg border p-6 text-center ${theme.card}`}>
         <span className="text-4xl" aria-hidden>🎉</span>
         <h2 className={`mt-2 text-xl font-bold ${theme.text}`}>Finished — {subjectName}</h2>
         <p className={`mt-1 text-sm ${theme.subtext}`}>{answeredCount}/{total} answered</p>
         <p className={`mt-4 text-4xl font-black ${theme.text}`}>{pct}%</p>
         <p className={`mb-6 text-sm ${theme.subtext}`}>{correctCount} of {total} correct</p>
         <div className="space-y-2">
-          <button onClick={onRetry} className={`w-full rounded-xl px-4 py-3 text-sm font-semibold transition-colors ${theme.accentBtn}`}>🔁 Retry</button>
+          <button onClick={onRetry} className={`flex w-full items-center justify-center gap-1.5 rounded-xl px-4 py-3 text-sm font-semibold transition-colors ${theme.accentBtn}`}><IconRefresh className="h-4 w-4" /> Retry</button>
           <button onClick={onBack} className={`w-full rounded-xl border px-4 py-2.5 text-sm font-medium transition-colors ${theme.outlineBtn}`}>← Back to Your Own Quiz</button>
         </div>
       </div>
@@ -196,7 +217,7 @@ export default function CustomQuizPlay({ subject, theme, randomChoices, timerCho
 
       {timer && !isResolved && (
         <div className={`mb-3 flex items-center justify-center gap-2 rounded-xl px-3 py-2 text-sm font-bold ${remainingLow ? "bg-red-500 text-white animate-pulse" : theme.chip}`}>
-          ⏱️ {formatSeconds(remainingMs / 1000)} {timer.mode === "perQuestion" ? "· this question" : "· whole quiz"}
+          <IconClock className="h-4 w-4 flex-shrink-0" /> {formatSeconds(remainingMs / 1000)} {timer.mode === "perQuestion" ? "· this question" : "· whole quiz"}
         </div>
       )}
 
@@ -213,12 +234,12 @@ export default function CustomQuizPlay({ subject, theme, randomChoices, timerCho
           const answeredDot = a !== undefined && a !== null;
           const correctDot = answeredDot && String(a).trim().toLowerCase() === String(entries[id]?.correct).trim().toLowerCase();
           const lockedDot = lockedIds.includes(id) && !answeredDot;
-          const dotColor = answeredDot ? (correctDot ? "bg-emerald-400" : "bg-red-400") : lockedDot ? "bg-amber-400" : "bg-slate-300 dark:bg-slate-600";
+          const dotColor = answeredDot ? (correctDot ? "bg-verdigris dark:bg-verdigris-300" : "bg-oxblood dark:bg-oxblood-300") : lockedDot ? "bg-amber-400" : "bg-slate-300 dark:bg-slate-600";
           return <button key={id} onClick={() => goTo(idx)} className={`h-3 w-3 rounded-full transition-all ${idx === currentIndex ? "scale-125" : ""} ${dotColor}`} title={`Question ${idx + 1}`} />;
         })}
       </div>
 
-      <div className={`rounded-xl border p-6 shadow-md ${theme.card}`}>
+      <div className={`rounded-lg border p-6 ${theme.card}`}>
         <p className={`mb-4 text-lg font-medium ${theme.text}`}>{currentItem?.question}</p>
         <div className="space-y-2">
           {slotKeys.map((slot) => {
@@ -228,11 +249,11 @@ export default function CustomQuizPlay({ subject, theme, randomChoices, timerCho
             const isCorrectChoice = isResolved && originalKey === currentItem.correct;
             const isWrongChoice = isAnswered && isSelected && originalKey !== currentItem.correct;
             const choiceClass = isResolved
-              ? isCorrectChoice ? "border-emerald-400 bg-emerald-50 dark:border-emerald-600 dark:bg-emerald-950/30"
-                : isWrongChoice ? "border-red-400 bg-red-50 dark:border-red-600 dark:bg-red-950/30"
-                : "border-slate-200 bg-white dark:border-slate-600 dark:bg-slate-800"
-              : isSelected ? "border-navy-900 dark:border-navy-500"
-                : "border-slate-200 bg-white hover:border-slate-400 dark:border-slate-600 dark:bg-slate-800 dark:hover:border-slate-400";
+              ? isCorrectChoice ? "border-verdigris bg-verdigris/10 dark:border-verdigris/70 dark:bg-verdigris/20"
+                : isWrongChoice ? "border-oxblood bg-oxblood/10 dark:border-oxblood/70 dark:bg-oxblood/20"
+                : "border-parchment-200 bg-parchment-50 dark:border-navy-700 dark:bg-navy-800"
+              : isSelected ? "border-seal dark:border-gold-400"
+                : "border-parchment-200 bg-parchment-50 hover:border-navy-700 dark:border-navy-700 dark:bg-navy-800 dark:hover:border-slate-500";
             return (
               <button key={slot} onClick={() => handleAnswer(originalKey)} disabled={isResolved} className={`block w-full rounded-xl border-2 px-4 py-3 text-left text-sm transition-colors ${choiceClass} ${!isResolved && "cursor-pointer"} disabled:cursor-default`}>
                 <span className="font-semibold">{slot}.</span> {label}
@@ -241,11 +262,20 @@ export default function CustomQuizPlay({ subject, theme, randomChoices, timerCho
           })}
         </div>
         {isResolved && (
-          <div className={`mt-4 rounded-lg p-4 ${isAnswered && !isWrongAnswer(currentAnswer, currentItem.correct) ? "bg-emerald-50 dark:bg-emerald-950/30" : "bg-red-50 dark:bg-red-950/30"}`}>
-            <p className={`font-medium ${theme.text}`}>
-              {!isAnswered ? "⏰ Time's up — no answer." : isWrongAnswer(currentAnswer, currentItem.correct) ? `❌ Incorrect. The correct answer is: ${currentItem.correct}` : "✅ Correct!"}
-            </p>
-            {currentItem.reason && <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{currentItem.reason}</p>}
+          <div className={`mt-4 flex items-start gap-2 rounded-lg p-4 ${isAnswered && !isWrongAnswer(currentAnswer, currentItem.correct) ? "bg-verdigris/10 dark:bg-verdigris/20" : "bg-oxblood/10 dark:bg-oxblood/20"}`}>
+            {!isAnswered ? (
+              <IconClock className="mt-0.5 h-4 w-4 flex-shrink-0 text-oxblood dark:text-oxblood-300" />
+            ) : isWrongAnswer(currentAnswer, currentItem.correct) ? (
+              <IconXCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-oxblood dark:text-oxblood-300" />
+            ) : (
+              <IconCheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-verdigris dark:text-verdigris-300" />
+            )}
+            <div>
+              <p className={`font-medium ${theme.text}`}>
+                {!isAnswered ? "Time's up — no answer." : isWrongAnswer(currentAnswer, currentItem.correct) ? `Incorrect. The correct answer is: ${currentItem.correct}` : "Correct!"}
+              </p>
+              {currentItem.reason && <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{currentItem.reason}</p>}
+            </div>
           </div>
         )}
       </div>

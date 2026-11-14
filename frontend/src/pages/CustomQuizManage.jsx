@@ -4,6 +4,37 @@ import {
   addCustomQuestion, updateCustomQuestion, deleteCustomQuestion,
 } from "../customQuizStore";
 
+const IconSave = (p) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" {...p}>
+    <path d="M5 4h11l3 3v13H5Z" /><path d="M8 4v5h7V4M8 13h8v7H8Z" />
+  </svg>
+);
+const IconEdit = (p) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" {...p}>
+    <path d="M12 20h9" /><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" />
+  </svg>
+);
+const IconTrash = (p) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" {...p}>
+    <path d="M4 7h16" /><path d="M10 11v6M14 11v6" /><path d="M6 7l1 13a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-13" /><path d="M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3" />
+  </svg>
+);
+const IconPlus = (p) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" {...p}>
+    <path d="M12 5v14M5 12h14" />
+  </svg>
+);
+const IconPoint = (p) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" {...p}>
+    <path d="M7 11l5-7 5 7" /><path d="M12 4v13" /><path d="M8 20h8" />
+  </svg>
+);
+const IconInfo = (p) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" {...p}>
+    <circle cx="12" cy="12" r="9" /><path d="M12 11v5M12 8v.01" />
+  </svg>
+);
+
 const EMPTY_FORM = { question: "", A: "", B: "", C: "", D: "", correct: "A", reason: "" };
 
 function QuestionForm({ theme, initial, onSave, onCancel }) {
@@ -22,14 +53,14 @@ function QuestionForm({ theme, initial, onSave, onCancel }) {
   };
 
   return (
-    <div className={`mb-4 rounded-2xl border-2 p-4 shadow-md ${theme.card}`}>
+    <div className={`mb-4 rounded-lg border-2 p-4 ${theme.card}`}>
       <label className={`mb-1 block text-xs font-semibold uppercase tracking-wide ${theme.subtext}`}>Question</label>
       <textarea
         value={form.question}
         onChange={(e) => setField("question", e.target.value)}
         rows={2}
         placeholder="Type the question here…"
-        className="mb-3 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-navy-900 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:focus:ring-navy-500"
+        className="mb-3 w-full rounded-lg border border-parchment-200 bg-parchment-50 px-3 py-2 text-sm text-navy-900 focus:outline-none focus:ring-2 focus:ring-navy-900 dark:border-navy-700 dark:bg-navy-900 dark:text-parchment-50 dark:focus:ring-gold-500"
       />
 
       <label className={`mb-1 block text-xs font-semibold uppercase tracking-wide ${theme.subtext}`}>Choices (A and B required, C/D optional)</label>
@@ -53,12 +84,12 @@ function QuestionForm({ theme, initial, onSave, onCancel }) {
               value={form[k]}
               onChange={(e) => setField(k, e.target.value)}
               placeholder={k === "A" || k === "B" ? `Choice ${k}` : `Choice ${k} (optional)`}
-              className="flex-1 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-navy-900 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:focus:ring-navy-500"
+              className="flex-1 rounded-lg border border-parchment-200 bg-parchment-50 px-3 py-2 text-sm text-navy-900 focus:outline-none focus:ring-2 focus:ring-navy-900 dark:border-navy-700 dark:bg-navy-900 dark:text-parchment-50 dark:focus:ring-gold-500"
             />
           </div>
         ))}
       </div>
-      <p className={`mb-3 text-xs ${theme.subtext}`}>👆 Tap a letter to mark it as the correct answer. Currently correct: <strong>{form.correct}</strong></p>
+      <p className={`mb-3 flex items-center gap-1 text-xs ${theme.subtext}`}><IconPoint className="h-3.5 w-3.5 flex-shrink-0" /> Tap a letter to mark it as the correct answer. Currently correct: <strong>{form.correct}</strong></p>
 
       <label className={`mb-1 block text-xs font-semibold uppercase tracking-wide ${theme.subtext}`}>Reason (why the answer is correct)</label>
       <textarea
@@ -66,12 +97,12 @@ function QuestionForm({ theme, initial, onSave, onCancel }) {
         onChange={(e) => setField("reason", e.target.value)}
         rows={2}
         placeholder={`Because ${form.correct} is…`}
-        className="mb-4 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-navy-900 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:focus:ring-navy-500"
+        className="mb-4 w-full rounded-lg border border-parchment-200 bg-parchment-50 px-3 py-2 text-sm text-navy-900 focus:outline-none focus:ring-2 focus:ring-navy-900 dark:border-navy-700 dark:bg-navy-900 dark:text-parchment-50 dark:focus:ring-gold-500"
       />
 
       <div className="flex gap-2">
         <button type="button" onClick={onCancel} className={`flex-1 rounded-xl border px-4 py-2.5 text-sm font-medium ${theme.outlineBtn}`}>Cancel</button>
-        <button type="button" onClick={handleSave} disabled={!canSave} className={`flex-[2] rounded-xl px-4 py-2.5 text-sm font-semibold disabled:opacity-40 ${theme.accentBtn}`}>💾 Save Question</button>
+        <button type="button" onClick={handleSave} disabled={!canSave} className={`flex flex-[2] items-center justify-center gap-1.5 rounded-xl px-4 py-2.5 text-sm font-semibold disabled:opacity-40 ${theme.accentBtn}`}><IconSave className="h-4 w-4" /> Save Question</button>
       </div>
     </div>
   );
@@ -80,12 +111,12 @@ function QuestionForm({ theme, initial, onSave, onCancel }) {
 function QuestionBox({ id, item, theme, onEdit, onDelete }) {
   const choiceKeys = Object.keys(item.choices || {});
   return (
-    <div className={`rounded-2xl border-2 p-4 shadow-md ${theme.card}`}>
+    <div className={`rounded-lg border-2 p-4 ${theme.card}`}>
       <div className="mb-2 flex items-start justify-between gap-2">
         <span className={`inline-flex h-6 min-w-6 flex-shrink-0 items-center justify-center rounded-full px-1.5 text-xs font-bold ${theme.chip}`}>{id}</span>
         <div className="flex flex-shrink-0 gap-1">
-          <button onClick={onEdit} aria-label="Edit" className={`rounded-lg border px-2.5 py-1.5 text-xs font-medium ${theme.outlineBtn}`}>✏️ Edit</button>
-          <button onClick={onDelete} aria-label="Delete" className={`rounded-lg border px-2.5 py-1.5 text-xs font-medium ${theme.dangerBtn}`}>🗑️</button>
+          <button onClick={onEdit} aria-label="Edit" className={`flex items-center gap-1 rounded-lg border px-2.5 py-1.5 text-xs font-medium ${theme.outlineBtn}`}><IconEdit className="h-3.5 w-3.5" /> Edit</button>
+          <button onClick={onDelete} aria-label="Delete" className={`rounded-lg border px-2.5 py-1.5 text-xs font-medium ${theme.dangerBtn}`}><IconTrash className="h-3.5 w-3.5" /></button>
         </div>
       </div>
       <p className={`mb-2 text-sm font-medium ${theme.text}`}>{item.question}</p>
@@ -96,7 +127,7 @@ function QuestionBox({ id, item, theme, onEdit, onDelete }) {
           </span>
         ))}
       </div>
-      {item.reason && <p className={`mt-2 text-xs italic ${theme.subtext}`}>💡 {item.reason}</p>}
+      {item.reason && <p className={`mt-2 flex items-start gap-1 text-xs italic ${theme.subtext}`}><IconInfo className="mt-0.5 h-3.5 w-3.5 flex-shrink-0" /> {item.reason}</p>}
     </div>
   );
 }
@@ -147,15 +178,15 @@ export default function CustomQuizManage({ subject, theme, onBack }) {
       </div>
 
       {!formOpen && (
-        <button onClick={openAdd} className={`mb-4 w-full rounded-xl px-4 py-3 text-sm font-semibold transition-colors ${theme.accentBtn}`}>
-          ➕ Add Question
+        <button onClick={openAdd} className={`mb-4 flex w-full items-center justify-center gap-1.5 rounded-xl px-4 py-3 text-sm font-semibold transition-colors ${theme.accentBtn}`}>
+          <IconPlus className="h-4 w-4" /> Add Question
         </button>
       )}
 
       {formOpen && <QuestionForm key={editingId || "new"} theme={theme} initial={editingInitial} onSave={handleSave} onCancel={closeForm} />}
 
       {ids.length === 0 ? (
-        <p className={`rounded-xl border border-dashed p-6 text-center text-sm ${theme.card} ${theme.subtext}`}>No questions yet. Start with "➕ Add Question" above.</p>
+        <p className={`rounded-xl border border-dashed p-6 text-center text-sm ${theme.card} ${theme.subtext}`}>No questions yet. Start with "Add Question" above.</p>
       ) : (
         <div className="space-y-3">
           {ids.map((id) => (

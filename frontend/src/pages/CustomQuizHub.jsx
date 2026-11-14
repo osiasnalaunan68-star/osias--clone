@@ -10,6 +10,47 @@ import {
 import CustomQuizManage from "./CustomQuizManage";
 import CustomQuizPlay from "./CustomQuizPlay";
 
+const IconLayers = (p) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" {...p}>
+    <path d="M12 3 3 8l9 5 9-5-9-5Z" /><path d="M3 13l9 5 9-5" />
+  </svg>
+);
+const IconDice = (p) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" {...p}>
+    <rect x="3.5" y="3.5" width="17" height="17" rx="3" /><circle cx="8.3" cy="8.3" r="1" fill="currentColor" stroke="none" /><circle cx="15.7" cy="8.3" r="1" fill="currentColor" stroke="none" /><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none" /><circle cx="8.3" cy="15.7" r="1" fill="currentColor" stroke="none" /><circle cx="15.7" cy="15.7" r="1" fill="currentColor" stroke="none" />
+  </svg>
+);
+const IconClock = (p) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" {...p}>
+    <circle cx="12" cy="12" r="9" /><path d="M12 7v5l3.5 2" />
+  </svg>
+);
+const IconPlus = (p) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" {...p}>
+    <path d="M12 5v14M5 12h14" />
+  </svg>
+);
+const IconSave = (p) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" {...p}>
+    <path d="M5 4h11l3 3v13H5Z" /><path d="M8 4v5h7V4M8 13h8v7H8Z" />
+  </svg>
+);
+const IconPlay = (p) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" stroke="none" {...p}>
+    <path d="M7 5.3v13.4a1 1 0 0 0 1.5.86l11-6.7a1 1 0 0 0 0-1.72l-11-6.7A1 1 0 0 0 7 5.3Z" />
+  </svg>
+);
+const IconEdit = (p) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" {...p}>
+    <path d="M12 20h9" /><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" />
+  </svg>
+);
+const IconTrash = (p) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" {...p}>
+    <path d="M4 7h16" /><path d="M10 11v6M14 11v6" /><path d="M6 7l1 13a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-13" /><path d="M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3" />
+  </svg>
+);
+
 // ---------- Add Subject ----------
 
 function AddSubjectView({ theme, onSave, onCancel }) {
@@ -36,10 +77,10 @@ function AddSubjectView({ theme, onSave, onCancel }) {
     <div className="mx-auto max-w-2xl p-4">
       <div className="mb-4 flex items-center justify-between">
         <button onClick={onCancel} className={`flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium ${theme.subtext}`}>← Back</button>
-        <span className={`text-sm font-semibold ${theme.text}`}>➕ Add Subject</span>
+        <span className={`flex items-center gap-1.5 text-sm font-semibold ${theme.text}`}><IconPlus className="h-4 w-4" /> Add Subject</span>
       </div>
 
-      <div className={`rounded-2xl border p-4 ${theme.card}`}>
+      <div className={`rounded-lg border p-4 ${theme.card}`}>
         <label className={`mb-1 block text-xs font-semibold uppercase tracking-wide ${theme.subtext}`}>Subject name</label>
         <input
           type="text"
@@ -47,7 +88,7 @@ function AddSubjectView({ theme, onSave, onCancel }) {
           onChange={(e) => setName(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && addToList()}
           placeholder="e.g. Science, Math, Anatomy…"
-          className="mb-4 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-navy-900 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:focus:ring-navy-500"
+          className="mb-4 w-full rounded-lg border border-parchment-200 bg-parchment-50 px-3 py-2.5 text-sm text-navy-900 focus:outline-none focus:ring-2 focus:ring-navy-900 dark:border-navy-700 dark:bg-navy-900 dark:text-parchment-50 dark:focus:ring-gold-500"
         />
 
         <label className={`mb-1 block text-xs font-semibold uppercase tracking-wide ${theme.subtext}`}>Icon</label>
@@ -64,9 +105,9 @@ function AddSubjectView({ theme, onSave, onCancel }) {
           type="button"
           onClick={addToList}
           disabled={!name.trim()}
-          className={`w-full rounded-xl px-4 py-2.5 text-sm font-semibold transition-colors disabled:opacity-40 ${theme.accentBtn}`}
+          className={`flex w-full items-center justify-center gap-1.5 rounded-xl px-4 py-2.5 text-sm font-semibold transition-colors disabled:opacity-40 ${theme.accentBtn}`}
         >
-          ➕ Add to list
+          <IconPlus className="h-4 w-4" /> Add to list
         </button>
       </div>
 
@@ -75,7 +116,7 @@ function AddSubjectView({ theme, onSave, onCancel }) {
           <p className={`mb-2 text-xs font-semibold uppercase tracking-wide ${theme.subtext}`}>Ready to save ({pending.length})</p>
           <div className="space-y-2">
             {pending.map((s, idx) => (
-              <div key={idx} className={`flex items-center gap-3 rounded-xl border p-3 ${theme.card}`}>
+              <div key={idx} className={`flex items-center gap-3 rounded-lg border p-3 ${theme.card}`}>
                 <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full text-lg" style={{ backgroundColor: s.color }}>{s.icon}</span>
                 <span className={`min-w-0 flex-1 truncate text-sm font-medium ${theme.text}`}>{s.name}</span>
                 <button onClick={() => removeFromList(idx)} aria-label="Remove" className="flex-shrink-0 rounded-full px-2 py-1 text-sm text-red-500 active:bg-red-50 dark:active:bg-red-950/30">✕</button>
@@ -85,9 +126,9 @@ function AddSubjectView({ theme, onSave, onCancel }) {
           <button
             type="button"
             onClick={saveAll}
-            className={`mt-3 w-full rounded-xl px-4 py-3 text-sm font-bold shadow-sm transition-colors ${theme.accentBtn}`}
+            className={`mt-3 flex w-full items-center justify-center gap-1.5 rounded-xl px-4 py-3 text-sm font-bold transition-colors ${theme.accentBtn}`}
           >
-            💾 Save All ({pending.length})
+            <IconSave className="h-4 w-4" /> Save All ({pending.length})
           </button>
         </div>
       )}
@@ -117,7 +158,7 @@ function CustomSubjectCard({ subject, expanded, onToggle, onPlay, onManage, onDe
   };
 
   return (
-    <div className={`overflow-hidden rounded-2xl border transition-all ${theme.card} ${expanded ? "col-span-2" : ""}`}>
+    <div className={`overflow-hidden rounded-lg border transition-all ${theme.card} ${expanded ? "col-span-2" : ""}`}>
       <button onClick={onToggle} className="flex w-full items-center gap-3 p-4 text-left active:opacity-80">
         <ProgressCircle progress={stats.percentAnswered} size={44} strokeWidth={5} color={subject.color} />
         <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full text-lg" style={{ backgroundColor: subject.color }}>{subject.icon}</span>
@@ -132,20 +173,20 @@ function CustomSubjectCard({ subject, expanded, onToggle, onPlay, onManage, onDe
           <button
             onClick={() => onPlay(subject)}
             disabled={stats.total === 0}
-            className={`w-full rounded-xl px-4 py-3 text-sm font-semibold transition-colors disabled:opacity-40 ${theme.accentBtn}`}
+            className={`flex w-full items-center justify-center gap-1.5 rounded-xl px-4 py-3 text-sm font-semibold transition-colors disabled:opacity-40 ${theme.accentBtn}`}
           >
-            {hasProgress ? "▶️ Continue" : "▶️ Start"}
+            <IconPlay className="h-4 w-4" /> {hasProgress ? "Continue" : "Start"}
           </button>
-          <button onClick={() => onManage(subject)} className={`w-full rounded-xl border px-4 py-2.5 text-sm font-medium transition-colors ${theme.outlineBtn}`}>
-            ✏️ Add / Edit / Delete Questions
+          <button onClick={() => onManage(subject)} className={`flex w-full items-center justify-center gap-1.5 rounded-xl border px-4 py-2.5 text-sm font-medium transition-colors ${theme.outlineBtn}`}>
+            <IconEdit className="h-4 w-4" /> Add / Edit / Delete Questions
           </button>
           {hasProgress && (
             <button onClick={handleRestart} className={`w-full rounded-xl border px-4 py-2 text-xs font-medium transition-colors ${theme.dangerBtn}`}>
               ↺ Reset progress
             </button>
           )}
-          <button onClick={handleDelete} className={`w-full rounded-xl border px-4 py-2 text-xs font-medium transition-colors ${theme.dangerBtn}`}>
-            🗑️ Delete Subject
+          <button onClick={handleDelete} className={`flex w-full items-center justify-center gap-1.5 rounded-xl border px-4 py-2 text-xs font-medium transition-colors ${theme.dangerBtn}`}>
+            <IconTrash className="h-3.5 w-3.5" /> Delete Subject
           </button>
         </div>
       )}
@@ -249,18 +290,18 @@ export default function CustomQuizHub({ onBack }) {
           <button onClick={onBack} className={`flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium ${theme.subtext}`}>← Back to Subjects</button>
         </div>
 
-        <h1 className={`mb-1 text-xl font-bold ${theme.text}`}>🧩 Your Own Quiz</h1>
+        <h1 className={`mb-1 flex items-center gap-1.5 text-xl font-bold ${theme.text}`}><IconLayers className="h-5 w-5" /> Your Own Quiz</h1>
         <p className={`mb-4 text-sm ${theme.subtext}`}>Create your own subjects and questions — always saved on your device.</p>
 
         <div className="mb-4 space-y-2">
           <OnOffToggle
-            label="🎲 Random Choices"
+            label={<span className="flex items-center gap-1.5"><IconDice className="h-4 w-4" /> Random Choices</span>}
             description="Randomizes the answer letters and question order every time you take the quiz"
             checked={settings.randomChoices}
             onChange={(v) => updateSetting("randomChoices", v)}
           />
           <OnOffToggle
-            label="⏱️ Timer"
+            label={<span className="flex items-center gap-1.5"><IconClock className="h-4 w-4" /> Timer</span>}
             description="Asks for a time limit (per question or total) before you start"
             checked={settings.timerEnabled}
             onChange={(v) => updateSetting("timerEnabled", v)}
@@ -274,11 +315,11 @@ export default function CustomQuizHub({ onBack }) {
         </div>
 
         {subjects.length === 0 ? (
-          <div className={`flex flex-col items-center gap-3 rounded-2xl border border-dashed p-8 text-center ${theme.card}`}>
-            <span className="text-4xl" aria-hidden>🧩</span>
+          <div className={`flex flex-col items-center gap-3 rounded-lg border border-dashed p-8 text-center ${theme.card}`}>
+            <IconLayers className={`h-9 w-9 ${theme.subtext}`} aria-hidden />
             <p className={`text-sm font-medium ${theme.text}`}>You don't have any subjects yet.</p>
-            <button onClick={() => setSubView("add-subject")} className={`mt-1 w-full rounded-xl px-4 py-3 text-sm font-semibold transition-colors ${theme.accentBtn}`}>
-              ➕ Add Subject
+            <button onClick={() => setSubView("add-subject")} className={`mt-1 flex w-full items-center justify-center gap-1.5 rounded-xl px-4 py-3 text-sm font-semibold transition-colors ${theme.accentBtn}`}>
+              <IconPlus className="h-4 w-4" /> Add Subject
             </button>
           </div>
         ) : (
@@ -301,9 +342,9 @@ export default function CustomQuizHub({ onBack }) {
             </div>
             <button
               onClick={() => setSubView("add-subject")}
-              className={`mt-3 w-full rounded-2xl border-2 border-dashed px-4 py-4 text-sm font-semibold transition-colors ${theme.outlineBtn}`}
+              className={`mt-3 flex w-full items-center justify-center gap-1.5 rounded-lg border-2 border-dashed px-4 py-4 text-sm font-semibold transition-colors ${theme.outlineBtn}`}
             >
-              ➕ Add Subject
+              <IconPlus className="h-4 w-4" /> Add Subject
             </button>
           </>
         )}
