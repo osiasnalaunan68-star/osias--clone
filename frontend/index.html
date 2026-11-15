@@ -36,6 +36,28 @@
   </head>
   <body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
     <div id="root"></div>
+    <script>
+      (function () {
+        var KEY = "cuble_boot_recover";
+        function recover() {
+          if (navigator.onLine === false) return;
+          try { if (sessionStorage.getItem(KEY)) return; sessionStorage.setItem(KEY, "1"); } catch (e) {}
+          var jobs = [];
+          try { if (navigator.serviceWorker) jobs.push(navigator.serviceWorker.getRegistrations().then(function (rs) { return Promise.all(rs.map(function (r) { return r.unregister(); })); })); } catch (e) {}
+          try { if (window.caches) jobs.push(caches.keys().then(function (ks) { return Promise.all(ks.map(function (k) { return caches.delete(k); })); })); } catch (e) {}
+          Promise.all(jobs).catch(function () {}).then(function () { location.reload(); });
+        }
+        window.addEventListener("error", function (e) {
+          var t = e.target;
+          if (t && (t.tagName === "SCRIPT" || t.tagName === "LINK")) recover();
+        }, true);
+        setTimeout(function () {
+          var r = document.getElementById("root");
+          if (r && !r.childElementCount) recover();
+          else { try { sessionStorage.removeItem(KEY); } catch (e) {} }
+        }, 12000);
+      })();
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

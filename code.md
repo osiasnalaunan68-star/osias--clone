@@ -131,7 +131,7 @@ export default {
 // - Firebase / Google APIs: not cached, browser handles them
 // - Everything else (index.html etc.): network-first with a 4s timeout
 // NOTE: bump CACHE_NAME whenever you change customs_law.db
-const CACHE_NAME = "cmta-app-cache-v4";
+const CACHE_NAME = "cmta-app-cache-v5";
 const NETWORK_TIMEOUT_MS = 4000;
 
 self.addEventListener("install", () => {
@@ -200,7 +200,7 @@ self.addEventListener("fetch", (event) => {
       const timeout = new Promise((resolve) => setTimeout(() => resolve(null), NETWORK_TIMEOUT_MS));
       try {
         const fresh = await Promise.race([network, timeout]);
-        if (fresh) return fresh;
+        if (fresh && (fresh.ok || request.mode !== "navigate")) return fresh;
       } catch (_) {}
       return cached;
     })()

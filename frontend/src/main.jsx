@@ -23,9 +23,11 @@ class ErrorBoundary extends React.Component {
   }
 }
 
+// unhandledrejection-safe: log only. Never replace the whole page for a
+// transient error (network drop, resume from background, etc).
 window.addEventListener("unhandledrejection", (e) => {
-  const msg = e.reason?.message || String(e.reason);
-  document.body.innerHTML = `<div style="padding:20px;background:#1e1e1e;color:#ff6b6b;font-family:monospace;white-space:pre-wrap;">⚠️ ${msg}</div>`;
+  console.warn("Unhandled rejection:", e.reason);
+  e.preventDefault();
 });
 
 // Seed CL / CDP / TL / PC default quizzes (from src/data/defaultQuizzes/*.json)

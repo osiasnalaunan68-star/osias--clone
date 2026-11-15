@@ -12,8 +12,25 @@ async function loadDatabase() {
   return new SQL.Database(new Uint8Array(arrayBuffer));
 }
 
+async function loadDatabaseWithRetry() {
+  let lastErr;
+  for (let i = 0; i < 3; i++) {
+    try { return await loadDatabase(); }
+    catch (err) {
+      lastErr = err;
+      await new Promise((r) => setTimeout(r, 700 * (i + 1)));
+    }
+  }
+  throw lastErr;
+}
+
 export function initDatabase() {
-  if (!dbPromise) dbPromise = loadDatabase();
+  if (!dbPromise) {
+    dbPromise = loadDatabaseWithRetry().catch((err) => {
+      dbPromise = null; // allow a fresh try next time instead of caching the failure
+      throw err;
+    });
+  }
   return dbPromise;
 }
 

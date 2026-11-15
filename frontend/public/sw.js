@@ -3,7 +3,7 @@
 // - Firebase / Google APIs: not cached, browser handles them
 // - Everything else (index.html etc.): network-first with a 4s timeout
 // NOTE: bump CACHE_NAME whenever you change customs_law.db
-const CACHE_NAME = "cmta-app-cache-v4";
+const CACHE_NAME = "cmta-app-cache-v6";
 const NETWORK_TIMEOUT_MS = 4000;
 
 self.addEventListener("install", () => {
@@ -19,9 +19,16 @@ self.addEventListener("activate", (event) => {
   self.clients.claim();
 });
 
+function isHtmlForAsset(request, response) {
+  try {
+    const ct = response.headers.get("content-type") || "";
+    return ct.includes("text/html") && /\.(js|css|wasm|db|png|woff2?)(\?|$)/.test(request.url);
+  } catch (_) { return false; }
+}
+
 function fetchAndCache(request, init) {
   return fetch(request, init).then((response) => {
-    if (response && (response.ok || response.type === "opaque")) {
+    if (response && (response.ok || response.type === "opaque") && !isHtmlForAsset(request, response)) {
       const copy = response.clone();
       caches.open(CACHE_NAME).then((cache) => cache.put(request, copy)).catch(() => {});
     }
@@ -72,7 +79,7 @@ self.addEventListener("fetch", (event) => {
       const timeout = new Promise((resolve) => setTimeout(() => resolve(null), NETWORK_TIMEOUT_MS));
       try {
         const fresh = await Promise.race([network, timeout]);
-        if (fresh) return fresh;
+        if (fresh && (fresh.ok || request.mode !== "navigate")) return fresh;
       } catch (_) {}
       return cached;
     })()
