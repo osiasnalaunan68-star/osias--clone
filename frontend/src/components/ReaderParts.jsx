@@ -5,6 +5,22 @@ import {
   getNotesForNode, addNote, updateNote, deleteNote,
 } from "../db";
 
+const IconTrash = (p) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" {...p}>
+    <path d="M4 7h16" /><path d="M10 11v6M14 11v6" /><path d="M6 7l1 13a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-13" /><path d="M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3" />
+  </svg>
+);
+const IconHighlighter = (p) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" {...p}>
+    <path d="M3 21v-3.5L14.5 6a2.1 2.1 0 0 1 3 3L6 21H3Z" /><path d="M13 7l4 4" />
+  </svg>
+);
+const IconNote = (p) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" {...p}>
+    <rect x="4" y="3" width="16" height="18" rx="2" /><path d="M8 8h8M8 12h8M8 16h5" />
+  </svg>
+);
+
 export function useNodeHighlights(nodeId, shouldLoad) {
   const [highlights, setHighlights] = useState([]);
   const [loaded, setLoaded] = useState(false);
@@ -75,15 +91,15 @@ export function applyHighlights(text, highlights) {
 
 export function SelectionToolbar({ x, y, kind, onSave, onCancel, onDelete }) {
   return (
-    <div style={{ position: "fixed", left: x, top: y, zIndex: 100 }} className="flex items-center gap-1 rounded-xl border border-slate-200 bg-white px-1.5 py-1.5 shadow-lg shadow-slate-900/10 dark:border-slate-600 dark:bg-slate-800 dark:shadow-black/40">
+    <div style={{ position: "fixed", left: x, top: y, zIndex: 100 }} className="flex items-center gap-1 rounded-xl border border-parchment-200 bg-parchment-50 px-1.5 py-1.5 shadow-lg shadow-slate-900/10 dark:border-navy-700 dark:bg-navy-800 dark:shadow-black/40">
       {kind === "existing" ? (
         <>
-          <button onClick={onDelete} className="flex items-center gap-1 rounded-lg px-3 py-2 min-h-[40px] text-sm font-medium text-red-600 active:bg-red-50 dark:text-red-400 dark:active:bg-red-950/40">🗑 Remove highlight</button>
+          <button onClick={onDelete} className="flex items-center gap-1.5 rounded-lg px-3 py-2 min-h-[40px] text-sm font-medium text-red-600 active:bg-red-50 dark:text-red-400 dark:active:bg-red-950/40"><IconTrash className="h-4 w-4" /> Remove highlight</button>
           <button onClick={onCancel} className="rounded-lg px-3 py-2 min-h-[40px] text-sm text-slate-500 active:bg-slate-100 dark:text-slate-400 dark:active:bg-slate-700">Close</button>
         </>
       ) : (
         <>
-          <button onClick={onSave} className="flex items-center gap-1 rounded-lg bg-amber-100 px-3 py-2 min-h-[40px] text-sm font-semibold text-amber-800 active:bg-amber-200 dark:bg-amber-900/50 dark:text-amber-300 dark:active:bg-amber-900/70">🖍 Highlight</button>
+          <button onClick={onSave} className="flex items-center gap-1.5 rounded-lg bg-amber-100 px-3 py-2 min-h-[40px] text-sm font-semibold text-amber-800 active:bg-amber-200 dark:bg-amber-900/50 dark:text-amber-300 dark:active:bg-amber-900/70"><IconHighlighter className="h-4 w-4" /> Highlight</button>
           <button onClick={onCancel} className="rounded-lg px-3 py-2 min-h-[40px] text-sm text-slate-500 active:bg-slate-100 dark:text-slate-400 dark:active:bg-slate-700">Cancel</button>
         </>
       )}
@@ -161,13 +177,13 @@ export function NotePanel({ notes, onCreate, onEdit, onDelete, onClose }) {
   return (
     <div onClick={(e) => e.stopPropagation()} className="mt-3 rounded-xl border border-sky-200 bg-sky-50/70 p-3 dark:border-sky-800 dark:bg-sky-950/30">
       <div className="mb-2 flex items-center justify-between">
-        <span className="text-xs font-semibold uppercase tracking-wide text-sky-700 dark:text-sky-400">📝 My Notes</span>
+        <span className="flex items-center gap-1 text-xs font-semibold uppercase tracking-wide text-sky-700 dark:text-sky-400"><IconNote className="h-3.5 w-3.5" /> My Notes</span>
         <button onClick={onClose} className="rounded-lg px-2 py-1 text-xs font-medium text-slate-500 active:bg-slate-200 dark:text-slate-400 dark:active:bg-slate-700">Close</button>
       </div>
       {notes.length > 0 && !adding && !editingId && (
         <div className="mb-2 space-y-2">
           {notes.map((n) => (
-            <div key={n.id} className="rounded-lg bg-white p-2.5 shadow-sm dark:bg-slate-800">
+            <div key={n.id} className="rounded-lg bg-parchment-50 p-2.5 dark:bg-navy-800">
               <p className="whitespace-pre-wrap text-sm text-slate-700 dark:text-slate-200">{n.content}</p>
               <div className="mt-1.5 flex items-center justify-between">
                 <span className="text-[11px] text-slate-400 dark:text-slate-500">
@@ -191,7 +207,7 @@ export function NotePanel({ notes, onCreate, onEdit, onDelete, onClose }) {
             placeholder="Write your own explanation or reminder…"
             rows={3}
             style={{ fontSize: "16px" }}
-            className="w-full rounded-lg border border-slate-200 bg-white p-2.5 text-sm text-slate-800 focus:outline-none dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100"
+            className="w-full rounded-lg border border-parchment-200 bg-parchment-50 p-2.5 text-sm text-navy-900 focus:outline-none dark:border-navy-700 dark:bg-navy-900 dark:text-parchment-50"
           />
           <div className="mt-2 flex justify-end gap-2">
             <button onClick={cancel} className="rounded-lg px-3 py-1.5 text-sm text-slate-500 active:bg-slate-200 dark:text-slate-400 dark:active:bg-slate-700">Cancel</button>

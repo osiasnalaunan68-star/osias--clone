@@ -5,6 +5,17 @@ import { isRaLevelUnlocked } from "../access";
 import { QuizLevelButton, QuizPlayView, resetLevelProgress } from "./QuizShared";
 import { QUIZ_LEVELS, getIssuanceQuiz, quizEntriesForLevel, issuanceQuizProgressKey } from "../issuanceQuizStore";
 
+const IconQuiz = (p) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" {...p}>
+    <rect x="3.5" y="3.5" width="17" height="17" rx="3" /><path d="M8 12l2.5 2.5L16 9" />
+  </svg>
+);
+const IconBack = (p) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}>
+    <path d="M15 6l-6 6 6 6" />
+  </svg>
+);
+
 function readProgress(key) {
   try { return JSON.parse(localStorage.getItem(`quiz_progress_${key}`) || "{}") || {}; } catch { return {}; }
 }
@@ -12,7 +23,7 @@ function readProgress(key) {
 // Quiz for ONE CMO / CAO: level picker -> play view.
 // Level 1 is free; Level 2 uses the same RA 10863 lock as the other quizzes.
 // Two ways to show it:
-//  - default: full-screen overlay (the 📝 Quiz button inside a CMO / CAO page)
+//  - default: full-screen overlay (the Quiz button inside a CMO / CAO page)
 //  - embedded: plain block, used inside Quiz/Exam -> CMO / CAO list (QuizHub already is a full-screen overlay)
 export default function IssuanceQuizModal({ issuance, onClose, embedded = false, backLabel }) {
   const { profile } = useAuth();
@@ -49,8 +60,8 @@ export default function IssuanceQuizModal({ issuance, onClose, embedded = false,
 
       {quiz && !level && (
         <div className="space-y-3">
-          <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-card dark:border-slate-700 dark:bg-slate-800">
-            <h2 className="text-lg font-bold text-navy-900 dark:text-slate-50">{issuance.label}</h2>
+          <div className="rounded-lg border border-parchment-200 bg-parchment-50 p-4 dark:border-navy-700 dark:bg-navy-800">
+            <h2 className="text-lg font-bold text-navy-900 dark:text-parchment-50">{issuance.label}</h2>
             {issuance.title && <p className="mt-0.5 text-sm text-slate-600 dark:text-slate-300">{issuance.title}</p>}
             <p className="mt-2 text-xs text-slate-400">
               {QUIZ_LEVELS.filter((l) => quiz[l.id].length > 0).map((l) => `${l.label.replace(/^\S+\s/, "")}: ${quiz[l.id].length} questions`).join(" · ")}
@@ -76,7 +87,7 @@ export default function IssuanceQuizModal({ issuance, onClose, embedded = false,
       <div>
         <button
           onClick={onClose}
-          className="mb-3 flex h-9 items-center gap-1 rounded-full px-3 text-sm font-medium text-slate-600 active:bg-slate-100 dark:text-slate-300 dark:active:bg-slate-800"
+          className="mb-3 flex h-9 items-center gap-1 rounded-full px-3 text-sm font-medium text-slate-600 active:bg-parchment dark:text-slate-300 dark:active:bg-navy-800"
         >
           {closeLabel}
         </button>
@@ -86,16 +97,16 @@ export default function IssuanceQuizModal({ issuance, onClose, embedded = false,
   }
 
   return createPortal(
-    <div className="fixed inset-0 z-[48] flex flex-col bg-slate-50 dark:bg-slate-950" style={{ height: "100dvh" }}>
-      <div className="safe-top sticky top-0 z-10 border-b border-slate-200 bg-white/95 backdrop-blur dark:border-slate-800 dark:bg-slate-900/95">
+    <div className="fixed inset-0 z-[48] flex flex-col bg-parchment dark:bg-navy-950" style={{ height: "100dvh" }}>
+      <div className="safe-top sticky top-0 z-10 border-b border-parchment-200 bg-parchment-50/95 backdrop-blur dark:border-navy-800 dark:bg-navy-900/95">
         <div className="flex items-center gap-2 px-3 py-2">
           <button
             onClick={onClose}
-            className="flex h-9 flex-shrink-0 items-center gap-1 rounded-full px-3 text-sm font-medium text-slate-600 active:bg-slate-100 dark:text-slate-300 dark:active:bg-slate-800"
+            className="flex h-9 flex-shrink-0 items-center gap-1 rounded-full px-3 text-sm font-medium text-slate-600 active:bg-parchment dark:text-slate-300 dark:active:bg-navy-800"
           >
-            <span aria-hidden>←</span> Back to {issuance.label}
+            <IconBack className="h-4 w-4" aria-hidden /> Back to {issuance.label}
           </button>
-          <span className="text-sm font-semibold text-slate-500 dark:text-slate-400">📝 Quiz</span>
+          <span className="flex items-center gap-1.5 text-sm font-semibold text-slate-500 dark:text-slate-400"><IconQuiz className="h-4 w-4" aria-hidden /> Quiz</span>
         </div>
       </div>
 
