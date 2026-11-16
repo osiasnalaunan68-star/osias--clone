@@ -20,6 +20,7 @@ import DevPanel from "./DevPanel";
 import QuizPage from "./QuizPage";
 import QuizHub from "./QuizHub";
 import AccountButton from "../components/AccountButton";
+import { HighlightableContent, useNodeHighlights, HighlightHint } from "../components/ReaderParts";
 // Admin Panel: nilo-load lang kapag admin ang nagbukas (mas magaan ang unang load ng ibang user).
 const AdminPanel = lazy(() =>
   import("./AdminPanel").catch(() => ({
@@ -96,26 +97,6 @@ const DARK_KEY = "customsLaw_darkMode";
 const HighlightUIContext = createContext(null);
 function useHighlightUI() { return useContext(HighlightUIContext); }
 
-function useNodeHighlights(nodeId, shouldLoad) {
-  const [highlights, setHighlights] = useState([]);
-  const [loaded, setLoaded] = useState(false);
-  useEffect(() => {
-    if (!shouldLoad || !nodeId || loaded) return;
-    const data = getHighlightsForNode(nodeId);
-    setHighlights(data);
-    setLoaded(true);
-  }, [shouldLoad, nodeId, loaded]);
-  const addHighlightLocal = useCallback(async (start, end) => {
-    const newHl = addHighlight(nodeId, start, end);
-    setHighlights(prev => [...prev, newHl]);
-  }, [nodeId]);
-  const removeHighlightLocal = useCallback(async (hlId) => {
-    removeHighlight(hlId);
-    setHighlights(prev => prev.filter(h => h.id !== hlId));
-  }, []);
-  return { highlights, addHighlight: addHighlightLocal, removeHighlight: removeHighlightLocal };
-}
-
 function useNodeNotes(nodeId, shouldLoad) {
   const [notes, setNotes] = useState([]);
   const [loaded, setLoaded] = useState(false);
@@ -148,89 +129,6 @@ function formatNoteDate(iso) {
   } catch {
     return "";
   }
-}
-
-function applyHighlights(text, highlights) {
-  if (!highlights || highlights.length === 0) return [{ text, highlightId: null }];
-  const sorted = [...highlights].sort((a, b) => a.start_offset - b.start_offset);
-  const segments = [];
-  let cursor = 0;
-  for (const hl of sorted) {
-    if (hl.start_offset > cursor) segments.push({ text: text.slice(cursor, hl.start_offset), highlightId: null });
-    segments.push({ text: text.slice(hl.start_offset, hl.end_offset), highlightId: hl.id, color: hl.color });
-    cursor = hl.end_offset;
-  }
-  if (cursor < text.length) segments.push({ text: text.slice(cursor), highlightId: null });
-  return segments;
-}
-
-function SelectionToolbar({ x, y, kind, onSave, onCancel, onDelete }) {
-  return (
-    <div style={{ position: "fixed", left: x, top: y, zIndex: 100 }} className="flex items-center gap-1 rounded-xl border border-parchment-200 bg-parchment-50 px-1.5 py-1.5 shadow-lg shadow-slate-900/10 dark:border-navy-700 dark:bg-navy-800 dark:shadow-black/40">
-      {kind === "existing" ? (
-        <>
-          <button onClick={onDelete} className="flex items-center gap-1.5 rounded-lg px-3 py-2 min-h-[40px] text-sm font-medium text-red-600 active:bg-red-50 dark:text-red-400 dark:active:bg-red-950/40"><NavIcon name="trash" className="h-4 w-4" /> Remove highlight</button>
-          <button onClick={onCancel} className="rounded-lg px-3 py-2 min-h-[40px] text-sm text-slate-500 active:bg-slate-100 dark:text-slate-400 dark:active:bg-slate-700">Close</button>
-        </>
-      ) : (
-        <>
-          <button onClick={onSave} className="flex items-center gap-1.5 rounded-lg bg-amber-100 px-3 py-2 min-h-[40px] text-sm font-semibold text-amber-800 active:bg-amber-200 dark:bg-amber-900/50 dark:text-amber-300 dark:active:bg-amber-900/70"><NavIcon name="highlighter" className="h-4 w-4" /> Highlight</button>
-          <button onClick={onCancel} className="rounded-lg px-3 py-2 min-h-[40px] text-sm text-slate-500 active:bg-slate-100 dark:text-slate-400 dark:active:bg-slate-700">Cancel</button>
-        </>
-      )}
-    </div>
-  );
-}
-
-function HighlightableContent({ nodeId, content, highlights, addHighlight, removeHighlight, className, armed }) {
-  const containerRef = useRef(null);
-  const [pendingSelection, setPendingSelection] = useState(null);
-  const [toolbar, setToolbar] = useState(null);
-  useEffect(() => {
-    if (!armed) { setPendingSelection(null); setToolbar((t) => (t && t.kind === "existing" ? t : null)); return; }
-    const handleSelectionChange = () => {
-      const sel = window.getSelection();
-      if (!sel || sel.isCollapsed || !containerRef.current || !containerRef.current.contains(sel.anchorNode)) {
-        setPendingSelection(null); setToolbar((t) => (t && t.kind === "existing" ? t : null)); return;
-      }
-      const range = sel.getRangeAt(0);
-      const preRange = document.createRange();
-      preRange.selectNodeContents(containerRef.current);
-      preRange.setEnd(range.startContainer, range.startOffset);
-      const start = preRange.toString().length;
-      const end = start + range.toString().length;
-      if (start >= end) return;
-      setPendingSelection({ start, end });
-      const rect = range.getBoundingClientRect();
-      setToolbar({ x: Math.max(8, Math.min(rect.left, window.innerWidth - 200)), y: rect.bottom + 8, kind: "selection" });
-    };
-    document.addEventListener("selectionchange", handleSelectionChange);
-    return () => document.removeEventListener("selectionchange", handleSelectionChange);
-  }, [armed]);
-  const handleMarkClick = (e, hlId) => {
-    e.stopPropagation();
-    const rect = e.target.getBoundingClientRect();
-    setToolbar({ x: Math.max(8, Math.min(rect.left, window.innerWidth - 200)), y: rect.bottom + 8, kind: "existing", hlId });
-    setPendingSelection(null);
-  };
-  const closeToolbar = () => { setToolbar(null); setPendingSelection(null); window.getSelection()?.removeAllRanges(); };
-  const confirmHighlight = async () => { if (!pendingSelection) return; await addHighlight(pendingSelection.start, pendingSelection.end); closeToolbar(); };
-  const confirmDelete = async () => { if (!toolbar?.hlId) return; await removeHighlight(toolbar.hlId); closeToolbar(); };
-  const segments = applyHighlights(content, highlights);
-  return (
-    <div className="relative">
-      <div ref={containerRef} className={`${className} ${armed ? "rounded-lg bg-amber-50/70 ring-1 ring-amber-300 dark:bg-amber-950/30 dark:ring-amber-700" : ""}`}>
-        {segments.map((seg, i) =>
-          seg.highlightId ? (
-            <mark key={i} style={{ backgroundColor: seg.color }} className="cursor-pointer rounded-sm px-0.5" onClick={(e) => handleMarkClick(e, seg.highlightId)}>{seg.text}</mark>
-          ) : (
-            <span key={i}>{seg.text}</span>
-          )
-        )}
-      </div>
-      {toolbar && <SelectionToolbar x={toolbar.x} y={toolbar.y} kind={toolbar.kind} onSave={confirmHighlight} onDelete={confirmDelete} onCancel={closeToolbar} />}
-    </div>
-  );
 }
 
 function NotePanel({ notes, onCreate, onEdit, onDelete, onClose }) {
@@ -440,7 +338,6 @@ function StudyNodeRenderer({ node, level = 0, expandedSet = new Set(), scrollToI
             <div onClick={(e) => e.stopPropagation()} className="mt-2">
               <HighlightableContent nodeId={node.id} content={node.content} highlights={highlights} addHighlight={addHighlight} removeHighlight={removeHighlight} armed={isHighlighting} className="select-text rounded-lg p-2 text-base leading-relaxed text-slate-700 dark:text-slate-300" />
               <div className="mt-1 flex flex-wrap items-center gap-2">
-                <button onClick={() => setActiveHighlightNodeId(isHighlighting ? null : node.id)} className={`flex min-h-[38px] items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm font-medium transition-colors ${isHighlighting ? "border-amber-400 bg-amber-100 text-amber-800 dark:border-amber-600 dark:bg-amber-900/40 dark:text-amber-300" : "border-emerald-200 bg-emerald-50 text-emerald-700 active:bg-emerald-100 dark:border-emerald-700 dark:bg-emerald-950/30 dark:text-emerald-400 dark:active:bg-emerald-950/50"}`}>{isHighlighting ? null : <NavIcon name="highlighter" className="h-4 w-4" />} {isHighlighting ? "Select text to highlight…" : "Highlight"}</button>
                 <button onClick={() => setNotesOpen((v) => !v)} className={`flex min-h-[38px] items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm font-medium transition-colors ${notesOpen ? "border-sky-400 bg-sky-100 text-sky-800 dark:border-sky-600 dark:bg-sky-900/40 dark:text-sky-300" : "border-sky-200 bg-sky-50 text-sky-700 active:bg-sky-100 dark:border-sky-700 dark:bg-sky-950/30 dark:text-sky-400 dark:active:bg-sky-950/50"}`}>
                   <NavIcon name="note" className="h-4 w-4" /> {notes.length > 0 ? `Notes (${notes.length})` : "Add Note"}
                 </button>
@@ -597,12 +494,6 @@ function ReadingProgressBar({ containerRef }) {
   );
 }
 
-function FilterChip({ label, value, active, onClick }) {
-  return (
-    <button onClick={() => onClick(value)} className={`min-h-[38px] rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors ${active ? "border-navy-900 bg-navy-900 text-white dark:border-navy-600 dark:bg-navy-700" : "border-parchment-200 bg-parchment-50 text-slate-600 active:bg-slate-100 dark:border-navy-700 dark:bg-navy-800 dark:text-slate-300 dark:active:bg-slate-700"}`}>{label}</button>
-  );
-}
-
 function SearchResultCard({ item, onClick }) {
   const buildPath = () => {
     const parts = [];
@@ -637,7 +528,6 @@ function SearchResultCard({ item, onClick }) {
 
 function SearchView({ onNavigateChapter }) {
   const [query, setQuery] = useState("");
-  const [filter, setFilter] = useState("all");
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -648,13 +538,13 @@ function SearchView({ onNavigateChapter }) {
     if (!query.trim()) return;
     setLoading(true); setError(null); setHasSearched(true);
     try {
-      const data = await search(query.trim(), filter);
+      const data = await search(query.trim(), "all");
       setResults(data);
     } catch (err) {
       setError(err.message);
       setResults([]);
     } finally { setLoading(false); }
-  }, [query, filter]);
+  }, [query]);
 
   const handleKeyDown = (e) => { if (e.key === "Enter") handleSearch(); };
   const clearQuery = () => { setQuery(""); setResults([]); setHasSearched(false); inputRef.current?.focus(); };
@@ -688,13 +578,7 @@ function SearchView({ onNavigateChapter }) {
           <input ref={inputRef} type="text" value={query} onChange={(e) => setQuery(e.target.value)} onKeyDown={handleKeyDown} placeholder='Search e.g. "Section 102" or "smuggling"' className="min-w-0 flex-1 border-none bg-transparent py-2 text-base text-navy-900 placeholder:text-slate-400 focus:outline-none dark:text-parchment-50 dark:placeholder:text-slate-500" style={{ fontSize: "16px" }} />
           {query && <button onClick={clearQuery} className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full text-slate-400 active:bg-slate-100 dark:text-slate-500 dark:active:bg-slate-700" aria-label="Clear search">✕</button>}
         </div>
-        <div className="mt-2 flex flex-wrap items-center justify-between gap-2 border-t border-slate-100 pt-2 dark:border-navy-700">
-          <div className="flex flex-wrap gap-1.5">
-            <FilterChip label="All" value="all" active={filter === "all"} onClick={setFilter} />
-            <FilterChip label="Title" value="title" active={filter === "title"} onClick={setFilter} />
-            <FilterChip label="Chapter" value="chapter" active={filter === "chapter"} onClick={setFilter} />
-            <FilterChip label="Section" value="section" active={filter === "section"} onClick={setFilter} />
-          </div>
+        <div className="mt-2 flex justify-end border-t border-slate-100 pt-2 dark:border-navy-700">
           <button onClick={handleSearch} disabled={loading || !query.trim()} className="min-h-[38px] flex-shrink-0 rounded-full bg-navy-900 px-5 py-1.5 text-sm font-semibold text-white shadow-sm active:bg-navy-800 disabled:opacity-40 dark:bg-navy-700 dark:active:bg-navy-600">{loading ? "Searching…" : "Search"}</button>
         </div>
       </div>
@@ -712,6 +596,105 @@ function SearchView({ onNavigateChapter }) {
   );
 }
 
+// ── CMTA search sa sidebar (keyword lang, kapareho ng CMO / CAO) ──────
+function SidebarSearch({ onOpen, children }) {
+  const [q, setQ] = useState("");
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const reqId = useRef(0);
+  const term = q.trim();
+
+  useEffect(() => {
+    if (!term) { reqId.current++; setResults([]); setLoading(false); setError(null); return; }
+    const id = ++reqId.current;
+    setLoading(true);
+    const t = setTimeout(async () => {
+      try {
+        const data = await search(term, "all");
+        if (id === reqId.current) { setResults(data); setError(null); }
+      } catch (err) {
+        if (id === reqId.current) { setResults([]); setError(err.message); }
+      } finally {
+        if (id === reqId.current) setLoading(false);
+      }
+    }, 300);
+    return () => clearTimeout(t);
+  }, [term]);
+
+  const pathOf = (item) => {
+    const p = [];
+    if (item.title_number) p.push("Title " + item.title_number);
+    if (item.chapter_number) p.push("Ch. " + item.chapter_number);
+    if (item.node_type === "section") p.push("Sec. " + item.node_number);
+    return p.join(" · ");
+  };
+
+  const openResult = async (item) => {
+    if (item.chapter_number) { onOpen(item.chapter_number, item.title_number, item.node_id); return; }
+    try {
+      const info = await getChapterForNode(item.node_id);
+      if (info) onOpen(info.chapter_number, info.title_number, item.node_id);
+      else alert("This item is not under any chapter. Please browse manually.");
+    } catch (e) {
+      console.error(e);
+      alert("Could not locate the chapter for this item.");
+    }
+  };
+
+  const ordered = [...results.filter((r) => r.exact_match), ...results.filter((r) => !r.exact_match)];
+
+  return (
+    <div className="p-3">
+      <div className="mb-3 flex items-center gap-2 rounded-xl border border-parchment-200 bg-parchment px-3 dark:border-navy-700 dark:bg-navy-800">
+        <span className="text-slate-400 dark:text-slate-500" aria-hidden><NavIcon name="search" className="h-4 w-4" /></span>
+        <input
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          placeholder="Search RA 10863 (section, keyword)"
+          style={{ fontSize: "16px" }}
+          className="min-w-0 flex-1 border-none bg-transparent py-2 text-navy-900 placeholder:text-slate-400 focus:outline-none dark:text-parchment-50"
+        />
+        {q && <button onClick={() => setQ("")} className="text-slate-400" aria-label="Clear">✕</button>}
+      </div>
+
+      {!term ? children : (
+        <div>
+          {loading && <p className="p-3 text-center text-sm text-slate-400">Searching…</p>}
+          {error && <p className="mb-2 rounded-lg bg-red-50 p-2 text-sm text-red-600 dark:bg-red-950/30 dark:text-red-400">{error}</p>}
+          {!loading && !error && ordered.length === 0 && (
+            <p className="p-3 text-center text-sm text-slate-400">No match for “{term}”.</p>
+          )}
+          {ordered.length > 0 && (
+            <ul className="space-y-0.5">
+              {ordered.map((item, idx) => (
+                <li key={"sr-" + idx}>
+                  <button
+                    onClick={() => openResult(item)}
+                    className="block min-h-[44px] w-full rounded-lg px-3 py-2 text-left text-sm text-slate-600 active:bg-parchment dark:text-slate-400 dark:active:bg-navy-800"
+                  >
+                    <span className="flex flex-wrap items-center gap-1.5">
+                      <span className="rounded-md bg-amber-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-800 dark:bg-amber-900/40 dark:text-amber-300">{item.node_type}</span>
+                      <span className="text-xs text-slate-400 dark:text-slate-500">{pathOf(item)}</span>
+                    </span>
+                    <span className="mt-0.5 block font-semibold text-navy-900 dark:text-parchment-50">{item.title || item.node_number}</span>
+                    {item.excerpt && (
+                      <span
+                        className="line-clamp-2 block text-xs text-slate-500 dark:text-slate-400"
+                        dangerouslySetInnerHTML={{ __html: item.excerpt.replace(/\[/g, "<mark>").replace(/\]/g, "</mark>") }}
+                      />
+                    )}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function DarkModeToggle({ enabled, onChange }) {
   return (
     <button type="button" role="switch" aria-checked={enabled} onClick={() => onChange(!enabled)} className={`relative inline-flex h-8 w-14 flex-shrink-0 items-center rounded-full transition-colors duration-300 ${enabled ? "bg-navy-700" : "bg-slate-300"}`}>
@@ -725,10 +708,10 @@ const TUTORIAL_STEPS = [
   { icon: "📚", title: "Browse the Law", body: "Tap the menu button (☰) to open the sidebar. Every Title, Chapter, and Section is organized in the correct legal order." },
   { icon: "📘", title: "Study Mode", body: "Expand one section at a time to focus on details. Use Expand All or Collapse All at the top to move through a whole chapter faster." },
   { icon: "📖", title: "Reading Mode", body: "A clean, book-style view for long reading sessions. Tap 🎯 Focus to hide the toolbar and read distraction-free." },
-  { icon: "🖍️", title: "Highlights", body: "Select any text to highlight it. Works in both Study and Reading mode, and is saved automatically — even offline." },
+  { icon: "🖍️", title: "Highlights", body: "Long-press any text, then tap Highlight. Works in both Study and Reading mode, and is saved automatically — even offline." },
   { icon: "📝", title: "Notes", body: "Tap \"Add Note\" under any section to write your own explanation. Edit or delete your notes anytime." },
   { icon: "🤖", title: "Ask AI", body: "Tap Ask AI under any section for an instant offline explanation from Osias 6.7 — or hand off to Meta AI, ChatGPT, or Gemini with one tap." },
-  { icon: "🔍", title: "Search", body: "Find anything instantly. Try a section number like \"102\", or a keyword like \"smuggling\"." },
+  { icon: "🔍", title: "Search", body: "Open the menu (☰) and use the search box at the top. Try a section number like \"102\", or a keyword like \"smuggling\"." },
   { icon: "⏱️", title: "Resume Reading", body: "Close the app anytime — a \"Continue where you left off\" card will bring you right back to your spot." },
   { icon: "⚙️", title: "Settings", body: "Switch Dark Mode on or off, and replay this tour anytime from the Settings screen." },
 ];
@@ -873,7 +856,6 @@ function BottomNav({ view, setView, showAdmin, showDev }) {
   const updateAvailable = useUpdateAvailable();
   const items = [
     { id: "browse", label: "Library", icon: "book" },
-    { id: "search", label: "Search", icon: "search" },
     { id: "quiz", label: "Quiz", icon: "quiz" },
     { id: "fees", label: "Fees", icon: "tag" },
     { id: "settings", label: "Settings", icon: "settings" },
@@ -1271,7 +1253,8 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
               </div>
             </div>
             {source === "cmta" ? (
-            <div className="p-3">
+            <SidebarSearch onOpen={loadChapter}>
+            <div>
               {error && <p className="mb-2 rounded-lg bg-red-50 p-2 text-sm text-red-600 dark:bg-red-950/30 dark:text-red-400">{error}</p>}
               {titles.map((titleGroup) => {
                 const key = titleGroup.title_number || "root";
@@ -1312,6 +1295,7 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
                 );
               })}
             </div>
+            </SidebarSearch>
             ) : (
               <IssuanceSidebar kind={source} selectedId={issuanceId} onSelect={(id) => openIssuance(source, id)} />
             )}
@@ -1394,6 +1378,7 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
                 )}
                 {chapterTree && mode === "study" && (
                   <div className="mx-auto max-w-3xl">
+                    <HighlightHint className="mb-3" />
                     {chapterTree.content && <p className="mb-4 rounded-xl bg-parchment-50 p-4 text-base text-slate-600 dark:bg-navy-900 dark:text-slate-300">{chapterTree.content}</p>}
                     <div className="mb-3 flex flex-wrap items-center justify-end gap-2">
                       <button onClick={expandAllStudy} className="flex h-9 items-center gap-1.5 rounded-full border border-parchment-200 bg-parchment-50 px-3 text-sm font-medium text-slate-600 active:bg-slate-100 dark:border-navy-700 dark:bg-navy-800 dark:text-slate-300 dark:active:bg-slate-700">
@@ -1408,6 +1393,7 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
                 )}
                 {chapterTree && mode === "reading" && (
                   <div className={`mx-auto transition-all duration-300 ${focusMode ? "max-w-[62ch]" : "max-w-[70ch]"}`}>
+                    <HighlightHint className="mb-3 font-sans" />
                     {chapterTree.content && <p className="mb-4 font-serif text-slate-700 dark:text-slate-300" style={{ fontSize: `${1.05 * fontScale}rem` }}>{chapterTree.content}</p>}
                     {chapterTree.children.map((section) => <ReadingNodeRenderer key={section.id} node={section} level={0} fontScale={fontScale} expandedSet={expandedNodeIds} scrollToId={scrollToNodeId} />)}
                   </div>

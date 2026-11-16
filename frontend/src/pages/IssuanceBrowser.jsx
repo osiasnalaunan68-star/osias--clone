@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { createPortal } from "react-dom";
 import { AI_APPS, copyPromptAndOpen } from "../aiContext";
-import { HighlightableContent, NotePanel, useNodeHighlights, useNodeNotes } from "../components/ReaderParts";
+import { HighlightableContent, HighlightHint, NotePanel, useNodeHighlights, useNodeNotes } from "../components/ReaderParts";
 import { IS_DEV } from "../env";
 import { ISSUANCE_KINDS, STATUS_META, listIssuances, getIssuance, resolveIssuanceRef } from "../issuancesStore";
 import { getIssuanceQuiz } from "../issuanceQuizStore";
@@ -258,13 +258,13 @@ function ParagraphBlock({ issuance, section, para, reading, fontScale, armedId, 
 
   return (
     <div className={`${INDENT_CLASS[para.indent] || "ml-0"} ${reading ? "my-4" : "rounded-lg bg-parchment/70 p-3 dark:bg-navy-800/40"}`}>
-      <div className="flex gap-2" style={{ fontSize: `${fontScale}rem` }}>
+      <div className="flex flex-col gap-1" style={{ fontSize: `${fontScale}rem` }}>
         {para.label && (
-          <span className={`flex-shrink-0 select-none font-semibold tabular-nums text-slate-500 dark:text-slate-400 ${reading ? "font-serif leading-loose" : "leading-relaxed"}`}>
+          <span className={`flex-shrink-0 select-none font-semibold tabular-nums text-slate-500 dark:text-slate-400 ${reading ? "font-serif leading-snug" : "leading-relaxed"}`}>
             {para.label}
           </span>
         )}
-        <div className="min-w-0 flex-1">
+        <div className="w-full min-w-0">
           <HighlightableContent
             nodeId={nodeId}
             content={para.text}
@@ -282,18 +282,6 @@ function ParagraphBlock({ issuance, section, para, reading, fontScale, armedId, 
       </div>
 
       <div className="mt-1.5 flex flex-wrap items-center gap-2 font-sans">
-        {!reading && (
-          <button
-            onClick={() => setArmedId(isArmed ? null : nodeId)}
-            className={`flex min-h-[36px] items-center gap-1.5 rounded-lg border px-3 py-1 text-sm font-medium transition-colors ${
-              isArmed
-                ? "border-amber-400 bg-amber-100 text-amber-800 dark:border-amber-600 dark:bg-amber-900/40 dark:text-amber-300"
-                : "border-emerald-200 bg-emerald-50 text-emerald-700 active:bg-emerald-100 dark:border-emerald-700 dark:bg-emerald-950/30 dark:text-emerald-400 dark:active:bg-emerald-950/50"
-            }`}
-          >
-            {isArmed ? null : <IconHighlighter className="h-4 w-4" />} {isArmed ? "Select text to highlight…" : "Highlight"}
-          </button>
-        )}
         {noteBtn}
         {aiBtn}
         {para.ai && <span className="text-[11px] font-medium text-verdigris dark:text-verdigris-300" title="AI explanation available">✓ explained</span>}
@@ -418,6 +406,8 @@ export function IssuanceReader({ kind, issuanceId, mode, fontScale, focusMode, o
           )}
         </div>
       </div>
+
+      <HighlightHint className="mb-3" />
 
       {issuance.sections.map((sec) => {
         const open = !sec.heading || !collapsed[sec.id];
