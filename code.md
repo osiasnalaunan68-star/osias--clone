@@ -1647,6 +1647,7 @@ function AccessGateInner() {
 ```
 // Shared reader pieces (highlight, notes). Copied from ChapterBrowser.jsx so the CMTA screen stays untouched.
 import { useState, useEffect, useCallback, useRef } from "react";
+import { createPortal } from "react-dom";
 import {
   addHighlight, removeHighlight, getHighlightsForNode,
   getNotesForNode, addNote, updateNote, deleteNote,
@@ -1671,19 +1672,44 @@ const IconNote = (p) => (
 export function useNodeHighlights(nodeId, shouldLoad) {
   const [highlights, setHighlights] = useState([]);
   const [loaded, setLoaded] = useState(false);
+  const hlRef = useRef([]);
+  hlRef.current = highlights;
   useEffect(() => {
     if (!shouldLoad || !nodeId || loaded) return;
     const data = getHighlightsForNode(nodeId);
+    hlRef.current = data;
     setHighlights(data);
     setLoaded(true);
   }, [shouldLoad, nodeId, loaded]);
+  // Kapag nag-overlap / magkadikit ang bagong highlight sa luma, pinagsasama (walang doble)
   const addHighlightLocal = useCallback(async (start, end) => {
-    const newHl = addHighlight(nodeId, start, end);
-    setHighlights(prev => [...prev, newHl]);
+    try {
+      let s = start, e = end;
+      const keep = [];
+      for (const h of hlRef.current) {
+        if (h.end_offset >= s && h.start_offset <= e) {
+          s = Math.min(s, h.start_offset);
+          e = Math.max(e, h.end_offset);
+          removeHighlight(h.id);
+        } else keep.push(h);
+      }
+      const newHl = addHighlight(nodeId, s, e);
+      const next = [...keep, newHl];
+      hlRef.current = next;
+      setHighlights(next);
+    } catch (err) {
+      console.error("Highlight failed:", err);
+    }
   }, [nodeId]);
   const removeHighlightLocal = useCallback(async (hlId) => {
-    removeHighlight(hlId);
-    setHighlights(prev => prev.filter(h => h.id !== hlId));
+    try {
+      removeHighlight(hlId);
+      const next = hlRef.current.filter((h) => h.id !== hlId);
+      hlRef.current = next;
+      setHighlights(next);
+    } catch (err) {
+      console.error("Remove highlight failed:", err);
+    }
   }, []);
   return { highlights, addHighlight: addHighlightLocal, removeHighlight: removeHighlightLocal };
 }
@@ -1728,79 +1754,180 @@ export function applyHighlights(text, highlights) {
   const segments = [];
   let cursor = 0;
   for (const hl of sorted) {
-    if (hl.start_offset > cursor) segments.push({ text: text.slice(cursor, hl.start_offset), highlightId: null });
-    segments.push({ text: text.slice(hl.start_offset, hl.end_offset), highlightId: hl.id, color: hl.color });
-    cursor = hl.end_offset;
+    const s = Math.max(hl.start_offset, cursor);
+    const e = Math.min(hl.end_offset, text.length);
+    if (e <= s) continue;
+    if (s > cursor) segments.push({ text: text.slice(cursor, s), highlightId: null });
+    segments.push({ text: text.slice(s, e), highlightId: hl.id, color: hl.color });
+    cursor = e;
   }
   if (cursor < text.length) segments.push({ text: text.slice(cursor), highlightId: null });
   return segments;
 }
 
-export function SelectionToolbar({ x, y, kind, onSave, onCancel, onDelete }) {
-  return (
-    <div style={{ position: "fixed", left: x, top: y, zIndex: 100 }} className="flex items-center gap-1 rounded-xl border border-parchment-200 bg-parchment-50 px-1.5 py-1.5 shadow-lg shadow-slate-900/10 dark:border-navy-700 dark:bg-navy-800 dark:shadow-black/40">
-      {kind === "existing" ? (
-        <>
-          <button onClick={onDelete} className="flex items-center gap-1.5 rounded-lg px-3 py-2 min-h-[40px] text-sm font-medium text-red-600 active:bg-red-50 dark:text-red-400 dark:active:bg-red-950/40"><IconTrash className="h-4 w-4" /> Remove highlight</button>
-          <button onClick={onCancel} className="rounded-lg px-3 py-2 min-h-[40px] text-sm text-slate-500 active:bg-slate-100 dark:text-slate-400 dark:active:bg-slate-700">Close</button>
-        </>
-      ) : (
-        <>
-          <button onClick={onSave} className="flex items-center gap-1.5 rounded-lg bg-amber-100 px-3 py-2 min-h-[40px] text-sm font-semibold text-amber-800 active:bg-amber-200 dark:bg-amber-900/50 dark:text-amber-300 dark:active:bg-amber-900/70"><IconHighlighter className="h-4 w-4" /> Highlight</button>
-          <button onClick={onCancel} className="rounded-lg px-3 py-2 min-h-[40px] text-sm text-slate-500 active:bg-slate-100 dark:text-slate-400 dark:active:bg-slate-700">Cancel</button>
-        </>
-      )}
-    </div>
+// ── Isang global na "selectionchange" listener para sa lahat ng paragraph ──
+const hlRegistry = new Map();
+let hlActive = null;
+let hlPressing = false;
+let hlPressTimer = null;
+let hlBarCloser = null;
+
+function hlHandleSelectionChange() {
+  if (hlPressing) return; // pinipindot ang Highlight bar — wag galawin ang selection
+  const sel = window.getSelection();
+  let target = null;
+  if (sel && sel.rangeCount > 0 && !sel.isCollapsed) {
+    const n = sel.anchorNode;
+    const startEl = n && (n.nodeType === 1 ? n : n.parentElement);
+    const host = startEl && startEl.closest ? startEl.closest("[data-hl-content]") : null;
+    if (host && hlRegistry.has(host)) target = host;
+  }
+  if (hlActive && hlActive !== target) {
+    const prev = hlRegistry.get(hlActive);
+    if (prev) prev(null);
+  }
+  hlActive = target;
+  if (target) hlRegistry.get(target)(sel.getRangeAt(0));
+}
+function hlRegister(el, cb) {
+  hlRegistry.set(el, cb);
+  if (hlRegistry.size === 1) document.addEventListener("selectionchange", hlHandleSelectionChange);
+  return () => {
+    hlRegistry.delete(el);
+    if (hlActive === el) hlActive = null;
+    if (hlRegistry.size === 0) document.removeEventListener("selectionchange", hlHandleSelectionChange);
+  };
+}
+function hlPress() {
+  hlPressing = true;
+  clearTimeout(hlPressTimer);
+  hlPressTimer = setTimeout(() => { hlPressing = false; }, 1500);
+}
+function hlRelease() {
+  hlPressing = false;
+  clearTimeout(hlPressTimer);
+}
+
+// Fixed bar sa baba (sa taas ng bottom nav) — hindi natatakpan ng native Copy/Share menu o ng selection handles
+function HighlightBar({ kind, onSave, onDelete, onCancel }) {
+  const run = (fn) => () => { hlRelease(); fn(); };
+  return createPortal(
+    <div
+      className="pointer-events-none fixed inset-x-0 z-[100] flex justify-center px-3"
+      style={{ bottom: "calc(env(safe-area-inset-bottom, 0px) + 76px)" }}
+      onClick={(e) => e.stopPropagation()}
+    >
+      <div
+        data-hl-bar="1"
+        onMouseDown={(e) => e.preventDefault()}
+        onPointerDown={hlPress}
+        onPointerUp={hlRelease}
+        onPointerCancel={hlRelease}
+        className="pointer-events-auto flex items-center gap-1 rounded-2xl border border-parchment-200 bg-parchment-50 p-1.5 shadow-xl shadow-slate-900/20 dark:border-navy-700 dark:bg-navy-800 dark:shadow-black/50"
+      >
+        {kind === "existing" ? (
+          <>
+            <button onClick={run(onDelete)} className="flex min-h-[44px] items-center gap-1.5 rounded-xl px-4 py-2 text-sm font-semibold text-red-600 active:bg-red-50 dark:text-red-400 dark:active:bg-red-950/40"><IconTrash className="h-4 w-4" /> Remove highlight</button>
+            <button onClick={run(onCancel)} className="min-h-[44px] rounded-xl px-4 py-2 text-sm text-slate-500 active:bg-slate-100 dark:text-slate-400 dark:active:bg-slate-700">Close</button>
+          </>
+        ) : (
+          <>
+            <button onClick={run(onSave)} className="flex min-h-[44px] items-center gap-1.5 rounded-xl bg-amber-100 px-4 py-2 text-sm font-semibold text-amber-800 active:bg-amber-200 dark:bg-amber-900/50 dark:text-amber-300 dark:active:bg-amber-900/70"><IconHighlighter className="h-4 w-4" /> Highlight</button>
+            <button onClick={run(onCancel)} className="min-h-[44px] rounded-xl px-4 py-2 text-sm text-slate-500 active:bg-slate-100 dark:text-slate-400 dark:active:bg-slate-700">Cancel</button>
+          </>
+        )}
+      </div>
+    </div>,
+    document.body
   );
 }
 
-export function HighlightableContent({ nodeId, content, highlights, addHighlight, removeHighlight, className, armed }) {
+// Tip na makikita ng users sa taas ng reader
+export function HighlightHint({ className = "" }) {
+  return (
+    <p className={"flex items-start gap-2 rounded-xl border border-amber-200 bg-amber-50/70 px-3 py-2 text-xs leading-snug text-amber-900 dark:border-amber-800/60 dark:bg-amber-950/30 dark:text-amber-200 " + className}>
+      <IconHighlighter className="mt-0.5 h-4 w-4 flex-shrink-0" />
+      <span><b>To highlight:</b> long-press the text, drag to select, then tap <b>Highlight</b>. Tap a highlighted text to remove it.</span>
+    </p>
+  );
+}
+
+export function HighlightableContent({ nodeId, content, highlights, addHighlight, removeHighlight, className }) {
   const containerRef = useRef(null);
-  const [pendingSelection, setPendingSelection] = useState(null);
-  const [toolbar, setToolbar] = useState(null);
+  const pendingRef = useRef(null);
+  const [bar, setBar] = useState(null);
+
+  const closeBar = useCallback(() => {
+    pendingRef.current = null;
+    setBar(null);
+    if (hlBarCloser === closeBar) hlBarCloser = null;
+  }, []);
+  const openBar = useCallback((b) => {
+    if (hlBarCloser && hlBarCloser !== closeBar) hlBarCloser();
+    hlBarCloser = closeBar;
+    setBar(b);
+  }, [closeBar]);
+
   useEffect(() => {
-    if (!armed) { setPendingSelection(null); setToolbar((t) => (t && t.kind === "existing" ? t : null)); return; }
-    const handleSelectionChange = () => {
-      const sel = window.getSelection();
-      if (!sel || sel.isCollapsed || !containerRef.current || !containerRef.current.contains(sel.anchorNode)) {
-        setPendingSelection(null); setToolbar((t) => (t && t.kind === "existing" ? t : null)); return;
+    const el = containerRef.current;
+    if (!el) return undefined;
+    const unregister = hlRegister(el, (range) => {
+      if (!range) {
+        pendingRef.current = null;
+        setBar((b) => (b && b.kind === "selection" ? null : b));
+        return;
       }
-      const range = sel.getRangeAt(0);
-      const preRange = document.createRange();
-      preRange.selectNodeContents(containerRef.current);
-      preRange.setEnd(range.startContainer, range.startOffset);
-      const start = preRange.toString().length;
-      const end = start + range.toString().length;
-      if (start >= end) return;
-      setPendingSelection({ start, end });
-      const rect = range.getBoundingClientRect();
-      setToolbar({ x: Math.max(8, Math.min(rect.left, window.innerWidth - 200)), y: rect.bottom + 8, kind: "selection" });
+      if (!range.toString().trim()) return;
+      const offsetOf = (node, off) => {
+        const r = document.createRange();
+        r.selectNodeContents(el);
+        r.setEnd(node, off);
+        return r.toString().length;
+      };
+      const total = el.textContent.length;
+      const start = el.contains(range.startContainer) ? offsetOf(range.startContainer, range.startOffset) : 0;
+      const end = el.contains(range.endContainer) ? offsetOf(range.endContainer, range.endOffset) : total;
+      if (end <= start) return;
+      pendingRef.current = { start, end };
+      openBar({ kind: "selection" });
+    });
+    return () => {
+      unregister();
+      if (hlBarCloser === closeBar) hlBarCloser = null;
     };
-    document.addEventListener("selectionchange", handleSelectionChange);
-    return () => document.removeEventListener("selectionchange", handleSelectionChange);
-  }, [armed]);
+  }, [openBar, closeBar]);
+
+  const clearSelection = () => { const s = window.getSelection(); if (s) s.removeAllRanges(); };
   const handleMarkClick = (e, hlId) => {
     e.stopPropagation();
-    const rect = e.target.getBoundingClientRect();
-    setToolbar({ x: Math.max(8, Math.min(rect.left, window.innerWidth - 200)), y: rect.bottom + 8, kind: "existing", hlId });
-    setPendingSelection(null);
+    pendingRef.current = null;
+    openBar({ kind: "existing", hlId });
   };
-  const closeToolbar = () => { setToolbar(null); setPendingSelection(null); window.getSelection()?.removeAllRanges(); };
-  const confirmHighlight = async () => { if (!pendingSelection) return; await addHighlight(pendingSelection.start, pendingSelection.end); closeToolbar(); };
-  const confirmDelete = async () => { if (!toolbar?.hlId) return; await removeHighlight(toolbar.hlId); closeToolbar(); };
+  const confirmHighlight = () => {
+    const p = pendingRef.current;
+    if (p) addHighlight(p.start, p.end);
+    closeBar();
+    clearSelection();
+  };
+  const confirmDelete = () => {
+    if (bar && bar.hlId != null) removeHighlight(bar.hlId);
+    closeBar();
+  };
+  const cancel = () => { closeBar(); clearSelection(); };
+
   const segments = applyHighlights(content, highlights);
   return (
     <div className="relative">
-      <div ref={containerRef} className={`${className} ${armed ? "rounded-lg bg-amber-50/70 ring-1 ring-amber-300 dark:bg-amber-950/30 dark:ring-amber-700" : ""}`}>
+      <div ref={containerRef} data-hl-content="1" className={className} style={{ WebkitUserSelect: "text", userSelect: "text" }}>
         {segments.map((seg, i) =>
           seg.highlightId ? (
-            <mark key={i} style={{ backgroundColor: seg.color }} className="cursor-pointer rounded-sm px-0.5" onClick={(e) => handleMarkClick(e, seg.highlightId)}>{seg.text}</mark>
+            <mark key={i} style={{ backgroundColor: seg.color, color: "#0f172a" }} className="cursor-pointer rounded-sm px-0.5" onClick={(e) => handleMarkClick(e, seg.highlightId)}>{seg.text}</mark>
           ) : (
             <span key={i}>{seg.text}</span>
           )
         )}
       </div>
-      {toolbar && <SelectionToolbar x={toolbar.x} y={toolbar.y} kind={toolbar.kind} onSave={confirmHighlight} onDelete={confirmDelete} onCancel={closeToolbar} />}
+      {bar && <HighlightBar kind={bar.kind} onSave={confirmHighlight} onDelete={confirmDelete} onCancel={cancel} />}
     </div>
   );
 }
@@ -3124,6 +3251,7 @@ import DevPanel from "./DevPanel";
 import QuizPage from "./QuizPage";
 import QuizHub from "./QuizHub";
 import AccountButton from "../components/AccountButton";
+import { HighlightableContent, useNodeHighlights, HighlightHint } from "../components/ReaderParts";
 // Admin Panel: nilo-load lang kapag admin ang nagbukas (mas magaan ang unang load ng ibang user).
 const AdminPanel = lazy(() =>
   import("./AdminPanel").catch(() => ({
@@ -3200,26 +3328,6 @@ const DARK_KEY = "customsLaw_darkMode";
 const HighlightUIContext = createContext(null);
 function useHighlightUI() { return useContext(HighlightUIContext); }
 
-function useNodeHighlights(nodeId, shouldLoad) {
-  const [highlights, setHighlights] = useState([]);
-  const [loaded, setLoaded] = useState(false);
-  useEffect(() => {
-    if (!shouldLoad || !nodeId || loaded) return;
-    const data = getHighlightsForNode(nodeId);
-    setHighlights(data);
-    setLoaded(true);
-  }, [shouldLoad, nodeId, loaded]);
-  const addHighlightLocal = useCallback(async (start, end) => {
-    const newHl = addHighlight(nodeId, start, end);
-    setHighlights(prev => [...prev, newHl]);
-  }, [nodeId]);
-  const removeHighlightLocal = useCallback(async (hlId) => {
-    removeHighlight(hlId);
-    setHighlights(prev => prev.filter(h => h.id !== hlId));
-  }, []);
-  return { highlights, addHighlight: addHighlightLocal, removeHighlight: removeHighlightLocal };
-}
-
 function useNodeNotes(nodeId, shouldLoad) {
   const [notes, setNotes] = useState([]);
   const [loaded, setLoaded] = useState(false);
@@ -3252,89 +3360,6 @@ function formatNoteDate(iso) {
   } catch {
     return "";
   }
-}
-
-function applyHighlights(text, highlights) {
-  if (!highlights || highlights.length === 0) return [{ text, highlightId: null }];
-  const sorted = [...highlights].sort((a, b) => a.start_offset - b.start_offset);
-  const segments = [];
-  let cursor = 0;
-  for (const hl of sorted) {
-    if (hl.start_offset > cursor) segments.push({ text: text.slice(cursor, hl.start_offset), highlightId: null });
-    segments.push({ text: text.slice(hl.start_offset, hl.end_offset), highlightId: hl.id, color: hl.color });
-    cursor = hl.end_offset;
-  }
-  if (cursor < text.length) segments.push({ text: text.slice(cursor), highlightId: null });
-  return segments;
-}
-
-function SelectionToolbar({ x, y, kind, onSave, onCancel, onDelete }) {
-  return (
-    <div style={{ position: "fixed", left: x, top: y, zIndex: 100 }} className="flex items-center gap-1 rounded-xl border border-parchment-200 bg-parchment-50 px-1.5 py-1.5 shadow-lg shadow-slate-900/10 dark:border-navy-700 dark:bg-navy-800 dark:shadow-black/40">
-      {kind === "existing" ? (
-        <>
-          <button onClick={onDelete} className="flex items-center gap-1.5 rounded-lg px-3 py-2 min-h-[40px] text-sm font-medium text-red-600 active:bg-red-50 dark:text-red-400 dark:active:bg-red-950/40"><NavIcon name="trash" className="h-4 w-4" /> Remove highlight</button>
-          <button onClick={onCancel} className="rounded-lg px-3 py-2 min-h-[40px] text-sm text-slate-500 active:bg-slate-100 dark:text-slate-400 dark:active:bg-slate-700">Close</button>
-        </>
-      ) : (
-        <>
-          <button onClick={onSave} className="flex items-center gap-1.5 rounded-lg bg-amber-100 px-3 py-2 min-h-[40px] text-sm font-semibold text-amber-800 active:bg-amber-200 dark:bg-amber-900/50 dark:text-amber-300 dark:active:bg-amber-900/70"><NavIcon name="highlighter" className="h-4 w-4" /> Highlight</button>
-          <button onClick={onCancel} className="rounded-lg px-3 py-2 min-h-[40px] text-sm text-slate-500 active:bg-slate-100 dark:text-slate-400 dark:active:bg-slate-700">Cancel</button>
-        </>
-      )}
-    </div>
-  );
-}
-
-function HighlightableContent({ nodeId, content, highlights, addHighlight, removeHighlight, className, armed }) {
-  const containerRef = useRef(null);
-  const [pendingSelection, setPendingSelection] = useState(null);
-  const [toolbar, setToolbar] = useState(null);
-  useEffect(() => {
-    if (!armed) { setPendingSelection(null); setToolbar((t) => (t && t.kind === "existing" ? t : null)); return; }
-    const handleSelectionChange = () => {
-      const sel = window.getSelection();
-      if (!sel || sel.isCollapsed || !containerRef.current || !containerRef.current.contains(sel.anchorNode)) {
-        setPendingSelection(null); setToolbar((t) => (t && t.kind === "existing" ? t : null)); return;
-      }
-      const range = sel.getRangeAt(0);
-      const preRange = document.createRange();
-      preRange.selectNodeContents(containerRef.current);
-      preRange.setEnd(range.startContainer, range.startOffset);
-      const start = preRange.toString().length;
-      const end = start + range.toString().length;
-      if (start >= end) return;
-      setPendingSelection({ start, end });
-      const rect = range.getBoundingClientRect();
-      setToolbar({ x: Math.max(8, Math.min(rect.left, window.innerWidth - 200)), y: rect.bottom + 8, kind: "selection" });
-    };
-    document.addEventListener("selectionchange", handleSelectionChange);
-    return () => document.removeEventListener("selectionchange", handleSelectionChange);
-  }, [armed]);
-  const handleMarkClick = (e, hlId) => {
-    e.stopPropagation();
-    const rect = e.target.getBoundingClientRect();
-    setToolbar({ x: Math.max(8, Math.min(rect.left, window.innerWidth - 200)), y: rect.bottom + 8, kind: "existing", hlId });
-    setPendingSelection(null);
-  };
-  const closeToolbar = () => { setToolbar(null); setPendingSelection(null); window.getSelection()?.removeAllRanges(); };
-  const confirmHighlight = async () => { if (!pendingSelection) return; await addHighlight(pendingSelection.start, pendingSelection.end); closeToolbar(); };
-  const confirmDelete = async () => { if (!toolbar?.hlId) return; await removeHighlight(toolbar.hlId); closeToolbar(); };
-  const segments = applyHighlights(content, highlights);
-  return (
-    <div className="relative">
-      <div ref={containerRef} className={`${className} ${armed ? "rounded-lg bg-amber-50/70 ring-1 ring-amber-300 dark:bg-amber-950/30 dark:ring-amber-700" : ""}`}>
-        {segments.map((seg, i) =>
-          seg.highlightId ? (
-            <mark key={i} style={{ backgroundColor: seg.color }} className="cursor-pointer rounded-sm px-0.5" onClick={(e) => handleMarkClick(e, seg.highlightId)}>{seg.text}</mark>
-          ) : (
-            <span key={i}>{seg.text}</span>
-          )
-        )}
-      </div>
-      {toolbar && <SelectionToolbar x={toolbar.x} y={toolbar.y} kind={toolbar.kind} onSave={confirmHighlight} onDelete={confirmDelete} onCancel={closeToolbar} />}
-    </div>
-  );
 }
 
 function NotePanel({ notes, onCreate, onEdit, onDelete, onClose }) {
@@ -3544,7 +3569,6 @@ function StudyNodeRenderer({ node, level = 0, expandedSet = new Set(), scrollToI
             <div onClick={(e) => e.stopPropagation()} className="mt-2">
               <HighlightableContent nodeId={node.id} content={node.content} highlights={highlights} addHighlight={addHighlight} removeHighlight={removeHighlight} armed={isHighlighting} className="select-text rounded-lg p-2 text-base leading-relaxed text-slate-700 dark:text-slate-300" />
               <div className="mt-1 flex flex-wrap items-center gap-2">
-                <button onClick={() => setActiveHighlightNodeId(isHighlighting ? null : node.id)} className={`flex min-h-[38px] items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm font-medium transition-colors ${isHighlighting ? "border-amber-400 bg-amber-100 text-amber-800 dark:border-amber-600 dark:bg-amber-900/40 dark:text-amber-300" : "border-emerald-200 bg-emerald-50 text-emerald-700 active:bg-emerald-100 dark:border-emerald-700 dark:bg-emerald-950/30 dark:text-emerald-400 dark:active:bg-emerald-950/50"}`}>{isHighlighting ? null : <NavIcon name="highlighter" className="h-4 w-4" />} {isHighlighting ? "Select text to highlight…" : "Highlight"}</button>
                 <button onClick={() => setNotesOpen((v) => !v)} className={`flex min-h-[38px] items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm font-medium transition-colors ${notesOpen ? "border-sky-400 bg-sky-100 text-sky-800 dark:border-sky-600 dark:bg-sky-900/40 dark:text-sky-300" : "border-sky-200 bg-sky-50 text-sky-700 active:bg-sky-100 dark:border-sky-700 dark:bg-sky-950/30 dark:text-sky-400 dark:active:bg-sky-950/50"}`}>
                   <NavIcon name="note" className="h-4 w-4" /> {notes.length > 0 ? `Notes (${notes.length})` : "Add Note"}
                 </button>
@@ -3701,12 +3725,6 @@ function ReadingProgressBar({ containerRef }) {
   );
 }
 
-function FilterChip({ label, value, active, onClick }) {
-  return (
-    <button onClick={() => onClick(value)} className={`min-h-[38px] rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors ${active ? "border-navy-900 bg-navy-900 text-white dark:border-navy-600 dark:bg-navy-700" : "border-parchment-200 bg-parchment-50 text-slate-600 active:bg-slate-100 dark:border-navy-700 dark:bg-navy-800 dark:text-slate-300 dark:active:bg-slate-700"}`}>{label}</button>
-  );
-}
-
 function SearchResultCard({ item, onClick }) {
   const buildPath = () => {
     const parts = [];
@@ -3741,7 +3759,6 @@ function SearchResultCard({ item, onClick }) {
 
 function SearchView({ onNavigateChapter }) {
   const [query, setQuery] = useState("");
-  const [filter, setFilter] = useState("all");
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -3752,13 +3769,13 @@ function SearchView({ onNavigateChapter }) {
     if (!query.trim()) return;
     setLoading(true); setError(null); setHasSearched(true);
     try {
-      const data = await search(query.trim(), filter);
+      const data = await search(query.trim(), "all");
       setResults(data);
     } catch (err) {
       setError(err.message);
       setResults([]);
     } finally { setLoading(false); }
-  }, [query, filter]);
+  }, [query]);
 
   const handleKeyDown = (e) => { if (e.key === "Enter") handleSearch(); };
   const clearQuery = () => { setQuery(""); setResults([]); setHasSearched(false); inputRef.current?.focus(); };
@@ -3792,13 +3809,7 @@ function SearchView({ onNavigateChapter }) {
           <input ref={inputRef} type="text" value={query} onChange={(e) => setQuery(e.target.value)} onKeyDown={handleKeyDown} placeholder='Search e.g. "Section 102" or "smuggling"' className="min-w-0 flex-1 border-none bg-transparent py-2 text-base text-navy-900 placeholder:text-slate-400 focus:outline-none dark:text-parchment-50 dark:placeholder:text-slate-500" style={{ fontSize: "16px" }} />
           {query && <button onClick={clearQuery} className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full text-slate-400 active:bg-slate-100 dark:text-slate-500 dark:active:bg-slate-700" aria-label="Clear search">✕</button>}
         </div>
-        <div className="mt-2 flex flex-wrap items-center justify-between gap-2 border-t border-slate-100 pt-2 dark:border-navy-700">
-          <div className="flex flex-wrap gap-1.5">
-            <FilterChip label="All" value="all" active={filter === "all"} onClick={setFilter} />
-            <FilterChip label="Title" value="title" active={filter === "title"} onClick={setFilter} />
-            <FilterChip label="Chapter" value="chapter" active={filter === "chapter"} onClick={setFilter} />
-            <FilterChip label="Section" value="section" active={filter === "section"} onClick={setFilter} />
-          </div>
+        <div className="mt-2 flex justify-end border-t border-slate-100 pt-2 dark:border-navy-700">
           <button onClick={handleSearch} disabled={loading || !query.trim()} className="min-h-[38px] flex-shrink-0 rounded-full bg-navy-900 px-5 py-1.5 text-sm font-semibold text-white shadow-sm active:bg-navy-800 disabled:opacity-40 dark:bg-navy-700 dark:active:bg-navy-600">{loading ? "Searching…" : "Search"}</button>
         </div>
       </div>
@@ -3816,6 +3827,105 @@ function SearchView({ onNavigateChapter }) {
   );
 }
 
+// ── CMTA search sa sidebar (keyword lang, kapareho ng CMO / CAO) ──────
+function SidebarSearch({ onOpen, children }) {
+  const [q, setQ] = useState("");
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const reqId = useRef(0);
+  const term = q.trim();
+
+  useEffect(() => {
+    if (!term) { reqId.current++; setResults([]); setLoading(false); setError(null); return; }
+    const id = ++reqId.current;
+    setLoading(true);
+    const t = setTimeout(async () => {
+      try {
+        const data = await search(term, "all");
+        if (id === reqId.current) { setResults(data); setError(null); }
+      } catch (err) {
+        if (id === reqId.current) { setResults([]); setError(err.message); }
+      } finally {
+        if (id === reqId.current) setLoading(false);
+      }
+    }, 300);
+    return () => clearTimeout(t);
+  }, [term]);
+
+  const pathOf = (item) => {
+    const p = [];
+    if (item.title_number) p.push("Title " + item.title_number);
+    if (item.chapter_number) p.push("Ch. " + item.chapter_number);
+    if (item.node_type === "section") p.push("Sec. " + item.node_number);
+    return p.join(" · ");
+  };
+
+  const openResult = async (item) => {
+    if (item.chapter_number) { onOpen(item.chapter_number, item.title_number, item.node_id); return; }
+    try {
+      const info = await getChapterForNode(item.node_id);
+      if (info) onOpen(info.chapter_number, info.title_number, item.node_id);
+      else alert("This item is not under any chapter. Please browse manually.");
+    } catch (e) {
+      console.error(e);
+      alert("Could not locate the chapter for this item.");
+    }
+  };
+
+  const ordered = [...results.filter((r) => r.exact_match), ...results.filter((r) => !r.exact_match)];
+
+  return (
+    <div className="p-3">
+      <div className="mb-3 flex items-center gap-2 rounded-xl border border-parchment-200 bg-parchment px-3 dark:border-navy-700 dark:bg-navy-800">
+        <span className="text-slate-400 dark:text-slate-500" aria-hidden><NavIcon name="search" className="h-4 w-4" /></span>
+        <input
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          placeholder="Search RA 10863 (section, keyword)"
+          style={{ fontSize: "16px" }}
+          className="min-w-0 flex-1 border-none bg-transparent py-2 text-navy-900 placeholder:text-slate-400 focus:outline-none dark:text-parchment-50"
+        />
+        {q && <button onClick={() => setQ("")} className="text-slate-400" aria-label="Clear">✕</button>}
+      </div>
+
+      {!term ? children : (
+        <div>
+          {loading && <p className="p-3 text-center text-sm text-slate-400">Searching…</p>}
+          {error && <p className="mb-2 rounded-lg bg-red-50 p-2 text-sm text-red-600 dark:bg-red-950/30 dark:text-red-400">{error}</p>}
+          {!loading && !error && ordered.length === 0 && (
+            <p className="p-3 text-center text-sm text-slate-400">No match for “{term}”.</p>
+          )}
+          {ordered.length > 0 && (
+            <ul className="space-y-0.5">
+              {ordered.map((item, idx) => (
+                <li key={"sr-" + idx}>
+                  <button
+                    onClick={() => openResult(item)}
+                    className="block min-h-[44px] w-full rounded-lg px-3 py-2 text-left text-sm text-slate-600 active:bg-parchment dark:text-slate-400 dark:active:bg-navy-800"
+                  >
+                    <span className="flex flex-wrap items-center gap-1.5">
+                      <span className="rounded-md bg-amber-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-800 dark:bg-amber-900/40 dark:text-amber-300">{item.node_type}</span>
+                      <span className="text-xs text-slate-400 dark:text-slate-500">{pathOf(item)}</span>
+                    </span>
+                    <span className="mt-0.5 block font-semibold text-navy-900 dark:text-parchment-50">{item.title || item.node_number}</span>
+                    {item.excerpt && (
+                      <span
+                        className="line-clamp-2 block text-xs text-slate-500 dark:text-slate-400"
+                        dangerouslySetInnerHTML={{ __html: item.excerpt.replace(/\[/g, "<mark>").replace(/\]/g, "</mark>") }}
+                      />
+                    )}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function DarkModeToggle({ enabled, onChange }) {
   return (
     <button type="button" role="switch" aria-checked={enabled} onClick={() => onChange(!enabled)} className={`relative inline-flex h-8 w-14 flex-shrink-0 items-center rounded-full transition-colors duration-300 ${enabled ? "bg-navy-700" : "bg-slate-300"}`}>
@@ -3829,10 +3939,10 @@ const TUTORIAL_STEPS = [
   { icon: "📚", title: "Browse the Law", body: "Tap the menu button (☰) to open the sidebar. Every Title, Chapter, and Section is organized in the correct legal order." },
   { icon: "📘", title: "Study Mode", body: "Expand one section at a time to focus on details. Use Expand All or Collapse All at the top to move through a whole chapter faster." },
   { icon: "📖", title: "Reading Mode", body: "A clean, book-style view for long reading sessions. Tap 🎯 Focus to hide the toolbar and read distraction-free." },
-  { icon: "🖍️", title: "Highlights", body: "Select any text to highlight it. Works in both Study and Reading mode, and is saved automatically — even offline." },
+  { icon: "🖍️", title: "Highlights", body: "Long-press any text, then tap Highlight. Works in both Study and Reading mode, and is saved automatically — even offline." },
   { icon: "📝", title: "Notes", body: "Tap \"Add Note\" under any section to write your own explanation. Edit or delete your notes anytime." },
   { icon: "🤖", title: "Ask AI", body: "Tap Ask AI under any section for an instant offline explanation from Osias 6.7 — or hand off to Meta AI, ChatGPT, or Gemini with one tap." },
-  { icon: "🔍", title: "Search", body: "Find anything instantly. Try a section number like \"102\", or a keyword like \"smuggling\"." },
+  { icon: "🔍", title: "Search", body: "Open the menu (☰) and use the search box at the top. Try a section number like \"102\", or a keyword like \"smuggling\"." },
   { icon: "⏱️", title: "Resume Reading", body: "Close the app anytime — a \"Continue where you left off\" card will bring you right back to your spot." },
   { icon: "⚙️", title: "Settings", body: "Switch Dark Mode on or off, and replay this tour anytime from the Settings screen." },
 ];
@@ -3977,7 +4087,6 @@ function BottomNav({ view, setView, showAdmin, showDev }) {
   const updateAvailable = useUpdateAvailable();
   const items = [
     { id: "browse", label: "Library", icon: "book" },
-    { id: "search", label: "Search", icon: "search" },
     { id: "quiz", label: "Quiz", icon: "quiz" },
     { id: "fees", label: "Fees", icon: "tag" },
     { id: "settings", label: "Settings", icon: "settings" },
@@ -4375,7 +4484,8 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
               </div>
             </div>
             {source === "cmta" ? (
-            <div className="p-3">
+            <SidebarSearch onOpen={loadChapter}>
+            <div>
               {error && <p className="mb-2 rounded-lg bg-red-50 p-2 text-sm text-red-600 dark:bg-red-950/30 dark:text-red-400">{error}</p>}
               {titles.map((titleGroup) => {
                 const key = titleGroup.title_number || "root";
@@ -4416,6 +4526,7 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
                 );
               })}
             </div>
+            </SidebarSearch>
             ) : (
               <IssuanceSidebar kind={source} selectedId={issuanceId} onSelect={(id) => openIssuance(source, id)} />
             )}
@@ -4498,6 +4609,7 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
                 )}
                 {chapterTree && mode === "study" && (
                   <div className="mx-auto max-w-3xl">
+                    <HighlightHint className="mb-3" />
                     {chapterTree.content && <p className="mb-4 rounded-xl bg-parchment-50 p-4 text-base text-slate-600 dark:bg-navy-900 dark:text-slate-300">{chapterTree.content}</p>}
                     <div className="mb-3 flex flex-wrap items-center justify-end gap-2">
                       <button onClick={expandAllStudy} className="flex h-9 items-center gap-1.5 rounded-full border border-parchment-200 bg-parchment-50 px-3 text-sm font-medium text-slate-600 active:bg-slate-100 dark:border-navy-700 dark:bg-navy-800 dark:text-slate-300 dark:active:bg-slate-700">
@@ -4512,6 +4624,7 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
                 )}
                 {chapterTree && mode === "reading" && (
                   <div className={`mx-auto transition-all duration-300 ${focusMode ? "max-w-[62ch]" : "max-w-[70ch]"}`}>
+                    <HighlightHint className="mb-3 font-sans" />
                     {chapterTree.content && <p className="mb-4 font-serif text-slate-700 dark:text-slate-300" style={{ fontSize: `${1.05 * fontScale}rem` }}>{chapterTree.content}</p>}
                     {chapterTree.children.map((section) => <ReadingNodeRenderer key={section.id} node={section} level={0} fontScale={fontScale} expandedSet={expandedNodeIds} scrollToId={scrollToNodeId} />)}
                   </div>
@@ -8012,7 +8125,7 @@ function isWrongAnswer(answer, correct) {
 import { useState, useEffect, useMemo } from "react";
 import { createPortal } from "react-dom";
 import { AI_APPS, copyPromptAndOpen } from "../aiContext";
-import { HighlightableContent, NotePanel, useNodeHighlights, useNodeNotes } from "../components/ReaderParts";
+import { HighlightableContent, HighlightHint, NotePanel, useNodeHighlights, useNodeNotes } from "../components/ReaderParts";
 import { IS_DEV } from "../env";
 import { ISSUANCE_KINDS, STATUS_META, listIssuances, getIssuance, resolveIssuanceRef } from "../issuancesStore";
 import { getIssuanceQuiz } from "../issuanceQuizStore";
@@ -8269,13 +8382,13 @@ function ParagraphBlock({ issuance, section, para, reading, fontScale, armedId, 
 
   return (
     <div className={`${INDENT_CLASS[para.indent] || "ml-0"} ${reading ? "my-4" : "rounded-lg bg-parchment/70 p-3 dark:bg-navy-800/40"}`}>
-      <div className="flex gap-2" style={{ fontSize: `${fontScale}rem` }}>
+      <div className="flex flex-col gap-1" style={{ fontSize: `${fontScale}rem` }}>
         {para.label && (
-          <span className={`flex-shrink-0 select-none font-semibold tabular-nums text-slate-500 dark:text-slate-400 ${reading ? "font-serif leading-loose" : "leading-relaxed"}`}>
+          <span className={`flex-shrink-0 select-none font-semibold tabular-nums text-slate-500 dark:text-slate-400 ${reading ? "font-serif leading-snug" : "leading-relaxed"}`}>
             {para.label}
           </span>
         )}
-        <div className="min-w-0 flex-1">
+        <div className="w-full min-w-0">
           <HighlightableContent
             nodeId={nodeId}
             content={para.text}
@@ -8293,18 +8406,6 @@ function ParagraphBlock({ issuance, section, para, reading, fontScale, armedId, 
       </div>
 
       <div className="mt-1.5 flex flex-wrap items-center gap-2 font-sans">
-        {!reading && (
-          <button
-            onClick={() => setArmedId(isArmed ? null : nodeId)}
-            className={`flex min-h-[36px] items-center gap-1.5 rounded-lg border px-3 py-1 text-sm font-medium transition-colors ${
-              isArmed
-                ? "border-amber-400 bg-amber-100 text-amber-800 dark:border-amber-600 dark:bg-amber-900/40 dark:text-amber-300"
-                : "border-emerald-200 bg-emerald-50 text-emerald-700 active:bg-emerald-100 dark:border-emerald-700 dark:bg-emerald-950/30 dark:text-emerald-400 dark:active:bg-emerald-950/50"
-            }`}
-          >
-            {isArmed ? null : <IconHighlighter className="h-4 w-4" />} {isArmed ? "Select text to highlight…" : "Highlight"}
-          </button>
-        )}
         {noteBtn}
         {aiBtn}
         {para.ai && <span className="text-[11px] font-medium text-verdigris dark:text-verdigris-300" title="AI explanation available">✓ explained</span>}
@@ -8429,6 +8530,8 @@ export function IssuanceReader({ kind, issuanceId, mode, fontScale, focusMode, o
           )}
         </div>
       </div>
+
+      <HighlightHint className="mb-3" />
 
       {issuance.sections.map((sec) => {
         const open = !sec.heading || !collapsed[sec.id];
@@ -12868,4 +12971,547 @@ patchWholeFile(
 
 console.log("");
 console.log("🎉 Tapos na. Susunod: cd frontend && npm run build   (o i-push na sa Codemagic)");```
+
+## File: ./patch-cmta-search.js
+```
+// patch-cmta-search.js
+// 1) CMTA search -> nasa sidebar (menu) na, keyword lang (walang filter), kapareho ng CMO/CAO
+// 2) CMO/CAO reader: nasa ibabaw na ang number/label, nasa ilalim ang text (malawak)
+const fs = require("fs");
+
+const CB = "frontend/src/pages/ChapterBrowser.jsx";
+const IB = "frontend/src/pages/IssuanceBrowser.jsx";
+
+function must(cond, msg) {
+  if (!cond) { console.error("\n❌ PATCH FAILED: " + msg + "\n   (walang binago sa file na ito)"); process.exit(1); }
+}
+function once(src, from, to, label) {
+  const parts = src.split(from);
+  must(parts.length === 2, label + " — anchor found " + (parts.length - 1) + "x (dapat 1x)");
+  return parts.join(to);
+}
+
+// ───────────────── ChapterBrowser.jsx ─────────────────
+let cb = fs.readFileSync(CB, "utf8");
+must(!cb.includes("function SidebarSearch"), "Na-patch na yata ang ChapterBrowser.jsx");
+
+const SIDEBAR_SEARCH = String.raw`// ── CMTA search sa sidebar (keyword lang, kapareho ng CMO / CAO) ──────
+function SidebarSearch({ onOpen, children }) {
+  const [q, setQ] = useState("");
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const reqId = useRef(0);
+  const term = q.trim();
+
+  useEffect(() => {
+    if (!term) { reqId.current++; setResults([]); setLoading(false); setError(null); return; }
+    const id = ++reqId.current;
+    setLoading(true);
+    const t = setTimeout(async () => {
+      try {
+        const data = await search(term, "all");
+        if (id === reqId.current) { setResults(data); setError(null); }
+      } catch (err) {
+        if (id === reqId.current) { setResults([]); setError(err.message); }
+      } finally {
+        if (id === reqId.current) setLoading(false);
+      }
+    }, 300);
+    return () => clearTimeout(t);
+  }, [term]);
+
+  const pathOf = (item) => {
+    const p = [];
+    if (item.title_number) p.push("Title " + item.title_number);
+    if (item.chapter_number) p.push("Ch. " + item.chapter_number);
+    if (item.node_type === "section") p.push("Sec. " + item.node_number);
+    return p.join(" · ");
+  };
+
+  const openResult = async (item) => {
+    if (item.chapter_number) { onOpen(item.chapter_number, item.title_number, item.node_id); return; }
+    try {
+      const info = await getChapterForNode(item.node_id);
+      if (info) onOpen(info.chapter_number, info.title_number, item.node_id);
+      else alert("This item is not under any chapter. Please browse manually.");
+    } catch (e) {
+      console.error(e);
+      alert("Could not locate the chapter for this item.");
+    }
+  };
+
+  const ordered = [...results.filter((r) => r.exact_match), ...results.filter((r) => !r.exact_match)];
+
+  return (
+    <div className="p-3">
+      <div className="mb-3 flex items-center gap-2 rounded-xl border border-parchment-200 bg-parchment px-3 dark:border-navy-700 dark:bg-navy-800">
+        <span className="text-slate-400 dark:text-slate-500" aria-hidden><NavIcon name="search" className="h-4 w-4" /></span>
+        <input
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          placeholder="Search RA 10863 (section, keyword)"
+          style={{ fontSize: "16px" }}
+          className="min-w-0 flex-1 border-none bg-transparent py-2 text-navy-900 placeholder:text-slate-400 focus:outline-none dark:text-parchment-50"
+        />
+        {q && <button onClick={() => setQ("")} className="text-slate-400" aria-label="Clear">✕</button>}
+      </div>
+
+      {!term ? children : (
+        <div>
+          {loading && <p className="p-3 text-center text-sm text-slate-400">Searching…</p>}
+          {error && <p className="mb-2 rounded-lg bg-red-50 p-2 text-sm text-red-600 dark:bg-red-950/30 dark:text-red-400">{error}</p>}
+          {!loading && !error && ordered.length === 0 && (
+            <p className="p-3 text-center text-sm text-slate-400">No match for “{term}”.</p>
+          )}
+          {ordered.length > 0 && (
+            <ul className="space-y-0.5">
+              {ordered.map((item, idx) => (
+                <li key={"sr-" + idx}>
+                  <button
+                    onClick={() => openResult(item)}
+                    className="block min-h-[44px] w-full rounded-lg px-3 py-2 text-left text-sm text-slate-600 active:bg-parchment dark:text-slate-400 dark:active:bg-navy-800"
+                  >
+                    <span className="flex flex-wrap items-center gap-1.5">
+                      <span className="rounded-md bg-amber-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-800 dark:bg-amber-900/40 dark:text-amber-300">{item.node_type}</span>
+                      <span className="text-xs text-slate-400 dark:text-slate-500">{pathOf(item)}</span>
+                    </span>
+                    <span className="mt-0.5 block font-semibold text-navy-900 dark:text-parchment-50">{item.title || item.node_number}</span>
+                    {item.excerpt && (
+                      <span
+                        className="line-clamp-2 block text-xs text-slate-500 dark:text-slate-400"
+                        dangerouslySetInnerHTML={{ __html: item.excerpt.replace(/\[/g, "<mark>").replace(/\]/g, "</mark>") }}
+                      />
+                    )}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+`;
+
+// 1. isingit ang SidebarSearch component
+cb = once(cb, "function DarkModeToggle(", SIDEBAR_SEARCH + "function DarkModeToggle(", "DarkModeToggle anchor");
+
+// 2. i-wrap ang CMTA chapter list ng SidebarSearch
+cb = once(
+  cb,
+  '{source === "cmta" ? (\n            <div className="p-3">\n',
+  '{source === "cmta" ? (\n            <SidebarSearch onOpen={loadChapter}>\n            <div>\n',
+  "sidebar open anchor"
+);
+cb = once(
+  cb,
+  "            </div>\n            ) : (\n              <IssuanceSidebar",
+  "            </div>\n            </SidebarSearch>\n            ) : (\n              <IssuanceSidebar",
+  "sidebar close anchor"
+);
+
+// 3. tanggalin ang "Search" tab sa bottom nav (nasa sidebar na)
+cb = once(cb, '    { id: "search", label: "Search", icon: "search" },\n', "", "bottom nav search item");
+
+// 4. tutorial text
+cb = once(cb, "Find anything instantly. Try a section number like", "Open the menu (☰) and use the search box at the top. Try a section number like", "tutorial text");
+
+// 5. SearchView (demo na lang gumagamit): tanggalin ang filter
+cb = once(cb, '  const [filter, setFilter] = useState("all");\n', "", "filter state");
+cb = once(cb, "await search(query.trim(), filter);", 'await search(query.trim(), "all");', "search call");
+cb = once(cb, "}, [query, filter]);", "}, [query]);", "search deps");
+const chipsRe = /\s*<div className="flex flex-wrap gap-1\.5">\s*(?:<FilterChip[^\n]*\n\s*)+<\/div>/;
+must(chipsRe.test(cb), "FilterChip block not found");
+cb = cb.replace(chipsRe, "");
+cb = once(
+  cb,
+  '<div className="mt-2 flex flex-wrap items-center justify-between gap-2 border-t border-slate-100 pt-2 dark:border-navy-700">',
+  '<div className="mt-2 flex justify-end border-t border-slate-100 pt-2 dark:border-navy-700">',
+  "search button row"
+);
+const fcRe = /function FilterChip[\s\S]*?\n}\n\n(?=function SearchResultCard)/;
+must(fcRe.test(cb), "FilterChip function not found");
+cb = cb.replace(fcRe, "");
+must(!cb.includes("FilterChip") && !cb.includes("setFilter"), "may natira pang filter code");
+
+fs.writeFileSync(CB, cb);
+console.log("✅ ChapterBrowser.jsx — search nasa sidebar na, walang filter");
+
+// ───────────────── IssuanceBrowser.jsx ─────────────────
+let ib = fs.readFileSync(IB, "utf8");
+must(!ib.includes('className="flex flex-col gap-1" style={{ fontSize'), "Na-patch na yata ang IssuanceBrowser.jsx");
+
+ib = once(ib, '<div className="flex gap-2" style={{ fontSize:', '<div className="flex flex-col gap-1" style={{ fontSize:', "paragraph row");
+ib = once(
+  ib,
+  '${reading ? "font-serif leading-loose" : "leading-relaxed"}',
+  '${reading ? "font-serif leading-snug" : "leading-relaxed"}',
+  "label line-height"
+);
+ib = once(
+  ib,
+  '        <div className="min-w-0 flex-1">\n          <HighlightableContent',
+  '        <div className="w-full min-w-0">\n          <HighlightableContent',
+  "text wrapper"
+);
+
+fs.writeFileSync(IB, ib);
+console.log("✅ IssuanceBrowser.jsx — nasa ilalim na ng number ang text (full width)");
+console.log("\nTapos na. Run: cd frontend && npm run dev (or build) para i-test.");
+```
+
+## File: ./patch-highlights.js
+```
+// patch-highlights.js
+// Ayusin ang Highlights (CMTA + CMO + CAO):
+//  - long-press the text -> lalabas ang "Highlight" bar sa baba (hindi na natatakpan ng native menu)
+//  - hindi na nawawala ang selection kapag pinindot ang button
+//  - hindi na kailangan ng "arm" button; laging gumagana
+//  - may Tip note na "Long-press the text to highlight"
+//  - overlap-safe (hindi na nadodoble ang text), readable ang kulay sa dark mode
+const fs = require("fs");
+
+const RP = "frontend/src/components/ReaderParts.jsx";
+const CB = "frontend/src/pages/ChapterBrowser.jsx";
+const IB = "frontend/src/pages/IssuanceBrowser.jsx";
+
+function must(cond, msg) {
+  if (!cond) { console.error("\n❌ PATCH FAILED: " + msg + "\n   (walang binago)"); process.exit(1); }
+}
+function once(src, from, to, label) {
+  const parts = src.split(from);
+  must(parts.length === 2, label + " — anchor found " + (parts.length - 1) + "x (dapat 1x)");
+  return parts.join(to);
+}
+function reOnce(src, re, to, label) {
+  must(re.test(src), label + " — hindi nahanap");
+  return src.replace(re, () => to);
+}
+
+// ───────────────── ReaderParts.jsx ─────────────────
+let rp = fs.readFileSync(RP, "utf8");
+must(!rp.includes("hlRegister"), "Na-patch na yata ang ReaderParts.jsx");
+
+rp = once(
+  rp,
+  'import { useState, useEffect, useCallback, useRef } from "react";\n',
+  'import { useState, useEffect, useCallback, useRef } from "react";\nimport { createPortal } from "react-dom";\n',
+  "react import"
+);
+
+const NEW_HOOK = String.raw`export function useNodeHighlights(nodeId, shouldLoad) {
+  const [highlights, setHighlights] = useState([]);
+  const [loaded, setLoaded] = useState(false);
+  const hlRef = useRef([]);
+  hlRef.current = highlights;
+  useEffect(() => {
+    if (!shouldLoad || !nodeId || loaded) return;
+    const data = getHighlightsForNode(nodeId);
+    hlRef.current = data;
+    setHighlights(data);
+    setLoaded(true);
+  }, [shouldLoad, nodeId, loaded]);
+  // Kapag nag-overlap / magkadikit ang bagong highlight sa luma, pinagsasama (walang doble)
+  const addHighlightLocal = useCallback(async (start, end) => {
+    try {
+      let s = start, e = end;
+      const keep = [];
+      for (const h of hlRef.current) {
+        if (h.end_offset >= s && h.start_offset <= e) {
+          s = Math.min(s, h.start_offset);
+          e = Math.max(e, h.end_offset);
+          removeHighlight(h.id);
+        } else keep.push(h);
+      }
+      const newHl = addHighlight(nodeId, s, e);
+      const next = [...keep, newHl];
+      hlRef.current = next;
+      setHighlights(next);
+    } catch (err) {
+      console.error("Highlight failed:", err);
+    }
+  }, [nodeId]);
+  const removeHighlightLocal = useCallback(async (hlId) => {
+    try {
+      removeHighlight(hlId);
+      const next = hlRef.current.filter((h) => h.id !== hlId);
+      hlRef.current = next;
+      setHighlights(next);
+    } catch (err) {
+      console.error("Remove highlight failed:", err);
+    }
+  }, []);
+  return { highlights, addHighlight: addHighlightLocal, removeHighlight: removeHighlightLocal };
+}
+
+`;
+rp = reOnce(rp, /export function useNodeHighlights[\s\S]*?\n}\n\n(?=export function useNodeNotes)/, NEW_HOOK, "useNodeHighlights");
+
+const NEW_CONTENT = String.raw`export function applyHighlights(text, highlights) {
+  if (!highlights || highlights.length === 0) return [{ text, highlightId: null }];
+  const sorted = [...highlights].sort((a, b) => a.start_offset - b.start_offset);
+  const segments = [];
+  let cursor = 0;
+  for (const hl of sorted) {
+    const s = Math.max(hl.start_offset, cursor);
+    const e = Math.min(hl.end_offset, text.length);
+    if (e <= s) continue;
+    if (s > cursor) segments.push({ text: text.slice(cursor, s), highlightId: null });
+    segments.push({ text: text.slice(s, e), highlightId: hl.id, color: hl.color });
+    cursor = e;
+  }
+  if (cursor < text.length) segments.push({ text: text.slice(cursor), highlightId: null });
+  return segments;
+}
+
+// ── Isang global na "selectionchange" listener para sa lahat ng paragraph ──
+const hlRegistry = new Map();
+let hlActive = null;
+let hlPressing = false;
+let hlPressTimer = null;
+let hlBarCloser = null;
+
+function hlHandleSelectionChange() {
+  if (hlPressing) return; // pinipindot ang Highlight bar — wag galawin ang selection
+  const sel = window.getSelection();
+  let target = null;
+  if (sel && sel.rangeCount > 0 && !sel.isCollapsed) {
+    const n = sel.anchorNode;
+    const startEl = n && (n.nodeType === 1 ? n : n.parentElement);
+    const host = startEl && startEl.closest ? startEl.closest("[data-hl-content]") : null;
+    if (host && hlRegistry.has(host)) target = host;
+  }
+  if (hlActive && hlActive !== target) {
+    const prev = hlRegistry.get(hlActive);
+    if (prev) prev(null);
+  }
+  hlActive = target;
+  if (target) hlRegistry.get(target)(sel.getRangeAt(0));
+}
+function hlRegister(el, cb) {
+  hlRegistry.set(el, cb);
+  if (hlRegistry.size === 1) document.addEventListener("selectionchange", hlHandleSelectionChange);
+  return () => {
+    hlRegistry.delete(el);
+    if (hlActive === el) hlActive = null;
+    if (hlRegistry.size === 0) document.removeEventListener("selectionchange", hlHandleSelectionChange);
+  };
+}
+function hlPress() {
+  hlPressing = true;
+  clearTimeout(hlPressTimer);
+  hlPressTimer = setTimeout(() => { hlPressing = false; }, 1500);
+}
+function hlRelease() {
+  hlPressing = false;
+  clearTimeout(hlPressTimer);
+}
+
+// Fixed bar sa baba (sa taas ng bottom nav) — hindi natatakpan ng native Copy/Share menu o ng selection handles
+function HighlightBar({ kind, onSave, onDelete, onCancel }) {
+  const run = (fn) => () => { hlRelease(); fn(); };
+  return createPortal(
+    <div
+      className="pointer-events-none fixed inset-x-0 z-[100] flex justify-center px-3"
+      style={{ bottom: "calc(env(safe-area-inset-bottom, 0px) + 76px)" }}
+      onClick={(e) => e.stopPropagation()}
+    >
+      <div
+        data-hl-bar="1"
+        onMouseDown={(e) => e.preventDefault()}
+        onPointerDown={hlPress}
+        onPointerUp={hlRelease}
+        onPointerCancel={hlRelease}
+        className="pointer-events-auto flex items-center gap-1 rounded-2xl border border-parchment-200 bg-parchment-50 p-1.5 shadow-xl shadow-slate-900/20 dark:border-navy-700 dark:bg-navy-800 dark:shadow-black/50"
+      >
+        {kind === "existing" ? (
+          <>
+            <button onClick={run(onDelete)} className="flex min-h-[44px] items-center gap-1.5 rounded-xl px-4 py-2 text-sm font-semibold text-red-600 active:bg-red-50 dark:text-red-400 dark:active:bg-red-950/40"><IconTrash className="h-4 w-4" /> Remove highlight</button>
+            <button onClick={run(onCancel)} className="min-h-[44px] rounded-xl px-4 py-2 text-sm text-slate-500 active:bg-slate-100 dark:text-slate-400 dark:active:bg-slate-700">Close</button>
+          </>
+        ) : (
+          <>
+            <button onClick={run(onSave)} className="flex min-h-[44px] items-center gap-1.5 rounded-xl bg-amber-100 px-4 py-2 text-sm font-semibold text-amber-800 active:bg-amber-200 dark:bg-amber-900/50 dark:text-amber-300 dark:active:bg-amber-900/70"><IconHighlighter className="h-4 w-4" /> Highlight</button>
+            <button onClick={run(onCancel)} className="min-h-[44px] rounded-xl px-4 py-2 text-sm text-slate-500 active:bg-slate-100 dark:text-slate-400 dark:active:bg-slate-700">Cancel</button>
+          </>
+        )}
+      </div>
+    </div>,
+    document.body
+  );
+}
+
+// Tip na makikita ng users sa taas ng reader
+export function HighlightHint({ className = "" }) {
+  return (
+    <p className={"flex items-start gap-2 rounded-xl border border-amber-200 bg-amber-50/70 px-3 py-2 text-xs leading-snug text-amber-900 dark:border-amber-800/60 dark:bg-amber-950/30 dark:text-amber-200 " + className}>
+      <IconHighlighter className="mt-0.5 h-4 w-4 flex-shrink-0" />
+      <span><b>To highlight:</b> long-press the text, drag to select, then tap <b>Highlight</b>. Tap a highlighted text to remove it.</span>
+    </p>
+  );
+}
+
+export function HighlightableContent({ nodeId, content, highlights, addHighlight, removeHighlight, className }) {
+  const containerRef = useRef(null);
+  const pendingRef = useRef(null);
+  const [bar, setBar] = useState(null);
+
+  const closeBar = useCallback(() => {
+    pendingRef.current = null;
+    setBar(null);
+    if (hlBarCloser === closeBar) hlBarCloser = null;
+  }, []);
+  const openBar = useCallback((b) => {
+    if (hlBarCloser && hlBarCloser !== closeBar) hlBarCloser();
+    hlBarCloser = closeBar;
+    setBar(b);
+  }, [closeBar]);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return undefined;
+    const unregister = hlRegister(el, (range) => {
+      if (!range) {
+        pendingRef.current = null;
+        setBar((b) => (b && b.kind === "selection" ? null : b));
+        return;
+      }
+      if (!range.toString().trim()) return;
+      const offsetOf = (node, off) => {
+        const r = document.createRange();
+        r.selectNodeContents(el);
+        r.setEnd(node, off);
+        return r.toString().length;
+      };
+      const total = el.textContent.length;
+      const start = el.contains(range.startContainer) ? offsetOf(range.startContainer, range.startOffset) : 0;
+      const end = el.contains(range.endContainer) ? offsetOf(range.endContainer, range.endOffset) : total;
+      if (end <= start) return;
+      pendingRef.current = { start, end };
+      openBar({ kind: "selection" });
+    });
+    return () => {
+      unregister();
+      if (hlBarCloser === closeBar) hlBarCloser = null;
+    };
+  }, [openBar, closeBar]);
+
+  const clearSelection = () => { const s = window.getSelection(); if (s) s.removeAllRanges(); };
+  const handleMarkClick = (e, hlId) => {
+    e.stopPropagation();
+    pendingRef.current = null;
+    openBar({ kind: "existing", hlId });
+  };
+  const confirmHighlight = () => {
+    const p = pendingRef.current;
+    if (p) addHighlight(p.start, p.end);
+    closeBar();
+    clearSelection();
+  };
+  const confirmDelete = () => {
+    if (bar && bar.hlId != null) removeHighlight(bar.hlId);
+    closeBar();
+  };
+  const cancel = () => { closeBar(); clearSelection(); };
+
+  const segments = applyHighlights(content, highlights);
+  return (
+    <div className="relative">
+      <div ref={containerRef} data-hl-content="1" className={className} style={{ WebkitUserSelect: "text", userSelect: "text" }}>
+        {segments.map((seg, i) =>
+          seg.highlightId ? (
+            <mark key={i} style={{ backgroundColor: seg.color, color: "#0f172a" }} className="cursor-pointer rounded-sm px-0.5" onClick={(e) => handleMarkClick(e, seg.highlightId)}>{seg.text}</mark>
+          ) : (
+            <span key={i}>{seg.text}</span>
+          )
+        )}
+      </div>
+      {bar && <HighlightBar kind={bar.kind} onSave={confirmHighlight} onDelete={confirmDelete} onCancel={cancel} />}
+    </div>
+  );
+}
+
+`;
+rp = reOnce(rp, /export function applyHighlights[\s\S]*?(?=export function NotePanel)/, NEW_CONTENT, "applyHighlights..HighlightableContent");
+fs.writeFileSync(RP, rp);
+console.log("✅ ReaderParts.jsx — bagong highlight engine");
+
+// ───────────────── ChapterBrowser.jsx (CMTA) ─────────────────
+let cb = fs.readFileSync(CB, "utf8");
+must(!cb.includes("HighlightHint"), "Na-patch na yata ang ChapterBrowser.jsx");
+
+// gamitin ang shared engine (isang fix lang para sa CMTA, CMO, CAO)
+cb = reOnce(cb, /function useNodeHighlights[\s\S]*?\n}\n\n(?=function useNodeNotes)/, "", "local useNodeHighlights");
+cb = reOnce(cb, /function applyHighlights[\s\S]*?(?=function NotePanel)/, "", "local HighlightableContent");
+cb = once(
+  cb,
+  'import AccountButton from "../components/AccountButton";\n',
+  'import AccountButton from "../components/AccountButton";\nimport { HighlightableContent, useNodeHighlights, HighlightHint } from "../components/ReaderParts";\n',
+  "import ReaderParts"
+);
+
+// tanggalin ang lumang "Highlight" arm button sa Study mode (laging gumagana na)
+cb = reOnce(
+  cb,
+  /\n\s*<button onClick=\{\(\) => setActiveHighlightNodeId\(isHighlighting \? null : node\.id\)\}[\s\S]*?<\/button>/,
+  "",
+  "study Highlight button"
+);
+
+// Tip note sa taas ng Study at Reading mode
+cb = once(
+  cb,
+  '<div className="mx-auto max-w-3xl">\n                    {chapterTree.content &&',
+  '<div className="mx-auto max-w-3xl">\n                    <HighlightHint className="mb-3" />\n                    {chapterTree.content &&',
+  "study hint"
+);
+cb = once(
+  cb,
+  '{chapterTree.content && <p className="mb-4 font-serif',
+  '<HighlightHint className="mb-3 font-sans" />\n                    {chapterTree.content && <p className="mb-4 font-serif',
+  "reading hint"
+);
+
+// tutorial text
+cb = once(
+  cb,
+  "Select any text to highlight it. Works in both Study and Reading mode",
+  "Long-press any text, then tap Highlight. Works in both Study and Reading mode",
+  "tutorial text"
+);
+
+must(!cb.includes("function HighlightableContent") && !cb.includes("function SelectionToolbar"), "may natira pang lumang highlight code");
+fs.writeFileSync(CB, cb);
+console.log("✅ ChapterBrowser.jsx — CMTA highlights");
+
+// ───────────────── IssuanceBrowser.jsx (CMO / CAO) ─────────────────
+let ib = fs.readFileSync(IB, "utf8");
+must(!ib.includes("HighlightHint"), "Na-patch na yata ang IssuanceBrowser.jsx");
+
+ib = once(
+  ib,
+  'import { HighlightableContent, NotePanel, useNodeHighlights, useNodeNotes } from "../components/ReaderParts";',
+  'import { HighlightableContent, HighlightHint, NotePanel, useNodeHighlights, useNodeNotes } from "../components/ReaderParts";',
+  "import"
+);
+ib = reOnce(
+  ib,
+  /\n\s*\{!reading && \(\n\s*<button\n\s*onClick=\{\(\) => setArmedId\(isArmed \? null : nodeId\)\}[\s\S]*?<\/button>\n\s*\)\}/,
+  "",
+  "CMO/CAO Highlight button"
+);
+ib = once(
+  ib,
+  "      {issuance.sections.map((sec) => {\n",
+  '      <HighlightHint className="mb-3" />\n\n      {issuance.sections.map((sec) => {\n',
+  "CMO/CAO hint"
+);
+
+fs.writeFileSync(IB, ib);
+console.log("✅ IssuanceBrowser.jsx — CMO/CAO highlights");
+console.log("\nTapos na. I-test: cd frontend && npm run dev");
+```
 

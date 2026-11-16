@@ -1,4 +1,5 @@
 import "./index.css";
+import "./fonts";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import AccessGate from "./components/AccessGate";
