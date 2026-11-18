@@ -56,3 +56,10 @@ if ("serviceWorker" in navigator) {
     });
   });
 }
+
+// Offline-ready: i-save ang CMTA data (customs_law.db + sql wasm) habang may internet.
+{
+  const warm = () => import("./db").then((m) => m.warmOfflineData()).catch(() => {});
+  window.addEventListener("load", () => setTimeout(warm, 2500));
+  window.addEventListener("online", () => setTimeout(warm, 1000));
+}

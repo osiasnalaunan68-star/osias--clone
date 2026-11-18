@@ -1,4 +1,8 @@
-// Detects when a newer build was deployed (compares __BUILD_ID__ with /version.json).
+// Detects when a newer build was deployed and applies it.
+// 1) version.json sa server (kailangan ng internet)
+// 2) ang service worker: kapag na-download na ang bagong version sa background,
+//    nagpapadala ito ng "SW_ACTIVATED" -> lalabas ang banner kahit OFFLINE na,
+//    at ang "Update now" ay reload na lang.
 import { useEffect, useState } from "react";
 import { isNativeApp } from "./pwaInstall";
 
@@ -8,6 +12,7 @@ export const BUILD_ID = typeof __BUILD_ID__ !== "undefined" ? __BUILD_ID__ : "de
 let remoteId = null;
 let lastCheck = 0;
 let inflight = null;
+let swReady = false;
 const subs = new Set();
 const notify = () => subs.forEach((f) => f());
 
@@ -25,7 +30,14 @@ async function fetchRemoteId() {
   }
 }
 
-// force = true ignores the 60-second throttle.
+function kickSwUpdate() {
+  try {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.getRegistration().then((r) => r && r.update()).catch(() => {});
+    }
+  } catch (_) {}
+}
+
 export function checkForUpdate(force) {
   if (import.meta.env.DEV || isNativeApp()) return Promise.resolve(false);
   if (inflight) return inflight;
@@ -33,34 +45,43 @@ export function checkForUpdate(force) {
   inflight = fetchRemoteId().then((id) => {
     lastCheck = Date.now();
     inflight = null;
-    if (id) { remoteId = id; notify(); }
+    if (id) {
+      remoteId = id;
+      notify();
+      if (id !== BUILD_ID) kickSwUpdate();
+    }
     return isUpdateAvailable();
   });
   return inflight;
 }
 
-// Removes the stale page files (index.html etc.) but keeps the big offline
-// files (/assets/, .wasm, .db, fonts), then reloads. Needs internet.
-export async function applyUpdate() {
-  if (typeof navigator !== "undefined" && navigator.onLine === false) return false;
-  try {
-    if ("caches" in window) {
-      const keys = await caches.keys();
-      for (const k of keys) {
-        const cache = await caches.open(k);
-        const reqs = await cache.keys();
-        await Promise.all(reqs.map((r) => {
-          const u = new URL(r.url);
-          const keep = u.origin !== location.origin || u.pathname.includes("/assets/") || /\.(wasm|db)$/.test(u.pathname);
-          return keep ? null : cache.delete(r);
-        }));
-      }
-    }
-  } catch (_) {}
+async function installLatest(timeoutMs) {
   try {
     const reg = "serviceWorker" in navigator ? await navigator.serviceWorker.getRegistration() : null;
-    if (reg) await reg.update();
-  } catch (_) {}
+    if (!reg) return true;
+    await reg.update();
+    const w = reg.installing || reg.waiting;
+    if (!w || w.state === "activated") return true;
+    return await new Promise((resolve) => {
+      const t = setTimeout(() => resolve(false), timeoutMs);
+      w.addEventListener("statechange", () => {
+        if (w.state === "activated") { clearTimeout(t); resolve(true); }
+        else if (w.state === "redundant") { clearTimeout(t); resolve(false); }
+      });
+    });
+  } catch (_) {
+    return false;
+  }
+}
+
+// Wala nang binubura na cache: kapag pumalya ang download (walang signal / load),
+// buo pa rin ang lumang version. Returns false kung hindi natuloy.
+export async function applyUpdate() {
+  if (!swReady) {
+    if (typeof navigator !== "undefined" && navigator.onLine === false) return false;
+    const ok = await installLatest(90000);
+    if (!ok) return false;
+  }
   location.reload();
   return true;
 }
@@ -76,7 +97,6 @@ export function useUpdateAvailable() {
   return isUpdateAvailable();
 }
 
-// Re-check when the app opens, comes back to the front, or gets internet again.
 if (typeof window !== "undefined") {
   const recheck = () => { if (document.visibilityState !== "hidden") checkForUpdate(false); };
   document.addEventListener("visibilitychange", recheck);
@@ -84,4 +104,16 @@ if (typeof window !== "undefined") {
   window.addEventListener("focus", recheck);
   setInterval(recheck, 30 * 60 * 1000);
   setTimeout(recheck, 1500);
+
+  if ("serviceWorker" in navigator && !import.meta.env.DEV && !isNativeApp()) {
+    const hadController = !!navigator.serviceWorker.controller;
+    navigator.serviceWorker.addEventListener("message", (e) => {
+      const d = e.data;
+      if (!hadController || !d || d.type !== "SW_ACTIVATED" || !d.build) return;
+      if (String(d.build) === BUILD_ID) return;
+      swReady = true;
+      remoteId = String(d.build);
+      notify();
+    });
+  }
 }

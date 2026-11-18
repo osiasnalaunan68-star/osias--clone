@@ -1,3 +1,4 @@
+import logoImg from "../assets/logo.png";
 import { useState, useEffect, useCallback, useRef, useMemo, useContext, createContext, lazy, Suspense } from "react";
 import { createPortal } from "react-dom";
 import {
@@ -825,6 +826,7 @@ const NAV_ICONS = {
   download: <><path d="M12 3v12" /><path d="m7 11 5 5 5-5" /><path d="M5 21h14" /></>,
   wrench: <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />,
   menu: <><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></>,
+  back: <path d="M15 6l-6 6 6 6" />,
   x: <><path d="M18 6 6 18" /><path d="m6 6 12 12" /></>,
   tag: <><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z" /><circle cx="7.5" cy="7.5" r="1" fill="currentColor" /></>,
   scale: <><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="2" fill="currentColor" /></>,
@@ -993,6 +995,18 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
   const mainRef = useRef(null);
   const pendingScrollRestore = useRef(null);
   const scrollSaveTimeout = useRef(null);
+
+  // Phone back button / swipe-back closes the full-screen menu instead of leaving the app.
+  useEffect(() => {
+    if (!sidebarOpen || view !== "browse" || window.innerWidth >= 768) return undefined;
+    window.history.pushState({ cuMenu: true }, "");
+    const onPop = () => setSidebarOpen(false);
+    window.addEventListener("popstate", onPop);
+    return () => {
+      window.removeEventListener("popstate", onPop);
+      if (window.history.state && window.history.state.cuMenu) window.history.back();
+    };
+  }, [sidebarOpen, view]);
 
   useEffect(() => { if (!demo) localStorage.setItem(SOURCE_KEY, source); }, [source, demo]);
   useEffect(() => { if (issuanceId) localStorage.setItem(ISSUANCE_KEY, issuanceId); }, [issuanceId]);
@@ -1239,14 +1253,13 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
   return (
     <HighlightUIContext.Provider value={highlightUIValue}>
       <div className="relative flex h-screen overflow-hidden bg-parchment dark:bg-navy-950" style={{ height: "100dvh" }}>
-        {sidebarOpen && view === "browse" && <div className="fixed inset-0 z-30 bg-slate-900/40 backdrop-blur-[1px] md:hidden" onClick={() => setSidebarOpen(false)} />}
         {view === "browse" && (
-          <aside className={`safe-top fixed inset-y-0 left-0 z-40 w-[85vw] max-w-[320px] overflow-y-auto overscroll-contain border-r border-parchment-200 bg-parchment-50 transition-transform duration-200 dark:border-navy-800 dark:bg-navy-900 md:static md:w-80 md:max-w-none md:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
-            <div className="sticky top-0 z-10 border-b border-slate-100 bg-parchment-50/95 px-5 py-4 backdrop-blur dark:border-navy-800 dark:bg-navy-900/95">
-              <div className="flex items-center gap-2"><span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-seal text-seal dark:border-gold-400 dark:text-gold-400" aria-hidden><NavIcon name="scale" className="h-4 w-4" /></span><div><h2 className="text-base font-bold leading-tight text-navy-900 dark:text-parchment-50">RA 10863</h2><p className="text-xs text-slate-400 dark:text-slate-500">Customs Modernization &amp; Tariff Act</p></div></div>
-              <div className="mt-3 flex rounded-xl bg-slate-100 p-1 text-sm dark:bg-navy-800" role="tablist" aria-label="Library">
+          <aside className={`safe-top fixed inset-0 z-40 w-full overflow-y-auto overscroll-contain border-r border-parchment-200 bg-parchment-50 transition-transform duration-200 dark:border-navy-800 dark:bg-navy-900 md:static md:w-80 md:max-w-none md:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
+            <div className="sticky top-0 z-10 border-b border-slate-100 bg-parchment-50/95 px-4 py-3 backdrop-blur dark:border-navy-800 dark:bg-navy-900/95">
+              <div className="flex items-center gap-2"><button onClick={() => setSidebarOpen(false)} aria-label="Back" className="flex h-9 flex-shrink-0 items-center gap-0.5 rounded-full pl-1 pr-3 text-sm font-semibold text-navy-900 active:bg-slate-100 dark:text-parchment-50 dark:active:bg-navy-800 md:hidden"><NavIcon name="back" className="h-5 w-5" />Back</button><img src={logoImg} alt="" aria-hidden="true" draggable={false} className="h-9 w-9 flex-shrink-0 rounded-full object-contain" /><div><h2 className="text-base font-bold leading-tight text-navy-900 dark:text-parchment-50">RA 10863</h2><p className="text-xs text-slate-400 dark:text-slate-500">Customs Modernization &amp; Tariff Act</p></div></div>
+              <div className="mt-2 flex flex-wrap gap-1.5" role="tablist" aria-label="Library">
                 {ISSUANCE_KINDS.map((k) => (
-                  <button key={k.id} role="tab" aria-selected={source === k.id} onClick={() => setSource(k.id)} className={`min-h-[36px] flex-1 rounded-lg px-2 py-1 font-semibold transition-colors ${source === k.id ? "bg-navy-900 text-white shadow-sm dark:bg-navy-700" : "text-slate-500 dark:text-slate-400"}`}>
+                  <button key={k.id} role="tab" aria-selected={source === k.id} onClick={() => setSource(k.id)} className={`min-h-[28px] rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors ${source === k.id ? "border-navy-900 bg-navy-900 text-white dark:border-navy-700 dark:bg-navy-700" : "border-parchment-200 bg-parchment text-slate-500 dark:border-navy-700 dark:bg-navy-800 dark:text-slate-400"}`}>
                     <span aria-hidden>{k.icon}</span> {k.label}
                   </button>
                 ))}
@@ -1310,7 +1323,7 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
                 </button>
               )}
               <div className="flex min-w-0 items-center gap-2 pl-1">
-                <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl bg-navy-900 text-white dark:bg-gold-500 dark:text-navy-950" aria-hidden><NavIcon name="scale" className="h-4 w-4" /></span>
+                <img src={logoImg} alt="" aria-hidden="true" draggable={false} className="h-8 w-8 flex-shrink-0 rounded-full object-contain" />
                 <span className="truncate text-[15px] font-bold tracking-tight text-navy-900 dark:text-parchment-50">{VIEW_TITLES[view] || "RA 10863"}</span>
               </div>
               <span className="flex-1" />

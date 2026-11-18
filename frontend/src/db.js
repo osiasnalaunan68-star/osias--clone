@@ -1,15 +1,23 @@
 import initSqlJs from 'sql.js/dist/sql-wasm.js';
 import sqlWasmUrl from 'sql.js/dist/sql-wasm.wasm?url';
+import { DB_URL, absUrl, loadOfflineBytes, ensureOffline } from './offlineData';
 
 let dbPromise = null;
 
+// Offline-first: galing sa saved copy kung meron; network lang kapag wala pa.
 async function loadDatabase() {
-  const SQL = await initSqlJs({ locateFile: () => sqlWasmUrl });
-  const url = `${import.meta.env.BASE_URL}customs_law.db`;
-  const response = await fetch(url);
-  if (!response.ok) throw new Error(`Could not load customs_law.db (HTTP ${response.status})`);
-  const arrayBuffer = await response.arrayBuffer();
-  return new SQL.Database(new Uint8Array(arrayBuffer));
+  const [wasmBinary, dbBytes] = await Promise.all([
+    loadOfflineBytes(absUrl(sqlWasmUrl), 'wasm'),
+    loadOfflineBytes(DB_URL, 'db'),
+  ]);
+  let SQL;
+  try {
+    SQL = await initSqlJs({ wasmBinary });
+  } catch (err) {
+    console.warn('sql.js wasmBinary init failed, fallback to locateFile:', err);
+    SQL = await initSqlJs({ locateFile: () => sqlWasmUrl });
+  }
+  return new SQL.Database(dbBytes);
 }
 
 async function loadDatabaseWithRetry() {
@@ -18,10 +26,16 @@ async function loadDatabaseWithRetry() {
     try { return await loadDatabase(); }
     catch (err) {
       lastErr = err;
+      if (err && err.offline) break; // offline at wala pang saved copy: huwag nang mag-retry
       await new Promise((r) => setTimeout(r, 700 * (i + 1)));
     }
   }
   throw lastErr;
+}
+
+// Tinatawag ng main.jsx habang idle: dina-download at sine-save ang CMTA data.
+export function warmOfflineData() {
+  return ensureOffline([[absUrl(sqlWasmUrl), 'wasm'], [DB_URL, 'db']]);
 }
 
 export function initDatabase() {

@@ -1,11 +1,22 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import crypto from 'crypto';
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+const HERE = path.dirname(fileURLToPath(import.meta.url));
 
 // Unique ID per build. The app compares its own ID with /version.json
 // on the server to know if a newer version was deployed.
 const BUILD_ID = String(Date.now());
+
+// Hash ng laman ng public/customs_law.db. Nagbabago lang kapag nagbago ang DB,
+// kaya awtomatikong nare-refresh ang offline copy (walang manual na bump).
+const DB_FILE = path.join(HERE, 'public', 'customs_law.db');
+const DB_HASH = fs.existsSync(DB_FILE)
+  ? crypto.createHash('sha1').update(fs.readFileSync(DB_FILE)).digest('hex').slice(0, 10)
+  : 'nodb';
 
 function emitVersionFile() {
   return {
@@ -17,7 +28,7 @@ function emitVersionFile() {
 }
 
 // Gumagawa ng precache.json (listahan ng LAHAT ng files sa build) at nilalagay ang
-// build id sa sw.js, para laging na-iinstall ulit ang service worker kada deploy.
+// build id at db hash sa sw.js, para laging na-iinstall ulit ang service worker kada deploy.
 function precachePlugin() {
   let outDir;
   return {
@@ -37,7 +48,10 @@ function precachePlugin() {
       fs.writeFileSync(path.join(outDir, 'precache.json'), JSON.stringify({ id: BUILD_ID, files: ['./', ...files] }));
       const swPath = path.join(outDir, 'sw.js');
       if (fs.existsSync(swPath)) {
-        fs.writeFileSync(swPath, fs.readFileSync(swPath, 'utf8').replace(/__BUILD_ID__/g, BUILD_ID));
+        fs.writeFileSync(
+          swPath,
+          fs.readFileSync(swPath, 'utf8').replace(/__BUILD_ID__/g, BUILD_ID).replace(/__DB_HASH__/g, DB_HASH)
+        );
       }
     },
   };
@@ -45,7 +59,7 @@ function precachePlugin() {
 
 export default defineConfig({
   base: './',
-  define: { __BUILD_ID__: JSON.stringify(BUILD_ID) },
+  define: { __BUILD_ID__: JSON.stringify(BUILD_ID), __DB_HASH__: JSON.stringify(DB_HASH) },
   plugins: [react(), emitVersionFile(), precachePlugin()],
   build: {
     outDir: '../docs',

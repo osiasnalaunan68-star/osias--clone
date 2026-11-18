@@ -1,3 +1,4 @@
+import logoImg from "../assets/logo.png";
 import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import { useAuth } from "../authContext";
 import { TRIAL_DAYS, DAY_MS, formatTimeLeft, formatDateShort, toMs } from "../access";
@@ -50,7 +51,7 @@ const STEPS = [
 function Splash({ text }) {
   return (
     <div className="safe-top flex min-h-[100dvh] flex-col items-center justify-center gap-4 bg-parchment px-6 text-center dark:bg-navy-950">
-      <span className="flex h-12 w-12 items-center justify-center rounded-full border border-seal text-seal dark:border-gold-400 dark:text-gold-400" aria-hidden><StepIcon name="scale" className="h-6 w-6" /></span>
+      <img src={logoImg} alt="Customs Tech" draggable={false} className="h-20 w-20 rounded-full object-contain" />
       <div
         className="h-9 w-9 animate-spin rounded-full border-4 border-parchment-200 border-t-navy-900 dark:border-navy-700 dark:border-t-gold-400"
         role="status"
@@ -59,7 +60,9 @@ function Splash({ text }) {
       <p className="text-sm font-medium text-slate-600 dark:text-slate-300">{text}</p>
       <p className="flex items-start gap-1.5 max-w-xs rounded-xl bg-parchment-50/80 px-4 py-3 text-left text-xs leading-relaxed text-slate-500 shadow-sm dark:bg-navy-900/70 dark:text-slate-400">
         <StepIcon name="info" className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-seal dark:text-gold-400" />
-        Tip: If loading takes too long, turn Airplane Mode on, then off, and reopen the app for a faster reload.
+        <span>
+          <span className="font-semibold">Tip:</span> If loading is slow, turn Airplane Mode on and then off again, without leaving the app. This refreshes your connection so the app loads faster.
+        </span>
       </p>
     </div>
   );

@@ -20,7 +20,11 @@ const SUBJECT_LABELS = {
 
 // Subjects that are temporarily closed while being fixed.
 // To re-open a subject later, just delete its line here.
-const DISABLED_SUBJECTS = {};
+const DISABLED_SUBJECTS = {
+  tl: { title: "Under maintenance", message: "This subject is under maintenance. We are currently preparing new practice questions based directly on the 2025–2026 Table of Specifications (TOS), so your review can focus on the topics most likely to be covered in the exam. Please check back soon." },
+  cdp: { title: "Under maintenance", message: "This subject is under maintenance. We are currently preparing new practice questions based directly on the 2025–2026 Table of Specifications (TOS), so your review can focus on the topics most likely to be covered in the exam. Please check back soon." },
+  pc: { title: "Under maintenance", message: "This subject is under maintenance. We are currently preparing new practice questions based directly on the 2025–2026 Table of Specifications (TOS), so your review can focus on the topics most likely to be covered in the exam. Please check back soon." },
+};
 
 const IconWrench = (p) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" {...p}>
