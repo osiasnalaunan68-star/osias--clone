@@ -1322,10 +1322,11 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
                   <NavIcon name={sidebarOpen ? "x" : "menu"} className="h-5 w-5" />
                 </button>
               )}
-              <div className="flex min-w-0 items-center gap-2 pl-1">
-                <img src={logoImg} alt="" aria-hidden="true" draggable={false} className="h-8 w-8 flex-shrink-0 rounded-full object-contain" />
+              {view !== "browse" && (
+                <div className="flex min-w-0 items-center gap-2 pl-1">
                 <span className="truncate text-[15px] font-bold tracking-tight text-navy-900 dark:text-parchment-50">{VIEW_TITLES[view] || "RA 10863"}</span>
-              </div>
+                </div>
+              )}
               <span className="flex-1" />
               <AccountButton />
               {view === "browse" && <ModeToggle mode={mode} setMode={setMode} />}
