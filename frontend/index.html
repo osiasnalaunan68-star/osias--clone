@@ -36,13 +36,24 @@
     <script>
       (function () {
         var KEY = "cuble_boot_recover";
+        // Binubura lang ang app cache (cmta-build-*) at ang service worker.
+        // HINDI binubura ang cmta-data-v1 (customs_law.db) kaya buo pa rin ang offline data.
+        function reset() {
+          var jobs = [];
+          try { if (navigator.serviceWorker) jobs.push(navigator.serviceWorker.getRegistrations().then(function (rs) { return Promise.all(rs.map(function (r) { return r.unregister(); })); })); } catch (e) {}
+          try { if (window.caches) jobs.push(caches.keys().then(function (ks) { return Promise.all(ks.filter(function (k) { return k.indexOf("cmta-build-") === 0; }).map(function (k) { return caches.delete(k); })); })); } catch (e) {}
+          return Promise.all(jobs).catch(function () {}).then(function () { location.reload(); });
+        }
         function recover() {
           if (navigator.onLine === false) return;
           try { if (sessionStorage.getItem(KEY)) return; sessionStorage.setItem(KEY, "1"); } catch (e) {}
-          var jobs = [];
-          try { if (navigator.serviceWorker) jobs.push(navigator.serviceWorker.getRegistrations().then(function (rs) { return Promise.all(rs.map(function (r) { return r.unregister(); })); })); } catch (e) {}
-          try { if (window.caches) jobs.push(caches.keys().then(function (ks) { return Promise.all(ks.map(function (k) { return caches.delete(k); })); })); } catch (e) {}
-          Promise.all(jobs).catch(function () {}).then(function () { location.reload(); });
+          // navigator.onLine ay hindi mapagkakatiwalaan (may wifi pero walang load).
+          // Mag-reset LANG kung talagang naabot ang server. Kung hindi, huwag galawin ang cache.
+          var ctl = typeof AbortController !== "undefined" ? new AbortController() : null;
+          var timer = setTimeout(function () { if (ctl) ctl.abort(); }, 8000);
+          fetch("version.json?t=" + Date.now(), { cache: "no-store", signal: ctl ? ctl.signal : undefined })
+            .then(function (r) { clearTimeout(timer); if (!r.ok) throw new Error("no server"); return reset(); })
+            .catch(function () { clearTimeout(timer); try { sessionStorage.removeItem(KEY); } catch (e) {} });
         }
         window.addEventListener("error", function (e) {
           var t = e.target;

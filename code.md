@@ -145,44 +145,96 @@ export default {
 
 ## File: ./frontend/public/sw.js
 ```
-// Service worker v5
-// - /assets/*, .wasm: cache-first (no re-download on every open)
-// - customs_law.db: cache-first sa DATA_CACHE (persistent, hindi binubura ng version bump)
-// - Firebase / Google APIs: not cached, browser handles them
-// - Everything else (index.html etc.): network-first with a 4s timeout
-// NOTE: Hindi na kailangang i-bump ang CACHE_NAME kapag nagpalit ng customs_law.db:
-//       may DB_HASH na na kusang nagbabago kapag nagbago ang laman ng .db.
-const CACHE_NAME = "cmta-app-cache-v7";
-const DATA_CACHE = "cmta-data-v1"; // pareho sa src/offlineData.js
-const NETWORK_TIMEOUT_MS = 4000;
-// Pinapalitan ng vite build -> nagbabago ang sw.js kada deploy -> uulit ang precache.
+// Service worker v6 — atomic, per-build precache.
+//
+// 1. Kada deploy nagbabago ang sw.js -> bagong cache na "cmta-build-<id>".
+// 2. Sa install, dina-download ang LAHAT ng files ng bagong build (precache.json).
+//    Kapag may pumalya (nawalan ng signal / load), FAILED ang install at ang LUMANG
+//    version ay tuloy pa ring gumagana. Walang halo-halong luma at bago.
+//    Susubukan ulit sa susunod; yung na-download na ay hindi na uulitin.
+// 3. Kapag kumpleto na saka lang mag-activate ang bagong version at saka lang buburahin
+//    ang lumang cache (1 nakaraang build ang itinatago para sa bukas na page).
+// 4. Pag-open ng app: galing agad sa cache, kahit walang internet / walang load.
+// 5. Pag na-activate ang bagong version, sinasabihan ang page (SW_ACTIVATED)
+//    para lumabas ang "New version" banner.
+// customs_law.db: nasa DATA_CACHE, best-effort lang ang precache nito; ang page
+// (src/offlineData.js) ang may fallback sa lumang copy.
 const SW_BUILD = "__BUILD_ID__";
 const DB_HASH = "__DB_HASH__";
+const BUILD_PREFIX = "cmta-build-";
+const CACHE_NAME = BUILD_PREFIX + SW_BUILD;
+const DATA_CACHE = "cmta-data-v1"; // pareho sa src/offlineData.js
 
-// I-download ang LAHAT ng files ng app (galing sa precache.json) para offline-ready agad.
+const isLocalScope = () => /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?\//.test(self.registration.scope);
+const readyUrl = () => new URL("__ready", self.registration.scope).href;
+
+function isHtmlForAsset(url, response) {
+  try {
+    const ct = response.headers.get("content-type") || "";
+    return ct.includes("text/html") && /\.(js|css|wasm|db|png|woff2?)(\?|$)/.test(url);
+  } catch (_) { return false; }
+}
+
+async function fetchOk(url, fresh) {
+  let lastErr;
+  for (let i = 0; i < 2; i++) {
+    try {
+      const r = await fetch(url, { cache: fresh ? "no-cache" : "default" });
+      if (!r.ok) throw new Error("HTTP " + r.status + " " + url);
+      if (isHtmlForAsset(url, r)) throw new Error("HTML instead of file: " + url);
+      return r;
+    } catch (e) { lastErr = e; }
+  }
+  throw lastErr;
+}
+
+async function fromOldCaches(url, names) {
+  for (const name of names) {
+    try {
+      const hit = await (await caches.open(name)).match(url);
+      if (hit) return hit;
+    } catch (_) {}
+  }
+  return null;
+}
+
 async function precacheAll() {
   const scope = self.registration.scope;
-  if (/^https?:\/\/localhost(:\d+)?\//.test(scope)) return; // APK / dev: bundled na
-  try {
-    const res = await fetch(new URL("precache.json", scope), { cache: "no-store" });
-    if (!res.ok) return;
-    const data = await res.json();
-    const cache = await caches.open(CACHE_NAME);
-    const dataCache = await caches.open(DATA_CACHE);
-    const files = data.files || [];
-    const one = async (f) => {
-      const isDb = /\.db$/.test(f);
-      const url = new URL(f, scope).href + (isDb ? "?v=" + DB_HASH : "");
-      const target = isDb ? dataCache : cache;
-      const big = f.includes("assets/") || /\.(wasm|db)$/.test(f);
-      if (big && (await target.match(url))) return; // hashed/malaki: nandito na
-      try {
-        const r = await fetch(url, { cache: "no-cache" });
-        if (r.ok && !isHtmlForAsset({ url }, r)) await target.put(url, r);
-      } catch (_) {}
-    };
-    for (let i = 0; i < files.length; i += 6) await Promise.all(files.slice(i, i + 6).map(one));
-  } catch (_) {}
+  if (isLocalScope()) return; // APK / dev: bundled na
+
+  const res = await fetch(new URL("precache.json", scope), { cache: "no-store" });
+  if (!res.ok) throw new Error("precache.json HTTP " + res.status);
+  const data = await res.json();
+  if (!SW_BUILD.startsWith("__") && data.id && String(data.id) !== SW_BUILD) throw new Error("precache.json is from another build");
+
+  const files = Array.isArray(data.files) ? data.files : [];
+  const cache = await caches.open(CACHE_NAME);
+  const dataCache = await caches.open(DATA_CACHE);
+  const oldNames = (await caches.keys()).filter((k) => k.startsWith("cmta-") && k !== CACHE_NAME && k !== DATA_CACHE);
+  const failed = [];
+
+  const one = async (f) => {
+    const isDb = /\.db$/i.test(f);
+    const hashed = f.includes("assets/") || /\.wasm$/i.test(f);
+    const url = new URL(f, scope).href + (isDb ? "?v=" + DB_HASH : "");
+    const target = isDb ? dataCache : cache;
+    try {
+      if (await target.match(url)) return;
+      if (hashed) {
+        const old = await fromOldCaches(url, oldNames);
+        if (old) { await target.put(url, old); return; }
+      }
+      const r = await fetchOk(url, !hashed && !isDb);
+      await target.put(url, r);
+    } catch (e) {
+      if (!isDb) failed.push(f);
+    }
+  };
+
+  for (let i = 0; i < files.length; i += 6) await Promise.all(files.slice(i, i + 6).map(one));
+  if (failed.length) throw new Error("Precache incomplete: " + failed.slice(0, 5).join(", "));
+
+  await cache.put(readyUrl(), new Response("ok")); // marka: kumpleto ang build na ito
 }
 
 self.addEventListener("install", (event) => {
@@ -191,81 +243,73 @@ self.addEventListener("install", (event) => {
 });
 
 self.addEventListener("activate", (event) => {
-  event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(keys.filter((key) => key !== CACHE_NAME && key !== DATA_CACHE).map((key) => caches.delete(key)))
-    )
-  );
-  self.clients.claim();
+  event.waitUntil((async () => {
+    const own = (await caches.keys()).filter((k) => k.startsWith("cmta-"));
+    const builds = own
+      .filter((k) => k.startsWith(BUILD_PREFIX) && k !== CACHE_NAME)
+      .sort((a, b) => Number(b.slice(BUILD_PREFIX.length)) - Number(a.slice(BUILD_PREFIX.length)));
+    let keepPrev = null;
+    for (const name of builds) {
+      try {
+        if (await (await caches.open(name)).match(readyUrl())) { keepPrev = name; break; }
+      } catch (_) {}
+    }
+    await Promise.all(
+      own.filter((k) => k !== CACHE_NAME && k !== DATA_CACHE && k !== keepPrev).map((k) => caches.delete(k))
+    );
+    await self.clients.claim();
+    const wins = await self.clients.matchAll({ type: "window" });
+    wins.forEach((c) => c.postMessage({ type: "SW_ACTIVATED", build: SW_BUILD }));
+  })());
 });
 
-function isHtmlForAsset(request, response) {
-  try {
-    const ct = response.headers.get("content-type") || "";
-    return ct.includes("text/html") && /\.(js|css|wasm|db|png|woff2?)(\?|$)/.test(request.url);
-  } catch (_) { return false; }
+async function shell(request) {
+  const scope = self.registration.scope;
+  const cache = await caches.open(CACHE_NAME);
+  const hit =
+    (await cache.match(request, { ignoreSearch: true })) ||
+    (await cache.match(scope)) ||
+    (await cache.match(scope + "index.html"));
+  if (hit) return hit;
+  try { return await fetch(request); } catch (_) {}
+  const any = (await caches.match(scope, { ignoreSearch: true })) || (await caches.match(scope + "index.html"));
+  return any || Response.error();
 }
 
-function fetchAndCache(request, init, cacheName = CACHE_NAME) {
-  return fetch(request, init).then((response) => {
-    if (response && (response.ok || response.type === "opaque") && !isHtmlForAsset(request, response)) {
-      const copy = response.clone();
-      caches.open(cacheName).then((cache) => cache.put(request, copy)).catch(() => {});
-    }
-    return response;
-  });
+async function smallFile(request) {
+  const cache = await caches.open(CACHE_NAME);
+  const hit = (await cache.match(request, { ignoreSearch: true })) || (await caches.match(request, { ignoreSearch: true }));
+  return hit || fetch(request);
 }
 
-async function offlineFallback(request) {
-  const cached = await caches.match(request, { ignoreSearch: true });
-  if (cached) return cached;
-  if (request.mode === "navigate") {
-    const shell = (await caches.match(self.registration.scope)) || (await caches.match(self.registration.scope + "index.html"));
-    if (shell) return shell;
+async function bigFile(request, event, storeName) {
+  const hit = await caches.match(request);
+  if (hit) return hit;
+  const res = await fetch(request);
+  if (res && res.ok && !isHtmlForAsset(request.url, res)) {
+    const copy = res.clone();
+    event.waitUntil(caches.open(storeName).then((c) => c.put(request, copy)).catch(() => {}));
   }
-  return Response.error();
+  return res;
 }
 
 self.addEventListener("fetch", (event) => {
   const { request } = event;
-  if (request.method !== "GET") return;
+  if (request.method !== "GET" || isLocalScope()) return;
   const url = new URL(request.url);
-  const sameOrigin = url.origin === self.location.origin;
-  if (sameOrigin && url.pathname.endsWith("/version.json")) return; // always straight to the network
+  if (url.origin !== self.location.origin) return;
+  if (/\/(version|precache)\.json$|\/sw\.js$/.test(url.pathname)) return;
 
-  // Cross-origin: only cache Google Fonts. Firebase/Auth/APIs go straight to the browser.
-  if (!sameOrigin) {
-    if (!/(^|\.)fonts\.(googleapis|gstatic)\.com$/.test(url.hostname)) return;
-    event.respondWith(fetchAndCache(request).catch(() => offlineFallback(request)));
+  if (request.mode === "navigate") {
+    event.respondWith(shell(request));
     return;
   }
-
-  // Big static files: cache-first. Vite hashes /assets/ names, so new deploys still load.
-  const isDbFile = /\.db$/.test(url.pathname);
-  if (url.pathname.includes("/assets/") || isDbFile || /\.wasm$/.test(url.pathname)) {
-    const store = isDbFile ? DATA_CACHE : CACHE_NAME;
-    event.respondWith(
-      caches.match(request).then((hit) => hit || fetchAndCache(request, undefined, store).catch(() => offlineFallback(request)))
-    );
+  const isDb = /\.db$/i.test(url.pathname);
+  if (isDb || url.pathname.includes("/assets/") || /\.wasm$/i.test(url.pathname)) {
+    event.respondWith(bigFile(request, event, isDb ? DATA_CACHE : CACHE_NAME));
     return;
   }
-
-  // Rest of same-origin files: network-first with short timeout.
-  event.respondWith(
-    (async () => {
-      const network = fetchAndCache(request, { cache: "no-cache" }); // skip the 10-min HTTP cache of GitHub Pages
-      network.catch(() => {});
-      const cached = await caches.match(request);
-      if (!cached) return network.catch(() => offlineFallback(request));
-
-      const timeout = new Promise((resolve) => setTimeout(() => resolve(null), NETWORK_TIMEOUT_MS));
-      try {
-        const fresh = await Promise.race([network, timeout]);
-        if (fresh && (fresh.ok || request.mode !== "navigate")) return fresh;
-      } catch (_) {}
-      return cached;
-    })()
-  );
+  event.respondWith(smallFile(request));
 });
 ```
 
@@ -4090,6 +4134,7 @@ const NAV_ICONS = {
   download: <><path d="M12 3v12" /><path d="m7 11 5 5 5-5" /><path d="M5 21h14" /></>,
   wrench: <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />,
   menu: <><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></>,
+  back: <path d="M15 6l-6 6 6 6" />,
   x: <><path d="M18 6 6 18" /><path d="m6 6 12 12" /></>,
   tag: <><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z" /><circle cx="7.5" cy="7.5" r="1" fill="currentColor" /></>,
   scale: <><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="2" fill="currentColor" /></>,
@@ -4258,6 +4303,18 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
   const mainRef = useRef(null);
   const pendingScrollRestore = useRef(null);
   const scrollSaveTimeout = useRef(null);
+
+  // Phone back button / swipe-back closes the full-screen menu instead of leaving the app.
+  useEffect(() => {
+    if (!sidebarOpen || view !== "browse" || window.innerWidth >= 768) return undefined;
+    window.history.pushState({ cuMenu: true }, "");
+    const onPop = () => setSidebarOpen(false);
+    window.addEventListener("popstate", onPop);
+    return () => {
+      window.removeEventListener("popstate", onPop);
+      if (window.history.state && window.history.state.cuMenu) window.history.back();
+    };
+  }, [sidebarOpen, view]);
 
   useEffect(() => { if (!demo) localStorage.setItem(SOURCE_KEY, source); }, [source, demo]);
   useEffect(() => { if (issuanceId) localStorage.setItem(ISSUANCE_KEY, issuanceId); }, [issuanceId]);
@@ -4504,14 +4561,13 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
   return (
     <HighlightUIContext.Provider value={highlightUIValue}>
       <div className="relative flex h-screen overflow-hidden bg-parchment dark:bg-navy-950" style={{ height: "100dvh" }}>
-        {sidebarOpen && view === "browse" && <div className="fixed inset-0 z-30 bg-slate-900/40 backdrop-blur-[1px] md:hidden" onClick={() => setSidebarOpen(false)} />}
         {view === "browse" && (
-          <aside className={`safe-top fixed inset-y-0 left-0 z-40 w-[85vw] max-w-[320px] overflow-y-auto overscroll-contain border-r border-parchment-200 bg-parchment-50 transition-transform duration-200 dark:border-navy-800 dark:bg-navy-900 md:static md:w-80 md:max-w-none md:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
-            <div className="sticky top-0 z-10 border-b border-slate-100 bg-parchment-50/95 px-5 py-4 backdrop-blur dark:border-navy-800 dark:bg-navy-900/95">
-              <div className="flex items-center gap-2"><img src={logoImg} alt="" aria-hidden="true" draggable={false} className="h-9 w-9 flex-shrink-0 rounded-full object-contain" /><div><h2 className="text-base font-bold leading-tight text-navy-900 dark:text-parchment-50">RA 10863</h2><p className="text-xs text-slate-400 dark:text-slate-500">Customs Modernization &amp; Tariff Act</p></div></div>
-              <div className="mt-3 flex rounded-xl bg-slate-100 p-1 text-sm dark:bg-navy-800" role="tablist" aria-label="Library">
+          <aside className={`safe-top fixed inset-0 z-40 w-full overflow-y-auto overscroll-contain border-r border-parchment-200 bg-parchment-50 transition-transform duration-200 dark:border-navy-800 dark:bg-navy-900 md:static md:w-80 md:max-w-none md:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
+            <div className="sticky top-0 z-10 border-b border-slate-100 bg-parchment-50/95 px-4 py-3 backdrop-blur dark:border-navy-800 dark:bg-navy-900/95">
+              <div className="flex items-center gap-2"><button onClick={() => setSidebarOpen(false)} aria-label="Back" className="flex h-9 flex-shrink-0 items-center gap-0.5 rounded-full pl-1 pr-3 text-sm font-semibold text-navy-900 active:bg-slate-100 dark:text-parchment-50 dark:active:bg-navy-800 md:hidden"><NavIcon name="back" className="h-5 w-5" />Back</button><img src={logoImg} alt="" aria-hidden="true" draggable={false} className="h-9 w-9 flex-shrink-0 rounded-full object-contain" /><div><h2 className="text-base font-bold leading-tight text-navy-900 dark:text-parchment-50">RA 10863</h2><p className="text-xs text-slate-400 dark:text-slate-500">Customs Modernization &amp; Tariff Act</p></div></div>
+              <div className="mt-2 flex flex-wrap gap-1.5" role="tablist" aria-label="Library">
                 {ISSUANCE_KINDS.map((k) => (
-                  <button key={k.id} role="tab" aria-selected={source === k.id} onClick={() => setSource(k.id)} className={`min-h-[36px] flex-1 rounded-lg px-2 py-1 font-semibold transition-colors ${source === k.id ? "bg-navy-900 text-white shadow-sm dark:bg-navy-700" : "text-slate-500 dark:text-slate-400"}`}>
+                  <button key={k.id} role="tab" aria-selected={source === k.id} onClick={() => setSource(k.id)} className={`min-h-[28px] rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors ${source === k.id ? "border-navy-900 bg-navy-900 text-white dark:border-navy-700 dark:bg-navy-700" : "border-parchment-200 bg-parchment text-slate-500 dark:border-navy-700 dark:bg-navy-800 dark:text-slate-400"}`}>
                     <span aria-hidden>{k.icon}</span> {k.label}
                   </button>
                 ))}
@@ -11171,7 +11227,11 @@ export function getIssuanceProgress(kind) {
 
 ## File: ./frontend/src/updateCheck.js
 ```
-// Detects when a newer build was deployed (compares __BUILD_ID__ with /version.json).
+// Detects when a newer build was deployed and applies it.
+// 1) version.json sa server (kailangan ng internet)
+// 2) ang service worker: kapag na-download na ang bagong version sa background,
+//    nagpapadala ito ng "SW_ACTIVATED" -> lalabas ang banner kahit OFFLINE na,
+//    at ang "Update now" ay reload na lang.
 import { useEffect, useState } from "react";
 import { isNativeApp } from "./pwaInstall";
 
@@ -11181,6 +11241,7 @@ export const BUILD_ID = typeof __BUILD_ID__ !== "undefined" ? __BUILD_ID__ : "de
 let remoteId = null;
 let lastCheck = 0;
 let inflight = null;
+let swReady = false;
 const subs = new Set();
 const notify = () => subs.forEach((f) => f());
 
@@ -11198,7 +11259,14 @@ async function fetchRemoteId() {
   }
 }
 
-// force = true ignores the 60-second throttle.
+function kickSwUpdate() {
+  try {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.getRegistration().then((r) => r && r.update()).catch(() => {});
+    }
+  } catch (_) {}
+}
+
 export function checkForUpdate(force) {
   if (import.meta.env.DEV || isNativeApp()) return Promise.resolve(false);
   if (inflight) return inflight;
@@ -11206,34 +11274,43 @@ export function checkForUpdate(force) {
   inflight = fetchRemoteId().then((id) => {
     lastCheck = Date.now();
     inflight = null;
-    if (id) { remoteId = id; notify(); }
+    if (id) {
+      remoteId = id;
+      notify();
+      if (id !== BUILD_ID) kickSwUpdate();
+    }
     return isUpdateAvailable();
   });
   return inflight;
 }
 
-// Removes the stale page files (index.html etc.) but keeps the big offline
-// files (/assets/, .wasm, .db, fonts), then reloads. Needs internet.
-export async function applyUpdate() {
-  if (typeof navigator !== "undefined" && navigator.onLine === false) return false;
-  try {
-    if ("caches" in window) {
-      const keys = await caches.keys();
-      for (const k of keys) {
-        const cache = await caches.open(k);
-        const reqs = await cache.keys();
-        await Promise.all(reqs.map((r) => {
-          const u = new URL(r.url);
-          const keep = u.origin !== location.origin || u.pathname.includes("/assets/") || /\.(wasm|db)$/.test(u.pathname);
-          return keep ? null : cache.delete(r);
-        }));
-      }
-    }
-  } catch (_) {}
+async function installLatest(timeoutMs) {
   try {
     const reg = "serviceWorker" in navigator ? await navigator.serviceWorker.getRegistration() : null;
-    if (reg) await reg.update();
-  } catch (_) {}
+    if (!reg) return true;
+    await reg.update();
+    const w = reg.installing || reg.waiting;
+    if (!w || w.state === "activated") return true;
+    return await new Promise((resolve) => {
+      const t = setTimeout(() => resolve(false), timeoutMs);
+      w.addEventListener("statechange", () => {
+        if (w.state === "activated") { clearTimeout(t); resolve(true); }
+        else if (w.state === "redundant") { clearTimeout(t); resolve(false); }
+      });
+    });
+  } catch (_) {
+    return false;
+  }
+}
+
+// Wala nang binubura na cache: kapag pumalya ang download (walang signal / load),
+// buo pa rin ang lumang version. Returns false kung hindi natuloy.
+export async function applyUpdate() {
+  if (!swReady) {
+    if (typeof navigator !== "undefined" && navigator.onLine === false) return false;
+    const ok = await installLatest(90000);
+    if (!ok) return false;
+  }
   location.reload();
   return true;
 }
@@ -11249,7 +11326,6 @@ export function useUpdateAvailable() {
   return isUpdateAvailable();
 }
 
-// Re-check when the app opens, comes back to the front, or gets internet again.
 if (typeof window !== "undefined") {
   const recheck = () => { if (document.visibilityState !== "hidden") checkForUpdate(false); };
   document.addEventListener("visibilitychange", recheck);
@@ -11257,6 +11333,18 @@ if (typeof window !== "undefined") {
   window.addEventListener("focus", recheck);
   setInterval(recheck, 30 * 60 * 1000);
   setTimeout(recheck, 1500);
+
+  if ("serviceWorker" in navigator && !import.meta.env.DEV && !isNativeApp()) {
+    const hadController = !!navigator.serviceWorker.controller;
+    navigator.serviceWorker.addEventListener("message", (e) => {
+      const d = e.data;
+      if (!hadController || !d || d.type !== "SW_ACTIVATED" || !d.build) return;
+      if (String(d.build) === BUILD_ID) return;
+      swReady = true;
+      remoteId = String(d.build);
+      notify();
+    });
+  }
 }
 ```
 

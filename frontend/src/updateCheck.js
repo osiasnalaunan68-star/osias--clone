@@ -55,13 +55,38 @@ export function checkForUpdate(force) {
   return inflight;
 }
 
+// Tinatanong ang active service worker kung anong build siya (v7+ lang ang sumasagot).
+async function activeBuild() {
+  try {
+    const reg = await navigator.serviceWorker.getRegistration();
+    const sw = reg && reg.active;
+    if (!sw) return null;
+    return await new Promise((resolve) => {
+      const ch = new MessageChannel();
+      const t = setTimeout(() => resolve(null), 2000);
+      ch.port1.onmessage = (e) => {
+        clearTimeout(t);
+        resolve(e.data && e.data.build ? String(e.data.build) : null);
+      };
+      sw.postMessage({ type: "GET_BUILD" }, [ch.port2]);
+    });
+  } catch (_) {
+    return null;
+  }
+}
+
 async function installLatest(timeoutMs) {
   try {
     const reg = "serviceWorker" in navigator ? await navigator.serviceWorker.getRegistration() : null;
     if (!reg) return true;
     await reg.update();
     const w = reg.installing || reg.waiting;
-    if (!w || w.state === "activated") return true;
+    if (!w) {
+      // Walang bagong ini-install. Okay lang i-reload kung ang active SW ay ang pinakabago na.
+      const b = await activeBuild();
+      return !b || !remoteId || b === remoteId;
+    }
+    if (w.state === "activated") return true;
     return await new Promise((resolve) => {
       const t = setTimeout(() => resolve(false), timeoutMs);
       w.addEventListener("statechange", () => {
@@ -115,5 +140,25 @@ if (typeof window !== "undefined") {
       remoteId = String(d.build);
       notify();
     });
+
+    // Kapag pumalya ang pag-install ng bagong version (nawalan ng signal, atbp.),
+    // subukan ulit nang kusa hanggang matapos. Ang na-download na ay hindi na uulitin.
+    let retries = 0;
+    const retry = () => {
+      if (swReady || !isUpdateAvailable() || retries >= 8) return;
+      if (document.visibilityState === "hidden" || navigator.onLine === false) return;
+      retries++;
+      kickSwUpdate();
+    };
+    navigator.serviceWorker.ready.then((reg) => {
+      reg.addEventListener("updatefound", () => {
+        const w = reg.installing;
+        if (!w) return;
+        w.addEventListener("statechange", () => {
+          if (w.state === "redundant") setTimeout(retry, 15000);
+        });
+      });
+    }).catch(() => {});
+    setInterval(retry, 2 * 60 * 1000);
   }
 }
