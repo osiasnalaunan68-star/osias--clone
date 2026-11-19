@@ -967,7 +967,7 @@ function FeesView() {
   );
 }
 
-export default function ChapterBrowser({ initialView = "browse", initialMode = null, demo = false } = {}) {
+export default function ChapterBrowser({ initialView = "browse", initialMode = null, demo = false, guest = false } = {}) {
   const { profile } = useAuth();
   const [view, setView] = useState(initialView);
   const [titles, setTitles] = useState([]);
@@ -1084,7 +1084,7 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
       });
     const progress = getProgress();
     if (progress && progress.chapter_number) setResumeAvailable(progress);
-    if (!demo && !hasTutorialBeenSeen()) {
+    if (!demo && !guest && !hasTutorialBeenSeen()) {
       setShowTutorial(true);
     }
   }, []);

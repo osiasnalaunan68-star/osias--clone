@@ -9,8 +9,6 @@ import { LegalGate, LegalLinkButton } from "./LegalNotice";
 const ChapterBrowser = lazy(() => import("../pages/ChapterBrowser"));
 const QuizHub = lazy(() => import("../pages/QuizHub"));
 
-const DEMO_SECONDS = 60;
-
 const STEP_ICONS = {
   scale: <><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="2" fill="currentColor" /></>,
   book: <><path d="M3 5c3-1.4 6-1.4 9 0M12 5c3-1.4 6-1.4 9 0M3 5v13c3-1.4 6-1.4 9 0M12 5v13c3-1.4 6-1.4 9 0" /></>,
@@ -33,21 +31,6 @@ function StepIcon({ name, className }) {
   );
 }
 
-// Tutorial + About for signed-out users. Each feature has a demo:
-// tap Start to try it for 1 minute, then return here.
-const STEPS = [
-  { icon: "scale", title: "Welcome to RA 10863", body: "Your offline companion for the Customs Modernization and Tariff Act (CMTA) — the law, notes, AI explanations, and practice questions for the CuBLE." },
-  { icon: "book", title: "Browse the Law", body: "Open the menu (☰). Every Title, Chapter, and Section is arranged in the correct order.", demo: { view: "browse", mode: "study" } },
-  { icon: "book", title: "Study Mode", body: "One section at a time, so you can stay focused. Use Expand All / Collapse All to move through a whole chapter quickly.", demo: { view: "browse", mode: "study" } },
-  { icon: "book", title: "Reading Mode", body: "A book-style view for long reading sessions. Tap Focus to hide the toolbar.", demo: { view: "browse", mode: "reading" } },
-  { icon: "highlighter", title: "Highlights", body: "Select any text to highlight it. Highlights save automatically and work offline.", demo: { view: "browse", mode: "study" } },
-  { icon: "note", title: "Notes", body: "Tap \"Add Note\" under any section to write your own explanation.", demo: { view: "browse", mode: "study" } },
-  { icon: "spark", title: "Ask AI", body: "Instant offline explanations from Osias 6.7 for every section.", demo: { view: "browse", mode: "study" } },
-  { icon: "search", title: "Search", body: "Find anything fast. Try \"102\" or \"smuggling\".", demo: { view: "search", mode: null } },
-  { icon: "edit", title: "Practice Quiz / Exam", body: "Try the practice questions. RA 10863 Level 1 (Filipino version) is free, and so are the first 10 items of each other subject. Levels 2–5 are in English.", demo: { view: "quiz", mode: null } },
-  { icon: "tag", title: TRIAL_DAYS + "-Day Free Trial", body: "Sign in with Google to start " + TRIAL_DAYS + " days of free access to the whole app. After that, choose a plan to continue." },
-];
-
 function Splash({ text }) {
   return (
     <div className="safe-top flex min-h-[100dvh] flex-col items-center justify-center gap-4 bg-parchment px-6 text-center dark:bg-navy-950">
@@ -68,100 +51,86 @@ function Splash({ text }) {
   );
 }
 
-// ── Demo: 1 minuto bawat Start ───────────────────────────────────────
-function DemoShell({ feature, onEnd }) {
-  const { overlayOpen, setOverlayOpen } = useAuth();
-  const [left, setLeft] = useState(DEMO_SECONDS);
-  const endRef = useRef(onEnd);
-  endRef.current = onEnd;
+// ── Guest: pasok agad sa BUONG app (walang login, walang tutorial) ───
+// Countdown: ilang segundo ang libreng preview ng guest kada araw.
+// Gawing 0 kung ayaw mo ng countdown (libre ang guest, walang lock).
+const GUEST_PREVIEW_SECONDS = 300;
+const GUEST_CLOCK_KEY = "cuble_guest_clock";
 
-  useEffect(() => {
-    const endAt = Date.now() + DEMO_SECONDS * 1000;
-    const id = setInterval(() => {
-      const s = Math.max(0, Math.ceil((endAt - Date.now()) / 1000));
-      setLeft(s);
-      if (s <= 0) {
-        clearInterval(id);
-        endRef.current();
-      }
-    }, 500);
-    return () => clearInterval(id);
-  }, []);
-
-  const mm = Math.floor(left / 60);
-  const ss = String(left % 60).padStart(2, "0");
-
-  return (
-    <>
-      <ChapterBrowser initialView={feature.view} initialMode={feature.mode} demo />
-      {!overlayOpen && (
-        <div className="safe-bottom fixed bottom-3 left-1/2 z-[80] flex -translate-x-1/2 items-center gap-2 rounded-full bg-navy-900/95 px-4 py-2 text-xs font-semibold text-white shadow-lg backdrop-blur dark:bg-parchment-50/95 dark:text-navy-900">
-          <StepIcon name="clock" className="h-3.5 w-3.5" aria-hidden />
-          <span>Demo {mm}:{ss}</span>
-          <button onClick={() => setOverlayOpen(true)} className="rounded-full bg-gold-500 px-2.5 py-1 text-[11px] text-navy-900 active:bg-gold-600">Sign in</button>
-          <button onClick={onEnd} className="rounded-full border border-white/40 px-2.5 py-1 text-[11px] dark:border-navy-900/40">Exit</button>
-        </div>
-      )}
-    </>
-  );
+function readGuestUsed() {
+  try {
+    const d = JSON.parse(localStorage.getItem(GUEST_CLOCK_KEY) || "null");
+    if (d && d.day === new Date().toDateString()) return Number(d.used) || 0;
+  } catch (_) {}
+  return 0;
 }
 
-// ── Guest: About + Tutorial + Login ──────────────────────────────────
-function GuestWelcome({ step, setStep, onStartDemo }) {
+// Tapos na ang preview: login na lang ang pwede.
+function GuestLock() {
   const { signInWithGoogle, signingIn, authError } = useAuth();
-  const total = STEPS.length;
-  const cur = STEPS[step];
-  const isLast = step === total - 1;
-
   return (
-    <div className="safe-top safe-bottom flex min-h-[100dvh] flex-col bg-parchment dark:bg-navy-950">
-      <div className="px-5 pb-2 pt-4 text-center">
-        <p className="text-xs font-semibold uppercase tracking-widest text-gold-600 dark:text-gold-400">RA 10863 · CMTA</p>
-        <h1 className="text-xl font-bold text-navy-900 dark:text-parchment-50">CuBLE Review App</h1>
-      </div>
-
-      <main className="flex flex-1 flex-col items-center justify-center px-5 py-4">
-        <div className="w-full max-w-md rounded-xl border border-parchment-200 bg-parchment-50 p-6 text-center dark:border-navy-700 dark:bg-navy-900">
-          <div className="mb-4 flex justify-center gap-1.5">
-            {STEPS.map((_, i) => (
-              <button key={i} onClick={() => setStep(i)} aria-label={"Step " + (i + 1)} className={"h-1.5 rounded-full transition-all duration-300 " + (i === step ? "w-6 bg-navy-900 dark:bg-parchment-50" : "w-1.5 bg-parchment-200 dark:bg-navy-700")} />
-            ))}
-          </div>
-          <span className="mb-3 flex items-center justify-center" aria-hidden>
-            <span className="flex h-16 w-16 items-center justify-center rounded-full border border-seal text-seal dark:border-gold-400 dark:text-gold-400"><StepIcon name={cur.icon} className="h-8 w-8" /></span>
-          </span>
-          <h2 className="mb-2 text-xl font-bold text-navy-900 dark:text-parchment-50">{cur.title}</h2>
-          <p className="mb-5 text-sm leading-relaxed text-slate-600 dark:text-slate-300">{cur.body}</p>
-
-          {cur.demo && (
-            <button onClick={() => onStartDemo(cur.demo)} className="mb-4 flex w-full items-center justify-center gap-1.5 rounded-xl border-2 border-gold-500 bg-gold-50 px-4 py-2.5 text-sm font-semibold text-navy-900 active:bg-gold-100 dark:border-gold-400 dark:bg-navy-800 dark:text-gold-400">
-              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" stroke="none"><path d="M7 5.3v13.4a1 1 0 0 0 1.5.86l11-6.7a1 1 0 0 0 0-1.72l-11-6.7A1 1 0 0 0 7 5.3Z" /></svg>
-              Start — try it for 1 minute
-            </button>
-          )}
-
-          <div className="flex items-center gap-2">
-            {step > 0 && (
-              <button onClick={() => setStep(step - 1)} className="flex h-11 flex-1 items-center justify-center rounded-xl border border-parchment-200 text-sm font-semibold text-slate-600 active:bg-parchment dark:border-navy-700 dark:text-slate-300 dark:active:bg-navy-800">Back</button>
-            )}
-            <button onClick={() => setStep(isLast ? 0 : step + 1)} className="flex h-11 flex-[2] items-center justify-center gap-1.5 rounded-xl bg-navy-900 text-sm font-semibold text-white active:bg-navy-800 dark:bg-navy-700">
-              {isLast ? <><StepIcon name="clock" className="h-4 w-4" /> Replay Tutorial</> : "Next"}
-            </button>
-          </div>
-        </div>
-      </main>
-
-      <div className="border-t border-parchment-200 bg-parchment-50/90 p-4 backdrop-blur dark:border-navy-800 dark:bg-navy-900/90">
-        {authError && <p className="mb-2 text-center text-xs text-red-600 dark:text-red-400">{authError}</p>}
-        <p className="mx-auto mb-2 max-w-md text-center text-[11px] leading-snug text-slate-500 dark:text-slate-400">
+    <div className="safe-top safe-bottom flex min-h-[100dvh] flex-col items-center justify-center bg-parchment px-5 py-6 dark:bg-navy-950">
+      <div className="w-full max-w-md rounded-xl border border-parchment-200 bg-parchment-50 p-6 text-center dark:border-navy-700 dark:bg-navy-900">
+        <img src={logoImg} alt="Customs Tech" draggable={false} className="mx-auto mb-3 h-16 w-16 rounded-full object-contain" />
+        <h1 className="text-xl font-bold text-navy-900 dark:text-parchment-50">Enjoying the app?</h1>
+        <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+          Your free preview for today is over. Log in with Google to keep going and start your {TRIAL_DAYS}-day free trial of the whole app.
+        </p>
+        {authError && <p className="mt-3 text-xs text-red-600 dark:text-red-400">{authError}</p>}
+        <p className="mx-auto mt-4 mb-2 max-w-xs text-[11px] leading-snug text-slate-500 dark:text-slate-400">
           After you log in you will be asked to accept the{" "}
           <LegalLinkButton className="font-semibold text-navy-900 dark:text-gold-400">Privacy Notice &amp; Terms</LegalLinkButton>.
         </p>
-        <button onClick={signInWithGoogle} disabled={signingIn} className="mx-auto flex h-12 w-full max-w-md items-center justify-center gap-1.5 rounded-xl bg-gold-500 text-sm font-bold text-navy-900 shadow-sm active:bg-gold-600 disabled:opacity-50">
-          {signingIn ? "Waiting for Google..." : <><StepIcon name="tag" className="h-4 w-4" /> Login with Google — start your {TRIAL_DAYS}-day free trial</>}
+        <button onClick={signInWithGoogle} disabled={signingIn} className="flex h-12 w-full items-center justify-center gap-1.5 rounded-xl bg-gold-500 text-sm font-bold text-navy-900 shadow-sm active:bg-gold-600 disabled:opacity-50">
+          {signingIn ? "Waiting for Google..." : <><StepIcon name="tag" className="h-4 w-4" /> Login with Google</>}
         </button>
       </div>
     </div>
+  );
+}
+
+function GuestApp() {
+  const { overlayOpen, setOverlayOpen } = useAuth();
+  const [used, setUsed] = useState(readGuestUsed);
+  const overlayRef = useRef(overlayOpen);
+  overlayRef.current = overlayOpen;
+  const limited = GUEST_PREVIEW_SECONDS > 0;
+  const left = limited ? Math.max(0, GUEST_PREVIEW_SECONDS - used) : null;
+
+  // Tumatakbo lang ang oras kapag nakikita ang app at hindi nagla-login.
+  useEffect(() => {
+    if (!limited) return undefined;
+    const id = setInterval(() => {
+      if (document.visibilityState === "hidden" || overlayRef.current) return;
+      setUsed((u) => u + 1);
+    }, 1000);
+    return () => clearInterval(id);
+  }, [limited]);
+
+  // Naka-save para hindi ma-reset ng refresh.
+  useEffect(() => {
+    if (!limited) return;
+    try { localStorage.setItem(GUEST_CLOCK_KEY, JSON.stringify({ day: new Date().toDateString(), used })); } catch (_) {}
+  }, [used, limited]);
+
+  if (limited && left <= 0) return <GuestLock />;
+
+  const mm = limited ? Math.floor(left / 60) : 0;
+  const ss = limited ? String(left % 60).padStart(2, "0") : "00";
+  return (
+    <>
+      <ChapterBrowser guest />
+      {limited && !overlayOpen && (
+        <div
+          className={"fixed left-1/2 z-[45] flex -translate-x-1/2 items-center gap-2 rounded-full bg-navy-900/95 px-3 py-1.5 text-xs font-semibold text-white shadow-lg backdrop-blur dark:bg-parchment-50/95 dark:text-navy-900" + (left <= 30 ? " animate-pulse" : "")}
+          style={{ bottom: "calc(env(safe-area-inset-bottom) + 76px)" }}
+        >
+          <StepIcon name="clock" className="h-3.5 w-3.5" />
+          <span>Free preview {mm}:{ss}</span>
+          <button onClick={() => setOverlayOpen(true)} className="rounded-full bg-gold-500 px-2.5 py-1 text-[11px] text-navy-900 active:bg-gold-600">Sign in</button>
+        </div>
+      )}
+    </>
   );
 }
 
@@ -377,8 +346,6 @@ export default function AccessGate() {
 
 function AccessGateInner() {
   const { user, profile, loading, signingIn, needsFullName, deviceLimitReached, needsLegal, access, overlayOpen, setOverlayOpen } = useAuth();
-  const [demo, setDemo] = useState(null);
-  const [guestStep, setGuestStep] = useState(0);
 
   // Kapag kulang ang setup (pangalan / device limit), buksan ang account overlay.
   useEffect(() => {
@@ -387,10 +354,7 @@ function AccessGateInner() {
 
   if (loading || signingIn) return <Splash text="Loading…" />;
 
-  if (!user) {
-    if (demo) return <DemoShell key={demo.key} feature={demo.feature} onEnd={() => setDemo(null)} />;
-    return <GuestWelcome step={guestStep} setStep={setGuestStep} onStartDemo={(feature) => setDemo({ feature, key: Date.now() })} />;
-  }
+  if (!user) return <GuestApp />;
 
   if (!profile || needsFullName || deviceLimitReached) return <Splash text="Finishing your account setup…" />;
   // After a successful login: Privacy Notice / Terms / AI disclaimer must be accepted first.
