@@ -11,7 +11,7 @@
 //    Kapag pumalya, tuloy ang lumang version at susubukan ulit ng page (updateCheck.js).
 // 5. Pag-open ng app: galing agad sa cache, kahit walang internet / walang load.
 // 6. Pag na-activate, sinasabihan ang page (SW_ACTIVATED) para lumabas ang "New version" banner.
-const SW_BUILD = "1795063748410";
+const SW_BUILD = "1795612372610";
 const DB_HASH = "d0eeac62fe";
 const BUILD_PREFIX = "cmta-build-";
 const CACHE_NAME = BUILD_PREFIX + SW_BUILD;

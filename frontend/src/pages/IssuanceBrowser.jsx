@@ -73,7 +73,7 @@ export function IssuanceSidebar({ kind, selectedId, onSelect }) {
   const groups = useMemo(() => {
     const m = new Map();
     for (const it of filtered) {
-      const y = it.year || "Undated";
+      const y = kind === "tcp" ? "Topics" : it.year || "Undated";
       if (!m.has(y)) m.set(y, []);
       m.get(y).push(it);
     }
@@ -98,7 +98,7 @@ export function IssuanceSidebar({ kind, selectedId, onSelect }) {
         <div className="rounded-xl bg-parchment p-4 text-center text-sm text-slate-500 dark:bg-navy-800/60 dark:text-slate-400">
           <p className="mb-1 text-2xl" aria-hidden>{meta?.icon}</p>
           <p className="font-medium">No {meta?.label}s yet.</p>
-          {IS_DEV && <p className="mt-1 flex items-center justify-center gap-1 text-xs"><IconWrench className="h-3 w-3" /> Import one in the Dev Panel → CMO / CAO tab.</p>}
+          {IS_DEV && <p className="mt-1 flex items-center justify-center gap-1 text-xs"><IconWrench className="h-3 w-3" /> Import one in the Dev Panel → CMO / CAO / Primer tab.</p>}
         </div>
       )}
       {items.length > 0 && filtered.length === 0 && (
@@ -355,7 +355,7 @@ export function IssuanceReader({ kind, issuanceId, mode, fontScale, focusMode, o
     <div className={wrap}>
       <div className="mb-4 rounded-lg border border-parchment-200 bg-parchment-50 p-4 dark:border-navy-700 dark:bg-navy-900">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="rounded-md bg-navy-900 px-2 py-0.5 text-xs font-semibold uppercase tracking-wide text-white dark:bg-navy-700">{issuance.type}</span>
+          <span className="rounded-md bg-navy-900 px-2 py-0.5 text-xs font-semibold uppercase tracking-wide text-white dark:bg-navy-700">{issuance.type === "TCP" ? "TC Primer" : issuance.type}</span>
           <StatusBadge status={issuance.status} />
           {issuance.source === "preview" && <span className="rounded-md bg-purple-100 px-1.5 py-0.5 text-[11px] font-semibold text-purple-700 dark:bg-purple-900/40 dark:text-purple-300">DEV PREVIEW</span>}
         </div>

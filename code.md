@@ -109,13 +109,24 @@ workflows:
     <script>
       (function () {
         var KEY = "cuble_boot_recover";
+        // Binubura lang ang app cache (cmta-build-*) at ang service worker.
+        // HINDI binubura ang cmta-data-v1 (customs_law.db) kaya buo pa rin ang offline data.
+        function reset() {
+          var jobs = [];
+          try { if (navigator.serviceWorker) jobs.push(navigator.serviceWorker.getRegistrations().then(function (rs) { return Promise.all(rs.map(function (r) { return r.unregister(); })); })); } catch (e) {}
+          try { if (window.caches) jobs.push(caches.keys().then(function (ks) { return Promise.all(ks.filter(function (k) { return k.indexOf("cmta-build-") === 0; }).map(function (k) { return caches.delete(k); })); })); } catch (e) {}
+          return Promise.all(jobs).catch(function () {}).then(function () { location.reload(); });
+        }
         function recover() {
           if (navigator.onLine === false) return;
           try { if (sessionStorage.getItem(KEY)) return; sessionStorage.setItem(KEY, "1"); } catch (e) {}
-          var jobs = [];
-          try { if (navigator.serviceWorker) jobs.push(navigator.serviceWorker.getRegistrations().then(function (rs) { return Promise.all(rs.map(function (r) { return r.unregister(); })); })); } catch (e) {}
-          try { if (window.caches) jobs.push(caches.keys().then(function (ks) { return Promise.all(ks.map(function (k) { return caches.delete(k); })); })); } catch (e) {}
-          Promise.all(jobs).catch(function () {}).then(function () { location.reload(); });
+          // navigator.onLine ay hindi mapagkakatiwalaan (may wifi pero walang load).
+          // Mag-reset LANG kung talagang naabot ang server. Kung hindi, huwag galawin ang cache.
+          var ctl = typeof AbortController !== "undefined" ? new AbortController() : null;
+          var timer = setTimeout(function () { if (ctl) ctl.abort(); }, 8000);
+          fetch("version.json?t=" + Date.now(), { cache: "no-store", signal: ctl ? ctl.signal : undefined })
+            .then(function (r) { clearTimeout(timer); if (!r.ok) throw new Error("no server"); return reset(); })
+            .catch(function () { clearTimeout(timer); try { sessionStorage.removeItem(KEY); } catch (e) {} });
         }
         window.addEventListener("error", function (e) {
           var t = e.target;
@@ -145,20 +156,19 @@ export default {
 
 ## File: ./frontend/public/sw.js
 ```
-// Service worker v6 — atomic, per-build precache.
+// Service worker v7 — atomic precache, pero mas matibay.
 //
-// 1. Kada deploy nagbabago ang sw.js -> bagong cache na "cmta-build-<id>".
-// 2. Sa install, dina-download ang LAHAT ng files ng bagong build (precache.json).
-//    Kapag may pumalya (nawalan ng signal / load), FAILED ang install at ang LUMANG
-//    version ay tuloy pa ring gumagana. Walang halo-halong luma at bago.
-//    Susubukan ulit sa susunod; yung na-download na ay hindi na uulitin.
-// 3. Kapag kumpleto na saka lang mag-activate ang bagong version at saka lang buburahin
-//    ang lumang cache (1 nakaraang build ang itinatago para sa bukas na page).
-// 4. Pag-open ng app: galing agad sa cache, kahit walang internet / walang load.
-// 5. Pag na-activate ang bagong version, sinasabihan ang page (SW_ACTIVATED)
-//    para lumabas ang "New version" banner.
-// customs_law.db: nasa DATA_CACHE, best-effort lang ang precache nito; ang page
-// (src/offlineData.js) ang may fallback sa lumang copy.
+// Bago kumpara sa v6:
+// 1. Ang kailangan lang para mag-install ay ang CORE ng app (index.html, .js, .css, .wasm, .json).
+//    Ang images / fonts / customs_law.db ay dina-download sa background pagkatapos (best-effort).
+//    Hindi na maiipit sa lumang version dahil lang sa isang maliit na file na pumalya.
+// 2. Bawat file may timeout (30s) at 4 na retry na may pahinga. Hindi na nakabitin sa mahinang signal.
+// 3. Cache-busting sa precache.json at index.html (iwas lumang kopya mula sa GitHub Pages CDN),
+//    at tinitiyak na ang index.html ay galing sa SAME build bago i-save.
+// 4. Kapag kumpleto na ang core saka lang mag-activate ang bagong version.
+//    Kapag pumalya, tuloy ang lumang version at susubukan ulit ng page (updateCheck.js).
+// 5. Pag-open ng app: galing agad sa cache, kahit walang internet / walang load.
+// 6. Pag na-activate, sinasabihan ang page (SW_ACTIVATED) para lumabas ang "New version" banner.
 const SW_BUILD = "__BUILD_ID__";
 const DB_HASH = "__DB_HASH__";
 const BUILD_PREFIX = "cmta-build-";
@@ -166,7 +176,14 @@ const CACHE_NAME = BUILD_PREFIX + SW_BUILD;
 const DATA_CACHE = "cmta-data-v1"; // pareho sa src/offlineData.js
 
 const isLocalScope = () => /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?\//.test(self.registration.scope);
-const readyUrl = () => new URL("__ready", self.registration.scope).href;
+const scopeUrl = (p) => new URL(p, self.registration.scope).href;
+const readyUrl = () => scopeUrl("__ready"); // marka: kumpleto ang CORE ng build na ito
+const fullUrl = () => scopeUrl("__full"); // marka: kumpleto na pati images/fonts/db
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+const isDbFile = (f) => /\.db$/i.test(f);
+const isShellFile = (f) => f === "./" || /(^|\/)index\.html$/i.test(f);
+const isCritical = (f) => f === "./" || /\.(html|js|css|wasm|json|webmanifest)$/i.test(f);
 
 function isHtmlForAsset(url, response) {
   try {
@@ -175,15 +192,25 @@ function isHtmlForAsset(url, response) {
   } catch (_) { return false; }
 }
 
-async function fetchOk(url, fresh) {
+// May timeout + retry. Binabasa ang buong file sa loob ng timeout.
+async function download(url, bust, ms) {
   let lastErr;
-  for (let i = 0; i < 2; i++) {
+  for (let i = 0; i < 4; i++) {
+    if (i) await sleep(700 * i);
+    const ctl = new AbortController();
+    const timer = setTimeout(() => ctl.abort(), ms);
     try {
-      const r = await fetch(url, { cache: fresh ? "no-cache" : "default" });
+      const target = bust ? url + (url.includes("?") ? "&" : "?") + "_=" + Date.now() : url;
+      const r = await fetch(target, { cache: bust ? "no-store" : "default", signal: ctl.signal });
       if (!r.ok) throw new Error("HTTP " + r.status + " " + url);
       if (isHtmlForAsset(url, r)) throw new Error("HTML instead of file: " + url);
-      return r;
-    } catch (e) { lastErr = e; }
+      const blob = await r.blob();
+      return { blob, type: r.headers.get("content-type") || "" };
+    } catch (e) {
+      lastErr = e;
+    } finally {
+      clearTimeout(timer);
+    }
   }
   throw lastErr;
 }
@@ -198,25 +225,42 @@ async function fromOldCaches(url, names) {
   return null;
 }
 
-async function precacheAll() {
-  const scope = self.registration.scope;
-  if (isLocalScope()) return; // APK / dev: bundled na
+async function loadFileList() {
+  let lastErr;
+  for (let i = 0; i < 3; i++) {
+    if (i) await sleep(1500 * i);
+    try {
+      const res = await fetch(scopeUrl("precache.json") + "?_=" + Date.now(), { cache: "no-store" });
+      if (!res.ok) throw new Error("precache.json HTTP " + res.status);
+      const data = await res.json();
+      if (!SW_BUILD.startsWith("__") && data.id && String(data.id) !== SW_BUILD) throw new Error("precache.json is from another build");
+      return Array.isArray(data.files) ? data.files : [];
+    } catch (e) { lastErr = e; }
+  }
+  throw lastErr;
+}
 
-  const res = await fetch(new URL("precache.json", scope), { cache: "no-store" });
-  if (!res.ok) throw new Error("precache.json HTTP " + res.status);
-  const data = await res.json();
-  if (!SW_BUILD.startsWith("__") && data.id && String(data.id) !== SW_BUILD) throw new Error("precache.json is from another build");
+// Ang index.html ay dapat tumutukoy lang sa files ng SAME build. Kung hindi, lumang kopya ito (CDN).
+async function assertFreshShell(blob, fileSet) {
+  const html = await blob.text();
+  const refs = html.match(/assets\/[^"'\s)<>]+/g) || [];
+  for (const ref of refs) {
+    if (!fileSet.has(ref)) throw new Error("index.html is from another build: " + ref);
+  }
+}
 
-  const files = Array.isArray(data.files) ? data.files : [];
+// I-download ang mga files na wala pa sa cache. Returns ang listahan ng pumalya.
+async function syncFiles(list, allFiles) {
+  const fileSet = new Set(allFiles);
   const cache = await caches.open(CACHE_NAME);
   const dataCache = await caches.open(DATA_CACHE);
-  const oldNames = (await caches.keys()).filter((k) => k.startsWith("cmta-") && k !== CACHE_NAME && k !== DATA_CACHE);
+  const oldNames = (await caches.keys()).filter((k) => k.startsWith(BUILD_PREFIX) && k !== CACHE_NAME);
   const failed = [];
 
   const one = async (f) => {
-    const isDb = /\.db$/i.test(f);
+    const isDb = isDbFile(f);
     const hashed = f.includes("assets/") || /\.wasm$/i.test(f);
-    const url = new URL(f, scope).href + (isDb ? "?v=" + DB_HASH : "");
+    const url = scopeUrl(f) + (isDb ? "?v=" + DB_HASH : "");
     const target = isDb ? dataCache : cache;
     try {
       if (await target.match(url)) return;
@@ -224,23 +268,42 @@ async function precacheAll() {
         const old = await fromOldCaches(url, oldNames);
         if (old) { await target.put(url, old); return; }
       }
-      const r = await fetchOk(url, !hashed && !isDb);
-      await target.put(url, r);
+      const got = await download(url, !hashed && !isDb, isDb ? 120000 : 30000);
+      if (isShellFile(f)) await assertFreshShell(got.blob, fileSet);
+      const init = got.type ? { headers: { "Content-Type": got.type } } : undefined;
+      await target.put(url, new Response(got.blob, init));
     } catch (e) {
-      if (!isDb) failed.push(f);
+      failed.push(f);
     }
   };
 
-  for (let i = 0; i < files.length; i += 6) await Promise.all(files.slice(i, i + 6).map(one));
-  if (failed.length) throw new Error("Precache incomplete: " + failed.slice(0, 5).join(", "));
-
-  await cache.put(readyUrl(), new Response("ok")); // marka: kumpleto ang build na ito
+  for (let i = 0; i < list.length; i += 6) await Promise.all(list.slice(i, i + 6).map(one));
+  return failed;
 }
 
+// INSTALL: CORE lang ang hinihintay. Kapag may pumalya -> FAILED ang install, tuloy ang lumang version.
 self.addEventListener("install", (event) => {
   self.skipWaiting();
-  event.waitUntil(precacheAll());
+  event.waitUntil((async () => {
+    if (isLocalScope()) return; // APK / dev: bundled na
+    const files = await loadFileList();
+    const failed = await syncFiles(files.filter(isCritical), files);
+    if (failed.length) throw new Error("Precache incomplete: " + failed.slice(0, 5).join(", "));
+    const cache = await caches.open(CACHE_NAME);
+    await cache.put(readyUrl(), new Response("ok"));
+  })());
 });
+
+// Background: images / fonts / customs_law.db. Best-effort, uulitin sa susunod kung kulang pa.
+let warmStarted = false;
+async function warmOptional() {
+  if (isLocalScope()) return;
+  const cache = await caches.open(CACHE_NAME);
+  if (await cache.match(fullUrl())) return;
+  const files = await loadFileList(); // mag-throw kung ibang build na ang nasa server
+  const failed = await syncFiles(files.filter((f) => !isCritical(f)), files);
+  if (!failed.length) await cache.put(fullUrl(), new Response("ok"));
+}
 
 self.addEventListener("activate", (event) => {
   event.waitUntil((async () => {
@@ -263,6 +326,14 @@ self.addEventListener("activate", (event) => {
   })());
 });
 
+// Sinasagot ang tanong ng page: "anong build ka?" (ginagamit ng updateCheck.js)
+self.addEventListener("message", (event) => {
+  const d = event.data;
+  if (d && d.type === "GET_BUILD" && event.ports && event.ports[0]) {
+    event.ports[0].postMessage({ build: SW_BUILD });
+  }
+});
+
 async function shell(request) {
   const scope = self.registration.scope;
   const cache = await caches.open(CACHE_NAME);
@@ -276,10 +347,16 @@ async function shell(request) {
   return any || Response.error();
 }
 
-async function smallFile(request) {
+async function smallFile(request, event) {
   const cache = await caches.open(CACHE_NAME);
   const hit = (await cache.match(request, { ignoreSearch: true })) || (await caches.match(request, { ignoreSearch: true }));
-  return hit || fetch(request);
+  if (hit) return hit;
+  const res = await fetch(request);
+  if (res && res.ok && !isHtmlForAsset(request.url, res)) {
+    const copy = res.clone();
+    event.waitUntil(cache.put(request, copy).catch(() => {}));
+  }
+  return res;
 }
 
 async function bigFile(request, event, storeName) {
@@ -300,6 +377,11 @@ self.addEventListener("fetch", (event) => {
   if (url.origin !== self.location.origin) return;
   if (/\/(version|precache)\.json$|\/sw\.js$/.test(url.pathname)) return;
 
+  if (!warmStarted) {
+    warmStarted = true;
+    event.waitUntil(sleep(3000).then(warmOptional).catch(() => {}));
+  }
+
   if (request.mode === "navigate") {
     event.respondWith(shell(request));
     return;
@@ -309,7 +391,7 @@ self.addEventListener("fetch", (event) => {
     event.respondWith(bigFile(request, event, isDb ? DATA_CACHE : CACHE_NAME));
     return;
   }
-  event.respondWith(smallFile(request));
+  event.respondWith(smallFile(request, event));
 });
 ```
 
@@ -843,6 +925,7 @@ function QuizPlayViewInner({ title, entries, level, onBack, progressKey, backLab
 ## File: ./frontend/src/components/AccountOverlay.jsx
 ```
 import { useState, useEffect } from "react";
+import { useBackClose } from "../backNav";
 import { useAuth } from "../authContext";
 import { PAYMENT_METHODS, PROMO_PLAN, generateReferenceCode, submitPendingPurchase } from "../payments";
 import { TRIAL_DAYS, getSubjectInfo, getClTrialInfo, formatTimeLeft, formatDateShort } from "../access";
@@ -922,6 +1005,9 @@ export default function AccountOverlay() {
     setReferenceCode(generateReferenceCode(plan.id));
     setStep("payment-method");
   }, [overlayOpen, intentPlanId, user, profile]);
+
+  // Back button / swipe-back: isara ang overlay sa halip na lumabas sa app.
+  useBackClose(overlayOpen, () => setOverlayOpen(false));
 
   if (!overlayOpen) return null;
 
@@ -1324,8 +1410,6 @@ import { LegalGate, LegalLinkButton } from "./LegalNotice";
 const ChapterBrowser = lazy(() => import("../pages/ChapterBrowser"));
 const QuizHub = lazy(() => import("../pages/QuizHub"));
 
-const DEMO_SECONDS = 60;
-
 const STEP_ICONS = {
   scale: <><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="2" fill="currentColor" /></>,
   book: <><path d="M3 5c3-1.4 6-1.4 9 0M12 5c3-1.4 6-1.4 9 0M3 5v13c3-1.4 6-1.4 9 0M12 5v13c3-1.4 6-1.4 9 0" /></>,
@@ -1348,21 +1432,6 @@ function StepIcon({ name, className }) {
   );
 }
 
-// Tutorial + About for signed-out users. Each feature has a demo:
-// tap Start to try it for 1 minute, then return here.
-const STEPS = [
-  { icon: "scale", title: "Welcome to RA 10863", body: "Your offline companion for the Customs Modernization and Tariff Act (CMTA) — the law, notes, AI explanations, and practice questions for the CuBLE." },
-  { icon: "book", title: "Browse the Law", body: "Open the menu (☰). Every Title, Chapter, and Section is arranged in the correct order.", demo: { view: "browse", mode: "study" } },
-  { icon: "book", title: "Study Mode", body: "One section at a time, so you can stay focused. Use Expand All / Collapse All to move through a whole chapter quickly.", demo: { view: "browse", mode: "study" } },
-  { icon: "book", title: "Reading Mode", body: "A book-style view for long reading sessions. Tap Focus to hide the toolbar.", demo: { view: "browse", mode: "reading" } },
-  { icon: "highlighter", title: "Highlights", body: "Select any text to highlight it. Highlights save automatically and work offline.", demo: { view: "browse", mode: "study" } },
-  { icon: "note", title: "Notes", body: "Tap \"Add Note\" under any section to write your own explanation.", demo: { view: "browse", mode: "study" } },
-  { icon: "spark", title: "Ask AI", body: "Instant offline explanations from Osias 6.7 for every section.", demo: { view: "browse", mode: "study" } },
-  { icon: "search", title: "Search", body: "Find anything fast. Try \"102\" or \"smuggling\".", demo: { view: "search", mode: null } },
-  { icon: "edit", title: "Practice Quiz / Exam", body: "Try the practice questions. RA 10863 Level 1 (Filipino version) is free, and so are the first 10 items of each other subject. Levels 2–5 are in English.", demo: { view: "quiz", mode: null } },
-  { icon: "tag", title: TRIAL_DAYS + "-Day Free Trial", body: "Sign in with Google to start " + TRIAL_DAYS + " days of free access to the whole app. After that, choose a plan to continue." },
-];
-
 function Splash({ text }) {
   return (
     <div className="safe-top flex min-h-[100dvh] flex-col items-center justify-center gap-4 bg-parchment px-6 text-center dark:bg-navy-950">
@@ -1383,100 +1452,86 @@ function Splash({ text }) {
   );
 }
 
-// ── Demo: 1 minuto bawat Start ───────────────────────────────────────
-function DemoShell({ feature, onEnd }) {
-  const { overlayOpen, setOverlayOpen } = useAuth();
-  const [left, setLeft] = useState(DEMO_SECONDS);
-  const endRef = useRef(onEnd);
-  endRef.current = onEnd;
+// ── Guest: pasok agad sa BUONG app (walang login, walang tutorial) ───
+// Countdown: ilang segundo ang libreng preview ng guest kada araw.
+// Gawing 0 kung ayaw mo ng countdown (libre ang guest, walang lock).
+const GUEST_PREVIEW_SECONDS = 300;
+const GUEST_CLOCK_KEY = "cuble_guest_clock";
 
-  useEffect(() => {
-    const endAt = Date.now() + DEMO_SECONDS * 1000;
-    const id = setInterval(() => {
-      const s = Math.max(0, Math.ceil((endAt - Date.now()) / 1000));
-      setLeft(s);
-      if (s <= 0) {
-        clearInterval(id);
-        endRef.current();
-      }
-    }, 500);
-    return () => clearInterval(id);
-  }, []);
-
-  const mm = Math.floor(left / 60);
-  const ss = String(left % 60).padStart(2, "0");
-
-  return (
-    <>
-      <ChapterBrowser initialView={feature.view} initialMode={feature.mode} demo />
-      {!overlayOpen && (
-        <div className="safe-bottom fixed bottom-3 left-1/2 z-[80] flex -translate-x-1/2 items-center gap-2 rounded-full bg-navy-900/95 px-4 py-2 text-xs font-semibold text-white shadow-lg backdrop-blur dark:bg-parchment-50/95 dark:text-navy-900">
-          <StepIcon name="clock" className="h-3.5 w-3.5" aria-hidden />
-          <span>Demo {mm}:{ss}</span>
-          <button onClick={() => setOverlayOpen(true)} className="rounded-full bg-gold-500 px-2.5 py-1 text-[11px] text-navy-900 active:bg-gold-600">Sign in</button>
-          <button onClick={onEnd} className="rounded-full border border-white/40 px-2.5 py-1 text-[11px] dark:border-navy-900/40">Exit</button>
-        </div>
-      )}
-    </>
-  );
+function readGuestUsed() {
+  try {
+    const d = JSON.parse(localStorage.getItem(GUEST_CLOCK_KEY) || "null");
+    if (d && d.day === new Date().toDateString()) return Number(d.used) || 0;
+  } catch (_) {}
+  return 0;
 }
 
-// ── Guest: About + Tutorial + Login ──────────────────────────────────
-function GuestWelcome({ step, setStep, onStartDemo }) {
+// Tapos na ang preview: login na lang ang pwede.
+function GuestLock() {
   const { signInWithGoogle, signingIn, authError } = useAuth();
-  const total = STEPS.length;
-  const cur = STEPS[step];
-  const isLast = step === total - 1;
-
   return (
-    <div className="safe-top safe-bottom flex min-h-[100dvh] flex-col bg-parchment dark:bg-navy-950">
-      <div className="px-5 pb-2 pt-4 text-center">
-        <p className="text-xs font-semibold uppercase tracking-widest text-gold-600 dark:text-gold-400">RA 10863 · CMTA</p>
-        <h1 className="text-xl font-bold text-navy-900 dark:text-parchment-50">CuBLE Review App</h1>
-      </div>
-
-      <main className="flex flex-1 flex-col items-center justify-center px-5 py-4">
-        <div className="w-full max-w-md rounded-xl border border-parchment-200 bg-parchment-50 p-6 text-center dark:border-navy-700 dark:bg-navy-900">
-          <div className="mb-4 flex justify-center gap-1.5">
-            {STEPS.map((_, i) => (
-              <button key={i} onClick={() => setStep(i)} aria-label={"Step " + (i + 1)} className={"h-1.5 rounded-full transition-all duration-300 " + (i === step ? "w-6 bg-navy-900 dark:bg-parchment-50" : "w-1.5 bg-parchment-200 dark:bg-navy-700")} />
-            ))}
-          </div>
-          <span className="mb-3 flex items-center justify-center" aria-hidden>
-            <span className="flex h-16 w-16 items-center justify-center rounded-full border border-seal text-seal dark:border-gold-400 dark:text-gold-400"><StepIcon name={cur.icon} className="h-8 w-8" /></span>
-          </span>
-          <h2 className="mb-2 text-xl font-bold text-navy-900 dark:text-parchment-50">{cur.title}</h2>
-          <p className="mb-5 text-sm leading-relaxed text-slate-600 dark:text-slate-300">{cur.body}</p>
-
-          {cur.demo && (
-            <button onClick={() => onStartDemo(cur.demo)} className="mb-4 flex w-full items-center justify-center gap-1.5 rounded-xl border-2 border-gold-500 bg-gold-50 px-4 py-2.5 text-sm font-semibold text-navy-900 active:bg-gold-100 dark:border-gold-400 dark:bg-navy-800 dark:text-gold-400">
-              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" stroke="none"><path d="M7 5.3v13.4a1 1 0 0 0 1.5.86l11-6.7a1 1 0 0 0 0-1.72l-11-6.7A1 1 0 0 0 7 5.3Z" /></svg>
-              Start — try it for 1 minute
-            </button>
-          )}
-
-          <div className="flex items-center gap-2">
-            {step > 0 && (
-              <button onClick={() => setStep(step - 1)} className="flex h-11 flex-1 items-center justify-center rounded-xl border border-parchment-200 text-sm font-semibold text-slate-600 active:bg-parchment dark:border-navy-700 dark:text-slate-300 dark:active:bg-navy-800">Back</button>
-            )}
-            <button onClick={() => setStep(isLast ? 0 : step + 1)} className="flex h-11 flex-[2] items-center justify-center gap-1.5 rounded-xl bg-navy-900 text-sm font-semibold text-white active:bg-navy-800 dark:bg-navy-700">
-              {isLast ? <><StepIcon name="clock" className="h-4 w-4" /> Replay Tutorial</> : "Next"}
-            </button>
-          </div>
-        </div>
-      </main>
-
-      <div className="border-t border-parchment-200 bg-parchment-50/90 p-4 backdrop-blur dark:border-navy-800 dark:bg-navy-900/90">
-        {authError && <p className="mb-2 text-center text-xs text-red-600 dark:text-red-400">{authError}</p>}
-        <p className="mx-auto mb-2 max-w-md text-center text-[11px] leading-snug text-slate-500 dark:text-slate-400">
+    <div className="safe-top safe-bottom flex min-h-[100dvh] flex-col items-center justify-center bg-parchment px-5 py-6 dark:bg-navy-950">
+      <div className="w-full max-w-md rounded-xl border border-parchment-200 bg-parchment-50 p-6 text-center dark:border-navy-700 dark:bg-navy-900">
+        <img src={logoImg} alt="Customs Tech" draggable={false} className="mx-auto mb-3 h-16 w-16 rounded-full object-contain" />
+        <h1 className="text-xl font-bold text-navy-900 dark:text-parchment-50">Enjoying the app?</h1>
+        <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+          Your free preview for today is over. Log in with Google to keep going and start your {TRIAL_DAYS}-day free trial of the whole app.
+        </p>
+        {authError && <p className="mt-3 text-xs text-red-600 dark:text-red-400">{authError}</p>}
+        <p className="mx-auto mt-4 mb-2 max-w-xs text-[11px] leading-snug text-slate-500 dark:text-slate-400">
           After you log in you will be asked to accept the{" "}
           <LegalLinkButton className="font-semibold text-navy-900 dark:text-gold-400">Privacy Notice &amp; Terms</LegalLinkButton>.
         </p>
-        <button onClick={signInWithGoogle} disabled={signingIn} className="mx-auto flex h-12 w-full max-w-md items-center justify-center gap-1.5 rounded-xl bg-gold-500 text-sm font-bold text-navy-900 shadow-sm active:bg-gold-600 disabled:opacity-50">
-          {signingIn ? "Waiting for Google..." : <><StepIcon name="tag" className="h-4 w-4" /> Login with Google — start your {TRIAL_DAYS}-day free trial</>}
+        <button onClick={signInWithGoogle} disabled={signingIn} className="flex h-12 w-full items-center justify-center gap-1.5 rounded-xl bg-gold-500 text-sm font-bold text-navy-900 shadow-sm active:bg-gold-600 disabled:opacity-50">
+          {signingIn ? "Waiting for Google..." : <><StepIcon name="tag" className="h-4 w-4" /> Login with Google</>}
         </button>
       </div>
     </div>
+  );
+}
+
+function GuestApp() {
+  const { overlayOpen, setOverlayOpen } = useAuth();
+  const [used, setUsed] = useState(readGuestUsed);
+  const overlayRef = useRef(overlayOpen);
+  overlayRef.current = overlayOpen;
+  const limited = GUEST_PREVIEW_SECONDS > 0;
+  const left = limited ? Math.max(0, GUEST_PREVIEW_SECONDS - used) : null;
+
+  // Tumatakbo lang ang oras kapag nakikita ang app at hindi nagla-login.
+  useEffect(() => {
+    if (!limited) return undefined;
+    const id = setInterval(() => {
+      if (document.visibilityState === "hidden" || overlayRef.current) return;
+      setUsed((u) => u + 1);
+    }, 1000);
+    return () => clearInterval(id);
+  }, [limited]);
+
+  // Naka-save para hindi ma-reset ng refresh.
+  useEffect(() => {
+    if (!limited) return;
+    try { localStorage.setItem(GUEST_CLOCK_KEY, JSON.stringify({ day: new Date().toDateString(), used })); } catch (_) {}
+  }, [used, limited]);
+
+  if (limited && left <= 0) return <GuestLock />;
+
+  const mm = limited ? Math.floor(left / 60) : 0;
+  const ss = limited ? String(left % 60).padStart(2, "0") : "00";
+  return (
+    <>
+      <ChapterBrowser guest />
+      {limited && !overlayOpen && (
+        <div
+          className={"fixed left-1/2 z-[45] flex -translate-x-1/2 items-center gap-2 rounded-full bg-navy-900/95 px-3 py-1.5 text-xs font-semibold text-white shadow-lg backdrop-blur dark:bg-parchment-50/95 dark:text-navy-900" + (left <= 30 ? " animate-pulse" : "")}
+          style={{ bottom: "calc(env(safe-area-inset-bottom) + 76px)" }}
+        >
+          <StepIcon name="clock" className="h-3.5 w-3.5" />
+          <span>Free preview {mm}:{ss}</span>
+          <button onClick={() => setOverlayOpen(true)} className="rounded-full bg-gold-500 px-2.5 py-1 text-[11px] text-navy-900 active:bg-gold-600">Sign in</button>
+        </div>
+      )}
+    </>
   );
 }
 
@@ -1609,6 +1664,38 @@ function RenewBanner() {
   );
 }
 
+// ── Hindi pa kumpleto ang offline data (db + wasm) sa device na ito ───
+function OfflineReadyBadge() {
+  const [ready, setReady] = useState(null);
+  const [retrying, setRetrying] = useState(false);
+  const check = () => {
+    import("../offlineData").then((m) => m.isOfflineDataReady()).then(setReady).catch(() => setReady(false));
+  };
+  useEffect(() => {
+    check();
+    const id = setInterval(check, 15000);
+    const onOnline = () => setTimeout(check, 2000);
+    window.addEventListener("online", onOnline);
+    return () => { clearInterval(id); window.removeEventListener("online", onOnline); };
+  }, []);
+  if (ready !== false) return null;
+  const retry = async () => {
+    setRetrying(true);
+    try { const m = await import("../db"); await m.warmOfflineData(); } catch (_) {}
+    check();
+    setRetrying(false);
+  };
+  return (
+    <div className="pointer-events-none fixed inset-x-3 z-[55] mx-auto max-w-md" style={{ bottom: "calc(env(safe-area-inset-bottom) + 76px)" }}>
+      <div className="pointer-events-auto rounded-xl border border-oxblood bg-parchment-50 p-3 text-center shadow-lg dark:bg-navy-800">
+        <p className="text-xs font-semibold text-oxblood dark:text-oxblood-300">Hindi pa buo ang offline data sa device na ito.</p>
+        <p className="mt-0.5 text-[11px] text-slate-500 dark:text-slate-400">Manatiling naka-connect hanggang mawala ang mensaheng ito — saka lang talaga gagana nang walang internet.</p>
+        <button onClick={retry} disabled={retrying} className="mt-2 rounded-full bg-oxblood px-3 py-1.5 text-xs font-bold text-white active:opacity-80 disabled:opacity-60">{retrying ? "Dina-download…" : "Subukan ulit i-download"}</button>
+      </div>
+    </div>
+  );
+}
+
 // ── "Offline" pill ───────────────────────────────────────────────────
 function OfflinePill() {
   const [online, setOnline] = useState(() => typeof navigator === "undefined" || navigator.onLine !== false);
@@ -1685,6 +1772,7 @@ export default function AccessGate() {
       <UnlockToast />
       <RenewBanner />
       <OfflinePill />
+      <OfflineReadyBadge />
       <UpdateBanner />
     </>
   );
@@ -1692,8 +1780,6 @@ export default function AccessGate() {
 
 function AccessGateInner() {
   const { user, profile, loading, signingIn, needsFullName, deviceLimitReached, needsLegal, access, overlayOpen, setOverlayOpen } = useAuth();
-  const [demo, setDemo] = useState(null);
-  const [guestStep, setGuestStep] = useState(0);
 
   // Kapag kulang ang setup (pangalan / device limit), buksan ang account overlay.
   useEffect(() => {
@@ -1702,10 +1788,7 @@ function AccessGateInner() {
 
   if (loading || signingIn) return <Splash text="Loading…" />;
 
-  if (!user) {
-    if (demo) return <DemoShell key={demo.key} feature={demo.feature} onEnd={() => setDemo(null)} />;
-    return <GuestWelcome step={guestStep} setStep={setGuestStep} onStartDemo={(feature) => setDemo({ feature, key: Date.now() })} />;
-  }
+  if (!user) return <GuestApp />;
 
   if (!profile || needsFullName || deviceLimitReached) return <Splash text="Finishing your account setup…" />;
   // After a successful login: Privacy Notice / Terms / AI disclaimer must be accepted first.
@@ -3245,6 +3328,7 @@ import AccessGate from "./components/AccessGate";
 import { seedDefaultQuizzes } from "./subjectQuizStore";
 import { AuthProvider } from "./authContext";
 import AccountOverlay from "./components/AccountOverlay";
+import { isNativeApp } from "./pwaInstall";
 
 class ErrorBoundary extends React.Component {
   constructor(props) { super(props); this.state = { error: null }; }
@@ -3263,17 +3347,11 @@ class ErrorBoundary extends React.Component {
   }
 }
 
-// unhandledrejection-safe: log only. Never replace the whole page for a
-// transient error (network drop, resume from background, etc).
 window.addEventListener("unhandledrejection", (e) => {
   console.warn("Unhandled rejection:", e.reason);
   e.preventDefault();
 });
 
-// Seed CL / CDP / TL / PC default quizzes (from src/data/defaultQuizzes/*.json)
-// into localStorage kapag walang laman pa. Kailangan ito para may laman
-// ang mga subject sa ANY bagong browser/origin — kasama ang GitHub Pages,
-// na may sarili at hiwalay na localStorage kumpara sa localhost.
 seedDefaultQuizzes();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -3287,7 +3365,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   </React.StrictMode>
 );
 
-// Register Service Worker
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker.register("./sw.js").catch((err) => {
@@ -3296,7 +3373,18 @@ if ("serviceWorker" in navigator) {
   });
 }
 
-// Offline-ready: i-save ang CMTA data (customs_law.db + sql wasm) habang may internet.
+// Android hardware back button (APK lang, via @capacitor/app). May bukas na
+// view/overlay (naka-push sa backNav.js)? Bumalik lang dito sa app. Wala nang
+// mababalikan (home/root na talaga)? I-minimize, huwag i-kill ang app.
+if (isNativeApp()) {
+  import("@capacitor/app").then(({ App }) => {
+    App.addListener("backButton", ({ canGoBack }) => {
+      if (canGoBack) window.history.back();
+      else App.minimizeApp();
+    });
+  }).catch(() => {});
+}
+
 {
   const warm = () => import("./db").then((m) => m.warmOfflineData()).catch(() => {});
   window.addEventListener("load", () => setTimeout(warm, 2500));
@@ -3329,6 +3417,7 @@ import DevPanel from "./DevPanel";
 import QuizPage from "./QuizPage";
 import QuizHub from "./QuizHub";
 import AccountButton from "../components/AccountButton";
+import { useBackClose } from "../backNav";
 import { HighlightableContent, useNodeHighlights, HighlightHint } from "../components/ReaderParts";
 // Admin Panel: nilo-load lang kapag admin ang nagbukas (mas magaan ang unang load ng ibang user).
 const AdminPanel = lazy(() =>
@@ -4275,7 +4364,7 @@ function FeesView() {
   );
 }
 
-export default function ChapterBrowser({ initialView = "browse", initialMode = null, demo = false } = {}) {
+export default function ChapterBrowser({ initialView = "browse", initialMode = null, demo = false, guest = false } = {}) {
   const { profile } = useAuth();
   const [view, setView] = useState(initialView);
   const [titles, setTitles] = useState([]);
@@ -4304,17 +4393,13 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
   const pendingScrollRestore = useRef(null);
   const scrollSaveTimeout = useRef(null);
 
-  // Phone back button / swipe-back closes the full-screen menu instead of leaving the app.
-  useEffect(() => {
-    if (!sidebarOpen || view !== "browse" || window.innerWidth >= 768) return undefined;
-    window.history.pushState({ cuMenu: true }, "");
-    const onPop = () => setSidebarOpen(false);
-    window.addEventListener("popstate", onPop);
-    return () => {
-      window.removeEventListener("popstate", onPop);
-      if (window.history.state && window.history.state.cuMenu) window.history.back();
-    };
-  }, [sidebarOpen, view]);
+  // Phone back button / swipe-back closes the full-screen menu instead of leaving
+  // the app (gumagana rin sa APK dahil iisa lang ang window.history na ginagamit).
+  useBackClose(sidebarOpen && view === "browse" && window.innerWidth < 768, () => setSidebarOpen(false));
+
+  // Back button sa labas ng "browse" tab (search/quiz/admin/fees/update/settings/dev)
+  // ay bumabalik sa browse sa halip na lumabas sa app.
+  useBackClose(view !== "browse", () => setView("browse"));
 
   useEffect(() => { if (!demo) localStorage.setItem(SOURCE_KEY, source); }, [source, demo]);
   useEffect(() => { if (issuanceId) localStorage.setItem(ISSUANCE_KEY, issuanceId); }, [issuanceId]);
@@ -4339,9 +4424,9 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
   }, []);
 
   // ── Continue para sa CMO / CAO (kapareho ng CMTA) ──
-  const [issuanceResume, setIssuanceResume] = useState(() => ({ cmo: getIssuanceProgress("cmo"), cao: getIssuanceProgress("cao") }));
+  const [issuanceResume, setIssuanceResume] = useState(() => ({ cmo: getIssuanceProgress("cmo"), cao: getIssuanceProgress("cao"), tcp: getIssuanceProgress("tcp") }));
   useEffect(() => {
-    setIssuanceResume({ cmo: getIssuanceProgress("cmo"), cao: getIssuanceProgress("cao") });
+    setIssuanceResume({ cmo: getIssuanceProgress("cmo"), cao: getIssuanceProgress("cao"), tcp: getIssuanceProgress("tcp") });
   }, [source, view, issuanceId, chapterTree]);
 
   const resumeIssuance = useCallback((kind) => {
@@ -4392,7 +4477,7 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
       });
     const progress = getProgress();
     if (progress && progress.chapter_number) setResumeAvailable(progress);
-    if (!demo && !hasTutorialBeenSeen()) {
+    if (!demo && !guest && !hasTutorialBeenSeen()) {
       setShowTutorial(true);
     }
   }, []);
@@ -4541,7 +4626,7 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
         else { setSource("cmta"); setSidebarOpen(true); }
       },
     },
-    ...["cmo", "cao"].map((k) => {
+    ...["cmo", "cao", "tcp"].map((k) => {
       const meta = ISSUANCE_KINDS.find((x) => x.id === k);
       const p = issuanceResume[k];
       const iss = p ? getIssuance(p.id) : null;
@@ -4550,7 +4635,7 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
         icon: meta ? meta.icon : "📜",
         label: "Continue " + (meta ? meta.label : k.toUpperCase()),
         has: !!iss,
-        sub: iss ? iss.label + (iss.title ? " — " + iss.title : "") : "No progress yet — tap to pick a " + k.toUpperCase(),
+        sub: iss ? iss.label + (iss.title ? " — " + iss.title : "") : "No progress yet — tap to pick a " + (meta ? meta.label : k.toUpperCase()),
         onClick: () => resumeIssuance(k),
       };
     }),
@@ -4630,10 +4715,11 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
                   <NavIcon name={sidebarOpen ? "x" : "menu"} className="h-5 w-5" />
                 </button>
               )}
-              <div className="flex min-w-0 items-center gap-2 pl-1">
-                <img src={logoImg} alt="" aria-hidden="true" draggable={false} className="h-8 w-8 flex-shrink-0 rounded-full object-contain" />
+              {view !== "browse" && (
+                <div className="flex min-w-0 items-center gap-2 pl-1">
                 <span className="truncate text-[15px] font-bold tracking-tight text-navy-900 dark:text-parchment-50">{VIEW_TITLES[view] || "RA 10863"}</span>
-              </div>
+                </div>
+              )}
               <span className="flex-1" />
               <AccountButton />
               {view === "browse" && <ModeToggle mode={mode} setMode={setMode} />}
@@ -4751,7 +4837,7 @@ import IssuanceQuizPanel from "./IssuanceQuizPanel";
 // To add a tab later: add an entry to TABS and a matching render below.
 const TABS = [
   { id: "ra10863", label: "RA10863" },
-  { id: "issuances", label: "CMO / CAO" },
+  { id: "issuances", label: "CMO / CAO / Primer" },
   { id: "issuance-quiz", label: "CMO/CAO Quiz" },
 ];
 
@@ -8107,7 +8193,7 @@ export function IssuanceSidebar({ kind, selectedId, onSelect }) {
   const groups = useMemo(() => {
     const m = new Map();
     for (const it of filtered) {
-      const y = it.year || "Undated";
+      const y = kind === "tcp" ? "Topics" : it.year || "Undated";
       if (!m.has(y)) m.set(y, []);
       m.get(y).push(it);
     }
@@ -8132,7 +8218,7 @@ export function IssuanceSidebar({ kind, selectedId, onSelect }) {
         <div className="rounded-xl bg-parchment p-4 text-center text-sm text-slate-500 dark:bg-navy-800/60 dark:text-slate-400">
           <p className="mb-1 text-2xl" aria-hidden>{meta?.icon}</p>
           <p className="font-medium">No {meta?.label}s yet.</p>
-          {IS_DEV && <p className="mt-1 flex items-center justify-center gap-1 text-xs"><IconWrench className="h-3 w-3" /> Import one in the Dev Panel → CMO / CAO tab.</p>}
+          {IS_DEV && <p className="mt-1 flex items-center justify-center gap-1 text-xs"><IconWrench className="h-3 w-3" /> Import one in the Dev Panel → CMO / CAO / Primer tab.</p>}
         </div>
       )}
       {items.length > 0 && filtered.length === 0 && (
@@ -8389,7 +8475,7 @@ export function IssuanceReader({ kind, issuanceId, mode, fontScale, focusMode, o
     <div className={wrap}>
       <div className="mb-4 rounded-lg border border-parchment-200 bg-parchment-50 p-4 dark:border-navy-700 dark:bg-navy-900">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="rounded-md bg-navy-900 px-2 py-0.5 text-xs font-semibold uppercase tracking-wide text-white dark:bg-navy-700">{issuance.type}</span>
+          <span className="rounded-md bg-navy-900 px-2 py-0.5 text-xs font-semibold uppercase tracking-wide text-white dark:bg-navy-700">{issuance.type === "TCP" ? "TC Primer" : issuance.type}</span>
           <StatusBadge status={issuance.status} />
           {issuance.source === "preview" && <span className="rounded-md bg-purple-100 px-1.5 py-0.5 text-[11px] font-semibold text-purple-700 dark:bg-purple-900/40 dark:text-purple-300">DEV PREVIEW</span>}
         </div>
@@ -8510,7 +8596,7 @@ import { useState, useCallback } from "react";
 import {
   importIssuanceJson, getPreviewList, deletePreviewIssuance, clearPreview,
   exportIssuanceJson, exportManyJson, issuanceFileName,
-  ISSUANCE_PROMPT, ISSUANCE_TEMPLATE, STATUS_META,
+  ISSUANCE_PROMPT, ISSUANCE_TEMPLATE, TCP_PROMPT, TCP_TEMPLATE, STATUS_META,
 } from "../issuancesStore";
 
 const IconCopy = (p) => (
@@ -8556,6 +8642,7 @@ export default function IssuancePanel() {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [copied, setCopied] = useState(false);
+  const [copiedTcp, setCopiedTcp] = useState(false);
   const [, setTick] = useState(0);
   const refresh = () => setTick((t) => t + 1);
   const list = getPreviewList();
@@ -8567,7 +8654,7 @@ export default function IssuancePanel() {
       const res = importIssuanceJson(json);
       setSuccess(
         "✓ Imported " + res.map((r) => `${r.label} (${r.paragraphCount} paragraphs, ${r.aiCount} explained)`).join(", ") +
-        ". Open ☰ → CMO / CAO to preview."
+        ". Open ☰ and pick the CMO / CAO / Primer tab to preview."
       );
       setJson("");
       refresh();
@@ -8586,11 +8673,21 @@ export default function IssuancePanel() {
     }
   };
 
+  const copyTcpPrompt = async () => {
+    try {
+      await navigator.clipboard.writeText(TCP_PROMPT);
+      setCopiedTcp(true);
+      setTimeout(() => setCopiedTcp(false), 2500);
+    } catch {
+      alert("Clipboard blocked. Long-press the text in the box below instead.");
+    }
+  };
+
   const handleDelete = (id, label) => {
     if (confirm(`Remove ${label} from the dev preview?`)) { deletePreviewIssuance(id); refresh(); }
   };
   const handleClear = () => {
-    if (confirm("Remove ALL dev-preview CMOs / CAOs?")) { clearPreview(); refresh(); }
+    if (confirm("Remove ALL dev-preview CMOs / CAOs / Primers?")) { clearPreview(); refresh(); }
   };
 
   const btn = "min-h-[40px] rounded-lg border px-3 py-1.5 text-sm font-medium";
@@ -8598,7 +8695,7 @@ export default function IssuancePanel() {
   return (
     <div className="space-y-4">
       <div className="rounded-lg border border-parchment-200 bg-parchment-50 p-4 dark:border-navy-700 dark:bg-navy-800">
-        <h2 className="text-base font-bold text-navy-900 dark:text-parchment-50">CMO / CAO import</h2>
+        <h2 className="text-base font-bold text-navy-900 dark:text-parchment-50">CMO / CAO / Primer import</h2>
         <ol className="mt-2 list-decimal space-y-1 pl-5 text-sm text-slate-600 dark:text-slate-300">
           <li>Copy the AI prompt, paste it in ChatGPT / Gemini, then paste the official CMO/CAO text below it.</li>
           <li>Paste the JSON the AI gives you here (official paragraphs + Tagalog explanations in one go).</li>
@@ -8607,10 +8704,16 @@ export default function IssuancePanel() {
         </ol>
         <div className="mt-3 flex flex-wrap gap-2">
           <button onClick={copyPrompt} className={`${btn} flex items-center gap-1.5 border-purple-200 bg-purple-50 text-purple-700 dark:border-purple-700 dark:bg-purple-950/30 dark:text-purple-400`}>
-            {copied ? "✓ Prompt copied" : <><IconCopy className="h-4 w-4" /> Copy AI prompt</>}
+            {copied ? "✓ Prompt copied" : <><IconCopy className="h-4 w-4" /> Copy CMO/CAO prompt</>}
           </button>
           <button onClick={() => setJson(ISSUANCE_TEMPLATE)} className={`${btn} flex items-center gap-1.5 border-parchment-200 text-slate-600 dark:border-navy-700 dark:text-slate-300`}>
-            <IconLayers className="h-4 w-4" /> Insert template
+            <IconLayers className="h-4 w-4" /> Insert CMO/CAO template
+          </button>
+          <button onClick={copyTcpPrompt} className={`${btn} flex items-center gap-1.5 border-purple-200 bg-purple-50 text-purple-700 dark:border-purple-700 dark:bg-purple-950/30 dark:text-purple-400`}>
+            {copiedTcp ? "✓ Primer prompt copied" : <><IconCopy className="h-4 w-4" /> Copy Primer prompt</>}
+          </button>
+          <button onClick={() => setJson(TCP_TEMPLATE)} className={`${btn} flex items-center gap-1.5 border-parchment-200 text-slate-600 dark:border-navy-700 dark:text-slate-300`}>
+            <IconLayers className="h-4 w-4" /> Insert Primer template
           </button>
         </div>
       </div>
@@ -8620,7 +8723,7 @@ export default function IssuancePanel() {
           value={json}
           onChange={(e) => setJson(e.target.value)}
           rows={10}
-          placeholder="Paste JSON here — one CMO/CAO, or an array of many. Code fences are fine."
+          placeholder="Paste JSON here — one CMO / CAO / Primer topic, or an array of many. Code fences are fine."
           style={{ fontSize: "16px" }}
           className="w-full rounded-lg border border-parchment-200 bg-parchment p-2.5 font-mono text-navy-900 focus:outline-none dark:border-navy-700 dark:bg-navy-900 dark:text-parchment-50"
         />
@@ -8638,7 +8741,7 @@ export default function IssuancePanel() {
           <h3 className="text-sm font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400">Dev preview ({list.length})</h3>
           {list.length > 0 && (
             <div className="flex flex-wrap gap-2">
-              {["CMO", "CAO"].filter((t) => list.some((i) => i.type === t)).map((t) => (
+              {["CMO", "CAO", "TCP"].filter((t) => list.some((i) => i.type === t)).map((t) => (
                 <button key={t} onClick={() => download(`${t.toLowerCase()}-all.json`, exportManyJson(t))} className={`${btn} flex items-center gap-1.5 border-parchment-200 text-slate-600 dark:border-navy-700 dark:text-slate-300`}>
                   <IconDownload className="h-3.5 w-3.5" /> All {t}
                 </button>
@@ -10857,6 +10960,7 @@ export const ISSUANCE_KINDS = [
   { id: "cmta", label: "CMTA", icon: "⚖️", full: "Customs Modernization & Tariff Act" },
   { id: "cmo", label: "CMO", icon: "📜", full: "Customs Memorandum Orders" },
   { id: "cao", label: "CAO", icon: "📄", full: "Customs Administrative Orders" },
+  { id: "tcp", label: "Primer", icon: "📘", full: "Tariff Commission Primer" },
 ];
 
 export const STATUS_META = {
@@ -10881,15 +10985,18 @@ function normalizeAi(raw) {
 
 export function normalizeIssuance(raw) {
   if (!raw || typeof raw !== "object") throw new Error("Each issuance must be a JSON object.");
-  const type = str(raw.type).toUpperCase();
-  if (type !== "CMO" && type !== "CAO") {
-    throw new Error(`"type" must be "CMO" or "CAO" (got "${raw.type ?? ""}").`);
+  let type = str(raw.type).toUpperCase();
+  if (type === "PRIMER" || type === "TC PRIMER" || type === "TARIFF COMMISSION PRIMER") type = "TCP";
+  if (type !== "CMO" && type !== "CAO" && type !== "TCP") {
+    throw new Error(`"type" must be "CMO", "CAO" or "TCP" (got "${raw.type ?? ""}").`);
   }
+  const isTcp = type === "TCP";
   const number = str(raw.number)
-    .replace(/^(CMO|CAO)\b\s*(NO\.?|NUMBER)?\s*/i, "")
-    .replace(/\s+/g, "");
-  if (!number) throw new Error(`${type}: missing "number" (example: "01-2020").`);
-  const label = `${type} ${number}`;
+    .replace(/^(CMO|CAO|TCP|PRIMER)\b\s*(NO\.?|NUMBER)?\s*/i, "")
+    .replace(/\s+/g, isTcp ? " " : "")
+    .trim();
+  if (!number) throw new Error(`${type}: missing "number" (example: ${isTcp ? '"01"' : '"01-2020"'}).`);
+  const label = isTcp ? `Primer ${number}` : `${type} ${number}`;
   const id = `${type.toLowerCase()}-${slug(number)}`;
 
   let rawSections = Array.isArray(raw.sections) ? raw.sections : null;
@@ -10928,7 +11035,7 @@ export function normalizeIssuance(raw) {
   const aiCount = sections.reduce((n, s) => n + s.paragraphs.filter((p) => p.ai).length, 0);
 
   const date_issued = str(raw.date_issued);
-  const year = (number.match(/(\d{4})$/) || date_issued.match(/(\d{4})/) || [])[1] || "";
+  const year = isTcp ? "" : (number.match(/(\d{4})$/) || date_issued.match(/(\d{4})/) || [])[1] || "";
   const statusKey = str(raw.status).toLowerCase().replace(/[\s-]+/g, "_");
 
   return {
@@ -11045,7 +11152,7 @@ function compare(a, b) {
     if (!b.year) return -1;
     return b.year.localeCompare(a.year); // newest year first
   }
-  return (parseInt(a.number, 10) || 0) - (parseInt(b.number, 10) || 0); // 01, 02, 03...
+  return (parseInt(a.number, 10) || 0) - (parseInt(b.number, 10) || 0) || String(a.number).localeCompare(String(b.number), undefined, { numeric: true }); // 01, 02, 03...
 }
 
 export function listIssuances(kind) {
@@ -11200,6 +11307,33 @@ SHAPE EXAMPLE (structure only — replace all content)
 OFFICIAL TEXT (the only source of truth):
 `;
 
+// ── Tariff Commission Primer (type: "TCP") ───────────────────────────
+// Parehong format ng CMO / CAO. Ang "number" ay ang pagkakasunod-sunod ng topic (hal. "01", "02", "2.1").
+export const TCP_TEMPLATE = (() => {
+  const t = JSON.parse(ISSUANCE_TEMPLATE);
+  t.type = "TCP";
+  t.number = "01";
+  t.title = "[SAMPLE] Replace everything in this template";
+  t.subject = "One-line topic of this part of the Primer";
+  delete t.date_issued;
+  delete t.effectivity;
+  delete t.amends;
+  t.keywords = ["sample", "primer"];
+  t.ai.title = "Overview ng Primer 01";
+  t.ai.prompt = "Explain this part of the Tariff Commission Primer simply, with practical examples.";
+  t.sections[0].heading = "PART I. OVERVIEW";
+  t.sections[1].heading = "PART II. DETAILS";
+  t.sections[1].paragraphs[0].ai.prompt = "Explain this part of the Primer step by step with a practical example.";
+  return JSON.stringify(t, null, 2);
+})();
+
+export const TCP_PROMPT = ISSUANCE_PROMPT
+  .replace("CMO / CAO → STUDY-JSON GENERATION PROMPT", "TARIFF COMMISSION PRIMER → STUDY-JSON GENERATION PROMPT")
+  .replace("ONE Customs Memorandum Order (CMO) or Customs Administrative Order (CAO)", "ONE topic / chapter / part of the TARIFF COMMISSION PRIMER")
+  .replace('type ("CMO" or "CAO"), number (e.g. "01-2020")', 'type (always "TCP"), number (the order of this topic in the Primer, e.g. "01", "02", "2.1")')
+  .replace('{"type":"CMO","number":"01-2020"', '{"type":"TCP","number":"01"')
+  .replace("OFFICIAL TEXT (the only source of truth):", "OFFICIAL PRIMER TEXT (the only source of truth):");
+
 // ── Continue / resume progress para sa CMO at CAO ────────────────────
 const ISSUANCE_PROGRESS_KEY = "customsLaw_issuanceProgress";
 
@@ -11284,13 +11418,38 @@ export function checkForUpdate(force) {
   return inflight;
 }
 
+// Tinatanong ang active service worker kung anong build siya (v7+ lang ang sumasagot).
+async function activeBuild() {
+  try {
+    const reg = await navigator.serviceWorker.getRegistration();
+    const sw = reg && reg.active;
+    if (!sw) return null;
+    return await new Promise((resolve) => {
+      const ch = new MessageChannel();
+      const t = setTimeout(() => resolve(null), 2000);
+      ch.port1.onmessage = (e) => {
+        clearTimeout(t);
+        resolve(e.data && e.data.build ? String(e.data.build) : null);
+      };
+      sw.postMessage({ type: "GET_BUILD" }, [ch.port2]);
+    });
+  } catch (_) {
+    return null;
+  }
+}
+
 async function installLatest(timeoutMs) {
   try {
     const reg = "serviceWorker" in navigator ? await navigator.serviceWorker.getRegistration() : null;
     if (!reg) return true;
     await reg.update();
     const w = reg.installing || reg.waiting;
-    if (!w || w.state === "activated") return true;
+    if (!w) {
+      // Walang bagong ini-install. Okay lang i-reload kung ang active SW ay ang pinakabago na.
+      const b = await activeBuild();
+      return !b || !remoteId || b === remoteId;
+    }
+    if (w.state === "activated") return true;
     return await new Promise((resolve) => {
       const t = setTimeout(() => resolve(false), timeoutMs);
       w.addEventListener("statechange", () => {
@@ -11344,6 +11503,26 @@ if (typeof window !== "undefined") {
       remoteId = String(d.build);
       notify();
     });
+
+    // Kapag pumalya ang pag-install ng bagong version (nawalan ng signal, atbp.),
+    // subukan ulit nang kusa hanggang matapos. Ang na-download na ay hindi na uulitin.
+    let retries = 0;
+    const retry = () => {
+      if (swReady || !isUpdateAvailable() || retries >= 8) return;
+      if (document.visibilityState === "hidden" || navigator.onLine === false) return;
+      retries++;
+      kickSwUpdate();
+    };
+    navigator.serviceWorker.ready.then((reg) => {
+      reg.addEventListener("updatefound", () => {
+        const w = reg.installing;
+        if (!w) return;
+        w.addEventListener("statechange", () => {
+          if (w.state === "redundant") setTimeout(retry, 15000);
+        });
+      });
+    }).catch(() => {});
+    setInterval(retry, 2 * 60 * 1000);
   }
 }
 ```
@@ -11949,6 +12128,66 @@ export async function ensureOffline(items) {
       await store(key, await fetchValid(key, kind), kind);
     } catch (_) {}
   }
+}
+
+// Tinitignan kung kumpleto na ang offline data (sql.js wasm + customs_law.db) —
+// gamitin ito bago maniwala na "offline-ready na" base lang sa UI.
+export async function isOfflineDataReady() {
+  if (!cacheOn()) return isNative(); // APK (bundled na) = laging "ready"
+  try {
+    const cache = await caches.open(DATA_CACHE);
+    const keys = await cache.keys();
+    const hasDb = keys.some((r) => /\.db(\?|$)/i.test(r.url));
+    const hasWasm = keys.some((r) => /\.wasm(\?|$)/i.test(r.url));
+    return hasDb && hasWasm;
+  } catch (_) {
+    return false;
+  }
+}
+```
+
+## File: ./frontend/src/backNav.js
+```
+import { useEffect, useRef } from "react";
+
+// Iisang "back stack" para gumana ang back button/swipe-back ng phone kapwa
+// sa PWA (browser) at sa APK (Capacitor) — pareho lang silang window.history.
+//
+// Gamit: tawagin ang useBackClose(active, onBack) sa loob ng isang component.
+// Habang active === true, may naka-push na history entry. Pag pinindot ang
+// back, tatawagin ang onBack mo (isara/bumalik) sa halip na umalis sa app.
+// Isang pindot = isang antas lang ang nagsasara (LIFO), tulad ng normal na app.
+const stack = [];
+let nextDepth = 1;
+
+if (typeof window !== "undefined") {
+  window.addEventListener("popstate", () => {
+    const top = stack.pop();
+    if (top) top.onBack();
+  });
+}
+
+export function pushBackLevel(onBack) {
+  const depth = nextDepth++;
+  try { window.history.pushState({ __backLevel: depth }, ""); } catch (_) {}
+  stack.push({ depth, onBack });
+  // Tawagin ito kung isinara MO mismo (hal. pag-tap ng "X"), hindi sa back button.
+  return function closeBackLevel() {
+    const i = stack.findIndex((e) => e.depth === depth);
+    if (i === -1) return;
+    const wasTop = i === stack.length - 1;
+    stack.splice(i, 1);
+    if (wasTop) { try { window.history.back(); } catch (_) {} }
+  };
+}
+
+export function useBackClose(active, onBack) {
+  const cb = useRef(onBack);
+  cb.current = onBack;
+  useEffect(() => {
+    if (!active) return undefined;
+    return pushBackLevel(() => cb.current());
+  }, [active]);
 }
 ```
 

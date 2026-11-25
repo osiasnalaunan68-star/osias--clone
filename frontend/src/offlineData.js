@@ -90,3 +90,18 @@ export async function ensureOffline(items) {
     } catch (_) {}
   }
 }
+
+// Tinitignan kung kumpleto na ang offline data (sql.js wasm + customs_law.db) —
+// gamitin ito bago maniwala na "offline-ready na" base lang sa UI.
+export async function isOfflineDataReady() {
+  if (!cacheOn()) return isNative(); // APK (bundled na) = laging "ready"
+  try {
+    const cache = await caches.open(DATA_CACHE);
+    const keys = await cache.keys();
+    const hasDb = keys.some((r) => /\.db(\?|$)/i.test(r.url));
+    const hasWasm = keys.some((r) => /\.wasm(\?|$)/i.test(r.url));
+    return hasDb && hasWasm;
+  } catch (_) {
+    return false;
+  }
+}

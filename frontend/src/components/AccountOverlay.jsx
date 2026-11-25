@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useBackClose } from "../backNav";
 import { useAuth } from "../authContext";
 import { PAYMENT_METHODS, PROMO_PLAN, generateReferenceCode, submitPendingPurchase } from "../payments";
 import { TRIAL_DAYS, getSubjectInfo, getClTrialInfo, formatTimeLeft, formatDateShort } from "../access";
@@ -78,6 +79,9 @@ export default function AccountOverlay() {
     setReferenceCode(generateReferenceCode(plan.id));
     setStep("payment-method");
   }, [overlayOpen, intentPlanId, user, profile]);
+
+  // Back button / swipe-back: isara ang overlay sa halip na lumabas sa app.
+  useBackClose(overlayOpen, () => setOverlayOpen(false));
 
   if (!overlayOpen) return null;
 

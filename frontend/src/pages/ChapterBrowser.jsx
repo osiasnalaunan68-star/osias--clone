@@ -21,6 +21,7 @@ import DevPanel from "./DevPanel";
 import QuizPage from "./QuizPage";
 import QuizHub from "./QuizHub";
 import AccountButton from "../components/AccountButton";
+import { useBackClose } from "../backNav";
 import { HighlightableContent, useNodeHighlights, HighlightHint } from "../components/ReaderParts";
 // Admin Panel: nilo-load lang kapag admin ang nagbukas (mas magaan ang unang load ng ibang user).
 const AdminPanel = lazy(() =>
@@ -996,17 +997,13 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
   const pendingScrollRestore = useRef(null);
   const scrollSaveTimeout = useRef(null);
 
-  // Phone back button / swipe-back closes the full-screen menu instead of leaving the app.
-  useEffect(() => {
-    if (!sidebarOpen || view !== "browse" || window.innerWidth >= 768) return undefined;
-    window.history.pushState({ cuMenu: true }, "");
-    const onPop = () => setSidebarOpen(false);
-    window.addEventListener("popstate", onPop);
-    return () => {
-      window.removeEventListener("popstate", onPop);
-      if (window.history.state && window.history.state.cuMenu) window.history.back();
-    };
-  }, [sidebarOpen, view]);
+  // Phone back button / swipe-back closes the full-screen menu instead of leaving
+  // the app (gumagana rin sa APK dahil iisa lang ang window.history na ginagamit).
+  useBackClose(sidebarOpen && view === "browse" && window.innerWidth < 768, () => setSidebarOpen(false));
+
+  // Back button sa labas ng "browse" tab (search/quiz/admin/fees/update/settings/dev)
+  // ay bumabalik sa browse sa halip na lumabas sa app.
+  useBackClose(view !== "browse", () => setView("browse"));
 
   useEffect(() => { if (!demo) localStorage.setItem(SOURCE_KEY, source); }, [source, demo]);
   useEffect(() => { if (issuanceId) localStorage.setItem(ISSUANCE_KEY, issuanceId); }, [issuanceId]);
@@ -1031,9 +1028,9 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
   }, []);
 
   // ── Continue para sa CMO / CAO (kapareho ng CMTA) ──
-  const [issuanceResume, setIssuanceResume] = useState(() => ({ cmo: getIssuanceProgress("cmo"), cao: getIssuanceProgress("cao") }));
+  const [issuanceResume, setIssuanceResume] = useState(() => ({ cmo: getIssuanceProgress("cmo"), cao: getIssuanceProgress("cao"), tcp: getIssuanceProgress("tcp") }));
   useEffect(() => {
-    setIssuanceResume({ cmo: getIssuanceProgress("cmo"), cao: getIssuanceProgress("cao") });
+    setIssuanceResume({ cmo: getIssuanceProgress("cmo"), cao: getIssuanceProgress("cao"), tcp: getIssuanceProgress("tcp") });
   }, [source, view, issuanceId, chapterTree]);
 
   const resumeIssuance = useCallback((kind) => {
@@ -1233,7 +1230,7 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
         else { setSource("cmta"); setSidebarOpen(true); }
       },
     },
-    ...["cmo", "cao"].map((k) => {
+    ...["cmo", "cao", "tcp"].map((k) => {
       const meta = ISSUANCE_KINDS.find((x) => x.id === k);
       const p = issuanceResume[k];
       const iss = p ? getIssuance(p.id) : null;
@@ -1242,7 +1239,7 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
         icon: meta ? meta.icon : "📜",
         label: "Continue " + (meta ? meta.label : k.toUpperCase()),
         has: !!iss,
-        sub: iss ? iss.label + (iss.title ? " — " + iss.title : "") : "No progress yet — tap to pick a " + k.toUpperCase(),
+        sub: iss ? iss.label + (iss.title ? " — " + iss.title : "") : "No progress yet — tap to pick a " + (meta ? meta.label : k.toUpperCase()),
         onClick: () => resumeIssuance(k),
       };
     }),

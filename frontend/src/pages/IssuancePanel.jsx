@@ -2,7 +2,7 @@ import { useState, useCallback } from "react";
 import {
   importIssuanceJson, getPreviewList, deletePreviewIssuance, clearPreview,
   exportIssuanceJson, exportManyJson, issuanceFileName,
-  ISSUANCE_PROMPT, ISSUANCE_TEMPLATE, STATUS_META,
+  ISSUANCE_PROMPT, ISSUANCE_TEMPLATE, TCP_PROMPT, TCP_TEMPLATE, STATUS_META,
 } from "../issuancesStore";
 
 const IconCopy = (p) => (
@@ -48,6 +48,7 @@ export default function IssuancePanel() {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [copied, setCopied] = useState(false);
+  const [copiedTcp, setCopiedTcp] = useState(false);
   const [, setTick] = useState(0);
   const refresh = () => setTick((t) => t + 1);
   const list = getPreviewList();
@@ -59,7 +60,7 @@ export default function IssuancePanel() {
       const res = importIssuanceJson(json);
       setSuccess(
         "✓ Imported " + res.map((r) => `${r.label} (${r.paragraphCount} paragraphs, ${r.aiCount} explained)`).join(", ") +
-        ". Open ☰ → CMO / CAO to preview."
+        ". Open ☰ and pick the CMO / CAO / Primer tab to preview."
       );
       setJson("");
       refresh();
@@ -78,11 +79,21 @@ export default function IssuancePanel() {
     }
   };
 
+  const copyTcpPrompt = async () => {
+    try {
+      await navigator.clipboard.writeText(TCP_PROMPT);
+      setCopiedTcp(true);
+      setTimeout(() => setCopiedTcp(false), 2500);
+    } catch {
+      alert("Clipboard blocked. Long-press the text in the box below instead.");
+    }
+  };
+
   const handleDelete = (id, label) => {
     if (confirm(`Remove ${label} from the dev preview?`)) { deletePreviewIssuance(id); refresh(); }
   };
   const handleClear = () => {
-    if (confirm("Remove ALL dev-preview CMOs / CAOs?")) { clearPreview(); refresh(); }
+    if (confirm("Remove ALL dev-preview CMOs / CAOs / Primers?")) { clearPreview(); refresh(); }
   };
 
   const btn = "min-h-[40px] rounded-lg border px-3 py-1.5 text-sm font-medium";
@@ -90,7 +101,7 @@ export default function IssuancePanel() {
   return (
     <div className="space-y-4">
       <div className="rounded-lg border border-parchment-200 bg-parchment-50 p-4 dark:border-navy-700 dark:bg-navy-800">
-        <h2 className="text-base font-bold text-navy-900 dark:text-parchment-50">CMO / CAO import</h2>
+        <h2 className="text-base font-bold text-navy-900 dark:text-parchment-50">CMO / CAO / Primer import</h2>
         <ol className="mt-2 list-decimal space-y-1 pl-5 text-sm text-slate-600 dark:text-slate-300">
           <li>Copy the AI prompt, paste it in ChatGPT / Gemini, then paste the official CMO/CAO text below it.</li>
           <li>Paste the JSON the AI gives you here (official paragraphs + Tagalog explanations in one go).</li>
@@ -99,10 +110,16 @@ export default function IssuancePanel() {
         </ol>
         <div className="mt-3 flex flex-wrap gap-2">
           <button onClick={copyPrompt} className={`${btn} flex items-center gap-1.5 border-purple-200 bg-purple-50 text-purple-700 dark:border-purple-700 dark:bg-purple-950/30 dark:text-purple-400`}>
-            {copied ? "✓ Prompt copied" : <><IconCopy className="h-4 w-4" /> Copy AI prompt</>}
+            {copied ? "✓ Prompt copied" : <><IconCopy className="h-4 w-4" /> Copy CMO/CAO prompt</>}
           </button>
           <button onClick={() => setJson(ISSUANCE_TEMPLATE)} className={`${btn} flex items-center gap-1.5 border-parchment-200 text-slate-600 dark:border-navy-700 dark:text-slate-300`}>
-            <IconLayers className="h-4 w-4" /> Insert template
+            <IconLayers className="h-4 w-4" /> Insert CMO/CAO template
+          </button>
+          <button onClick={copyTcpPrompt} className={`${btn} flex items-center gap-1.5 border-purple-200 bg-purple-50 text-purple-700 dark:border-purple-700 dark:bg-purple-950/30 dark:text-purple-400`}>
+            {copiedTcp ? "✓ Primer prompt copied" : <><IconCopy className="h-4 w-4" /> Copy Primer prompt</>}
+          </button>
+          <button onClick={() => setJson(TCP_TEMPLATE)} className={`${btn} flex items-center gap-1.5 border-parchment-200 text-slate-600 dark:border-navy-700 dark:text-slate-300`}>
+            <IconLayers className="h-4 w-4" /> Insert Primer template
           </button>
         </div>
       </div>
@@ -112,7 +129,7 @@ export default function IssuancePanel() {
           value={json}
           onChange={(e) => setJson(e.target.value)}
           rows={10}
-          placeholder="Paste JSON here — one CMO/CAO, or an array of many. Code fences are fine."
+          placeholder="Paste JSON here — one CMO / CAO / Primer topic, or an array of many. Code fences are fine."
           style={{ fontSize: "16px" }}
           className="w-full rounded-lg border border-parchment-200 bg-parchment p-2.5 font-mono text-navy-900 focus:outline-none dark:border-navy-700 dark:bg-navy-900 dark:text-parchment-50"
         />
@@ -130,7 +147,7 @@ export default function IssuancePanel() {
           <h3 className="text-sm font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400">Dev preview ({list.length})</h3>
           {list.length > 0 && (
             <div className="flex flex-wrap gap-2">
-              {["CMO", "CAO"].filter((t) => list.some((i) => i.type === t)).map((t) => (
+              {["CMO", "CAO", "TCP"].filter((t) => list.some((i) => i.type === t)).map((t) => (
                 <button key={t} onClick={() => download(`${t.toLowerCase()}-all.json`, exportManyJson(t))} className={`${btn} flex items-center gap-1.5 border-parchment-200 text-slate-600 dark:border-navy-700 dark:text-slate-300`}>
                   <IconDownload className="h-3.5 w-3.5" /> All {t}
                 </button>

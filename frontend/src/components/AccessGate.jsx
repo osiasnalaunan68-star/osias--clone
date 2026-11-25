@@ -263,6 +263,38 @@ function RenewBanner() {
   );
 }
 
+// ── Hindi pa kumpleto ang offline data (db + wasm) sa device na ito ───
+function OfflineReadyBadge() {
+  const [ready, setReady] = useState(null);
+  const [retrying, setRetrying] = useState(false);
+  const check = () => {
+    import("../offlineData").then((m) => m.isOfflineDataReady()).then(setReady).catch(() => setReady(false));
+  };
+  useEffect(() => {
+    check();
+    const id = setInterval(check, 15000);
+    const onOnline = () => setTimeout(check, 2000);
+    window.addEventListener("online", onOnline);
+    return () => { clearInterval(id); window.removeEventListener("online", onOnline); };
+  }, []);
+  if (ready !== false) return null;
+  const retry = async () => {
+    setRetrying(true);
+    try { const m = await import("../db"); await m.warmOfflineData(); } catch (_) {}
+    check();
+    setRetrying(false);
+  };
+  return (
+    <div className="pointer-events-none fixed inset-x-3 z-[55] mx-auto max-w-md" style={{ bottom: "calc(env(safe-area-inset-bottom) + 76px)" }}>
+      <div className="pointer-events-auto rounded-xl border border-oxblood bg-parchment-50 p-3 text-center shadow-lg dark:bg-navy-800">
+        <p className="text-xs font-semibold text-oxblood dark:text-oxblood-300">Hindi pa buo ang offline data sa device na ito.</p>
+        <p className="mt-0.5 text-[11px] text-slate-500 dark:text-slate-400">Manatiling naka-connect hanggang mawala ang mensaheng ito — saka lang talaga gagana nang walang internet.</p>
+        <button onClick={retry} disabled={retrying} className="mt-2 rounded-full bg-oxblood px-3 py-1.5 text-xs font-bold text-white active:opacity-80 disabled:opacity-60">{retrying ? "Dina-download…" : "Subukan ulit i-download"}</button>
+      </div>
+    </div>
+  );
+}
+
 // ── "Offline" pill ───────────────────────────────────────────────────
 function OfflinePill() {
   const [online, setOnline] = useState(() => typeof navigator === "undefined" || navigator.onLine !== false);
@@ -339,6 +371,7 @@ export default function AccessGate() {
       <UnlockToast />
       <RenewBanner />
       <OfflinePill />
+      <OfflineReadyBadge />
       <UpdateBanner />
     </>
   );

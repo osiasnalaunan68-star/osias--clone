@@ -13,6 +13,7 @@ export const ISSUANCE_KINDS = [
   { id: "cmta", label: "CMTA", icon: "⚖️", full: "Customs Modernization & Tariff Act" },
   { id: "cmo", label: "CMO", icon: "📜", full: "Customs Memorandum Orders" },
   { id: "cao", label: "CAO", icon: "📄", full: "Customs Administrative Orders" },
+  { id: "tcp", label: "Primer", icon: "📘", full: "Tariff Commission Primer" },
 ];
 
 export const STATUS_META = {
@@ -37,15 +38,18 @@ function normalizeAi(raw) {
 
 export function normalizeIssuance(raw) {
   if (!raw || typeof raw !== "object") throw new Error("Each issuance must be a JSON object.");
-  const type = str(raw.type).toUpperCase();
-  if (type !== "CMO" && type !== "CAO") {
-    throw new Error(`"type" must be "CMO" or "CAO" (got "${raw.type ?? ""}").`);
+  let type = str(raw.type).toUpperCase();
+  if (type === "PRIMER" || type === "TC PRIMER" || type === "TARIFF COMMISSION PRIMER") type = "TCP";
+  if (type !== "CMO" && type !== "CAO" && type !== "TCP") {
+    throw new Error(`"type" must be "CMO", "CAO" or "TCP" (got "${raw.type ?? ""}").`);
   }
+  const isTcp = type === "TCP";
   const number = str(raw.number)
-    .replace(/^(CMO|CAO)\b\s*(NO\.?|NUMBER)?\s*/i, "")
-    .replace(/\s+/g, "");
-  if (!number) throw new Error(`${type}: missing "number" (example: "01-2020").`);
-  const label = `${type} ${number}`;
+    .replace(/^(CMO|CAO|TCP|PRIMER)\b\s*(NO\.?|NUMBER)?\s*/i, "")
+    .replace(/\s+/g, isTcp ? " " : "")
+    .trim();
+  if (!number) throw new Error(`${type}: missing "number" (example: ${isTcp ? '"01"' : '"01-2020"'}).`);
+  const label = isTcp ? `Primer ${number}` : `${type} ${number}`;
   const id = `${type.toLowerCase()}-${slug(number)}`;
 
   let rawSections = Array.isArray(raw.sections) ? raw.sections : null;
@@ -84,7 +88,7 @@ export function normalizeIssuance(raw) {
   const aiCount = sections.reduce((n, s) => n + s.paragraphs.filter((p) => p.ai).length, 0);
 
   const date_issued = str(raw.date_issued);
-  const year = (number.match(/(\d{4})$/) || date_issued.match(/(\d{4})/) || [])[1] || "";
+  const year = isTcp ? "" : (number.match(/(\d{4})$/) || date_issued.match(/(\d{4})/) || [])[1] || "";
   const statusKey = str(raw.status).toLowerCase().replace(/[\s-]+/g, "_");
 
   return {
@@ -201,7 +205,7 @@ function compare(a, b) {
     if (!b.year) return -1;
     return b.year.localeCompare(a.year); // newest year first
   }
-  return (parseInt(a.number, 10) || 0) - (parseInt(b.number, 10) || 0); // 01, 02, 03...
+  return (parseInt(a.number, 10) || 0) - (parseInt(b.number, 10) || 0) || String(a.number).localeCompare(String(b.number), undefined, { numeric: true }); // 01, 02, 03...
 }
 
 export function listIssuances(kind) {
@@ -355,6 +359,33 @@ SHAPE EXAMPLE (structure only — replace all content)
 
 OFFICIAL TEXT (the only source of truth):
 `;
+
+// ── Tariff Commission Primer (type: "TCP") ───────────────────────────
+// Parehong format ng CMO / CAO. Ang "number" ay ang pagkakasunod-sunod ng topic (hal. "01", "02", "2.1").
+export const TCP_TEMPLATE = (() => {
+  const t = JSON.parse(ISSUANCE_TEMPLATE);
+  t.type = "TCP";
+  t.number = "01";
+  t.title = "[SAMPLE] Replace everything in this template";
+  t.subject = "One-line topic of this part of the Primer";
+  delete t.date_issued;
+  delete t.effectivity;
+  delete t.amends;
+  t.keywords = ["sample", "primer"];
+  t.ai.title = "Overview ng Primer 01";
+  t.ai.prompt = "Explain this part of the Tariff Commission Primer simply, with practical examples.";
+  t.sections[0].heading = "PART I. OVERVIEW";
+  t.sections[1].heading = "PART II. DETAILS";
+  t.sections[1].paragraphs[0].ai.prompt = "Explain this part of the Primer step by step with a practical example.";
+  return JSON.stringify(t, null, 2);
+})();
+
+export const TCP_PROMPT = ISSUANCE_PROMPT
+  .replace("CMO / CAO → STUDY-JSON GENERATION PROMPT", "TARIFF COMMISSION PRIMER → STUDY-JSON GENERATION PROMPT")
+  .replace("ONE Customs Memorandum Order (CMO) or Customs Administrative Order (CAO)", "ONE topic / chapter / part of the TARIFF COMMISSION PRIMER")
+  .replace('type ("CMO" or "CAO"), number (e.g. "01-2020")', 'type (always "TCP"), number (the order of this topic in the Primer, e.g. "01", "02", "2.1")')
+  .replace('{"type":"CMO","number":"01-2020"', '{"type":"TCP","number":"01"')
+  .replace("OFFICIAL TEXT (the only source of truth):", "OFFICIAL PRIMER TEXT (the only source of truth):");
 
 // ── Continue / resume progress para sa CMO at CAO ────────────────────
 const ISSUANCE_PROGRESS_KEY = "customsLaw_issuanceProgress";

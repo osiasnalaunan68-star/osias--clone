@@ -7,7 +7,7 @@ import IssuanceQuizPanel from "./IssuanceQuizPanel";
 // To add a tab later: add an entry to TABS and a matching render below.
 const TABS = [
   { id: "ra10863", label: "RA10863" },
-  { id: "issuances", label: "CMO / CAO" },
+  { id: "issuances", label: "CMO / CAO / Primer" },
   { id: "issuance-quiz", label: "CMO/CAO Quiz" },
 ];
 

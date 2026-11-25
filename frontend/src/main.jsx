@@ -6,6 +6,7 @@ import AccessGate from "./components/AccessGate";
 import { seedDefaultQuizzes } from "./subjectQuizStore";
 import { AuthProvider } from "./authContext";
 import AccountOverlay from "./components/AccountOverlay";
+import { isNativeApp } from "./pwaInstall";
 
 class ErrorBoundary extends React.Component {
   constructor(props) { super(props); this.state = { error: null }; }
@@ -24,17 +25,11 @@ class ErrorBoundary extends React.Component {
   }
 }
 
-// unhandledrejection-safe: log only. Never replace the whole page for a
-// transient error (network drop, resume from background, etc).
 window.addEventListener("unhandledrejection", (e) => {
   console.warn("Unhandled rejection:", e.reason);
   e.preventDefault();
 });
 
-// Seed CL / CDP / TL / PC default quizzes (from src/data/defaultQuizzes/*.json)
-// into localStorage kapag walang laman pa. Kailangan ito para may laman
-// ang mga subject sa ANY bagong browser/origin — kasama ang GitHub Pages,
-// na may sarili at hiwalay na localStorage kumpara sa localhost.
 seedDefaultQuizzes();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -48,7 +43,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   </React.StrictMode>
 );
 
-// Register Service Worker
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker.register("./sw.js").catch((err) => {
@@ -57,7 +51,18 @@ if ("serviceWorker" in navigator) {
   });
 }
 
-// Offline-ready: i-save ang CMTA data (customs_law.db + sql wasm) habang may internet.
+// Android hardware back button (APK lang, via @capacitor/app). May bukas na
+// view/overlay (naka-push sa backNav.js)? Bumalik lang dito sa app. Wala nang
+// mababalikan (home/root na talaga)? I-minimize, huwag i-kill ang app.
+if (isNativeApp()) {
+  import("@capacitor/app").then(({ App }) => {
+    App.addListener("backButton", ({ canGoBack }) => {
+      if (canGoBack) window.history.back();
+      else App.minimizeApp();
+    });
+  }).catch(() => {});
+}
+
 {
   const warm = () => import("./db").then((m) => m.warmOfflineData()).catch(() => {});
   window.addEventListener("load", () => setTimeout(warm, 2500));
