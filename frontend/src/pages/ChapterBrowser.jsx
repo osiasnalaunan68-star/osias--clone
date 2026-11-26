@@ -852,7 +852,7 @@ function NavIcon({ name, className = "h-[22px] w-[22px]" }) {
   );
 }
 
-const VIEW_TITLES = { browse: "RA 10863", search: "Search", quiz: "Quiz", fees: "Fees", settings: "Settings", update: "Update", admin: "Admin", dev: "Dev Panel" };
+const VIEW_TITLES = { browse: "RA 10863", search: "Search", quiz: "Quiz", fees: "Fees", settings: "Settings", update: "Install", admin: "Admin", dev: "Dev Panel" };
 
 function BottomNav({ view, setView, showAdmin, showDev }) {
   const install = useInstallInfo();
@@ -864,7 +864,7 @@ function BottomNav({ view, setView, showAdmin, showDev }) {
     { id: "settings", label: "Settings", icon: "settings" },
   ];
   // Walang "Update" tab sa Android APK (real app na ito).
-  if (!isNativeApp()) items.push({ id: "update", label: "Update", icon: "download" });
+  if (!isNativeApp()) items.push({ id: "update", label: "Install", icon: "download" });
   if (showAdmin) items.push({ id: "admin", label: "Admin", icon: "crown" });
   if (showDev) items.push({ id: "dev", label: "Dev", icon: "wrench" });
   return (

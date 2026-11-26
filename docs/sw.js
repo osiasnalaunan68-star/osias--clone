@@ -1,4 +1,11 @@
-// Service worker v7 — atomic precache, pero mas matibay.
+// Service worker v8 — atomic precache, pero mas matibay.
+//
+// Bago sa v8 (offline fixes):
+//  a. Ang customs_law.db ay hinihintay na rin sa install (hanggang 45s), para offline-ready agad pagka-install.
+//     Kapag mabagal ang net, tuloy pa rin ang install at tuloy ang download sa background.
+//  b. Kapag walang net at wala sa kasalukuyang cache ang page, ang PINAKABAGONG cache ang gagamitin
+//     (dati ang PINAKALUMA ang unang tinitingnan -> lumang version ang lumalabas).
+//  c. Kapag talagang wala pang naka-save, may malinaw na offline page (hindi blangko / freeze).
 //
 // Bago kumpara sa v6:
 // 1. Ang kailangan lang para mag-install ay ang CORE ng app (index.html, .js, .css, .wasm, .json).
@@ -11,7 +18,7 @@
 //    Kapag pumalya, tuloy ang lumang version at susubukan ulit ng page (updateCheck.js).
 // 5. Pag-open ng app: galing agad sa cache, kahit walang internet / walang load.
 // 6. Pag na-activate, sinasabihan ang page (SW_ACTIVATED) para lumabas ang "New version" banner.
-const SW_BUILD = "1795655959782";
+const SW_BUILD = "1795734794950";
 const DB_HASH = "d0eeac62fe";
 const BUILD_PREFIX = "cmta-build-";
 const CACHE_NAME = BUILD_PREFIX + SW_BUILD;
@@ -66,6 +73,33 @@ async function fromOldCaches(url, names) {
   }
   return null;
 }
+
+// Mga cache ng bawat build, PINAKABAGO muna. (caches.match() ay PINAKALUMA ang inuuna — iyon ang sanhi ng lumang version.)
+async function buildNamesNewestFirst() {
+  return (await caches.keys())
+    .filter((k) => k.startsWith(BUILD_PREFIX))
+    .sort((a, b) => Number(b.slice(BUILD_PREFIX.length)) - Number(a.slice(BUILD_PREFIX.length)));
+}
+
+async function fromAnyBuild(urls) {
+  for (const name of await buildNamesNewestFirst()) {
+    try {
+      const c = await caches.open(name);
+      for (const u of urls) {
+        const hit = await c.match(u, { ignoreSearch: true });
+        if (hit) return hit;
+      }
+    } catch (_) {}
+  }
+  return null;
+}
+
+const OFFLINE_PAGE =
+  '<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
+  '<title>Offline</title></head><body style="font-family:system-ui,sans-serif;background:#0f172a;color:#f1f5f9;display:flex;min-height:100vh;align-items:center;justify-content:center;margin:0;padding:24px;text-align:center">' +
+  '<div><h2>Hindi pa naka-save ang app sa device na ito</h2>' +
+  '<p style="opacity:.8">Kumonekta sa internet at buksan ang app nang ilang segundo. Pagkatapos nito, gagana na ito kahit walang internet.</p>' +
+  '<button onclick="location.reload()" style="margin-top:12px;padding:10px 20px;border:0;border-radius:999px;background:#c9a227;color:#0f172a;font-weight:700">Subukan ulit</button></div></body></html>';
 
 async function loadFileList() {
   let lastErr;
@@ -133,6 +167,11 @@ self.addEventListener("install", (event) => {
     if (failed.length) throw new Error("Precache incomplete: " + failed.slice(0, 5).join(", "));
     const cache = await caches.open(CACHE_NAME);
     await cache.put(readyUrl(), new Response("ok"));
+    // Ang customs_law.db ang puso ng app. Hintayin ito hanggang 45s para offline-ready agad.
+    // Hindi pumapalya ang install kung mabagal / pumalya (tuloy sa background at sa page).
+    try {
+      await Promise.race([syncFiles(files.filter(isDbFile), files), sleep(45000)]);
+    } catch (_) {}
   })());
 });
 
@@ -185,13 +224,14 @@ async function shell(request) {
     (await cache.match(scope + "index.html"));
   if (hit) return hit;
   try { return await fetch(request); } catch (_) {}
-  const any = (await caches.match(scope, { ignoreSearch: true })) || (await caches.match(scope + "index.html"));
-  return any || Response.error();
+  const any = await fromAnyBuild([scope, scope + "index.html"]);
+  if (any) return any;
+  return new Response(OFFLINE_PAGE, { status: 200, headers: { "Content-Type": "text/html; charset=utf-8" } });
 }
 
 async function smallFile(request, event) {
   const cache = await caches.open(CACHE_NAME);
-  const hit = (await cache.match(request, { ignoreSearch: true })) || (await caches.match(request, { ignoreSearch: true }));
+  const hit = (await cache.match(request, { ignoreSearch: true })) || (await fromAnyBuild([request.url]));
   if (hit) return hit;
   const res = await fetch(request);
   if (res && res.ok && !isHtmlForAsset(request.url, res)) {

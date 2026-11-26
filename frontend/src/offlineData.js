@@ -13,10 +13,12 @@ const MAGIC = {
   wasm: [0x00, 0x61, 0x73, 0x6d],
 };
 const looksValid = (b, kind) => !!b && b.length > MAGIC[kind].length && MAGIC[kind].every((x, i) => b[i] === x);
-const isOnline = () => typeof navigator === "undefined" || navigator.onLine !== false;
 const isNative = () => {
   try { return !!(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()); } catch (_) { return false; }
 };
+// APK: ang db + wasm ay NASA LOOB NA ng app (https://localhost/...), kaya gumagana ang fetch
+// kahit walang internet. Dati, "offline" ang akala dito at hindi na sinubukan ang fetch -> error.
+const isOnline = () => isNative() || typeof navigator === "undefined" || navigator.onLine !== false;
 // APK (bundled na) at dev: walang cache, kapareho ng dati.
 const cacheOn = () => typeof caches !== "undefined" && !isNative() && !import.meta.env.DEV;
 
@@ -33,7 +35,15 @@ async function readCached(key, kind, loose) {
 }
 
 async function fetchValid(url, kind) {
-  const res = await fetch(url, { cache: "no-cache" });
+  // Timeout sa pagkuha ng response: iwas "lie-fi" (may wifi pero walang load) na nakabitin nang walang hanggan.
+  const ctl = typeof AbortController !== "undefined" ? new AbortController() : null;
+  const timer = ctl ? setTimeout(() => ctl.abort(), 30000) : null;
+  let res;
+  try {
+    res = await fetch(url, { cache: "no-cache", signal: ctl ? ctl.signal : undefined });
+  } finally {
+    if (timer) clearTimeout(timer);
+  }
   if (!res.ok) throw new Error("HTTP " + res.status);
   const bytes = new Uint8Array(await res.arrayBuffer());
   if (!looksValid(bytes, kind)) throw new Error("invalid file");
@@ -59,6 +69,7 @@ async function store(key, bytes, kind) {
 export async function loadOfflineBytes(key, kind) {
   const cached = await readCached(key, kind, false);
   if (cached) return cached;
+  const native = isNative();
   const online = isOnline();
   let netErr = null;
   if (online) {
@@ -71,9 +82,11 @@ export async function loadOfflineBytes(key, kind) {
   const old = await readCached(key, kind, true); // kahit lumang copy, mas okay kaysa wala
   if (old) return old;
   const err = new Error(
-    online
-      ? "Could not download the CMTA data" + (netErr ? " (" + netErr.message + ")" : "") + ". Check your connection and try again."
-      : "The CMTA data isn't saved on this device yet. Connect to the internet and open the app once — after that it works fully offline."
+    native
+      ? "Could not load the CMTA data bundled in the app" + (netErr ? " (" + netErr.message + ")" : "") + ". Please reinstall the latest APK."
+      : online
+        ? "Could not download the CMTA data" + (netErr ? " (" + netErr.message + ")" : "") + ". Check your connection and try again."
+        : "The CMTA data isn't saved on this device yet. Connect to the internet and open the app once — after that it works fully offline."
   );
   err.offline = !online;
   throw err;
@@ -91,16 +104,21 @@ export async function ensureOffline(items) {
   }
 }
 
+// Hinahanap sa LAHAT ng cache: ang wasm ay puwedeng nasa build cache (sw.js) at hindi sa data cache.
+async function anyCacheHas(re) {
+  for (const n of await caches.keys()) {
+    const keys = await (await caches.open(n)).keys();
+    if (keys.some((r) => re.test(r.url))) return true;
+  }
+  return false;
+}
+
 // Tinitignan kung kumpleto na ang offline data (sql.js wasm + customs_law.db) —
 // gamitin ito bago maniwala na "offline-ready na" base lang sa UI.
 export async function isOfflineDataReady() {
   if (!cacheOn()) return isNative(); // APK (bundled na) = laging "ready"
   try {
-    const cache = await caches.open(DATA_CACHE);
-    const keys = await cache.keys();
-    const hasDb = keys.some((r) => /\.db(\?|$)/i.test(r.url));
-    const hasWasm = keys.some((r) => /\.wasm(\?|$)/i.test(r.url));
-    return hasDb && hasWasm;
+    return (await anyCacheHas(/\.db(\?|$)/i)) && (await anyCacheHas(/\.wasm(\?|$)/i));
   } catch (_) {
     return false;
   }

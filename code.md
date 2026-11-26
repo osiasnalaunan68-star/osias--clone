@@ -927,7 +927,7 @@ function QuizPlayViewInner({ title, entries, level, onBack, progressKey, backLab
 import { useState, useEffect } from "react";
 import { useBackClose } from "../backNav";
 import { useAuth } from "../authContext";
-import { PAYMENT_METHODS, PROMO_PLAN, generateReferenceCode, submitPendingPurchase } from "../payments";
+import { PAYMENT_METHODS, PLANS, generateReferenceCode, submitPendingPurchase } from "../payments";
 import { TRIAL_DAYS, getSubjectInfo, getClTrialInfo, formatTimeLeft, formatDateShort } from "../access";
 
 const SUBJECT_LABELS = { CL: "RA 10863 (CMTA)", TL: "Tariff Law", CDP: "Customs Documentation & Procedures", PC: "Practical Computations", TCP: "Tariff Commission Primer" };
@@ -996,7 +996,7 @@ export default function AccountOverlay() {
   // Galing sa Paywall: diretso sa payment method ng napiling plan.
   useEffect(() => {
     if (!overlayOpen || !intentPlanId || !user || !profile) return;
-    const plan = intentPlanId === PROMO_PLAN.id ? PROMO_PLAN : null;
+    const plan = PLANS.find((pl) => pl.id === intentPlanId) || null;
     setIntentPlanId(null);
     if (!plan) return;
     setSelectedPlan(plan);
@@ -1197,15 +1197,18 @@ export default function AccountOverlay() {
                   );
                 })}
               </div>
-              <button
-                onClick={() => startPurchase(PROMO_PLAN)}
-                className="mt-2 w-full rounded-xl border-2 border-gold-500 bg-navy-900 px-3 py-3 text-center text-white active:bg-navy-800 dark:bg-navy-700"
-              >
-                <span className="block text-sm font-extrabold">🔥 {PROMO_PLAN.label} — ₱{PROMO_PLAN.price}</span>
-                <span className="mt-1 block text-[11px] font-normal opacity-90">{PROMO_PLAN.tagline}</span>
-                <span className="mt-1 block text-[11px] font-normal opacity-90">Unlocks EVERYTHING: RA 10863 (all 5 levels) · CDP · TL · PC · TCP + full App Access</span>
-                <span className="mt-1 flex items-center justify-center gap-1 text-[11px] font-semibold text-gold-400"><Icon name="clock" className="h-3 w-3" /> Valid for {PROMO_PLAN.days} days only</span>
-              </button>
+              {PLANS.map((plan) => (
+                <button
+                  key={plan.id}
+                  onClick={() => startPurchase(plan)}
+                  className="mt-2 w-full rounded-xl border-2 border-gold-500 bg-navy-900 px-3 py-3 text-center text-white active:bg-navy-800 dark:bg-navy-700"
+                >
+                  <span className="block text-sm font-extrabold">🔥 {plan.label} — ₱{plan.price}</span>
+                  <span className="mt-1 block text-[11px] font-normal opacity-90">{plan.tagline}</span>
+                  <span className="mt-1 block text-[11px] font-normal opacity-90">Unlocks EVERYTHING: RA 10863 (all 5 levels) · CDP · TL · PC · TCP + full App Access</span>
+                  <span className="mt-1 flex items-center justify-center gap-1 text-[11px] font-semibold text-gold-400"><Icon name="clock" className="h-3 w-3" /> Valid for {plan.days} days only</span>
+                </button>
+              ))}
             </div>
 
             <div>
@@ -1403,7 +1406,7 @@ import logoImg from "../assets/logo.png";
 import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import { useAuth } from "../authContext";
 import { TRIAL_DAYS, DAY_MS, formatTimeLeft, formatDateShort, toMs } from "../access";
-import { PROMO_PLAN } from "../payments";
+import { PLANS, FROM_PRICE } from "../payments";
 import { useUpdateAvailable, getRemoteId, applyUpdate } from "../updateCheck";
 import { LegalGate, LegalLinkButton } from "./LegalNotice";
 
@@ -1553,7 +1556,7 @@ function Paywall({ onFree }) {
         <div className="text-center">
           <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full border border-seal text-seal dark:border-gold-400 dark:text-gold-400" aria-hidden><StepIcon name="clock" className="h-6 w-6" /></span>
           <h1 className="mt-2 text-xl font-bold text-navy-900 dark:text-parchment-50">Your free trial has ended</h1>
-          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Get the All Access promo to continue. It is the only plan available right now. {user?.email}</p>
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Choose a plan to continue. {user?.email}</p>
         </div>
 
         {pending.length > 0 && (
@@ -1563,17 +1566,19 @@ function Paywall({ onFree }) {
         )}
 
         <div className="space-y-2">
-          <button onClick={() => choose(PROMO_PLAN)} className="w-full rounded-xl border-2 border-gold-500 bg-gold-50 px-4 py-4 text-left active:opacity-80 dark:border-gold-400 dark:bg-navy-900">
-            <span className="flex items-center justify-between gap-3">
-              <span>
-                <span className="block text-base font-extrabold text-navy-900 dark:text-parchment-50">{PROMO_PLAN.label}</span>
-                <span className="mt-1 block text-xs text-slate-600 dark:text-slate-300">{PROMO_PLAN.tagline}</span>
-                <span className="mt-1 block text-xs text-slate-600 dark:text-slate-300">Unlocks everything: RA 10863 (all levels) · CDP · TL · PC · TCP + full App Access</span>
-                <span className="mt-1 flex items-center gap-1 text-xs font-semibold text-gold-600 dark:text-gold-400"><StepIcon name="clock" className="h-3.5 w-3.5" /> Valid for {PROMO_PLAN.days} days only</span>
+          {PLANS.map((plan) => (
+            <button key={plan.id} onClick={() => choose(plan)} className="w-full rounded-xl border-2 border-gold-500 bg-gold-50 px-4 py-4 text-left active:opacity-80 dark:border-gold-400 dark:bg-navy-900">
+              <span className="flex items-center justify-between gap-3">
+                <span>
+                  <span className="block text-base font-extrabold text-navy-900 dark:text-parchment-50">{plan.label}</span>
+                  <span className="mt-1 block text-xs text-slate-600 dark:text-slate-300">{plan.tagline}</span>
+                  <span className="mt-1 block text-xs text-slate-600 dark:text-slate-300">Unlocks everything: RA 10863 (all levels) · CDP · TL · PC · TCP + full App Access</span>
+                  <span className="mt-1 flex items-center gap-1 text-xs font-semibold text-gold-600 dark:text-gold-400"><StepIcon name="clock" className="h-3.5 w-3.5" /> Valid for {plan.days} days only</span>
+                </span>
+                <span className="text-3xl font-extrabold text-navy-900 dark:text-parchment-50">₱{plan.price}</span>
               </span>
-              <span className="text-3xl font-extrabold text-navy-900 dark:text-parchment-50">₱{PROMO_PLAN.price}</span>
-            </span>
-          </button>
+            </button>
+          ))}
         </div>
 
         {onFree && (
@@ -1643,7 +1648,7 @@ function RenewBanner() {
   let last = 0;
   try { last = Number(localStorage.getItem(KEY)) || 0; } catch (_) {}
   if (Date.now() - last < 12 * 60 * 60 * 1000) return null;
-  const open = () => { setIntentPlanId(PROMO_PLAN.id); setOverlayOpen(true); };
+  const open = () => { setIntentPlanId(null); setOverlayOpen(true); };
   const later = () => { try { localStorage.setItem(KEY, String(Date.now())); } catch (_) {} setTick((n) => n + 1); };
   return (
     <div className="fixed inset-x-3 z-[45] mx-auto max-w-md rounded-xl border border-gold-500 bg-parchment-50 p-3 dark:bg-navy-800" style={{ bottom: "calc(env(safe-area-inset-bottom) + 76px)" }}>
@@ -1656,7 +1661,7 @@ function RenewBanner() {
       </p>
       <div className="mt-2 flex gap-2">
         <button onClick={open} className="flex-1 rounded-xl bg-navy-900 py-2 text-sm font-semibold text-white active:bg-navy-800 dark:bg-navy-700">
-          {kind === "paid" ? "Renew" : "Get All Access"} · ₱{PROMO_PLAN.price}
+          {kind === "paid" ? "Renew" : "Get All Access"} · from ₱{FROM_PRICE}
         </button>
         <button onClick={later} className="rounded-xl border border-parchment-200 px-4 py-2 text-sm font-medium text-slate-500 dark:border-navy-700 dark:text-slate-300">Later</button>
       </div>
@@ -3427,7 +3432,7 @@ const AdminPanel = lazy(() =>
 );
 import { useAuth } from "../authContext";
 import { LegalSettingsSection } from "../components/LegalNotice";
-import { PROMO_PLAN, PAYMENT_METHODS, SUBJECT_LABELS } from "../payments";
+import { PLANS, PAYMENT_METHODS, SUBJECT_LABELS } from "../payments";
 import { formatTimeLeft, formatDateShort } from "../access";
 import { IssuanceSidebar, IssuanceReader } from "./IssuanceBrowser";
 import { ISSUANCE_KINDS, getIssuance, getIssuanceProgress, saveIssuanceProgress } from "../issuancesStore";
@@ -4248,7 +4253,7 @@ function NavIcon({ name, className = "h-[22px] w-[22px]" }) {
   );
 }
 
-const VIEW_TITLES = { browse: "RA 10863", search: "Search", quiz: "Quiz", fees: "Fees", settings: "Settings", update: "Update", admin: "Admin", dev: "Dev Panel" };
+const VIEW_TITLES = { browse: "RA 10863", search: "Search", quiz: "Quiz", fees: "Fees", settings: "Settings", update: "Install", admin: "Admin", dev: "Dev Panel" };
 
 function BottomNav({ view, setView, showAdmin, showDev }) {
   const install = useInstallInfo();
@@ -4260,7 +4265,7 @@ function BottomNav({ view, setView, showAdmin, showDev }) {
     { id: "settings", label: "Settings", icon: "settings" },
   ];
   // Walang "Update" tab sa Android APK (real app na ito).
-  if (!isNativeApp()) items.push({ id: "update", label: "Update", icon: "download" });
+  if (!isNativeApp()) items.push({ id: "update", label: "Install", icon: "download" });
   if (showAdmin) items.push({ id: "admin", label: "Admin", icon: "crown" });
   if (showDev) items.push({ id: "dev", label: "Dev", icon: "wrench" });
   return (
@@ -4299,8 +4304,8 @@ function FeesView() {
   const isPaid = access?.state === "paid";
 
   // Same shortcut the Paywall uses: opens the payment-method step directly.
-  const payNow = () => {
-    if (user) setIntentPlanId(PROMO_PLAN.id);
+  const payNow = (plan) => {
+    if (user) setIntentPlanId(plan.id);
     setOverlayOpen(true);
   };
 
@@ -4308,13 +4313,13 @@ function FeesView() {
   if (access?.state === "admin") status = { icon: "crown", text: "Admin — everything is unlocked." };
   else if (isPaid) status = { icon: "check", text: "Active until " + formatDateShort(access.app.expiresAt) + " (" + formatTimeLeft(access.msLeft) + " left). Renew early and your remaining days are kept." };
   else if (access?.state === "trial") status = { icon: "tag", text: "Free trial: " + formatTimeLeft(access.msLeft) + " left" };
-  else if (access?.state === "expired") status = { icon: "clock", text: "Your trial has ended. Get the promo to continue." };
+  else if (access?.state === "expired") status = { icon: "clock", text: "Your trial has ended. Choose a plan to continue." };
 
   return (
     <div className="mx-auto max-w-2xl space-y-4 pb-10">
       <div>
         <h1 className="mb-1 text-2xl font-bold text-navy-900 dark:text-parchment-50">Fees</h1>
-        <p className="text-sm text-slate-500 dark:text-slate-400">The promo bundle and where to pay.</p>
+        <p className="text-sm text-slate-500 dark:text-slate-400">Plans and where to pay.</p>
       </div>
 
       {status && (
@@ -4327,25 +4332,27 @@ function FeesView() {
         </div>
       )}
 
-      <section className="rounded-2xl border-2 border-gold-500 bg-parchment-50 p-4 dark:bg-navy-800">
-        <div className="flex items-start justify-between gap-3">
-          <div className="min-w-0">
-            <p className="text-base font-extrabold text-navy-900 dark:text-parchment-50">{PROMO_PLAN.label}</p>
-            <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">{PROMO_PLAN.tagline}</p>
+      {PLANS.map((plan) => (
+        <section key={plan.id} className="rounded-2xl border-2 border-gold-500 bg-parchment-50 p-4 dark:bg-navy-800">
+          <div className="flex items-start justify-between gap-3">
+            <div className="min-w-0">
+              <p className="text-base font-extrabold text-navy-900 dark:text-parchment-50">{plan.label}</p>
+              <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">{plan.tagline}</p>
+            </div>
+            <span className="flex-shrink-0 text-3xl font-extrabold text-navy-900 dark:text-parchment-50">₱{plan.price}</span>
           </div>
-          <span className="flex-shrink-0 text-3xl font-extrabold text-navy-900 dark:text-parchment-50">₱{PROMO_PLAN.price}</span>
-        </div>
-        <ul className="mt-3 space-y-1 text-sm text-slate-700 dark:text-slate-200">
-          {PROMO_PLAN.subjects.map((code) => (
-            <li key={code} className="flex items-center gap-1.5"><NavIcon name="check" className="h-3.5 w-3.5 flex-shrink-0 text-verdigris dark:text-verdigris-300" /> {SUBJECT_LABELS[code] || code}</li>
-          ))}
-          <li className="flex items-center gap-1.5"><NavIcon name="check" className="h-3.5 w-3.5 flex-shrink-0 text-verdigris dark:text-verdigris-300" /> Full app access</li>
-        </ul>
-        <p className="mt-3 flex items-center gap-1.5 text-xs font-semibold text-gold-600 dark:text-gold-400"><NavIcon name="clock" className="h-3.5 w-3.5" /> Valid for {PROMO_PLAN.days} days only</p>
-        <button onClick={payNow} className="mt-4 flex min-h-[48px] w-full items-center justify-center rounded-xl bg-navy-900 px-4 py-3 text-sm font-bold text-white active:bg-navy-800 dark:bg-navy-700">
-          {user ? (isPaid ? "Renew" : "Pay now") + " · ₱" + PROMO_PLAN.price : "Sign in to get started"}
-        </button>
-      </section>
+          <ul className="mt-3 space-y-1 text-sm text-slate-700 dark:text-slate-200">
+            {plan.subjects.map((code) => (
+              <li key={code} className="flex items-center gap-1.5"><NavIcon name="check" className="h-3.5 w-3.5 flex-shrink-0 text-verdigris dark:text-verdigris-300" /> {SUBJECT_LABELS[code] || code}</li>
+            ))}
+            <li className="flex items-center gap-1.5"><NavIcon name="check" className="h-3.5 w-3.5 flex-shrink-0 text-verdigris dark:text-verdigris-300" /> Full app access</li>
+          </ul>
+          <p className="mt-3 flex items-center gap-1.5 text-xs font-semibold text-gold-600 dark:text-gold-400"><NavIcon name="clock" className="h-3.5 w-3.5" /> Valid for {plan.days} days only</p>
+          <button onClick={() => payNow(plan)} className="mt-4 flex min-h-[48px] w-full items-center justify-center rounded-xl bg-navy-900 px-4 py-3 text-sm font-bold text-white active:bg-navy-800 dark:bg-navy-700">
+            {user ? (isPaid ? "Renew" : "Pay now") + " · ₱" + plan.price : "Sign in to get started"}
+          </button>
+        </section>
+      ))}
 
       <section className="rounded-2xl border border-parchment-200 bg-parchment-50 p-4 dark:border-navy-700 dark:bg-navy-800">
         <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">How to pay</h2>
@@ -4356,7 +4363,7 @@ function FeesView() {
         </div>
         <ol className="space-y-2 text-sm text-slate-600 dark:text-slate-300">
           <li>1. Tap <b>Pay now</b> above and choose GCash, Maya, or MariBank.</li>
-          <li>2. Scan the QR code and pay ₱{PROMO_PLAN.price}. Write your <b>email address</b> and the <b>reference code</b> in the payment note.</li>
+          <li>2. Scan the QR code and pay the exact price of your plan. Write your <b>email address</b> and the <b>reference code</b> in the payment note.</li>
           <li>3. Tap <b>I've paid</b>. Payments are confirmed manually by the admin within a few hours.</li>
         </ol>
       </section>
@@ -5610,7 +5617,7 @@ import CustomQuizHub from "./CustomQuizHub";
 import IssuanceQuizHub from "./IssuanceQuizHub";
 import { ProgressCircle, QuizPlayView } from "../components/QuizShared";
 import { useAuth } from "../authContext";
-import { PROMO_PLAN } from "../payments";
+import { FROM_PRICE } from "../payments";
 import { isRaLevelUnlocked } from "../access";
 import { getSubjectStats, resetSubjectProgress } from "../subjectQuizStore";
 import { getLastQuizPosition } from "../quizStore";
@@ -5856,10 +5863,10 @@ export default function QuizHub({ onExit, limited = false }) {
         <div className="flex items-center justify-between gap-3 border-b border-seal/40 bg-gold-50 px-4 py-2 dark:border-gold-500/40 dark:bg-navy-900">
           <p className="flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-300"><IconLock className="h-3.5 w-3.5 flex-shrink-0 text-seal dark:text-gold-400" aria-hidden /> Free preview: RA 10863 Level 1 + first 10 items per subject.</p>
           <button
-            onClick={() => { setIntentPlanId(PROMO_PLAN.id); setOverlayOpen(true); }}
+            onClick={() => { setIntentPlanId(null); setOverlayOpen(true); }}
             className="flex-shrink-0 rounded-full bg-navy-900 px-3 py-1.5 text-xs font-bold text-parchment-50 active:bg-navy-800 dark:bg-navy-700"
           >
-            Unlock all · ₱{PROMO_PLAN.price}
+            Unlock all · from ₱{FROM_PRICE}
           </button>
         </div>
       )}
@@ -5932,7 +5939,7 @@ import { useState, useEffect, useMemo, useRef } from "react";
 import { collection, getDocs, doc, updateDoc, arrayUnion, deleteField, Timestamp, runTransaction, writeBatch } from "firebase/firestore";
 import { db } from "../firebase";
 import AdminOverview from "./AdminOverview";
-import { SUBJECT_LABELS, PAYMENT_METHODS, PROMO_PLAN } from "../payments";
+import { SUBJECT_LABELS, PAYMENT_METHODS, PROMO_PLAN, PLANS, LEGACY_PROMO_ID, getPlanById } from "../payments";
 import {
   TRIAL_DAYS, DAY_MS, serverNow, getTrialInfo, getAppAccessInfo,
   getAccess, formatTimeLeft, formatDateShort, getSubjectInfo, toMs,
@@ -5945,7 +5952,11 @@ const SUBJECT_CODES = ["CL", "CDP", "TL", "PC", "TCP"];
 // Months for old App Access requests that may still be waiting in pendingAccess.
 const LEGACY_ACCESS_MONTHS = { M1: 1, M3: 3, M8: 8 };
 const METHOD_LABELS = Object.fromEntries(PAYMENT_METHODS.map((m) => [m.id, m.label]));
-const ALL_PLAN_LABELS = { ...SUBJECT_LABELS, [PROMO_PLAN.id]: PROMO_PLAN.label };
+const ALL_PLAN_LABELS = {
+  ...SUBJECT_LABELS,
+  ...Object.fromEntries(PLANS.map((pl) => [pl.id, pl.label])),
+  [LEGACY_PROMO_ID]: "All Access Promo (old)",
+};
 
 const TRIAGE = {
   pending: { label: "Pending", dot: "bg-amber-500", chip: "border-amber-300 text-amber-700 dark:border-amber-700 dark:text-amber-400" },
@@ -6096,7 +6107,7 @@ export default function AdminPanel() {
 
   // ── Pending — All Access promo purchases (pendingPurchases) ──────────
   const approvePractice = async (u, p) => {
-    const plan = p.plan === PROMO_PLAN.id ? PROMO_PLAN : undefined;
+    const plan = getPlanById(p.plan) || undefined;
     if (!plan) { alert("Unknown plan: " + p.plan + ". Nothing was changed."); return; }
     const diff = plan.price !== p.price ? "⚠️ Price mismatch: the user paid ₱" + p.price + " but the plan is now ₱" + plan.price + " (older app version). " : "";
     if (!window.confirm(diff + "Approve " + plan.label + " ₱" + p.price + " for " + (u.fullName || u.email) + "?")) return;
@@ -6429,7 +6440,8 @@ export default function AdminPanel() {
     const wait = waitInfo(p.requestedAt);
     const app = getAppAccessInfo(u, serverNow());
     const nPending = (u.pendingPurchases || []).length + (u.pendingAccess || []).length;
-    const mismatch = p.plan === PROMO_PLAN.id && p.price !== PROMO_PLAN.price;
+    const planDef = getPlanById(p.plan);
+    const mismatch = !!planDef && p.price !== planDef.price;
     const copyRef = async () => {
       try {
         await navigator.clipboard.writeText(p.referenceCode);
@@ -6458,7 +6470,7 @@ export default function AdminPanel() {
           <span>· {formatDateTime(p.requestedAt)}</span>
         </div>
         <div className="mt-1.5 flex flex-wrap gap-1.5">
-          {mismatch && <span className={warn}>⚠️ Paid ₱{p.price} · plan is ₱{PROMO_PLAN.price}</span>}
+          {mismatch && <span className={warn}>⚠️ Paid ₱{p.price} · plan is ₱{planDef.price}</span>}
           {nPending > 1 && <span className={warn}>⚠️ {nPending} pending requests (possible double payment)</span>}
           <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-600 dark:bg-slate-700 dark:text-slate-300">
             {app.active ? "Active until " + formatDateShort(app.expiresAt) + " · renewal adds days" : "No active access"}
@@ -6477,7 +6489,7 @@ export default function AdminPanel() {
       <div>
         <h1 className="text-2xl font-bold text-navy-900 dark:text-slate-50">👑 Admin Panel</h1>
         <p className="text-sm text-slate-500 dark:text-slate-400">
-          One All Access bundle (₱{PROMO_PLAN.price} · {PROMO_PLAN.days} days) — grant months, restart to {PROMO_PLAN.days} days, or approve pending payments below.
+          All Access plans ({PLANS.map((pl) => "₱" + pl.price + "/" + pl.days + "d").join(" · ")}) — grant months, restart to {PROMO_PLAN.days} days, or approve pending payments below.
         </p>
       </div>
 
@@ -7087,6 +7099,7 @@ const card = "rounded-2xl border border-slate-200 bg-white p-4 shadow-card dark:
 const h2 = "mb-3 text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500";
 const bigBtn = "flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl bg-navy-900 px-4 py-3 text-sm font-bold text-white active:bg-navy-800 disabled:opacity-50 dark:bg-navy-700";
 const ghostBtn = "flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-700 active:bg-slate-100 dark:border-slate-600 dark:text-slate-200 dark:active:bg-slate-700";
+const ANDROID_APK_URL = "https://osiasnalaunan68-star.github.io/app-store/";
 
 function Steps({ items }) {
   return (
@@ -7162,7 +7175,7 @@ export default function InstallView() {
           <Steps items={[
             "Tap the ⋯ or ⋮ menu (top right or bottom right).",
             p.ios ? "Tap \"Open in Safari\"." : "Tap \"Open in Chrome\" (or \"Open in browser\").",
-            "Come back to this Update tab and install from there.",
+            "Come back to this Install tab and install from there.",
           ]} />
         </div>
       </section>
@@ -7222,7 +7235,7 @@ export default function InstallView() {
   return (
     <div className="mx-auto max-w-2xl space-y-4 pb-10">
       <div>
-        <h1 className="mb-1 text-2xl font-bold text-slate-900 dark:text-slate-50">Update</h1>
+        <h1 className="mb-1 text-2xl font-bold text-slate-900 dark:text-slate-50">Install</h1>
         <p className="text-sm text-slate-500 dark:text-slate-400">Put the app on your Home Screen and keep it up to date.</p>
       </div>
 
@@ -7232,6 +7245,22 @@ export default function InstallView() {
         {updateAvailable && (
           <button onClick={() => { applyUpdate(); }} className="mt-3 flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl bg-navy-900 px-4 py-2.5 text-sm font-bold text-white active:bg-navy-800 dark:bg-navy-700">🆕 New version available — Update now</button>
         )}
+      </section>
+
+
+      <section className="rounded-2xl border border-emerald-300 bg-emerald-50 p-4 dark:border-emerald-700 dark:bg-emerald-950/20">
+        <h2 className={h2}>Install for Android</h2>
+        <p className="mb-3 text-sm text-slate-700 dark:text-slate-200">
+          <b>Recommended for Android users.</b> Download and install the app directly on your phone for the best experience.
+        </p>
+        <a
+          href={ANDROID_APK_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={bigBtn}
+        >
+          🤖 Install for Android
+        </a>
       </section>
 
       {body}
@@ -10250,7 +10279,7 @@ export function useAuth() {
 ```
 // Payment method list, reference-code generator, and the Firestore
 // write for the manual GCash / Maya / MariBank purchase flow.
-// The All Access promo is the only plan new buyers can purchase.
+// Two All Access plans can be purchased: 1 month and 3 months.
 
 import gcashQr from "./assets/payment/gcash-qr.png";
 import mayaQr from "./assets/payment/maya-qr.png";
@@ -10266,22 +10295,50 @@ export const SUBJECT_LABELS = {
   TCP: "Tariff Commission Primer",
 };
 
-// ── ALL ACCESS PROMO (the only plan) ─────────────────────────────────
+// ── ALL ACCESS PLANS ─────────────────────────────────────────────────
+// Both plans unlock everything; only the length and price differ.
 // Existing subscribers are not affected (their data is untouched).
-export const PROMO_PRICE = 89;
-export const PROMO_DAYS = 60;
-export const PROMO_PLAN = {
-  id: "PROMO",
+const ALL_SUBJECTS = ["CL", "TL", "CDP", "PC", "TCP"];
+
+export const PLAN_1M = {
+  id: "ALL1M",
   kind: "promo",
-  label: "All Access Promo",
-  tagline: "One promo, everything unlocked. This is the only plan available right now.",
-  price: PROMO_PRICE,
-  days: PROMO_DAYS,
+  label: "All Access · 1 Month",
+  tagline: "Everything unlocked for 30 days.",
+  price: 50,
+  days: 30,
   months: 0,
-  subjects: ["CL", "TL", "CDP", "PC", "TCP"],
+  subjects: ALL_SUBJECTS,
 };
 
+export const PLAN_3M = {
+  id: "ALL3M",
+  kind: "promo",
+  label: "All Access · 3 Months",
+  tagline: "Everything unlocked for 90 days.",
+  price: 150,
+  days: 90,
+  months: 0,
+  subjects: ALL_SUBJECTS,
+};
 
+export const PLANS = [PLAN_1M, PLAN_3M];
+
+// Older app builds saved purchases under the id "PROMO". Those pending
+// requests can still be approved: they are treated as the 3-month plan
+// (the Admin Panel shows a price warning if the amount paid is different).
+export const LEGACY_PROMO_ID = "PROMO";
+
+export function getPlanById(id) {
+  if (id === LEGACY_PROMO_ID) return PLAN_3M;
+  return PLANS.find((p) => p.id === id) || null;
+}
+
+// Default plan for the admin Restart buttons = the 3-month plan.
+export const PROMO_PLAN = PLAN_3M;
+
+// Lowest price, for short "from ₱X" button labels.
+export const FROM_PRICE = Math.min(...PLANS.map((p) => p.price));
 
 export const PAYMENT_METHODS = [
   { id: "gcash", label: "GCash", qr: gcashQr },

@@ -6,6 +6,7 @@ const card = "rounded-2xl border border-slate-200 bg-white p-4 shadow-card dark:
 const h2 = "mb-3 text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500";
 const bigBtn = "flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl bg-navy-900 px-4 py-3 text-sm font-bold text-white active:bg-navy-800 disabled:opacity-50 dark:bg-navy-700";
 const ghostBtn = "flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-700 active:bg-slate-100 dark:border-slate-600 dark:text-slate-200 dark:active:bg-slate-700";
+const ANDROID_APK_URL = "https://osiasnalaunan68-star.github.io/app-store/";
 
 function Steps({ items }) {
   return (
@@ -81,7 +82,7 @@ export default function InstallView() {
           <Steps items={[
             "Tap the ⋯ or ⋮ menu (top right or bottom right).",
             p.ios ? "Tap \"Open in Safari\"." : "Tap \"Open in Chrome\" (or \"Open in browser\").",
-            "Come back to this Update tab and install from there.",
+            "Come back to this Install tab and install from there.",
           ]} />
         </div>
       </section>
@@ -141,7 +142,7 @@ export default function InstallView() {
   return (
     <div className="mx-auto max-w-2xl space-y-4 pb-10">
       <div>
-        <h1 className="mb-1 text-2xl font-bold text-slate-900 dark:text-slate-50">Update</h1>
+        <h1 className="mb-1 text-2xl font-bold text-slate-900 dark:text-slate-50">Install</h1>
         <p className="text-sm text-slate-500 dark:text-slate-400">Put the app on your Home Screen and keep it up to date.</p>
       </div>
 
@@ -151,6 +152,22 @@ export default function InstallView() {
         {updateAvailable && (
           <button onClick={() => { applyUpdate(); }} className="mt-3 flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl bg-navy-900 px-4 py-2.5 text-sm font-bold text-white active:bg-navy-800 dark:bg-navy-700">🆕 New version available — Update now</button>
         )}
+      </section>
+
+
+      <section className="rounded-2xl border border-emerald-300 bg-emerald-50 p-4 dark:border-emerald-700 dark:bg-emerald-950/20">
+        <h2 className={h2}>Install for Android</h2>
+        <p className="mb-3 text-sm text-slate-700 dark:text-slate-200">
+          <b>Recommended for Android users.</b> Download and install the app directly on your phone for the best experience.
+        </p>
+        <a
+          href={ANDROID_APK_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={bigBtn}
+        >
+          🤖 Install for Android
+        </a>
       </section>
 
       {body}
