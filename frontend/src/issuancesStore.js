@@ -13,7 +13,6 @@ export const ISSUANCE_KINDS = [
   { id: "cmta", label: "CMTA", icon: "⚖️", full: "Customs Modernization & Tariff Act" },
   { id: "cmo", label: "CMO", icon: "📜", full: "Customs Memorandum Orders" },
   { id: "cao", label: "CAO", icon: "📄", full: "Customs Administrative Orders" },
-  { id: "tcp", label: "Primer", icon: "📘", full: "Tariff Commission Primer" },
 ];
 
 export const STATUS_META = {

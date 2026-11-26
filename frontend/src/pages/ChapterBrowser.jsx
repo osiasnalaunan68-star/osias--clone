@@ -31,7 +31,7 @@ const AdminPanel = lazy(() =>
 );
 import { useAuth } from "../authContext";
 import { LegalSettingsSection } from "../components/LegalNotice";
-import { PROMO_PLAN, PAYMENT_METHODS, SUBJECT_LABELS } from "../payments";
+import { PLANS, PAYMENT_METHODS, SUBJECT_LABELS } from "../payments";
 import { formatTimeLeft, formatDateShort } from "../access";
 import { IssuanceSidebar, IssuanceReader } from "./IssuanceBrowser";
 import { ISSUANCE_KINDS, getIssuance, getIssuanceProgress, saveIssuanceProgress } from "../issuancesStore";
@@ -903,8 +903,8 @@ function FeesView() {
   const isPaid = access?.state === "paid";
 
   // Same shortcut the Paywall uses: opens the payment-method step directly.
-  const payNow = () => {
-    if (user) setIntentPlanId(PROMO_PLAN.id);
+  const payNow = (plan) => {
+    if (user) setIntentPlanId(plan.id);
     setOverlayOpen(true);
   };
 
@@ -912,13 +912,13 @@ function FeesView() {
   if (access?.state === "admin") status = { icon: "crown", text: "Admin — everything is unlocked." };
   else if (isPaid) status = { icon: "check", text: "Active until " + formatDateShort(access.app.expiresAt) + " (" + formatTimeLeft(access.msLeft) + " left). Renew early and your remaining days are kept." };
   else if (access?.state === "trial") status = { icon: "tag", text: "Free trial: " + formatTimeLeft(access.msLeft) + " left" };
-  else if (access?.state === "expired") status = { icon: "clock", text: "Your trial has ended. Get the promo to continue." };
+  else if (access?.state === "expired") status = { icon: "clock", text: "Your trial has ended. Choose a plan to continue." };
 
   return (
     <div className="mx-auto max-w-2xl space-y-4 pb-10">
       <div>
         <h1 className="mb-1 text-2xl font-bold text-navy-900 dark:text-parchment-50">Fees</h1>
-        <p className="text-sm text-slate-500 dark:text-slate-400">The promo bundle and where to pay.</p>
+        <p className="text-sm text-slate-500 dark:text-slate-400">Plans and where to pay.</p>
       </div>
 
       {status && (
@@ -931,25 +931,27 @@ function FeesView() {
         </div>
       )}
 
-      <section className="rounded-2xl border-2 border-gold-500 bg-parchment-50 p-4 dark:bg-navy-800">
-        <div className="flex items-start justify-between gap-3">
-          <div className="min-w-0">
-            <p className="text-base font-extrabold text-navy-900 dark:text-parchment-50">{PROMO_PLAN.label}</p>
-            <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">{PROMO_PLAN.tagline}</p>
+      {PLANS.map((plan) => (
+        <section key={plan.id} className="rounded-2xl border-2 border-gold-500 bg-parchment-50 p-4 dark:bg-navy-800">
+          <div className="flex items-start justify-between gap-3">
+            <div className="min-w-0">
+              <p className="text-base font-extrabold text-navy-900 dark:text-parchment-50">{plan.label}</p>
+              <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">{plan.tagline}</p>
+            </div>
+            <span className="flex-shrink-0 text-3xl font-extrabold text-navy-900 dark:text-parchment-50">₱{plan.price}</span>
           </div>
-          <span className="flex-shrink-0 text-3xl font-extrabold text-navy-900 dark:text-parchment-50">₱{PROMO_PLAN.price}</span>
-        </div>
-        <ul className="mt-3 space-y-1 text-sm text-slate-700 dark:text-slate-200">
-          {PROMO_PLAN.subjects.map((code) => (
-            <li key={code} className="flex items-center gap-1.5"><NavIcon name="check" className="h-3.5 w-3.5 flex-shrink-0 text-verdigris dark:text-verdigris-300" /> {SUBJECT_LABELS[code] || code}</li>
-          ))}
-          <li className="flex items-center gap-1.5"><NavIcon name="check" className="h-3.5 w-3.5 flex-shrink-0 text-verdigris dark:text-verdigris-300" /> Full app access</li>
-        </ul>
-        <p className="mt-3 flex items-center gap-1.5 text-xs font-semibold text-gold-600 dark:text-gold-400"><NavIcon name="clock" className="h-3.5 w-3.5" /> Valid for {PROMO_PLAN.days} days only</p>
-        <button onClick={payNow} className="mt-4 flex min-h-[48px] w-full items-center justify-center rounded-xl bg-navy-900 px-4 py-3 text-sm font-bold text-white active:bg-navy-800 dark:bg-navy-700">
-          {user ? (isPaid ? "Renew" : "Pay now") + " · ₱" + PROMO_PLAN.price : "Sign in to get started"}
-        </button>
-      </section>
+          <ul className="mt-3 space-y-1 text-sm text-slate-700 dark:text-slate-200">
+            {plan.subjects.map((code) => (
+              <li key={code} className="flex items-center gap-1.5"><NavIcon name="check" className="h-3.5 w-3.5 flex-shrink-0 text-verdigris dark:text-verdigris-300" /> {SUBJECT_LABELS[code] || code}</li>
+            ))}
+            <li className="flex items-center gap-1.5"><NavIcon name="check" className="h-3.5 w-3.5 flex-shrink-0 text-verdigris dark:text-verdigris-300" /> Full app access</li>
+          </ul>
+          <p className="mt-3 flex items-center gap-1.5 text-xs font-semibold text-gold-600 dark:text-gold-400"><NavIcon name="clock" className="h-3.5 w-3.5" /> Valid for {plan.days} days only</p>
+          <button onClick={() => payNow(plan)} className="mt-4 flex min-h-[48px] w-full items-center justify-center rounded-xl bg-navy-900 px-4 py-3 text-sm font-bold text-white active:bg-navy-800 dark:bg-navy-700">
+            {user ? (isPaid ? "Renew" : "Pay now") + " · ₱" + plan.price : "Sign in to get started"}
+          </button>
+        </section>
+      ))}
 
       <section className="rounded-2xl border border-parchment-200 bg-parchment-50 p-4 dark:border-navy-700 dark:bg-navy-800">
         <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">How to pay</h2>
@@ -960,7 +962,7 @@ function FeesView() {
         </div>
         <ol className="space-y-2 text-sm text-slate-600 dark:text-slate-300">
           <li>1. Tap <b>Pay now</b> above and choose GCash, Maya, or MariBank.</li>
-          <li>2. Scan the QR code and pay ₱{PROMO_PLAN.price}. Write your <b>email address</b> and the <b>reference code</b> in the payment note.</li>
+          <li>2. Scan the QR code and pay the exact price of your plan. Write your <b>email address</b> and the <b>reference code</b> in the payment note.</li>
           <li>3. Tap <b>I've paid</b>. Payments are confirmed manually by the admin within a few hours.</li>
         </ol>
       </section>
@@ -1028,9 +1030,9 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
   }, []);
 
   // ── Continue para sa CMO / CAO (kapareho ng CMTA) ──
-  const [issuanceResume, setIssuanceResume] = useState(() => ({ cmo: getIssuanceProgress("cmo"), cao: getIssuanceProgress("cao"), tcp: getIssuanceProgress("tcp") }));
+  const [issuanceResume, setIssuanceResume] = useState(() => ({ cmo: getIssuanceProgress("cmo"), cao: getIssuanceProgress("cao") }));
   useEffect(() => {
-    setIssuanceResume({ cmo: getIssuanceProgress("cmo"), cao: getIssuanceProgress("cao"), tcp: getIssuanceProgress("tcp") });
+    setIssuanceResume({ cmo: getIssuanceProgress("cmo"), cao: getIssuanceProgress("cao") });
   }, [source, view, issuanceId, chapterTree]);
 
   const resumeIssuance = useCallback((kind) => {
@@ -1230,7 +1232,7 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
         else { setSource("cmta"); setSidebarOpen(true); }
       },
     },
-    ...["cmo", "cao", "tcp"].map((k) => {
+    ...["cmo", "cao"].map((k) => {
       const meta = ISSUANCE_KINDS.find((x) => x.id === k);
       const p = issuanceResume[k];
       const iss = p ? getIssuance(p.id) : null;

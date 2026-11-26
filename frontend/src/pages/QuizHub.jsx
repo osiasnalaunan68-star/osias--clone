@@ -5,7 +5,7 @@ import CustomQuizHub from "./CustomQuizHub";
 import IssuanceQuizHub from "./IssuanceQuizHub";
 import { ProgressCircle, QuizPlayView } from "../components/QuizShared";
 import { useAuth } from "../authContext";
-import { PROMO_PLAN } from "../payments";
+import { FROM_PRICE } from "../payments";
 import { isRaLevelUnlocked } from "../access";
 import { getSubjectStats, resetSubjectProgress } from "../subjectQuizStore";
 import { getLastQuizPosition } from "../quizStore";
@@ -251,10 +251,10 @@ export default function QuizHub({ onExit, limited = false }) {
         <div className="flex items-center justify-between gap-3 border-b border-seal/40 bg-gold-50 px-4 py-2 dark:border-gold-500/40 dark:bg-navy-900">
           <p className="flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-300"><IconLock className="h-3.5 w-3.5 flex-shrink-0 text-seal dark:text-gold-400" aria-hidden /> Free preview: RA 10863 Level 1 + first 10 items per subject.</p>
           <button
-            onClick={() => { setIntentPlanId(PROMO_PLAN.id); setOverlayOpen(true); }}
+            onClick={() => { setIntentPlanId(null); setOverlayOpen(true); }}
             className="flex-shrink-0 rounded-full bg-navy-900 px-3 py-1.5 text-xs font-bold text-parchment-50 active:bg-navy-800 dark:bg-navy-700"
           >
-            Unlock all · ₱{PROMO_PLAN.price}
+            Unlock all · from ₱{FROM_PRICE}
           </button>
         </div>
       )}

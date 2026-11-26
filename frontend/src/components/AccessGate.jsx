@@ -2,7 +2,7 @@ import logoImg from "../assets/logo.png";
 import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import { useAuth } from "../authContext";
 import { TRIAL_DAYS, DAY_MS, formatTimeLeft, formatDateShort, toMs } from "../access";
-import { PROMO_PLAN } from "../payments";
+import { PLANS, FROM_PRICE } from "../payments";
 import { useUpdateAvailable, getRemoteId, applyUpdate } from "../updateCheck";
 import { LegalGate, LegalLinkButton } from "./LegalNotice";
 
@@ -152,7 +152,7 @@ function Paywall({ onFree }) {
         <div className="text-center">
           <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full border border-seal text-seal dark:border-gold-400 dark:text-gold-400" aria-hidden><StepIcon name="clock" className="h-6 w-6" /></span>
           <h1 className="mt-2 text-xl font-bold text-navy-900 dark:text-parchment-50">Your free trial has ended</h1>
-          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Get the All Access promo to continue. It is the only plan available right now. {user?.email}</p>
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Choose a plan to continue. {user?.email}</p>
         </div>
 
         {pending.length > 0 && (
@@ -162,17 +162,19 @@ function Paywall({ onFree }) {
         )}
 
         <div className="space-y-2">
-          <button onClick={() => choose(PROMO_PLAN)} className="w-full rounded-xl border-2 border-gold-500 bg-gold-50 px-4 py-4 text-left active:opacity-80 dark:border-gold-400 dark:bg-navy-900">
-            <span className="flex items-center justify-between gap-3">
-              <span>
-                <span className="block text-base font-extrabold text-navy-900 dark:text-parchment-50">{PROMO_PLAN.label}</span>
-                <span className="mt-1 block text-xs text-slate-600 dark:text-slate-300">{PROMO_PLAN.tagline}</span>
-                <span className="mt-1 block text-xs text-slate-600 dark:text-slate-300">Unlocks everything: RA 10863 (all levels) · CDP · TL · PC · TCP + full App Access</span>
-                <span className="mt-1 flex items-center gap-1 text-xs font-semibold text-gold-600 dark:text-gold-400"><StepIcon name="clock" className="h-3.5 w-3.5" /> Valid for {PROMO_PLAN.days} days only</span>
+          {PLANS.map((plan) => (
+            <button key={plan.id} onClick={() => choose(plan)} className="w-full rounded-xl border-2 border-gold-500 bg-gold-50 px-4 py-4 text-left active:opacity-80 dark:border-gold-400 dark:bg-navy-900">
+              <span className="flex items-center justify-between gap-3">
+                <span>
+                  <span className="block text-base font-extrabold text-navy-900 dark:text-parchment-50">{plan.label}</span>
+                  <span className="mt-1 block text-xs text-slate-600 dark:text-slate-300">{plan.tagline}</span>
+                  <span className="mt-1 block text-xs text-slate-600 dark:text-slate-300">Unlocks everything: RA 10863 (all levels) · CDP · TL · PC · TCP + full App Access</span>
+                  <span className="mt-1 flex items-center gap-1 text-xs font-semibold text-gold-600 dark:text-gold-400"><StepIcon name="clock" className="h-3.5 w-3.5" /> Valid for {plan.days} days only</span>
+                </span>
+                <span className="text-3xl font-extrabold text-navy-900 dark:text-parchment-50">₱{plan.price}</span>
               </span>
-              <span className="text-3xl font-extrabold text-navy-900 dark:text-parchment-50">₱{PROMO_PLAN.price}</span>
-            </span>
-          </button>
+            </button>
+          ))}
         </div>
 
         {onFree && (
@@ -242,7 +244,7 @@ function RenewBanner() {
   let last = 0;
   try { last = Number(localStorage.getItem(KEY)) || 0; } catch (_) {}
   if (Date.now() - last < 12 * 60 * 60 * 1000) return null;
-  const open = () => { setIntentPlanId(PROMO_PLAN.id); setOverlayOpen(true); };
+  const open = () => { setIntentPlanId(null); setOverlayOpen(true); };
   const later = () => { try { localStorage.setItem(KEY, String(Date.now())); } catch (_) {} setTick((n) => n + 1); };
   return (
     <div className="fixed inset-x-3 z-[45] mx-auto max-w-md rounded-xl border border-gold-500 bg-parchment-50 p-3 dark:bg-navy-800" style={{ bottom: "calc(env(safe-area-inset-bottom) + 76px)" }}>
@@ -255,7 +257,7 @@ function RenewBanner() {
       </p>
       <div className="mt-2 flex gap-2">
         <button onClick={open} className="flex-1 rounded-xl bg-navy-900 py-2 text-sm font-semibold text-white active:bg-navy-800 dark:bg-navy-700">
-          {kind === "paid" ? "Renew" : "Get All Access"} · ₱{PROMO_PLAN.price}
+          {kind === "paid" ? "Renew" : "Get All Access"} · from ₱{FROM_PRICE}
         </button>
         <button onClick={later} className="rounded-xl border border-parchment-200 px-4 py-2 text-sm font-medium text-slate-500 dark:border-navy-700 dark:text-slate-300">Later</button>
       </div>

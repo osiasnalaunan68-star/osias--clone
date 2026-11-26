@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo, useRef } from "react";
 import { collection, getDocs, doc, updateDoc, arrayUnion, deleteField, Timestamp, runTransaction, writeBatch } from "firebase/firestore";
 import { db } from "../firebase";
 import AdminOverview from "./AdminOverview";
-import { SUBJECT_LABELS, PAYMENT_METHODS, PROMO_PLAN } from "../payments";
+import { SUBJECT_LABELS, PAYMENT_METHODS, PROMO_PLAN, PLANS, LEGACY_PROMO_ID, getPlanById } from "../payments";
 import {
   TRIAL_DAYS, DAY_MS, serverNow, getTrialInfo, getAppAccessInfo,
   getAccess, formatTimeLeft, formatDateShort, getSubjectInfo, toMs,
@@ -15,7 +15,11 @@ const SUBJECT_CODES = ["CL", "CDP", "TL", "PC", "TCP"];
 // Months for old App Access requests that may still be waiting in pendingAccess.
 const LEGACY_ACCESS_MONTHS = { M1: 1, M3: 3, M8: 8 };
 const METHOD_LABELS = Object.fromEntries(PAYMENT_METHODS.map((m) => [m.id, m.label]));
-const ALL_PLAN_LABELS = { ...SUBJECT_LABELS, [PROMO_PLAN.id]: PROMO_PLAN.label };
+const ALL_PLAN_LABELS = {
+  ...SUBJECT_LABELS,
+  ...Object.fromEntries(PLANS.map((pl) => [pl.id, pl.label])),
+  [LEGACY_PROMO_ID]: "All Access Promo (old)",
+};
 
 const TRIAGE = {
   pending: { label: "Pending", dot: "bg-amber-500", chip: "border-amber-300 text-amber-700 dark:border-amber-700 dark:text-amber-400" },
@@ -166,7 +170,7 @@ export default function AdminPanel() {
 
   // ── Pending — All Access promo purchases (pendingPurchases) ──────────
   const approvePractice = async (u, p) => {
-    const plan = p.plan === PROMO_PLAN.id ? PROMO_PLAN : undefined;
+    const plan = getPlanById(p.plan) || undefined;
     if (!plan) { alert("Unknown plan: " + p.plan + ". Nothing was changed."); return; }
     const diff = plan.price !== p.price ? "⚠️ Price mismatch: the user paid ₱" + p.price + " but the plan is now ₱" + plan.price + " (older app version). " : "";
     if (!window.confirm(diff + "Approve " + plan.label + " ₱" + p.price + " for " + (u.fullName || u.email) + "?")) return;
@@ -499,7 +503,8 @@ export default function AdminPanel() {
     const wait = waitInfo(p.requestedAt);
     const app = getAppAccessInfo(u, serverNow());
     const nPending = (u.pendingPurchases || []).length + (u.pendingAccess || []).length;
-    const mismatch = p.plan === PROMO_PLAN.id && p.price !== PROMO_PLAN.price;
+    const planDef = getPlanById(p.plan);
+    const mismatch = !!planDef && p.price !== planDef.price;
     const copyRef = async () => {
       try {
         await navigator.clipboard.writeText(p.referenceCode);
@@ -528,7 +533,7 @@ export default function AdminPanel() {
           <span>· {formatDateTime(p.requestedAt)}</span>
         </div>
         <div className="mt-1.5 flex flex-wrap gap-1.5">
-          {mismatch && <span className={warn}>⚠️ Paid ₱{p.price} · plan is ₱{PROMO_PLAN.price}</span>}
+          {mismatch && <span className={warn}>⚠️ Paid ₱{p.price} · plan is ₱{planDef.price}</span>}
           {nPending > 1 && <span className={warn}>⚠️ {nPending} pending requests (possible double payment)</span>}
           <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-600 dark:bg-slate-700 dark:text-slate-300">
             {app.active ? "Active until " + formatDateShort(app.expiresAt) + " · renewal adds days" : "No active access"}
@@ -547,7 +552,7 @@ export default function AdminPanel() {
       <div>
         <h1 className="text-2xl font-bold text-navy-900 dark:text-slate-50">👑 Admin Panel</h1>
         <p className="text-sm text-slate-500 dark:text-slate-400">
-          One All Access bundle (₱{PROMO_PLAN.price} · {PROMO_PLAN.days} days) — grant months, restart to {PROMO_PLAN.days} days, or approve pending payments below.
+          All Access plans ({PLANS.map((pl) => "₱" + pl.price + "/" + pl.days + "d").join(" · ")}) — grant months, restart to {PROMO_PLAN.days} days, or approve pending payments below.
         </p>
       </div>
 

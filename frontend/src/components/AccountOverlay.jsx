@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useBackClose } from "../backNav";
 import { useAuth } from "../authContext";
-import { PAYMENT_METHODS, PROMO_PLAN, generateReferenceCode, submitPendingPurchase } from "../payments";
+import { PAYMENT_METHODS, PLANS, generateReferenceCode, submitPendingPurchase } from "../payments";
 import { TRIAL_DAYS, getSubjectInfo, getClTrialInfo, formatTimeLeft, formatDateShort } from "../access";
 
 const SUBJECT_LABELS = { CL: "RA 10863 (CMTA)", TL: "Tariff Law", CDP: "Customs Documentation & Procedures", PC: "Practical Computations", TCP: "Tariff Commission Primer" };
@@ -70,7 +70,7 @@ export default function AccountOverlay() {
   // Galing sa Paywall: diretso sa payment method ng napiling plan.
   useEffect(() => {
     if (!overlayOpen || !intentPlanId || !user || !profile) return;
-    const plan = intentPlanId === PROMO_PLAN.id ? PROMO_PLAN : null;
+    const plan = PLANS.find((pl) => pl.id === intentPlanId) || null;
     setIntentPlanId(null);
     if (!plan) return;
     setSelectedPlan(plan);
@@ -271,15 +271,18 @@ export default function AccountOverlay() {
                   );
                 })}
               </div>
-              <button
-                onClick={() => startPurchase(PROMO_PLAN)}
-                className="mt-2 w-full rounded-xl border-2 border-gold-500 bg-navy-900 px-3 py-3 text-center text-white active:bg-navy-800 dark:bg-navy-700"
-              >
-                <span className="block text-sm font-extrabold">🔥 {PROMO_PLAN.label} — ₱{PROMO_PLAN.price}</span>
-                <span className="mt-1 block text-[11px] font-normal opacity-90">{PROMO_PLAN.tagline}</span>
-                <span className="mt-1 block text-[11px] font-normal opacity-90">Unlocks EVERYTHING: RA 10863 (all 5 levels) · CDP · TL · PC · TCP + full App Access</span>
-                <span className="mt-1 flex items-center justify-center gap-1 text-[11px] font-semibold text-gold-400"><Icon name="clock" className="h-3 w-3" /> Valid for {PROMO_PLAN.days} days only</span>
-              </button>
+              {PLANS.map((plan) => (
+                <button
+                  key={plan.id}
+                  onClick={() => startPurchase(plan)}
+                  className="mt-2 w-full rounded-xl border-2 border-gold-500 bg-navy-900 px-3 py-3 text-center text-white active:bg-navy-800 dark:bg-navy-700"
+                >
+                  <span className="block text-sm font-extrabold">🔥 {plan.label} — ₱{plan.price}</span>
+                  <span className="mt-1 block text-[11px] font-normal opacity-90">{plan.tagline}</span>
+                  <span className="mt-1 block text-[11px] font-normal opacity-90">Unlocks EVERYTHING: RA 10863 (all 5 levels) · CDP · TL · PC · TCP + full App Access</span>
+                  <span className="mt-1 flex items-center justify-center gap-1 text-[11px] font-semibold text-gold-400"><Icon name="clock" className="h-3 w-3" /> Valid for {plan.days} days only</span>
+                </button>
+              ))}
             </div>
 
             <div>

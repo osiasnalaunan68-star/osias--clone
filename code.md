@@ -4424,9 +4424,9 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
   }, []);
 
   // ── Continue para sa CMO / CAO (kapareho ng CMTA) ──
-  const [issuanceResume, setIssuanceResume] = useState(() => ({ cmo: getIssuanceProgress("cmo"), cao: getIssuanceProgress("cao"), tcp: getIssuanceProgress("tcp") }));
+  const [issuanceResume, setIssuanceResume] = useState(() => ({ cmo: getIssuanceProgress("cmo"), cao: getIssuanceProgress("cao") }));
   useEffect(() => {
-    setIssuanceResume({ cmo: getIssuanceProgress("cmo"), cao: getIssuanceProgress("cao"), tcp: getIssuanceProgress("tcp") });
+    setIssuanceResume({ cmo: getIssuanceProgress("cmo"), cao: getIssuanceProgress("cao") });
   }, [source, view, issuanceId, chapterTree]);
 
   const resumeIssuance = useCallback((kind) => {
@@ -4626,7 +4626,7 @@ export default function ChapterBrowser({ initialView = "browse", initialMode = n
         else { setSource("cmta"); setSidebarOpen(true); }
       },
     },
-    ...["cmo", "cao", "tcp"].map((k) => {
+    ...["cmo", "cao"].map((k) => {
       const meta = ISSUANCE_KINDS.find((x) => x.id === k);
       const p = issuanceResume[k];
       const iss = p ? getIssuance(p.id) : null;
@@ -10268,8 +10268,8 @@ export const SUBJECT_LABELS = {
 
 // ── ALL ACCESS PROMO (the only plan) ─────────────────────────────────
 // Existing subscribers are not affected (their data is untouched).
-export const PROMO_PRICE = 50;
-export const PROMO_DAYS = 30;
+export const PROMO_PRICE = 89;
+export const PROMO_DAYS = 60;
 export const PROMO_PLAN = {
   id: "PROMO",
   kind: "promo",
@@ -10960,7 +10960,6 @@ export const ISSUANCE_KINDS = [
   { id: "cmta", label: "CMTA", icon: "⚖️", full: "Customs Modernization & Tariff Act" },
   { id: "cmo", label: "CMO", icon: "📜", full: "Customs Memorandum Orders" },
   { id: "cao", label: "CAO", icon: "📄", full: "Customs Administrative Orders" },
-  { id: "tcp", label: "Primer", icon: "📘", full: "Tariff Commission Primer" },
 ];
 
 export const STATUS_META = {
